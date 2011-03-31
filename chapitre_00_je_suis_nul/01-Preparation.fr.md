@@ -205,36 +205,45 @@ Voyons donc comment faire pour transformer notre squelette d'application en proj
 **Puis on lance IntelliJ et on fait les manipulations suivantes :**
 
 - Créer un nouveau projet :
+
 ![Alt "ch00_02"](/3monkeys/play.rules/blob/master/rsrc/ch00_02.png?raw=true)
 
 - Saisir le nom du projet `Azergues` et l'endroit où vous souhaitez le sauvegarder, puis clickez sur `Finish` :
+
 ![Alt "ch00_03"](/3monkeys/play.rules/blob/master/rsrc/ch00_03.png?raw=true)
 
 - Ensuite une fenêtre s'affiche, vous permettant d'ajouter un module
 - Sélectionnez `Modules`
 - Clickez sur le `+` en haut (un peu) à gauche
+
 ![Alt "ch00_04"](/3monkeys/play.rules/blob/master/rsrc/ch00_04.png?raw=true)
 
 - Sélectionnez le choix `Import existing module`
 - Précisez le chemin du fichier module `azerguespeche.iml` (qui a été généré par Play! lors de la commande `play idealize azerguespeche`)
 - Puis clickez sur `Finish`
+
 ![Alt "ch00_05"](/3monkeys/play.rules/blob/master/rsrc/ch00_05.png?raw=true)
 
 - La fenêtre se réactualise avec un onglet `Sources`
 - Dans l'onglet, clickez sur `Add Content Root`. Nous allons ajouter les dépendances à certains modules embarqués dans Play!.
+
 ![Alt "ch00_06"](/3monkeys/play.rules/blob/master/rsrc/ch00_06.png?raw=true)
 
 - Précisez le répertoire du module `CRUD` (présent dans le répertoire d'installation de Play!). Ce module nous permettra de générer automatiquement des écrans de saisie et de visualisation.
+
 ![Alt "ch00_07"](/3monkeys/play.rules/blob/master/rsrc/ch00_07.png?raw=true)
 
 - Précisez le répertoire du module `Secure` (présent dans le répertoire d'installation de Play!). Ce module nous permettra de gérer facilement l'authentification.
+
 ![Alt "ch00_08"](/3monkeys/play.rules/blob/master/rsrc/ch00_08.png?raw=true)
 
 - Votre projet est paramétré
 - Clickez sur OK (ça va mouliner quelques secondes)
+
 ![Alt "ch00_09"](/3monkeys/play.rules/blob/master/rsrc/ch00_09.png?raw=true)
 
 - Et hop! Vous arrivez dans l'arvorescence de votre projet :
+
 ![Alt "ch00_10"](/3monkeys/play.rules/blob/master/rsrc/ch00_10.png?raw=true)
 
 **Voilà, nous sommes prêts à démarrer, nous pouvons passer à l'étape suivante.**
