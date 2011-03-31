@@ -188,7 +188,7 @@ Play! propose les commandes nécessaires pour transformer votre projet en projet
 Voyons donc comment faire pour transformer notre squelette d'application en projet IntelliJ (bien sûr vous avez téléchargé IntelliJ : [http://www.jetbrains.com/idea/](http://www.jetbrains.com/idea/)) :
 
 - Tout d'abord, nous devons arrêter notre application : faire `Control+c` dans la console pour quitter
-- En mode commande : `play idealize azerguespeche`
+- En mode commande : `play idealize azerguespeche` (pour NetBeans ça serait `play netbeansify links`)
 
 		~        _            _ 
 		~  _ __ | | __ _ _  _| |
@@ -202,9 +202,25 @@ Voyons donc comment faire pour transformer notre squelette d'application en proj
 		~ Use File/New Module/Import Existing module
 		~
 
-- Puis on lance IntelliJ et on fait les manipulations suivantes :
-> - ...
-> - ...
+Puis on lance IntelliJ et on fait les manipulations suivantes :
+
+![Alt "ch00_02"](/3monkeys/play.rules/blob/master/rsrc/ch00_02.png?raw=true)
+
+![Alt "ch00_03"](/3monkeys/play.rules/blob/master/rsrc/ch00_03.png?raw=true)
+
+![Alt "ch00_04"](/3monkeys/play.rules/blob/master/rsrc/ch00_04.png?raw=true)
+
+![Alt "ch00_05"](/3monkeys/play.rules/blob/master/rsrc/ch00_05.png?raw=true)
+
+![Alt "ch00_06"](/3monkeys/play.rules/blob/master/rsrc/ch00_06.png?raw=true)
+
+![Alt "ch00_07"](/3monkeys/play.rules/blob/master/rsrc/ch00_07.png?raw=true)
+
+![Alt "ch00_08"](/3monkeys/play.rules/blob/master/rsrc/ch00_08.png?raw=true)
+
+![Alt "ch00_09"](/3monkeys/play.rules/blob/master/rsrc/ch00_09.png?raw=true)
+
+![Alt "ch00_10"](/3monkeys/play.rules/blob/master/rsrc/ch00_10.png?raw=true)
 
 
 
