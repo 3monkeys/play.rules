@@ -183,6 +183,30 @@ si tout va bien, ceci devrait s'afficher :
 
 En ce qui concerne l'IDE, vous pouvez très bien utiliser un simple éditeur de code avec colorisation syntaxique (Vous avez par exemple KomodoEdit qui fonctionne sur toutes les plateformes qui est assez sympa ... et open-source), mais c'est vraiment si vous voulez vous la jouer en démo ou que vous connaissez Java par coeur ou que vous codez sur un eeepc 701.
 
+Play! propose les commandes nécessaires pour transformer votre projet en projet Eclipse, NetBeans ou IntelliJ. Je suis particulièrement accro à NetBeans, mais pour avoir utilisé la version Community d'IntelliJ (Win, Tux, OSX), je vous conseille fortement de choisir cet IDE, étant donné que la version open source suffit largement pour faire du Play!, pourquoi se priver ?
+
+Voyons donc comment faire pour transformer notre squelette d'application en projet IntelliJ (bien sûr vous avez téléchargé IntelliJ : [http://www.jetbrains.com/idea/](http://www.jetbrains.com/idea/)) :
+
+- Tout d'abord, nous devons arrêter notre application : faire `Control+c` dans la console pour quitter
+- En mode commande : `play idealize azerguespeche`
+
+		~        _            _ 
+		~  _ __ | | __ _ _  _| |
+		~ | '_ \| |/ _' | || |_|
+		~ |  __/|_|\____|\__ (_)
+		~ |_|            |__/   
+		~
+		~ play! 1.1.1, http://www.playframework.org
+		~
+		~ OK, the application is ready for Intellij Idea
+		~ Use File/New Module/Import Existing module
+		~
+
+- Puis on lance IntelliJ et on fait les manipulations suivantes :
+> - ...
+> - ...
+
+
 
 
 
