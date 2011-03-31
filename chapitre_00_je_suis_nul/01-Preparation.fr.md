@@ -175,7 +175,7 @@ si tout va bien, ceci devrait s'afficher :
 
 - lancer le navigateur : [http://localhost:9000/](http://localhost:9000/)
 
-![Alt text](05.PNG)
+![Alt "ch00_01"](/3monkeys/play.rules/blob/master/rsrc/ch00_01.png?raw=true)
 
 **Wouaaoo ! Vous êtes trop forts, on va bientôt pouvoir commencer.**
 
