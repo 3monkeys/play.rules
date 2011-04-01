@@ -21,13 +21,12 @@ Dans le formulaire HTML, on peut utiliser un nouveau tag, #{input} :
 
 Ce tag sera traduit en une balise input classique, avec un attribut indiquant que le champ est obligatoire : 
 
-view plaincopy to clipboardprint?
 <input type="text" name="album.name" value="album?.name" id="name" required="required"/>  
 
 Le rendu est le suivant si on valide le formulaire sans remplir le champ obligatoire : 
 
 ![Image](/img1.png)
 
-Le tag input supporte un grand nombre d'options et plusieurs types d'annotations de validation, comme @Match pour valider une expression rÃ©guliÃ¨re ou @Email. Toutes ces options sont dÃ©crites dans cette documentation.
+Le tag input supporte un grand nombre d'options et plusieurs types d'annotations de validation, comme @Match pour valider une expression régulière ou @Email. Toutes ces options sont décrites dans [cette documentation](http://www.playframework.org/modules/html5validation-1.0/home).
 
-Si votre navigateur ne supporte pas la validation HTML5, aucun soucis car la validation cÃ´tÃ© serveur sera exÃ©cutÃ©e dans tous les cas. J'ai testÃ© avec Chrome 10 et Firefox 4 beta 12 et cela fonctionne parfaitement sur ces navigateurs.
+Si votre navigateur ne supporte pas la validation HTML5, aucun soucis car la validation côté serveur sera exécutée dans tous les cas. J'ai testé avec Chrome 10 et Firefox 4 beta 12 et cela fonctionne parfaitement sur ces navigateurs.
