@@ -17,6 +17,7 @@ Mais on se retrouve vite confronté à un problème, un clic sur ce lien mène �
 Même si le lien est masqué, n’importe qui peut entrer cette URL dans son browser pour supprimer l’entité de son choix. Nous devons donc aussi protéger la méthode delete côté serveur.
 Le module Secure de Play va nous permettre de faire ça de manière élégante. Il propose également un formulaire de login prêt à l’emploi qui permet de mettre les informations dont on a besoin dans le cookie de session.
 
+
 ## Mise en oeuvre du module Secure
 
 Le module secure est livré en standard avec la distribution Play.

@@ -1,4 +1,4 @@
-TODO
+## TODO
 
 *Architecture simple
 
@@ -17,5 +17,5 @@ TODO
 *Java tricks (encapsulation ...)
 
 
-== Exemples ==
+## Exemples
     TODO détailler ces exemples http://www.playframework.org/documentation/1.0/5things
