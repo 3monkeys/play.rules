@@ -242,7 +242,7 @@ Voyons donc comment faire pour transformer notre squelette d'application en proj
 
 ![Alt "ch00_09"](/3monkeys/play.rules/blob/master/rsrc/ch00_09.png?raw=true)
 
-- Et hop! Vous arrivez dans l'arvorescence de votre projet :
+- Et hop! Vous arrivez dans l'arborescence de votre projet :
 
 ![Alt "ch00_10"](/3monkeys/play.rules/blob/master/rsrc/ch00_10.png?raw=true)
 
