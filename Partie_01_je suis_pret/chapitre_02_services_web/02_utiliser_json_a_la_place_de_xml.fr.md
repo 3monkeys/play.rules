@@ -1,10 +1,16 @@
-﻿Dans le chapitre précédent nous avons vu comment créer des services REST envoyant et consommant des messages au format XML.
+﻿# Utiliser JSON à la place de XML 
+
+Dans le chapitre précédent nous avons vu comment créer des services REST envoyant et consommant des messages au format XML.
 Voyons maintenant comment faire la même chose avec JSON.
 
-# Exporter ses objets en JSON
+## Exporter ses objets en JSON
 
-## Le format JSON
-	TODO intro au format JSON
+### Le format JSON
+Définition de wikipedia : 
+
+	JSON (JavaScript Object Notation) est un format de données textuel, générique, dérivé de la notation des objets du langage ECMAScript. Il permet de représenter de l’information structurée.
+	
+L'avantage de JSON par rapport à XML être d'être un peu moins verbeux et directement interprétable dans un navigateur à l'aide de JavaScript.
 
 Si on écrit cette ligne dans le fichier routes :
 
@@ -36,4 +42,4 @@ On peut ensuite s'en servir dans le contrôleur :
 
 Si vous tapez l'URL /albums.xml, Play cherchera un fichier de template XML nommé listAlbums.xml (une autre extension fonctionnerait aussi) pour effectuer le rendu.
 
-# Recevoir un message JSON
+## Recevoir un message JSON

@@ -6,6 +6,8 @@ TODO
 
 *Stateless, scalable
 
+*Model driven
+
 *Productif (hot deploy)
 
 *Extensible (modules)

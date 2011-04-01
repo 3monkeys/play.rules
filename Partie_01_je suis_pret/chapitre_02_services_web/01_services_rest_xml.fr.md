@@ -1,4 +1,6 @@
-# REST et RESTful, qu'est ce que c'est?
+﻿# Services REST et XML
+
+## REST et RESTful, qu'est ce que c'est?
 
 On appelle service RESTful est un service web respectant le style d'architecture REST.
 REST (Representational State Transfer) est un modèle d'architecture orienté ressources. Ceci signifie qu'au lieu d'exposer des méthodes comme lorsque l'on utilise le protocole SOAP, on va exposer des ressources. Chaque ressource possède une URL qui l'identifie.
