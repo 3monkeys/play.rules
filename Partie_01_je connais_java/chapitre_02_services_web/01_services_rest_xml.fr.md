@@ -1,6 +1,18 @@
+# REST et RESTful, qu'est ce que c'est?
+
+On appelle service RESTful est un service web respectant le style d'architecture REST.
+REST (Representational State Transfer) est un modèle d'architecture orienté ressources. Ceci signifie qu'au lieu d'exposer des méthodes comme lorsque l'on utilise le protocole SOAP, on va exposer des ressources. Chaque ressource possède une URL qui l'identifie.
+
+Contrairement à SOAP, REST s'appuie uniquement sur le protocole HTTP et ne propose aucune couche au dessus de ce protocole. Tout est faisable à partir des opérations fournies par de base par HTTP : GET, PUT, POST, DELETE, etc.
+Pour récupérer une collection, on effectue un GET sur l'URL appropriée.
+La réponse contiendra un ensemble d'éléments, décris par exemple en XML ou en JSON. Pour chaque élément, une URL est définie. Il sera donc possible d'effectuer un appel GET sur élément en particulier pour ne récupérer que celui ci. Une opération de type PUT sur le même élement permettra de mettre à jour ses données. De la même façon, une opération DELETE supprimera l'élément.
+
+REST est en fait le modèle sur lequel le web lui même est construit : les sites et les pages web étant des ressources accessibles via des URL, depuis un navigateur grâce à des opérations HTTP.
+
+Pour la sécurité il est possible de s'appuyer sur l'autentification HTTP, ou encore sur le SSL avec HTTPS. Comme vous pouvez le voir, tout est fait pour utiliser au maximum ce que le web nous fournit depuis toujours, sans sur-couche supplémentaire.
+
 # Play et les services REST
 
-Dans cette partie nous allons voir comment exposer simplement du contenu XML (ou JSON, ou autre) avec le framework Play!.
 Les URL de Play! étant RESTful par essence, il devient très facile de créer une petite API REST/XML coinjointement à l'interface Web d'une application Play!.
 Voyons comment procéder.
 
