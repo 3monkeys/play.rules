@@ -21,11 +21,11 @@ Dans le formulaire HTML, on peut utiliser un nouveau tag, #{input} :
 
 Ce tag sera traduit en une balise input classique, avec un attribut indiquant que le champ est obligatoire : 
 
-<input type="text" name="album.name" value="album?.name" id="name" required="required"/>  
+    <input type="text" name="album.name" value="album?.name" id="name" required="required"/>
 
 Le rendu est le suivant si on valide le formulaire sans remplir le champ obligatoire : 
 
-![Image](/img1.png)
+![Alt "p03_ch01_01"](../rsrc/p03_ch01_01.png?raw=true)
 
 Le tag input supporte un grand nombre d'options et plusieurs types d'annotations de validation, comme @Match pour valider une expression régulière ou @Email. Toutes ces options sont décrites dans [cette documentation](http://www.playframework.org/modules/html5validation-1.0/home).
 

@@ -71,7 +71,8 @@ Il suffit d’ajouter le code suivant dans le contrôleur Admin pour exposer le 
 
 	public static void login() {  
 	  Application.list();  
-	 }  
+	 }
+
 Toutes les méthodes que l’on définit dans ce controlleur étant soumises à un contrôle de l’utilisateur en session, vous vous retrouverez directement sur le formulaire d’authentification.
 
 L’utilisateur sera ensuite redirigé vers l’écran principal de l’application (la liste des albums dans cet exemple).
@@ -87,6 +88,6 @@ On ajoute le code suivant :
 		  </div>  
 		 #{/if}  
 	 #{doLayout /}  
-	 </body>  
+	 </body>
 
 Et voilà, vous savez maintenant comment ajouter des fonctions d’administration et de la sécurité à un site public avec Play!
