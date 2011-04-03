@@ -176,7 +176,7 @@ si tout va bien, ceci devrait s'afficher :
 - lancer le navigateur : [http://localhost:9000/](http://localhost:9000/)
 
 <!--![Alt "ch00_01"](/3monkeys/play.rules/blob/master/rsrc/ch00_01.png?raw=true)-->
-![Alt "ch00_01"](//github.com/3monkeys/play.rules/raw/master/rsrc/ch00_01.png)
+![Alt "ch00_01"](https://github.com/3monkeys/play.rules/raw/master/rsrc/ch00_01.png)
 
 **Wouaaoo ! Vous êtes trop forts, on va bientôt pouvoir commencer.**
 
