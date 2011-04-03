@@ -21,7 +21,7 @@ Voyons comment procéder.
 ## Exposer des données avec un service REST
 
 Gardons l'exemple de notre bibliothèque musicale. Notre modèle comporte des albums, des artistes et des genres.
-La classe Album se présente comme ceci :
+Pour rappel, la classe Album se présente comme ceci :
 
 	@Entity
 	public class Album extends Model {
@@ -32,15 +32,10 @@ La classe Album se présente comme ceci :
 	@Enumerated(EnumType.STRING)
 	public Genre genre;
 
-Le genre est une simple Enum, définie comme cela :
-	public enum Genre {
-		ROCK, METAL, JAZZ, BLUES, POP, WORLD, HIP_HOP, OTHER
-	}
-
 Nous voulons définir une URL qui renvoie lors d'un GET la liste des albums au format XML pour un genre donné.
 Pour cela nous devons modifier le fichier routes :
-	GET /website/albums/{genre}       Application.list
-	GET /albums/{genre}   Application.listXml(format:'xml')
+	GET /albums/{genre}       Application.list
+	GET /api/albums/{genre}   Application.listXml(format:'xml')
 
 La première ligne correspond à la page HTML(non présentée dans cet article) affichant la liste des albums disponibles : le format n'étant pas spécifié, le rendu se fera avec une page HTML.
 Ici c'est la deuxième ligne qui nous intéresse. Le paramètre (format:'xml') indique que la méthode render() du contrôleur devra chercher un fichier nommé listXml.xml.
@@ -115,7 +110,7 @@ On veut par exemple envoyer le contenu suivant en POST avec un content type appl
 
 Pour cela on ajoute la ligne suivante au fichier routes pour autoriser l'opération POST sur l'url /album :
 
-	POST /album  Application.saveXml
+	POST /api/album  Application.saveXml
 
 La méthode saveXml récupère le contenu de la requete dans la variable request.body .
 Elle parse ensuite le contenu pour créer un album et l'enregistrer dans la base :
