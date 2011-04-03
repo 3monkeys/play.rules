@@ -1,0 +1,37 @@
+/* the humans responsible & colophon */
+/* humanstxt.org */
+
+
+/* TEAM */
+  SuperMonkey: Phillipe Charrière
+  Site: http://www.k33g.org/
+  Twitter: k33g_org
+  Location: Between his chair and keyboard
+
+  SuperClassyMonkey: Loic Descotte
+  Site: http://coffeebean.loicdescotte.com/
+  Twitter: loic_d
+  Location: same as k33g (more or less)
+  
+  Sous-Singe: Mickael Daniel
+  Site: http://blog.mklog.fr
+  Twitter: mklabs
+  Location: Kobol
+
+/* THANKS */
+  Names (& URL): 
+  
+
+/* SITE */
+  Standards: HTML5, CSS3
+  Components: Modernizr, jQuery, Amplify, RequireJS, Sammy, Showdown, jquery.tmpl
+  
+  Source: https://github.com/3monkeys/play.rules
+                                    
+                
+  .______    __          ___   ____    ____ .______       __    __   __       _______     _______.
+  |   _  \  |  |        /   \  \   \  /   / |   _  \     |  |  |  | |  |     |   ____|   /       |
+  |  |_)  | |  |       /  ^  \  \   \/   /  |  |_)  |    |  |  |  | |  |     |  |__     |   (----`
+  |   ___/  |  |      /  /_\  \  \_    _/   |      /     |  |  |  | |  |     |   __|     \   \    
+  |  |      |  `----./  _____  \   |  |  __ |  |\  \----.|  `--'  | |  `----.|  |____.----)   |   
+  | _|      |_______/__/     \__\  |__| (__)| _| `._____| \______/  |_______||_______|_______/
