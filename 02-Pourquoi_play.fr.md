@@ -8,7 +8,7 @@
 
 *Model driven
 
-*Productif (hot deploy)
+*Productif : hot deploy, convention over configuration
 
 *Extensible (modules)
 
