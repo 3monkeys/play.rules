@@ -208,53 +208,53 @@ Voyons donc comment faire pour transformer notre squelette d'application en proj
 - Créer un nouveau projet :
 
 <!--![Alt "ch00_02"](/3monkeys/play.rules/blob/master/rsrc/ch00_02.png?raw=true)-->
-![Alt "ch00_02"](//github.com/3monkeys/play.rules/raw/master/rsrc/ch00_02.png)
+![Alt "ch00_02"](https://github.com/3monkeys/play.rules/raw/master/rsrc/ch00_02.png)
 
 - Saisir le nom du projet `Azergues` et l'endroit où vous souhaitez le sauvegarder, puis clickez sur `Finish` :
 
 <!--![Alt "ch00_03"](/3monkeys/play.rules/blob/master/rsrc/ch00_03.png?raw=true)-->
-![Alt "ch00_03"](//github.com/3monkeys/play.rules/raw/master/rsrc/ch00_03.png)
+![Alt "ch00_03"](https://github.com/3monkeys/play.rules/raw/master/rsrc/ch00_03.png)
 
 - Ensuite une fenêtre s'affiche, vous permettant d'ajouter un module
 - Sélectionnez `Modules`
 - Clickez sur le `+` en haut (un peu) à gauche
 
 <!--![Alt "ch00_04"](/3monkeys/play.rules/blob/master/rsrc/ch00_04.png?raw=true)-->
-![Alt "ch00_04"](//github.com/3monkeys/play.rules/raw/master/rsrc/ch00_04.png)
+![Alt "ch00_04"](https://github.com/3monkeys/play.rules/raw/master/rsrc/ch00_04.png)
 
 - Sélectionnez le choix `Import existing module`
 - Précisez le chemin du fichier module `azerguespeche.iml` (qui a été généré par Play! lors de la commande `play idealize azerguespeche`)
 - Puis clickez sur `Finish`
 
 <!--![Alt "ch00_05"](/3monkeys/play.rules/blob/master/rsrc/ch00_05.png?raw=true)-->
-![Alt "ch00_05"](//github.com/3monkeys/play.rules/raw/master/rsrc/ch00_05.png)
+![Alt "ch00_05"](https://github.com/3monkeys/play.rules/raw/master/rsrc/ch00_05.png)
 
 - La fenêtre se réactualise avec un onglet `Sources`
 - Dans l'onglet, clickez sur `Add Content Root`. Nous allons ajouter les dépendances à certains modules embarqués dans Play!.
 
 <!--![Alt "ch00_06"](/3monkeys/play.rules/blob/master/rsrc/ch00_06.png?raw=true)-->
-![Alt "ch00_06"](//github.com/3monkeys/play.rules/raw/master/rsrc/ch00_06.png)
+![Alt "ch00_06"](https://github.com/3monkeys/play.rules/raw/master/rsrc/ch00_06.png)
 
 - Précisez le répertoire du module `CRUD` (présent dans le répertoire d'installation de Play!). Ce module nous permettra de générer automatiquement des écrans de saisie et de visualisation.
 
 <!--![Alt "ch00_07"](/3monkeys/play.rules/blob/master/rsrc/ch00_07.png?raw=true)-->
-![Alt "ch00_07"](//github.com/3monkeys/play.rules/raw/master/rsrc/ch00_07.png)
+![Alt "ch00_07"](https://github.com/3monkeys/play.rules/raw/master/rsrc/ch00_07.png)
 
 - Précisez le répertoire du module `Secure` (présent dans le répertoire d'installation de Play!). Ce module nous permettra de gérer facilement l'authentification.
 
 <!--![Alt "ch00_08"](/3monkeys/play.rules/blob/master/rsrc/ch00_08.png?raw=true)-->
-![Alt "ch00_08"](//github.com/3monkeys/play.rules/raw/master/rsrc/ch00_08.png)
+![Alt "ch00_08"](https://github.com/3monkeys/play.rules/raw/master/rsrc/ch00_08.png)
 
 - Votre projet est paramétré
 - Clickez sur OK (ça va mouliner quelques secondes)
 
 <!--![Alt "ch00_09"](/3monkeys/play.rules/blob/master/rsrc/ch00_09.png?raw=true)-->
-![Alt "ch00_09"](//github.com/3monkeys/play.rules/raw/master/rsrc/ch00_09.png)
+![Alt "ch00_09"](https://github.com/3monkeys/play.rules/raw/master/rsrc/ch00_09.png)
 
 - Et hop! Vous arrivez dans l'arborescence de votre projet :
 
 <!--![Alt "ch00_10"](/3monkeys/play.rules/blob/master/rsrc/ch00_10.png?raw=true)-->
-![Alt "ch00_10"](//github.com/3monkeys/play.rules/raw/master/rsrc/ch00_10.png)
+![Alt "ch00_10"](https://github.com/3monkeys/play.rules/raw/master/rsrc/ch00_10.png)
 
 **Voilà, nous sommes prêts à démarrer, nous pouvons passer à l'étape suivante.**
 **Rendez-vous donc au chapitre suivant :** [02-Premiere_application.fr.md](02-Premiere_application.fr.md).
