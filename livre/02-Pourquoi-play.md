@@ -29,7 +29,7 @@ On peut par exemple écrire le code suivant pour manipuler une entité "Personne
 
 ## Stateless et scalable
 
-##Productif (convention over configuration, hot deploy, CRUD...)
+##Productif
 
 Toute la pile est pré-configurée, de la vue à la base de données. Play suit la logique de "convention over configuration". Ainsi, si le paramétrage par défaut vous convient, vous pourrez commencer à développer dès que vous aurez dézippé l'archive du framework! Ce principe sera également appliqué lors du développement de nos applications Play afin d'économiser des lignes de code tout au long du développement.
 
