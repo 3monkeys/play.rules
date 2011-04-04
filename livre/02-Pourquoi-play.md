@@ -9,7 +9,8 @@ Architectures techniques opaques, gestion chaotique des dépendances, longues ph
 ## Architecture simple
 
 Play se base sur une architecure extrêmement simple en suivant le design pattern MVC. A côté de ça il ne rajoute pas de notions de couches service, couches DAO etc.
-Tout le code métier est porté par les objets du modèle, afin d'éviter le phénonème appelé [Anemic_Domain_Model](http://en.wikipedia.org/wiki/Anemic_Domain_Model)
+Tout le code métier est porté par les objets du modèle, afin d'éviter le phénonème appelé [Anemic Domain Model](http://en.wikipedia.org/wiki/Anemic_Domain_Model)
+
 Comme en Ruby On Rails, les objets du modèle sont conçus selon le pattern Active Record : ils ont la capacité de gérer eux même leur persistence dans la base de données.
 
 On peut par exemple écrire le code suivant pour manipuler une entité "Personne" : 
