@@ -1,7 +1,7 @@
 ﻿# Validation côté client avec HTML5
 
 La spécification HTML 5 prévoit la possibilité de valider les données d'un formulaire HTML côté client, directement dans le navigateur avant d'envoyer les données vers un serveur.
-Il existe un module pour Play! qui permet de faire un mapping entre les annotations de validation du modèle (qui servent normalement à valider les données côté serveur) et le rendu HTML, pour intégrer cette fonctionnalité.
+Il existe un module pour Play qui permet de faire un mapping entre les annotations de validation du modèle (qui servent normalement à valider les données côté serveur) et le rendu HTML, pour intégrer cette fonctionnalité.
 
 Pour activer ce module, après l'avoir téléchargé il suffit d'ajouter cette ligne dans le fichier application.conf :
 	module.html5validation=modules/html5validation  
