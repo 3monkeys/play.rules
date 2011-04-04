@@ -10,6 +10,8 @@ c'est bases seront suffisantes pour avoir quelque chose qui tourne à montrer à
 
 ##Introduction 
 
+*Remarque : si ça vous ennuie, il est tout à fait possible de passer au § suivant*
+
 Alors, avant de remettre les mains dans le code, nous allons parler théorie. Et plus particulièrement "design pattern" (*definition ici : [http://fr.wikipedia.org/wiki/Design_pattern](http://fr.wikipedia.org/wiki/Design_pattern) (1)*) et encore plus particulièrement : **pattern MVC**, sûrement le pattern que j'ai le plus détesté, que j'ai trouvé être le pattern le plus crétin et le plus improductif de l'histoire des patterns.
 
 Je m'explique, j'étais architecte .Net (v° 1.1), fan invétéré du modèle évènementiel d'ASP.Net (2) et en changeant de boîte (celle dont je parlais dans le chapitre précédent), j'ai hérité du pilotage d'une TMA Java avec des applications Web. Mon nouveau boss m'a dit : *"Tu n'es pas là pour coder, tu es là pour faire du management et de la relation client, donc pas besoin de connaître Java"*, **Moi (dans ma tête) :** *"wahouuu, trop sympa, ... mais en même temps, l'équipe va me prendre pour un c..."*.
