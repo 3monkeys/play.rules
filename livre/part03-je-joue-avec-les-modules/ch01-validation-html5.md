@@ -25,7 +25,8 @@ Ce tag sera traduit en une balise input classique, avec un attribut indiquant qu
 
 Le rendu est le suivant si on valide le formulaire sans remplir le champ obligatoire : 
 
-![Alt "p03_ch01_01"](../rsrc/p03_ch01_01.png?raw=true)
+<!--![Alt "p03_ch01_01"](../rsrc/p03_ch01_01.png?raw=true)-->
+![Alt "p03_ch01_01"](https://github.com/3monkeys/play.rules/raw/master/rsrc/p03_ch01_01.png)
 
 Le tag input supporte un grand nombre d'options et plusieurs types d'annotations de validation, comme @Match pour valider une expression régulière ou @Email. Toutes ces options sont décrites dans [cette documentation](http://www.playframework.org/modules/html5validation-1.0/home).
 
