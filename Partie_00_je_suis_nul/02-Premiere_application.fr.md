@@ -1,5 +1,12 @@
 ﻿#Faut bosser maintenant !!!
 
+Dans ce chapitre nous allons :
+
+- créer notre 1ère page selon les préceptes MVC (kézaco ?)
+- construire les bases de notre application
+
+c'est bases seront suffisantes pour avoir quelque chose qui tourne à montrer à nos copains les pêcheurs.
+
 ##Introduction 
 
 Alors, avant de remettre les mains dans le code, nous allons parler théorie. Et plus particulièrement "design pattern" (*definition ici : [http://fr.wikipedia.org/wiki/Design_pattern](http://fr.wikipedia.org/wiki/Design_pattern) (1)*) et encore plus particulièrement : **pattern MVC**, sûrement le pattern que j'ai le plus détesté, que j'ai trouvé être le pattern le plus crétin et le plus improductif de l'histoire des patterns.
