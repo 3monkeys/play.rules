@@ -29,8 +29,15 @@ On peut par exemple écrire le code suivant pour manipuler une entité "Personne
 
 ## Stateless et scalable
 
-
 ##Productif (convention over configuration, hot deploy, CRUD...)
+
+Toute la pile est pré-configurée, de la vue à la base de données. Play suit la logique de "convention over configuration". Ainsi, si le paramétrage par défaut vous convient, vous pourrez commencer à développer dès que vous aurez dézippé l'archive du framework! Ce principe sera également appliqué lors du développement de nos applications Play afin d'économiser des lignes de code tout au long du développement.
+
+Play embarque son propre serveur qui est capable de compiler lui même les fichiers source et de récupérer à chaud toutes les modifications de code.
+Vous n'aurez donc jamais à vous soucier des phases de compilation ou de déploiement de votre application.
+Si vous ajoutez une nouvelle ligne de code, un simple "refresh" dans votre navigateur vous permettra de la voir en action.
+
+De plus, Play propose nativement un module "CRUD" permettant de générer les écrans, les traitements et les requêtes pour gérer les opération basiques relatives à une entité métier (création, lecture/recherche, mise à jour, suppression). 
 
 ## Extensible (modules)
 
