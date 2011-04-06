@@ -29,15 +29,19 @@ Tout simplement aux 2 autres singes, [@loic_d](@loic_d) parce qu'à défaut de n
 #Vision de [@loic_d](@loic_d)
 
 ##Comment est née l'idée de ce livre ? 
+
 La première réunion que nous avons organisé avec l'Alpes JUG (Java User Group grenoblois) était un coding dojo sur Play! avec Guillaume Bort, l'auteur du framework. Ce jour là ce fût une vrai claque et cette présentation reste pour moi parmi les plus marquantes que j'ai pu voir. Guillaume nous a présenté non pas un simple framework mais une plateforme complète pour le développement et l’exécution d'applications Web. J'ai été extrêmement enthousiasmé par sa vision des architectures Web et de la sur-complexité vendue depuis des années par les éditeurs de middleware dans le monde Java...
 Depuis je n'ai pas arrêté de coder avec Play et d'écrire des article sur ce sujet pour mon blog [CoffeeBean](http://coffeebean.loicdescotte.com). 
 Quand [@mklabs](@mklabs) nous a soumis l'idée d'écrire cet ebook, je ne pouvais pas refuser de travailler sur un sujet aussi excitant!
 
 ##Pourquoi open-source ?
+
 Pour coller à l'esprit de Play!. Et aussi car je pense qu'avec un maximum de relecteurs et de contributeurs le résultat ne pourra être que meilleur!
 
 ##Qui suis-je ?
+
 Un geek, un fan de Java et depuis peu de Scala, aussi un musicien (guitare et un peu de batterie) à mes heures perdues. Je ne suis pas un gros amateur du développement d'IHM quelles qu'elles soient, surtout parce que je suis nul pour faire des choses "jolies". Par contre écrire des API REST me rend heureux et me donne un teint frais!
 
 ##Dédicace
+
 Je ne vais pas être très original sur ce coup, comme [@k33g_org](@k33g_org) je dédicace ce livre aux deux autres monkeys, sans qui ce projet ne pourrait se réaliser. Grâce à [@k33g_org](@k33g_org), j'ai d'excellents souvenirs des deux années que j'ai passé à Lyon : j'ai compris grâce à lui qu'on pouvait facilement mêler boulot et grosse déconnade! Quand à [@mklabs](@mklabs) même si nous avons déjà échangé pas loin d'une centaine de mails, nous n'avons pas encore eu le temps de nous rencontrer physiquement au moment où j'écris ces lignes. Mais ça ne devrait pas tarder (la semaine prochaine normalement)!
