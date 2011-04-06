@@ -1,4 +1,3 @@
-    TODO relire et corriger orthographe
 
 # Pourquoi Play
 
@@ -64,4 +63,5 @@ Play est écrit en Java et il est compatible avec toutes vos librairies Java pr�
 De plus Play facilite l'utilisation de Java grâce à un certain nombre d'astuces.Il génére par exemple automatiquement les accesseurs (getters et setters) dans les classes Java dans le but d'améliorer la lisibilité du code.
 
 ## 5 trucs cool que l'on peut faire avec Play
+
     TODO détailler ces exemples http://www.playframework.org/documentation/1.0/5things
