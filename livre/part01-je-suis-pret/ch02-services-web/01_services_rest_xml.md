@@ -15,7 +15,7 @@ Pour la sécurité il est possible de s'appuyer sur l'autentification HTTP, ou e
 
 # Play et les services REST
 
-Les URL de Play! étant RESTful par essence, il devient très facile de créer une petite API REST/XML coinjointement à l'interface Web d'une application Play!.
+Les URL de Play étant RESTful par essence, il devient très facile de créer une petite API REST/XML coinjointement à l'interface Web d'une application Play!.
 Voyons comment procéder.
 
 ## Exposer des données avec un service REST
@@ -54,7 +54,7 @@ public static void listXml(String genre) {
 		render(albums);
 	}
 
-Je recherche simplement les albums correspondant au genre passé en paramètre, et je demande le rendu de la liste. Au passage on voit la simplicité d'utilisation de JPA avec Play!! Le rendu sera fait dans le fichier portant le nom de la méthode et l'extension xml : listXml.xml.
+Je recherche simplement les albums correspondant au genre passé en paramètre, et je demande le rendu de la liste. Au passage on voit la simplicité d'utilisation de JPA avec Play! Le rendu sera fait dans le fichier portant le nom de la méthode et l'extension xml : listXml.xml.
 Ce template, placé dans le repertoire app/views, est défini comme ceci :
 
     <albums>   
@@ -95,8 +95,8 @@ Voilà, cela suffit pour exposer nos albums en XML. En respectant le pattern d'U
 
 ## Envoie de données à travers un service REST
 
-Dans la première partie avons vu comment exposer des données au format XML avec Play!.
-Maintenant nous allons effectuer l'opération inverse, l'envoi d'un contenu XML au contrôleur Play!, à travers une URL RESTful.
+Dans la première partie avons vu comment exposer des données au format XML avec Play.
+Maintenant nous allons effectuer l'opération inverse, l'envoi d'un contenu XML au contrôleur Play, à travers une URL RESTful.
 
 On veut par exemple envoyer le contenu suivant en POST avec un content type application/xml :
 
@@ -161,7 +161,7 @@ Elle parse ensuite le contenu pour créer un album et l'enregistrer dans la base
 
 NB: il est bien sûr possible d'obtenir un code moins verbeux en dé-sérialisant l'objet à l'aide d'un outil comme JAXB ou XStream, mais ce n'est pas l'objet de ce chapitre.
 
-Lorsqu'on écrit le code album.artist=artist, la méthode setArtist(Artist artist) est appelée automatiquement par Play! (le code est modifié au runtime). On peut ainsi vérifier le fait que l'artiste existe ou non dans la base, pour savoir si on doit créer une nouvelle instance d'artiste ou récupérer l'artiste existant.
+Lorsqu'on écrit le code album.artist=artist, la méthode setArtist(Artist artist) est appelée automatiquement par Play (le code est modifié au runtime). On peut ainsi vérifier le fait que l'artiste existe ou non dans la base, pour savoir si on doit créer une nouvelle instance d'artiste ou récupérer l'artiste existant.
 La méthode save() de la classe Album s'occupe alors d'enregistrer l'album en base, ainsi que l'artiste si il est inconnu dans la bibliothèque(à l'aide d'un cascade JPA).
 
 	public void setArtist(Artist artist){
