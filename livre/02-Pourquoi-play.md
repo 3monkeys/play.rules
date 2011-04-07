@@ -1,4 +1,3 @@
-
 # Pourquoi Play
 
 Play framework est une vraie révolution dans le monde des application Web écrites en Java. Il vous fera oublier toutes les souffrances que vous avez pu vivre avec la pile Java EE classique, des frameworks comme Spring ou pire, J2EE.
@@ -7,12 +6,9 @@ Architectures techniques opaques, gestion chaotique des dépendances, longues ph
 ## Architecture simple
 
 Play se base sur une architecure extrêmement simple en suivant le design pattern MVC. A côté de ça il ne rajoute pas de notions de couches service, couches DAO etc.
-<<<<<<< HEAD
-Tout le code métier est porté par les objets du modèle, afin d'éviter le phénonème appelé [Anemic_Domain_Model](http://en.wikipedia.org/wiki/Anemic_Domain_Model)
-=======
+
 Tout le code métier est porté par les objets du modèle, afin d'éviter le phénonème appelé [Anemic Domain Model](http://en.wikipedia.org/wiki/Anemic_Domain_Model), qui résulte en l'écriture de classes métier contenant uniquement des champs et des accesseurs (getters et setters), donc sans traitements ni intelligence. C'est ce qui arrive dès que l'on commence à implémenter le code métier de l'application dans des couches techniques (couches service, EJB...)
 
->>>>>>> 18058067215233518d47b0e36d14ebf3994453dc
 Comme en Ruby On Rails, les objets du modèle sont conçus selon le pattern Active Record : ils ont la capacité de gérer eux même leur persistence dans la base de données.
 
 On peut par exemple écrire le code suivant pour manipuler une entité "Personne" : 
