@@ -24,7 +24,13 @@ On peut par exemple écrire le code suivant pour manipuler une entité "Personne
 
 ## Orienté REST
 
-    TODO URL "bookmarkables" et explicites : chaque page est une ressource 
+Avec Play, il est extrêmement facile de faire correspondre des URL simples, lisibiles et _bookmarkables_ aux actions du controlleur.
+
+Par exemple, pour afficher toutes les personnes habitant à Paris dans un annuaire, on pourra utiliser une URL comme
+
+    /annuaire/personnes/paris
+
+Ceci est renforcé par l'aspect _stateless_ du framework. Le serveur ne stockant pas d'état, on n'aura pas de mauvaise surprise quant au rendu correspondant à une URL : Play effectuera toujours le même traitement quelque soit le contexte (voir paragraphe suivant).
 
 ## Stateless et scalable
 
@@ -64,4 +70,115 @@ De plus Play facilite l'utilisation de Java grâce à un certain nombre d'astuce
 
 ## 5 trucs cool que l'on peut faire avec Play
 
-    TODO détailler ces exemples http://www.playframework.org/documentation/1.0/5things
+Les exemples suivants sont tirés [du site officiel de Play](http://www.playframework.org/documentation/1.0/5things) et montrent en quelques lignes l'esprit et la simplicité du framework.
+
+### 1. Faire correspondre un paramètre HTTP à une méthode Java
+
+L'URL suivante
+    /articles/archive?date=08/01/08&page=2
+
+permettra de consulter les articles que vous avez demandé en ajoutant des paramètres ayant le même nom dans une méthode Java :
+
+    public static void archive(Date date, Integer page) {
+        List<Article> articles = Articles.fromArchive(date, page);
+        render(articles);
+    }
+
+Le _biding_ intelligent fonctionne avec n'importe quelle classe :
+
+    public class Person {
+        public String name;
+        public Integer age;
+    }
+
+Une simple action dans le controlleur permet d'ajouter une personne :
+
+    public static void add(Person p) {
+        p.save();
+    }
+
+
+Le formulaire HTML définie les champs correspondant à la classe Person :
+
+    <form action="/Directory/add" method="POST">
+        Name: <input type="text" name="p.name" />
+        Age: <input type="text" name="p.age" />
+    </form>
+
+### 2. Redirection vers une action, en appelant simplement une méthode Java
+
+
+Play n'a pas besoin de l'équivalent de la directive _forward_ de Servlet pour la redirection vers d'autres actions. Il suffit d'appeler la bonne méthode dans le code Java :
+
+    public static void show(Long id) {
+        Article article = Article.findById(id);
+        render(article);
+    }
+
+    public static void edit(Long id, String title) {
+        Article article = Article.findById(id);
+        article.title = title;
+        article.save();
+        show(id);
+    }
+
+Comme vous le vooyez, à la fin de l'action edit, on se redirige vers l'action show!
+
+Dans les templates, on peut utiliser une syntaxe équivalente pour générer un lien :
+
+    <a href="@{Article.show(article.id)}">${article.title}</a>
+    That will generate the following HTML:
+
+    <a href="/articles/15">My new article</a>
+
+### 3. Ne vous répetez pas en passant des paramètres aux templates
+
+Dans la plupart des frameworks Java, pour passer des objets au moteur de template vous devrez utiliser une syntaxe comme :
+
+    Article article = Article.findById(id);
+    User user = User.getConnected();
+    Map<String, Object> model = new HashMap<String,Object>();
+    model.put("article", article);
+    model.put("user", user);
+    render(model);
+
+Avec Play, il suffit d'écrire :
+
+    Article article = Article.findById(id);
+    User user = User.getConnected();
+    render(article, user);
+
+Et vous pourrez récupérer les objets à partir de leur nom dans le template. Encore des lignes de code gagnées!
+
+### 4. JPA sous steroids
+
+Il est incroyablement facile d'utiliser l'API de mapping objet/relationnel JPA avec Play. Rien à configurer, Play synchronisera la base (également configurée et démarrée automatiquement en mode développement) avec vos objets.
+
+En plus, si vous utilisez la classe Model de Play, le code sera encore simplifié :
+
+    public void messages(int page) {
+        User connectedUser = User.find("byEmail", connected());
+        List<Message> messages = Message.find(
+            "user = ? and read = false order by date desc",
+            connectedUser
+        ).from(page * 10).fetch(10);
+        render(connectedUser, messages);
+    }
+
+### 5. Uploadez facilement des fichiers
+
+    Le formulaire HTML :
+
+    <form action="@{Article.uploadPhoto()}" method="POST" enctype="multipart/form-data">
+        <input type="text" name="title" />
+        <input type="file" id="photo" name="photo" />
+        <input type="submit" value="Send it..." />
+    </form>
+
+    Et le code Java :
+
+    public static void uploadPhoto(String title, File photo) {
+       ...
+    }
+
+Comment faire plus simple?
