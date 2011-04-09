@@ -84,6 +84,9 @@ Pour le top 10, vous pouvez choisir un style de musique. Pour cela, le template 
 
     TODO  ...
 
+On peut également choisir l'année durant laquelle sont sortis les albums. Pour proposer les dates disponibles, on calcule un intervalle de dates ...
+    TODO
+
 ## Le formulaire d'ajout
 
 On utilise GET pour obtenir le formualire, POST pour envoyer les données au controlleur (voir le fichier de routes plus haut).
