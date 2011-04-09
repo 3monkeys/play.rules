@@ -3,8 +3,10 @@
 La spécification HTML 5 prévoit la possibilité de valider les données d'un formulaire HTML côté client, directement dans le navigateur avant d'envoyer les données vers un serveur.
 Il existe un module pour Play qui permet de faire un mapping entre les annotations de validation du modèle (qui servent normalement à valider les données côté serveur) et le rendu HTML, pour intégrer cette fonctionnalité.
 
-Pour activer ce module, après l'avoir téléchargé il suffit d'ajouter cette ligne dans le fichier application.conf :
-	module.html5validation=modules/html5validation  
+Pour activer ce module, après l'avoir téléchargé il suffit d'ajouter cette ligne dans le fichier dependencies.yml, dans la section _require_ :
+
+    - play -> html5validation 1.2
+
 
 Sur une entité du modèle, on ajoute une annotation de validation pour indiquer qu'un des champs est obligatoire : 
 

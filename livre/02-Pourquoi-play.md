@@ -165,6 +165,7 @@ En plus, si vous utilisez la classe Model de Play, le code sera encore simplifi√
         render(connectedUser, messages);
     }
 
+
 ### 5. Uploadez facilement des fichiers
 
     Le formulaire HTML :
