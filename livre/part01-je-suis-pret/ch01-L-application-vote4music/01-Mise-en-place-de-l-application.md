@@ -69,7 +69,21 @@ Les routes que nous allons définir permettront :
 
 La route "catch all" permet de résoudre automatiquement une URL à partir du nom du controlleur et d'une méthode.
 
-## Formulaire d'ajout
+
+## La page d'accueil
+
+La page d'accueil permet d'accéder aux principales fonctionnalités de l'application :
+
+- Le formulaire de création d'albums
+- La liste des albums
+- Le top 10 par genre
+- Les fonctions d'administration (que nous verrons au chapitre 3)
+
+Pour le top 10, vous pouvez choisir un style de musique. Pour cela, le template Play utilise l'enum Genre :
+
+    TODO
+
+## Le formulaire d'ajout
 
 ## Lister et rechercher des albums
 
