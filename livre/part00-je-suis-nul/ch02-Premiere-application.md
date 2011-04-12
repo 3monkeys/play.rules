@@ -80,7 +80,7 @@ créeons un premier modèle `version` dans le répertoire `models` :
 	    }
 	}
 
-**Remarque :** vous pouvez voir qu'il n'y a pas de getter ni de setter, juste des "champs" publiques. Dans la majeure partie des cas vous n'en n'avez pas besoin, alors à quoi bon ? Sachez cependant que Play! va les générer lui même (vous ne verrez rien dans le code, mais rien ne vous empêche d'appeler `getReference()` ou `setReference(r)`). Au besoin vous pouvez les écrire vous même si nécessaire.
+**Remarque :** vous pouvez voir qu'il n'y a pas de getter ni de setter, juste des "champs" publiques. Dans la majeure partie des cas vous n'en n'avez pas besoin, alors à quoi bon ? Sachez cependant que Play! va les générer lui même à la compilation (vous ne verrez rien dans le code). Au besoin vous pouvez les écrire vous même si nécessaire.
 
 ####Et le contrôleur ?
 
