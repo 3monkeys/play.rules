@@ -58,10 +58,12 @@ Si vous ajoutez une nouvelle ligne de code, un simple "refresh" dans votre navig
 
 De plus, Play propose nativement un module "CRUD" permettant de générer les écrans, les traitements et les requêtes pour gérer les opération basiques relatives à une entité métier (création, lecture/recherche, mise à jour, suppression). 
 
-## Extensible (modules)
+## Modulaire et extensible
 
 Il existe un grand nombre de modules pour ajouter des fonctionnalités au framework : déploiement sous Google APP Engine, authentification avec OAuth, validation des données côté client avec HTML5...
 La communauté est très active et de nouveaux plugins arrivent régulièrement dans le dépot officiel.
+
+De plus le framework, bien que _full stack_, n'est pas monolithique,  il est possible de n'utiliser que les parties de Play qui nous intéresse et de l'utiliser conjointement à d'autres technologies. On pourrait par exemple imaginer n'utiliser que la partie contrôleur de Play pour exposer des services REST à un front end écrit en HTML/JavaScript et s'appuyer sur des services Spring pour la partie métier. 
 
 ## Pur Java
 
