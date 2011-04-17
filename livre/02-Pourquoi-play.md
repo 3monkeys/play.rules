@@ -54,9 +54,9 @@ Toute la pile est pré-configurée, de la vue à la base de données. Play suit 
 
 Play embarque son propre serveur qui est capable de compiler lui même les fichiers source et de récupérer à chaud toutes les modifications de code.
 Vous n'aurez donc jamais à vous soucier des phases de compilation ou de déploiement de votre application.
-Si vous ajoutez une nouvelle ligne de code, un simple "refresh" dans votre navigateur vous permettra de la voir en action.
+Si vous ajoutez une nouvelle ligne de code, un simple "refresh" dans votre navigateur vous permettra de la voir en action. Et si jamais votre code contient une erreur, vous verrez un message clair et explicite dans votre navigateur, bien plus simple à comprendre que les traditionnelles _stack trace_ que l'on rencontre habituellement lorsque l'on fait du développement JEE.
 
-De plus, Play propose nativement un module "CRUD" permettant de générer les écrans, les traitements et les requêtes pour gérer les opération basiques relatives à une entité métier (création, lecture/recherche, mise à jour, suppression). 
+Enfin, Play propose nativement un module _CRUD_ permettant de générer les écrans, les traitements et les requêtes pour gérer les opération basiques relatives à une entité métier (création, lecture/recherche, mise à jour, suppression). 
 
 ## Extensible (modules)
 
