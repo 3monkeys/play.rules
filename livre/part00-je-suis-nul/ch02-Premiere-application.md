@@ -22,7 +22,7 @@ Ca n'a pas loupé, dès le 1er jour :
 - **mon ingé préféré :** *"tu sais java, c'est une techno très aboutie, mais qui n'est pas simple, mais si il n'y a pas de problème, d'ici la fin de la semaine cela devraît être bon ... tu sais STRUTS c'est pas pour les gamins"* `(ndla : on est lundi)` 
 - **Moi (dans ma tête) :** *"comme un doute ... C'est sympa de passer pour c... auprès du client dès le premier jour ..."*
 
-Je vous épargne la suite. Les anciens (la meilleure équipe que j'ai pu avoir (3)) de ce projet reconnaitrons sûrment la personne à laquelle je fais allusion.
+Je vous épargne la suite. Les anciens (la meilleure équipe que j'ai pu avoir (3)) de ce projet reconnaitront sûrment la personne à laquelle je fais allusion.
 
 ... bon j'en étais où ?
 
@@ -52,10 +52,132 @@ Dans le chapitre précédent, nous avons initialisé notre application **Azergue
 - Ouvrez votre projet dans votre ide préféré (cf. chapitre précédent : [01-Preparation.fr.md](01-Preparation.fr.md))
 - Observons la structure de notre future "killer-app"
 
-###Structure d'azerguespeche
+###Structure d'azerguespeche et 1ère page
 
+Dans IntelliJ vous pouvez voir dans l'arborescence de votre projet que vous avez plusieurs répertoires :
 
+	- azerguespeche
+		- app
+			- controllers
+			- models
+			- views
+				- Application
 
+####1er modèle
+
+créeons un premier modèle `version` dans le répertoire `models` :
+
+	package models;
+
+	public class Version {
+
+	    public String reference;
+	    public String name;
+
+	    public Version() {
+	        this.reference="v° zero";
+	        this.name="proto pour les copains";
+	    }
+	}
+
+**Remarque :** vous pouvez voir qu'il n'y a pas de getter ni de setter, juste des "champs" publiques. Dans la majeure partie des cas vous n'en n'avez pas besoin, alors à quoi bon ? Sachez cependant que Play! va les générer lui même à la compilation (vous ne verrez rien dans le code). Au besoin vous pouvez les écrire vous même si nécessaire.
+
+####Et le contrôleur ?
+
+Cette fois-ci nous allons modifier le contrôleur `Application` dans le répertoire `controllers` :
+
+*Si vous n'avez touché à rien vous devez avoir le code suivant :*
+
+	package controllers;
+	import play.*;
+	import play.mvc.*;
+	import java.util.*;
+	import models.*;
+
+	public class Application extends Controller {
+
+	    public static void index() {
+	        render();
+	    }
+	}
+
+*Modifions la méthode `index()` :*
+
+	public class Application extends Controller {
+
+	    public static void index() {
+
+	        Version version = new Version();
+
+	        render(version);
+	    }
+	}
+
+####Allons modifier la vue Application
+
+- Ouvrez la page `index.html` du répertoire `views/Application/`
+- Vous devez avoir le code suivant :
+
+	
+		#{extends 'main.html' /}
+		#{set title:'Home' /}
+
+		#{welcome /}
+
+- Que vous allez remplacer par :
+
+	
+		#{extends 'main.html' /}
+		#{set title:'Azergues Pêche' /}
+
+		<B>Version : ${version.reference} ${version.name}</B>
+
+**Remarque :** `#{extends 'main.html' /}` signifie que `index.html` hérite de `main.html` (si vous allez regarder dans `main.html`, vous verrez que c'est là que sont déclarées les ressources css, js, etc. ...)
+
+**Remarque bis :** *Que vient-on de faire ?*, eh bien, lorsque nous allons nous connecter, le contrôleur `Application` va instancier le modèle `Version` qui sera affiché dans la vue `Application`(`index.html`) grâce à la méthode `render(version)` utilisée dans le contrôleur.
+
+Si c'est vrai ! Vous n'avez qu'à appeler l'url [http://localhost:9000/](http://localhost:9000/) dans votre navigateur :
+
+![Alt "p00_ch02_01"](https://github.com/3monkeys/play.rules/raw/master/rsrc/p00_ch02_01.png)
+
+*Et là je sens que une pointe de fierté et de satisfaction monter en vous ... non ???*
+
+Donc, comme vous venez de le voir, faire discuter un contrôleur avec un modèle et une vue, ça n'a rien de bien compliqué, surtout avec Play!. Là sans vous en aperçevoir, vous avez compris MVC.
+
+**Question :** 
+
+- *Euh ... et Play!, comment il sait qu'il faut ouvrir la page index.html ?*
+- *c'est une excellente question !*
+
+Allez ouvrir le fichier `routes` dans répertoire `conf` de votre projet, il contient le code suivant :
+
+	# Routes
+	# This file defines all application routes (Higher priority routes first)
+	# ~~~~
+
+	# Home page
+	GET /   Application.index
+
+	# Map static resources from the /app/public folder to the /public path
+	GET /public/    staticDir:public
+
+	# Catch all
+	*       /{controller}/{action}                  {controller}.{action}
+
+En fait la ligne :
+
+	# Home page
+	GET /   Application.index
+
+explique que quand on appelle la racine du site dans l'url (le "`/`" tout seul), alors on ouvre la page index.html du répertoire Application (c'est une **convention**)
+
+##Vous êtes prêts ! ... pour aller plus loin : des objets, des écrans ...
+
+Où nous allons créer les bases d'***Azergues Pêche*** grâce au module CRUD de play
+
+###Préparation
+
+*là je fais une pause, je continue demain matin @k33g_org (12.04.2011)*
 
 <HR>
 	
