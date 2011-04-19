@@ -74,7 +74,7 @@ De plus Play facilite l'utilisation de Java grâce à un certain nombre d'astuce
 
 Les exemples suivants sont tirés [du site officiel de Play](http://www.playframework.org/documentation/1.0/5things) et montrent en quelques lignes l'esprit et la simplicité du framework.
 
-### 1. Faire correspondre un paramètre HTTP à une méthode Java
+### 1. Mapper des paramètres HTTP et une méthode Java
 
 L'URL suivante
     /articles/archive?date=08/01/08&page=2
