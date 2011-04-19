@@ -1,0 +1,13 @@
+files:
+  - "00-Preface.md"
+  - "01-Introduction.md"
+  - "02-Pourquoi-play.md"
+  - "part00-je-suis-nul/ch01-Preparation.md"
+  - "part00-je-suis-nul/ch02-Premiere-application.md"
+  - "part01-je-suis-pret/ch01-L-application-vote4music/01-Mise-en-place-de-l-application.md"
+  - "part01-je-suis-pret/ch02-services-web/01_services_rest_xml.md"
+  - "part01-je-suis-pret/ch02-services-web/02_utiliser_json_a_la_place_de_xml.md"
+  - "part01-je-suis-pret/ch03-play-dans-la-vraie-vie/01-authentification-et-securite.md"
+  - "part01-je-suis-pret/ch03-play-dans-la-vraie-vie/02-tester-notre-application.md"
+  - "part01-je-suis-pret/ch03-play-dans-la-vraie-vie/03-Les-jobs.md"
+  - "part03-je-joue-avec-les-modules/ch01-validation-html5.md"
