@@ -20,12 +20,11 @@ Le module Secure de Play va nous permettre de faire ça de manière élégante. 
 
 ## Mise en oeuvre du module Secure
 
-Le module secure est livré en standard avec la distribution Play.
-Pour l'activer on commence par modifier le fichier de configuration application.conf.
-Décommenter la ligne suivante :
-	module.secure=${play.path}/modules/secure
+Pour activer le module secure, on commence par modifier le fichier dependencies.yml pour y ajouter la ligne suivante dans la section _require_ :
 
-Dans le même fichier ajouter la ligne suivante pour configurer les routes :
+        - play -> secure
+
+Dans le fichier application.conf, ajouter la ligne suivante pour configurer les routes :
 	# Import Secure routes
 	* / module:secure
 	Toujours dans ce fichier, on ajout les indentifiants d’admin :
