@@ -82,7 +82,7 @@ L'URL suivante
 permettra de consulter les articles que vous avez demandé en ajoutant des paramètres ayant le même nom dans une méthode Java :
 
     public static void archive(Date date, Integer page) {
-        List<Article> articles = Articles.fromArchive(date, page);
+        List<Article> articles = Article.fromArchive(date, page);
         render(articles);
     }
 
@@ -100,7 +100,7 @@ Une simple action dans le controlleur permet d'ajouter une personne :
     }
 
 
-Le formulaire HTML définie les champs correspondant à la classe Person :
+Ce formulaire HTML définie les champs correspondant à la classe Person et permet d'appeler notre méthode _add_.
 
     <form action="/Directory/add" method="POST">
         Name: <input type="text" name="p.name" />
