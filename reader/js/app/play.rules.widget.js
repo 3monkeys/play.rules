@@ -83,6 +83,8 @@
             return '<span class="sausage-span">' + page.find(':header').first().text() + '</span>';
           }
       });
+      
+      this.element.pdf();
     },
     
     renderFile: function(index) {
