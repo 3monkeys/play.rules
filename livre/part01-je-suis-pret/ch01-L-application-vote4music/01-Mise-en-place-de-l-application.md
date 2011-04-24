@@ -15,6 +15,8 @@ La classe Album contient les informations suivante :
 - Le genre (ou style de musique)
 - Le nombre de votes que cet album a reçu
 
+Voici le code de cette classe :
+
 	@Entity
 	public class Album extends Model {
 	@Required
@@ -45,6 +47,7 @@ La classe Artist est définie comme ceci :
 ### L'enum Genre
 
 Le genre est une simple Enum, définie comme cela :
+
 	public enum Genre {
 		ROCK, METAL, JAZZ, BLUES, POP, WORLD, HIP_HOP, OTHER
 	}
