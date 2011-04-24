@@ -60,7 +60,9 @@ Les routes que nous allons définir permettront :
 - De consulter le top 10 par genre
 - D'ajouter de nouvelles entrées dans la bibliothèque d'albums
 
-	\# User pages
+Le fichier _routes_ de notre application se présente ainsi :
+
+	# User pages
 	GET     /                                                       Application.index
 	POST    /album                                                  Application.save
 	GET     /albums                                                 Application.list
@@ -69,14 +71,14 @@ Les routes que nous allons définir permettront :
 	GET     /album/{id}                                             Admin.form
 	POST	/api/album                                              Application.saveAlbumJson
 	
-	\#Vote
+	#Vote
 	POST	/vote                                                   Application.vote
 
-	\# Map static resources from the /app/public folder to the /public path
+	# Map static resources from the /app/public folder to the /public path
 	GET     /public/                                                staticDir:public
 
-	\# Catch all
-	\*       /{controller}/{action}                                  {controller}.{action}
+	# Catch all
+	*       /{controller}/{action}                                  {controller}.{action}
 
 La route "catch all" permet de résoudre automatiquement une URL à partir du nom du controlleur et d'une méthode.
 
@@ -392,8 +394,8 @@ Cette méthode du contrôleur permet d'enregistrer un vote pour un album :
 
 Si vous avez une bonne mémoire, vous vous souvenez qu'on avait ajouté une route "catch all" à notre ficher de configuration _routes_ :
 
-	\# Catch all
-	\*       /{controller}/{action}                                  {controller}.{action}
+	# Catch all
+	*       /{controller}/{action}                                  {controller}.{action}
 
 Ceci signifie que l'on est pas obligés de définir des routes pour toutes les méthodes du contrôleur : un pattern par défaut est utilisé. 
 Dans le cas présent, la méthode _vote()_ sera accessible depuis l'URL _/application/vote_.
