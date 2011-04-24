@@ -1,5 +1,5 @@
 Le SOCLE de notre application grâce au module CRUD
-=
+
 
 Dans ce chapitre nous allons :
 
@@ -233,7 +233,7 @@ Vérifions si cela fonctionne en allant créer quelques poissons :
 ![Alt "p00_ch03_06"](https://github.com/3monkeys/play.rules/raw/master/rsrc/p00_ch03_06.png)
 
 Vous pouvez déjà remarquer que l'annotation "Required" apparaît en dessous des champs de saisie.
-Essayer de sauvegarde sans avoir rien saisi :
+Essayez de sauvegarder sans avoir rien saisi :
 
 ![Alt "p00_ch03_07"](https://github.com/3monkeys/play.rules/raw/master/rsrc/p00_ch03_07.png)
 
@@ -245,10 +245,10 @@ Bon, maintenant, il faut les saisir ces poissons ...
 ###Comment "exiger" un format de saisie
 
 Vous pouvez aussi déclarer qu'un type de format est nécessaire comme l'e-mail, un chiffre, etc. ...
-Pour cela allons modifier la classe `Pecheur` en ajoutant un champ email et un champ departement.
+Pour cela allons modifier la classe `Pecheur` en ajoutant un champ email et un champ département.
 
 - pour l'email, nous utiliserons l'annotation `@Email` (la référence à déclarer dans le code sera : `import play.data.validation.Email;`)
-- pour le département, c'est encore plus facile, le simple fait de le typer en integer suffit
+- pour le département, c'est encore plus facile, le simple fait de le typer en Integer suffit
 
 Le code de notre classe `Pecheur` va ressembler à ceci :
 
@@ -304,7 +304,7 @@ Soyons donc débile :
 
 ![Alt "p00_ch03_09"](https://github.com/3monkeys/play.rules/raw/master/rsrc/p00_ch03_09.png)
 
-Eh oui, Play! propose bien un module "annti-débile" et vous explique ce qu'il faut saisir avant d'enregistrer.
+Eh oui, Play! propose bien un module "anti-débile" et vous explique ce qu'il faut saisir avant d'enregistrer.
 
 ##Quelques remarques
 
@@ -331,10 +331,10 @@ Nous verrons comment :
 - créer de nouveaux modèles et des relations entre eux (nous aborderons donc quelques notions de JPA)
 - aller plus loin dans la personnalisation de nos écrans CRUD
 
-Vous n'avez pas encore le statut "demi-dieu" de la progammation Web en java *(1)*, mais je sens déjà quelque chose frétiller en vous :) Non ? Vous avouerez que pour le moment c'est assez facile et sans effort et pourtant ça a déjà de la gueule. J'espère que la vous donne envie de continuer.
+Vous n'avez pas encore le statut "demi-dieu" de la programmation Web en java *(1)*, mais je sens déjà quelque chose frétiller en vous :) Non ? Vous avouerez que pour le moment c'est assez facile et sans effort et pourtant ça a déjà de la gueule. J'espère que la vous donne envie de continuer.
 
 - - -
 
-- (1) : ne vous inquietez pas, je n'ai pas cette prétention non plus ;), mais nous allons progresser ensembles
+- (1) : ne vous inquiétezEssayer pas, je n'ai pas cette prétention non plus ;), mais nous allons progresser ensemble
 
 

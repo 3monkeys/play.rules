@@ -27,6 +27,8 @@ La classe Album contient les informations suivante :
 Nous verrons le code métier de cette classe plus tard.
 
 ### La classe Artist
+La classe Artist est définie comme ceci :
+	
 	public class Artist extends Model{
 		@Required
 		@Column(unique = true)
@@ -99,7 +101,7 @@ On utilise jQuery et le plugin datatables pour améliorer le rendu du tableau de
 Le tableau contient un formulaire de recherche :
 
 La variable search est récupérée dans le contrôleur. Elle permet de trouver des noms d'albums ou d'artistes correspondant à la saisie de l'utilisateur.
-On ne rammène que 100 résultats à la fois côté client. Si l'utilisateur a besoin de parcourir plus de résultats pour trouver ce qu'il cherche, on l'incite à utiliser le formulaire de recherche pour affiner les résultats.s
+On ne ramène que 100 résultats à la fois côté client. Si l'utilisateur a besoin de parcourir plus de résultats pour trouver ce qu'il cherche, on l'incite à utiliser le formulaire de recherche pour affiner les résultats.s
 Cette solution est plus simple pour nous du point de vue du code, par rapport à l'option qui consisterait à rappeler le serveur lors des clics sur les liens de pagination pour aller au delà de 100 résultats.
     TODO ...
 
