@@ -188,15 +188,6 @@ On utilise le verbe HTTP GET pour obtenir le formulaire :
 	    <input type="text" name="album.releaseDate" id="release-date" value="${album?.releaseDate?.format('yyyy-MM-dd')}"/>
 	    <span class="error">${errors.forKey('album.releaseDate')}</span>
 	</p>
-	<p class="field">
-	    <label for="cover">Cover</label>
-	    <input type="file" id="cover" name="cover" accept="gif,jpg,jpeg,png,bmp"/>
-	    #{if album?.hasCover}
-	    <br/>
-	    <img src="@{'/public/shared/covers'}/${album?.id}" alt="no cover" widht="50px" height="50px"/>
-	    #{/if}
-	</p>
-
 
 	<p class="buttons">
 	    <a href="/albums" class="button">Cancel</a>
