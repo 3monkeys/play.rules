@@ -6,6 +6,7 @@ Le code complet de l'application est disponible [ici](https://github.com/loicdes
 ## Le modèle de données
 
 ### La classe Album
+
 La classe Album contient les informations suivante :
 - Nom de l'album (obligatoire)
 - Référence à l'artiste (obligatoire)
@@ -30,6 +31,7 @@ La classe Album contient les informations suivante :
 Nous verrons le code métier de cette classe dans la suite du chapitre.
 
 ### La classe Artist
+
 La classe Artist est définie comme ceci :
 	
 	public class Artist extends Model{
@@ -49,6 +51,7 @@ Le genre est une simple Enum, définie comme cela :
 Vous pouvez bien sur ajouter autant que genres que vous voulez.
 
 ## Définition des routes
+
 Les routes que nous allons définir permettront : 
 - De consulter les albums, triés par popularité
 - De rechercher des albums
@@ -108,6 +111,8 @@ Si la base est vide on donne des valeurs par défaut :
 
 La classe Album implémente les méthodes getFirstAlbumYear et getLastAlbumYear, qui récupèrent ces valeurs dans la base de données :
 
+	private static SimpleDateFormat formatYear = new SimpleDateFormat("yyyy");
+
 	public static int getFirstAlbumYear() {
         // get a single result via play-jpa gives the wrong result
         Date result = (Date) em().createQuery("select min(a.releaseDate) from Album a").getSingleResult();
@@ -125,6 +130,7 @@ La classe Album implémente les méthodes getFirstAlbumYear et getLastAlbumYear,
         return Integer.parseInt(formatYear.format(new Date()));
     }
     
+La méthode _em()_ de classe _Model_ de Play permet d'accéder à l'entity manager de JPA (Java Persistence API). Ceci peut être utile dans certains cas, notamment lorsque l'on veut ramener autre chose que des objets du modèle (ici une date).
 
 ## Le formulaire d'ajout
 
@@ -207,6 +213,8 @@ Pour permettre à l'utilisateur de sélectionner une date à l'aide d'un widget,
 	</script>
 	#{/set}
 
+Ce script utilise jQuery, comme tous les exemples de code JavaScript que nous verrons dans ce chapitre.
+
 Enfin, définissons la méthode du contrôleur qui va nous permettre d'enregistrer un album dans la base : 
 
 	public static void save(@Valid Album album, @Valid Artist artist, File cover) {
@@ -266,6 +274,10 @@ Ceci suffit à ajouter des fonctions de pagination et de tri à un simple tablea
 	        <td>${album.name}</td>
 	        <td>${album.releaseDate.format('yyyy-MM-dd')}</td>
 	        <td>${album.genre.toString()}</td>
+			<td>
+	            <span id="nbVotes${album.id}">${album.nbVotes}</span>
+	            <a id="${album.id}-clickVote" class="voteLink" href="#">Vote for it!</a>
+	        </td>
 	    </tr>
 	    #{/list}    
 	</table>
@@ -317,19 +329,205 @@ La classe Album définie la méthode de recherche par filtre :
 
 ## Le top 10
 
-La librairie lambdaj nous aide à filtrer l'ensemble des albums récupérés pour une année donnée :
+Cette fonction de l'application permet d'afficher 10 les albums ayant reçu le plus de votes, pour une année et un genre donnés :
 
-    TODO ...
+	public static void listByGenreAndYear(String genre, String year) {
+        notFoundIfNull(genre);
+        notFoundIfNull(year);
+        List<Album> albums = Album.findByGenreAndYear(genre, year);
+        render(genre, year, albums);
+    }
 
-Grace à cette librairie, nous pouvons écrire notre filtre comme dans un langage fonctionnel, en évitant de créer des boucles pour parcourir la collection d'albums dans le but de la trier.
+Les paramètres _genre_ et _year_ sont obligatoires. Cela veut dire que si on appelle ce contrôleur dans ces paramètres, il renverra une erreur 404 (not found).
+ 
+La classe Album définie les méthodes nécessaires à cette recherche :
+
+ public static List<Album> findByGenreAndYear(String genre, String year) {
+        
+	List<Album> albums;
+        Genre genreEnum = Genre.valueOf(genre.toString().toUpperCase());
+        albums = Album.find("byGenre", genreEnum).fetch(10);
+        //LabmdaJ example
+        albums = filterByYear(albums, year);
+        return sortByPopularity(albums);
+    }
+
+La librairie lambdaj nous aide à filtrer l'ensemble des albums récupérés pour une année donnée. Grâce à elle, nous pouvons écrire nos filtres comme dans un langage fonctionnel, en évitant de créer des boucles pour parcourir la collection d'albums dans le but de la trier. Dans cet exemple, on utilise les fonctions _sort_ et _select_ :
+
+
+    private static List<Album> sortByPopularity(List<Album> albums) {
+        List sortedAlbums = sort(albums, on(Album.class).nbVotes);
+        //tri descendant
+		Collections.reverse(sortedAlbums);
+        return sortedAlbums;
+    }
+
+    public static List<Album> filterByYear(List<Album> albums, String year) {
+        return select(albums, having(on(Album.class).getReleaseYear(), equalTo(year)));
+    }	
+	
+	
 Pour que Play puisse bénéficier de lambdaj, on ajoute cette ligne à la section _require_ du fichier dependencies.yml :
     - com.googlecode.lambdaj -> lambdaj 2.2
 
-    TODO ...
 
 ## La fonction de votes
 
+Voyons maintenant une fonctionnalité clé de cette application, le vote!
 
+Cette méthode du contrôleur permet d'enregistrer un vote pour un album :
+
+	public static void vote(String id) {
+        Album album = Album.findById(Long.parseLong(id));
+        album.vote();
+        renderText(album.nbVotes);
+    }
+
+La classe Album définie cette méthode pour mettre à jour le compteur des votes d'une instance d'album:
+
+	public void vote() {
+        nbVotes++;
+        save();
+    }
+
+Les entités du modèle pouvant auto-gérer leur état dans la base de données, on peut directement appeler la méthode _save_ pour sauvegarder ce nouvel état.
+
+La méthode du contrôleur renvoie directement le nouveau score de l'album au format texte. On récupérera cette réponse dans notre client HTML pour mettre à jour les informations affichées à l'écran. 
+Le bouton de vote est accessible dans la liste des albums :
+
+	<td>
+        <span id="nbVotes${album.id}">${album.nbVotes}</span>
+        <a id="${album.id}-clickVote" class="voteLink" href="#">Vote for it!</a>
+    </td>
+
+On créer aussi une _div_ pour afficher un message en cas de succès :
+
+	<div id="voteInfo" class="info">One vote added!</div>
+
+Cette section sera masquée par défaut, à l'aide de CSS : 
+
+.info {
+  display: none;
+}
+
+Ce code JavaScript permet d'intercepter les clicks et de rafraîchir l'écran :
+	
+		//On récupère les span dont l'id commence par "nbVotes" pour trouver la zone à mettre à jour
+		var nbvotes = $('span[id^="nbVotes"]');
+		clickVote = function() {
+			//Récupération de l'id de l'album sur lequel on a cliqué
+        	var id = t.attr('id').split('-')[0],
+			//Zone à zone à mettre à jour pour cet id : les spans commençant par "nbVotes" et finissant par l'id
+        	voteTarget = nbvotes.filter("[id$=" + id + "]");
+        
+        	// un seul vote possible par album : on cache le bouton
+	        $(this).hide();
+                    
+	        $.ajax({
+	            url: '/vote',
+	            type: "POST",
+	            data: {id: id},
+	            complete: function(req) {      
+	                var newTotal = req.responseText;
+					//si la réponse est OK
+	                if (req.status === 200) {
+						//rafraichissement de l'écran
+	                    voteTarget.text(newTotal);
+						//Animation pour afficher le message
+	                    voteInfo.slideDown("slow").delay(3000).slideUp("slow");
+	                }
+	            }
+	        });
+	    };
+
+	$('a.voteLink').click(clickVote);
+		
 ## Gestion des pochettes d'albums
+	
+On veut maintenant ajouter la possibilité d'attacher l'image d'une pochette aux albums.	
+On enrichit la classe Album avec d'un nouveau champ :
 
-	TODO ...
+	public boolean hasCover = false;
+
+Ce booléen nous permettra de savoir si l'album possède une pochette ou non.
+On ajoute une colonne à la liste des albums. Lors de l'affichage, on effectue le test suivant : 
+
+	<td>
+        #{if album?.hasCover}
+        <span class="cover"><a href="#">Show cover</a></span>
+        #{/if}
+    </td>
+
+Lors du survol de ce lien, on affiche une miniature de la pochette avec un peu de JavaScript :
+
+	$('.cover').each(function(i, val) {
+        var t = $(this); 
+		//Récupération de l'id courant
+        var album = t.closest('tr').attr("id");
+        var id = album.match(/album-(\d)/)[1];
+        displayCover(id, t);
+    });
+
+	//Affichage de l'image
+	displayCover = function(id, albumMarkup){
+        var root = '/public/shared/covers';
+        var markup = '<img src="' + root + '/' + id + '" width="200" height="200">';
+        albumMarkup.bt(markup, {
+            width: 200,
+            fill: 'white',
+            cornerRadius: 20,
+            padding: 20,
+            strokeWidth: 1,
+            trigger: ['mouseover', 'click']
+        });
+    };
+	
+Ce code récupère une image dans un répertoire du serveur et effectue son rendu à l'aide du plugin jQuery bt (BeautyTips).
+
+Voyons maintenant comment enregistrer l'image dans ce répertoire lors de la création d'un album.
+		
+### Upload et sauvegarde d'une image
+
+On ajoute un champ dans le formulaire de création (et d'édition) de l'album :
+
+	<p class="field">
+	    <label for="cover">Cover</label>
+	    <input type="file" id="cover" name="cover" accept="image/*"/>
+	     #{if album?.hasCover}
+	     <br/>
+	     <img src="@{'/public/shared/covers'}/${album?.id}" alt="no cover" widht="50px" height="50px"/>
+	     #{/if}
+	</p>
+
+Ce champ permet d'uploader une image. En mode édition, si une image est enregistrée elle sera affichée.
+
+On modifié également la méthode _save_ du contrôleur pour traiter cet upload :
+
+	public static void save(@Valid Album album, @Valid Artist artist, File cover) {
+        if (Validation.hasErrors()) {
+            render("@form", album);
+        }
+        // set the album
+        album.artist = artist;
+        //look for duplicates
+        album.replaceDuplicateArtist();
+        album.save();
+
+        //pochette
+        if (cover != null) {
+            String path = "/public/shared/covers/" + album.id;
+            album.hasCover = true;
+            File newFile = Play.getFile(path);
+            //suppression des anciennes pochettes si elles existent
+            if (newFile.exists())
+                newFile.delete();
+            cover.renameTo(newFile);
+
+            album.save();
+        }
+
+        //return to album list
+        list();
+    }
+
+Comme vous pouvez le voir il suffit d'ajouter un paramètre de type _File_ à la méthode _save_ puis de le traiter avec les méthodes _Play.getFile_ (pour déterminer le chemin de destination du fichier) et _renameTo_.
