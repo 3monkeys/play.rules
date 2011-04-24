@@ -8,6 +8,7 @@ Le code complet de l'application est disponible [ici](https://github.com/loicdes
 ### La classe Album
 
 La classe Album contient les informations suivante :
+
 - Nom de l'album (obligatoire)
 - Référence à l'artiste (obligatoire)
 - Année de sortie (obligatoire)
@@ -53,10 +54,11 @@ Vous pouvez bien sur ajouter autant que genres que vous voulez.
 ## Définition des routes
 
 Les routes que nous allons définir permettront : 
- - De consulter les albums
- - De rechercher des albums
- - De consulter le top 10 par genre
- - D'ajouter de nouvelles entrées dans la bibliothèque d'albums
+
+- De consulter les albums
+- De rechercher des albums
+- De consulter le top 10 par genre
+- D'ajouter de nouvelles entrées dans la bibliothèque d'albums
 
 	# User pages
 	GET     /                                                       Application.index
