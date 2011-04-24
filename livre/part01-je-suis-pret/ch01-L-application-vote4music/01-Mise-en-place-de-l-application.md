@@ -380,7 +380,7 @@ Pour que Play puisse bénéficier de lambdaj, on ajoute cette ligne à la sectio
     - com.googlecode.lambdaj -> lambdaj 2.2
 
 
-## La fonction de votes
+## La fonction de vote
 
 Voyons maintenant une fonctionnalité clé de cette application, le vote!
 
