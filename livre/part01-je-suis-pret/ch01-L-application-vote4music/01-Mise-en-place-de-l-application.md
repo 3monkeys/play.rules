@@ -89,7 +89,7 @@ On peut également choisir l'année durant laquelle sont sortis les albums. Pour
 
 ## Le formulaire d'ajout
 
-On utilise GET pour obtenir le formualire, POST pour envoyer les données au controlleur (voir le fichier de routes plus haut).
+On utilise GET pour obtenir le formulaire, POST pour envoyer les données au contrôleur (voir le fichier de routes plus haut).
 
     TODO ...
 
@@ -98,18 +98,18 @@ On utilise GET pour obtenir le formualire, POST pour envoyer les données au con
 On utilise jQuery et le plugin datatables pour améliorer le rendu du tableau des résultats. Ce plugin permet d'afficher des liens pour trier le tableau, et ajoute la pagination des données.
 Le tableau contient un formulaire de recherche :
 
-La variable search est récupérée dans le controlleur. Elle permet de trouver des noms d'albums ou d'artistes correspondant à la saisie de l'utilisateur.
+La variable search est récupérée dans le contrôleur. Elle permet de trouver des noms d'albums ou d'artistes correspondant à la saisie de l'utilisateur.
 On ne rammène que 100 résultats à la fois côté client. Si l'utilisateur a besoin de parcourir plus de résultats pour trouver ce qu'il cherche, on l'incite à utiliser le formulaire de recherche pour affiner les résultats.s
 Cette solution est plus simple pour nous du point de vue du code, par rapport à l'option qui consisterait à rappeler le serveur lors des clics sur les liens de pagination pour aller au delà de 100 résultats.
     TODO ...
 
 ## Le top 10
 
-La librairie lambdaj nous aide à filtrer l'ensemble des alubms récupérés pour une année donnée :
+La librairie lambdaj nous aide à filtrer l'ensemble des albums récupérés pour une année donnée :
 
     TODO ...
 
-Grace à cette librairie, nous pouvons écrire notre filtre comme dans un langage fonctionnel, en evitant de créer des boucles pour parcourir la collection d'albums dans le but de la trier.
+Grace à cette librairie, nous pouvons écrire notre filtre comme dans un langage fonctionnel, en évitant de créer des boucles pour parcourir la collection d'albums dans le but de la trier.
 Pour que Play puisse bénéficier de lambdaj, on ajoute cette ligne à la section _require_ du fichier dependencies.yml :
     - com.googlecode.lambdaj -> lambdaj 2.2
 

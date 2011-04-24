@@ -4,7 +4,7 @@ Nous avons étudié ici et là le fonctionnement de l’authentification et de l
 Voyons aujourd’hui comment cela fonctionne avec Play, notamment ce que le framework nous propose avec son module Secure.
 Nous allons étudier le cas suivant : notre application est publique, on peut y naviguer sans être authentifié. Mais elle possède également des fonctions d’administrations, affichées lorsque l’on s’identifie comme admin. Pour accéder à ces fonctions, il existe une URL qui permet d’accéder à un formulaire d'authentification. 
 
-Play permet d’écrire les informations de session utilisateur dans un cookie. Ce cookie est signé, il n’est donc pas modifiable côté client, par contre il n’est pas crypté, il ne faut donc pas écrire d’informations sensible à l’interieur (pas de mot de passe par exemple). Dans notre exemple, on souhaite utiliser le cookie de session pour stocker le fait que l’utilisateur soit identifié comme un administrateur ou non.
+Play permet d’écrire les informations de session utilisateur dans un cookie. Ce cookie est signé, il n’est donc pas modifiable côté client, par contre il n’est pas crypté, il ne faut donc pas écrire d’informations sensible à l’intérieur (pas de mot de passe par exemple). Dans notre exemple, on souhaite utiliser le cookie de session pour stocker le fait que l’utilisateur soit identifié comme un administrateur ou non.
 
 Une des choses que l’on souhaite ajouter à l’application web si l’utilisateur est admin est un lien “Supprimer” dans le tableau html qui liste nos entités métiers (on liste des albums de musique pour reprendre les exemples précédents). On pourrait donc utiliser le code suivant:
 
@@ -46,7 +46,7 @@ On ajoute ensuite un contrôle sur l'action delete en utilisant l'annotation @Ch
 	...  
 	}  
 
-On redefinie également la méthode check en creéant une nouvelle classe dans le package controller, héritant de la classe Secure.Security :
+On redefinie également la méthode check en créant une nouvelle classe dans le package controller, héritant de la classe Secure.Security :
 	static boolean check(String profile) {  
 		 if(profile.equals("admin"))  
 		   return session.get("username").equals("admin");  
@@ -61,7 +61,7 @@ Dans la même classe, on redéfinie la méthode authentify. C'est sur cette mét
 	}  
 
 
-Avec cette configuration, si on essaie d’entrer l’URL /admin/delete?id=11, on arrivera directement sur le formulaire d’autentification pour prouver que l’on est bien administrateur.
+Avec cette configuration, si on essaie d’entrer l’URL /admin/delete?id=11, on arrivera directement sur le formulaire d’authentification pour prouver que l’on est bien administrateur.
 Et bien sur si le mot de passe et l’utilisateur entrés ne sont pas les bons, on ne passe pas.
 
 On aimerait maintenant pouvoir aller directement sur ce formulaire pour mettre en session utilisateur les informations concernant notre identité.
@@ -72,7 +72,7 @@ Il suffit d’ajouter le code suivant dans le contrôleur Admin pour exposer le 
 	  Application.list();  
 	 }
 
-Toutes les méthodes que l’on définit dans ce controlleur étant soumises à un contrôle de l’utilisateur en session, vous vous retrouverez directement sur le formulaire d’authentification.
+Toutes les méthodes que l’on définit dans ce contrôleur étant soumises à un contrôle de l’utilisateur en session, vous vous retrouverez directement sur le formulaire d’authentification.
 
 L’utilisateur sera ensuite redirigé vers l’écran principal de l’application (la liste des albums dans cet exemple).
 

@@ -5,11 +5,11 @@ Architectures techniques opaques, gestion chaotique des dépendances, longues ph
 
 ## Architecture simple
 
-Play se base sur une architecure extrêmement simple en suivant le design pattern MVC. A côté de ça il ne rajoute pas de notions de couches service, couches DAO etc.
+Play se base sur une architecture extrêmement simple en suivant le design pattern MVC. A côté de ça il ne rajoute pas de notions de couches service, couches DAO etc.
 
-Tout le code métier est porté par les objets du modèle, afin d'éviter le phénonème appelé [Anemic Domain Model](http://en.wikipedia.org/wiki/Anemic_Domain_Model), qui résulte en l'écriture de classes métier contenant uniquement des champs et des accesseurs (getters et setters), donc sans traitements ni intelligence. C'est ce qui arrive dès que l'on commence à implémenter le code métier de l'application dans des couches techniques (couches service, EJB...)
+Tout le code métier est porté par les objets du modèle, afin d'éviter le phénomène appelé [Anemic Domain Model](http://en.wikipedia.org/wiki/Anemic_Domain_Model), qui résulte en l'écriture de classes métier contenant uniquement des champs et des accesseurs (getters et setters), donc sans traitements ni intelligence. C'est ce qui arrive dès que l'on commence à implémenter le code métier de l'application dans des couches techniques (couches service, EJB...)
 
-Comme en Ruby On Rails, les objets du modèle sont conçus selon le pattern Active Record : ils ont la capacité de gérer eux même leur persistence dans la base de données.
+Comme en Ruby On Rails, les objets du modèle sont conçus selon le pattern Active Record : ils ont la capacité de gérer eux même leur persistance dans la base de données.
 
 On peut par exemple écrire le code suivant pour manipuler une entité "Personne" : 
 
@@ -24,7 +24,7 @@ On peut par exemple écrire le code suivant pour manipuler une entité "Personne
 
 ## Orienté REST
 
-Avec Play, il est extrêmement facile de faire correspondre des URL simples, lisibiles et _bookmarkables_ aux actions du controlleur.
+Avec Play, il est extrêmement facile de faire correspondre des URL simples, lisibles et _bookmarkables_ aux actions du controlleur.
 
 Par exemple, pour afficher toutes les personnes habitant à Paris dans un annuaire, on pourra utiliser une URL comme
 
@@ -36,21 +36,21 @@ Ceci est renforcé par l'aspect _stateless_ du framework. Le serveur ne stockant
 
 Play se veut respectueux de l'architecture du Web et donc des architectures REST. Guillaume Bort a fait le choix de ne rien stocker côté serveur.
 Cela signifie qu'il n'existe pas de session utilisateur sur la partie serveur du framework. 
-Ceci peut sembler déstabilisant lorsque l'on a l'habitude de travailler des frameworks comme JSF ou Wicket. Mais finalement ce mode de fonctionnement simplifie vraiment lec choses.
-En effet on n'a pas besoin de gérer l'état du serveur, il ne fait que traiter les requêtes qui arrivent et renvoyer la réponse. Ceux qui ont déjà eu des problèmes avec Wicket et sa manie de tout garder en session, même les objets "ou of date" comprendront ce queje veux dire.
+Ceci peut sembler déstabilisant lorsque l'on a l'habitude de travailler des frameworks comme JSF ou Wicket. Mais finalement ce mode de fonctionnement simplifie vraiment les choses.
+En effet on n'a pas besoin de gérer l'état du serveur, il ne fait que traiter les requêtes qui arrivent et renvoyer la réponse. Ceux qui ont déjà eu des problèmes avec Wicket et sa manie de tout garder en session, même les objets "ou of date" comprendront ce que je veux dire.
 Play propose un objet "session" qui permet de stocker un identifiant de session utilisateur en écrivant dans un cookie côté client (dans le navigateur).
-Pour stocker des volumes plus importans de données côté client, vous serez incité à utiliser les API de stockage de HTML 5 (web storage).
-Si pour des raisons de performances vous ne voulez pas répeter trop souvent les mêmes requêtes vers la base de données, il est également possible d'utiliser un cache distribué. Play fournit une implémentation de cache par défaut.
+Pour stocker des volumes plus importants de données côté client, vous serez incité à utiliser les API de stockage de HTML 5 (web storage).
+Si pour des raisons de performances vous ne voulez pas répéter trop souvent les mêmes requêtes vers la base de données, il est également possible d'utiliser un cache distribué. Play fournit une implémentation de cache par défaut.
     
 Une autre conséquence de ce mode stateless est bien sur la capacité à monter en charge (scalabilité). Si le trafic de votre application augmente, il suffira de rajouter un serveur derrière un load balancer pour tenir la charge.
-Ceci prend tout son sens dans les environnements de type cloud ou des neouds de serveurs peuvent être ajoutés et retirés dynamiquement selon la demande.
+Ceci prend tout son sens dans les environnements de type cloud ou des noeuds de serveurs peuvent être ajoutés et retirés dynamiquement selon la demande.
 Autre avantage : la tolérance aux pannes. Si un serveur tombe en panne, les appels pourront passer sur un autre serveur sans que l'utilisateur s'en rende compte.
 Avec des framework stateful, vous seriez obligé de dupliquer les sessions utilisateurs d'un serveur à l'autre pour que les utilisateurs ne perdent pas leur contexte de travail.
 
   
 ##Productif
 
-Toute la pile est pré-configurée, de la vue à la base de données. Play suit la logique de "convention over configuration". Ainsi, si le paramétrage par défaut vous convient, vous pourrez commencer à développer dès que vous aurez dézippé l'archive du framework! Ce principe sera également appliqué lors du développement de nos applications Play afin d'économiser des lignes de code tout au long du développement.
+Toute la pile est pré-configurée, de la vue à la base de données. Play suit la logique de _convention over configuration_. Ainsi, si le paramétrage par défaut vous convient, vous pourrez commencer à développer dès que vous aurez dézippé l'archive du framework! Ce principe sera également appliqué lors du développement de nos applications Play afin d'économiser des lignes de code tout au long du développement.
 
 Play embarque son propre serveur qui est capable de compiler lui même les fichiers source et de récupérer à chaud toutes les modifications de code.
 Vous n'aurez donc jamais à vous soucier des phases de compilation ou de déploiement de votre application.
@@ -61,14 +61,14 @@ Enfin, Play propose nativement un module _CRUD_ permettant de générer les écr
 ## Modulaire et extensible
 
 Il existe un grand nombre de modules pour ajouter des fonctionnalités au framework : déploiement sous Google APP Engine, authentification avec OAuth, validation des données côté client avec HTML5...
-La communauté est très active et de nouveaux plugins arrivent régulièrement dans le dépot officiel.
+La communauté est très active et de nouveaux plugins arrivent régulièrement dans le dépôt officiel.
 
 De plus le framework, bien que _full stack_, n'est pas monolithique,  il est possible de n'utiliser que les parties de Play qui nous intéresse et de l'utiliser conjointement à d'autres technologies. On pourrait par exemple imaginer n'utiliser que la partie contrôleur de Play pour exposer des services REST à un front end écrit en HTML/JavaScript et s'appuyer sur des services Spring pour la partie métier. 
 
 ## Pur Java
 
 Play est écrit en Java et il est compatible avec toutes vos librairies Java préférées.
-De plus Play facilite l'utilisation de Java grâce à un certain nombre d'astuces.Il génére par exemple automatiquement les accesseurs (getters et setters) dans les classes Java dans le but d'améliorer la lisibilité du code.
+De plus Play facilite l'utilisation de Java grâce à un certain nombre d'astuces.Il génère par exemple automatiquement les accesseurs (getters et setters) dans les classes Java dans le but d'améliorer la lisibilité du code.
 
 ## 5 trucs cool que l'on peut faire avec Play
 
@@ -93,14 +93,14 @@ Le _biding_ intelligent fonctionne avec n'importe quelle classe :
         public Integer age;
     }
 
-Une simple action dans le controlleur permet d'ajouter une personne :
+Une simple action dans le contrôleur permet d'ajouter une personne :
 
     public static void add(Person p) {
         p.save();
     }
 
 
-Ce formulaire HTML définie les champs correspondant à la classe Person et permet d'appeler notre méthode _add_.
+Ce formulaire HTML définie les champs correspondant à la classe Person et permet d'appeler notre méthode _add_ :
 
     <form action="/Directory/add" method="POST">
         Name: <input type="text" name="p.name" />
@@ -124,7 +124,7 @@ Play n'a pas besoin de l'équivalent de la directive _forward_ de Servlet pour l
         show(id);
     }
 
-Comme vous le vooyez, à la fin de l'action edit, on se redirige vers l'action show!
+Comme vous le voyez, à la fin de l'action edit, on se redirige vers l'action show!
 
 Dans les templates, on peut utiliser une syntaxe équivalente pour générer un lien :
 
