@@ -329,7 +329,7 @@ Vous avez aussi noté (j'espère) que toutes les modifications apportées aux cl
 Nous verrons comment :
 
 - créer de nouveaux modèles et des relations entre eux (nous aborderons donc quelques notions de JPA)
-- aller plus loin dans la personnalisation de nos écrans CRUS
+- aller plus loin dans la personnalisation de nos écrans CRUD
 
 Vous n'avez pas encore le statut "demi-dieu" de la progammation Web en java *(1)*, mais je sens déjà quelque chose frétiller en vous :) Non ? Vous avouerez que pour le moment c'est assez facile et sans effort et pourtant ça a déjà de la gueule. J'espère que la vous donne envie de continuer.
 
