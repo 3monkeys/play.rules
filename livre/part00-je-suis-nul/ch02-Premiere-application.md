@@ -177,9 +177,9 @@ Où nous allons créer les bases d'***Azergues Pêche*** grâce au module CRUD d
 
 ###Préparation
 
-*là je fais une pause, je continue demain matin @k33g_org (12.04.2011)*
+c'est dans le chapitre suivant : [ch03-Premiere-application-CRUD](ch03-Premiere-application-CRUD.md).
 
-<HR>
+- - -
 	
 - (1) : oui, je sais, ce n'est pas la meilleure source d'information qui soit, ni la plus fiable, mais bon ... n'hésitez pas à poster vos définitions dans les "issues" du projet : [https://github.com/3monkeys/play.rules/issues](https://github.com/3monkeys/play.rules/issues).
 - (2) : je le suis encore un peu, je dois l'avouer, mais on ne se refait pas.
