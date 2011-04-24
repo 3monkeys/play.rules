@@ -221,9 +221,8 @@ Enfin, définissons la méthode du contrôleur qui va nous permettre d'enregistr
         if (Validation.hasErrors()) {
             render("@form", album);
         }
-        // set the album
         album.artist = artist;
-        //look for duplicates
+        //recherche des doublons
         album.replaceDuplicateArtist();
         album.save();
 
@@ -507,9 +506,8 @@ On modifié également la méthode _save_ du contrôleur pour traiter cet upload
         if (Validation.hasErrors()) {
             render("@form", album);
         }
-        // set the album
         album.artist = artist;
-        //look for duplicates
+        //recherche des doublons
         album.replaceDuplicateArtist();
         album.save();
 
