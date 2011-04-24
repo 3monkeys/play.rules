@@ -97,8 +97,14 @@ Pour le top 10, vous pouvez choisir un style de musique. Pour cela, le template 
 	    #{/list}
 	</select>
 
-On peut également choisir l'année durant laquelle sont sortis les albums. Pour proposer les dates disponibles, on calcule un intervalle de dates allant de l'album le plus récent à l'album le plus ancien.
-Si la base est vide on donne des valeurs par défaut :
+On peut également choisir l'année durant laquelle sont sortis les albums :
+
+	#{list controllers.Application.getYearsToDisplay(), as:'year'}
+    <option  value="${year}">${year}</option>
+    #{/list}
+
+Pour proposer les dates disponibles depuis le contrôleur, on calcule un intervalle de dates allant de l'album le plus récent à l'album le plus ancien.
+Si la base est vide on donne des valeurs par défaut :	
 
 	public static List<String> getYearsToDisplay() {
         List<String> years = new ArrayList<String>();
@@ -107,7 +113,7 @@ Si la base est vide on donne des valeurs par défaut :
         }
         Collections.reverse(years);
         return years;
-    }
+    }	
 
 La classe Album implémente les méthodes getFirstAlbumYear et getLastAlbumYear, qui récupèrent ces valeurs dans la base de données :
 
@@ -382,6 +388,14 @@ Cette méthode du contrôleur permet d'enregistrer un vote pour un album :
         renderText(album.nbVotes);
     }
 
+Si vous avez une bonne mémoire, vous vous souvenez qu'on avait ajouté une route "catch all" à notre ficher de configuration _routes_ :
+
+	# Catch all
+	*       /{controller}/{action}                                  {controller}.{action}
+
+Ceci signifie que l'on est pas obligés de définir des routes pour toutes les méthodes du contrôleur : un pattern par défaut est utilisé. 
+Dans le cas présent, la méthode _vote()_ sera accessible depuis l'URL _/application/vote_.
+
 La classe Album définie cette méthode pour mettre à jour le compteur des votes d'une instance d'album:
 
 	public void vote() {
@@ -423,7 +437,8 @@ Ce code JavaScript permet d'intercepter les clicks et de rafraîchir l'écran :
 	        $(this).hide();
                     
 	        $.ajax({
-	            url: '/vote',
+				//Cette URL redirige vers la méthode vote() du contrôleur
+                url: '/application/vote',
 	            type: "POST",
 	            data: {id: id},
 	            complete: function(req) {      
@@ -440,7 +455,7 @@ Ce code JavaScript permet d'intercepter les clicks et de rafraîchir l'écran :
 	    };
 
 	$('a.voteLink').click(clickVote);
-		
+	 	
 ## Gestion des pochettes d'albums
 	
 On veut maintenant ajouter la possibilité d'attacher l'image d'une pochette aux albums.	
