@@ -76,7 +76,7 @@ Les routes que nous allons définir permettront :
 	GET     /public/                                                staticDir:public
 
 	\# Catch all
-	*       /{controller}/{action}                                  {controller}.{action}
+	\*       /{controller}/{action}                                  {controller}.{action}
 
 La route "catch all" permet de résoudre automatiquement une URL à partir du nom du controlleur et d'une méthode.
 
@@ -393,7 +393,7 @@ Cette méthode du contrôleur permet d'enregistrer un vote pour un album :
 Si vous avez une bonne mémoire, vous vous souvenez qu'on avait ajouté une route "catch all" à notre ficher de configuration _routes_ :
 
 	\# Catch all
-	*       /{controller}/{action}                                  {controller}.{action}
+	\*       /{controller}/{action}                                  {controller}.{action}
 
 Ceci signifie que l'on est pas obligés de définir des routes pour toutes les méthodes du contrôleur : un pattern par défaut est utilisé. 
 Dans le cas présent, la méthode _vote()_ sera accessible depuis l'URL _/application/vote_.
