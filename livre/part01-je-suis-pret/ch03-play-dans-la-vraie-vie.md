@@ -60,7 +60,7 @@ On redefinie également la méthode check en créant une nouvelle classe dans le
 
 Ce code permet de demander au module Secure de vérifier que l’utilisateur en session est bien “admin” lorsque l’annotation @check(“admin”) est trouvée. 
 
-Dans la même classe, on redéfinie la méthode authentify. C'est sur cette méthode que le formulaire d’autentification du module Secure s'appuie pour laisser passer ou non l'utilisateur :
+Dans la même classe, on redéfinie la méthode authentify. C'est sur cette méthode que le formulaire d’authentification du module Secure s'appuie pour laisser passer ou non l'utilisateur :
 
 	static boolean authentify(String username, String password) {  
 	return Play.configuration.getProperty("application.admin").equals(username)&& Play.configuration.getProperty("application.adminpwd").equals(password);  
@@ -271,7 +271,7 @@ Dans cet exemple, on souhaite recharger les albums toutes les heures à partir d
 
 On peut imaginer beaucoup d'applications possibles pour ce genre de traitements périodiques.
 On pourrait par exemple envoyer un résumé d'activité par mail tous les lundi à l'ensemble des utilisateurs.
-Pour définir finement la periodicité on peut utiliser la syntaxe CRON avec l'annotation _@On_.
+Pour définir finement la périodicité on peut utiliser la syntaxe CRON avec l'annotation _@On_.
 Par exemple, `@On("0 0 8 * * ?")` déclenchera le traitement tous les jours à 8h.
 	
 ## L'internationalisation
