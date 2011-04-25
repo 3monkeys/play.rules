@@ -6,7 +6,7 @@ Dans ce chapitre nous allons :
 - créer notre 1ère page selon les préceptes MVC (kézaco ?)
 - construire les bases de notre application
 
-c'est bases seront suffisantes pour avoir quelque chose qui tourne à montrer à nos copains les pêcheurs.
+ces bases seront suffisantes pour avoir quelque chose qui tourne à montrer à nos copains les pêcheurs.
 
 ##Introduction 
 
