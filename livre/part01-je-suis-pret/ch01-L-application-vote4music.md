@@ -319,7 +319,7 @@ Le contrôleur intercepte l'appel de cette manière:
         render(albums);
     }
 
-La classe Album définie la méthode de recherche par filtre :
+La classe Album définit la méthode de recherche par filtre :
 
 	public static List<Album> findAll(String filter) {
         List<Album> albums;
@@ -334,7 +334,7 @@ La classe Album définie la méthode de recherche par filtre :
 
 ## Le top 10
 
-Cette fonction de l'application permet d'afficher 10 les albums ayant reçu le plus de votes, pour une année et un genre donnés :
+Cette fonction de l'application permet d'afficher les 10 albums ayant reçu le plus de votes, pour une année et un genre donnés :
 
 	public static void listByGenreAndYear(String genre, String year) {
         notFoundIfNull(genre);
@@ -343,7 +343,7 @@ Cette fonction de l'application permet d'afficher 10 les albums ayant reçu le p
         render(genre, year, albums);
     }
 
-Les paramètres _genre_ et _year_ sont obligatoires. Cela veut dire que si on appelle ce contrôleur dans ces paramètres, il renverra une erreur 404 (not found).
+Les paramètres _genre_ et _year_ sont obligatoires. Cela veut dire que si on appelle ce contrôleur sans ces paramètres, il renverra une erreur 404 (not found).
  
 La classe Album définie les méthodes nécessaires à cette recherche :
 
@@ -396,7 +396,7 @@ Si vous avez une bonne mémoire, vous vous souvenez qu'on avait ajouté une rout
 Ceci signifie que l'on est pas obligés de définir des routes pour toutes les méthodes du contrôleur : un pattern par défaut est utilisé. 
 Dans le cas présent, la méthode _vote()_ sera accessible depuis l'URL _/application/vote_.
 
-La classe Album définie cette méthode pour mettre à jour le compteur des votes d'une instance d'album:
+La classe Album définit cette méthode pour mettre à jour le compteur des votes d'une instance d'album:
 
 	public void vote() {
         nbVotes++;
@@ -459,7 +459,7 @@ Ce code JavaScript permet d'intercepter les clicks et de rafraîchir l'écran :
 ## Gestion des pochettes d'albums
 	
 On veut maintenant ajouter la possibilité d'attacher l'image d'une pochette aux albums.	
-On enrichit la classe Album avec d'un nouveau champ :
+On enrichit la classe Album d'un nouveau champ :
 
 	public boolean hasCover = false;
 
@@ -515,7 +515,7 @@ On ajoute un champ dans le formulaire de création (et d'édition) de l'album :
 
 Ce champ permet d'uploader une image. En mode édition, si une image est enregistrée elle sera affichée.
 
-On modifié également la méthode _save_ du contrôleur pour traiter cet upload :
+On modifie également la méthode _save_ du contrôleur pour traiter cet upload :
 
 	public static void save(@Valid Album album, @Valid Artist artist, File cover) {
         if (Validation.hasErrors()) {
