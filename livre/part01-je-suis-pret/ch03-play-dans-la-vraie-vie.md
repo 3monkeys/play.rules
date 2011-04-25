@@ -259,7 +259,20 @@ Voici un exemple de fichier yml :
 
 ### Effectuer des traitements périodiques
 
-	TODO 
+Dans cet exemple, on souhaite recharger les albums toutes les heures à partir de notre fichier yml :
+
+	@Every("1h")
+	public class ReloadData extends Job {
+		public void doJob() {	
+			Fixtures.deleteAll();
+			Fixtures.load("data.yml");		
+		}
+} 
+
+On peut imaginer beaucoup d'applications possibles pour ce genre de traitements périodiques.
+On pourrait par exemple envoyer un résumé d'activité par mail tous les lundi à l'ensemble des utilisateurs.
+Pour définir finement la periodicité on peut utiliser la syntaxe CRON avec l'annotation _@On_.
+Par exemple, `@On("0 0 8 * * ?")` déclenchera le traitement tous les jours à 8h.
 	
 ## L'internationalisation
 
