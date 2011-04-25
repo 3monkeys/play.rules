@@ -179,7 +179,7 @@ La méthode setUp permet de charger un fichier yml contenant des données de tes
 	releaseDate: 2010-11-12 00:00:00
 	genre: ROCK
 	
-### Tests selenium
+### Tests Selenium
 	
 Ces tests permettent de simuler des clicks dans l'application à l'aide de l'outil Selenium.
 Ce code permet de déclencher la création d'un album, puis de vérifier sa présence dans la liste des albums :
