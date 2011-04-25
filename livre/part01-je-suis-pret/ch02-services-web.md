@@ -222,3 +222,16 @@ On peut ensuite s'en servir dans le contrôleur :
 Si vous tapez l'URL /albums.xml, Play cherchera un fichier de template XML nommé listAlbums.xml (une autre extension fonctionnerait aussi) pour effectuer le rendu.
 
 ### Recevoir un message JSON
+
+Maintenant que nous savons exposer des données au format JSON à travers un service REST, voyons comment envoyer des données au serveur en utilisant le même format.
+Cette méthode du contrôleur permet de résoudre cette problématique :
+
+	public static void saveAlbumJson() {
+		Gson gson = new Gson();
+		Album album = gson.fromJson(new InputStreamReader(request.body),Album.class);
+		album.replaceDuplicateArtist();
+		album.save();
+	}
+
+En récupérant l'objet _request.body_, on peut analyser le flux entrant et enregistrer un album dans la base de données.
+Attention, pour que cette méthode fonctionne, il faudra respecter la structure de la classe Album lors de l'envoie des données en JSON. 
