@@ -1,4 +1,6 @@
-﻿Nous allons développer une application qui sera notre fil conducteur tout au long de cette partie.
+﻿#Mise en place de l'application Vote4Music
+
+Nous allons développer une application qui sera notre fil conducteur tout au long de cette partie.
 Cette application permettra de parcourir une liste de CD, d'en ajouter de nouveaux et de voter pour vos albums préférés. 
 
 Le code complet de l'application est disponible [ici](https://github.com/loicdescotte/vote4music)
