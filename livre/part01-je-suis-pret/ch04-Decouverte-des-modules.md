@@ -92,11 +92,11 @@ Si vous désirez apprendre ce langage, il existe un e-book gratuit (en anglais) 
 ## jQuery datatables
 
 Nous avons utilisé le plugin datatables de jQuery dans la partie 1 de ce livre. Nous allons maintenant voir comment l'intégrer automatiquement au système de CRUD avec un module Play. 
-See https://github.com/schaloner/tabula-rasa
+    TODO See https://github.com/schaloner/tabula-rasa
 
 ## Google APP Engine et Siena
 
-See http://viralpatel.net/blogs/2011/01/first-play-framework-gae-siena-application-tutorial-example.html
+    TODO See http://viralpatel.net/blogs/2011/01/first-play-framework-gae-siena-application-tutorial-example.html
 
 ## Et plein d'autres modules!
 
