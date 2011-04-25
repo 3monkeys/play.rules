@@ -13,12 +13,12 @@ REST est en fait le modèle sur lequel le web lui même est construit : les site
 
 Pour la sécurité il est possible de s'appuyer sur l'authentification HTTP, ou encore sur le SSL avec HTTPS. Comme vous pouvez le voir, tout est fait pour utiliser au maximum ce que le web nous fournit depuis toujours, sans sur-couche supplémentaire.
 
-# Play et les services REST
+## Play et les services REST
 
 Les URL de Play étant RESTful par essence, il devient très facile de créer une petite API REST/XML conjointement à l'interface Web d'une application Play!.
 Voyons comment procéder.
 
-## Exposer des données avec un service REST
+### Exposer des données avec un service REST
 
 Gardons l'exemple de notre bibliothèque musicale. Notre modèle comporte des albums, des artistes et des genres.
 Pour rappel, la classe Album se présente comme ceci :
@@ -93,7 +93,7 @@ Voilà, cela suffit pour exposer nos albums en XML. En respectant le pattern d'U
     </albums>
 
 
-## Envoie de données à travers un service REST
+### Envoie de données à travers un service REST
 
 Dans la première partie avons vu comment exposer des données au format XML avec Play.
 Maintenant nous allons effectuer l'opération inverse, l'envoi d'un contenu XML au contrôleur Play, à travers une URL RESTful.
@@ -178,12 +178,12 @@ La méthode save() de la classe Album s'occupe alors d'enregistrer l'album en ba
 Notre API REST/XML nous permet donc maintenant de lire la liste des albums de note bibliothèque musicale et d'ajouter des albums.
 Vous pouvez tester l'envoi de contenu XML avec le plugin Poster de Firefox ou avec l'application rest-client.
 
-## Services REST/JSON
+### Services REST/JSON
 
 Dans la première partie de ce chapitre, nous avons vu comment créer des services REST envoyant et consommant des messages au format XML.
 Voyons maintenant comment faire la même chose avec JSON.
 
-### Le format JSON
+#### Le format JSON
 
 Définition de wikipedia : 
 
@@ -221,4 +221,4 @@ On peut ensuite s'en servir dans le contrôleur :
 
 Si vous tapez l'URL /albums.xml, Play cherchera un fichier de template XML nommé listAlbums.xml (une autre extension fonctionnerait aussi) pour effectuer le rendu.
 
-## Recevoir un message JSON
+### Recevoir un message JSON

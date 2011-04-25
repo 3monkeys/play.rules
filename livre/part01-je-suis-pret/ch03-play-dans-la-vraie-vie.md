@@ -1,4 +1,4 @@
-﻿#Play dans la vraie vie
+﻿# Play dans la vraie vie
 
 ## Authentification et sécurité
 
@@ -21,7 +21,7 @@ Même si le lien est masqué, n’importe qui peut entrer cette URL dans son bro
 Le module Secure de Play va nous permettre de faire ça de manière élégante. Il propose également un formulaire de login prêt à l’emploi qui permet de mettre les informations dont on a besoin dans le cookie de session.
 
 
-## Mise en oeuvre du module Secure
+### Mise en oeuvre du module Secure
 
 Pour activer le module secure, on commence par modifier le fichier dependencies.yml pour y ajouter la ligne suivante dans la section _require_ :
 
@@ -157,7 +157,7 @@ Voici un exemple de fichier yml :
 
 	TODO 
 	
-##L'internationalisation
+## L'internationalisation
 
 Genres :
 	
