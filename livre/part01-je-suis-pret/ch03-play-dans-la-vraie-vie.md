@@ -7,10 +7,10 @@ Nous allons étudier le cas suivant : notre application est publique, on peut y 
 
 Play permet d’écrire les informations de session utilisateur dans un cookie. Ce cookie est signé, il n’est donc pas modifiable côté client, par contre il n’est pas crypté, il ne faut donc pas écrire d’informations sensible à l’intérieur (pas de mot de passe par exemple). Dans notre exemple, on souhaite utiliser le cookie de session pour stocker le fait que l’utilisateur soit identifié comme un administrateur ou non.
 
-Une des choses que l’on souhaite ajouter à l’application web si l’utilisateur est admin est un lien “Supprimer” dans le tableau html qui liste nos entités métiers (on liste des albums de musique pour reprendre les exemples précédents). On pourrait donc utiliser le code suivant:
+Une des choses que l’on souhaite ajouter à l’application web si l’utilisateur est admin est un lien “Supprimer” dans le tableau html qui liste nos entités métiers (on liste des albums de musique pour reprendre les exemples précédents). On peut donc utiliser le code suivant:
 
 	#{if session.get("username").equals("admin")}    
-	<a href="@{Application.form(album.id)}"</a>  
+	<a href="@{Application.delete(album.id)}">Supprimer</a>  
 	#{/if}  
 
 Mais on se retrouve vite confronté à un problème, un clic sur ce lien mène à une URL comme celle ci :
@@ -100,22 +100,126 @@ Et voilà, vous savez maintenant comment ajouter des fonctions d’administratio
 
 ## Tester notre application
 
-	TODO Intro
+Play intègre un framework de tests permettant de lancer différents types de tests.
 	
 ### Tests unitaires
-	TODO TU
+
+Les tests unitaires testent une partie précise du code de notre application.
+Voici un exemple de test unitaire :
+
+	public class CoreTest extends UnitTest {
+	
+		@Test
+		public void filterByYearTest() {
+			//Création de 2 albums
+			List<Album> albums = new ArrayList<Album>();
+			Album album1 = new Album("album1");
+			Calendar c1 = Calendar.getInstance();
+			c1.set(2010, 1, 1);
+			album1.releaseDate= c1.getTime();
+			albums.add(album1);
+			Album album2 = new Album("album1");
+			Calendar c2 = Calendar.getInstance();
+			c2.set(2009, 1, 1);
+			album2.releaseDate= c2.getTime();
+			albums.add(album2);
+	
+			//Test de la méthodefilter by year
+			albums = Album.filterByYear(albums, "2010");
+	
+			//Un seul album a la date 2010
+			assertTrue(albums.size()==1);
+		}
+	}
+
+Cette classe hérite de la classe UnitTest fournie par Play. La méthode _filterByYearTest_ permet de tester la méthode _filterByYear_ de la classe Album.
 
 ### Tests fonctionnels
-	TODO Avec la base et les routes
-
-### Tests selenium
-	TODO IHM et clicks
-
-Play propose un environnement intégré pour lancer les tests de notre application.
-Tapez ceci dans votre console : `play test`
-
-	TODO screenshot
 	
+Les tests fonctionnels permettent de tester l'application à partir de son contrôleur en se basant sur le fichier _routes_ pour résoudre les URL d'appel.
+Ce test permet par exemple d'utiliser un service REST et valider la réponse obtenue : 
+
+	public class ApplicationTest extends FunctionalTest {
+	
+		@Before
+		public void setUp() {
+			Fixtures.deleteAll();
+			Fixtures.load("data.yml");
+		}
+	
+		@Test
+		public void testYML() {
+		Response response = GET("/api/albums.xml");
+		assertIsOk(response);
+		
+		//On récupère la réponse 	
+		String xmlTree = response.out.toString();
+		DocumentBuilderFactory factory = DocumentBuilderFactory.newInstance();
+		Document document = null;
+		try {
+			DocumentBuilder builder = factory.newDocumentBuilder();
+			document = builder.parse(new ByteArrayInputStream(xmlTree.getBytes()));
+		} catch (Exception e) {
+			Logger.error(e.getMessage());
+		}
+		Element rootNode = document.getDocumentElement();
+		
+		//On vérifie qu'on a le bon nombre d'éléments dans le fichier XML
+		assertTrue(rootNode.getElementsByTagName("album").getLength() == 2);		
+	}
+	
+La méthode setUp permet de charger un fichier yml contenant des données de test. Le fichier se présente comme cela :
+
+	Artist(joe) :
+	name: joe
+
+	Album(coolAlbum) :
+	name: coolAlbum
+	artist: joe
+	releaseDate: 2010-11-12 00:00:00
+	genre: ROCK
+	
+### Tests selenium
+	
+Ces tests permettent de simuler des clicks dans l'application à l'aide de l'outil Selenium.
+Ce code permet de déclencher la création d'un album, puis de vérifier sa présence dans la liste des albums :
+
+	#{fixture delete:'all', load:'data.yml' /}
+	#{selenium}
+	// Ouverture de la page d'accueil
+	open('/')
+	waitForPageToLoad(3000)
+	assertNotTitle('Application error')
+	
+	// Ouverture de la liste des albums
+	open('/albums')
+	waitForPageToLoad(3000)
+	assertTextPresent('coolAlbum')
+	
+	//Création d'un album
+	click('link=New album')
+	waitForPageToLoad('3000')
+	type('name', 'black album')
+	type('artist', 'metallica')
+	click('release-date')
+	type('release-date', '1990-01-01')
+	click('saveAlbum')
+	waitForPageToLoad('3000')
+	assertTextPresent('metallica')
+	
+	#{/selenium}
+	
+### Lancer les tests
+	
+Pour lancer les tests, entrez la commande suivante dans votre terminal : `play test`
+Puis tapez l'URL `http://localhost/@tests` dans votre navigateur.
+
+Vous verrez apparaître cette page : 
+
+![Tests](http://www.playframework.org/documentation/1.0/images/test-runner)
+
+A partir de cet écran, vous pouvez lancer les tests et obtenir un rapport d'erreur (si il y en a)! 
+Plutôt pratique non?
 	
 ## Les jobs
 
