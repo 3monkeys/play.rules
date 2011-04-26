@@ -30,13 +30,13 @@ Tout simplement aux 2 autres singes, [@loic_d](@loic_d) parce qu'à défaut de n
 
 ##Comment est née l'idée de ce livre ? 
 
-La première réunion que nous avons organisé avec l'Alpes JUG (Java User Group grenoblois) était un coding dojo sur Play! avec Guillaume Bort, l'auteur du framework. Ce jour là ce fût une vrai claque et cette présentation reste pour moi parmi les plus marquantes que j'ai pu voir. Guillaume nous a présenté non pas un simple framework mais une plateforme complète pour le développement et l’exécution d'applications Web. J'ai été extrêmement enthousiasmé par sa vision des architectures Web et de la sur-complexité vendue depuis des années par les éditeurs de middleware dans le monde Java...
+La première réunion que nous avons organisé avec l'Alpes JUG (Java User Group grenoblois) était un coding dojo sur Play avec Guillaume Bort, l'auteur du framework. Ce jour là ce fût une vrai claque et cette présentation reste pour moi parmi les plus marquantes que j'ai pu voir. Guillaume nous a présenté non pas un simple framework mais une plateforme complète pour le développement et l’exécution d'applications Web. J'ai été extrêmement enthousiasmé par sa vision des architectures Web et de la sur-complexité vendue depuis des années par les éditeurs de middleware dans le monde Java...
 Depuis je n'ai pas arrêté de coder avec Play et d'écrire des article sur ce sujet pour mon blog [CoffeeBean](http://coffeebean.loicdescotte.com). 
 Quand [@mklabs](@mklabs) nous a soumis l'idée d'écrire cet ebook, je ne pouvais pas refuser de travailler sur un sujet aussi excitant!
 
 ##Pourquoi open-source ?
 
-Pour coller à l'esprit de Play!. Et aussi car je pense qu'avec un maximum de relecteurs et de contributeurs le résultat ne pourra être que meilleur!
+Pour coller à l'esprit de Play. Et aussi car je pense qu'avec un maximum de relecteurs et de contributeurs le résultat ne pourra être que meilleur!
 
 ##Qui suis-je ?
 
