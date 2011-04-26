@@ -125,7 +125,7 @@ Play-Scala intègre une API qui permet d'effectuer très facilement des requête
 	        join Artist ar on al.artist = ar.id 
 	        where ar.name = {artist};
 	    """
-	).on("artist" -> "Joe").as(Album)
+	).on("artist" -> "Joe").as(Album*)
 	
 Plus d'infos sur cette API [ici](http://scala.playframework.org/documentation/scala-0.9/anorm)
 
