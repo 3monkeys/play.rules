@@ -2,12 +2,12 @@
 
 ## REST et RESTful, qu'est ce que c'est?
 
-On appelle service RESTful est un service web respectant le style d'architecture REST.
+On appelle service RESTful un service web respectant le style d'architecture REST.
 REST (Representational State Transfer) est un modèle d'architecture orienté ressources. Ceci signifie qu'au lieu d'exposer des méthodes comme lorsque l'on utilise le protocole SOAP, on va exposer des ressources. Chaque ressource possède une URL qui l'identifie.
 
 Contrairement à SOAP, REST s'appuie uniquement sur le protocole HTTP et ne propose aucune couche au dessus de ce protocole. Tout est faisable à partir des opérations fournies par de base par HTTP : GET, PUT, POST, DELETE, etc.
 Pour récupérer une collection, on effectue un GET sur l'URL appropriée.
-La réponse contiendra un ensemble d'éléments, décris par exemple en XML ou en JSON. Pour chaque élément, une URL est définie. Il sera donc possible d'effectuer un appel GET sur élément en particulier pour ne récupérer que celui ci. Une opération de type PUT sur le même élément permettra de mettre à jour ses données. De la même façon, une opération DELETE supprimera l'élément.
+La réponse contiendra un ensemble d'éléments, décrits par exemple en XML ou en JSON. Pour chaque élément, une URL est définie. Il sera donc possible d'effectuer un appel GET sur un élément en particulier pour ne récupérer que celui ci. Une opération de type PUT sur le même élément permettra de mettre à jour ses données. De la même façon, une opération DELETE supprimera l'élément.
 
 REST est en fait le modèle sur lequel le web lui même est construit : les sites et les pages web étant des ressources accessibles via des URL, depuis un navigateur grâce à des opérations HTTP.
 
@@ -93,9 +93,9 @@ Voilà, cela suffit pour exposer nos albums en XML. En respectant le pattern d'U
     </albums>
 
 
-### Envoie de données à travers un service REST
+### Envoi de données à travers un service REST
 
-Dans la première partie avons vu comment exposer des données au format XML avec Play.
+Dans la première partie nous avons vu comment exposer des données au format XML avec Play.
 Maintenant nous allons effectuer l'opération inverse, l'envoi d'un contenu XML au contrôleur Play, à travers une URL RESTful.
 
 On veut par exemple envoyer le contenu suivant en POST avec un content type application/xml :
@@ -166,7 +166,7 @@ La méthode save() de la classe Album s'occupe alors d'enregistrer l'album en ba
 
 	public void setArtist(Artist artist){
 			List<Artist> existingArtists = Artist.find("byName", artist.name).fetch();
-			if(existingArtists.size()&gt;0){
+			if(existingArtists.size()>0){
 				//Le nom d'artiste est unique
 				this.artist=existingArtists.get(0);
 			}
