@@ -1,4 +1,4 @@
-# Découverte des modules
+# Bonus - Découverte des modules
 
 Il existe un grand nombre de modules complémentaires pour ajouter des fonctionnalités à Play. Nous allons en voir quelques exemples.
 
@@ -80,6 +80,55 @@ En Java, ces exemples auraient nécessité de passer par de vilaines boucles for
 
 Une version totalement écrite en Scala de l'application vote4music est consultable [ici](https://github.com/loicdescotte/vote4music-scala)
 
+### API Play dédiées à la version Scala
+
+Play intègre un certain nombre d'API qui tirent parti des spécificités du langage Scala. Nous allons en voir un rapide aperçu.
+
+#### Les tests avec Play-Scala
+
+Le framework de test de Play-Scala est un bon d'exemple des avantages de ce langage. La syntaxe offerte par Scala donne des tests vraiment expressifs et simples à lire :
+
+	
+	    test("collections") { 
+			var albums=Albums.findAll()
+		    (albums.size) should be (2)
+
+			var artists=Artists.findAll()
+			(artists.size) should be (1)
+			
+			Artist artist = artists.apply(1) 
+			artist.name should include ("Joe")      
+	    }
+
+Il est également possible d'écrire des tests dans le style BDD (Behavior Driven Developpment), en combinant le code des tests avec du texte représentant les comportements attendus :
+
+		val name = "Play.Rules"
+
+	    "'Play.Rules'" should "not contain the X letter" in {
+	        name should not include ("X")
+	    }
+
+	    it should "have 10 chars" in {
+	        name should have length (10)      
+	    }
+	
+Plus d'infos sur cette API [ici](http://scala.playframework.org/documentation/scala-0.9/test)
+
+### Les requêtes SQL avec Anorm
+
+Play-Scala intègre une API qui permet d'effectuer très facilement des requêtes SQL et de mapper les résultats dans des objets Scala :
+
+	val albums:List[Album] = 
+	SQL(
+	    """
+	        select * from Album al 
+	        join Artist ar on al.artist = ar.id 
+	        where ar.name = {artist};
+	    """
+	).on("artist" -> "Joe").as(Album)
+	
+Plus d'infos sur cette API [ici](http://scala.playframework.org/documentation/scala-0.9/anorm)
+
 ### Installer le module Scala
 
 Pour installer ce module, il suffit d'ajouter cette ligne dans le fichier `dependencies.yml`, dans la partie `require` : `- play -> scala 0.9`.
@@ -92,11 +141,14 @@ Si vous désirez apprendre ce langage, il existe [un e-book gratuit](http://prog
 ## jQuery datatables
 
 Nous avons utilisé le plugin datatables de jQuery dans la partie 1 de ce livre. Nous allons maintenant voir comment l'intégrer automatiquement au système de CRUD avec un module Play. 
-    TODO See https://github.com/schaloner/tabula-rasa
+    
+	TODO : https://github.com/schaloner/tabula-rasa
 
 ## Google APP Engine et Siena
 
-    TODO See http://viralpatel.net/blogs/2011/01/first-play-framework-gae-siena-application-tutorial-example.html
+A venir bientôt!
+
+	TODO : http://viralpatel.net/blogs/2011/01/first-play-framework-gae-siena-application-tutorial-example.html
 
 ## Et plein d'autres modules!
 

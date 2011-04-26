@@ -305,4 +305,4 @@ On renseigne ces clés dans le fichier `messages` :
 
 ## Traitements asynchrones
 
-	TODO
+A venir!
