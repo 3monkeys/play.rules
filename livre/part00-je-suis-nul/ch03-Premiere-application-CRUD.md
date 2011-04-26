@@ -30,7 +30,7 @@ Et tout ceci facilement et rapidement
 
 ###Nous allons activer le module CRUD
 
-*C'est quoi CRUD ?*, alors déjà, ça veut dire **C**reate **R**ead **U**pdate **D**elete, le module CRUD de Play! va permettre de générer automatiquement pour vous les écrans de saisie des données à partir de votre modèle objet avec toute la mécanique qui va bien pour sauvegarder vos modifications. Je n'en dit pas plus, les exemples qui vont suivre parleront d'eux-même.
+*C'est quoi CRUD ?*, alors déjà, ça veut dire **C**reate **R**ead **U**pdate **D**elete, le module CRUD de Play! va permettre de générer automatiquement pour vous les écrans de saisie des données à partir de votre modèle objet avec toute la mécanique qui va bien pour sauvegarder vos modifications. Je n'en dis pas plus, les exemples qui vont suivre parleront d'eux-même.
 
 Donc pour activer le module CRUD :
 
@@ -52,7 +52,7 @@ Donc pour activer le module CRUD :
 
 *Note : on vient d'expliquer à Play! que l'on utilise le module CRUD lorsque l'on utilise l'url [http://localhost:9000/admin/](http://localhost:9000/admin/)*
 
-**Avant de continuer, arrêter puis relancer votre application :**
+**Avant de continuer, arrêtez puis relancez votre application :**
 
 donc avec la commande : `play run azerguespeche` en mode console.
 
@@ -165,7 +165,7 @@ Pour être plus sûr : clickez sur "add" à droite, sur la ligne "Pêcheur", nou
 
 Créons encore 2 pêcheurs ... : `loic_d` et `mklabs`
 
-Si vous revenez à la liste des pêcheurs (clickez sur pecheurs en haut : `Home > Pecheurs`) vous obtenez ceci est c'est laid ! :
+Si vous revenez à la liste des pêcheurs (clickez sur pecheurs en haut : `Home > Pecheurs`) vous obtenez ceci et c'est laid ! :
 
 ![Alt "p00_ch03_04"](https://github.com/3monkeys/play.rules/raw/master/rsrc/p00_ch03_04.png)
 
@@ -197,7 +197,7 @@ Nous allons créer quelques poissons, mais avant de continuer ...
 
 ###Comment rendre la saisie obligatoire ?
 
-Tout simplement en utilisant l'annotation `@Required` au dessus des champs obligatoires (dans notre classe Poisson) et en ajoutant la référence suivante dans le code de la classe : `import play.data.validation.Required;`, nous auront donc le code suivant :
+Tout simplement en utilisant l'annotation `@Required` au dessus des champs obligatoires (dans notre classe Poisson) et en ajoutant la référence suivante dans le code de la classe : `import play.data.validation.Required;`, nous aurons donc le code suivant :
 
 	package models;
 	import javax.persistence.*;
@@ -248,7 +248,7 @@ Vous pouvez aussi déclarer qu'un type de format est nécessaire comme l'e-mail,
 Pour cela allons modifier la classe `Pecheur` en ajoutant un champ email et un champ département.
 
 - pour l'email, nous utiliserons l'annotation `@Email` (la référence à déclarer dans le code sera : `import play.data.validation.Email;`)
-- pour le département, c'est encore plus facile, le simple fait de le typer en Integer suffit
+- pour le département, c'est encore plus facile, le simple fait de le typer en `Integer` suffit
 
 Le code de notre classe `Pecheur` va ressembler à ceci :
 
@@ -310,7 +310,7 @@ Eh oui, Play! propose bien un module "anti-débile" et vous explique ce qu'il fa
 
 ###Recherches
 
-Je ne sais pas si vous avez vu, mais dans les pages du module CRUD il y a un "petit" module de recherche, on l'essaye ? En images :
+Je ne sais pas si vous avez vu, mais dans les pages du module CRUD il y a un "petit" module de recherche, on l'essaie ? En images :
 
 ![Alt "p00_ch03_10"](https://github.com/3monkeys/play.rules/raw/master/rsrc/p00_ch03_10.png)
 
@@ -331,10 +331,10 @@ Nous verrons comment :
 - créer de nouveaux modèles et des relations entre eux (nous aborderons donc quelques notions de JPA)
 - aller plus loin dans la personnalisation de nos écrans CRUD
 
-Vous n'avez pas encore le statut "demi-dieu" de la programmation Web en java *(1)*, mais je sens déjà quelque chose frétiller en vous :) Non ? Vous avouerez que pour le moment c'est assez facile et sans effort et pourtant ça a déjà de la gueule. J'espère que la vous donne envie de continuer.
+Vous n'avez pas encore le statut "demi-dieu" de la programmation Web en java *(1)*, mais je sens déjà quelque chose frétiller en vous :) Non ? Vous avouerez que pour le moment c'est assez facile et sans effort et pourtant ça a déjà de la gueule. J'espère que cela vous donne envie de continuer.
 
 - - -
 
-- (1) : ne vous inquiétezEssayer pas, je n'ai pas cette prétention non plus ;), mais nous allons progresser ensemble
+- (1) : ne vous inquiétez pas, je n'ai pas cette prétention non plus ;), mais nous allons progresser ensemble
 
 
