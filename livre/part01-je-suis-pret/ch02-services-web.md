@@ -39,7 +39,7 @@ Pour cela nous devons modifier le fichier routes :
 	GET /api/albums/{genre}   Application.listXml(format:'xml')
 
 La première ligne correspond à la page HTML(non présentée dans cet article) affichant la liste des albums disponibles : le format n'étant pas spécifié, le rendu se fera avec une page HTML.
-Ici c'est la deuxième ligne qui nous intéresse. Le paramètre (format:'xml') indique que la méthode `render` du contrôleur devra chercher un fichier nommé listXml.xml.
+Ici c'est la deuxième ligne qui nous intéresse. Le paramètre `(format:'xml')` indique que la méthode `render` du contrôleur devra chercher un fichier nommé listXml.xml.
 Le paramètre {genre} sera récupéré dans l'URL et passé au contrôleur.
 
 NB :
@@ -223,7 +223,7 @@ On peut ensuite s'en servir dans le contrôleur :
 		render(albums);  
 	}  
 
-Si vous tapez l'URL /albums.xml, Play cherchera un fichier de template XML nommé `listAlbums.xml (une autre extension fonctionnerait aussi) pour effectuer le rendu.
+Si vous tapez l'URL /albums.xml, Play cherchera un fichier de template XML nommé `listAlbums.xml` (une autre extension fonctionnerait aussi) pour effectuer le rendu.
 
 ### Recevoir un message JSON
 

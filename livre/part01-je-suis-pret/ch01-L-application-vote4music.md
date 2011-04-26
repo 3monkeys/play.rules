@@ -394,7 +394,7 @@ Si vous avez une bonne mémoire, vous vous souvenez qu'on avait ajouté une rout
 	*       /{controller}/{action}                                  {controller}.{action}
 
 Ceci signifie que l'on est pas obligés de définir des routes pour toutes les méthodes du contrôleur : un pattern par défaut est utilisé. 
-Dans le cas présent, la méthode `vote`` sera accessible depuis l'URL `/application/vote`.
+Dans le cas présent, la méthode `vote` sera accessible depuis l'URL `/application/vote`.
 
 La classe Album définie cette méthode pour mettre à jour le compteur des votes d'une instance d'album:
 
