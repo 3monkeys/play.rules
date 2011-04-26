@@ -24,13 +24,13 @@ On peut par exemple écrire le code suivant pour manipuler une entité "Personne
 
 ## Orienté REST
 
-Avec Play, il est extrêmement facile de faire correspondre des URL simples, lisibles et _bookmarkables_ aux actions du controlleur.
+Avec Play, il est extrêmement facile de faire correspondre des URL simples, lisibles et `bookmarkables` aux actions du controlleur.
 
 Par exemple, pour afficher toutes les personnes habitant à Paris dans un annuaire, on pourra utiliser une URL comme
 
     /annuaire/personnes/paris
 
-Ceci est renforcé par l'aspect _stateless_ du framework. Le serveur ne stockant pas d'état, on n'aura pas de mauvaise surprise quant au rendu correspondant à une URL : Play effectuera toujours le même traitement quelque soit le contexte (voir paragraphe suivant).
+Ceci est renforcé par l'aspect `stateless` du framework. Le serveur ne stockant pas d'état, on n'aura pas de mauvaise surprise quant au rendu correspondant à une URL : Play effectuera toujours le même traitement quelque soit le contexte (voir paragraphe suivant).
 
 ## Stateless et scalable
 
@@ -50,20 +50,20 @@ Avec des framework stateful, vous seriez obligé de dupliquer les sessions utili
   
 ##Productif
 
-Toute la pile est pré-configurée, de la vue à la base de données. Play suit la logique de _convention over configuration_. Ainsi, si le paramétrage par défaut vous convient, vous pourrez commencer à développer dès que vous aurez dézippé l'archive du framework! Ce principe sera également appliqué lors du développement de nos applications Play afin d'économiser des lignes de code tout au long du développement.
+Toute la pile est pré-configurée, de la vue à la base de données. Play suit la logique de `convention over configuration`. Ainsi, si le paramétrage par défaut vous convient, vous pourrez commencer à développer dès que vous aurez dézippé l'archive du framework! Ce principe sera également appliqué lors du développement de nos applications Play afin d'économiser des lignes de code tout au long du développement.
 
 Play embarque son propre serveur qui est capable de compiler lui même les fichiers source et de récupérer à chaud toutes les modifications de code.
 Vous n'aurez donc jamais à vous soucier des phases de compilation ou de déploiement de votre application.
-Si vous ajoutez une nouvelle ligne de code, un simple "refresh" dans votre navigateur vous permettra de la voir en action. Et si jamais votre code contient une erreur, vous verrez un message clair et explicite dans votre navigateur, bien plus simple à comprendre que les traditionnelles _stack trace_ que l'on rencontre habituellement lorsque l'on fait du développement JEE.
+Si vous ajoutez une nouvelle ligne de code, un simple "refresh" dans votre navigateur vous permettra de la voir en action. Et si jamais votre code contient une erreur, vous verrez un message clair et explicite dans votre navigateur, bien plus simple à comprendre que les traditionnelles `stack trace` que l'on rencontre habituellement lorsque l'on fait du développement JEE.
 
-Enfin, Play propose nativement un module _CRUD_ permettant de générer les écrans, les traitements et les requêtes pour gérer les opération basiques relatives à une entité métier (création, lecture/recherche, mise à jour, suppression). 
+Enfin, Play propose nativement un module `CRUD` permettant de générer les écrans, les traitements et les requêtes pour gérer les opération basiques relatives à une entité métier (création, lecture/recherche, mise à jour, suppression). 
 
 ## Modulaire et extensible
 
 Il existe un grand nombre de modules pour ajouter des fonctionnalités au framework : déploiement sous Google APP Engine, authentification avec OAuth, validation des données côté client avec HTML5...
 La communauté est très active et de nouveaux plugins arrivent régulièrement dans le dépôt officiel.
 
-De plus le framework, bien que _full stack_, n'est pas monolithique,  il est possible de n'utiliser que les parties de Play qui nous intéresse et de l'utiliser conjointement à d'autres technologies. On pourrait par exemple imaginer n'utiliser que la partie contrôleur de Play pour exposer des services REST à un front end écrit en HTML/JavaScript et s'appuyer sur des services Spring pour la partie métier. 
+De plus le framework, bien que `full stack`, n'est pas monolithique,  il est possible de n'utiliser que les parties de Play qui nous intéresse et de l'utiliser conjointement à d'autres technologies. On pourrait par exemple imaginer n'utiliser que la partie contrôleur de Play pour exposer des services REST à un front end écrit en HTML/JavaScript et s'appuyer sur des services Spring pour la partie métier. 
 
 ## Pur Java
 
@@ -86,7 +86,7 @@ permettra de consulter les articles que vous avez demandé en ajoutant des param
         render(articles);
     }
 
-Le _biding_ intelligent fonctionne avec n'importe quelle classe :
+Le `biding` intelligent fonctionne avec n'importe quelle classe :
 
     public class Person {
         public String name;
@@ -100,7 +100,7 @@ Une simple action dans le contrôleur permet d'ajouter une personne :
     }
 
 
-Ce formulaire HTML définie les champs correspondant à la classe Person et permet d'appeler notre méthode _add_ :
+Ce formulaire HTML définie les champs correspondant à la classe Person et permet d'appeler notre méthode `add` :
 
     <form action="/Directory/add" method="POST">
         Name: <input type="text" name="p.name" />
@@ -110,7 +110,7 @@ Ce formulaire HTML définie les champs correspondant à la classe Person et perm
 ### 2. Redirection vers une action, en appelant simplement une méthode Java
 
 
-Play n'a pas besoin de l'équivalent de la directive _forward_ de Servlet pour la redirection vers d'autres actions. Il suffit d'appeler la bonne méthode dans le code Java :
+Play n'a pas besoin de l'équivalent de la directive `forward` de Servlet pour la redirection vers d'autres actions. Il suffit d'appeler la bonne méthode dans le code Java :
 
     public static void show(Long id) {
         Article article = Article.findById(id);

@@ -23,7 +23,7 @@ Le module Secure de Play va nous permettre de faire ça de manière élégante. 
 
 ### Mise en oeuvre du module Secure
 
-Pour activer le module secure, on commence par modifier le fichier dependencies.yml pour y ajouter la ligne suivante dans la section _require_ :
+Pour activer le module secure, on commence par modifier le fichier dependencies.yml pour y ajouter la ligne suivante dans la section `require` :
 
         - play -> secure
 
@@ -132,11 +132,11 @@ Voici un exemple de test unitaire :
 		}
 	}
 
-Cette classe hérite de la classe UnitTest fournie par Play. La méthode _filterByYearTest_ permet de tester la méthode _filterByYear_ de la classe Album.
+Cette classe hérite de la classe UnitTest fournie par Play. La méthode `filterByYearTest` permet de tester la méthode `filterByYear` de la classe Album.
 
 ### Tests fonctionnels
 	
-Les tests fonctionnels permettent de tester l'application à partir de son contrôleur en se basant sur le fichier _routes_ pour résoudre les URL d'appel.
+Les tests fonctionnels permettent de tester l'application à partir de son contrôleur en se basant sur le fichier `routes` pour résoudre les URL d'appel.
 Ce test permet par exemple d'utiliser un service REST et valider la réponse obtenue : 
 
 	public class ApplicationTest extends FunctionalTest {
@@ -271,7 +271,7 @@ Dans cet exemple, on souhaite recharger les albums toutes les heures à partir d
 
 On peut imaginer beaucoup d'applications possibles pour ce genre de traitements périodiques.
 On pourrait par exemple envoyer un résumé d'activité par mail tous les lundi à l'ensemble des utilisateurs.
-Pour définir finement la périodicité on peut utiliser la syntaxe CRON avec l'annotation _@On_.
+Pour définir finement la périodicité on peut utiliser la syntaxe CRON avec l'annotation `@On`.
 Par exemple, `@On("0 0 8 * * ?")` déclenchera le traitement tous les jours à 8h.
 	
 ## L'internationalisation
@@ -281,18 +281,18 @@ Pour le message d'accueil de notre application, on peut par exemple écrire :
 
 	<h1>&{welcome}</h1>
 
-Les paramètres entourés de _&{}_ seront traduits à partir des clés définies dans les fichiers de configuration de Play.
-Les clés pour la langue par défaut se trouvent dans le fichier _/conf/messages_ :
+Les paramètres entourés de `&{}` seront traduits à partir des clés définies dans les fichiers de configuration de Play.
+Les clés pour la langue par défaut se trouvent dans le fichier `/conf/messages` :
 
 	welcome=Welcome on Vote4Music!
 	
-On peut ensuite définir un fichier par lange supplémentaire, par exemple _messages\_fr_ pour le français.
+On peut ensuite définir un fichier par lange supplémentaire, par exemple `messages_fr` pour le français.
 
 Ce mécanisme peut être utilisé pour traduire toutes sorte de clés. On peut par exemple afficher les valeurs de l'énum Genre dans notre application en modifiant la casse :
 	
 	<h1>Top albums in &{genre} for ${year}</h1>
 
-On renseigne ces clés dans le fichier _messages_ :
+On renseigne ces clés dans le fichier `messages` :
 
 	ROCK=Rock
 	METAL=Metal

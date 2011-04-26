@@ -7,7 +7,7 @@ Il existe un grand nombre de modules complémentaires pour ajouter des fonctionn
 La spécification HTML 5 prévoit la possibilité de valider les données d'un formulaire HTML côté client, directement dans le navigateur avant d'envoyer les données vers un serveur.
 Il existe un module pour Play qui permet de faire un mapping entre les annotations de validation du modèle (qui servent normalement à valider les données côté serveur) et le rendu HTML, pour intégrer cette fonctionnalité.
 
-Pour activer ce module, après l'avoir téléchargé il suffit d'ajouter cette ligne dans le fichier dependencies.yml, dans la section _require_ :
+Pour activer ce module, après l'avoir téléchargé il suffit d'ajouter cette ligne dans le fichier dependencies.yml, dans la section `require`:
 
     - play -> html5validation 1.2
 
@@ -78,16 +78,16 @@ Pour trouver l'intervalle compris entre 2 entiers, ici le plus ancien album et l
 
 En Java, ces exemples auraient nécessité de passer par de vilaines boucles for (ou par l'utilisation de librairies comme Guava ou lambdaJ).
 
-Une version totalement écrite en Scala de l'application vote4music est consultable ici[https://github.com/loicdescotte/vote4music-scala]
+Une version totalement écrite en Scala de l'application vote4music est consultable [ici](https://github.com/loicdescotte/vote4music-scala)
 
 ### Installer le module Scala
 
-Pour installer ce module, il suffit d'ajouter cette ligne dans le fichier dependencies.yml, dans la partie require : `- play -> scala 0.9`.
+Pour installer ce module, il suffit d'ajouter cette ligne dans le fichier `dependencies.yml`, dans la partie `require` : `- play -> scala 0.9`.
 Ca y'est vous êtes armés pour développer en Scala!
 
 ### Apprendre Scala
 
-Si vous désirez apprendre ce langage, il existe un e-book gratuit (en anglais) : http://programming-scala.labs.oreilly.com/index.html[http://programming-scala.labs.oreilly.com/index.html]
+Si vous désirez apprendre ce langage, il existe [un e-book gratuit](http://programming-scala.labs.oreilly.com/index.html) (en anglais)
 	
 ## jQuery datatables
 
@@ -100,4 +100,4 @@ Nous avons utilisé le plugin datatables de jQuery dans la partie 1 de ce livre.
 
 ## Et plein d'autres modules!
 
-Il existe un tas d'autres modules et de nouveaux arrivent fréquemment grâce à la communauté des développeurs Play. La liste complète des modules disponibles est consultable ici[http://www.playframework.org/modules].
+Il existe un tas d'autres modules et de nouveaux arrivent fréquemment grâce à la communauté des développeurs Play. La liste complète des modules disponibles est consultable [ici](http://www.playframework.org/modules).

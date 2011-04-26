@@ -65,7 +65,7 @@ Les routes que nous allons définir permettront :
 - De consulter le top 10 par genre
 - D'ajouter de nouvelles entrées dans la bibliothèque d'albums
 
-Le fichier _routes_ de notre application se présente ainsi :
+Le fichier `routes` de notre application se présente ainsi :
 
 	# User pages
 	GET     /                                                       Application.index
@@ -145,7 +145,7 @@ La classe Album implémente les méthodes getFirstAlbumYear et getLastAlbumYear,
         return Integer.parseInt(formatYear.format(new Date()));
     }
     
-La méthode _em()_ de classe _Model_ de Play permet d'accéder à l'entity manager de JPA (Java Persistence API). Ceci peut être utile dans certains cas, notamment lorsque l'on veut ramener autre chose que des objets du modèle (ici une date).
+La méthode `em()` de classe `Model` de Play permet d'accéder à l'entity manager de JPA (Java Persistence API). Ceci peut être utile dans certains cas, notamment lorsque l'on veut ramener autre chose que des objets du modèle (ici une date).
 
 ## Le formulaire d'ajout
 
@@ -250,7 +250,7 @@ La méthode replaceDuplicateArtist de la classe Album permet d'éviter les doubl
         }
     }
 
-A la fin de l'action _save_, on retourne à la liste d'albums pour voir apparaître le nouvel élément enregistré. 
+A la fin de l'action `save`, on retourne à la liste d'albums pour voir apparaître le nouvel élément enregistré. 
 
 ## Lister et rechercher des albums
 
@@ -287,7 +287,7 @@ Ceci suffit à ajouter des fonctions de pagination et de tri à un simple tablea
 	    #{/list}    
 	</table>
 
-Nous plaçons ce code dans un fichier _tag_ séparément du reste de notre page, afin de pouvoir de réutiliser dans d'autres contextes : 
+Nous plaçons ce code dans un fichier `tag` séparément du reste de notre page, afin de pouvoir de réutiliser dans d'autres contextes : 
 
 Pour intégrer ce tag Play à notre page, on écrit la directive suivante :
 
@@ -308,7 +308,7 @@ Au dessus de notre tableau, nous définissons un champ de recherche qui permettr
 	<input type="submit" value="Filter" class="button" id="submitFilter">
 	#{/form}
 
-La variable _filter_ est récupérée dans le contrôleur. Elle permet de trouver des noms d'albums ou d'artistes correspondant à la saisie de l'utilisateur.
+La variable `filter` est récupérée dans le contrôleur. Elle permet de trouver des noms d'albums ou d'artistes correspondant à la saisie de l'utilisateur.
 Comme dans le cas précédent, on ne ramène que 100 résultats à la fois côté client. Si l'utilisateur a besoin de parcourir plus de résultats pour trouver ce qu'il cherche, on l'incite à utiliser le formulaire de recherche pour affiner les résultats.
 Cette solution est plus simple pour nous du point de vue du code, par rapport à l'option qui consisterait à rappeler le serveur lors des clics sur les liens de pagination pour aller au delà de 100 résultats.
 
@@ -343,7 +343,7 @@ Cette fonction de l'application permet d'afficher 10 les albums ayant reçu le p
         render(genre, year, albums);
     }
 
-Les paramètres _genre_ et _year_ sont obligatoires. Cela veut dire que si on appelle ce contrôleur dans ces paramètres, il renverra une erreur 404 (not found).
+Les paramètres `genre` et `year` sont obligatoires. Cela veut dire que si on appelle ce contrôleur dans ces paramètres, il renverra une erreur 404 (not found).
  
 La classe Album définie les méthodes nécessaires à cette recherche :
 
@@ -357,7 +357,7 @@ La classe Album définie les méthodes nécessaires à cette recherche :
         return sortByPopularity(albums);
     }
 
-La librairie lambdaj nous aide à filtrer l'ensemble des albums récupérés pour une année donnée. Grâce à elle, nous pouvons écrire nos filtres comme dans un langage fonctionnel, en évitant de créer des boucles pour parcourir la collection d'albums dans le but de la trier. Dans cet exemple, on utilise les fonctions _sort_ et _select_ :
+La librairie lambdaj nous aide à filtrer l'ensemble des albums récupérés pour une année donnée. Grâce à elle, nous pouvons écrire nos filtres comme dans un langage fonctionnel, en évitant de créer des boucles pour parcourir la collection d'albums dans le but de la trier. Dans cet exemple, on utilise les fonctions `sort` et `select` :
 
 
     private static List<Album> sortByPopularity(List<Album> albums) {
@@ -372,7 +372,7 @@ La librairie lambdaj nous aide à filtrer l'ensemble des albums récupérés pou
     }	
 	
 	
-Pour que Play puisse bénéficier de lambdaj, on ajoute cette ligne à la section _require_ du fichier dependencies.yml :
+Pour que Play puisse bénéficier de lambdaj, on ajoute cette ligne à la section `require` du fichier dependencies.yml :
     - com.googlecode.lambdaj -> lambdaj 2.2
 
 
@@ -388,13 +388,13 @@ Cette méthode du contrôleur permet d'enregistrer un vote pour un album :
         renderText(album.nbVotes);
     }
 
-Si vous avez une bonne mémoire, vous vous souvenez qu'on avait ajouté une route "catch all" à notre ficher de configuration _routes_ :
+Si vous avez une bonne mémoire, vous vous souvenez qu'on avait ajouté une route "catch all" à notre ficher de configuration `routes` :
 
 	# Catch all
 	*       /{controller}/{action}                                  {controller}.{action}
 
 Ceci signifie que l'on est pas obligés de définir des routes pour toutes les méthodes du contrôleur : un pattern par défaut est utilisé. 
-Dans le cas présent, la méthode _vote()_ sera accessible depuis l'URL _/application/vote_.
+Dans le cas présent, la méthode `vote`` sera accessible depuis l'URL `/application/vote`.
 
 La classe Album définie cette méthode pour mettre à jour le compteur des votes d'une instance d'album:
 
@@ -403,7 +403,7 @@ La classe Album définie cette méthode pour mettre à jour le compteur des vote
         save();
     }
 
-Les entités du modèle pouvant auto-gérer leur état dans la base de données, on peut directement appeler la méthode _save_ pour sauvegarder ce nouvel état.
+Les entités du modèle pouvant auto-gérer leur état dans la base de données, on peut directement appeler la méthode `save` pour sauvegarder ce nouvel état.
 
 La méthode du contrôleur renvoie directement le nouveau score de l'album au format texte. On récupérera cette réponse dans notre client HTML pour mettre à jour les informations affichées à l'écran. 
 Le bouton de vote est accessible dans la liste des albums :
@@ -413,7 +413,7 @@ Le bouton de vote est accessible dans la liste des albums :
         <a id="${album.id}-clickVote" class="voteLink" href="#">Vote for it!</a>
     </td>
 
-On créer aussi une _div_ pour afficher un message en cas de succès :
+On créer aussi une `div` pour afficher un message en cas de succès :
 
 	<div id="voteInfo" class="info">One vote added!</div>
 
@@ -515,7 +515,7 @@ On ajoute un champ dans le formulaire de création (et d'édition) de l'album :
 
 Ce champ permet d'uploader une image. En mode édition, si une image est enregistrée elle sera affichée.
 
-On modifié également la méthode _save_ du contrôleur pour traiter cet upload :
+On modifié également la méthode `save` du contrôleur pour traiter cet upload :
 
 	public static void save(@Valid Album album, @Valid Artist artist, File cover) {
         if (Validation.hasErrors()) {
@@ -543,4 +543,4 @@ On modifié également la méthode _save_ du contrôleur pour traiter cet upload
         list();
     }
 
-Comme vous pouvez le voir il suffit d'ajouter un paramètre de type _File_ à la méthode _save_ puis de le traiter avec les méthodes _Play.getFile_ (pour déterminer le chemin de destination du fichier) et _renameTo_.
+Comme vous pouvez le voir il suffit d'ajouter un paramètre de type `File` à la méthode `save` puis de le traiter avec les méthodes `Play.getFile` (pour déterminer le chemin de destination du fichier) et `renameTo`.

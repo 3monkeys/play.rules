@@ -14,7 +14,7 @@ REST est en fait le modèle sur lequel le web lui même est construit : les site
 Pour la sécurité il est possible de s'appuyer sur l'authentification HTTP, ou encore sur le SSL avec HTTPS. Comme vous pouvez le voir, tout est fait pour utiliser au maximum ce que le web nous fournit depuis toujours, sans sur-couche supplémentaire.
 
 ## Play et les services REST
-
+`
 Les URL de Play étant RESTful par essence, il devient très facile de créer une petite API REST/XML conjointement à l'interface Web d'une application Play!.
 Voyons comment procéder.
 
@@ -34,25 +34,29 @@ Pour rappel, la classe Album se présente comme ceci :
 
 Nous voulons définir une URL qui renvoie lors d'un GET la liste des albums au format XML pour un genre donné.
 Pour cela nous devons modifier le fichier routes :
+
 	GET /albums/{genre}       Application.list
 	GET /api/albums/{genre}   Application.listXml(format:'xml')
 
 La première ligne correspond à la page HTML(non présentée dans cet article) affichant la liste des albums disponibles : le format n'étant pas spécifié, le rendu se fera avec une page HTML.
-Ici c'est la deuxième ligne qui nous intéresse. Le paramètre (format:'xml') indique que la méthode render() du contrôleur devra chercher un fichier nommé listXml.xml.
+Ici c'est la deuxième ligne qui nous intéresse. Le paramètre (format:'xml') indique que la méthode `render` du contrôleur devra chercher un fichier nommé listXml.xml.
 Le paramètre {genre} sera récupéré dans l'URL et passé au contrôleur.
 
 NB :
 Il est possible d'utiliser une seule méthode dans le contrôleur si les paramètres requis et les traitements sont identiques pour les 2 types de rendus.
 Dans notre cas il se peut qu'on ajoute des paramètres à la version HTML ultérieurement, sans vouloir impacter le rendu XML, par exemple :
+	
 	GET /albums/{genre}/{first}/{count} Application.list
+
 J'ai donc opté pour une séparation du rendu dans deux méthodes distinctes.
 
 Le code de la méthode Application.listXml est le suivant :
-public static void listXml(String genre) {
-		Genre genreEnum = Genre.valueOf(genre.toString().toUpperCase());
-		List<Album> albums= Album.find("byGenre",genreEnum).fetch();
-		render(albums);
-	}
+
+	public static void listXml(String genre) {
+			Genre genreEnum = Genre.valueOf(genre.toString().toUpperCase());
+			List<Album> albums= Album.find("byGenre",genreEnum).fetch();
+			render(albums);
+		}
 
 Je recherche simplement les albums correspondant au genre passé en paramètre, et je demande le rendu de la liste. Au passage on voit la simplicité d'utilisation de JPA avec Play! Le rendu sera fait dans le fichier portant le nom de la méthode et l'extension xml : listXml.xml.
 Ce template, placé dans le repertoire app/views, est défini comme ceci :
@@ -69,7 +73,7 @@ Ce template, placé dans le repertoire app/views, est défini comme ceci :
     </albums>
 
 
-Voilà, cela suffit pour exposer nos albums en XML. En respectant le pattern d'URL défini dans le fichier routes, par exemple en appelant http://localhost:9000/albums/rock, on obtient le résultat suivant :
+Voilà, cela suffit pour exposer nos albums en XML. En respectant le pattern d'URL défini dans le fichier routes, par exemple en appelant `http://localhost:9000/albums/rock`, on obtient le résultat suivant :
 
     <albums>
        <album>
@@ -108,11 +112,11 @@ On veut par exemple envoyer le contenu suivant en POST avec un content type appl
     </album>
 
 
-Pour cela on ajoute la ligne suivante au fichier routes pour autoriser l'opération POST sur l'url /album :
+Pour cela on ajoute la ligne suivante au fichier routes pour autoriser l'opération POST sur l'url `/album`:
 
 	POST /api/album  Application.saveXml
 
-La méthode saveXml récupère le contenu de la requête dans la variable request.body .
+La méthode `saveXml` récupère le contenu de la requête dans la variable `request.body`.
 Elle parse ensuite le contenu pour créer un album et l'enregistrer dans la base :
 
 	public static void saveXML(){
@@ -161,7 +165,7 @@ Elle parse ensuite le contenu pour créer un album et l'enregistrer dans la base
 
 NB: il est bien sûr possible d'obtenir un code moins verbeux en dé-sérialisant l'objet à l'aide d'un outil comme JAXB ou XStream, mais ce n'est pas l'objet de ce chapitre.
 
-Lorsqu'on écrit le code album.artist=artist, la méthode setArtist(Artist artist) est appelée automatiquement par Play (le code est modifié au runtime). On peut ainsi vérifier le fait que l'artiste existe ou non dans la base, pour savoir si on doit créer une nouvelle instance d'artiste ou récupérer l'artiste existant.
+Lorsqu'on écrit le code album.artist=artist, la méthode `setArtist` est appelée automatiquement par Play (le code est modifié au runtime). On peut ainsi vérifier le fait que l'artiste existe ou non dans la base, pour savoir si on doit créer une nouvelle instance d'artiste ou récupérer l'artiste existant.
 La méthode save() de la classe Album s'occupe alors d'enregistrer l'album en base, ainsi que l'artiste si il est inconnu dans la bibliothèque(à l'aide d'un cascade JPA).
 
 	public void setArtist(Artist artist){
@@ -208,7 +212,7 @@ Autre astuce (que j'ai découvert grâce site zengularity.com) : pour détermine
 
 	GET /api/albums.{<json|xml>format} Application.listAlbums  
 
-En appelant /albums.xml , Play appelera la méthode listAlbums() avec le paramètre 'format' initialisé à 'xml', et en appelant /albums.json ce même paramètre aura la valeur 'json'. 
+En appelant /albums.xml , Play appellera la méthode `listAlbums` avec le paramètre 'format' initialisé à 'xml', et en appelant `/albums.json` ce même paramètre aura la valeur 'json'. 
 
 On peut ensuite s'en servir dans le contrôleur : 
 
@@ -219,7 +223,7 @@ On peut ensuite s'en servir dans le contrôleur :
 		render(albums);  
 	}  
 
-Si vous tapez l'URL /albums.xml, Play cherchera un fichier de template XML nommé listAlbums.xml (une autre extension fonctionnerait aussi) pour effectuer le rendu.
+Si vous tapez l'URL /albums.xml, Play cherchera un fichier de template XML nommé `listAlbums.xml (une autre extension fonctionnerait aussi) pour effectuer le rendu.
 
 ### Recevoir un message JSON
 
@@ -233,5 +237,5 @@ Cette méthode du contrôleur permet de résoudre cette problématique :
 		album.save();
 	}
 
-En récupérant l'objet _request.body_, on peut analyser le flux entrant et enregistrer un album dans la base de données.
+En récupérant l'objet `request.body`, on peut analyser le flux entrant et enregistrer un album dans la base de données.
 Attention, pour que cette méthode fonctionne, il faudra respecter la structure de la classe Album lors de l'envoie des données en JSON. 
