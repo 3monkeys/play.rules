@@ -40,7 +40,7 @@ Pour coller à l'esprit de Play. Et aussi car je pense qu'avec un maximum de rel
 
 ##Qui suis-je ?
 
-Un geek, un fan de Java et depuis peu de Scala, aussi un musicien (guitare et un peu de batterie) à mes heures perdues. Je ne suis pas un gros amateur du développement d'IHM quelles qu'elles soient, surtout parce que je suis nul pour faire des choses "jolies". Par contre écrire des API REST me rend heureux et me donne un teint frais!
+Un geek, un fan de Java et depuis peu de Scala, aussi un musicien (guitare et un peu de batterie) à mes heures perdues. J'ai toujours préféré le développement backend au frontend (vive les services REST), mais je commence à prendre goût au développement JavaScript, notamment grâce aux bons conseils de @mklabs sur jQuery!. 
 
 ##Dédicace
 
