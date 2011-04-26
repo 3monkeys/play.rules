@@ -287,7 +287,7 @@ Ceci suffit à ajouter des fonctions de pagination et de tri à un simple tablea
 	    #{/list}    
 	</table>
 
-Nous plaçons ce code dans un fichier `tag` séparément du reste de notre page, afin de pouvoir de réutiliser dans d'autres contextes : 
+Nous plaçons ce code dans un fichier nommé `albumtable.tag`, séparé du reste de notre page, afin de pouvoir de réutiliser dans d'autres contextes : 
 
 Pour intégrer ce tag Play à notre page, on écrit la directive suivante :
 
