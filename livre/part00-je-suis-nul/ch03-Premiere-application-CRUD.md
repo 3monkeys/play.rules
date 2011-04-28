@@ -17,14 +17,14 @@ Et tout ceci facilement et rapidement
 
 > * chercher dans `/conf/application.conf` ceci :
 
-	# Database configuration
-	# ~~~~~ 
-	# Enable a database engine if needed.
-	#
-	# To quickly set up a development database, use either:
-	#   - mem : for a transient in memory database (HSQL in memory)
-	#   - fs  : for a simple file written database (HSQL file stored)
-	# db=mem
+	    # Database configuration
+	    # ~~~~~ 
+	    # Enable a database engine if needed.
+	    #
+	    # To quickly set up a development database, use either:
+	    #   - mem : for a transient in memory database (HSQL in memory)
+	    #   - fs  : for a simple file written database (HSQL file stored)
+	    # db=mem
 
 > * activer la ligne `# db=mem` en enlevant # et remplaçant `mem` par `fs`
 
