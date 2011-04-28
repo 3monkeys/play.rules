@@ -17,6 +17,7 @@ Et tout ceci facilement et rapidement
 
 > * chercher dans `/conf/application.conf` ceci :
 
+
 	    # Database configuration
 	    # ~~~~~ 
 	    # Enable a database engine if needed.
