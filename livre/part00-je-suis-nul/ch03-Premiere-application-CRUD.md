@@ -44,8 +44,8 @@ Donc pour activer le module CRUD :
 > * aller dans le fichier routes `/azerguespeche/conf/routes`
 > * ajouter ceci :
 
->> `# Import CRUD routes`
->> `* /admin module:crud`
+        # Import CRUD routes
+        * /admin module:crud
 
 > * Et ceci : juste après `GET /   Application.index`
 
