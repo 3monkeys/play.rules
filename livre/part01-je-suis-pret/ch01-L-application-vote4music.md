@@ -319,18 +319,31 @@ Le contrôleur intercepte l'appel de cette manière:
         render(albums);
     }
 
-La classe Album définit la méthode de recherche par filtre :
+La méthode `findAll` est définie comme ceci :
+
+	<T> List<T> findAll();
+
+Le mécanisme d'inférence de type nous permet de récupérer une liste correctement typée (ici, `List<Album>`). 
+
+La classe Album définit la méthode de recherche avec un filtre sur le nom :
 
 	public static List<Album> findAll(String filter) {
-        List<Album> albums;
-        if (filter != null) {
-            String likeFilter = "%" + filter + "%";
-            //limit to 100 results
-            albums = find("select a from Album a where a.name like ? or a.artist.name like ?", likeFilter, likeFilter).fetch(100);
-        } else albums = Album.find("from Album").fetch(100);
+        String likeFilter = "%" + filter + "%";
+        //limit to 100 results
+        List<Album> albums = find("select a from Album a where a.name like ?", likeFilter).fetch(100);
         return sortByPopularity(albums);
     }
 
+Selon nos besoins, on peut bien sûr enrichir les filtres et les requêtes pour obtenir des résultats plus précis.
+La méthode `find` prend un nombre indéfini de paramètres (grâce à la syntaxe `...`) :
+
+	 JPAQuery find(String query, Object... params);
+
+On pourrait par exemple écrire :
+
+	List<Album> albums = find("select a from Album a where a.name like ? or a.artist.name like ?", nameFilter, artistFilter).fetch(100);
+
+Nous verrons la définition de la méthode `sortByPopularity` dans la suite du chapitre.
 
 ## Le top 10
 

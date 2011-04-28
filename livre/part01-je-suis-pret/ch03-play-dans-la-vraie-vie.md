@@ -303,6 +303,10 @@ On renseigne ces clés dans le fichier `messages` :
 	BLUES=Blues
 	OTHER=Other
 
+## La gestion des transactions
+
+A venir!
+
 ## Traitements asynchrones
 
 A venir!
