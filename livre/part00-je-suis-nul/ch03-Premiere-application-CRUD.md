@@ -37,9 +37,8 @@ Donc pour activer le module CRUD :
 > * aller dans `/azerguespeche/conf/application.conf`
 > * ajouter ceci :
 
->> `# Import CRUD module`
-
->> `module.crud=${play.path}/modules/crud`
+        # Import CRUD module
+        module.crud=${play.path}/modules/crud
 
 > * aller dans le fichier routes `/azerguespeche/conf/routes`
 > * ajouter ceci :
@@ -49,7 +48,7 @@ Donc pour activer le module CRUD :
 
 > * Et ceci : juste après `GET /   Application.index`
 
->> `GET /admin  module:crud`
+        GET /admin  module:crud`
 
 *Note : on vient d'expliquer à Play! que l'on utilise le module CRUD lorsque l'on utilise l'url [http://localhost:9000/admin/](http://localhost:9000/admin/)*
 
