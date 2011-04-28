@@ -15,8 +15,7 @@ Et tout ceci facilement et rapidement
 
 ###Nous allons avoir besoin d'une base de données
 
-> * chercher dans `/conf/application.conf` ceci :
-
+* chercher dans `/conf/application.conf` ceci :
 
 	    # Database configuration
 	    # ~~~~~ 
@@ -27,7 +26,7 @@ Et tout ceci facilement et rapidement
 	    #   - fs  : for a simple file written database (HSQL file stored)
 	    # db=mem
 
-> * activer la ligne `# db=mem` en enlevant # et remplaçant `mem` par `fs`
+* activer la ligne `# db=mem` en enlevant # et remplaçant `mem` par `fs`
 
 ###Nous allons activer le module CRUD
 
