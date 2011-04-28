@@ -38,6 +38,7 @@ Donc pour activer le module CRUD :
 > * ajouter ceci :
 
 >> `# Import CRUD module`
+
 >> `module.crud=${play.path}/modules/crud`
 
 > * aller dans le fichier routes `/azerguespeche/conf/routes`
