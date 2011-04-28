@@ -327,7 +327,7 @@ La classe Album définit la méthode de recherche par filtre :
             String likeFilter = "%" + filter + "%";
             //limit to 100 results
             albums = find("select a from Album a where a.name like ? or a.artist.name like ?", likeFilter, likeFilter).fetch(100);
-        } else albums = Album.find("from Album").fetch(100);
+        } else albums = Album.all().fetch(100);
         return sortByPopularity(albums);
     }
 
