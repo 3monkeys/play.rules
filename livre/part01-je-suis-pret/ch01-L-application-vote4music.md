@@ -105,6 +105,8 @@ Pour le top 10, vous pouvez choisir un style de musique. Pour cela, le template 
 	    <option  value="${genre}">${genre.toString().toLowerCase()}</option>
 	    #{/list}
 	</select>
+	 
+N.B. : Le lange d'expression utilisé dans les templates est [Groovy](http://groovy.codehaus.org/). C'est un langage à typage dynamique très proche de Java, qui nous permet de manipuler facilement les objets renvoyés par le contrôleur.
 
 On peut également choisir l'année durant laquelle sont sortis les albums :
 
@@ -129,7 +131,6 @@ La classe Album implémente les méthodes getFirstAlbumYear et getLastAlbumYear,
 	private static SimpleDateFormat formatYear = new SimpleDateFormat("yyyy");
 
 	public static int getFirstAlbumYear() {
-        // get a single result via play-jpa gives the wrong result
         Date result = (Date) em().createQuery("select min(a.releaseDate) from Album a").getSingleResult();
         if (result != null)
             return Integer.parseInt(formatYear.format(result));
@@ -252,6 +253,8 @@ La méthode replaceDuplicateArtist de la classe Album permet d'éviter les doubl
 
 A la fin de l'action `save`, on retourne à la liste d'albums pour voir apparaître le nouvel élément enregistré. 
 
+N.B. : Vous vous demandez peut être comment les transactions en base de données sont gérées dans cet exemple. La méthode 'save' est bien transactionnelle. En fait dès qu'il a besoin d'accéder à la base de données, Play ouvre une transaction en début de requête HTTP, qui sera terminée en fin de requête. Si quelque chose se passe mal durant cet intervalle de temps, un rollback sera effectué.
+
 ## Lister et rechercher des albums
 
 On utilise jQuery et le plugin datatables pour améliorer le rendu du tableau des résultats. Ce plugin permet d'afficher des liens pour trier le tableau, et ajoute la pagination des données.
@@ -372,7 +375,6 @@ La classe Album définie les méthodes nécessaires à cette recherche :
 
 La librairie lambdaj nous aide à filtrer l'ensemble des albums récupérés pour une année donnée. Grâce à elle, nous pouvons écrire nos filtres comme dans un langage fonctionnel, en évitant de créer des boucles pour parcourir la collection d'albums dans le but de la trier. Dans cet exemple, on utilise les fonctions `sort` et `select` :
 
-
     private static List<Album> sortByPopularity(List<Album> albums) {
         List sortedAlbums = sort(albums, on(Album.class).nbVotes);
         //tri descendant
@@ -384,6 +386,7 @@ La librairie lambdaj nous aide à filtrer l'ensemble des albums récupérés pou
         return select(albums, having(on(Album.class).getReleaseYear(), equalTo(year)));
     }	
 	
+N.B. : On aurait pu se passer de cette librarie, appliquer les filtres et effectuer les tris à l'aide d'une requête en base de données. Mais cet exemple nous permet de voir comment intégrer d'autres librairies à notre application Play, tout en obtenant un code intéressant du point de vue de la syntaxe.
 	
 Pour que Play puisse bénéficier de lambdaj, on ajoute cette ligne à la section `require` du fichier dependencies.yml :
     - com.googlecode.lambdaj -> lambdaj 2.2
