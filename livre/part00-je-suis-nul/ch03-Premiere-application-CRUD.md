@@ -66,6 +66,7 @@ Pour se mettre en jambes nous allons créer des pêcheurs et des poissons. les s
 
 aura le code suivant :
 
+~~~ java
 	package models;
 	import javax.persistence.*;
 	import play.db.jpa.*;
@@ -87,6 +88,7 @@ aura le code suivant :
 	        this.prenom = prenom;
 	    }
 	}
+~~~
 
 *Note : tous les modèles sont précédés par l'annotation `@Entity`, cela permet à Play! de savoir que c'est un modèle qui sera "persistable" en base de données.*
 
@@ -96,6 +98,7 @@ aura le code suivant :
 
 ###La classe Poisson
 
+~~~ java
 	package models;
 	import javax.persistence.*;
 	import play.db.jpa.*;
@@ -114,6 +117,7 @@ aura le code suivant :
 	        this.nom = nom;
 	    }
 	}
+~~~
 
 ça c'est fait.
 
@@ -127,6 +131,7 @@ Vous allez voir, c'est tout simple avec le mode CRUD :
 
 ###La classe Pecheur**s**
 
+~~~ java
 	package controllers;
 
 	import play.*;
@@ -135,9 +140,11 @@ Vous allez voir, c'est tout simple avec le mode CRUD :
 	public class Pecheurs extends CRUD {
 
 	}
+~~~
 
 ###La classe Poisson**s**
 
+~~~ java
 	package controllers;
 
 	import play.*;
@@ -146,6 +153,7 @@ Vous allez voir, c'est tout simple avec le mode CRUD :
 	public class Poissons extends CRUD {
 
 	}
+~~~
 
 **C'est tout ?!?** ... Ben voui ! C'est pas la classe ça ?
 
@@ -175,17 +183,21 @@ Nous allons nous contenter de rajouter (surcharger en fait) la méthode `toStrin
 
 ####Dans Classe Pecheur
 
+~~~ java
 	@Override
     public String toString() {
         return identifiant+" : "+nom+" "+prenom;
     }
+~~~
 
 ####Dans Classe Poisson
 
+~~~ java
 	@Override
     public String toString() {
         return identifiant+" : "+nom;
     }
+~~~
 
 Raffraichissez la page :
 
@@ -199,6 +211,7 @@ Nous allons créer quelques poissons, mais avant de continuer ...
 
 Tout simplement en utilisant l'annotation `@Required` au dessus des champs obligatoires (dans notre classe Poisson) et en ajoutant la référence suivante dans le code de la classe : `import play.data.validation.Required;`, nous aurons donc le code suivant :
 
+~~~ java
 	package models;
 	import javax.persistence.*;
 
@@ -225,6 +238,7 @@ Tout simplement en utilisant l'annotation `@Required` au dessus des champs oblig
 	        return identifiant+" : "+nom;
 	    }
 	}
+~~~
 
 *Note : faite donc la même chose pour la classe `Pecheur`, ça sera fait*
 
@@ -252,6 +266,7 @@ Pour cela allons modifier la classe `Pecheur` en ajoutant un champ email et un c
 
 Le code de notre classe `Pecheur` va ressembler à ceci :
 
+~~~ java
 	package models;
 	import javax.persistence.*;
 
@@ -288,6 +303,7 @@ Le code de notre classe `Pecheur` va ressembler à ceci :
 	        return identifiant+" : "+nom+" "+prenom;
 	    }
 	}
+~~~
 
 - retournez dans votre appli web [http://localhost:9000/admin/pecheurs](http://localhost:9000/admin/pecheurs) :
 - sélectionnez un pêcheur à modifier :
