@@ -68,6 +68,7 @@ Dans IntelliJ vous pouvez voir dans l'arborescence de votre projet que vous avez
 créeons un premier modèle `version` dans le répertoire `models` :
 
 ~~~ java
+
 	package models;
 
 	public class Version {
@@ -90,6 +91,8 @@ Cette fois-ci nous allons modifier le contrôleur `Application` dans le réperto
 
 *Si vous n'avez touché à rien vous devez avoir le code suivant :*
 
+~~~ java
+
 	package controllers;
 	import play.*;
 	import play.mvc.*;
@@ -102,9 +105,11 @@ Cette fois-ci nous allons modifier le contrôleur `Application` dans le réperto
 	        render();
 	    }
 	}
+~~~
 
 *Modifions la méthode `index()` :*
 
+~~~ java
 	public class Application extends Controller {
 
 	    public static void index() {
@@ -114,6 +119,7 @@ Cette fois-ci nous allons modifier le contrôleur `Application` dans le réperto
 	        render(version);
 	    }
 	}
+~~~
 
 ####Allons modifier la vue Application
 
