@@ -2,7 +2,7 @@
 
 Dans ce chapitre nous allons étudier quelques fonctions avancées du framework, dont nous aurons besoin pour gérer des cas plus complexes.
 
-	A venir, sautez au chapitre 5!
+	Suite à venir !
 	
 
 ## Traitements asynchrones
