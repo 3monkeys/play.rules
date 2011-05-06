@@ -1,4 +1,4 @@
-# Bonus - Découverte des modules
+# Découverte des modules
 
 Il existe un grand nombre de modules complémentaires pour ajouter des fonctionnalités à Play. Nous allons en voir quelques exemples.
 
