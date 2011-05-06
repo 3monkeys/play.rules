@@ -1,7 +1,8 @@
 ﻿#Mise en place de l'application Vote4Music
 
-Nous allons développer une application qui sera notre fil conducteur tout au long de cette partie.
-Cette application permettra de parcourir une liste de CD, d'en ajouter de nouveaux et de voter pour vos albums préférés. 
+Dans la partie précédente nous avons vu comment générer une partie des traitements de notre application grâce au module CRUD.
+Nous allons maintenant apprendre à développer une petite application entièrement "à la main".
+Le but de cette webapp est d'offrir la possibilité de parcourir une CDthèque, d'en ajouter de nouveaux et de voter pour vos albums préférés. Elle notre fil conducteur tout au long de cette partie.
 
 Le code complet de l'application est disponible [ici](https://github.com/loicdescotte/vote4music)
 

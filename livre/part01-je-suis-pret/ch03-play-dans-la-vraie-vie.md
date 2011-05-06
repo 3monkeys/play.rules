@@ -302,7 +302,3 @@ On renseigne ces clés dans le fichier `messages` :
 	JAZZ=Jazz
 	BLUES=Blues
 	OTHER=Other
-
-## Traitements asynchrones
-
-A venir!
