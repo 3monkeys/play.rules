@@ -37,6 +37,8 @@ Le tag input supporte un grand nombre d'options et plusieurs types d'annotations
 
 Si votre navigateur ne supporte pas la validation HTML5, aucun soucis car la validation côté serveur sera exécutée dans tous les cas. J'ai testé avec Chrome 10 et Firefox 4 beta 12 et cela fonctionne parfaitement sur ces navigateurs.
 
+[Home page du module HTML5 Validation](http://www.playframework.org/modules/html5validation)
+
 ## Play et Scala
 
 Play propose d'utiliser au choix les langages Scala ou Java pour développer des applications.
@@ -138,6 +140,44 @@ Ca y'est vous êtes armés pour développer en Scala!
 
 Si vous désirez apprendre ce langage, il existe [un e-book gratuit](http://programming-scala.labs.oreilly.com/index.html) (en anglais)
 	
+[Home page du module Scala](http://scala.playframework.org/)
+
+## Elastic Search
+
+Elastic Search est un framework construit au dessus de [Lucene](http://lucene.apache.org/java/docs/index.html).
+Il offre la possibilité d'effectuer des recherches "à la google" sur nos entités métier. Pour que cela fonctionne il suffit de les annoter avec `@ElasticSearchable`.
+
+Le moteur Lucene permet par exemple de faire des recherches :
+
+- tolérantes aux fautes de frappes ou d'orthographe
+- basées sur un dictionnaire de synonymes (on peut taper indifféremment 'rue' ou 'avenue' pour rechercher une adresse)
+- basées sur la prononciation des mots (recherche phonétique)
+- ...
+
+Avec les classes fournies par Elastic Search, on peut écrire ce genre de requêtes :
+
+	QueryBuilder qb = filteredQuery(
+	            termQuery("name", name), 
+	            rangeFilter("nbVotes")
+	                .from(100)
+	                .to(90)
+	            );
+	
+
+Mais il n'est pas nécessaire de maitriser l'API Elastic Search pour profiter de ce module : celui ci propose également un mode inspiré du module CRUD. En héritant de la classe `ElasticSearchController` et en utilisant l'annotation du même nom pour indiquer le type d'entité à rechercher, on peut générer tous le code et les écrans nécessaires pour la recherche de nos entités :
+
+	@ElasticSearchController.For(Album.class)
+	public class AlbumSearch extends ElasticSearchController {
+
+	}
+	
+Si vous souhaitez conserver le comportement par défaut du module, rien à ajouter dans cette classe! Mais comme pour le module CRUD vous pouvez surcharger ce comportement si vous le désirez.
+On peut également surcharger les vues et créer de nouveaux templates en créant un répertoire ELASTIC_SEARCH sous `app/views` dans l'arborescence de notre application.
+
+Vous pouvez voir ce module en action dans [cette vidéo](http://www.youtube.com/watch?v=pHpvNKO1mTE&feature=player_detailpage)
+
+[Home page du module Elastic Search](http://www.playframework.org/modules/elasticsearch-0.0.3/home)
+
 ## jQuery datatables
 
 Nous avons utilisé le plugin datatables de jQuery dans la partie 1 de ce livre. Nous allons maintenant voir comment l'intégrer automatiquement au système de CRUD avec un module Play. 
