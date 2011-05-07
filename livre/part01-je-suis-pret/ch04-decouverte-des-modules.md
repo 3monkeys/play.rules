@@ -15,21 +15,25 @@ Pour activer ce module, après l'avoir téléchargé il suffit d'ajouter cette l
 Sur une entité du modèle, on ajoute une annotation de validation pour indiquer qu'un des champs est obligatoire : 
 
 ~~~ java
-	@Entity  
-	public class Album extends Model {  
-	  
-		@Required  
-		public String name;  
-	}
+@Entity
+public class Album extends Model {
+
+    @Required
+    public String name;
+}
 ~~~  
 
 Dans le formulaire HTML, on peut utiliser un nouveau tag, #{input} : 
 
+~~~ html
 	#{input for:'album.name', type:'text', id:'name' /}  
+~~~
 
 Ce tag sera traduit en une balise input classique, avec un attribut indiquant que le champ est obligatoire : 
 
+~~~ html
     <input type="text" name="album.name" value="album?.name" id="name" required="required"/>
+~~~
 
 Le rendu est le suivant si on valide le formulaire sans remplir le champ obligatoire : 
 
@@ -52,44 +56,44 @@ C'est un langage très différent de Java, il demande donc un temps d'adaptation
 Pour effectuer le rendu d'un template, une seule ligne suffit. On déclare une map contenant les attributs de la page à afficher :
 
 ~~~ java
-	def list() = {
-		Template('albums -> Albums.all.fetch(100))
-	}
+def list() = {
+    Template('albums -> Albums.all.fetch(100))
+}
 ~~~
 	
 On peut facilement trier une collection avec la fonction filter :
 
 ~~~ java
-	var numbers = Array(0, 1, 2, 3, 4, 5, 6, 7, 8, 9)
-	// Récupération des nombres pairs
-	var evenNumbers = numbers.filter(x => x%2==0)
+var numbers = Array(0, 1, 2, 3, 4, 5, 6, 7, 8, 9)
+// Récupération des nombres pairs
+var evenNumbers = numbers.filter(x => x%2==0)
 ~~~
 
 On peut même simplifier l'écriture de cette fonction avec le caractère joker '_' :
 
 ~~~ java
-	var evenNumbers = numbers.filter(_%2==0)
+var evenNumbers = numbers.filter(_%2==0)
 ~~~
 
 Cette fonction nous sera utilise dans l'application vote4music, notamment pour trier les albums par année :
-	
+
 ~~~ java
-	albums = albums.filter(x => formatYear.format(x.releaseDate).equals(year))
+albums = albums.filter(x => formatYear.format(x.releaseDate).equals(year))
 ~~~
 	    
 Pour tirer des albums en fonction du nombre de votes, dans le sens décroissant, on peut écrire :
 
 ~~~ java
-	albums.sortBy(_.nbVotes).reverse
+albums.sortBy(_.nbVotes).reverse
 ~~~
 
 Pour trouver l'intervalle compris entre 2 entiers, ici le plus ancien album et le plus récent, il suffit d'écrire :
 
 ~~~ java
-	val first = Albums.firstAlbumYear
-	val last = Albums.lastAlbumYear
-	//Utilisation de la fonction to
-	years = first.to(last).toList
+val first = Albums.firstAlbumYear
+val last = Albums.lastAlbumYear
+//Utilisation de la fonction to
+years = first.to(last).toList
 ~~~
 
 En Java, ces exemples auraient nécessité de passer par de vilaines boucles for (ou par l'utilisation de librairies comme Guava ou lambdaJ).
@@ -105,30 +109,30 @@ Play intègre un certain nombre d'API qui tirent parti des spécificités du lan
 Le framework de test de Play-Scala est un bon d'exemple des avantages de ce langage. La syntaxe offerte par Scala donne des tests vraiment expressifs et simples à lire :
 
 ~~~ java	
-	    test("collections") { 
-			var albums=Albums.findAll()
-		    (albums.size) should be (2)
+test("collections") {
+    var albums=Albums.findAll()
+    (albums.size) should be (2)
 
-			var artists=Artists.findAll()
-			(artists.size) should be (1)
-			
-			Artist artist = artists.apply(1) 
-			artist.name should include ("Joe")      
-	    }
+    var artists=Artists.findAll()
+    (artists.size) should be (1)
+
+    Artist artist = artists.apply(1)
+    artist.name should include ("Joe")
+}
 ~~~
 
 Il est également possible d'écrire des tests dans le style BDD (Behavior Driven Developpment), en combinant le code des tests avec du texte représentant les comportements attendus :
 
 ~~~ java
-		val name = "Play.Rules"
+val name = "Play.Rules"
 
-	    "'Play.Rules'" should "not contain the X letter" in {
-	        name should not include ("X")
-	    }
+"'Play.Rules'" should "not contain the X letter" in {
+    name should not include ("X")
+}
 
-	    it should "have 10 chars" in {
-	        name should have length (10)      
-	    }
+it should "have 10 chars" in {
+    name should have length (10)
+}
 ~~~
 
 Plus d'infos sur cette API [ici](http://scala.playframework.org/documentation/scala-0.9/test)
@@ -138,14 +142,14 @@ Plus d'infos sur cette API [ici](http://scala.playframework.org/documentation/sc
 Play-Scala intègre une API qui permet d'effectuer très facilement des requêtes SQL et de mapper les résultats dans des objets Scala :
 
 ~~~ java
-	val albums:List[Album] = 
-	SQL(
-	    """
-	        select * from Album al 
-	        join Artist ar on al.artist = ar.id 
-	        where ar.name = {artist};
-	    """
-	).on("artist" -> "Joe").as(Album*)
+val albums:List[Album] =
+SQL(
+    """
+        select * from Album al
+        join Artist ar on al.artist = ar.id
+        where ar.name = {artist};
+    """
+).on("artist" -> "Joe").as(Album*)
 ~~~
 	
 Plus d'infos sur cette API [ici](http://scala.playframework.org/documentation/scala-0.9/anorm)
@@ -178,23 +182,23 @@ Elastic Search est basé sur une architecture REST et est capable d'indexer du c
 Avec l'API Java fournie par Elastic Search, on peut écrire ce genre de requêtes :
 
 ~~~ java
-	QueryBuilder qb = filteredQuery(
-	            termQuery("name", name), 
-	            rangeFilter("nbVotes")
-	                .from(100)
-	                .to(90)
-	            );
+QueryBuilder qb = filteredQuery(
+            termQuery("name", name),
+            rangeFilter("nbVotes")
+                .from(100)
+                .to(90)
+            );
 ~~~	
 
 Mais il n'est pas nécessaire de maitriser l'API Elastic Search pour profiter de ce module : celui ci propose également un mode inspiré du module CRUD. En héritant de la classe `ElasticSearchController` et en utilisant l'annotation du même nom pour indiquer le type d'entité à rechercher, on peut générer tous le code et les écrans nécessaires pour la création et la recherche de nos entités :
 
 ~~~ java
-	@ElasticSearchController.For(Album.class)
-	public class AlbumSearch extends ElasticSearchController {
+@ElasticSearchController.For(Album.class)
+public class AlbumSearch extends ElasticSearchController {
 
-	}
+}
 ~~~
-	
+
 Si vous souhaitez conserver le comportement par défaut du module, rien à ajouter dans cette classe! Mais comme pour le module CRUD vous pouvez surcharger ce comportement si vous le désirez.
 On peut également surcharger les vues et créer de nouveaux templates en créant un répertoire ELASTIC_SEARCH sous `app/views` dans l'arborescence de notre application.
 

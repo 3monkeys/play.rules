@@ -39,29 +39,29 @@ Dans le fichier application.conf, ajouter la ligne suivante pour configurer les 
 On déclare ensuite un contrôleur d’administration pour toutes les actions que l’on veut restreindre. On ajoute l’annotation @With à ce contrôleur pour lui dire qu’il doit s’appuyer sur le contrôleur du module Secure :
 
 ~~~ java 	
-	@With(Secure.class)  
-	public class Admin extends Controller {  
-	....  
-	}
+@With(Secure.class)
+public class Admin extends Controller {
+....
+}
 ~~~  
 
 On ajoute ensuite un contrôle sur l'action delete en utilisant l'annotation @Check :
 
 ~~~ java 
-	Check("admin")  
-	public static void delete(Long id) {  
-	...  
-	}  
+Check("admin")
+public static void delete(Long id) {
+...
+}
 ~~~ 
 
 On redefinie également la méthode check en créant une nouvelle classe dans le package contrôler, héritant de la classe Secure.Security :
 
 ~~~ java 
-	static boolean check(String profile) {  
-		 if(profile.equals("admin"))  
-		   return session.get("username").equals("admin");  
-		 return false;  
-		}	
+static boolean check(String profile) {
+    if(profile.equals("admin"))
+        return session.get("username").equals("admin");
+    return false;
+}
 ~~~ 
   
 Ce code permet de demander au module Secure de vérifier que l’utilisateur en session est bien “admin” lorsque l’annotation @check(“admin”) est trouvée. 
@@ -69,9 +69,9 @@ Ce code permet de demander au module Secure de vérifier que l’utilisateur en 
 Dans la même classe, on redéfinie la méthode authentify. C'est sur cette méthode que le formulaire d’authentification du module Secure s'appuie pour laisser passer ou non l'utilisateur :
 
 ~~~ java 
-	static boolean authentify(String username, String password) {  
-		return Play.configuration.getProperty("application.admin").equals(username)&& Play.configuration.getProperty("application.adminpwd").equals(password);  
-	}
+static boolean authentify(String username, String password) {
+    return Play.configuration.getProperty("application.admin").equals(username)&& Play.configuration.getProperty("application.adminpwd").equals(password);
+}
 ~~~  
 
 Avec cette configuration, si on essaie d’entrer l’URL /admin/delete?id=11, on arrivera directement sur le formulaire d’authentification pour prouver que l’on est bien administrateur.
@@ -82,9 +82,9 @@ On aimerait maintenant pouvoir aller directement sur ce formulaire pour mettre e
 Il suffit d’ajouter le code suivant dans le contrôleur Admin pour exposer le formulaire de login à l’URL /admin/login :
 
 ~~~ java 
-	public static void login() {  
-	  Application.list();  
-	 }
+public static void login() {
+  Application.list();
+ }
 ~~~ 
 
 Toutes les méthodes que l’on définit dans ce contrôleur étant soumises à un contrôle de l’utilisateur en session, vous vous retrouverez directement sur le formulaire d’authentification.
@@ -96,14 +96,16 @@ Pour cela rien de plus simple, il suffit d’ajouter un lien au template main.ht
 
 On ajoute le code suivant :
 
-	<body>  
-		 #{if session.get("username").equals("admin")}  
-		  <div align="right">  
-		   <a href="@{Secure.logout()}">Logout</a>  
-		  </div>  
-		 #{/if}  
-	 #{doLayout /}  
-	 </body>
+~~~ html
+<body>
+     #{if session.get("username").equals("admin")}
+      <div align="right">
+       <a href="@{Secure.logout()}">Logout</a>
+      </div>
+     #{/if}
+ #{doLayout /}
+ </body>
+~~~
 
 Et voilà, vous savez maintenant comment ajouter des fonctions d’administration et de la sécurité à un site public avec Play!
 
@@ -117,30 +119,30 @@ Les tests unitaires testent une partie précise du code de notre application.
 Voici un exemple de test unitaire :
 
 ~~~ java 
-	public class CoreTest extends UnitTest {
-	
-		@Test
-		public void filterByYearTest() {
-			//Création de 2 albums
-			List<Album> albums = new ArrayList<Album>();
-			Album album1 = new Album("album1");
-			Calendar c1 = Calendar.getInstance();
-			c1.set(2010, 1, 1);
-			album1.releaseDate= c1.getTime();
-			albums.add(album1);
-			Album album2 = new Album("album1");
-			Calendar c2 = Calendar.getInstance();
-			c2.set(2009, 1, 1);
-			album2.releaseDate= c2.getTime();
-			albums.add(album2);
-	
-			//Test de la méthodefilter by year
-			albums = Album.filterByYear(albums, "2010");
-	
-			//Un seul album a la date 2010
-			assertTrue(albums.size()==1);
-		}
-	}
+public class CoreTest extends UnitTest {
+
+    @Test
+    public void filterByYearTest() {
+        //Création de 2 albums
+        List<Album> albums = new ArrayList<Album>();
+        Album album1 = new Album("album1");
+        Calendar c1 = Calendar.getInstance();
+        c1.set(2010, 1, 1);
+        album1.releaseDate= c1.getTime();
+        albums.add(album1);
+        Album album2 = new Album("album1");
+        Calendar c2 = Calendar.getInstance();
+        c2.set(2009, 1, 1);
+        album2.releaseDate= c2.getTime();
+        albums.add(album2);
+
+        //Test de la méthodefilter by year
+        albums = Album.filterByYear(albums, "2010");
+
+        //Un seul album a la date 2010
+        assertTrue(albums.size()==1);
+    }
+}
 ~~~  
 
 Cette classe hérite de la classe UnitTest fournie par Play. La méthode `filterByYearTest` permet de tester la méthode `filterByYear` de la classe Album.
@@ -150,36 +152,36 @@ Cette classe hérite de la classe UnitTest fournie par Play. La méthode `filter
 Les tests fonctionnels permettent de tester l'application à partir de son contrôleur en se basant sur le fichier `routes` pour résoudre les URL d'appel.
 Ce test permet par exemple d'utiliser un service REST et valider la réponse obtenue : 
 
-~~~ java 
-	public class ApplicationTest extends FunctionalTest {
-	
-		@Before
-		public void setUp() {
-			Fixtures.deleteAll();
-			Fixtures.load("data.yml");
-		}
-	
-		@Test
-		public void testYML() {
-		Response response = GET("/api/albums.xml");
-		assertIsOk(response);
-		
-		//On récupère la réponse 	
-		String xmlTree = response.out.toString();
-		DocumentBuilderFactory factory = DocumentBuilderFactory.newInstance();
-		Document document = null;
-		try {
-			DocumentBuilder builder = factory.newDocumentBuilder();
-			document = builder.parse(new ByteArrayInputStream(xmlTree.getBytes()));
-		} catch (Exception e) {
-			Logger.error(e.getMessage());
-		}
-		Element rootNode = document.getDocumentElement();
-		
-		//On vérifie qu'on a le bon nombre d'éléments dans le fichier XML
-		assertTrue(rootNode.getElementsByTagName("album").getLength() == 2);		
-	}
-~~~ 
+~~~ java
+public class ApplicationTest extends FunctionalTest {
+
+    @Before
+    public void setUp() {
+        Fixtures.deleteAll();
+        Fixtures.load("data.yml");
+    }
+
+    @Test
+    public void testYML() {
+    Response response = GET("/api/albums.xml");
+    assertIsOk(response);
+
+    //On récupère la réponse
+    String xmlTree = response.out.toString();
+    DocumentBuilderFactory factory = DocumentBuilderFactory.newInstance();
+    Document document = null;
+    try {
+        DocumentBuilder builder = factory.newDocumentBuilder();
+        document = builder.parse(new ByteArrayInputStream(xmlTree.getBytes()));
+    } catch (Exception e) {
+        Logger.error(e.getMessage());
+    }
+    Element rootNode = document.getDocumentElement();
+
+    //On vérifie qu'on a le bon nombre d'éléments dans le fichier XML
+    assertTrue(rootNode.getElementsByTagName("album").getLength() == 2);
+}
+~~~
 
 La méthode setUp permet de charger un fichier yml contenant des données de test. Le fichier se présente comme cela :
 
@@ -191,7 +193,7 @@ La méthode setUp permet de charger un fichier yml contenant des données de tes
 	artist: joe
 	releaseDate: 2010-11-12 00:00:00
 	genre: ROCK
-	
+
 ### Tests Selenium
 	
 Ces tests permettent de simuler des clicks dans l'application à l'aide de l'outil Selenium.
@@ -241,16 +243,16 @@ Plutôt pratique non?
 Le code suivant permet de charger un jeu de données au démarrage de l'application :
 
 ~~~ java
-	@OnApplicationStart
-	public class PopulateOnStart extends Job {
+@OnApplicationStart
+public class PopulateOnStart extends Job {
 
-    	public void doJob() {
-        	// Check if the database is empty
-         	if(Album.count() == 0) {
-            	Fixtures.load("init-data.yml");
-        	}
-    	}
- 	}
+    public void doJob() {
+        // Check if the database is empty
+        if(Album.count() == 0) {
+            Fixtures.load("init-data.yml");
+        }
+    }
+}
 ~~~
 
 Pour que ça fonctionne il suffit de déposer le fichier init-data.yml dans le répertoire conf/
@@ -277,12 +279,12 @@ Voici un exemple de fichier yml :
 Dans cet exemple, on souhaite recharger les albums toutes les heures à partir de notre fichier yml :
 
 ~~~ java 	
-	@Every("1h")
-	public class ReloadData extends Job {
-		public void doJob() {	
-			Fixtures.deleteAll();
-			Fixtures.load("data.yml");		
-		}
+@Every("1h")
+public class ReloadData extends Job {
+    public void doJob() {
+        Fixtures.deleteAll();
+        Fixtures.load("data.yml");
+    }
 }
 ~~~ 
 
