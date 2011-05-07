@@ -286,7 +286,7 @@ N.B. : Vous vous demandez peut être comment les transactions en base de donnée
 On utilise jQuery et le plugin datatables pour améliorer le rendu du tableau des résultats. Ce plugin permet d'afficher des liens pour trier le tableau, et ajoute la pagination des données.
 Ce plugin est très simple à utiliser, il suffit d'écrire ces quelques lignes pour l'activer : 
 
-~~~ javascript
+~~~ js
 $(document).ready(function(){
     $('#albumList').dataTable();
   });
@@ -508,7 +508,7 @@ Cette section sera masquée par défaut, à l'aide de CSS :
 
 Ce code JavaScript permet d'intercepter les clicks et de rafraîchir l'écran :
 	
-~~~ javascript
+~~~ js
 //On récupère les span dont l'id commence par "nbVotes" pour trouver la zone à mettre à jour
 var nbvotes = $('span[id^="nbVotes"]');
 clickVote = function() {
@@ -563,7 +563,7 @@ On ajoute une colonne à la liste des albums. Lors de l'affichage, on effectue l
 
 Lors du survol de ce lien, on affiche une miniature de la pochette avec un peu de JavaScript :
 
-~~~ javascript 
+~~~ js 
 $('.cover').each(function(i, val) {
     var t = $(this);
     //Récupération de l'id courant
