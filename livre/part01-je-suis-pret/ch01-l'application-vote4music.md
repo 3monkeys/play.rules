@@ -124,6 +124,7 @@ On peut également choisir l'année durant laquelle sont sortis les albums :
 Pour proposer les dates disponibles depuis le contrôleur, on calcule un intervalle de dates allant de l'album le plus récent à l'album le plus ancien.
 Si la base est vide on donne des valeurs par défaut :	
 
+~~~ java 
 	public static List<String> getYearsToDisplay() {
         List<String> years = new ArrayList<String>();
         for (int i = Album.getFirstAlbumYear(); i <= Album.getLastAlbumYear(); i++) {
@@ -132,9 +133,11 @@ Si la base est vide on donne des valeurs par défaut :
         Collections.reverse(years);
         return years;
     }	
+~~~
 
 La classe Album implémente les méthodes getFirstAlbumYear et getLastAlbumYear, qui récupèrent ces valeurs dans la base de données :
 
+~~~ java 
 	private static SimpleDateFormat formatYear = new SimpleDateFormat("yyyy");
 
 	public static int getFirstAlbumYear() {
@@ -152,6 +155,7 @@ La classe Album implémente les méthodes getFirstAlbumYear et getLastAlbumYear,
         //if no album is registered return current year
         return Integer.parseInt(formatYear.format(new Date()));
     }
+~~~
     
 La méthode `em()` de classe `Model` de Play permet d'accéder à l'entity manager de JPA (Java Persistence API). Ceci peut être utile dans certains cas, notamment lorsque l'on veut ramener autre chose que des objets du modèle (ici une date).
 
@@ -166,6 +170,8 @@ On utilise le verbe HTTP GET pour obtenir le formulaire :
 ~~~
 
  On utilise ensuite POST pour envoyer les données au contrôleur (voir le fichier de routes plus haut) Voici le code du formulaire :
+
+~~~ html 
 	
 	#{extends 'main.html' /}
 	#{set title:'Album form' /}
@@ -211,6 +217,7 @@ On utilise le verbe HTTP GET pour obtenir le formulaire :
 	</p>
 
 	#{/form}
+~~~
 	
 Ce formulaire nous permettra aussi bien de créer des utilisateurs que de les mettre à jour. C'est pour cette raison que nous utilisons une syntaxe comme `album?.name` pour la valeur des champs : si l'album existe déjà on affiche son nom. Sinon, on n'affiche rien. On retrouve également la sélection des genres à partir de l'Enum, comme sur la page d'accueil.
 
@@ -480,7 +487,7 @@ Cette section sera masquée par défaut, à l'aide de CSS :
 
 Ce code JavaScript permet d'intercepter les clicks et de rafraîchir l'écran :
 	
-~~~ java
+~~~ javascript
 		//On récupère les span dont l'id commence par "nbVotes" pour trouver la zone à mettre à jour
 		var nbvotes = $('span[id^="nbVotes"]');
 		clickVote = function() {
@@ -534,7 +541,7 @@ On ajoute une colonne à la liste des albums. Lors de l'affichage, on effectue l
 
 Lors du survol de ce lien, on affiche une miniature de la pochette avec un peu de JavaScript :
 
-~~~ java 
+~~~ javascript 
 	$('.cover').each(function(i, val) {
         var t = $(this); 
 		//Récupération de l'id courant
