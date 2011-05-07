@@ -20,6 +20,7 @@ La classe Album contient les informations suivante :
 
 Voici le code de cette classe :
 
+~~~ java 
 	@Entity
 	public class Album extends Model {
 	@Required
@@ -33,27 +34,32 @@ Voici le code de cette classe :
 	public Genre genre;
 	//...
 	}
+~~~ 
 
 Nous verrons le code métier de cette classe dans la suite du chapitre.
 
 ### La classe Artist
 
 La classe Artist est définie comme ceci :
-	
+
+~~~ java 	
 	public class Artist extends Model{
 		@Required
 		@Column(unique = true)
 		public String name;	
 		//...
 	}
+~~~ 
 
 ### L'enum Genre
 
 Le genre est une simple Enum, définie comme cela :
 
+~~~ java 
 	public enum Genre {
 		ROCK, METAL, JAZZ, BLUES, POP, WORLD, HIP_HOP, OTHER
 	}
+~~~  
 
 Vous pouvez bien sur ajouter autant que genres que vous voulez.
 
@@ -153,9 +159,11 @@ La méthode `em()` de classe `Model` de Play permet d'accéder à l'entity manag
 
 On utilise le verbe HTTP GET pour obtenir le formulaire :
 
+~~~ java 
     public static void form() {
         render();
     }
+~~~
 
  On utilise ensuite POST pour envoyer les données au contrôleur (voir le fichier de routes plus haut) Voici le code du formulaire :
 	
@@ -225,6 +233,7 @@ Ce script utilise jQuery, comme tous les exemples de code JavaScript que nous ve
 
 Enfin, définissons la méthode du contrôleur qui va nous permettre d'enregistrer un album dans la base : 
 
+~~~ java 
 	public static void save(@Valid Album album, @Valid Artist artist, File cover) {
         if (Validation.hasErrors()) {
             render("@form", album);
@@ -236,7 +245,8 @@ Enfin, définissons la méthode du contrôleur qui va nous permettre d'enregistr
 
         //return to album list
         list();
-    }
+    }	
+~~~ 	
 
 La première ligne de cette méthode vérifie que les valeurs envoyées au contrôleur sont conformes au modèle défini dans les classes Album et Artist (par exemple le nom obligatoire pour l'album).
 Dans le cas contraire, on retourne au formulaire, qui affichera les erreurs grâce aux balises d'erreur que l'on écrit, comme 	
@@ -245,12 +255,14 @@ Dans le cas contraire, on retourne au formulaire, qui affichera les erreurs grâ
 	
 La méthode replaceDuplicateArtist de la classe Album permet d'éviter les doublons de nom d'artistes dans la base de données :
 
+~~~ java 
 	public void replaceDuplicateArtist() {
         Artist existingArtist = Artist.findByName(artist.name);
         if (existingArtist!=null) {
             artist = existingArtist;
         }
     }
+~~~	
 
 A la fin de l'action `save`, on retourne à la liste d'albums pour voir apparaître le nouvel élément enregistré. 
 
@@ -299,11 +311,12 @@ Pour intégrer ce tag Play à notre page, on écrit la directive suivante :
 
 Par défaut, on affiche les 100 derniers résultats trouvés dans la base de données : 
 	
+~~~ java 
 	public static void list() {
         List<Album> albums = Album.all().fetch(100);
         render(albums);
     }
- 
+~~~ 
 	
 Au dessus de notre tableau, nous définissons un champ de recherche qui permettra d'envoyer des filtres au serveur :
 	
@@ -318,10 +331,12 @@ Cette solution est plus simple pour nous du point de vue du code, par rapport à
 
 Le contrôleur intercepte l'appel de cette manière: 
 
+~~~ java 
 	public static void list(String filter) {
         List<Album> albums = Album.findAll(filter);
         render(albums);
     }
+~~~ 
 
 La méthode `findAll` est définie comme ceci :
 
@@ -331,21 +346,28 @@ Le mécanisme d'inférence de type nous permet de récupérer une liste correcte
 
 La classe Album définit la méthode de recherche avec un filtre sur le nom :
 
+~~~ java 
 	public static List<Album> findAll(String filter) {
         String likeFilter = "%" + filter + "%";
         //limit to 100 results
         List<Album> albums = find("select a from Album a where a.name like ?", likeFilter).fetch(100);
         return sortByPopularity(albums);
-    }
+    }	
+~~~ 	
 
 Selon nos besoins, on peut bien sûr enrichir les filtres et les requêtes pour obtenir des résultats plus précis.
 La méthode `find` prend un nombre indéfini de paramètres (grâce à la syntaxe `...`) :
 
-	 JPAQuery find(String query, Object... params);
+~~~ java 
+	JPAQuery find(String query, Object... params);
+~~~ 
 
 On pourrait par exemple écrire :
 
+~~~ java 
 	List<Album> albums = find("select a from Album a where a.name like ? or a.artist.name like ?", nameFilter, artistFilter).fetch(100);
+~~~ 
+
 
 Nous verrons la définition de la méthode `sortByPopularity` dans la suite du chapitre.
 
@@ -353,12 +375,14 @@ Nous verrons la définition de la méthode `sortByPopularity` dans la suite du c
 
 Cette fonction de l'application permet d'afficher les 10 albums ayant reçu le plus de votes, pour une année et un genre donnés :
 
+~~~ java 
 	public static void listByGenreAndYear(String genre, String year) {
         notFoundIfNull(genre);
         notFoundIfNull(year);
         List<Album> albums = Album.findByGenreAndYear(genre, year);
         render(genre, year, albums);
     }
+~~~ 
 
 Les paramètres _genre_ et _year_ sont obligatoires. Cela veut dire que si on appelle ce contrôleur dans ces paramètres, il renverra une erreur 404 (not found).
  
@@ -366,6 +390,7 @@ La classe Album définie les méthodes nécessaires à cette recherche :
 
  public static List<Album> findByGenreAndYear(String genre, String year) {
         
+~~~ java 
 	List<Album> albums;
         Genre genreEnum = Genre.valueOf(genre.toString().toUpperCase());
         albums = Album.find("byGenre", genreEnum).fetch(10);
@@ -373,24 +398,32 @@ La classe Album définie les méthodes nécessaires à cette recherche :
         albums = filterByYear(albums, year);
         return sortByPopularity(albums);
     }
+~~~ 
 
 La librairie lambdaj nous aide à filtrer l'ensemble des albums récupérés pour une année donnée. Grâce à elle, nous pouvons écrire nos filtres comme dans un langage fonctionnel, en évitant de créer des boucles pour parcourir la collection d'albums dans le but de la trier. Dans cet exemple, on utilise les fonctions `sort` et `select` :
 
-    private static List<Album> sortByPopularity(List<Album> albums) {
+~~~ java 
+	private static List<Album> sortByPopularity(List<Album> albums) {
         List sortedAlbums = sort(albums, on(Album.class).nbVotes);
         //tri descendant
 		Collections.reverse(sortedAlbums);
         return sortedAlbums;
     }
+~~~ 
 
-    public static List<Album> filterByYear(List<Album> albums, String year) {
+    
+~~~ java 
+public static List<Album> filterByYear(List<Album> albums, String year) {
         return select(albums, having(on(Album.class).getReleaseYear(), equalTo(year)));
-    }	
+    }
+~~~ 
+		
 	
 N.B. : On aurait pu se passer de cette librarie, appliquer les filtres et effectuer les tris à l'aide d'une requête en base de données. Mais cet exemple nous permet de voir comment intégrer d'autres librairies à notre application Play, tout en obtenant un code intéressant du point de vue de la syntaxe.
 	
 Pour que Play puisse bénéficier de lambdaj, on ajoute cette ligne à la section `require` du fichier dependencies.yml :
-    - com.googlecode.lambdaj -> lambdaj 2.2
+   
+	- com.googlecode.lambdaj -> lambdaj 2.2
 
 
 ## La fonction de vote
@@ -399,11 +432,14 @@ Voyons maintenant une fonctionnalité clé de cette application, le vote!
 
 Cette méthode du contrôleur permet d'enregistrer un vote pour un album :
 
+~~~ java 
 	public static void vote(String id) {
         Album album = Album.findById(Long.parseLong(id));
         album.vote();
         renderText(album.nbVotes);
     }
+~~~ 
+
 
 Si vous avez une bonne mémoire, vous vous souvenez qu'on avait ajouté une route "catch all" à notre ficher de configuration `routes` :
 
@@ -415,10 +451,12 @@ Dans le cas présent, la méthode `vote` sera accessible depuis l'URL `/applicat
 
 La classe Album définit cette méthode pour mettre à jour le compteur des votes d'une instance d'album:
 
+~~~ java 
 	public void vote() {
         nbVotes++;
         save();
     }
+~~~ 
 
 Les entités du modèle pouvant auto-gérer leur état dans la base de données, on peut directement appeler la méthode `save` pour sauvegarder ce nouvel état.
 
@@ -436,12 +474,13 @@ On créer aussi une `div` pour afficher un message en cas de succès :
 
 Cette section sera masquée par défaut, à l'aide de CSS : 
 
-.info {
-  display: none;
-}
+	.info {
+		display: none;
+	}
 
 Ce code JavaScript permet d'intercepter les clicks et de rafraîchir l'écran :
 	
+~~~ java
 		//On récupère les span dont l'id commence par "nbVotes" pour trouver la zone à mettre à jour
 		var nbvotes = $('span[id^="nbVotes"]');
 		clickVote = function() {
@@ -472,13 +511,17 @@ Ce code JavaScript permet d'intercepter les clicks et de rafraîchir l'écran :
 	    };
 
 	$('a.voteLink').click(clickVote);
+
+~~~ 
 	 	
 ## Gestion des pochettes d'albums
 	
 On veut maintenant ajouter la possibilité d'attacher l'image d'une pochette aux albums.	
 On enrichit la classe Album d'un nouveau champ :
 
+~~~ java 
 	public boolean hasCover = false;
+~~~ 
 
 Ce booléen nous permettra de savoir si l'album possède une pochette ou non.
 On ajoute une colonne à la liste des albums. Lors de l'affichage, on effectue le test suivant : 
@@ -491,6 +534,7 @@ On ajoute une colonne à la liste des albums. Lors de l'affichage, on effectue l
 
 Lors du survol de ce lien, on affiche une miniature de la pochette avec un peu de JavaScript :
 
+~~~ java 
 	$('.cover').each(function(i, val) {
         var t = $(this); 
 		//Récupération de l'id courant
@@ -512,6 +556,7 @@ Lors du survol de ce lien, on affiche une miniature de la pochette avec un peu d
             trigger: ['mouseover', 'click']
         });
     };
+~~~ 
 	
 Ce code récupère une image dans un répertoire du serveur et effectue son rendu à l'aide du plugin jQuery bt (BeautyTips).
 
@@ -534,6 +579,7 @@ Ce champ permet d'uploader une image. En mode édition, si une image est enregis
 
 On modifié également la méthode _save_ du contrôleur pour traiter cet upload :
 
+~~~ java 
 	public static void save(@Valid Album album, @Valid Artist artist, File cover) {
         if (Validation.hasErrors()) {
             render("@form", album);
@@ -559,5 +605,6 @@ On modifié également la méthode _save_ du contrôleur pour traiter cet upload
         //return to album list
         list();
     }
+~~~ 
 
 Comme vous pouvez le voir il suffit d'ajouter un paramètre de type `File` à la méthode `save` puis de le traiter avec les méthodes `Play.getFile` (pour déterminer le chemin de destination du fichier) et `renameTo`.

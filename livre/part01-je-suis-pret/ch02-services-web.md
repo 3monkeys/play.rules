@@ -191,7 +191,7 @@ Voyons maintenant comment faire la même chose avec JSON.
 
 Définition de wikipedia : 
 
-	JSON (JavaScript Object Notation) est un format de données textuel, générique, dérivé de la notation des objets du langage ECMAScript. Il permet de représenter de l’information structurée.
+`JSON (JavaScript Object Notation) est un format de données textuel, générique, dérivé de la notation des objets du langage ECMAScript. Il permet de représenter de l’information structurée.`
 	
 L'avantage de JSON par rapport à XML être d'être un peu moins verbeux et directement interprétable dans un navigateur à l'aide de JavaScript.
 
@@ -201,10 +201,12 @@ Si on écrit cette ligne dans le fichier routes :
 
 Et cette méthode dans le contrôleur :
 
+~~~ java 	
 	public static void listAlbumsInJson(){  
 			List<Album> albums = Album.findAll();  
 			renderJSON(albums);  
-	}  
+	} 
+~~~	 
 
 L'appel de l'URL http://monappli/albums.json renverra directement notre liste d'objets albums au format JSON. Difficile de faire plus simple!
 
@@ -216,13 +218,15 @@ En appelant /albums.xml , Play appellera la méthode `listAlbums` avec le param�
 
 On peut ensuite s'en servir dans le contrôleur : 
 
+~~~ java 	
 	public static void listAlbums() {  
 		List<Album> albums = Album.all().fetch();  
 		if(request.format.equals("json"))  
 		renderJSON(albums);  
 		render(albums);  
-	}  
-
+	}
+~~~ 
+	  
 Si vous tapez l'URL /albums.xml, Play cherchera un fichier de template XML nommé `listAlbums.xml` (une autre extension fonctionnerait aussi) pour effectuer le rendu.
 
 ### Recevoir un message JSON
@@ -230,12 +234,14 @@ Si vous tapez l'URL /albums.xml, Play cherchera un fichier de template XML nomm�
 Maintenant que nous savons exposer des données au format JSON à travers un service REST, voyons comment envoyer des données au serveur en utilisant le même format.
 Cette méthode du contrôleur permet de résoudre cette problématique :
 
+~~~ java 
 	public static void saveAlbumJson() {
 		Gson gson = new Gson();
 		Album album = gson.fromJson(new InputStreamReader(request.body),Album.class);
 		album.replaceDuplicateArtist();
 		album.save();
 	}
+~~~ 
 
 En récupérant l'objet `request.body`, on peut analyser le flux entrant et enregistrer un album dans la base de données.
 Attention, pour que cette méthode fonctionne, il faudra respecter la structure de la classe Album lors de l'envoie des données en JSON. 

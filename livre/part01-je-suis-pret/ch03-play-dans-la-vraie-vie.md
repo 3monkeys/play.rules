@@ -38,34 +38,41 @@ Dans le fichier application.conf, ajouter la ligne suivante pour configurer les 
 
 On déclare ensuite un contrôleur d’administration pour toutes les actions que l’on veut restreindre. On ajoute l’annotation @With à ce contrôleur pour lui dire qu’il doit s’appuyer sur le contrôleur du module Secure :
 
+~~~ java 	
 	@With(Secure.class)  
 	public class Admin extends Controller {  
 	....  
-	}  
+	}
+~~~  
 
 On ajoute ensuite un contrôle sur l'action delete en utilisant l'annotation @Check :
 
+~~~ java 
 	Check("admin")  
 	public static void delete(Long id) {  
 	...  
 	}  
+~~~ 
 
 On redefinie également la méthode check en créant une nouvelle classe dans le package contrôler, héritant de la classe Secure.Security :
 
+~~~ java 
 	static boolean check(String profile) {  
 		 if(profile.equals("admin"))  
 		   return session.get("username").equals("admin");  
 		 return false;  
-		}  
-
+		}	
+~~~ 
+  
 Ce code permet de demander au module Secure de vérifier que l’utilisateur en session est bien “admin” lorsque l’annotation @check(“admin”) est trouvée. 
 
 Dans la même classe, on redéfinie la méthode authentify. C'est sur cette méthode que le formulaire d’authentification du module Secure s'appuie pour laisser passer ou non l'utilisateur :
 
+~~~ java 
 	static boolean authentify(String username, String password) {  
-	return Play.configuration.getProperty("application.admin").equals(username)&& Play.configuration.getProperty("application.adminpwd").equals(password);  
-	}  
-
+		return Play.configuration.getProperty("application.admin").equals(username)&& Play.configuration.getProperty("application.adminpwd").equals(password);  
+	}
+~~~  
 
 Avec cette configuration, si on essaie d’entrer l’URL /admin/delete?id=11, on arrivera directement sur le formulaire d’authentification pour prouver que l’on est bien administrateur.
 Et bien sur si le mot de passe et l’utilisateur entrés ne sont pas les bons, on ne passe pas.
@@ -74,9 +81,11 @@ On aimerait maintenant pouvoir aller directement sur ce formulaire pour mettre e
 
 Il suffit d’ajouter le code suivant dans le contrôleur Admin pour exposer le formulaire de login à l’URL /admin/login :
 
+~~~ java 
 	public static void login() {  
 	  Application.list();  
 	 }
+~~~ 
 
 Toutes les méthodes que l’on définit dans ce contrôleur étant soumises à un contrôle de l’utilisateur en session, vous vous retrouverez directement sur le formulaire d’authentification.
 
@@ -107,6 +116,7 @@ Play intègre un framework de tests permettant de lancer différents types de te
 Les tests unitaires testent une partie précise du code de notre application.
 Voici un exemple de test unitaire :
 
+~~~ java 
 	public class CoreTest extends UnitTest {
 	
 		@Test
@@ -131,6 +141,7 @@ Voici un exemple de test unitaire :
 			assertTrue(albums.size()==1);
 		}
 	}
+~~~  
 
 Cette classe hérite de la classe UnitTest fournie par Play. La méthode `filterByYearTest` permet de tester la méthode `filterByYear` de la classe Album.
 
@@ -139,6 +150,7 @@ Cette classe hérite de la classe UnitTest fournie par Play. La méthode `filter
 Les tests fonctionnels permettent de tester l'application à partir de son contrôleur en se basant sur le fichier `routes` pour résoudre les URL d'appel.
 Ce test permet par exemple d'utiliser un service REST et valider la réponse obtenue : 
 
+~~~ java 
 	public class ApplicationTest extends FunctionalTest {
 	
 		@Before
@@ -167,7 +179,8 @@ Ce test permet par exemple d'utiliser un service REST et valider la réponse obt
 		//On vérifie qu'on a le bon nombre d'éléments dans le fichier XML
 		assertTrue(rootNode.getElementsByTagName("album").getLength() == 2);		
 	}
-	
+~~~ 
+
 La méthode setUp permet de charger un fichier yml contenant des données de test. Le fichier se présente comme cela :
 
 	Artist(joe) :
@@ -227,6 +240,7 @@ Plutôt pratique non?
 
 Le code suivant permet de charger un jeu de données au démarrage de l'application :
 
+~~~ java
 	@OnApplicationStart
 	public class PopulateOnStart extends Job {
 
@@ -237,6 +251,7 @@ Le code suivant permet de charger un jeu de données au démarrage de l'applicat
         	}
     	}
  	}
+~~~
 
 Pour que ça fonctionne il suffit de déposer le fichier init-data.yml dans le répertoire conf/
 
@@ -261,13 +276,15 @@ Voici un exemple de fichier yml :
 
 Dans cet exemple, on souhaite recharger les albums toutes les heures à partir de notre fichier yml :
 
+~~~ java 	
 	@Every("1h")
 	public class ReloadData extends Job {
 		public void doJob() {	
 			Fixtures.deleteAll();
 			Fixtures.load("data.yml");		
 		}
-} 
+}
+~~~ 
 
 On peut imaginer beaucoup d'applications possibles pour ce genre de traitements périodiques.
 On pourrait par exemple envoyer un résumé d'activité par mail tous les lundi à l'ensemble des utilisateurs.
