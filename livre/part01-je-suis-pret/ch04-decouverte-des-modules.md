@@ -154,7 +154,9 @@ Le moteur Lucene permet par exemple de faire des recherches :
 - basées sur la prononciation des mots (recherche phonétique)
 - ...
 
-Avec les classes fournies par Elastic Search, on peut écrire ce genre de requêtes :
+Elastic Search est basé sur une architecture REST et est capable d'indexer du contenu sous plusieurs formes, notamment à partir de flux JSON. Il offre une grande souplesse d'utilisation car il ne demande de respecter un schéma pour les données, contrairement à une base de données relationnelle. En mode production il est capable de fonctionner en multi-instances. L'index est réparti sur plusieurs noeuds, qui peuvent être répliqués pour résister aux pannes. Ce genre d'architecture est particulièrement adapté aux environnements cloud et permet de répondre à de fortes charges et de grosses volumétries sans sacrifier les performances.
+
+Avec l'API Java fournies par Elastic Search, on peut écrire ce genre de requêtes :
 
 	QueryBuilder qb = filteredQuery(
 	            termQuery("name", name), 
@@ -164,7 +166,7 @@ Avec les classes fournies par Elastic Search, on peut écrire ce genre de requê
 	            );
 	
 
-Mais il n'est pas nécessaire de maitriser l'API Elastic Search pour profiter de ce module : celui ci propose également un mode inspiré du module CRUD. En héritant de la classe `ElasticSearchController` et en utilisant l'annotation du même nom pour indiquer le type d'entité à rechercher, on peut générer tous le code et les écrans nécessaires pour la recherche de nos entités :
+Mais il n'est pas nécessaire de maitriser l'API Elastic Search pour profiter de ce module : celui ci propose également un mode inspiré du module CRUD. En héritant de la classe `ElasticSearchController` et en utilisant l'annotation du même nom pour indiquer le type d'entité à rechercher, on peut générer tous le code et les écrans nécessaires pour la création et la recherche de nos entités :
 
 	@ElasticSearchController.For(Album.class)
 	public class AlbumSearch extends ElasticSearchController {
