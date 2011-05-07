@@ -156,7 +156,7 @@ Le moteur Lucene permet par exemple de faire des recherches :
 
 Elastic Search est basé sur une architecture REST et est capable d'indexer du contenu sous plusieurs formes, notamment à partir de flux JSON. Il offre une grande souplesse d'utilisation car il ne demande de respecter un schéma pour les données, contrairement à une base de données relationnelle. En mode production il est capable de fonctionner en multi-instances. L'index est réparti sur plusieurs noeuds, qui peuvent être répliqués pour résister aux pannes. Ce genre d'architecture est particulièrement adapté aux environnements cloud et permet de répondre à de fortes charges et de grosses volumétries sans sacrifier les performances.
 
-Avec l'API Java fournies par Elastic Search, on peut écrire ce genre de requêtes :
+Avec l'API Java fournie par Elastic Search, on peut écrire ce genre de requêtes :
 
 	QueryBuilder qb = filteredQuery(
 	            termQuery("name", name), 
