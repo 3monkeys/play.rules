@@ -158,7 +158,6 @@ public class ApplicationTest extends FunctionalTest {
     @Before
     public void setUp() {
         Fixtures.deleteAll();
-        Fixtures.load("data.yml");
     }
 
     @Test
@@ -183,11 +182,13 @@ public class ApplicationTest extends FunctionalTest {
 }
 ~~~
 
+La méthode setUp permet de réinitaliser les données avant chaque méthode de test.
+
 Avec les méthodes GET et POST, on peut facilement tester le comportement de nos pages web.
 On peut également vérifier le bon fonctionnement de nos services REST : 
 
 ~~~ java
- @Test
+	@Test
     public void testJsonApi() {
         //preconditions
 		Response artists = GET("/api/artists.json");
@@ -230,17 +231,6 @@ On peut également vérifier le bon fonctionnement de nos services REST :
     }
 ~~~
 
-La méthode setUp permet de charger un fichier yml contenant des données de test. Le fichier se présente comme cela :
-
-	Artist(joe) :
-	name: joe
-
-	Album(coolAlbum) :
-	name: coolAlbum
-	artist: joe
-	releaseDate: 2010-11-12 00:00:00
-	genre: ROCK
-
 ### Tests Selenium
 	
 Ces tests permettent de simuler des clicks dans l'application à l'aide de l'outil Selenium.
@@ -270,6 +260,17 @@ Ce code permet de déclencher la création d'un album, puis de vérifier sa pré
 	assertTextPresent('metallica')
 	
 	#{/selenium}
+
+La directive `fixture delete:'all', load:'data.yml'` vide la base de données puis charge le fichier `data.yml`. Ce fichier se présente comme ceci :
+
+	Artist(joe) :
+	name: joe
+
+	Album(coolAlbum) :
+	name: coolAlbum
+	artist: joe
+	releaseDate: 2010-11-12 00:00:00
+	genre: ROCK
 	
 ### Lancer les tests
 	
