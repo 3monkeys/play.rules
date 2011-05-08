@@ -16,8 +16,6 @@ Dans ce chapitre nous allons étudier quelques fonctions avancées du framework,
 
 ### WS
 
-### XPath
-
 
 ## Identité
 

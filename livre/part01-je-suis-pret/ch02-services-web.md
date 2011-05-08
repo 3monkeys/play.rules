@@ -141,36 +141,29 @@ public static void saveXML(){
     }
     //parsing du contenu XML
     Element albumNode = document.getDocumentElement();
-    //récupération de l'artiste
-    NodeList artistNode = albumNode.getElementsByTagName("artist");
-    //il n'existe qu'un noeud "artiste" dans un album, on prend donc l'item 0
-    String artistName = artistNode.item(0).getTextContent();
-    Artist artist = new Artist(artistName);
+	//artiste
+	Node artistNode = XPath.selectNode("artist", albumNode);
+	String artistName = XPath.selectText("name",artistNode);
+	Artist artist = new Artist(artistName);
+	//get the name
+	String albumName = XPath.selectText("name", albumNode);
+	Album album = new Album(albumName);
+	//get the date
+	String date = XPath.selectText("release-date",albumNode);
+	DateFormat dateFormat = new SimpleDateFormat("yyyy");
+	try {
+		album.releaseDate = dateFormat.parse(date);
+	} catch (ParseException e) {
+		Logger.error(e.getMessage());
+	}
+	//genre
+	String genre = XPath.selectText("genre", albumNode);
+	Genre genreEnum = Genre.valueOf(genre.toString().toUpperCase());
+	album.genre = genreEnum;
 
-    //récupération du nom
-    NodeList nameNode = albumNode.getElementsByTagName("name");
-    String name = nameNode.item(0).getTextContent();
-    Album album = new Album(name);
-
-    //récupération de la date
-    NodeList dateNode = albumNode.getElementsByTagName("release-date");
-    String date = dateNode.item(0).getTextContent();
-    DateFormat dateFormat = new SimpleDateFormat("yyyy");
-    try{
-        album.releaseDate=dateFormat.parse(date);
-    }
-    catch(ParseException e){
-    }
-
-    //récupération du genre
-    NodeList genreNode = albumNode.getElementsByTagName("genre");
-    String genre= genreNode.item(0).getTextContent();
-    Genre genreEnum = Genre.valueOf(genre.toString().toUpperCase());
-    album.genre=genreEnum;
-
-    //sauvegarde en base
-    album.artist=artist;
-    album.save();
+	//sauvegarde
+	album.artist = artist;
+	album.save();
 }
 ~~~
 
