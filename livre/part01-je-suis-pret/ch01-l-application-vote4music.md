@@ -78,6 +78,7 @@ Le fichier `routes` de notre application se présente ainsi :
 	GET     /                                                       Application.index
 	POST    /album                                                  Application.save
 	GET     /albums                                                 Application.list
+	GET     /search                                                 Application.search
 	GET     /topalbums                                              Application.listByGenreAndYear
 	GET     /album/new                                              Application.form
 	GET     /album/{id}                                             Admin.form
@@ -338,7 +339,7 @@ public static void list() {
 Au dessus de notre tableau, nous définissons un champ de recherche qui permettra d'envoyer des filtres au serveur :
 
 ~~~ html
-#{form @list()}
+#{form @search()}
 <input type="text" id="filter" name="filter"/>
 <input type="submit" value="Filter" class="button" id="submitFilter">
 #{/form}
@@ -351,7 +352,7 @@ Cette solution est plus simple pour nous du point de vue du code, par rapport à
 Le contrôleur intercepte l'appel de cette manière: 
 
 ~~~ java 
-public static void list(String filter) {
+public static void search(String filter) {
     List<Album> albums = Album.findAll(filter);
     render(albums);
 }
