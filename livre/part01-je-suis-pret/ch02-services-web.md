@@ -126,7 +126,7 @@ Pour cela on ajoute la ligne suivante au fichier routes pour autoriser l'opérat
 	POST /api/album  Application.saveXml
 
 La méthode `saveXml` récupère le contenu de la requête dans la variable `request.body`.
-Elle parse ensuite le contenu pour créer un album et l'enregistrer dans la base :
+Elle parse ensuite le contenu pour créer un album et l'enregistrer dans la base. La classe play.libs.XPath facilite le parcours de documents XML :
 
 ~~~ java
 public static void saveXML(){
@@ -251,3 +251,20 @@ public static void saveAlbumJson() {
 
 En récupérant l'objet `request.body`, on peut analyser le flux entrant et enregistrer un album dans la base de données.
 Attention, pour que cette méthode fonctionne, il faudra respecter la structure de la classe Album lors de l'envoie des données en JSON. 
+
+Si on veut fournir un point d'entrée unique pour enregistrer de nouveaux albums en XML ou JSON, on peut écrire une méthode qui se chargera de rediriger vers le bon traitement selon le _content type_ demandé dans la requête HTTP.
+
+A la place de la ligne `POST /api/album  Application.saveXml` dans le fichier routes, on écrit :
+
+	POST /api/album  Application.saveByApi
+
+On ajoute ensuite cette méthode dans le contrôleur :
+
+~~~java
+public static void saveAlbumByApi() {
+	if (request.contentType.equalsIgnoreCase("application/xml"))
+		saveAlbumXml();
+	else if (request.contentType.equalsIgnoreCase("application/json"))
+		saveAlbumJson();
+    }
+~~~		

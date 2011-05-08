@@ -183,6 +183,53 @@ public class ApplicationTest extends FunctionalTest {
 }
 ~~~
 
+Avec les méthodes GET et POST, on peut facilement tester le comportement de nos pages web.
+On peut également vérifier le bon fonctionnement de nos services REST : 
+
+~~~ java
+ @Test
+    public void testJsonApi() {
+        //preconditions
+		Response artists = GET("/api/artists.json");
+        assertFalse(artists.out.toString().contains("john"));
+
+		Response albums = GET("/api/albums.json");
+        assertFalse(albums.out.toString().contains("album1"));
+
+		//insertion de données au format JSON
+		String album1 = "{ \"name\":\"album1\", \"artist\":{ \"name\":\"john\" }, \"releaseDate\":\"12 sept. 2010 00:00:00\", \"genre\":\"ROCK\" }";
+        POST("/api/album", "application/json", album1);
+
+		//vérification des données
+        artists = GET("/api/artists.json");
+        assertTrue(artists.out.toString().contains("john"));
+
+		albums = GET("/api/albums.json");
+        assertTrue(albums.out.toString().contains("album1"));
+    }
+
+	@Test
+    public void testXmlApi() {
+		//preconditions
+        Response artists = GET("/api/artists.xml");
+        assertFalse(artists.out.toString().contains("john"));
+
+		Response albums = GET("/api/albums.xml");
+        assertFalse(albums.out.toString().contains("album1"));
+
+		//insertion de données au format XML
+		String album1 = "<album><artist><name>john</name></artist><name>album1</name><release-date>2010</release-date><genre>ROCK</genre><nvVotes>0</nvVotes></album>";
+        POST("/api/album", "application/xml", album1);
+        
+		//vérification des données
+		artists = GET("/api/artists.xml");
+        assertTrue(artists.out.toString().contains("john"));
+
+		albums = GET("/api/albums.xml");
+        assertTrue(albums.out.toString().contains("album1"));
+    }
+~~~
+
 La méthode setUp permet de charger un fichier yml contenant des données de test. Le fichier se présente comme cela :
 
 	Artist(joe) :
