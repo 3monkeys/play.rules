@@ -1,4 +1,4 @@
-﻿# Services Web
+# Services Web
 
 ## REST et RESTful, qu'est ce que c'est?
 
@@ -187,6 +187,7 @@ public void setArtist(Artist artist){
 
 Notre API REST/XML nous permet donc maintenant de lire la liste des albums de note bibliothèque musicale et d'ajouter des albums.
 Vous pouvez tester l'envoi de contenu XML avec le plugin Poster de Firefox ou avec l'application [rest-client](http://code.google.com/p/rest-client/):
+
 ![Alt "rest-client"](http://farm4.static.flickr.com/3343/3281768353_7188e01648_o.png)
 
 ### Services REST/JSON
