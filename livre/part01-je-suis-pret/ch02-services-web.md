@@ -14,7 +14,7 @@ REST est en fait le modèle sur lequel le web lui même est construit : les site
 Pour la sécurité il est possible de s'appuyer sur l'authentification HTTP, ou encore sur le SSL avec HTTPS. Comme vous pouvez le voir, tout est fait pour utiliser au maximum ce que le web nous fournit depuis toujours, sans sur-couche supplémentaire.
 
 ## Play et les services REST
-`
+
 Les URL de Play étant RESTful par essence, il devient très facile de créer une petite API REST/XML conjointement à l'interface Web d'une application Play!.
 Voyons comment procéder.
 
