@@ -175,7 +175,7 @@ La méthode save() de la classe Album s'occupe alors d'enregistrer l'album en ba
 ~~~ java
 public void setArtist(Artist artist){
     List<Artist> existingArtists = Artist.find("byName", artist.name).fetch();
-    if(existingArtists.size()&gt;0){
+    if(existingArtists.size()>0){
         //Le nom d'artiste est unique
         this.artist=existingArtists.get(0);
     }
