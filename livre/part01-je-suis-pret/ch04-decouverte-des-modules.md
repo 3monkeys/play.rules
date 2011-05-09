@@ -205,12 +205,7 @@ On peut également surcharger les vues et créer de nouveaux templates en créan
 Vous pouvez voir ce module en action dans [cette vidéo](http://www.youtube.com/watch?v=pHpvNKO1mTE&feature=player_detailpage)
 
 [Home page du module Elastic Search](http://www.playframework.org/modules/elasticsearch-0.0.3/home)
-
-## jQuery datatables
-
-Nous avons utilisé le plugin datatables de jQuery dans la partie 1 de ce livre. Nous allons maintenant voir comment l'intégrer automatiquement au système de CRUD avec un module Play. 
-    
-	TODO : https://github.com/schaloner/tabula-rasa
+  
 
 ## Google APP Engine et Siena
 
@@ -220,4 +215,14 @@ A venir bientôt!
 
 ## Et plein d'autres modules!
 
-Il existe un tas d'autres modules et de nouveaux arrivent fréquemment grâce à la communauté des développeurs Play. La liste complète des modules disponibles est consultable [ici](http://www.playframework.org/modules).
+Il existe un tas d'autres modules et de nouveaux arrivent fréquemment grâce à la communauté des développeurs Play.
+
+On trouve par exemple :
+
+- [Tabula Rasa](http://www.playframework.org/modules/tabularasa-0.2/home), pour intégrer le plugin DataTables de JQuery (vu dans le chapitre 1 de cette partie) au CRUD de Play
+- [Facebook connect](http://www.playframework.org/modules/fbconnect), pour authentifier des utilisateurs à l'aide d'un compte Facebook
+- [pdf](http://www.playframework.org/modules/pdf), pour générer des documents... pdf!
+- [Akka](http://www.playframework.org/modules/akka), pour faciliter la programmation concurrente, en utilisant le modèle des acteurs
+- Et beaucoup d'autres... 
+
+La liste complète des modules disponibles est consultable [ici](http://www.playframework.org/modules).
