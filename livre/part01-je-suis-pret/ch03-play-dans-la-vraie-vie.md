@@ -1,4 +1,4 @@
-﻿# Play dans la vraie vie
+ # Play dans la vraie vie
 
 ## Authentification et sécurité
 
