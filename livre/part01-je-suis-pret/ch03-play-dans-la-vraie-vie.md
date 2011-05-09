@@ -283,6 +283,15 @@ Vous verrez apparaître cette page :
 
 A partir de cet écran, vous pouvez lancer les tests et obtenir un rapport d'erreur (si il y en a)! 
 Plutôt pratique non?
+
+N.B. : Si vous désirez connaître la couverture de tests de votre application, il existe un module Play pour ça!
+Le module [Cobertura](http://www.playframework.org/modules/cobertura) est capable de générer un rapport de couverture en analysant votre code. Quand le module est actif, il génère automatiquement ce rapport dans le répertoire `test-result` de l'application.
+
+Pour installer ce module, ajoutez cette ligne au fichier `dependencies.yml` :
+
+    require:
+        - play -> cobertura 2.1
+
 	
 ## Les jobs
 
