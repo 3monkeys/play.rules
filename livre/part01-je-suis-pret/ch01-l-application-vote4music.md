@@ -1,4 +1,4 @@
-﻿#Mise en place de l'application Vote4Music
+# Mise en place de l'application Vote4Music
 
 Dans la partie précédente nous avons vu comment générer une partie des traitements de notre application grâce au module CRUD.
 Nous allons maintenant apprendre à développer une petite application entièrement "à la main".
