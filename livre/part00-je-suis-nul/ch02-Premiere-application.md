@@ -67,6 +67,8 @@ Dans IntelliJ vous pouvez voir dans l'arborescence de votre projet que vous avez
 
 créeons un premier modèle `version` dans le répertoire `models` :
 
+~~~ java
+
 	package models;
 
 	public class Version {
@@ -79,6 +81,7 @@ créeons un premier modèle `version` dans le répertoire `models` :
 	        this.name="proto pour les copains";
 	    }
 	}
+~~~
 
 **Remarque :** vous pouvez voir qu'il n'y a pas de getter ni de setter, juste des "champs" publiques. Dans la majeure partie des cas vous n'en n'avez pas besoin, alors à quoi bon ? Sachez cependant que Play! va les générer lui même à la compilation (vous ne verrez rien dans le code). Au besoin vous pouvez les écrire vous même si nécessaire.
 
@@ -87,6 +90,8 @@ créeons un premier modèle `version` dans le répertoire `models` :
 Cette fois-ci nous allons modifier le contrôleur `Application` dans le répertoire `controllers` :
 
 *Si vous n'avez touché à rien vous devez avoir le code suivant :*
+
+~~~ java
 
 	package controllers;
 	import play.*;
@@ -100,9 +105,11 @@ Cette fois-ci nous allons modifier le contrôleur `Application` dans le réperto
 	        render();
 	    }
 	}
+~~~
 
 *Modifions la méthode `index()` :*
 
+~~~ java
 	public class Application extends Controller {
 
 	    public static void index() {
@@ -112,6 +119,7 @@ Cette fois-ci nous allons modifier le contrôleur `Application` dans le réperto
 	        render(version);
 	    }
 	}
+~~~
 
 ####Allons modifier la vue Application
 
