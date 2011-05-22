@@ -347,6 +347,8 @@ Nous verrons comment :
 - créer de nouveaux modèles et des relations entre eux (nous aborderons donc quelques notions de JPA)
 - aller plus loin dans la personnalisation de nos écrans CRUD
 
+c'est dans le chapitre suivant : [ch04-Premiere-application-CRUD-part2](ch04-Premiere-application-CRUD-part2.md).
+
 Vous n'avez pas encore le statut "demi-dieu" de la programmation Web en java *(1)*, mais je sens déjà quelque chose frétiller en vous :) Non ? Vous avouerez que pour le moment c'est assez facile et sans effort et pourtant ça a déjà de la gueule. J'espère que cela vous donne envie de continuer.
 
 - - -
