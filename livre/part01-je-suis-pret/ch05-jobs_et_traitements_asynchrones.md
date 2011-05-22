@@ -67,6 +67,10 @@ Pour résoudre cette problématique, on peut utiliser des traitements asynchrone
 
 Ce procédé crée un mode de communication bidirectionnel entre le navigateur et le serveur. Dès que le serveur aura fini son action, il notifiera le navigateur sans que celui-ci soit obligé de garder une connexion HTTP ouverte pendant toute la durée du traitement. Le serveur est alors capable de pousser une information au client dès qu'il en a besoin ("push" de données).
 
+Un autre cas d'usage habituel pour les communications client-serveur bilatérales et asynchrones est l'implémentation d'applications de 'chat' : lorsqu'on envoie un message à un correspondant, on ne sait pas à quel moment on va recevoir une réponse. Il faut donc que le serveur soit capable de pousser un nouveau message vers notre client à n'importe quel moment. 
+
+Voyons comment implémenter un exemple très simple de communication asynchrone avec cette API :
+
 ### Déclaration de la WebSocket dans le navigateur
 
 On crée une nouvelle page dans le dossier app/views. On l'appelle par exemple firstWebSocket.html.
