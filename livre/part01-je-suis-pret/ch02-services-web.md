@@ -270,3 +270,7 @@ public static void saveAlbumByApi() {
 		saveAlbumJson();
     }
 ~~~		
+
+## Appeler un service externe avec Play.libs.WS
+
+	TODO A venir
