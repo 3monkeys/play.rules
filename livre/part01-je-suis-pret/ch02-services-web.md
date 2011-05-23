@@ -273,4 +273,23 @@ public static void saveAlbumByApi() {
 
 ## Appeler un service externe avec Play.libs.WS
 
-	TODO A venir
+Play inclue également une libraire pour écrire des clients de services REST. Pour appeler un service externe, on peut écrire :
+
+~~~java
+import play.libs.WS;
+//...
+HttpResponse response = WS.url("http://api.twitter.com/1/statuses/user_timeline/loic_d.json").get();
+~~~
+
+On peut ensuite récupérer le résultat comme ceci : 
+
+~~~java
+JsonElement json = response.getJson();
+~~~	
+
+Cette librairie est aussi compatible avec les services renvoyant du XML ou du texte brut :
+
+~~~java
+String content = response.getString();
+Document xml= response.getXml();
+~~~
