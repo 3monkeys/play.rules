@@ -220,7 +220,7 @@ Il existe un tas d'autres modules et de nouveaux arrivent fréquemment grâce à
 On trouve par exemple :
 
 - [Tabula Rasa](http://www.playframework.org/modules/tabularasa-0.2/home), pour intégrer le plugin DataTables de JQuery (vu dans le chapitre 1 de cette partie) au CRUD de Play
-- [Facebook connect](http://www.playframework.org/modules/fbconnect), pour authentifier des utilisateurs à l'aide d'un compte Facebook
+- [OAuth](http://www.playframework.org/modules/oauth), pour authentifier des utilisateurs auprès de fournisseurs d’identité OAuth, comme Twitter ou Google
 - [pdf](http://www.playframework.org/modules/pdf), pour générer des documents... pdf!
 - [Akka](http://www.playframework.org/modules/akka), pour faciliter la programmation concurrente, en utilisant le modèle des acteurs
 - Et beaucoup d'autres... 
