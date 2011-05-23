@@ -206,19 +206,14 @@ Vous pouvez voir ce module en action dans [cette vidéo](http://www.youtube.com/
 
 [Home page du module Elastic Search](http://www.playframework.org/modules/elasticsearch-0.0.3/home)
   
-
-## Google APP Engine et Siena
-
-A venir bientôt!
-
-	TODO : http://viralpatel.net/blogs/2011/01/first-play-framework-gae-siena-application-tutorial-example.html
-
 ## Et plein d'autres modules!
 
 Il existe un tas d'autres modules et de nouveaux arrivent fréquemment grâce à la communauté des développeurs Play.
 
 On trouve par exemple :
 
+- [GAE](http://www.playframework.org/modules/gae), pour déployer son application sur Google APP Engine, le cloud de Google
+- [Siena](http://www.playframework.org/modules/siena), pour utiliser l'API de persistance Siena, compatible avec des bases de données relationnelles classiques ou avec BigTable (la base de données NoSQL de Google APP Engine) et Amazon SimpleDB.
 - [Tabula Rasa](http://www.playframework.org/modules/tabularasa-0.2/home), pour intégrer le plugin DataTables de JQuery (vu dans le chapitre 1 de cette partie) au CRUD de Play
 - [OAuth](http://www.playframework.org/modules/oauth), pour authentifier des utilisateurs auprès de fournisseurs d’identité OAuth, comme Twitter ou Google
 - [pdf](http://www.playframework.org/modules/pdf), pour générer des documents... pdf!
