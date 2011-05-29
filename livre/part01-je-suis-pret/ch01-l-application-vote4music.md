@@ -271,7 +271,7 @@ La méthode replaceDuplicateArtist de la classe Album permet d'éviter les doubl
 
 ~~~ java 
 public void replaceDuplicateArtist() {
-    Artist existingArtist = Artist.findByName(artist.name);
+    Artist existingArtist = Artist.find("byName", name).first();
     if (existingArtist!=null) {
         artist = existingArtist;
     }
@@ -280,7 +280,24 @@ public void replaceDuplicateArtist() {
 
 A la fin de l'action `save`, on retourne à la liste d'albums pour voir apparaître le nouvel élément enregistré. 
 
-N.B. : Vous vous demandez peut être comment les transactions en base de données sont gérées dans cet exemple. La méthode 'save' est bien transactionnelle. En fait dès qu'il a besoin d'accéder à la base de données, Play ouvre une transaction en début de requête HTTP, qui sera terminée en fin de requête. Si quelque chose se passe mal durant cet intervalle de temps, un rollback sera effectué.
+Vous vous demandez peut être comment les transactions en base de données sont gérées dans cet exemple. La méthode 'save' est bien transactionnelle. En fait dès qu'il a besoin d'accéder à la base de données, Play ouvre une transaction en début de requête HTTP, qui sera terminée en fin de requête. Si quelque chose se passe mal durant cet intervalle de temps, un rollback sera effectué.
+
+Autre point important, on a utilisé la syntaxe `byName` pour écrire notre requête. Cette syntaxe supporte également des cas plus avancés. 
+On peut utiliser les mots clés suivants pour générer des requêtes :
+
+- LessThan (inférieur)
+- LessThanEquals (inférieur ou égal)
+- GreaterThan (supérieur)
+- GreaterThanEquals (supérieur ou égal)
+- Like (*)
+- NotEqual (différent)
+- Between (compris entre 2 valeurs)
+- IsNotNull (non null)
+- IsNull (null)
+
+Les mots clés peuvent être liés avec des "And". On peut par exemple écrire `Album.find("byNameAndGenre", name, genre)` ou  `Album.find("byNameLikeAndGenreIsNotNull", name, genre)`.
+
+*Il existe différents types de 'like' selon la sensibilité qu'on veut donner à la casse. Le mot clé `Like` va chercher des mots clés en minuscule dans la base, `Ilike` est complètement insensible à la casse, alors que `Elike` et équivalent au `like` SQL n'effectue aucune conversion.
 
 ## Lister et rechercher des albums
 
