@@ -295,7 +295,12 @@ On peut utiliser les mots clés suivants pour générer des requêtes :
 - IsNotNull (non null)
 - IsNull (null)
 
-Les mots clés peuvent être liés avec des "And". On peut par exemple écrire `Album.find("byNameAndGenre", name, genre)` ou  `Album.find("byNameLikeAndGenreIsNotNull", name, genre)`.
+Les mots clés peuvent être liés avec des "And". On peut par exemple écrire `Album.find("byNameAndGenre", name, genre)` ou  `Album.find("byNameLikeAndGenreIsNotNull", name, genre)`. 
+La méthode `find` prend un nombre indéfini de paramètres (grâce à la syntaxe `...`) : 
+
+~~~ java 
+JPAQuery find(String query, Object... params);
+~~~
 
 *Il existe différents types de 'like' selon la sensibilité qu'on veut donner à la casse. Le mot clé `Like` va chercher des mots clés en minuscule dans la base, `Ilike` est complètement insensible à la casse, alors que `Elike` et équivalent au `like` SQL n'effectue aucune conversion.
 
@@ -389,24 +394,12 @@ La classe Album définit la méthode de recherche avec un filtre sur le nom :
 public static List<Album> findAll(String filter) {
     String likeFilter = "%" + filter + "%";
     //limit to 100 results
-    List<Album> albums = find("select a from Album a where a.name like ?", likeFilter).fetch(100);
+    List<Album> albums = find("byNameLike", likeFilter).fetch(100);
     return sortByPopularity(albums);
 }
 ~~~ 	
 
-Selon nos besoins, on peut bien sûr enrichir les filtres et les requêtes pour obtenir des résultats plus précis.
-La méthode `find` prend un nombre indéfini de paramètres (grâce à la syntaxe `...`) :
-
-~~~ java 
-JPAQuery find(String query, Object... params);
-~~~ 
-
-On pourrait par exemple écrire :
-
-~~~ java 
-List<Album> albums = find("select a from Album a where a.name like ? or a.artist.name like ?", nameFilter, artistFilter).fetch(100);
-~~~ 
-
+Selon nos besoins, on peut bien sûr enrichir les filtres et les requêtes pour obtenir des résultats plus précis. 
 
 Nous verrons la définition de la méthode `sortByPopularity` dans la suite du chapitre.
 
