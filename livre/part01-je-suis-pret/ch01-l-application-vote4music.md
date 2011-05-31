@@ -395,13 +395,11 @@ public static List<Album> findAll(String filter) {
     String likeFilter = "%" + filter + "%";
     //limit to 100 results
     List<Album> albums = find("byNameLike", likeFilter).fetch(100);
-    return sortByPopularity(albums);
+    return albums;
 }
 ~~~ 	
 
 Selon nos besoins, on peut bien sûr enrichir les filtres et les requêtes pour obtenir des résultats plus précis. 
-
-Nous verrons la définition de la méthode `sortByPopularity` dans la suite du chapitre.
 
 ## Le top 10
 
@@ -420,29 +418,19 @@ Les paramètres _genre_ et _year_ sont obligatoires. Cela veut dire que si on ap
  
 La classe Album définie les méthodes nécessaires à cette recherche :
 
- public static List<Album> findByGenreAndYear(String genre, String year) {
-        
 ~~~ java 
-List<Album> albums;
+public static List<Album> findByGenreAndYear(String genre, String year) {
+    List<Album> albums;
     Genre genreEnum = Genre.valueOf(genre.toString().toUpperCase());
-    albums = Album.find("byGenre", genreEnum).fetch(10);
-    //LabmdaJ example
+    //tri par popularité
+    albums = find("genre is ? order by nbVotes desc", genreEnum).fetch(100);
+    //exemple lambdaj
     albums = filterByYear(albums, year);
-    return sortByPopularity(albums);
+    return albums;
 }
 ~~~ 
 
-La librairie lambdaj nous aide à filtrer l'ensemble des albums récupérés pour une année donnée. Grâce à elle, nous pouvons écrire nos filtres comme dans un langage fonctionnel, en évitant de créer des boucles pour parcourir la collection d'albums dans le but de la trier. Dans cet exemple, on utilise les fonctions `sort` et `select` :
-
-~~~ java 
-private static List<Album> sortByPopularity(List<Album> albums) {
-    List sortedAlbums = sort(albums, on(Album.class).nbVotes);
-    //tri descendant
-    Collections.reverse(sortedAlbums);
-    return sortedAlbums;
-}
-~~~ 
-
+La librairie lambdaj nous aide à filtrer l'ensemble des albums récupérés pour une année donnée. Grâce à elle, nous pouvons écrire nos filtres comme dans un langage fonctionnel, en évitant de créer des boucles pour parcourir la collection d'albums dans le but de la trier. Dans cet exemple, on utilise la fonction `select` :
 
 ~~~ java 
 public static List<Album> filterByYear(List<Album> albums, String year) {
@@ -451,7 +439,7 @@ public static List<Album> filterByYear(List<Album> albums, String year) {
 ~~~ 
 
 	
-N.B. : On aurait pu se passer de cette librarie, appliquer les filtres et effectuer les tris à l'aide d'une requête en base de données. Mais cet exemple nous permet de voir comment intégrer d'autres librairies à notre application Play, tout en obtenant un code intéressant du point de vue de la syntaxe.
+N.B. : On aurait pu se passer de cette librarie, appliquer les filtres à l'aide d'une requête en base de données. Mais cet exemple nous permet de voir comment intégrer d'autres librairies à notre application Play, tout en obtenant un code intéressant du point de vue de la syntaxe.
 	
 Pour que Play puisse bénéficier de lambdaj, on ajoute cette ligne à la section `require` du fichier dependencies.yml :
    
