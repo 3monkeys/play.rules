@@ -118,52 +118,6 @@ Pour le top 10, vous pouvez choisir un style de musique. Pour cela, le template 
 
 N.B. : Le lange d'expression utilisé dans les templates est [Groovy](http://groovy.codehaus.org/). C'est un langage à typage dynamique très proche de Java, qui nous permet de manipuler facilement les objets renvoyés par le contrôleur.
 
-On peut également choisir l'année durant laquelle sont sortis les albums :
-
-~~~ html
-#{list controllers.Application.getYearsToDisplay(), as:'year'}
-<option  value="${year}">${year}</option>
-#{/list}
-~~~
-
-Pour proposer les dates disponibles depuis le contrôleur, on calcule un intervalle de dates allant de l'album le plus récent à l'album le plus ancien.
-Si la base est vide on donne des valeurs par défaut :	
-
-~~~ java 
-public static List<String> getYearsToDisplay() {
-    List<String> years = new ArrayList<String>();
-    for (int i = Album.getFirstAlbumYear(); i <= Album.getLastAlbumYear(); i++) {
-        years.add(String.valueOf(i));
-    }
-    Collections.reverse(years);
-    return years;
-}
-~~~
-
-La classe Album implémente les méthodes getFirstAlbumYear et getLastAlbumYear, qui récupèrent ces valeurs dans la base de données :
-
-~~~ java 
-private static SimpleDateFormat formatYear = new SimpleDateFormat("yyyy");
-
-public static int getFirstAlbumYear() {
-    Date result = (Date) em().createQuery("select min(a.releaseDate) from Album a").getSingleResult();
-    if (result != null)
-        return Integer.parseInt(formatYear.format(result));
-    //if no album is registered return 1990
-    return 1990;
-}
-
-public static int getLastAlbumYear() {
-    Date result = (Date) em().createQuery("select max(a.releaseDate) from Album a").getSingleResult();
-    if (result != null)
-        return Integer.parseInt(formatYear.format(result));
-    //if no album is registered return current year
-    return Integer.parseInt(formatYear.format(new Date()));
-}
-~~~
-    
-La méthode `em()` de classe `Model` de Play permet d'accéder à l'entity manager de JPA (Java Persistence API). Ceci peut être utile dans certains cas, notamment lorsque l'on veut ramener autre chose que des objets du modèle (ici une date).
-
 ## Le formulaire d'ajout
 
 On utilise le verbe HTTP GET pour obtenir le formulaire :
@@ -278,6 +232,8 @@ public void replaceDuplicateArtist() {
 }
 ~~~	
 
+On accède à la base de données en utilisant les méthodes statiques fournies par la classe `Model`. La méthode `find` permet de passer des requêtes pour obtenir des entités enregistrées précédemment.
+
 A la fin de l'action `save`, on retourne à la liste d'albums pour voir apparaître le nouvel élément enregistré. 
 
 Vous vous demandez peut être comment les transactions en base de données sont gérées dans cet exemple. La méthode 'save' est bien transactionnelle. En fait dès qu'il a besoin d'accéder à la base de données, Play ouvre une transaction en début de requête HTTP, qui sera terminée en fin de requête. Si quelque chose se passe mal durant cet intervalle de temps, un rollback sera effectué.
@@ -295,7 +251,7 @@ On peut utiliser les mots clés suivants pour générer des requêtes :
 - IsNotNull (non null)
 - IsNull (null)
 
-Les mots clés peuvent être liés avec des "And". On peut par exemple écrire `Album.find("byNameAndGenre", name, genre)` ou  `Album.find("byNameLikeAndGenreIsNotNull", name, genre)`. 
+Les mots clés peuvent être liés avec des "And". On peut par exemple écrire `find("byNameAndGenre", name, genre)` ou  `find("byNameLikeAndGenreIsNotNull", name, genre)`. 
 La méthode `find` prend un nombre indéfini de paramètres (grâce à la syntaxe `...`) : 
 
 ~~~ java 
@@ -403,7 +359,30 @@ Selon nos besoins, on peut bien sûr enrichir les filtres et les requêtes pour 
 
 ## Le top 10
 
-Cette fonction de l'application permet d'afficher les 10 albums ayant reçu le plus de votes, pour une année et un genre donnés :
+Cette fonction de l'application permet d'afficher les 10 albums ayant reçu le plus de votes, pour une année et un genre donnés.
+
+Sur la page d'accueil, on ajoute la possibilité de choisir le genre et l'année durant laquelle sont sortis les albums :
+
+~~~ html
+#{form @listByGenreAndYear()}
+<label for="year">Release Year</label>
+<select id="year" name="year">
+    #{list controllers.Application.getYearsToDisplay(), as:'year'}
+    <option  value="${year}">${year}</option>
+    #{/list}
+</select>
+<br/>
+<label for="genre">Genre:</label>
+<select id ="genre" name="genre">
+    #{list models.Genre.values(), as:'genre'}
+    <option  value="${genre}">${genre.toString().toLowerCase()}</option>
+    #{/list}
+</select>
+<input type="submit" class="button" value="View"/>
+#{/form}
+~~~
+
+On rend cette fonctionnalité accessible depuis le contrôleur :
 
 ~~~ java 
 public static void listByGenreAndYear(String genre, String year) {
@@ -414,8 +393,9 @@ public static void listByGenreAndYear(String genre, String year) {
 }
 ~~~ 
 
-Les paramètres _genre_ et _year_ sont obligatoires. Cela veut dire que si on appelle ce contrôleur dans ces paramètres, il renverra une erreur 404 (not found).
- 
+Les paramètres `genre` et `year` sont obligatoires. Cela veut dire que si on appelle ce contrôleur dans ces paramètres, il renverra une erreur 404 (not found).
+
+
 La classe Album définie les méthodes nécessaires à cette recherche :
 
 ~~~ java 
@@ -423,12 +403,52 @@ public static List<Album> findByGenreAndYear(String genre, String year) {
     List<Album> albums;
     Genre genreEnum = Genre.valueOf(genre.toString().toUpperCase());
     //tri par popularité
-    albums = find("genre is ? order by nbVotes desc", genreEnum).fetch(100);
+    albums = find("genre = ? order by nbVotes desc", genreEnum).fetch(100);
     //exemple lambdaj
     albums = filterByYear(albums, year);
     return albums;
 }
 ~~~ 
+
+La syntaxe de notre requête est un peu différente de celle que l'on a utilisé dans les exemples précédents. La méthode `find` est capable de traiter différents types de syntaxe. Ici on utilise la syntaxe standard JPQL (JPA Query Language), plus adaptée pour faire des requêtes avancées.
+
+Pour proposer les dates disponibles depuis le contrôleur, on calcule un intervalle de dates allant de l'album le plus récent à l'album le plus ancien.
+Si la base est vide on donne des valeurs par défaut :	
+
+~~~ java 
+public static List<String> getYearsToDisplay() {
+    List<String> years = new ArrayList<String>();
+    for (int i = Album.getFirstAlbumYear(); i <= Album.getLastAlbumYear(); i++) {
+        years.add(String.valueOf(i));
+    }
+    Collections.reverse(years);
+    return years;
+}
+~~~
+
+La classe Album implémente les méthodes getFirstAlbumYear et getLastAlbumYear, qui récupèrent ces valeurs dans la base de données :
+
+~~~ java 
+private static SimpleDateFormat formatYear = new SimpleDateFormat("yyyy");
+
+public static int getFirstAlbumYear() {
+    Date result = (Date) em().createQuery("select min(a.releaseDate) from Album a").getSingleResult();
+    if (result != null)
+        return Integer.parseInt(formatYear.format(result));
+    //if no album is registered return 1990
+    return 1990;
+}
+
+public static int getLastAlbumYear() {
+    Date result = (Date) em().createQuery("select max(a.releaseDate) from Album a").getSingleResult();
+    if (result != null)
+        return Integer.parseInt(formatYear.format(result));
+    //if no album is registered return current year
+    return Integer.parseInt(formatYear.format(new Date()));
+}
+~~~
+    
+La méthode `em()` de classe `Model` de Play permet d'accéder à l'entity manager de JPA (Java Persistence API). Ceci peut être utile dans certains cas, notamment lorsque l'on veut ramener autre chose que des objets du modèle (ici une date).
 
 La librairie lambdaj nous aide à filtrer l'ensemble des albums récupérés pour une année donnée. Grâce à elle, nous pouvons écrire nos filtres comme dans un langage fonctionnel, en évitant de créer des boucles pour parcourir la collection d'albums dans le but de la trier. Dans cet exemple, on utilise la fonction `select` :
 
@@ -454,12 +474,11 @@ Cette méthode du contrôleur permet d'enregistrer un vote pour un album :
 
 ~~~ java 
 public static void vote(String id) {
-    Album album = Album.findById(Long.parseLong(id));
+    Album album = findById(Long.parseLong(id));
     album.vote();
     renderText(album.nbVotes);
 }
 ~~~ 
-
 
 Si vous avez une bonne mémoire, vous vous souvenez qu'on avait ajouté une route "catch all" à notre ficher de configuration `routes` :
 
