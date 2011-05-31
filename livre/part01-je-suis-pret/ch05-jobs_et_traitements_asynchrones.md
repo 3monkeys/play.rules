@@ -146,7 +146,7 @@ public class AsyncController extends WebSocketController {
 
 On met à jour les routes pour spécifier l'utilisation du protocole `WS` (WebSocket) au lieu de `HTTP` : 
 
-	WS      /asyncTest                                              AsyncController.testWebSocket
+	WS      /asyncTest                                              AsyncController.asyncMessage
 	
 
 ### Push de données depuis le serveur
