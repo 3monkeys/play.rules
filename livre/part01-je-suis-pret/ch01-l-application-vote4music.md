@@ -439,7 +439,7 @@ public static List<Album> filterByYear(List<Album> albums, String year) {
 ~~~ 
 
 	
-N.B. : On aurait pu se passer de cette librarie, appliquer les filtres à l'aide d'une requête en base de données. Mais cet exemple nous permet de voir comment intégrer d'autres librairies à notre application Play, tout en obtenant un code intéressant du point de vue de la syntaxe.
+N.B. : On aurait pu se passer de cette libraire, appliquer les filtres à l'aide d'une requête en base de données. Mais cet exemple nous permet de voir comment intégrer d'autres librairies à notre application Play, tout en obtenant un code intéressant du point de vue de la syntaxe.
 	
 Pour que Play puisse bénéficier de lambdaj, on ajoute cette ligne à la section `require` du fichier dependencies.yml :
    
