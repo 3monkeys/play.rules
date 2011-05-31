@@ -26,7 +26,7 @@ Vous devez avoir installé Java sur votre joujou préféré.
 
 ###Installation
 
-- Télécharger Play Framework : [http://http://www.playframework.org/download](http://http://www.playframework.org/download)
+- Télécharger Play Framework : [http://www.playframework.org/download](http://www.playframework.org/download)
 - dézipper quelque part
 - ajouter à votre path : c'est mieux
 
