@@ -154,7 +154,7 @@ Et vous pourrez récupérer les objets à partir de leur nom dans le template. E
 
 ### 4. JPA sous steroids
 
-Il est incroyablement facile d'utiliser l'API de mapping objet/relationnel JPA avec Play. Rien à configurer, Play synchronisera la base (également configurée et démarrée automatiquement en mode développement) avec vos objets.
+Il est vraiment facile d'utiliser l'API de mapping objet/relationnel JPA avec Play. Rien à configurer, Play synchronisera la base (également configurée et démarrée automatiquement en mode développement) avec vos objets.
 
 En plus, si vous utilisez la classe Model de Play, le code sera encore simplifié :
 
