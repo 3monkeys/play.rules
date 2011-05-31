@@ -120,7 +120,7 @@ N.B. : Le lange d'expression utilisé dans les templates est [Groovy](http://gro
 
 ## Le formulaire d'ajout
 
-On utilise le verbe HTTP GET pour obtenir le formulaire :
+Dans le contrôleur, on crée une méthode pour obtenir le formulaire :
 
 ~~~ java 
 public static void form() {
@@ -128,7 +128,9 @@ public static void form() {
 }
 ~~~
 
- On utilise ensuite POST pour envoyer les données au contrôleur (voir le fichier de routes plus haut) Voici le code du formulaire :
+En se référant aux routes, on voit que cette méthode est invoquée lorsque l'on utilise le verbe HTTP GET. C'est la méthode utilisée par le navigateur lorsque l'on tape une URL ou lorsque l'on clique sur un lien.
+
+On utilise ensuite POST pour envoyer les données au contrôleur (voir le fichier de routes plus haut) Voici le code du formulaire :
 
 ~~~ html 
 	
