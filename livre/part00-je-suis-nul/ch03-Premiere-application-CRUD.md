@@ -50,7 +50,7 @@ Donc pour activer le module CRUD :
 
 **Avant de continuer, arrêtez votre application :**
 
-En ligne de commande, taper : play dependencies
+En ligne de commande, taper : `play dependencies`
 
 Cette commande permet d'installer les modules et/ou bibliothèques externes déclarés dans le fichier dependencies.yml.
 Donc si tout se passe bien vous devriez voir un message indiquant que le module CRUD a été installé.
