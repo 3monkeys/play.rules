@@ -1,4 +1,6 @@
 pecheur = Pêcheur
+Pecheur = Pêcheur
 prise = Prise
 poisson = Poisson
 competition = Compétition
+Competition = Compétition
