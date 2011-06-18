@@ -53,7 +53,7 @@ Vous devez avoir installé Java sur votre joujou préféré.
 		~ |  __/|_|\____|\__ (_)
 		~ |_|            |__/   
 		~
-		~ play! 1.1.1, http://www.playframework.org
+		~ play! 1.2.1, http://www.playframework.org
 		~
 		~ Usage: play cmd [app_path] [--options]
 		~ 
@@ -143,7 +143,7 @@ si tout va bien, ceci devrait s'afficher :
 		~ |  __/|_|\____|\__ (_)
 		~ |_|            |__/   
 		~
-		~ play! 1.1.1, http://www.playframework.org
+		~ play! 1.2.1, http://www.playframework.org
 		~
 		~ The new application will be created in /Users/k33g_org/Dropbox/play_projects/azerguespeche
 		~ What is the application name? [azerguespeche] 
@@ -164,7 +164,7 @@ si tout va bien, ceci devrait s'afficher :
 		~ |  __/|_|\____|\__ (_)
 		~ |_|            |__/   
 		~
-		~ play! 1.1.1, http://www.playframework.org
+		~ play! 1.2.1, http://www.playframework.org
 		~
 		~ Ctrl+C to stop
 		~ 
@@ -197,7 +197,7 @@ Voyons donc comment faire pour transformer notre squelette d'application en proj
 		~ |  __/|_|\____|\__ (_)
 		~ |_|            |__/   
 		~
-		~ play! 1.1.1, http://www.playframework.org
+		~ play! 1.2.1, http://www.playframework.org
 		~
 		~ OK, the application is ready for Intellij Idea
 		~ Use File/New Module/Import Existing module
