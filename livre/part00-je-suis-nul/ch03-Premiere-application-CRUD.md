@@ -34,28 +34,25 @@ Et tout ceci facilement et rapidement
 
 Donc pour activer le module CRUD :
 
-* aller dans `/azerguespeche/conf/dependencies.conf`
-* ajouter ceci sur une nouvelle ligne à la suite de `- play` :
+* aller dans `/azerguespeche/conf/application.conf`
+* ajouter ceci :
 
-        - play -> crud
+        # Import CRUD module
+        module.crud=${play.path}/modules/crud
 
 * aller dans le fichier routes `/azerguespeche/conf/routes`
-        
-* Ajouter ceci : juste après `GET /   Application.index`
+* ajouter ceci :
 
         # Import CRUD routes
         * /admin module:crud
 
+* Et ceci : juste après `GET /   Application.index`
+
+        GET /admin  module:crud`
+
 *Note : on vient d'expliquer à Play! que l'on utilise le module CRUD lorsque l'on utilise l'url [http://localhost:9000/admin/](http://localhost:9000/admin/)*
 
-**Avant de continuer, arrêtez votre application :**
-
-En ligne de commande, taper : `play dependencies`
-
-Cette commande permet d'installer les modules et/ou bibliothèques externes déclarés dans le fichier dependencies.yml.
-Donc si tout se passe bien vous devriez voir un message indiquant que le module CRUD a été installé.
-
-**A présent, vous pouvez relancer votre application :**
+**Avant de continuer, arrêtez puis relancez votre application :**
 
 donc avec la commande : `play run azerguespeche` en mode console.
 
