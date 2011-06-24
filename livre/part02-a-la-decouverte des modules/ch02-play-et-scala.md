@@ -189,9 +189,7 @@ Pour cela, on crée un fichier `layout.scala.html` :
 <div id="content">
     @content
 </div>
- 
-<hr>
- 
+  
 <div id="footer">© Mon super site</div>
 ~~~ 
 
