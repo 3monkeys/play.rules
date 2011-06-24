@@ -369,6 +369,24 @@ Le template `login.scala.html` est un formulaire très simple qui transmet le lo
 
 N.B : le scope `flash` est utilisé lorsque l'on veut récupérer une information dans la requête suivant le traitement. On s'en sert ici pour afficher le message d'erreur si les identifiants saisis sont invalides.
 
+Enfin, on peut écrire le contrôleur `Admin` qui contiendra les méthodes pour lesquelles le rôle d'administrateur est nécessaire :
+
+~~~ java
+object Admin extends Controller with AdminOnly {
+
+  import views.Application._
+
+  def delete(id: Option[Long]) = {
+    id.map(id => Album.delete("id={c}").onParams(id).executeUpdate())
+    Action(Application.list)
+  }
+
+  ...
+}
+~~~
+
+Grâce au mot clé `with` ce contrôleur hérite des comportements définis dans nos traits.
+
 ## Les tests
 
 Le framework de test de Play-Scala est un bon d'exemple des avantages de ce langage. La syntaxe offerte par Scala donne des tests vraiment expressifs et simples à lire :
