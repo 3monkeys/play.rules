@@ -140,6 +140,7 @@ Play-Scala propose un moteur de template full Scala. Ce moteur permet d'écrire 
 </ul>
 ~~~
 
+Ce template prend en paramètre une liste de messages.
 La méthode map permet ici de parcourir la liste des éléments.
 
 Pour effectuer le rendu d'un template, on appele une méthode qui porte le même nom que le le fichier HTML contenant ce template :
@@ -150,9 +151,63 @@ def index = html.index(messages)
 
 Ces méthodes sont générées automatiquement par le compilateur.
 
-	//TODO héritages de templates
+### Tags et layouts
 
-### Quelques exemples concrets
+Comme dans tout moteur de template qui se respecte, il est possible de créer des tags réutilisables pour factoriser du code.
+
+Par exemple, pour définir un tag qui affiche les informations concernant une personne, on crée un fichier persons.scala.html:
+
+~~~ html
+@(person:Person)
+
+<span>Name: </span> <span>@person.name</span> 
+<span>Address: </span> <span>@person.address</span>
+<span>Phone Number: </span> <span>@person.phoneNumber</span>
+~~~
+
+On peut ensuite appeler ce tag depuis une autre page :
+
+~~~ html
+...
+@persons(person=p)
+...
+~~~ 
+
+On utilise également ce procédé pour créer des layouts.
+
+Pour cela, on crée un fichier `layout.scala.html` :
+
+~~~ html
+@(title:String)(content: => Html)
+ 
+<h1>@title</h1>
+ 
+<div id="menu">
+
+</div>
+ 
+<div id="content">
+    @content
+</div>
+ 
+<hr>
+ 
+<div id="footer">© Mon super site</div>
+~~~ 
+
+Pour créer une nouvelle page qui utilise ce layout, on procède comme ceci :
+
+~~~ html
+@main(title = "maPage") {
+    
+ <p>Mon contenu</p>
+    
+}
+~~~ 
+
+Le titre sera remplacé par "ma page" et le contenu prendra place dans la balise `content`.
+
+### Un exemple concret
 
 Pour mettre à jour un album, on récupére l'album et l'artiste depuis la base de données puis on les transmet au template approprié :
 
@@ -209,9 +264,7 @@ Pour parcourir une liste de résultats, par exemple un objet de type List[Album,
 ~~~
 
 Le template définie un paramètre `entries` qui correspond à la liste des tuples d'albums et d'artistes renvoyée par `Album.findAll`.
-A l'interieur d'un tuple, on accède à un album avec l'expression `entry._1` et à un artiste avec `entry._2`.
-
-	//TODO les tags
+A l'interieur d'un tuple, on accède à un album avec l'expression `entry._1` et à un artiste avec `entry._2`.	
 
 ## Authentification à l'aide des traits
 
