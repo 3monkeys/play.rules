@@ -266,7 +266,12 @@ A l'interieur d'un tuple, on accède à un album avec l'expression `entry._1` et
 
 ## Authentification à l'aide des traits
 
-    // TODO
+Les traits sont une une variante plus puissante des interfaces Java. Nous allons voir comment les utiliser pour écrire un mécanisme d'authentification simple. L'équivalent du module secure que nous avons utilisé dans la version Java.
+
+Les traits Scala permettent d'implémenter facilement le principe du design pattern "décorateur".
+
+    //TODO
+
 
 ## Les tests
 
