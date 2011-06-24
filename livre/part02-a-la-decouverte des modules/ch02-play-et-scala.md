@@ -95,7 +95,7 @@ Album.update()
 
 ### Requêtes plus complexes
 
-On a souvent besoin de rammener plus d'un type d'objet à la fois. Cette méthode permet de récupérer tous les albums et les artistes dans la base de données :
+On a souvent besoin de ramener plus d'un type d'objet à la fois. Cette méthode permet de récupérer tous les albums et les artistes dans la base de données :
 
 ~~~ java
 def findAll:List[(Album,Artist)] =
@@ -137,7 +137,7 @@ def delete(id: Option[Long]) = {
     Action(Application.list)
   }
 
-Option est un type Scala qui permet d'éviter les erreurs liées aux pointeurs nulls (NullPointerException). Quand on récupere un objet de type Option, il peut avoir la valeur `Some` ou `None`. La méthode `map` appliquée à cette option nous permet de traiter les résultats différents de `None`. 
+Option est un type Scala qui permet d'éviter les erreurs liées aux pointeurs nulls (NullPointerException). Quand on récupère un objet de type Option, il peut avoir la valeur `Some` ou `None`. La méthode `map` appliquée à cette option nous permet de traiter les résultats différents de `None`. 
 La méthode `Action` permet d'effectuer une redirection vers une autre action du contrôleur.
 
 ## Le moteur de template
@@ -157,7 +157,7 @@ Play-Scala propose un moteur de template full Scala. Ce moteur permet d'écrire 
 Ce template prend en paramètre une liste de messages.
 La méthode map permet ici de parcourir la liste des éléments.
 
-Pour effectuer le rendu d'un template, on appele une méthode qui porte le même nom que le le fichier HTML contenant ce template :
+Pour effectuer le rendu d'un template, on appelle une méthode qui porte le même nom que le le fichier HTML contenant ce template :
 
 ~~~ java
 def index = html.index(messages)
@@ -221,7 +221,7 @@ Le titre sera remplacé par "ma page" et le contenu prendra place dans la balise
 
 ### Un exemple concret
 
-Pour mettre à jour un album, on récupére l'album et l'artiste depuis la base de données puis on les transmet au template approprié :
+Pour mettre à jour un album, on récupère l'album et l'artiste depuis la base de données puis on les transmet au template approprié :
 
 ~~~ java
 def form(id: Option[Long]) = {
@@ -276,7 +276,7 @@ Pour parcourir une liste de résultats, par exemple un objet de type List[Album,
 ~~~
 
 Le template définie un paramètre `entries` qui correspond à la liste des tuples d'albums et d'artistes renvoyée par `Album.findAll`.
-A l'interieur d'un tuple, on accède à un album avec l'expression `entry._1` et à un artiste avec `entry._2`.	
+A l'intérieur d'un tuple, on accède à un album avec l'expression `entry._1` et à un artiste avec `entry._2`.	
 
 ## Authentification à l'aide des traits
 
