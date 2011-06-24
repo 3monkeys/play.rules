@@ -54,7 +54,21 @@ Voyons maintenant quelles sont les spécifités de Play-Scala et comment porter 
 
 ## Accès à la base de données avec l'API Anorm
 
-Play-Scala intègre une API qui permet d'effectuer très facilement des requêtes SQL et de mapper les résultats dans des objets Scala :
+Play-Scala intègre une API qui permet d'effectuer très facilement des requêtes SQL et de mapper les résultats dans des objets Scala.
+
+### Définition d'une entité
+
+Une entités est une classe du modèle :
+
+~~~ java
+case class Artist(var id:Pk[Long], @Required var name: String){
+...
+}
+~~~
+
+Le mot clé `case` en Scala ajoute des facilités pour faire du pattern matching sur les classes et leurs attributs. Ces facilités seront exploitées par Anorm lors de l'exécution des requêtes.
+
+N.B : Comme vous le voyez nous pouvons continuer à utiliser les annotations de validation du modèle, comme `@Required`.
 
 ### La classe Magic
 
@@ -155,7 +169,7 @@ Ces méthodes sont générées automatiquement par le compilateur.
 
 Comme dans tout moteur de template qui se respecte, il est possible de créer des tags réutilisables pour factoriser du code.
 
-Par exemple, pour définir un tag qui affiche les informations concernant une personne, on crée un fichier persons.scala.html:
+Par exemple, pour définir un tag qui affiche les informations concernant une personne, on crée un fichier `persons.scala.html` :
 
 ~~~ html
 @(person:Person)
@@ -266,12 +280,94 @@ A l'interieur d'un tuple, on accède à un album avec l'expression `entry._1` et
 
 ## Authentification à l'aide des traits
 
-Les traits sont une une variante plus puissante des interfaces Java. Nous allons voir comment les utiliser pour écrire un mécanisme d'authentification simple. L'équivalent du module secure que nous avons utilisé dans la version Java.
+Les traits sont une variante plus puissante des interfaces et classes abstraites de Java. Ils permettent aussi d'implémenter facilement le principe du design pattern "décorateur" dont le but est d'ajouter dynamiquement des comportements à des objets.
+Nous allons voir comment les utiliser pour écrire un mécanisme d'authentification simple.
+Ce sera l'équivalent du module secure que nous avons utilisé dans la version Java. Ce mécanisme permettra d'accéder aux fonctions d'administration de l'application.
 
-Les traits Scala permettent d'implémenter facilement le principe du design pattern "décorateur".
+On définie le trait Secure, qui hérite de `Controller`. Ce trait définie le comportement suivant : avant chaque action (grâce à l'annotation `@Before`), on vérifie qu'il existe un utilisateur dans la session (le cookie stocké dans le navigateur).
+Si un nom d'utilisateur est disponible on le stocke dans la variable `connectedUser` :
 
-    //TODO
+~~~ java
+trait Secure extends Controller {
 
+  @Before def check = {
+    session("username") match {
+      case Some(username) => Continue
+      case None => Action(Authentication.login)
+    }
+  }
+
+  def connectedUser = session.get("username").asInstanceOf[String]
+
+}
+~~~
+
+On définie ensuite un deuxième trait qui hérite du comportement de `Secure` et qui vérifie que l'utilisateur qui a ouvert une session est bien l'admin :
+
+~~~ java
+trait AdminOnly extends Secure {
+
+  @Before def checkAdmin = {
+    if (!connectedUser.equals("admin")) Forbidden else Continue
+  }
+
+}
+~~~
+
+On peut maintenant écrire le contrôleur qui nous permettra d'identifier l'administrateur et de mettre son login dans la session si ses identifiants sont corrects :
+
+~~~ java
+object Authentication extends Controller {
+
+  import views.Authentication._
+
+  def login = {
+    html.login()
+  }
+
+  def logout() = {
+    session.clear()
+    Action(Admin.login)
+  }
+
+  def authenticate() = {
+      val username = params.get("username")
+      val password = params.get("password")
+      Play.configuration.getProperty("application.admin").equals(username) &&
+      Play.configuration.getProperty("application.adminpwd").equals(password) match {
+      case true => session.put("username", username)
+                   Action(Application.index)
+      case false => flash.error(Messages.get("error.login"))
+                    html.login()
+    }
+  }
+~~~
+
+Le template `login.scala.html` est un formulaire très simple qui transmet le login et le mot de passe saisis à l'action `authenticate` :
+
+~~~ html
+@form(controllers.Authentication.authenticate()){
+    @if(flash.get("error")){
+        <p class="error">
+            @flash.get("error")
+        </p>
+    }
+
+    <p id="username-field">
+        <label for="username">User name</label>
+        <input type="text" name="username" id="username"/>
+    </p>
+    <p id="password-field">
+        <label for="password">Password</label>
+        <input type="password" name="password" id="password" value="" />
+    </p>
+    <p id="signin-field">
+        <input type="submit" id="signin" value="Sign in" />
+    </p>
+}
+~~~
+
+N.B : le scope `flash` est utilisé lorsque l'on veut récupérer une information dans la requête suivant le traitement. On s'en sert ici pour afficher le message d'erreur si les identifiants saisis sont invalides.
 
 ## Les tests
 
