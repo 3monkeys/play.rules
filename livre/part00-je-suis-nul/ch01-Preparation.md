@@ -26,7 +26,7 @@ Vous devez avoir installé Java sur votre joujou préféré.
 
 ###Installation
 
-- Télécharger Play Framework : [http://http://www.playframework.org/download](http://http://www.playframework.org/download)
+- Télécharger Play Framework : [http://www.playframework.org/download](http://www.playframework.org/download)
 - dézipper quelque part
 - ajouter à votre path : c'est mieux
 
@@ -53,7 +53,7 @@ Vous devez avoir installé Java sur votre joujou préféré.
 		~ |  __/|_|\____|\__ (_)
 		~ |_|            |__/   
 		~
-		~ play! 1.1.1, http://www.playframework.org
+		~ play! 1.2.1, http://www.playframework.org
 		~
 		~ Usage: play cmd [app_path] [--options]
 		~ 
@@ -143,7 +143,7 @@ si tout va bien, ceci devrait s'afficher :
 		~ |  __/|_|\____|\__ (_)
 		~ |_|            |__/   
 		~
-		~ play! 1.1.1, http://www.playframework.org
+		~ play! 1.2.1, http://www.playframework.org
 		~
 		~ The new application will be created in /Users/k33g_org/Dropbox/play_projects/azerguespeche
 		~ What is the application name? [azerguespeche] 
@@ -164,7 +164,7 @@ si tout va bien, ceci devrait s'afficher :
 		~ |  __/|_|\____|\__ (_)
 		~ |_|            |__/   
 		~
-		~ play! 1.1.1, http://www.playframework.org
+		~ play! 1.2.1, http://www.playframework.org
 		~
 		~ Ctrl+C to stop
 		~ 
@@ -197,7 +197,7 @@ Voyons donc comment faire pour transformer notre squelette d'application en proj
 		~ |  __/|_|\____|\__ (_)
 		~ |_|            |__/   
 		~
-		~ play! 1.1.1, http://www.playframework.org
+		~ play! 1.2.1, http://www.playframework.org
 		~
 		~ OK, the application is ready for Intellij Idea
 		~ Use File/New Module/Import Existing module
@@ -257,7 +257,7 @@ Voyons donc comment faire pour transformer notre squelette d'application en proj
 ![Alt "p00_ch01_10"](https://github.com/3monkeys/play.rules/raw/master/rsrc/p00_ch01_10.png)
 
 **Voilà, nous sommes prêts à démarrer, nous pouvons passer à l'étape suivante.**
-**Rendez-vous donc au chapitre suivant :** [02-Premiere_application.fr.md](02-Premiere_application.fr.md).
+**Rendez-vous donc au chapitre suivant :** [ch02-Premiere-application](ch02-Premiere-application.md).
 
 
 

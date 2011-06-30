@@ -6,7 +6,7 @@ Dans ce chapitre nous allons :
 - créer notre 1ère page selon les préceptes MVC (kézaco ?)
 - construire les bases de notre application
 
-c'est bases seront suffisantes pour avoir quelque chose qui tourne à montrer à nos copains les pêcheurs.
+ces bases seront suffisantes pour avoir quelque chose qui tourne à montrer à nos copains les pêcheurs.
 
 ##Introduction 
 
@@ -22,11 +22,11 @@ Ca n'a pas loupé, dès le 1er jour :
 - **mon ingé préféré :** *"tu sais java, c'est une techno très aboutie, mais qui n'est pas simple, mais si il n'y a pas de problème, d'ici la fin de la semaine cela devraît être bon ... tu sais STRUTS c'est pas pour les gamins"* `(ndla : on est lundi)` 
 - **Moi (dans ma tête) :** *"comme un doute ... C'est sympa de passer pour c... auprès du client dès le premier jour ..."*
 
-Je vous épargne la suite. Les anciens (la meilleure équipe que j'ai pu avoir (3)) de ce projet reconnaitront sûrment la personne à laquelle je fais allusion.
+Je vous épargne la suite. Les anciens (la meilleure équipe que j'ai pu avoir (3)) de ce projet reconnaitront sûrement la personne à laquelle je fais allusion.
 
 ... bon j'en étais où ?
 
-Ah oui, c'est alors que je décide de me mettre sérieusement à Java, et surtout de prendre les choses à l'envers et de brillament m'auto-former à **STRUTS** (achat de bouqins, etc. ...) d'urgenge, car 5 jours pour une f@&%ing login box, ça me fait mal.
+Ah oui, c'est alors que je décide de me mettre sérieusement à Java, et surtout de prendre les choses à l'envers et de brillamment m'auto-former à **STRUTS** (achat de bouqins, etc. ...) d'urgenge, car 5 jours pour une f@&%ing login box, ça me fait mal.
 
 ###Petit rappel : MVC
 
@@ -67,6 +67,8 @@ Dans IntelliJ vous pouvez voir dans l'arborescence de votre projet que vous avez
 
 créeons un premier modèle `version` dans le répertoire `models` :
 
+~~~ java
+
 	package models;
 
 	public class Version {
@@ -79,6 +81,7 @@ créeons un premier modèle `version` dans le répertoire `models` :
 	        this.name="proto pour les copains";
 	    }
 	}
+~~~
 
 **Remarque :** vous pouvez voir qu'il n'y a pas de getter ni de setter, juste des "champs" publiques. Dans la majeure partie des cas vous n'en n'avez pas besoin, alors à quoi bon ? Sachez cependant que Play! va les générer lui même à la compilation (vous ne verrez rien dans le code). Au besoin vous pouvez les écrire vous même si nécessaire.
 
@@ -87,6 +90,8 @@ créeons un premier modèle `version` dans le répertoire `models` :
 Cette fois-ci nous allons modifier le contrôleur `Application` dans le répertoire `controllers` :
 
 *Si vous n'avez touché à rien vous devez avoir le code suivant :*
+
+~~~ java
 
 	package controllers;
 	import play.*;
@@ -100,9 +105,11 @@ Cette fois-ci nous allons modifier le contrôleur `Application` dans le réperto
 	        render();
 	    }
 	}
+~~~
 
 *Modifions la méthode `index()` :*
 
+~~~ java
 	public class Application extends Controller {
 
 	    public static void index() {
@@ -112,6 +119,7 @@ Cette fois-ci nous allons modifier le contrôleur `Application` dans le réperto
 	        render(version);
 	    }
 	}
+~~~
 
 ####Allons modifier la vue Application
 
@@ -173,13 +181,13 @@ explique que quand on appelle la racine du site dans l'url (le "`/`" tout seul),
 
 ##Vous êtes prêts ! ... pour aller plus loin : des objets, des écrans ...
 
-Où nous allons créer les bases d'***Azergues Pêche*** grâce au module CRUD de play
+Où nous allons créer les bases d'***Azergues Pêche*** grâce au module CRUD de Play
 
 ###Préparation
 
-*là je fais une pause, je continue demain matin @k33g_org (12.04.2011)*
+c'est dans le chapitre suivant : [ch03-Premiere-application-CRUD](ch03-Premiere-application-CRUD.md).
 
-<HR>
+- - -
 	
 - (1) : oui, je sais, ce n'est pas la meilleure source d'information qui soit, ni la plus fiable, mais bon ... n'hésitez pas à poster vos définitions dans les "issues" du projet : [https://github.com/3monkeys/play.rules/issues](https://github.com/3monkeys/play.rules/issues).
 - (2) : je le suis encore un peu, je dois l'avouer, mais on ne se refait pas.
