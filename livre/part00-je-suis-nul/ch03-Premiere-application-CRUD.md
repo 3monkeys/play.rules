@@ -1,3 +1,8 @@
+---
+layout: post
+title: Première application CRUD
+---
+
 Le SOCLE de notre application grâce au module CRUD
 =
 

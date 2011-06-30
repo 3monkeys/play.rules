@@ -1,3 +1,8 @@
+---
+layout: post
+title: Preface
+---
+
 *Texte temporaire*
 
 #Vision de [@k33g_org](@k33g_org)

@@ -1,3 +1,8 @@
+---
+layout: post
+title: Première application CRUD NOTE
+---
+
 Note pour le chargement du module CRUD :
 Je propose d'utiliser la nouvelle méthode de chargement des modules avec le fichier dependencies.yml.
 En effet, le chargement du module CRUD par le fichier application.conf semble déprécié depuis la version 1.2.1 de play et provoque l'affichage du message suivant:

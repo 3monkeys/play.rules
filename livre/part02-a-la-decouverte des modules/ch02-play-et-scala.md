@@ -1,3 +1,8 @@
+---
+layout: post
+title: Play et Scala
+---
+
 # Play et Scala
 
 Play propose d'utiliser au choix les langages Scala ou Java pour développer des applications.

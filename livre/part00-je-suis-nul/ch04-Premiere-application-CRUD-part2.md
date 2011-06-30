@@ -1,3 +1,8 @@
+---
+layout: post
+title: Première application CRUD part 2
+---
+
 Notre application CRUD ... la suite
 =
 

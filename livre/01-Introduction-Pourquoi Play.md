@@ -1,3 +1,8 @@
+---
+layout: post
+title: Introduction - Pourquoi Play
+---
+
 # Introduction - Pourquoi Play
 
 Play framework est une vraie révolution dans le monde des application Web écrites en Java. Il vous fera oublier toutes les souffrances que vous avez pu vivre avec la pile Java EE classique, des frameworks comme Spring.
