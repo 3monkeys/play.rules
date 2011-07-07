@@ -93,10 +93,10 @@ Il existe un tas d'autres modules et de nouveaux arrivent fréquemment grâce à
 On trouve par exemple :
 
 - [GAE](http://www.playframework.org/modules/gae), pour déployer son application sur Google APP Engine, le cloud de Google
-- [Morphia](http://www.playframework.org/modules/morphia), pour utiliser la base de données NoSQL MongoDB (base orientée documents) avec Play.
+- [Morphia](http://www.playframework.org/modules/morphia), pour utiliser très simplement la base de données NoSQL MongoDB (base orientée documents) avec Play
 - [Tabula Rasa](http://www.playframework.org/modules/tabularasa-0.2/home), pour intégrer le plugin DataTables de JQuery au CRUD de Play
 - [OAuth](http://www.playframework.org/modules/oauth), pour authentifier des utilisateurs auprès de fournisseurs d’identité OAuth, comme Twitter ou Google
-- [pdf](http://www.playframework.org/modules/pdf), pour générer des documents... PDF!
+- [Pdf](http://www.playframework.org/modules/pdf), pour générer des documents... PDF!
 - [Akka](http://www.playframework.org/modules/akka), pour faciliter la programmation concurrente, en utilisant le modèle des acteurs
 - Et beaucoup d'autres... 
 
