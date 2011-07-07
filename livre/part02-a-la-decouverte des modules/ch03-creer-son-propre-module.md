@@ -1,4 +1,4 @@
-	Stay tuned!
+﻿	Stay tuned!
 	
 ## Structure d'un module
 
@@ -8,7 +8,7 @@
 
 	(ex : html5validation)
 
-### Une annotation pour am�liorer le CRUD
+### Une annotation pour améliorer le CRUD
 	
 	http://www.lunatech-research.com/archives/2011/01/11/declarative-model-class-enhancement-play
 	
