@@ -1,4 +1,4 @@
-## Trucs et astuces
+# Annexes
 
 ## L'internationalisation
 
