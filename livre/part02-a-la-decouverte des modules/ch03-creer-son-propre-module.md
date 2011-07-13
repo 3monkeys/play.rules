@@ -1,8 +1,6 @@
-﻿	Stay tuned!
-	
-## Structure d'un module
+# Créer son propre module
 
-    TODO
+Maintenant que nous avons vu un certain nombre de modules existants, voyons comment créer un module personnel pour répondre à nos propres besoins! 
 
 ## Exemple 1 : Amélioration du module CRUD avec JQuery UI
 
