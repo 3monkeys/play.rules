@@ -185,7 +185,7 @@ Vous pouvez rapidement avoir un aperçu des routes disponibles en générant une
 
 Un tour à l'adresse [localhost:9000/admin/](http://localhost:9000/admin/) devrait vous donner:
 
-![Liste des ObjectType](/play/adminpage.png)
+![Liste des ObjectType](https://github.com/3monkeys/play.rules/raw/master/rsrc/p02_ch03_00.png)
 
 Page à partir de laquelle nous pouvons accéder à la liste des Timezone. Par défaut, la vue list du module crud n'affiche qu'une colonne contenant le résultat de la méthode `toString()` de l'objet.
 
@@ -389,11 +389,11 @@ Le grid aura alors les fonctionnalités et possibilités suivantes:
 * la fonctionnalité de filtre est supportée. Tout comme les liens, l'event submit du formulaire est intercepté pour demander au datasource de faire une nouvelle requête en passant une fois encore les paramètres correspondants et attendues par le module Play: `datasource.get({search: $.trim($(this).find('input[name="search"]').val())});`
 
 Un tour à l'adresse [http://localhost:9000/admin/localisedtimezones](http://localhost:9000/admin/localisedtimezones) devrait vous donner:
-![Crud UI Grid](/play/crud-grid.png)
+![Crud UI Grid](https://github.com/3monkeys/play.rules/raw/master/rsrc/p02_ch03_01.png)
 
 Le tri me direz-vous? Et bien, ce sera sûrement l'occasion de faire un second article sur ce sujet. Je me suis arrêté à ce niveau là au niveau de l'expérimentation. De même, les fonctionnalités de pagination et filtre ne sont gérées que partiellement car cela demanderait un peu plus de travail pour gérer le tout correctement. Les liens de pagination ne sont pas mis à jour à chaque changement de page par exemple. Quoi qu'il en soit, cela représente une bonne occasion de voir ce que peut apporter une couche d'abstraction des données au niveau JS: On ne manipule pas directement $.ajax pour effectuer les changements de page ou prise en compte du filtre, on ne fait que demander au datasource (`datasource.get({page: page})`) de le faire pour nous, la table étant automatiquement mis à jour par le widget. Big win.
 
-![Crud UI Grid filtered](/play/crud-grid-filtered.png)
+![Crud UI Grid filtered](https://github.com/3monkeys/play.rules/raw/master/rsrc/p02_ch03_02.png)
 
 
 Il faut savoir que UI Grid est prévue par la team jQuery pour sortir pour ou aprés la version 2.0, donc ce n'est pas encore pour tout de suite. Mais on peut faire confiance à la team jQuery UI pour nous sortir un super widget. Ils sont vraiment en train de faire les choses bien. Pour ceux souhaitant en savoir plus, je vous invite à vous attarder sur le [wiki consacré au développement de jQuery UI](http://wiki.jqueryui.com/) et aux parties concernant [UI Grid](http://wiki.jqueryui.com/w/page/34246941/Grid). La roadmap est très encourageante, et le travail de spécification est impressionnant. Ils n'en sont pour l'instant qu'à la toute première itération (grid-markup, grid-datamodel, grid-type), mais le résultat est prometteur.
