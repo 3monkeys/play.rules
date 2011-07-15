@@ -287,7 +287,6 @@ Puis au sein de la nouvelle balise, saisissez le code suivant :
 - - -
 **Remarque :** object représente l'objet (l'instance de classe) lié au formulaire. Dans le cas qui nous intéresse, c'est une compétition. Or, il se trouve que la classe `Competition` a une propriété `prises` qui contient la liste des prises d'une compétition.
 Donc pour avoir la liste, il suffit d'appeler `object.prises` et de le parcourir avec `#{list}#{/list}`.
-
 - - -
 
 ####Au final, votre template devrait ressembler à ceci :

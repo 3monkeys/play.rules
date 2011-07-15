@@ -2,23 +2,118 @@
 
 Maintenant que nous avons vu un certain nombre de modules existants, voyons comment créer un module personnel pour répondre à nos propres besoins! 
 
-## Exemple 1 : Amélioration du module CRUD avec JQuery UI
+## Exemple 1 : Créer un tag personnalisé
+
+Dans le chapitre précédent, je vous ai présenté le module HTML5Validation, qui ajoute la validation des données côté navigateur à l'aide d'un tag, en se basant sur les annotations du modèle.
+Nous allons maintenant étudier le code de ce module pour comprendre comment réaliser ce genre de tags.
+
+### Structure du module
+
+La structure d'un module ressemble à celle d'une application Play. Dans ce module nous trouvons les répertoires suivants :
+
+* app
+* app/tags
+* documentation
+
+Si le module avait défini des vues et des contrôleurs on les aurait retrouvé dans le répertoire app comme dans une application Play classique. Dans le cas de ce module on ne trouve qu'un tag, que l'on va étudier.
+
+La classe `HTMLValidationTags` étend `FastTags`. Cette dernière permet de créer rapidement un tag en décrivant simplement son comportement en Java.
+
+Le tag comporte une seule méthode publique, qui sera appelée pour effectuer le rendu :
+
+~~~ java 	
+public static void _input(final Map<?, ?> args, final Closure body, final PrintWriter out,
+        final ExecutableTemplate template, final int fromLine) {
+...
+}
+~~~ 	
+
+Les paramètres `args` et `body` correspondent au contenu du tag dans la vue HTML. Dans notre cas, le tag est toujours fermé à la fin de sa déclaration, il n'y a donc pas de body. 
+Exemple : `#{input for:'user.name', id:'YourID', class:'class1 class2' /}`
+Le paramètre `out` permet d'écrire dans la sortie HTML. `FromLine` sert à spécifier la section du template dans laquelle on exécute le code. On s'en sert par exemple pour préciser la ligne d'erreur lors de la levée d'une exception.
+Le nom du tag est défini par le nom de la méthode, sans le underscore.
+
+Le corps de la méthode écrit dans le flux sortie HTML en fonction des paramètres d'entrée :
+
+~~~ java 	
+out.print("<input");
+
+// Print standard attributes
+printStandardAttributes(args, out);
+
+// Print validation attributes
+printValidationAttributes(args, out);
+
+// Close input tag
+out.println(">");
+~~~ 	
+
+Si on a un modèle comme ceci : 
+
+~~~ java 	
+@Required
+@Match("[a-z]*")
+public String name;
+~~~ 	
+
+Alors le template `#{input for:'user.name', id:'YourID', class:'class1 class2' /}` rendra  le code HTML suivant : `<input name="user.name" value="${user?.name}" id="YourID" class="class1 class2" required pattern="[a-z]*">`
+
+Ce code permet de déterminer le champ que l'on est entrain de manipuler :
+
+~~~ java 	
+final String fieldname = args.get("for").toString();
+    final String[] components = fieldname.split("\\.");
+
+    // Find class
+    Class<?> clazz = null;
+
+    for (final Class<?> current : Play.classloader.getAllClasses()) {
+        if (current.getSimpleName().equalsIgnoreCase(components[0])) {
+            clazz = current;
+        }
+    }
+
+    // Find field
+    final Field field = clazz.getField(components[1]);
+~~~ 	
+
+
+Et voici le code utilisé pour détecter et traiter l'annotation `@Required` :
+
+~~~ java 	
+if (field.isAnnotationPresent(Required.class)) {
+    printAttribute("required", "required", out);
+}
+~~~ 
+
+Pour `@Match` :  
+  
+~~~ java 	
+if (field.isAnnotationPresent(Match.class)) {
+    final Match match = field.getAnnotation(Match.class);
+    printAttribute("pattern", match.value(), out);
+}	
+~~~ 	
+
+N.B. : Vous pouvez voir le détail des méthodes `printAttribute`, `printStandardAttributes` et `printValidationAttributes` dans le [code du module](https://github.com/oasits/play-html5-validation).
+
+## Exemple 2 : Amélioration du module CRUD avec JQuery UI
 
 Il y a quelques temps, [la team jQuery UI a annoncé](http://blog.jqueryui.com/2011/02/unleash-the-grid/) qu'ils avaient commencé à sérieusement et officiellement travailler sur le widget Grid de la librairie. Le développement prend place au sein de la branche grid du repository github, le répertoire nous intéressant le plus étant [grid-datamodel](https://github.com/jquery/jquery-ui/tree/grid/grid-datamodel).
 
-Dans cet article, nous nous intéresserons à l'implémentation grid-datamodel et son intégration dans le module CRUD de Play.
-Nous nous concentrerons à configurer le widget UI Grid et adapter légèrement le crud généré par Play pour permettre l'utilisation du widget en mode xhr (Ajax).
+Dans cette partie, nous nous intéresserons à l'implémentation grid-datamodel et son intégration dans le module CRUD de Play.
+Nous nous concentrerons à configurer le widget UI Grid et adapter légèrement le CRUD généré par Play pour permettre l'utilisation du widget en mode XHR (Ajax).
 
 ### Le plan
 
-Le module CRUD de Play! (soit dit en passant, une petite merveille) comporte un ensemble de fichier de templates (views/tags) permettant de gérer et afficher les données du modèle. Dans l'exemple que nous nous apprêtons à mettre en place ici, cela signifie générer une table à partir des données de notre modèle. Le module CRUD par défaut utilise des paramètres pour permettre pagination, recherche/filtre et tri. Play génère alors la table correspondante pour une "page" unique. Ainsi, même si votre modèle comporte des milliers d'objets, Play générera la table correspondante avec seulement une vingtaine de ligne (configurable).
+Le module CRUD de Play comporte un ensemble de fichier de templates (views/tags) permettant de gérer et afficher les données du modèle. Dans l'exemple que nous nous apprêtons à mettre en place ici, cela signifie générer une table à partir des données de notre modèle. Le module CRUD par défaut utilise des paramètres pour permettre pagination, recherche/filtre et tri. Play génère alors la table correspondante pour une "page" unique. Ainsi, même si votre modèle comporte des milliers d'objets, Play générera la table correspondante avec seulement une vingtaine de ligne (configurable).
 
-Dans le cadre de cet article, les étapes que l'on devra mettre en place se résumeront à:
+Dans le cadre de ce tutoriel, les étapes que l'on devra mettre en place se résumeront à:
 
 1. Configuration d'une application exemple, le but étant de définir des données avec lesquelles travailler.
-2. Création de nos contrôleurs et modification des templates utilisé par le module CRUD. Cette étape nous permettra de fournir un "service" dont le retour est une réponse JSON représentant les données de notre modèle.
-3. La création d'un module play très simple dont le seul but est de contenir les assets (fichiers statiques) nécessaire au widget grid et de les rendre disponible au reste de l'application via l'utilisation d'une route particulière `/grid/`
-4. Configuration du widget grid et du datasource pour utiliser le service fourni par Play.
+2. Création de nos contrôleurs et modification des templates utilisé par le module CRUD. Cette étape nous permettra de fournir un service dont le retour est une réponse JSON représentant les données de notre modèle.
+3. La création d'un module Play très simple dont le seul but est de contenir les assets (fichiers statiques) nécessaire au widget grid et de les rendre disponible au reste de l'application via l'utilisation d'une route particulière `/grid/`
+4. Configuration du widget grid et du datasource pour utiliser le service fourni par le module Play.
 
 Le code de cet exemple est disponible ici :
 
@@ -27,38 +122,13 @@ Le code de cet exemple est disponible ici :
 
 ### Mise en place de l'application exemple
 
-Nous utiliserons un exemple de gestion des fuseaux horaires (timezone locale) pour jouer avec un widget grid. Cela nous permettra facilement d'avoir plusieurs milliers d'enregistrement avec lesquelles travailler.
+Nous utiliserons un exemple de gestion des fuseaux horaires (timezone locale) pour jouer avec un widget grid. Cela nous permettra d'avoir facilement plusieurs milliers d'enregistrement avec lesquels travailler.
 
-Mais avant toute chose, créons une nouvelle application play:
+Nous partons d'une application Play vierge pour laquelle nous activerons le module CRUD (voir partie 0 du livre).
 
-	play new crud-grid
+Nous allons désormais nous occuper de la création de notre modèle. Dans notre exemple, il s'agit de timezones, le modèle est simple: timezoneId, name, language et un offset.
 
-Bim, Bam, Boom, c'est fait. Ensuite, nous aurons à configurer la base de données et à configurer notre application pour utiliser le module CRUD. Dans le fichier `conf/application.conf`, il convient de:
-
-* décommenter `db=mem` pour indiquer à Play d'utiliser HSQLDB en mode "in-memory" (le mode filesystem peut aussi être choisi pour garder les données aprés redémarrage de l'appli)
-* ajouter la directive d'import du module au niveau du fichier `conf/application.conf`
-* importer les routes du module crud au niveau du fichier `conf/routes`
-
-Dans `conf/application.conf` en dessous de la ligne `#------ MODULES ------`:
-
-	module.crud=${play.path}/modules/crud
-
-Dans `conf/routes`, ajout de la directive d'import des routes du module crud:
-
-	# Crud
-	GET     /admin	                                module:crud
-
-
-Nous allons désormais nous occuper de la création de notre modèle. Dans le cadre de cet article, il s'agit de timezones, le modèle est simple: timezoneId, name, language et un offset.
-
-    // http://www.lunatech-research.com/archives/2011/01/28/playframework-jquery-datatables#application
-    package models;
-
-    import java.util.Locale;
-    import java.util.TimeZone;
-    import javax.persistence.Entity;
-    import play.db.jpa.Model;
-
+~~~ java 	
     @Entity
     public class LocalisedTimeZone extends Model {
 
@@ -74,19 +144,12 @@ Nous allons désormais nous occuper de la création de notre modèle. Dans le ca
           this.offset = zone.getRawOffset() / 3600000;
        }
     }
+~~~  	
 
-Vient ensuite la dernière partie de la mise en place de notre exemple d'application avec la définition d'une classe `Bootstrap`, étendant [Jobs](http://www.playframework.org/documentation/1.1/jobs) du framework Play et annotée avec `@OnApplicationStart`. Ceci aura pour effet au chargement de votre application d'exécuter la méthode `doJob` qui s'occupera de nous fournir un ensemble conséquent de données avec lesquelles travailler.
+Vient ensuite la dernière partie de la mise en place de notre exemple d'application avec la définition d'un Job pour charger les données au démarrage :
 
-	// http://www.lunatech-research.com/archives/2011/01/28/playframework-jquery-datatables#application
-    package controllers;
-
-    import java.util.Locale;
-    import java.util.TimeZone;
-    import models.LocalisedTimeZone;
-    import play.jobs.Job;
-    import play.jobs.OnApplicationStart;
-
-    @OnApplicationStart
+~~~ java 	   
+ @OnApplicationStart
     public class Bootstrap extends Job {
 
     	@Override
@@ -102,6 +165,7 @@ Vient ensuite la dernière partie de la mise en place de notre exemple d'applica
     	}
 
     }
+~~~ 	
 
 Okay, notre modèle est prêt à être utilisé. Ils nous manque encore le contrôleur CRUD pour afficher le tout.
 
@@ -111,14 +175,7 @@ Okay, notre modèle est prêt à être utilisé. Ils nous manque encore le contr
 
 Penchons nous désormais sur le code du contrôleur, la partie de l'application qui permet d'offrir à nos vue les données du modèle sous format JSON (nous voulons faire de UI Grid un consommateur de ce "service").
 
-Encore une fois, cette exemple est fortement inspiré du travail de Lunatech. Cependant, dû à l'utilisation de jQuery UI Grid en lieu et place de datatable, le code du contrôleur est devenue bien plus simple:
-
-	package controllers;
-
-	import java.util.List;
-
-	import play.db.Model;
-
+~~~ java 	
 	public class CrudJson extends CRUD {
 
 	    public static void listJson(int page, String search, String searchFields, String orderBy, String order) {
@@ -142,21 +199,23 @@ Encore une fois, cette exemple est fortement inspiré du travail de Lunatech. Ce
 	        renderJSON(objects);
 	    }
 	}
+~~~  	
 
-En effet, UI Grid ou Datatable n'attendent pas exactement le même retour JSON, la même "enveloppe" autour de vos données. Et UI Grid sur ce point est beaucoup (beaucouuuuuuup) plus simple dans son approche qui attend un tableau d'objets. Parfait, c'est exactement le format JSON renvoyé par `renderJSON`.
+UI Grid attend simplement un tableau d'objets. Parfait, c'est exactement le format JSON renvoyé par `renderJSON`.
 
 Cette classe `CrudJson` est conçus pour être étendue par les véritables contrôleurs de notre application. Dans cette exemple, il s'agira de `LocalisedTimeZone`.
 
-	package controllers;
+~~~ java 	
 	public class LocalisedTimeZones extends CrudJson {}
+~~~ 	
 
-Deux lignes... Je sais pas vous, mais il me plaît beaucoup ce contrôleur!
+Une ligne... Je sais pas vous, mais il me plaît beaucoup ce contrôleur!
 
 Il nous reste une étape à ne pas oublier avec la configuration des routes des contrôleurs. Ici, nous ne disposons que d'un seul contrôleur. Aussi, nous pourrions nous contenter de:
 
 	GET /localeOrWhateverName.json LocalisedTimeZone.listJson
 
-Dans la plupart des cas, cela suffirait à répondre à nos besoin. Ceci dit, dans la pratique, les applications ne disposant que d'un modèle/contrôleur ne sont pas légion, et pour chaque objet de notre modèle, une route serait nécessaire. Ceci étant dit, il existe également la méthode suivante, se reposant sur la convention de nommage de vos contrôleurs et permettant une approche un peu plus DRY:
+Dans la plupart des cas, cela suffirait à répondre à nos besoin. Cela dit, dans la pratique, les applications ne disposant que d'un modèle/contrôleur ne sont pas légion, et pour chaque objet de notre modèle, une route serait nécessaire. Ceci étant, il existe également la méthode suivante, se reposant sur la convention de nommage de vos contrôleurs et permettant une approche un peu plus DRY:
 
 	#{crud.types}
 	GET /${type.controllerName}.json ${type.controllerClass.name.substring(12).replace('$','')}.listJson
@@ -181,7 +240,7 @@ A ce stade, nous avons donc de disponible les routes suivantes:
 	DELETE    /admin/localisedtimezones/{id}                    LocalisedTimeZones.delete
 	GET       /localisedtimezones.json                          LocalisedTimeZones.listJson
 
-Vous pouvez rapidement avoir un aperçu des routes disponibles en générant une erreur 404. Par défaut, Play vous renverra une page 404 particulière listant toutes les routes possibles pour votre application: [localhost:9000/coucoujsuispasla](http://localhost:9000/coucoujsuispasla)
+Vous pouvez rapidement avoir un aperçu des routes disponibles en générant une erreur 404. Par défaut (en mode dev), Play vous renverra une page 404 particulière listant toutes les routes possibles pour votre application: [localhost:9000/coucoujsuispasla](http://localhost:9000/coucoujsuispasla)
 
 Un tour à l'adresse [localhost:9000/admin/](http://localhost:9000/admin/) devrait vous donner:
 
@@ -191,9 +250,9 @@ Page à partir de laquelle nous pouvons accéder à la liste des Timezone. Par d
 
 #### Vues
 
-Maintenant, jetons un œil à notre vue custom list.html. Il s'agit de la vue responsable de la génération de notre table HTML (`app/views/CRUD/list.html`). Le module CRUD offre un moyen simple et efficace de "surcharger" des composants du module comme les views ou tags avec la commande `play crud:ov --template CRUD/list`. Cela indiquera à Play de vous fournir une copie conforme de ce template dans votre propre répertoire, que l'on peut ensuite modifier à souhait. Aucune configuration supplémentaire n'est à apporter, le système de module implique que Play cherche d'abord toute ressource au sein du répertoire de votre appli, puis ensuite au sein des modules configurés. Pratique, puissant, flexible, élégant, le système de module de play est une petite merveille mais sort un peu du sujet de l'article ici présent :)
+Maintenant, jetons un œil à notre vue custom list.html. Il s'agit de la vue responsable de la génération de notre table HTML (`app/views/CRUD/list.html`). Le module CRUD offre un moyen simple et efficace de surcharger des composants du module comme les views ou tags avec la commande `play crud:ov --template CRUD/list`. Cela indiquera à Play de vous fournir une copie conforme de ce template dans votre propre répertoire, que l'on peut ensuite modifier à souhait. Aucune configuration supplémentaire n'est à apporter, le système de module implique que Play cherche d'abord toute ressource au sein du répertoire de votre appli, puis ensuite au sein des modules configurés. Pratique, puissant, flexible, élégant, le système de modules de Play est une petite merveille... mais je m'égare, continuons :)
 
-Pour modifier la vue list.html, play propose la commande `play crud:ov`:
+Pour modifier la vue list.html, Play propose la commande `play crud:ov`:
 
 	> play crud:ov
 	~        _            _
@@ -314,7 +373,7 @@ Ceci devrait nous permettre, depuis nos vues, de charger les fichiers statiques 
 
 Dans cet exemple, le module crud-grid contient également la classe controller `CrudJson`. C'est une question de choix, on pourrait très bien la placer au niveau des autres contrôleurs de l'application, mais si l'on veut être un peu plus strict au niveau découplage des responsabilités, cela semble être le plus approprié.
 
-Personnellement, je trouve le système de module de play particulièrement brillant et permettant vraiment de modulariser notre développement. Bien sûr, la plupart des modules que l'on rencontrera seront des modules que l'on peut appeller "techniques", cad permettant ou facilitant l'intégration de couche "techniques" que ne propose pas Play par défaut (gae, sienna, pdf, etc.). Mais on peut imaginer que, dans le cadre d'une application assez large pour s'y prêter, l'utilisation de module pour compartimenter "fonctionnellement" l'application est possible (un module admin, un module gestion, un module facturation, etc.).
+N.B : la plupart des modules que l'on rencontrera seront des modules que l'on peut appeller "techniques", cad permettant ou facilitant l'intégration de couche "techniques" que ne propose pas Play par défaut (gae, sienna, pdf, etc.). Mais on peut imaginer que, dans le cadre d'une application assez large pour s'y prêter, l'utilisation de module pour compartimenter "fonctionnellement" l'application est possible (un module admin, un module gestion, un module facturation, etc.).
 
 ### UI GRID!
 
@@ -380,18 +439,18 @@ Voici le script responsable de la configuration et de l'initialisation du widget
       });
     </script>
 
-Dans l'idéal, ce document ready devrait être externaliser dans un fichier externe, cependant, dans le cadre de cet exercice, il sera défini en inline au sein du tag `#{set 'js'}` du template `àpp/views/CRUD/list`
+Dans l'idéal, ce document ready devrait être externaliser dans un fichier externe, cependant, dans le cadre de cet exercice, il sera défini en inline au sein du tag `#{set 'js'}` du template `app/views/CRUD/list`
 
 Le grid aura alors les fonctionnalités et possibilités suivantes:
 
-* Les données sont récupérées en passant par des appelx xhr (pas de rechargement de page)
+* les données sont récupérées en passant par des appelx XHR (pas de rechargement de page)
 * la pagination est gérée en interceptant les clicks des liens de pagination (les liens générés par le CRUD de play) pour effectuer une nouvelle requête au datasource en passant les paramètres correspondant: `datasource.get({page: page});`
 * la fonctionnalité de filtre est supportée. Tout comme les liens, l'event submit du formulaire est intercepté pour demander au datasource de faire une nouvelle requête en passant une fois encore les paramètres correspondants et attendues par le module Play: `datasource.get({search: $.trim($(this).find('input[name="search"]').val())});`
 
 Un tour à l'adresse [http://localhost:9000/admin/localisedtimezones](http://localhost:9000/admin/localisedtimezones) devrait vous donner:
 ![Crud UI Grid](https://github.com/3monkeys/play.rules/raw/master/rsrc/p02_ch03_01.png)
 
-Le tri me direz-vous? Et bien, ce sera sûrement l'occasion de faire un second article sur ce sujet. Je me suis arrêté à ce niveau là au niveau de l'expérimentation. De même, les fonctionnalités de pagination et filtre ne sont gérées que partiellement car cela demanderait un peu plus de travail pour gérer le tout correctement. Les liens de pagination ne sont pas mis à jour à chaque changement de page par exemple. Quoi qu'il en soit, cela représente une bonne occasion de voir ce que peut apporter une couche d'abstraction des données au niveau JS: On ne manipule pas directement $.ajax pour effectuer les changements de page ou prise en compte du filtre, on ne fait que demander au datasource (`datasource.get({page: page})`) de le faire pour nous, la table étant automatiquement mis à jour par le widget. Big win.
+Le tri me direz-vous? Et bien, ce sera de continuer l'investigation! Pour le moment, nous nous arrêtons à ce niveau là de l'expérimentation. De même, les fonctionnalités de pagination et filtre ne sont gérées que partiellement car cela demanderait un peu plus de travail pour gérer le tout correctement. Les liens de pagination ne sont pas mis à jour à chaque changement de page par exemple. Quoi qu'il en soit, cela représente une bonne occasion de voir ce que peut apporter une couche d'abstraction des données au niveau JS: On ne manipule pas directement $.ajax pour effectuer les changements de page ou prise en compte du filtre, on ne fait que demander au datasource (`datasource.get({page: page})`) de le faire pour nous, la table étant automatiquement mis à jour par le widget. Big win.
 
 ![Crud UI Grid filtered](https://github.com/3monkeys/play.rules/raw/master/rsrc/p02_ch03_02.png)
 
@@ -411,3 +470,7 @@ Sans oublier l'article de Tomasz Pęczek qui a été d'une aide précieuse en fo
 * [An early look at jQuery UI Grid in ASP.NET MVC - Data Model](http://tpeczek.blogspot.com/2011/02/early-look-at-jquery-ui-grid-in-aspnet.html)
 
 Je ne m'étend pas dans ce chapitre sur l'utilité ou non de récupérer les données à afficher en passant par des appels xhr, ou simplement en appliquant un widget grid (datatable, jQGrid, etc.) à une table contenant l'ensemble des données à afficher (permettant au widget de gérer pagination, recherche et tri de façon autonome - sans aller retour serveur). Dans la plupart des cas, la dernière solution est sûrement la meilleure. Tout dépend de la taille de votre modèle et de son "évolutivité". Si les données à afficher se comptent en plusieurs milliers, alors la solution xhr semble être plus appropriée. Je vous laisse lire [le premier article](http://www.lunatech-research.com/archives/2011/01/28/playframework-jquery-datatables) de Lunatech Research, il y est fait une très bonne analyse concernant ce point.
+
+## Aller plus loin
+
+Pour aller plus loin dans la création de modules, vous pouvez jeter un oeil à [ce tutoriel]() qui explique comment modifier le rendu des pages en utilisant des annotations sur le modèle. 
