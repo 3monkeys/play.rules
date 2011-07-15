@@ -203,7 +203,7 @@ Penchons nous désormais sur le code du contrôleur, la partie de l'application 
 
 UI Grid attend simplement un tableau d'objets. Parfait, c'est exactement le format JSON renvoyé par `renderJSON`.
 
-Cette classe `CrudJson` est conçus pour être étendue par les véritables contrôleurs de notre application. Dans cette exemple, il s'agira de `LocalisedTimeZone`.
+Cette classe `CrudJson` est conçue pour être étendue par les véritables contrôleurs de notre application. Dans cette exemple, il s'agira de `LocalisedTimeZone`.
 
 ~~~ java 	
 	public class LocalisedTimeZones extends CrudJson {}
@@ -335,11 +335,13 @@ Ce module prendra soin de l'import des ressources statiques et de la configurati
 
 Cette étape n'est absolument pas nécessaire, et vous pourriez vous contenter de stocker ces fichiers au sein de votre répertoire `/public/`.
 
-Toutes les ressources sont récupérées à partir du chemin `/grid/` qui est une route définie par le module crud-grid. Il prendra soin de faire correspondre toute ressources statiques du répertoire `/app/public/` au chemin `/grid/`. Il aura aussi pour rôle de contenir tout code relatif à l'intégration du widget grid (comme la définition du contrôleur special CrudJson qui nous permet de renvoyer une représentation JSON et grid-compliant de notre modèle).
+Toutes les ressources sont récupérées à partir du chemin `/grid/` qui est une route définie par le module crud-grid. Il prendra soin de faire correspondre toute ressources statiques du répertoire `/app/public/` au chemin `/grid/`. Il aura aussi pour rôle de contenir tout code relatif à l'intégration du widget grid (comme la définition du contrôleur spécial CrudJson qui nous permet de renvoyer une représentation JSON et grid-compliant de notre modèle).
 
     play new-module crud-grid
 
 Cette commande vous permettra de rapidement créer la structure de départ du module que l'on s'apprête à créer. Dans cette exemple, le module sera créé à la racine de notre application.
+
+Pour faciliter sa réutilisation, on déplace la classe CrudJson de l'application vers le répertoire app/controllers du module que l'on vient de créer.
 
 Il nous faut maintenant importer les routes du module au sein de l'application, ceci est fait dans le fichier `conf/application.conf`:
 
@@ -457,7 +459,7 @@ Le tri me direz-vous? Et bien, ce sera de continuer l'investigation! Pour le mom
 
 Il faut savoir que UI Grid est prévue par la team jQuery pour sortir pour ou aprés la version 2.0, donc ce n'est pas encore pour tout de suite. Mais on peut faire confiance à la team jQuery UI pour nous sortir un super widget. Ils sont vraiment en train de faire les choses bien. Pour ceux souhaitant en savoir plus, je vous invite à vous attarder sur le [wiki consacré au développement de jQuery UI](http://wiki.jqueryui.com/) et aux parties concernant [UI Grid](http://wiki.jqueryui.com/w/page/34246941/Grid). La roadmap est très encourageante, et le travail de spécification est impressionnant. Ils n'en sont pour l'instant qu'à la toute première itération (grid-markup, grid-datamodel, grid-type), mais le résultat est prometteur.
 
-Je suis très enthousiaste concernant cette annonce et ce nouveau widget en développement. non pas que, datatable ou jqGrid soient mauvais.. Loin de là, ils sont par ailleurs utilisés et analysés pour la conception d'UI Grid, mais la perspective d'avoir un widget officiel, complétement intégré dans la librairie et disposant d'une API claire et bien foutue ne me laisse pas indifférent...
+Je suis très enthousiaste concernant cette annonce et ce nouveau widget en développement. non pas que, datatable ou jqGrid soient mauvais.. Loin de là, ils sont par ailleurs utilisés et analysés pour la conception d'UI Grid, mais la perspective d'avoir un widget officiel, complètement intégré dans la librairie et disposant d'une API claire et bien foutue ne me laisse pas indifférent...
 
 ### Références
 Cette expérience est grandement inspirée par ces deux excellents articles de [Lunatech Research](//www.lunatech-research.com/editorials/tags/play) parlant de l'intégration du plugin datatable avec Play:
@@ -473,4 +475,4 @@ Je ne m'étend pas dans ce chapitre sur l'utilité ou non de récupérer les don
 
 ## Aller plus loin
 
-Pour aller plus loin dans la création de modules, vous pouvez jeter un oeil à [ce tutoriel]() qui explique comment modifier le rendu des pages en utilisant des annotations sur le modèle. 
+Pour aller plus loin dans la création de modules, vous pouvez jeter un oeil à [ce tutoriel]() qui explique comment modifier le rendu des pages en utilisant des annotations sur le modèle.
