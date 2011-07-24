@@ -456,17 +456,12 @@ Un tour à l'adresse [http://localhost:9000/admin/localisedtimezones](http://loc
 
 Le tri me direz-vous? Et bien, ce sera une bonne occasion de continuer l'investigation! Pour le moment, nous nous arrêtons à ce niveau là de l'expérimentation. Ce module est donc encore perfectible, mais il nous a permis de mettre en évidence un bon nombre de principes qui devraient vous donner les billes pour créer de nouveaux modules. Il ne reste plus qu'à laisser parler votre imagination!
 
-
 ### Références
 
 Cette expérience est grandement inspirée par ces deux excellents articles de [Lunatech Research](//www.lunatech-research.com/editorials/tags/play) parlant de l'intégration du plugin datatable avec Play:
 
 * [Integrating Play framework with jQuery DataTables](//www.lunatech-research.com/archives/2011/01/28/playframework-jquery-datatables)
 * [Ajax DataTables with the Play framework](//www.lunatech-research.com/archives/2011/02/07/ajax-datatables-playframework)
-
-Sans oublier l'article de Tomasz Pęczek qui a été d'une aide précieuse en fournissant une introduction et des exemples clairs et concrets sur l'utilisation d'UI Grid et la définition d'un datasource, dans le contexte d'une application ASP.NET MVC.
-
-* [An early look at jQuery UI Grid in ASP.NET MVC - Data Model](http://tpeczek.blogspot.com/2011/02/early-look-at-jquery-ui-grid-in-aspnet.html)
 
 ## Aller plus loin
 
