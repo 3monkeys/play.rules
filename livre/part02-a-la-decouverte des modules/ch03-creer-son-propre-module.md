@@ -454,14 +454,11 @@ Un tour à l'adresse [http://localhost:9000/admin/localisedtimezones](http://loc
 
 ### Améliorations possibles 
 
-Le tri me direz-vous? Et bien, ce sera de continuer l'investigation! Pour le moment, nous nous arrêtons à ce niveau là de l'expérimentation. De même, les fonctionnalités de pagination et filtre ne sont gérées que partiellement car cela demanderait un peu plus de travail pour gérer le tout correctement. Les liens de pagination ne sont pas mis à jour à chaque changement de page par exemple. Enfin, pour que l'intégration soit parfaite, on pourrait redéfinir tous les templates du CRUD dans le module (en plaçant nos nouveaux templates dans le répertoire `app/views`) pour qu'ils utilisent directement notre widget grid. On n'aurait ainsi plus rien à coder dans notre application pour que le CRUD utilise le widget.
-
-Quoi qu'il en soit, cela nous a permis de mettre en évidence un bon nombre de principes qui devraient vous donner les billes pour créer de nouveaux modules. Il ne reste plus qu'à laisser parler votre imagination!
-
-N.B : Il faut savoir que UI Grid est prévue par la team jQuery pour sortir pour ou aprés la version 2.0, donc ce n'est pas encore pour tout de suite. Mais on peut faire confiance à la team jQuery UI pour nous sortir un super widget. Ils sont vraiment en train de faire les choses bien. Pour ceux souhaitant en savoir plus, je vous invite à vous attarder sur le [wiki consacré au développement de jQuery UI](http://wiki.jqueryui.com/) et aux parties concernant [UI Grid](http://wiki.jqueryui.com/w/page/34246941/Grid). La roadmap est très encourageante, et le travail de spécification est impressionnant. Ils n'en sont pour l'instant qu'à la toute première itération (grid-markup, grid-datamodel, grid-type), mais le résultat est prometteur.
+Le tri me direz-vous? Et bien, ce sera une bonne occasion de continuer l'investigation! Pour le moment, nous nous arrêtons à ce niveau là de l'expérimentation. Ce module est donc encore perfectible, mais il nous a permis de mettre en évidence un bon nombre de principes qui devraient vous donner les billes pour créer de nouveaux modules. Il ne reste plus qu'à laisser parler votre imagination!
 
 
 ### Références
+
 Cette expérience est grandement inspirée par ces deux excellents articles de [Lunatech Research](//www.lunatech-research.com/editorials/tags/play) parlant de l'intégration du plugin datatable avec Play:
 
 * [Integrating Play framework with jQuery DataTables](//www.lunatech-research.com/archives/2011/01/28/playframework-jquery-datatables)
@@ -470,8 +467,6 @@ Cette expérience est grandement inspirée par ces deux excellents articles de [
 Sans oublier l'article de Tomasz Pęczek qui a été d'une aide précieuse en fournissant une introduction et des exemples clairs et concrets sur l'utilisation d'UI Grid et la définition d'un datasource, dans le contexte d'une application ASP.NET MVC.
 
 * [An early look at jQuery UI Grid in ASP.NET MVC - Data Model](http://tpeczek.blogspot.com/2011/02/early-look-at-jquery-ui-grid-in-aspnet.html)
-
-Je ne m'étend pas dans ce chapitre sur l'utilité ou non de récupérer les données à afficher en passant par des appels xhr, ou simplement en appliquant un widget grid (datatable, jQGrid, etc.) à une table contenant l'ensemble des données à afficher (permettant au widget de gérer pagination, recherche et tri de façon autonome - sans aller retour serveur). Dans la plupart des cas, la dernière solution est sûrement la meilleure. Tout dépend de la taille de votre modèle et de son "évolutivité". Si les données à afficher se comptent en plusieurs milliers, alors la solution xhr semble être plus appropriée. Je vous laisse lire [le premier article](http://www.lunatech-research.com/archives/2011/01/28/playframework-jquery-datatables) de Lunatech Research, il y est fait une très bonne analyse concernant ce point.
 
 ## Aller plus loin
 
