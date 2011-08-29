@@ -68,7 +68,7 @@ case class Artist(var id:Pk[Long], @Required var name: String){
 
 Le mot clé `case` en Scala ajoute des facilités pour faire du pattern matching sur les classes et leurs attributs. Ces facilités seront exploitées par Anorm lors de l'exécution des requêtes.
 
-N.B : Comme vous le voyez nous pouvons continuer à utiliser les annotations de validation du modèle, comme `@Required`.
+**Remarque** : Comme vous le voyez nous pouvons continuer à utiliser les annotations de validation du modèle, comme `@Required`.
 
 ### La classe Magic
 
@@ -367,7 +367,7 @@ Le template `login.scala.html` est un formulaire très simple qui transmet le lo
 }
 ~~~
 
-N.B : le scope `flash` est utilisé lorsque l'on veut récupérer une information dans la requête suivant le traitement. On s'en sert ici pour afficher le message d'erreur si les identifiants saisis sont invalides.
+**Remarque** : le scope `flash` est utilisé lorsque l'on veut récupérer une information dans la requête suivant le traitement. On s'en sert ici pour afficher le message d'erreur si les identifiants saisis sont invalides.
 
 Enfin, on peut écrire le contrôleur `Admin` qui contiendra les méthodes pour lesquelles le rôle d'administrateur est nécessaire :
 

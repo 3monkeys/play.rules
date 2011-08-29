@@ -95,7 +95,7 @@ if (field.isAnnotationPresent(Match.class)) {
 }	
 ~~~ 	
 
-N.B. : Vous pouvez voir le détail des méthodes `printAttribute`, `printStandardAttributes` et `printValidationAttributes` dans le [code du module](https://github.com/oasits/play-html5-validation).
+**Remarque** : Vous pouvez voir le détail des méthodes `printAttribute`, `printStandardAttributes` et `printValidationAttributes` dans le [code du module](https://github.com/oasits/play-html5-validation).
 
 ## Exemple 2 : Amélioration du module CRUD avec JQuery UI
 
@@ -375,7 +375,7 @@ Ceci devrait nous permettre, depuis nos vues, de charger les fichiers statiques 
 
 Dans cet exemple, le module crud-grid contient également la classe controller `CrudJson`. C'est une question de choix, on pourrait très bien la placer au niveau des autres contrôleurs de l'application, mais si l'on veut être un peu plus strict au niveau découplage des responsabilités, cela semble être le plus approprié.
 
-N.B : la plupart des modules que l'on rencontrera seront des modules que l'on peut appeller "techniques", cad permettant ou facilitant l'intégration de couche "techniques" que ne propose pas Play!► par défaut (gae, sienna, pdf, etc.). Mais on peut imaginer que, dans le cadre d'une application assez large pour s'y prêter, l'utilisation de module pour compartimenter "fonctionnellement" l'application est possible (un module admin, un module gestion, un module facturation, etc.).
+**Remarque** : la plupart des modules que l'on rencontrera seront des modules que l'on peut appeller "techniques", cad permettant ou facilitant l'intégration de couche "techniques" que ne propose pas Play!► par défaut (gae, sienna, pdf, etc.). Mais on peut imaginer que, dans le cadre d'une application assez large pour s'y prêter, l'utilisation de module pour compartimenter "fonctionnellement" l'application est possible (un module admin, un module gestion, un module facturation, etc.).
 
 ### UI GRID!
 

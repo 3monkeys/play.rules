@@ -116,7 +116,7 @@ Pour le top 10, vous pouvez choisir un style de musique. Pour cela, le template 
 </select>
 ~~~
 
-N.B. : Le lange d'expression utilisé dans les templates est [Groovy](http://groovy.codehaus.org/). C'est un langage à typage dynamique très proche de Java, qui nous permet de manipuler facilement les objets renvoyés par le contrôleur.
+**Remarque** : Le lange d'expression utilisé dans les templates est [Groovy](http://groovy.codehaus.org/). C'est un langage à typage dynamique très proche de Java, qui nous permet de manipuler facilement les objets renvoyés par le contrôleur.
 
 ## Le formulaire d'ajout
 
@@ -461,7 +461,7 @@ public static List<Album> filterByYear(List<Album> albums, String year) {
 ~~~ 
 
 	
-N.B. : On aurait pu se passer de cette libraire, appliquer les filtres à l'aide d'une requête en base de données. Mais cet exemple nous permet de voir comment intégrer d'autres librairies à notre application Play!►, tout en obtenant un code intéressant du point de vue de la syntaxe.
+**Remarque** : On aurait pu se passer de cette libraire, appliquer les filtres à l'aide d'une requête en base de données. Mais cet exemple nous permet de voir comment intégrer d'autres librairies à notre application Play!►, tout en obtenant un code intéressant du point de vue de la syntaxe.
 	
 Pour que Play!► puisse bénéficier de lambdaj, on ajoute cette ligne à la section `require` du fichier dependencies.yml :
    
