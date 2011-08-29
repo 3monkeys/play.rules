@@ -1,11 +1,11 @@
 # Découverte des modules
 
-Il existe un grand nombre de modules complémentaires pour ajouter des fonctionnalités à Play. Nous allons en voir quelques exemples.
+Il existe un grand nombre de modules complémentaires pour ajouter des fonctionnalités à Play!►. Nous allons en voir quelques exemples.
 
 ## Validation côté client avec HTML5
 
 La spécification HTML 5 prévoit la possibilité de valider les données d'un formulaire HTML côté client, directement dans le navigateur avant d'envoyer les données vers un serveur.
-Il existe un module pour Play qui permet de faire un mapping entre les annotations de validation du modèle (qui servent normalement à valider les données côté serveur) et le rendu HTML, pour intégrer cette fonctionnalité.
+Il existe un module pour Play!► qui permet de faire un mapping entre les annotations de validation du modèle (qui servent normalement à valider les données côté serveur) et le rendu HTML, pour intégrer cette fonctionnalité.
 
 Pour activer ce module, après l'avoir téléchargé il suffit d'ajouter cette ligne dans le fichier dependencies.yml, dans la section `require`:
 
@@ -88,13 +88,13 @@ Vous pouvez voir ce module en action dans [cette vidéo](http://www.youtube.com/
   
 ## Et plein d'autres modules!
 
-Il existe un tas d'autres modules et de nouveaux arrivent fréquemment grâce à la communauté des développeurs Play.
+Il existe un tas d'autres modules et de nouveaux arrivent fréquemment grâce à la communauté des développeurs Play!►.
 
 On trouve par exemple :
 
 - [GAE](http://www.playframework.org/modules/gae), pour déployer son application sur Google APP Engine, le cloud de Google
-- [Morphia](http://www.playframework.org/modules/morphia), pour utiliser très simplement la base de données NoSQL MongoDB (base orientée documents) avec Play
-- [Tabula Rasa](http://www.playframework.org/modules/tabularasa-0.2/home), pour intégrer le plugin DataTables de JQuery au CRUD de Play
+- [Morphia](http://www.playframework.org/modules/morphia), pour utiliser très simplement la base de données NoSQL MongoDB (base orientée documents)
+- [Tabula Rasa](http://www.playframework.org/modules/tabularasa-0.2/home), pour intégrer le plugin DataTables de JQuery au CRUD
 - [OAuth](http://www.playframework.org/modules/oauth), pour authentifier des utilisateurs auprès de fournisseurs d’identité OAuth, comme Twitter ou Google
 - [Pdf](http://www.playframework.org/modules/pdf), pour générer des documents... PDF!
 - [Akka](http://www.playframework.org/modules/akka), pour faciliter la programmation concurrente, en utilisant le modèle des acteurs

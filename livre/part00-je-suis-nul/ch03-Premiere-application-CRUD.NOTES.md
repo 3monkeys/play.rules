@@ -17,7 +17,7 @@ Cela donnerai donc pour activer le module CRUD :
         # Import CRUD routes
         * /admin module:crud
 
-*Note : on vient d'expliquer à Play! que l'on utilise le module CRUD lorsque l'on utilise l'url [http://localhost:9000/admin/](http://localhost:9000/admin/)*
+*Note : on vient d'expliquer à Play!► que l'on utilise le module CRUD lorsque l'on utilise l'url [http://localhost:9000/admin/](http://localhost:9000/admin/)*
 
 **Avant de continuer, arrêtez votre application :**
 

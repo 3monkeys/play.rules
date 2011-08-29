@@ -2,7 +2,7 @@
 
 Tout ce qui va se dire ici doit être oublié une fois que vous passerez au chapitre 1. Le chapitre "zéro" n'est là que pour désacraliser la bête. Vous ne vous sentez pas à l'aise avec le développement web en java, le pattern MVC vous donne des boutons (faut reconnaître qu'une indigestion de Struts c'est moyen), écrire des requêtes SQL vous angoisse, vous êtes débutant etc. ... Mais vous voulez vous y coller tout de suite (l'est-y pas tout plein de motivation !). Et bien, ce chapitre est pour vous (vous allez très vite comprendre pourquoi)
 
-##Play! c'est quoi ?
+##Play!► c'est quoi ?
 
 On l'a déjà dit dans l'intro ! Mais je vous donne ma définition : *"c'est le moyen de se la jouer rapidement en java-web, alors que l'on n'est pas forcément le meilleur de l'équipe"*
 
@@ -13,7 +13,7 @@ Mais ça c'est pour mes petits camarades [@loic_d](@loic_d) et [@mklabs](@mklabs
 
 Nous allons voir comment :
 
-- installer Play!
+- installer Play!►
 - définir le cahier des charges de notre 1ère application
 - générer le squelette de l'application
 - paramétrer votre IDE préféré (en fait je vais vous dire quel IDE utiliser)
@@ -104,7 +104,7 @@ Et les semaines, mois, ... passent à apprendre Java à la terrasse du café en 
 Bon, apprendre Java tout seul, bof ... C'est le printemps, vous êtes dans une région magnifique où le réseau halieutique (les rivières, les étangs, ...) est très riche. Grande décision : vous avez décidez de vous mettre à la pêche "sportive" et f#%$ Java ! C'est parti pour les grandes balades au bord de l'eau.
 
 Après quelques jours sur le même spot, vous faites la connaissance de Julo qui fait partie de l'amicale des pêcheurs de l'Azergues. Quelques canettes de bières plus tard, vous tentez d'expliquer à Julo ce qu'est un ingénieur informaticien. C'est à ce moment là qu'il sort "La Poire Maison" de sa besace car ça y'est vous êtes "potes de pêche". 
-1 heure après vous êtes LA PERSONNE qui va faire le site web de gestion des prises de pêches des concours de l'amicale des pêcheurs de l'Azergues et *en PLAY!Framework* bien sûr. 
+1 heure après vous êtes LA PERSONNE qui va faire le site web de gestion des prises de pêches des concours de l'amicale des pêcheurs de l'Azergues et *en Play!►* bien sûr. 
 Rendez-vous, donc, dimanche au local de l'amicale pour établir les spécifications, capturer les besoins, définir les exigences utilisateurs (eh oui, moi la poire ça me rend loquace)
 
 ####Le Cahier des Charges
@@ -184,7 +184,7 @@ si tout va bien, ceci devrait s'afficher :
 
 En ce qui concerne l'IDE, vous pouvez très bien utiliser un simple éditeur de code avec colorisation syntaxique (Vous avez par exemple KomodoEdit qui fonctionne sur toutes les plateformes qui est assez sympa ... et open-source), mais c'est vraiment si vous voulez vous la jouer en démo ou que vous connaissez Java par coeur ou que vous codez sur un eeepc 701.
 
-Play! propose les commandes nécessaires pour transformer votre projet en projet Eclipse, NetBeans ou IntelliJ. Je suis particulièrement accro à NetBeans, mais pour avoir utilisé la version Community d'IntelliJ (Win, Tux, OSX), je vous conseille fortement de choisir cet IDE, étant donné que la version open source suffit largement pour faire du Play!, pourquoi se priver ?
+Play!► propose les commandes nécessaires pour transformer votre projet en projet Eclipse, NetBeans ou IntelliJ. Je suis particulièrement accro à NetBeans, mais pour avoir utilisé la version Community d'IntelliJ (Win, Tux, OSX), je vous conseille fortement de choisir cet IDE, étant donné que la version open source suffit largement pour faire du Play!, pourquoi se priver ?
 
 Voyons donc comment faire pour transformer notre squelette d'application en projet IntelliJ (bien sûr vous avez téléchargé IntelliJ : [http://www.jetbrains.com/idea/](http://www.jetbrains.com/idea/)) :
 
@@ -223,24 +223,24 @@ Voyons donc comment faire pour transformer notre squelette d'application en proj
 ![Alt "p00_ch01_04"](https://github.com/3monkeys/play.rules/raw/master/rsrc/p00_ch01_04.png)
 
 - Sélectionnez le choix `Import existing module`
-- Précisez le chemin du fichier module `azerguespeche.iml` (qui a été généré par Play! lors de la commande `play idealize azerguespeche`)
+- Précisez le chemin du fichier module `azerguespeche.iml` (qui a été généré par Play!► lors de la commande `play idealize azerguespeche`)
 - Puis clickez sur `Finish`
 
 <!--![Alt "ch00_05"](/3monkeys/play.rules/blob/master/rsrc/ch00_05.png?raw=true)-->
 ![Alt "p00_ch01_05"](https://github.com/3monkeys/play.rules/raw/master/rsrc/p00_ch01_05.png)
 
 - La fenêtre se réactualise avec un onglet `Sources`
-- Dans l'onglet, clickez sur `Add Content Root`. Nous allons ajouter les dépendances à certains modules embarqués dans Play!.
+- Dans l'onglet, clickez sur `Add Content Root`. Nous allons ajouter les dépendances à certains modules embarqués dans Play!►.
 
 <!--![Alt "ch00_06"](/3monkeys/play.rules/blob/master/rsrc/ch00_06.png?raw=true)-->
 ![Alt "p00_ch01_06"](https://github.com/3monkeys/play.rules/raw/master/rsrc/p00_ch01_06.png)
 
-- Précisez le répertoire du module `CRUD` (présent dans le répertoire d'installation de Play!). Ce module nous permettra de générer automatiquement des écrans de saisie et de visualisation.
+- Précisez le répertoire du module `CRUD` (présent dans le répertoire d'installation de Play!►). Ce module nous permettra de générer automatiquement des écrans de saisie et de visualisation.
 
 <!--![Alt "ch00_07"](/3monkeys/play.rules/blob/master/rsrc/ch00_07.png?raw=true)-->
 ![Alt "p00_ch01_07"](https://github.com/3monkeys/play.rules/raw/master/rsrc/p00_ch01_07.png)
 
-- Précisez le répertoire du module `Secure` (présent dans le répertoire d'installation de Play!). Ce module nous permettra de gérer facilement l'authentification.
+- Précisez le répertoire du module `Secure` (présent dans le répertoire d'installation de Play!►). Ce module nous permettra de gérer facilement l'authentification.
 
 <!--![Alt "ch00_08"](/3monkeys/play.rules/blob/master/rsrc/ch00_08.png?raw=true)-->
 ![Alt "p00_ch01_08"](https://github.com/3monkeys/play.rules/raw/master/rsrc/p00_ch01_08.png)

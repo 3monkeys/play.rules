@@ -1,9 +1,9 @@
 # Authentification et sécurité
 
-Maintenant que nous savons comment développer une application Web avec Play, voyons comment gérer la sécurité et l'authentification à l'aide du module Secure.
+Maintenant que nous savons comment développer une application Web avec Play!►, voyons comment gérer la sécurité et l'authentification à l'aide du module Secure.
 Nous allons étudier le cas suivant : notre application est publique, on peut y naviguer sans être authentifié. Mais elle possède également des fonctions d’administrations, affichées lorsque l’on s’identifie comme admin. Pour accéder à ces fonctions, il existe une URL qui permet d’accéder à un formulaire d'authentification. 
 
-Play permet d’écrire les informations de session utilisateur dans un cookie. Ce cookie est signé, il n’est donc pas modifiable côté client, par contre il n’est pas crypté, il ne faut donc pas écrire d’informations sensible à l’intérieur (pas de mot de passe par exemple). Dans notre exemple, on souhaite utiliser le cookie de session pour stocker le fait que l’utilisateur soit identifié comme un administrateur ou non.
+Play!► permet d’écrire les informations de session utilisateur dans un cookie. Ce cookie est signé, il n’est donc pas modifiable côté client, par contre il n’est pas crypté, il ne faut donc pas écrire d’informations sensible à l’intérieur (pas de mot de passe par exemple). Dans notre exemple, on souhaite utiliser le cookie de session pour stocker le fait que l’utilisateur soit identifié comme un administrateur ou non.
 
 Une des choses que l’on souhaite ajouter à l’application web si l’utilisateur est admin est un lien “Supprimer” dans le tableau html qui liste nos entités métiers (on liste des albums de musique pour reprendre les exemples précédents). On peut donc utiliser le code suivant:
 
@@ -16,7 +16,7 @@ Mais on se retrouve vite confronté à un problème, un clic sur ce lien mène �
 	/admin/delete?id=11
 
 Même si le lien est masqué, n’importe qui peut entrer cette URL dans son browser pour supprimer l’entité de son choix. Nous devons donc aussi protéger la méthode delete côté serveur.
-Le module Secure de Play va nous permettre de faire ça de manière élégante. Il propose également un formulaire de login prêt à l’emploi qui permet de mettre les informations dont on a besoin dans le cookie de session.
+Le module Secure de Play!► va nous permettre de faire ça de manière élégante. Il propose également un formulaire de login prêt à l’emploi qui permet de mettre les informations dont on a besoin dans le cookie de session.
 
 
 ## Mise en oeuvre du module Secure
@@ -105,7 +105,7 @@ On ajoute le code suivant :
  </body>
 ~~~
 
-Et voilà, vous savez maintenant comment ajouter des fonctions d’administration et de la sécurité à un site public avec Play!
+Et voilà, vous savez maintenant comment ajouter des fonctions d’administration et de la sécurité à un site public avec Play!►.
 
 
 ## L'internationalisation
@@ -115,7 +115,7 @@ Pour le message d'accueil de notre application, on peut par exemple écrire :
 
 	<h1>&{welcome}</h1>
 
-Les paramètres entourés de `&{}` seront traduits à partir des clés définies dans les fichiers de configuration de Play.
+Les paramètres entourés de `&{}` seront traduits à partir des clés définies dans les fichiers de configuration de Play!►.
 Les clés pour la langue par défaut se trouvent dans le fichier `/conf/messages` :
 
 	welcome=Welcome on Vote4Music!

@@ -211,7 +211,7 @@ Allez faire un tour dans l'écran des prises :
 
 ![Alt "p00_ch04_01"](https://github.com/3monkeys/play.rules/raw/master/rsrc/p00_ch04_01.png)
 
-C'est plus pro, ça coûte pas cher, et c'est facile, voire trop facile! (la magie de Play!)
+C'est plus pro, ça coûte pas cher, et c'est facile, voire trop facile! (la magie de Play!►)
 
 - - -
 **Remarque :** il est possible d'avoir autant de fichiers `messages.xxx` que de langues.
@@ -336,7 +336,7 @@ Et si tout va bien, vous devriez obtenir cela :
 
 ![Alt "p00_ch04_02"](https://github.com/3monkeys/play.rules/raw/master/rsrc/p00_ch04_02.png)
 
-Ok, ça casse pas 3 pattes à un canard esthétiquement parlant (encore que j'ai vu beaucoup plus moche sur des projets facturés ;) ), mais avouez que l'effort est bien faible au regard du résultat. Est-ce que vous commencez à vous sentir plus "à l'aise" avec Play! ?
+Ok, ça casse pas 3 pattes à un canard esthétiquement parlant (encore que j'ai vu beaucoup plus moche sur des projets facturés ;) ), mais avouez que l'effort est bien faible au regard du résultat. Est-ce que vous commencez à vous sentir plus "à l'aise" avec Play!► ?
 Encore quelques étapes, et vous en saurez assez pour commencer à "bidouiller" des choses un peu plus "trapues".
 
 ##La suite (c'est fini pour cette partie)

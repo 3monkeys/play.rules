@@ -44,9 +44,9 @@ Alors je ne suis pas complètement idiot, j'ai codé mes 1ers écrans et ma mire
 
 Et bien vous allez voir (pour ceux qui ne connaissent pas) que :
 
-##Avec Play!, MVC c'est limpide !
+##Avec Play!►, MVC c'est limpide !
 
-Dans le chapitre précédent, nous avons initialisé notre application **AzerguesPeche**, il est temps maintenant de coder notre première page en mode MVC, comme ça après on n'en parle plus de MVC. Ami lecteur-codeur-newbee, prépare toi à entrer dans le monde de **Java + WEB** sans mal ni effort avec Play!Framework (si c'est pas un slogan de bouqin ça!).
+Dans le chapitre précédent, nous avons initialisé notre application **AzerguesPeche**, il est temps maintenant de coder notre première page en mode MVC, comme ça après on n'en parle plus de MVC. Ami lecteur-codeur-newbee, prépare toi à entrer dans le monde de **Java + WEB** sans mal ni effort avec Play Framework (si c'est pas un slogan de bouqin ça!).
 
 - Tout d'abord relancez votre application si elle ne tourne plus (`play run azerguespeche`)
 - Ouvrez votre projet dans votre ide préféré (cf. chapitre précédent : [01-Preparation.fr.md](01-Preparation.fr.md))
@@ -83,7 +83,7 @@ créeons un premier modèle `version` dans le répertoire `models` :
 	}
 ~~~
 
-**Remarque :** vous pouvez voir qu'il n'y a pas de getter ni de setter, juste des "champs" publiques. Dans la majeure partie des cas vous n'en n'avez pas besoin, alors à quoi bon ? Sachez cependant que Play! va les générer lui même à la compilation (vous ne verrez rien dans le code). Au besoin vous pouvez les écrire vous même si nécessaire.
+**Remarque :** vous pouvez voir qu'il n'y a pas de getter ni de setter, juste des "champs" publiques. Dans la majeure partie des cas vous n'en n'avez pas besoin, alors à quoi bon ? Sachez cependant que Play!► va les générer lui même à la compilation (vous ne verrez rien dans le code). Au besoin vous pouvez les écrire vous même si nécessaire.
 
 ####Et le contrôleur ?
 
@@ -150,11 +150,11 @@ Si c'est vrai ! Vous n'avez qu'à appeler l'url [http://localhost:9000/](http://
 
 *Et là je sens que une pointe de fierté et de satisfaction monter en vous ... non ???*
 
-Donc, comme vous venez de le voir, faire discuter un contrôleur avec un modèle et une vue, ça n'a rien de bien compliqué, surtout avec Play!. Là sans vous en aperçevoir, vous avez compris MVC.
+Donc, comme vous venez de le voir, faire discuter un contrôleur avec un modèle et une vue, ça n'a rien de bien compliqué, surtout avec Play!►. Là sans vous en aperçevoir, vous avez compris MVC.
 
 **Question :** 
 
-- *Euh ... et Play!, comment il sait qu'il faut ouvrir la page index.html ?*
+- *Euh ... et Play!►, comment il sait qu'il faut ouvrir la page index.html ?*
 - *c'est une excellente question !*
 
 Allez ouvrir le fichier `routes` dans répertoire `conf` de votre projet, il contient le code suivant :

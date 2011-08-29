@@ -2,7 +2,7 @@
 
 ## Les jobs
 
-Play propose un système de jobs qui permet de programmer des traitements sans qu'ils soient explicitement demandés par le navigateur.
+Play!► propose un système de jobs qui permet de programmer des traitements sans qu'ils soient explicitement demandés par le navigateur.
 
 ### Au démarrage de l'application
 
@@ -63,7 +63,7 @@ Pour définir finement la périodicité on peut utiliser la syntaxe CRON avec l'
 
 Il arrive que l'on doive effectuer des traitements longs dans une application web : génération d'un gros rapport PDF, contact d'un serveur distant pour obtenir des informations... 
 Lors d'un traitement long, on ne veut pas que le navigateur reste en suspension en attendant la réponse HTTP après qu'on ait lancé la requête. Il pourrait déclencher une erreur de timeout si le temps d'attente était trop long.
-Pour résoudre cette problématique, on peut utiliser des traitements asynchrones. Le plus simple pour implémenter ce genre de fonctionnement avec Play est d'utiliser les WebSocket HTML5.
+Pour résoudre cette problématique, on peut utiliser des traitements asynchrones. Le plus simple pour implémenter ce genre de fonctionnement avec Play!► est d'utiliser les WebSocket HTML5.
 
 Ce procédé crée un mode de communication bidirectionnel entre le navigateur et le serveur. Dès que le serveur aura fini son action, il notifiera le navigateur sans que celui-ci soit obligé de garder une connexion HTTP ouverte pendant toute la durée du traitement. Le serveur est alors capable de pousser une information au client dès qu'il en a besoin ("push" de données).
 

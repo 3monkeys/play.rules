@@ -9,7 +9,7 @@ Nous allons maintenant étudier le code de ce module pour comprendre comment ré
 
 ### Structure du module
 
-La structure d'un module ressemble à celle d'une application Play. Dans ce module nous trouvons les répertoires suivants :
+La structure d'un module ressemble à celle d'une application Play!►. Dans ce module nous trouvons les répertoires suivants :
 
 * app
 * app/tags
@@ -101,19 +101,19 @@ N.B. : Vous pouvez voir le détail des méthodes `printAttribute`, `printStandar
 
 Il y a quelques temps, [la team jQuery UI a annoncé](http://blog.jqueryui.com/2011/02/unleash-the-grid/) qu'ils avaient commencé à sérieusement et officiellement travailler sur le widget Grid de la librairie. Le développement prend place au sein de la branche grid du repository github, le répertoire nous intéressant le plus étant [grid-datamodel](https://github.com/jquery/jquery-ui/tree/grid/grid-datamodel).
 
-Dans cette partie, nous nous intéresserons à l'implémentation grid-datamodel et son intégration dans le module CRUD de Play.
-Nous nous concentrerons à configurer le widget UI Grid et adapter légèrement le CRUD généré par Play pour permettre l'utilisation du widget en mode XHR (Ajax).
+Dans cette partie, nous nous intéresserons à l'implémentation grid-datamodel et son intégration dans le module CRUD de Play!►.
+Nous nous concentrerons à configurer le widget UI Grid et adapter légèrement le CRUD généré par notre framework pour permettre l'utilisation du widget en mode XHR (Ajax).
 
 ### Le plan
 
-Le module CRUD de Play comporte un ensemble de fichier de templates (views/tags) permettant de gérer et afficher les données du modèle. Dans l'exemple que nous nous apprêtons à mettre en place ici, cela signifie générer une table à partir des données de notre modèle. Le module CRUD par défaut utilise des paramètres pour permettre pagination, recherche/filtre et tri. Play génère alors la table correspondante pour une "page" unique. Ainsi, même si votre modèle comporte des milliers d'objets, Play générera la table correspondante avec seulement une vingtaine de ligne (configurable).
+Le module CRUD comporte un ensemble de fichier de templates (views/tags) permettant de gérer et afficher les données du modèle. Dans l'exemple que nous nous apprêtons à mettre en place ici, cela signifie générer une table à partir des données de notre modèle. Le module CRUD par défaut utilise des paramètres pour permettre pagination, recherche/filtre et tri. Play!► génère alors la table correspondante pour une "page" unique. Ainsi, même si votre modèle comporte des milliers d'objets, le framework générera la table correspondante avec seulement une vingtaine de ligne (configurable).
 
 Dans le cadre de ce tutoriel, les étapes que l'on devra mettre en place se résumeront à:
 
 1. Configuration d'une application exemple, le but étant de définir des données avec lesquelles travailler.
 2. Création de nos contrôleurs et modification des templates utilisé par le module CRUD. Cette étape nous permettra de fournir un service dont le retour est une réponse JSON représentant les données de notre modèle.
-3. La création d'un module Play très simple dont le seul but est de contenir les assets (fichiers statiques) nécessaire au widget grid et de les rendre disponible au reste de l'application via l'utilisation d'une route particulière `/grid/`
-4. Configuration du widget grid et du datasource pour utiliser le service fourni par le module Play.
+3. La création d'un module Play!► très simple dont le seul but est de contenir les assets (fichiers statiques) nécessaire au widget grid et de les rendre disponible au reste de l'application via l'utilisation d'une route particulière `/grid/`
+4. Configuration du widget grid et du datasource pour utiliser le service fourni par notre module
 
 Le code de cet exemple est disponible ici :
 
@@ -124,7 +124,7 @@ Le code de cet exemple est disponible ici :
 
 Nous utiliserons un exemple de gestion des fuseaux horaires (timezone locale) pour jouer avec un widget grid. Cela nous permettra d'avoir facilement plusieurs milliers d'enregistrement avec lesquels travailler.
 
-Nous partons d'une application Play vierge pour laquelle nous activerons le module CRUD (voir partie 0 du livre).
+Nous partons d'une application Play!► vierge pour laquelle nous activerons le module CRUD (voir partie 0 du livre).
 
 Nous allons désormais nous occuper de la création de notre modèle. Dans notre exemple, il s'agit de timezones, le modèle est simple: timezoneId, name, language et un offset.
 
@@ -240,7 +240,7 @@ A ce stade, nous avons donc de disponible les routes suivantes:
 	DELETE    /admin/localisedtimezones/{id}                    LocalisedTimeZones.delete
 	GET       /localisedtimezones.json                          LocalisedTimeZones.listJson
 
-Vous pouvez rapidement avoir un aperçu des routes disponibles en générant une erreur 404. Par défaut (en mode dev), Play vous renverra une page 404 particulière listant toutes les routes possibles pour votre application: [localhost:9000/coucoujsuispasla](http://localhost:9000/coucoujsuispasla)
+Vous pouvez rapidement avoir un aperçu des routes disponibles en générant une erreur 404. Par défaut (en mode dev), Play!► vous renverra une page 404 particulière listant toutes les routes possibles pour votre application: [localhost:9000/coucoujsuispasla](http://localhost:9000/coucoujsuispasla)
 
 Un tour à l'adresse [localhost:9000/admin/](http://localhost:9000/admin/) devrait vous donner:
 
@@ -250,9 +250,9 @@ Page à partir de laquelle nous pouvons accéder à la liste des Timezone. Par d
 
 #### Vues
 
-Maintenant, jetons un œil à notre vue custom list.html. Il s'agit de la vue responsable de la génération de notre table HTML (`app/views/CRUD/list.html`). Le module CRUD offre un moyen simple et efficace de surcharger des composants du module comme les views ou tags avec la commande `play crud:ov --template CRUD/list`. Cela indiquera à Play de vous fournir une copie conforme de ce template dans votre propre répertoire, que l'on peut ensuite modifier à souhait. Aucune configuration supplémentaire n'est à apporter, le système de module implique que Play cherche d'abord toute ressource au sein du répertoire de votre appli, puis ensuite au sein des modules configurés. Pratique, puissant, flexible, élégant, le système de modules de Play est une petite merveille... mais je m'égare, continuons :)
+Maintenant, jetons un œil à notre vue custom list.html. Il s'agit de la vue responsable de la génération de notre table HTML (`app/views/CRUD/list.html`). Le module CRUD offre un moyen simple et efficace de surcharger des composants du module comme les views ou tags avec la commande `play crud:ov --template CRUD/list`. Cela indiquera à Play!► de vous fournir une copie conforme de ce template dans votre propre répertoire, que l'on peut ensuite modifier à souhait. Aucune configuration supplémentaire n'est à apporter, le système de module implique que le framework cherche d'abord toute ressource au sein du répertoire de votre appli, puis ensuite au sein des modules configurés. Pratique, puissant, flexible, élégant, le système de modules de Play!► est une petite merveille... mais je m'égare, continuons :)
 
-Pour modifier la vue list.html, Play propose la commande `play crud:ov`:
+Pour modifier la vue list.html, Play!► propose la commande `play crud:ov`:
 
 	> play crud:ov
 	~        _            _
@@ -273,7 +273,7 @@ Ainsi la commande:
 
 	play crud:ov --t CRUD/list
 
-demandera à Play de copier le template CRUD par défaut list.html dans le répertoire `app/views/CRUD/list.html` de notre application.
+demandera à Play!► de copier le template CRUD par défaut list.html dans le répertoire `app/views/CRUD/list.html` de notre application.
 
     #{extends 'CRUD/layout.html' /}
 
@@ -285,7 +285,7 @@ demandera à Play de copier le template CRUD par défaut list.html dans le répe
 
 
         <table class="crud-grid">
-          <caption>UI Grid integration with Play! Crud module</caption>
+          <caption>UI Grid integration with Play Crud module</caption>
           <thead>
             <tr>
               <th data-field="timeZoneId">yayTimezone</th>
@@ -375,7 +375,7 @@ Ceci devrait nous permettre, depuis nos vues, de charger les fichiers statiques 
 
 Dans cet exemple, le module crud-grid contient également la classe controller `CrudJson`. C'est une question de choix, on pourrait très bien la placer au niveau des autres contrôleurs de l'application, mais si l'on veut être un peu plus strict au niveau découplage des responsabilités, cela semble être le plus approprié.
 
-N.B : la plupart des modules que l'on rencontrera seront des modules que l'on peut appeller "techniques", cad permettant ou facilitant l'intégration de couche "techniques" que ne propose pas Play par défaut (gae, sienna, pdf, etc.). Mais on peut imaginer que, dans le cadre d'une application assez large pour s'y prêter, l'utilisation de module pour compartimenter "fonctionnellement" l'application est possible (un module admin, un module gestion, un module facturation, etc.).
+N.B : la plupart des modules que l'on rencontrera seront des modules que l'on peut appeller "techniques", cad permettant ou facilitant l'intégration de couche "techniques" que ne propose pas Play!► par défaut (gae, sienna, pdf, etc.). Mais on peut imaginer que, dans le cadre d'une application assez large pour s'y prêter, l'utilisation de module pour compartimenter "fonctionnellement" l'application est possible (un module admin, un module gestion, un module facturation, etc.).
 
 ### UI GRID!
 
@@ -458,7 +458,7 @@ Un tour à l'adresse [http://localhost:9000/admin/localisedtimezones](http://loc
 
 ### Références
 
-Cette expérience est grandement inspirée par ces deux excellents articles de [Lunatech Research](//www.lunatech-research.com/editorials/tags/play) parlant de l'intégration du plugin datatable avec Play:
+Cette expérience est grandement inspirée par ces deux excellents articles de [Lunatech Research](//www.lunatech-research.com/editorials/tags/play) parlant de l'intégration du plugin datatable avec Play!► :
 
 * [Integrating Play framework with jQuery DataTables](//www.lunatech-research.com/archives/2011/01/28/playframework-jquery-datatables)
 * [Ajax DataTables with the Play framework](//www.lunatech-research.com/archives/2011/02/07/ajax-datatables-playframework)

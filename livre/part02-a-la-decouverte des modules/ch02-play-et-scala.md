@@ -1,6 +1,6 @@
-# Play et Scala
+# Play!► et Scala
 
-Play propose d'utiliser au choix les langages Scala ou Java pour développer des applications.
+Play!► propose d'utiliser au choix les langages Scala ou Java pour développer des applications.
 
 Play-Scala est plus qu'un simple module, c'est une version complète du framework dédiée à ce langage. Cette version possède un site dédié qui présente ses avantages et ses fonctionnalités : [scala.playframework.org](http://scala.playframework.org/)
 

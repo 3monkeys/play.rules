@@ -13,9 +13,9 @@ REST est en fait le modèle sur lequel le web lui même est construit : les site
 
 Pour la sécurité il est possible de s'appuyer sur l'authentification HTTP, ou encore sur le SSL avec HTTPS. Comme vous pouvez le voir, tout est fait pour utiliser au maximum ce que le web nous fournit depuis toujours, sans sur-couche supplémentaire.
 
-## Play et les services REST
+## Play!► et les services REST
 
-Les URL de Play étant RESTful par essence, il devient très facile de créer une petite API REST/XML conjointement à l'interface Web d'une application Play!.
+Les URL de Play!► étant RESTful par essence, il devient très facile de créer une petite API REST/XML conjointement à l'interface Web d'une application Play!►.
 Voyons comment procéder.
 
 ### Exposer des données avec un service REST
@@ -62,7 +62,7 @@ public static void listXml(String genre) {
 }
 ~~~
 
-Je recherche simplement les albums correspondant au genre passé en paramètre, et je demande le rendu de la liste. Au passage on voit la simplicité d'utilisation de JPA avec Play! Le rendu sera fait dans le fichier portant le nom de la méthode et l'extension xml : listXml.xml.
+Je recherche simplement les albums correspondant au genre passé en paramètre, et je demande le rendu de la liste. Au passage on voit la simplicité d'utilisation de JPA avec Play!►. Le rendu sera fait dans le fichier portant le nom de la méthode et l'extension xml : listXml.xml.
 Ce template, placé dans le repertoire app/views, est défini comme ceci :
 
 ~~~ xml
@@ -106,8 +106,8 @@ Voilà, cela suffit pour exposer nos albums en XML. En respectant le pattern d'U
 
 ### Envoi de données à travers un service REST
 
-Dans la première partie nous avons vu comment exposer des données au format XML avec Play.
-Maintenant nous allons effectuer l'opération inverse, l'envoi d'un contenu XML au contrôleur Play, à travers une URL RESTful.
+Dans la première partie nous avons vu comment exposer des données au format XML avec Play!►.
+Maintenant nous allons effectuer l'opération inverse, l'envoi d'un contenu XML au contrôleur à travers une URL RESTful.
 
 On veut par exemple envoyer le contenu suivant en POST avec un content type application/xml :
 
@@ -169,7 +169,7 @@ public static void saveXML(){
 
 NB: il est bien sûr possible d'obtenir un code moins verbeux en dé-sérialisant l'objet à l'aide d'un outil comme JAXB ou XStream, mais ce n'est pas l'objet de ce chapitre.
 
-Lorsqu'on écrit le code album.artist=artist, la méthode `setArtist` est appelée automatiquement par Play (le code est modifié au runtime). On peut ainsi vérifier le fait que l'artiste existe ou non dans la base, pour savoir si on doit créer une nouvelle instance d'artiste ou récupérer l'artiste existant.
+Lorsqu'on écrit le code album.artist=artist, la méthode `setArtist` est appelée automatiquement par Play!► (le code est modifié au runtime). On peut ainsi vérifier le fait que l'artiste existe ou non dans la base, pour savoir si on doit créer une nouvelle instance d'artiste ou récupérer l'artiste existant.
 La méthode save() de la classe Album s'occupe alors d'enregistrer l'album en base, ainsi que l'artiste si il est inconnu dans la bibliothèque(à l'aide d'un cascade JPA).
 
 ~~~ java
@@ -222,7 +222,7 @@ Autre astuce (que j'ai découvert grâce site zengularity.com) : pour détermine
 
 	GET /api/albums.{<json|xml>format} Application.listAlbums  
 
-En appelant /albums.xml , Play appellera la méthode `listAlbums` avec le paramètre 'format' initialisé à 'xml', et en appelant `/albums.json` ce même paramètre aura la valeur 'json'. 
+En appelant /albums.xml , Play!► appellera la méthode `listAlbums` avec le paramètre 'format' initialisé à 'xml', et en appelant `/albums.json` ce même paramètre aura la valeur 'json'. 
 
 On peut ensuite s'en servir dans le contrôleur : 
 
@@ -235,7 +235,7 @@ public static void listAlbums() {
 }
 ~~~ 
 	  
-Si vous tapez l'URL /albums.xml, Play cherchera un fichier de template XML nommé `listAlbums.xml` (une autre extension fonctionnerait aussi) pour effectuer le rendu.
+Si vous tapez l'URL /albums.xml, Play!► cherchera un fichier de template XML nommé `listAlbums.xml` (une autre extension fonctionnerait aussi) pour effectuer le rendu.
 
 ### Recevoir un message JSON
 
@@ -271,9 +271,9 @@ public static void saveAlbumByApi() {
     }
 ~~~		
 
-## Appeler un service externe avec Play.libs.WS
+## Appeler un service externe avec Play!►.libs.WS
 
-Play inclue également une libraire pour écrire des clients de services REST. Pour appeler un service externe, on peut écrire :
+Play!► inclue également une libraire pour écrire des clients de services REST. Pour appeler un service externe, on peut écrire :
 
 ~~~java
 import play.libs.WS;

@@ -30,7 +30,7 @@ Et tout ceci facilement et rapidement
 
 ###Nous allons activer le module CRUD
 
-*C'est quoi CRUD ?*, alors déjà, ça veut dire **C**reate **R**ead **U**pdate **D**elete, le module CRUD de Play! va permettre de générer automatiquement pour vous les écrans de saisie des données à partir de votre modèle objet avec toute la mécanique qui va bien pour sauvegarder vos modifications. Je n'en dis pas plus, les exemples qui vont suivre parleront d'eux-même.
+*C'est quoi CRUD ?*, alors déjà, ça veut dire **C**reate **R**ead **U**pdate **D**elete, le module CRUD de Play!► va permettre de générer automatiquement pour vous les écrans de saisie des données à partir de votre modèle objet avec toute la mécanique qui va bien pour sauvegarder vos modifications. Je n'en dis pas plus, les exemples qui vont suivre parleront d'eux-même.
 
 Donc pour activer le module CRUD :
 
@@ -50,7 +50,7 @@ Donc pour activer le module CRUD :
 
         GET /admin  module:crud`
 
-*Note : on vient d'expliquer à Play! que l'on utilise le module CRUD lorsque l'on utilise l'url [http://localhost:9000/admin/](http://localhost:9000/admin/)*
+*Note : on vient d'expliquer à Play!► que l'on utilise le module CRUD lorsque l'on utilise l'url [http://localhost:9000/admin/](http://localhost:9000/admin/)*
 
 **Avant de continuer, arrêtez puis relancez votre application :**
 
@@ -90,11 +90,11 @@ aura le code suivant :
 	}
 ~~~
 
-*Note : tous les modèles sont précédés par l'annotation `@Entity`, cela permet à Play! de savoir que c'est un modèle qui sera "persistable" en base de données.*
+*Note : tous les modèles sont précédés par l'annotation `@Entity`, cela permet à Play!► de savoir que c'est un modèle qui sera "persistable" en base de données.*
 
 *Note bis : tous les modèles héritent de la classe `Model`, ce qui leur affecte différents "comportements", comme la méthode `save()`.*
 
-*Note (encore) : vous pouvez remarquer que l'on n'utilise pas de getter ni de setter, mais directement des champs publiques, Play! s'occupera de les générer à la compilation.*
+*Note (encore) : vous pouvez remarquer que l'on n'utilise pas de getter ni de setter, mais directement des champs publiques, Play!► s'occupera de les générer à la compilation.*
 
 ###La classe Poisson
 
@@ -163,11 +163,11 @@ Vérifions quand même : [http://localhost:9000/admin/](http://localhost:9000/ad
 
 Pour être plus sûr : clickez sur "add" à droite, sur la ligne "Pêcheur", nous allons ajouter quelques "amis pêcheurs" :
 
-- Vous pouvez voir que Play! s'est débrouillé comme un chef à partir de la structure de votre classe `Pecheur`
+- Vous pouvez voir que Play!► s'est débrouillé comme un chef à partir de la structure de votre classe `Pecheur`
 
 ![Alt "p00_ch03_02"](https://github.com/3monkeys/play.rules/raw/master/rsrc/p00_ch03_02.png)
 
-- Lorsque vous sauvegardez ("Save and create another"), Play! vous affiche un joli message d'encouragement (en vert)
+- Lorsque vous sauvegardez ("Save and create another"), Play!► vous affiche un joli message d'encouragement (en vert)
 
 ![Alt "p00_ch03_03"](https://github.com/3monkeys/play.rules/raw/master/rsrc/p00_ch03_03.png)
 
@@ -251,7 +251,7 @@ Essayez de sauvegarder sans avoir rien saisi :
 
 ![Alt "p00_ch03_07"](https://github.com/3monkeys/play.rules/raw/master/rsrc/p00_ch03_07.png)
 
-Play! vous affiche un message d'erreur, et où sont les champs obligatoires, tout ça juste avec une simple annotation !
+Play!► vous affiche un message d'erreur, et où sont les champs obligatoires, tout ça juste avec une simple annotation !
 
 Bon, maintenant, il faut les saisir ces poissons ...
 
@@ -320,7 +320,7 @@ Soyons donc débile :
 
 ![Alt "p00_ch03_09"](https://github.com/3monkeys/play.rules/raw/master/rsrc/p00_ch03_09.png)
 
-Eh oui, Play! propose bien un module "anti-débile" et vous explique ce qu'il faut saisir avant d'enregistrer.
+Eh oui, Play!► propose bien un module "anti-débile" et vous explique ce qu'il faut saisir avant d'enregistrer.
 
 ##Quelques remarques
 

@@ -1,11 +1,11 @@
-# Introduction - Pourquoi Play
+# Introduction - Pourquoi Play!►
 
-Play framework est une vraie révolution dans le monde des application Web écrites en Java. Il vous fera oublier toutes les souffrances que vous avez pu vivre avec la pile Java EE classique, des frameworks comme Spring.
+Play Framework est une vraie révolution dans le monde des application Web écrites en Java. Il vous fera oublier toutes les souffrances que vous avez pu vivre avec la pile Java EE classique, des frameworks comme Spring.
 Architectures techniques opaques, gestion chaotique des dépendances, longues phases de compilation, redémarrage du serveur à chaque modification du code... tout ça ne sera bientôt pour vous que de mauvais souvenirs :)
 
 ## Architecture simple
 
-Play se base sur une architecture extrêmement simple en suivant le design pattern MVC. A côté de ça il ne rajoute pas de notions de couches service, couches DAO etc.
+Play!► se base sur une architecture extrêmement simple en suivant le design pattern MVC. A côté de ça il ne rajoute pas de notions de couches service, couches DAO etc.
 
 Tout le code métier est porté par les objets du modèle, afin d'éviter le phénomène appelé [Anemic Domain Model](http://en.wikipedia.org/wiki/Anemic_Domain_Model), qui résulte en l'écriture de classes métier contenant uniquement des champs et des accesseurs (getters et setters), donc sans traitements ni intelligence. C'est ce qui arrive dès que l'on commence à implémenter le code métier de l'application dans des couches techniques (couches service, EJB...)
 
@@ -24,23 +24,23 @@ On peut par exemple écrire le code suivant pour manipuler une entité "Personne
 
 ## Orienté REST
 
-Avec Play, il est extrêmement facile de faire correspondre des URL simples, lisibles et `bookmarkables` aux actions du controlleur.
+Avec Play!►, il est extrêmement facile de faire correspondre des URL simples, lisibles et `bookmarkables` aux actions du controlleur.
 
 Par exemple, pour afficher toutes les personnes habitant à Paris dans un annuaire, on pourra utiliser une URL comme
 
     /annuaire/personnes/paris
 
-Ceci est renforcé par l'aspect `stateless` du framework. Le serveur ne stockant pas d'état, on n'aura pas de mauvaise surprise quant au rendu correspondant à une URL : Play effectuera toujours le même traitement quelque soit le contexte (voir paragraphe suivant).
+Ceci est renforcé par l'aspect `stateless` du framework. Le serveur ne stockant pas d'état, on n'aura pas de mauvaise surprise quant au rendu correspondant à une URL : le framework effectuera toujours le même traitement quelque soit le contexte (voir paragraphe suivant).
 
 ## Stateless et scalable
 
-Play se veut respectueux de l'architecture du Web et donc des architectures REST. Guillaume Bort a fait le choix de ne rien stocker côté serveur.
+Play!► se veut respectueux de l'architecture du Web et donc des architectures REST. Guillaume Bort a fait le choix de ne rien stocker côté serveur.
 Cela signifie qu'il n'existe pas de session utilisateur sur la partie serveur du framework. 
 Ceci peut sembler déstabilisant lorsque l'on a l'habitude de travailler des frameworks comme JSF ou Wicket. Mais finalement ce mode de fonctionnement simplifie vraiment les choses.
 En effet on n'a pas besoin de gérer l'état du serveur, il ne fait que traiter les requêtes qui arrivent et renvoyer la réponse. Ceux qui ont déjà eu des problèmes avec Wicket et sa manie de tout garder en session, même les objets "ou of date" comprendront ce que je veux dire.
-Play propose un objet "session" qui permet de stocker un identifiant de session utilisateur en écrivant dans un cookie côté client (dans le navigateur).
+Notre framework propose un objet "session" qui permet de stocker un identifiant de session utilisateur en écrivant dans un cookie côté client (dans le navigateur).
 Pour stocker des volumes plus importants de données côté client, vous serez incité à utiliser les API de stockage de HTML 5 (web storage).
-Si pour des raisons de performances vous ne voulez pas répéter trop souvent les mêmes requêtes vers la base de données, il est également possible d'utiliser un cache distribué. Play fournit une implémentation de cache par défaut.
+Si pour des raisons de performances vous ne voulez pas répéter trop souvent les mêmes requêtes vers la base de données, il est également possible d'utiliser un cache distribué. Play!► fournit une implémentation de cache par défaut.
     
 Une autre conséquence de ce mode stateless est bien sur la capacité à monter en charge (scalabilité). Si le trafic de votre application augmente, il suffira de rajouter un serveur derrière un load balancer pour tenir la charge.
 Ceci prend tout son sens dans les environnements de type cloud ou des noeuds de serveurs peuvent être ajoutés et retirés dynamiquement selon la demande.
@@ -50,29 +50,29 @@ Avec des framework stateful, vous seriez obligé de dupliquer les sessions utili
   
 ##Productif
 
-Toute la pile est pré-configurée, de la vue à la base de données. Play suit la logique de `convention over configuration`. Ainsi, si le paramétrage par défaut vous convient, vous pourrez commencer à développer dès que vous aurez dézippé l'archive du framework! Ce principe sera également appliqué lors du développement de nos applications Play afin d'économiser des lignes de code tout au long du développement.
+Toute la pile est pré-configurée, de la vue à la base de données. Play!► suit la logique de `convention over configuration`. Ainsi, si le paramétrage par défaut vous convient, vous pourrez commencer à développer dès que vous aurez dézippé l'archive du framework! Ce principe sera également appliqué lors du développement de nos applications afin d'économiser des lignes de code tout au long du développement.
 
-Play embarque son propre serveur qui est capable de compiler lui même les fichiers source et de récupérer à chaud toutes les modifications de code.
+Play!► embarque son propre serveur qui est capable de compiler lui même les fichiers source et de récupérer à chaud toutes les modifications de code.
 Vous n'aurez donc jamais à vous soucier des phases de compilation ou de déploiement de votre application.
 Si vous ajoutez une nouvelle ligne de code, un simple "refresh" dans votre navigateur vous permettra de la voir en action. Et si jamais votre code contient une erreur, vous verrez un message clair et explicite dans votre navigateur, bien plus simple à comprendre que les traditionnelles `stack trace` que l'on rencontre habituellement lorsque l'on fait du développement JEE.
 
-Enfin, Play propose nativement un module `CRUD` permettant de générer les écrans, les traitements et les requêtes pour gérer les opération basiques relatives à une entité métier (création, lecture/recherche, mise à jour, suppression). 
+Enfin, le framework propose nativement un module `CRUD` permettant de générer les écrans, les traitements et les requêtes pour gérer les opération basiques relatives à une entité métier (création, lecture/recherche, mise à jour, suppression). 
 
 ## Modulaire et extensible
 
 Il existe un grand nombre de modules pour ajouter des fonctionnalités au framework : déploiement sous Google APP Engine, authentification avec OAuth, validation des données côté client avec HTML5...
 La communauté est très active et de nouveaux plugins arrivent régulièrement dans le dépôt officiel.
 
-De plus le framework, bien que `full stack`, n'est pas monolithique,  il est possible de n'utiliser que les parties de Play qui nous intéresse et de l'utiliser conjointement à d'autres technologies. On pourrait par exemple imaginer n'utiliser que la partie contrôleur de Play pour exposer des services REST à un front end écrit en HTML/JavaScript et s'appuyer sur des services Spring pour la partie métier. 
+De plus le framework, bien que `full stack`, n'est pas monolithique,  il est possible de n'utiliser que les parties de Play!► qui nous intéresse et de l'utiliser conjointement à d'autres technologies. On pourrait par exemple imaginer n'utiliser que la partie contrôleur de Play!► pour exposer des services REST à un front end écrit en HTML/JavaScript et s'appuyer sur des services Spring pour la partie métier. 
 
 ## Pur Java
 
-Play est écrit en Java et il est compatible avec toutes vos librairies Java préférées.
-De plus Play facilite l'utilisation de Java grâce à un certain nombre d'astuces.Il génère par exemple automatiquement les accesseurs (getters et setters) dans les classes Java dans le but d'améliorer la lisibilité du code.
+Play!► est écrit en Java et est compatible avec toutes vos librairies Java préférées.
+De plus il facilite l'utilisation de Java grâce à un certain nombre d'astuces.Il génère par exemple automatiquement les accesseurs (getters et setters) dans les classes Java dans le but d'améliorer la lisibilité du code.
 
-## 5 trucs cool que l'on peut faire avec Play
+## 5 trucs cool que l'on peut faire avec Play!►
 
-Les exemples suivants sont tirés [du site officiel de Play](http://www.playframework.org/documentation/1.0/5things) et montrent en quelques lignes l'esprit et la simplicité du framework.
+Les exemples suivants sont tirés [du site officiel de Play!►](http://www.playframework.org/documentation/1.0/5things) et montrent en quelques lignes l'esprit et la simplicité du framework.
 
 ### 1. Mapper des paramètres HTTP et une méthode Java
 
@@ -110,7 +110,7 @@ Ce formulaire HTML définie les champs correspondant à la classe Person et perm
 ### 2. Redirection vers une action, en appelant simplement une méthode Java
 
 
-Play n'a pas besoin de l'équivalent de la directive `forward` de Servlet pour la redirection vers d'autres actions. Il suffit d'appeler la bonne méthode dans le code Java :
+Play!► n'a pas besoin de l'équivalent de la directive `forward` de Servlet pour la redirection vers d'autres actions. Il suffit d'appeler la bonne méthode dans le code Java :
 
     public static void show(Long id) {
         Article article = Article.findById(id);
@@ -144,7 +144,7 @@ Dans la plupart des frameworks Java, pour passer des objets au moteur de templat
     model.put("user", user);
     render(model);
 
-Avec Play, il suffit d'écrire :
+Avec Play!►, il suffit d'écrire :
 
     Article article = Article.findById(id);
     User user = User.getConnected();
@@ -154,9 +154,9 @@ Et vous pourrez récupérer les objets à partir de leur nom dans le template. E
 
 ### 4. JPA sous steroids
 
-Il est vraiment facile d'utiliser l'API de mapping objet/relationnel JPA avec Play. Rien à configurer, Play synchronisera la base (également configurée et démarrée automatiquement en mode développement) avec vos objets.
+Il est vraiment facile d'utiliser l'API de mapping objet/relationnel JPA avec Play!►. Rien à configurer, il synchronisera la base (également configurée et démarrée automatiquement en mode développement) avec vos objets.
 
-En plus, si vous utilisez la classe Model de Play, le code sera encore simplifié :
+En plus, si vous utilisez la classe Model de Play!►, le code sera encore simplifié :
 
     public void messages(int page) {
         User connectedUser = User.find("byEmail", connected());

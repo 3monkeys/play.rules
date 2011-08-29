@@ -105,7 +105,7 @@ La page d'accueil permet d'accéder aux principales fonctionnalités de l'applic
 - Le top 10 par genre
 - Les fonctions d'administration (que nous verrons au chapitre 3)
 
-Pour le top 10, vous pouvez choisir un style de musique. Pour cela, le template Play utilise l'enum Genre :
+Pour le top 10, vous pouvez choisir un style de musique. Pour cela, le template Play!► utilise l'enum Genre :
 
 ~~~ html
 <label for="genre">Genre:</label>
@@ -238,7 +238,7 @@ On accède à la base de données en utilisant les méthodes statiques fournies 
 
 A la fin de l'action `save`, on retourne à la liste d'albums pour voir apparaître le nouvel élément enregistré. 
 
-Vous vous demandez peut être comment les transactions en base de données sont gérées dans cet exemple. La méthode 'save' est bien transactionnelle. En fait dès qu'il a besoin d'accéder à la base de données, Play ouvre une transaction en début de requête HTTP, qui sera terminée en fin de requête. Si quelque chose se passe mal durant cet intervalle de temps, un rollback sera effectué.
+Vous vous demandez peut être comment les transactions en base de données sont gérées dans cet exemple. La méthode 'save' est bien transactionnelle. En fait dès qu'il a besoin d'accéder à la base de données, Play!► ouvre une transaction en début de requête HTTP, qui sera terminée en fin de requête. Si quelque chose se passe mal durant cet intervalle de temps, un rollback sera effectué.
 
 Autre point important, on a utilisé la syntaxe `byName` pour écrire notre requête. Cette syntaxe supporte également des cas plus avancés. 
 On peut utiliser les mots clés suivants pour générer des requêtes :
@@ -303,7 +303,7 @@ Ceci suffit à ajouter des fonctions de pagination et de tri à un simple tablea
 
 Nous plaçons ce code dans un fichier nommé `albumtable.tag`, séparé du reste de notre page, afin de pouvoir de réutiliser dans d'autres contextes : 
 
-Pour intégrer ce tag Play à notre page, on écrit la directive suivante :
+Pour intégrer ce tag Play!► à notre page, on écrit la directive suivante :
 
 	#{albumtable albums:albums/}
 
@@ -450,7 +450,7 @@ public static int getLastAlbumYear() {
 }
 ~~~
     
-La méthode `em()` de classe `Model` de Play permet d'accéder à l'entity manager de JPA (Java Persistence API). Ceci peut être utile dans certains cas, notamment lorsque l'on veut ramener autre chose que des objets du modèle (ici une date).
+La méthode `em()` de classe `Model` de Play!► permet d'accéder à l'entity manager de JPA (Java Persistence API). Ceci peut être utile dans certains cas, notamment lorsque l'on veut ramener autre chose que des objets du modèle (ici une date).
 
 La librairie lambdaj nous aide à filtrer l'ensemble des albums récupérés pour une année donnée. Grâce à elle, nous pouvons écrire nos filtres comme dans un langage fonctionnel, en évitant de créer des boucles pour parcourir la collection d'albums dans le but de la trier. Dans cet exemple, on utilise la fonction `select` :
 
@@ -461,9 +461,9 @@ public static List<Album> filterByYear(List<Album> albums, String year) {
 ~~~ 
 
 	
-N.B. : On aurait pu se passer de cette libraire, appliquer les filtres à l'aide d'une requête en base de données. Mais cet exemple nous permet de voir comment intégrer d'autres librairies à notre application Play, tout en obtenant un code intéressant du point de vue de la syntaxe.
+N.B. : On aurait pu se passer de cette libraire, appliquer les filtres à l'aide d'une requête en base de données. Mais cet exemple nous permet de voir comment intégrer d'autres librairies à notre application Play!►, tout en obtenant un code intéressant du point de vue de la syntaxe.
 	
-Pour que Play puisse bénéficier de lambdaj, on ajoute cette ligne à la section `require` du fichier dependencies.yml :
+Pour que Play!► puisse bénéficier de lambdaj, on ajoute cette ligne à la section `require` du fichier dependencies.yml :
    
 	- com.googlecode.lambdaj -> lambdaj 2.2
 
