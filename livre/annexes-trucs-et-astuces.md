@@ -27,7 +27,6 @@ On renseigne ces clés dans le fichier `messages` :
 	POP=pop
 	JAZZ=Jazz
 	BLUES=Blues
-	OTHER=Other
+	OTHER=Other	
 	
-
 	//TODO more tips to come
