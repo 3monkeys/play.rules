@@ -13,14 +13,16 @@ Comme en Ruby On Rails, les objets du modèle sont conçus selon le pattern Acti
 
 On peut par exemple écrire le code suivant pour manipuler une entité "Personne" : 
 
-    //Si on voulait récupérer toutes les personnes
-    //List<Personne> personnes = find("byName","Dupont");
-    //Récupérer la personne ayant l'id 1
+``` java
+    // Si on voulait récupérer toutes les personnes
+    // List<Personne> personnes = find("byName","Dupont");
+    // Récupérer la personne ayant l'id 1
     Personne p1 = Personne.findById(1);
-    //Modification de l'entité
+    // Modification de l'entité
     p1.firstName = "paul";
-    //Mise à jour dans la base de données
+    // Mise à jour dans la base de données
     p1.save();
+```
 
 ## Orienté REST
 
@@ -81,37 +83,46 @@ L'URL suivante
 
 permettra de consulter les articles que vous avez demandé en ajoutant des paramètres ayant le même nom dans une méthode Java :
 
+``` java
     public static void archive(Date date, Integer page) {
         List<Article> articles = Article.fromArchive(date, page);
         render(articles);
     }
+```
 
 Le `biding` intelligent fonctionne avec n'importe quelle classe :
 
+``` java
     public class Person {
         public String name;
         public Integer age;
     }
+```
 
 Une simple action dans le contrôleur permet d'ajouter une personne :
 
+```
     public static void add(Person p) {
         p.save();
     }
+```
 
 
 Ce formulaire HTML définie les champs correspondant à la classe Person et permet d'appeler notre méthode `add` :
 
+``` html
     <form action="/Directory/add" method="POST">
         Name: <input type="text" name="p.name" />
         Age: <input type="text" name="p.age" />
     </form>
+```
 
 ### 2. Redirection vers une action, en appelant simplement une méthode Java
 
 
 Play!► n'a pas besoin de l'équivalent de la directive `forward` de Servlet pour la redirection vers d'autres actions. Il suffit d'appeler la bonne méthode dans le code Java :
 
+``` java
     public static void show(Long id) {
         Article article = Article.findById(id);
         render(article);
@@ -123,32 +134,39 @@ Play!► n'a pas besoin de l'équivalent de la directive `forward` de Servlet po
         article.save();
         show(id);
     }
+```
 
 Comme vous le voyez, à la fin de l'action edit, on se redirige vers l'action show!
 
 Dans les templates, on peut utiliser une syntaxe équivalente pour générer un lien :
 
+``` html
     <a href="@{Article.show(article.id)}">${article.title}</a>
     That will generate the following HTML:
 
     <a href="/articles/15">My new article</a>
+```
 
 ### 3. Ne vous répetez pas en passant des paramètres aux templates
 
 Dans la plupart des frameworks Java, pour passer des objets au moteur de template vous devrez utiliser une syntaxe comme :
 
+``` java
     Article article = Article.findById(id);
     User user = User.getConnected();
     Map<String, Object> model = new HashMap<String,Object>();
     model.put("article", article);
     model.put("user", user);
     render(model);
+```
 
 Avec Play!►, il suffit d'écrire :
 
+``` java
     Article article = Article.findById(id);
     User user = User.getConnected();
     render(article, user);
+```
 
 Et vous pourrez récupérer les objets à partir de leur nom dans le template. Encore des lignes de code gagnées!
 
@@ -158,6 +176,7 @@ Il est vraiment facile d'utiliser l'API de mapping objet/relationnel JPA avec Pl
 
 En plus, si vous utilisez la classe Model de Play!►, le code sera encore simplifié :
 
+``` java
     public void messages(int page) {
         User connectedUser = User.find("byEmail", connected());
         List<Message> messages = Message.find(
@@ -166,22 +185,27 @@ En plus, si vous utilisez la classe Model de Play!►, le code sera encore simpl
         ).from(page * 10).fetch(10);
         render(connectedUser, messages);
     }
+```
 
 
 ### 5. Uploadez facilement des fichiers
 
-    Le formulaire HTML :
+Le formulaire HTML :
 
+``` html
     <form action="@{Article.uploadPhoto()}" method="POST" enctype="multipart/form-data">
         <input type="text" name="title" />
         <input type="file" id="photo" name="photo" />
         <input type="submit" value="Send it..." />
     </form>
+```
 
-    Et le code Java :
+Et le code Java :
 
+``` java
     public static void uploadPhoto(String title, File photo) {
        ...
     }
+```
 
 Comment faire plus simple?
