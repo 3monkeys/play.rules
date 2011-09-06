@@ -1,3 +1,5 @@
+##Paramétrage d'Eclipse
+
 - Tout d'abord, nous devons arrêter notre application : faire `Control+c` dans la console pour quitter
 - En mode commande, placez vous dans votre répertoire "workspace" d'Eclipse
  
