@@ -11,9 +11,21 @@ public class Application extends Controller {
 
     public static void index() {
 
+        List<Pecheur> listePecheurs = Pecheur.findAll();
+        List<Poisson> listePoissons = Poisson.findAll();
+        List<Competition> listeCompetitions = Competition.find("order by date DESC").fetch();
+
         Version version = new Version();
 
-        render(version);
+        render(listePecheurs, listePoissons, listeCompetitions, version);
+
+    }
+
+    public static void competition(Long id) {
+
+        Long idCompetition = id;
+
+        render(idCompetition);
     }
 
 }

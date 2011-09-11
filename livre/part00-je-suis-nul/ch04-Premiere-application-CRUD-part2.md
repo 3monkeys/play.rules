@@ -343,7 +343,7 @@ Encore quelques étapes, et vous en saurez assez pour commencer à "bidouiller" 
 
 Nous verrons comment :
 
-- Créer des services
+- Créer des services (plutôt dans la partie "part01 : Je suis prêt"
 - Créer "from scratch" des pages qui utilisent ces services
 
 - - -
