@@ -1,0 +1,9 @@
+<component name="libraryTable">
+  <library name="play-1.2.1.jar">
+    <CLASSES>
+      <root url="jar://$USER_HOME$/play/framework/play-1.2.1.jar!/" />
+    </CLASSES>
+    <JAVADOC />
+    <SOURCES />
+  </library>
+</component>

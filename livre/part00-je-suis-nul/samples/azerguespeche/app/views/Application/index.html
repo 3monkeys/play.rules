@@ -1,13 +1,26 @@
 #{extends 'main.html' /}
 #{set title:'Azergues Pêche' /}
-
+<h1>Azergues Pêche</h1>
 <B>Version : ${version.reference} ${version.name}</B>
 
 <hr>
-
+<h2>Nos amis pêcheurs</h2>
 <ul>
     #{list items:listePecheurs, as:'pecheur'}
         <li>${pecheur.identifiant} : ${pecheur.prenom} - ${pecheur.nom} (${pecheur.departement})</li>
     #{/list}
 </ul>
 
+<h2>Les poissons du coin</h2>
+<ul>
+    #{list items:listePoissons, as:'poisson'}
+        <li>${poisson.nom}</li>
+    #{/list}
+</ul>
+
+<h2>Les compétitions</h2>
+<ul>
+    #{list items:listeCompetitions, as:'competition'}
+        <li>Le : ${competition.date} : <a href="/competition?id=${competition.id}">${competition.nom}</a></li>
+    #{/list}
+</ul>
