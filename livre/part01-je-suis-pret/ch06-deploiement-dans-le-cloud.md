@@ -140,4 +140,4 @@ Si tout se passe bien et que vous n'avez aucune erreur, vous verrez par exemple 
 
 Redis est une base de données NoSQL et un cache clé/valeur. 
 Bonne nouvelle, Heroku propose l'utilisation de Redis dans son catalogue de services. 
-Il existe [un module Play](https://github.com/tkral/play-redis) pour faire fonctionner Play Framework avec Redis. Ce module permet d'utiliser Redis pour la persistance ou comme implémentation de cache par défaut.
+Il existe [un module](https://github.com/tkral/play-redis) pour faire fonctionner Play Framework avec Redis. Ce module permet d'utiliser Redis pour la persistance ou comme implémentation de cache par défaut.
