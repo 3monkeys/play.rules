@@ -175,7 +175,7 @@ Chaque modèle JPA hérite d'une propriété `id`, c'est de cette propriété do
 	    #{/list}
 	</ul>
 
-2- Modifions `Application.java` en lui ajoutant une méthode `compétition` (toute simple pour le moment) :
+2- Modifions `Application.java` en lui ajoutant une méthode `competition()` (toute simple pour le moment) :
 
     public static void competition(Long id) {
 
@@ -203,14 +203,40 @@ Chaque modèle JPA hérite d'une propriété `id`, c'est de cette propriété do
 
 ![Alt "p00_ch05_04"](https://github.com/3monkeys/play.rules/raw/master/rsrc/p00_ch05_04.png)
 
-####Terminons la vue "competition"
+####Modifions le contrôlleur et terminons la vue "competition"
+
+1- Modifions la méthode `competition()` de `Application.java` :
+
+    public static void competition(Long id) {
+
+        Competition competitionSelectionnee =  Competition.findById(id);
+        render(competitionSelectionnee);
+    }
+
+2- Modifions la vue "competition" (la page `competition.html`) de la façon suivante :
+
+	#{extends 'main.html' /}
+	#{set title:'Azergues Pêche' /}
+	<h1>Azergues Pêche</h1>
+	<B>Id Competition : ${competitionSelectionnee.id} ${competitionSelectionnee.nom} Le ${competitionSelectionnee.date}</B>
+	
+	<h2>Les Prises</h2>
+	<ul>
+	    #{list items:competitionSelectionnee.prises, as:'prise'}
+	        <li>${prise.poisson.nom} par ${prise.pecheur.nom}</li>
+	    #{/list}
+	</ul>
+
+3- Lancez votre application et accédez au lien : [http://localhost:9000/](http://localhost:9000/)
+4- Clickez sur un lien "compétition" :
+
+![Alt "p00_ch05_05"](https://github.com/3monkeys/play.rules/raw/master/rsrc/p00_ch05_05.png)
+
+Et Hop, même pas mal!
 
 
+##C'est moche !
+
+Là je suis d'accord :). 
 
 
-
-
-
-
-
-##Un peu de javascript ...
