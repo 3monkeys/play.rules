@@ -237,6 +237,112 @@ Et Hop, même pas mal!
 
 ##C'est moche !
 
-Là je suis d'accord :). 
+Là je suis d'accord :). On va essayer d'embellir tout ça. Je ne suis pas un graphiste, nous allons faire dans le simple. Ensuite, libre à vous de laisser s'exprimer "le délire de l'artiste" ou "le fantasme de l'homme" (cf. "Pierre dans le Père Noël est une ordure").
+
+Dans un 1er temps, réglons tout de suite une chose horrible : Vous avez du remarquer que je répète `<h1>Azergues Pêche</h1>` dans toute mes vues : c'est idiot. Dans le répertoire `azerguespeche/app/views/` vous avez une page `main.html` dont héritent les vues (vous savez la ligne `#{extends 'main.html' /}` en en-tête des vues). Donc vous me virez `<h1>Azergues Pêche</h1>` des vues et vous allez le coller dans `main.html` :
+
+<!DOCTYPE html>
+
+	<html>
+	    <head>
+	        <title>#{get 'title' /}</title>
+	        <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+	        <link rel="stylesheet" type="text/css" media="screen" href="@{'/public/stylesheets/main.css'}">
+	        #{get 'moreStyles' /}
+	        <link rel="shortcut icon" type="image/png" href="@{'/public/images/favicon.png'}">
+	        <script src="@{'/public/javascripts/jquery-1.4.2.min.js'}" type="text/javascript" charset="utf-8"></script>
+	        #{get 'moreScripts' /}
+	    </head>
+	    <body>
+	        <h1>Azergues Pêche</h1>
+	        #{doLayout /}
+	    </body>
+	</html>
+
+Si vous regardez le code de plus près, vous voyez qu'il fait référence à une feuille de style `main.css` dans le répertoire `/public/stylesheets`.
+Allons donc modifier cette feuille (qui est vide pour le moment).
+
+###La feuille de style : main.css
+
+
+	body {
+		background-color            : #ddd;
+		color                       : #222;
+		font-family                 : Helvetica;
+		font-size                   : large;
+		margin                      : 0;
+		padding                     : 0;
+	}
+	
+	h1 {
+	    display                     : block;
+	    width                       : 100%;
+		margin                      : 0;
+		padding-top                 : 10px;
+	    padding-bottom              : 10px;
+	    background                  : black;
+	    text-align                  : center;
+		text-decoration             : none;
+	    font-size                   : 16px;
+	    color                       : white;
+		line-height                 : 20px;
+		height                      : 20px;
+	}
+	
+	h2 {
+	    font-size                   : 18px;
+	    margin                      : 20px;
+	
+	}
+	
+	ul {
+		list-style                  : none;
+		padding                     : 0;
+		margin                      : 10px;
+	}
+	
+	ul li {
+		background-color            : #FFFFFF;
+		border                      : 1px solid #999999;
+	    color                       : #222;
+		display                     : block;
+		font-weight                 : bold;
+		margin-bottom               : -1px;
+		padding                     : 10px 8px;
+		text-decoration             : none;
+	}
+	
+	ul li:first-child {
+		border-top-left-radius      : 6px;
+		border-top-right-radius     : 6px;
+	}
+	
+	ul li:last-child {
+		border-bottom-left-radius   : 6px;
+		border-bottom-right-radius  : 6px;
+	}
+
+###Derniers réglages
+
+1- Ajoutez ceci `<meta name="viewport" content="initial-scale=1.0, maximum-scale=1.0, user-scalable=no, width=device-width">` dans `main.html`, cela permettra à votre page de bien s'adapter sur un mobile.
+
+2- Lancez votre application et accédez au lien : [http://localhost:9000/](http://localhost:9000/) :
+
+![Alt "p00_ch05_06"](https://github.com/3monkeys/play.rules/raw/master/rsrc/p00_ch05_06.png)
+
+Et sous iPhone, ce n'est pas trop mal non plus ;)
+
+![Alt "p00_ch05_07"](https://github.com/3monkeys/play.rules/raw/master/rsrc/p00_ch05_07.png)
+
+OK, ça ne respire pas la couleur, mais en un rien de temps, vous vous êtes fait un site mobile. Allez, soyez créatifs!
+
+C'est tout pour aujourd'hui.
+
+
+
+
+
+
+
 
 
