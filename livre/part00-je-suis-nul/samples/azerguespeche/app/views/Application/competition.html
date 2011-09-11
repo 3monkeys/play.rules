@@ -1,5 +1,11 @@
 #{extends 'main.html' /}
 #{set title:'Azergues Pêche' /}
 <h1>Azergues Pêche</h1>
-<B>Id Competition : ${idCompetition} </B>
+<B>Id Competition : ${competitionSelectionnee.id} ${competitionSelectionnee.nom} Le ${competitionSelectionnee.date}</B>
 
+<h2>Les Prises</h2>
+<ul>
+    #{list items:competitionSelectionnee.prises, as:'prise'}
+        <li>${prise.poisson.nom} par ${prise.pecheur.nom}</li>
+    #{/list}
+</ul>

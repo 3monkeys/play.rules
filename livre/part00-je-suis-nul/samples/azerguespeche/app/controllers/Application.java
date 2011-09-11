@@ -23,9 +23,8 @@ public class Application extends Controller {
 
     public static void competition(Long id) {
 
-        Long idCompetition = id;
-
-        render(idCompetition);
+        Competition competitionSelectionnee =  Competition.findById(id);
+        render(competitionSelectionnee);
     }
 
 }
