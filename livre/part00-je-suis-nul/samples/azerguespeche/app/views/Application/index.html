@@ -3,3 +3,11 @@
 
 <B>Version : ${version.reference} ${version.name}</B>
 
+<hr>
+
+<ul>
+    #{list items:listePecheurs, as:'pecheur'}
+        <li>${pecheur.identifiant} : ${pecheur.prenom} - ${pecheur.nom} (${pecheur.departement})</li>
+    #{/list}
+</ul>
+

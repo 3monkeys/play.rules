@@ -11,9 +11,14 @@ public class Application extends Controller {
 
     public static void index() {
 
+        List<Pecheur> listePecheurs = Pecheur.findAll();
+        List<Poisson> listePoissons = Poisson.findAll();
+        List<Competition> listeCompetitions = Competition.findAll();
+
         Version version = new Version();
 
-        render(version);
+        render(listePecheurs, listePoissons, listeCompetitions, version);
+
     }
 
 }

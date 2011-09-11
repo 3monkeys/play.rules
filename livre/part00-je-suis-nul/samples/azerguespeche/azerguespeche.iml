@@ -9,10 +9,7 @@
     <content url="file://$USER_HOME$/play/modules/crud">
       <sourceFolder url="file://$USER_HOME$/play/modules/crud/app" isTestSource="false" />
     </content>
-    <content url="file://$USER_HOME$/play/modules/secure">
-      <sourceFolder url="file://$USER_HOME$/play/modules/secure/app" isTestSource="false" />
-    </content>
-    <orderEntry type="inheritedJdk" />
+    <orderEntry type="jdk" jdkName="1.6" jdkType="JavaSDK" />
     <orderEntry type="sourceFolder" forTests="false" />
     <orderEntry type="inheritedJdk" />
     <orderEntry type="module-library">
@@ -38,7 +35,7 @@
     <orderEntry type="module-library">
       <library>
         <CLASSES>
-          <root url="jar://$USER_HOME$/play/framework/play.jar!/" />
+          <root url="jar://$USER_HOME$/play/framework/play-1.2.1.jar!/" />
         </CLASSES>
         <JAVADOC />
         <SOURCES />
