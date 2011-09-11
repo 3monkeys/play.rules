@@ -1,9 +1,9 @@
-= Déploiement d'une application dans le cloud avec Heroku =
+# Déploiement d'une application dans le cloud avec Heroku
 
 Heroku est une plateforme de cloud computing qui supporte les applications Java depuis peu. Cette entreprise, renommée dans le monde Ruby, propose désormais une offre de PaaS (Plateform as a Service) capable d'exécuter nativement des applications Play!►.
 L'inscription à ce service est gratuite. Par défaut, il propose une infrastructure suffisante pour une application à faible affluence. Pour des besoins plus conséquents, on peut passer sur une formule payante "scalable", fournissant une montée à charge automatique en fonction de la demande (en fonction du nombre d'utilisateurs, du nombre de requêtes par secondes etc.).
  
-== Installation de l'environnement ==
+## Installation de l'environnement
 
 On commence par créer un compte sur le site d'Heroku.
 
@@ -91,12 +91,12 @@ En copiant la dernière ligne, vous obtenez l'URL de production de votre applica
 Vous voilà avec votre première application déployée dans le Cloud!
 
 	
-== Mise à jour de l'application == 
+## Mise à jour de l'application
 
 Pour mettre à jour son appli, rien de plus simple. 
 Une fois les modifications effectuées, on fait un `commit` avec git suivi de la commande `git push heroku master`
 
-== Configuration d'une base de données ==
+## Configuration d'une base de données
 
 Heroku propose par défaut sur les comptes gratuits une base de données PostGreSQL partagée avec une capacité de 5 Mo. Pour activer cette base tapez cette commande dans votre terminal :
 
@@ -112,7 +112,7 @@ En mode développement, quand vous lancez votre application en local vous pouvez
 
 	play run -Ddb=mem
 
-== Logs ==
+## Logs
 
 Si on rencontre une erreur lors de l'exécution de l'application, Heroku affichera un numero d'erreur que l'on peut retrouver dans les logs. 
 Pour voir les derniers logs on tape cette commande dans notre terminal :
@@ -136,7 +136,7 @@ Si tout se passe bien et que vous n'avez aucune erreur, vous verrez par exemple 
 	2011-09-08T19:17:44+00:00 app[web.1]: 19:17:44,399 INFO  ~ Listening for HTTP on port 51522 ...
 	2011-09-08T19:17:44+00:00 heroku[web.1]: State changed from starting to up
 	
-== Redis == 
+## Redis
 
 Redis est une base de données NoSQL et un cache clé/valeur. 
 Bonne nouvelle, Heroku propose l'utilisation de Redis dans son catalogue de services. 
