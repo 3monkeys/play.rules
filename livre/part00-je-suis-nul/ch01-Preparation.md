@@ -189,7 +189,7 @@ Play!► propose les commandes nécessaires pour transformer votre projet en pro
 Voyons donc comment faire pour transformer notre squelette d'application en projet IntelliJ (bien sûr vous avez téléchargé IntelliJ : [http://www.jetbrains.com/idea/](http://www.jetbrains.com/idea/)) :
 
 - Tout d'abord, nous devons arrêter notre application : faire `Control+c` dans la console pour quitter
-- En mode commande : `play idealize azerguespeche` (pour NetBeans ça serait `play netbeansify links`)
+- En mode commande : `play idealize azerguespeche` (pour NetBeans ça serait `play netbeansify azerguespeche`)
 
 		~        _            _ 
 		~  _ __ | | __ _ _  _| |
