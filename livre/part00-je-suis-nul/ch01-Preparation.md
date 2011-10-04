@@ -41,7 +41,7 @@ Vous devez avoir installé Java sur votre joujou préféré.
             PLAY_HOME=/Users/ton_user_name/play; export PLAY_HOME
             export PATH=$PATH:$PLAY_HOME
 
-> sous Linux, ça doit être comme sous OSX (non ?)
+> sous Linux, c'est presque comme sous OSX (on devrait dire l'inverse, non? )
 
             cd /opt
             sudo unzip ~/Téléchargements/play-x.y.z.zip
