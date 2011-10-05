@@ -7,7 +7,7 @@ Dans l'épisode précédant nous avons initié notre application grâce au modul
 
 ##Tout d'abord quelques réglages
 
-Dans application.conf cherchez le texte suivant :
+Dans `application.conf` cherchez le texte suivant :
 
 	# i18n
 	# ~~~~~
@@ -21,7 +21,7 @@ Ajoutez à la suite la ligne suivante :
 
 Créer un fichier `messages.fr` dans le répertoire `conf` de l'arborescence du projet
 
-Puis, cherchez le texte suivant : (en général c'est juste après)
+Puis, toujours dans le fichier `application.conf`, cherchez le texte suivant : (en général c'est juste après)
 
 	# Date format
 	# ~~~~~
