@@ -1,0 +1,239 @@
+<!DOCTYPE HTML PUBLIC>
+<html>
+<head>
+    <title>Play.Rules!► eBook</title>
+
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />	
+	<link rel="stylesheet" href="css/lavanja.css">
+	<link rel="stylesheet" type="text/css" href="css/sh_style.css"> </style>
+		
+</head>
+
+<body>
+
+	
+	<div class="container left" id="leftView">
+		<div class="head">
+			Play.Rules<b>!</b><small>►</small> eBook
+			<a id="cmdHideMenuBar" class="barRightButton">✖</a>
+		</div>
+		<div  class="container scrollable" id="toc-container">
+			<ul id="toc"><ul>
+		</div>
+	</div>
+    <div class="container right scrollable" id="rightView">
+		<div class="head">
+			<a id="cmdShowMenuBar" class="barLeftButton">➼</a>
+			<a id="cmdHome" class="barRightButton">⟰</a>
+		</div>
+    	<div class="container scrollable">
+    		<p id="details-container" style="margin-right:40px; margin-left:20px;"></p>
+    	</div>
+    </div>
+
+	
+</body>
+<script src="js/class.js"></script>
+
+<script src="js/vendor/sh_main.min.js"></script>
+<script src="js/vendor/sh_java.min.js"></script>
+<script src="js/vendor/sh_javascript.min.js"></script>
+<script src="js/vendor/sh_html.min.js"></script>
+<script src="js/vendor/showdown.js"></script>
+<script src="js/vendor/github.js"></script>
+<script src="js/vendor/zepto.min.js"></script>
+
+
+
+
+<script>
+$(document).ready(function() {
+	
+	function washCode(data){
+	    /*TODO : a better regex*/
+
+	    data = data.replace(/```html/g,"");
+	    data = data.replace(/``` html/g,"");
+	    data = data.replace(/~~~html/g,"");
+	    data = data.replace(/~~~ html/g,"");
+
+	    data = data.replace(/```xml/g,"");
+	    data = data.replace(/``` xml/g,"");
+	    data = data.replace(/~~~xml/g,"");
+	    data = data.replace(/~~~ xml/g,"");
+
+	    data = data.replace(/```js/g,"");
+	    data = data.replace(/``` js/g,"");
+	    data = data.replace(/~~~js/g,"");
+	    data = data.replace(/~~~ js/g,"");
+		//<pre class="sh_javascript">
+	    data = data.replace(/```java/g,'<pre class="sh_java">');
+	    data = data.replace(/``` java/g,'<pre class="sh_java">');
+	    data = data.replace(/~~~java/g,'<pre class="sh_java">');
+	    data = data.replace(/~~~ java/g,'<pre class="sh_java">');
+
+	    data = data.replace(/```rb/g,"");
+	    data = data.replace(/``` rb/g,"");
+	    data = data.replace(/~~~rb/g,"");
+	    data = data.replace(/~~~ rb/g,"");
+
+	    data = data.replace(/```/g,"</pre>");
+	    data = data.replace(/~~~/g,"</pre>");
+
+	    return data;
+	}	
+	
+	var Store = Class({
+		constructor : function Store (user,repo, callBk) {
+			var that = this;
+			this.branches = {};
+			this.user = user;
+			this.repo = repo;
+			var branches = gh.repo(this.user, this.repo).branches(function(data){
+				that.branches = data.branches;
+				console.log("Branches of ",that.repo," are loaded : ", that.branches);
+				
+				if(callBk) { callBk(); }
+			});
+		},
+		getBranchId : function(name) { return this.branches[name]; },
+		getItemsOfBranch : function(name, callBk) {
+			var that = this;
+			gh.object(this.user, this.repo).tree(this.getBranchId(name),function(items){
+				console.log("Items of ",name," are loaded : ");
+				if(callBk) { callBk(items.tree); }
+			});
+		},
+		getItemsOfItem : function(item, callBk) {
+			var that = this;
+			gh.object(this.user, this.repo).tree(item.sha,function(items){
+				console.log("Items of ",item.name,"(",item.sha,")"," are loaded : ");
+				if(callBk) { callBk(items.tree); }
+			});			
+		},
+		getContent : function(pathOfFile, callBk){
+			gh.object(this.user, this.repo).blob(pathOfFile, this.getBranchId('master'),function(result){
+				//console.log(result);
+				if(callBk) { callBk(result.blob.data); }
+			});
+		}
+	});
+	
+	
+	
+	//var toc = {};
+	var path = "livre/";
+	var converter = new Showdown.converter();
+	
+	var gitHubStorage = new Store('3monkeys','play.rules', function(){
+		
+		function getChapterContent(clickedLink) {
+			//console.log(clickedLink.srcElement.href.split('#')[1]);
+			var selDoc = clickedLink.srcElement.href.split('#')[1];
+			gitHubStorage.getContent(selDoc, function(content){
+				$("#details-container").html(converter.makeHtml(washCode(content)));
+				sh_highlightDocument();	
+			});
+		}
+				
+		gitHubStorage.getItemsOfBranch('master', function(items){ 
+			
+			window.news = items.filter(function(item) { return item.name === "NEWS.md"; })[0];
+			
+			gitHubStorage.getContent(news.name, function(content){
+				news.content = converter.makeHtml(washCode(content));
+				$("#details-container").html(news.content);
+				sh_highlightDocument();	
+			});			
+			
+			var livre  = items.filter(function(item) { return item.name === "livre"; })[0];
+			
+			gitHubStorage.getItemsOfItem(livre, function(items){
+
+				items.forEach(function(item) {
+					//toc[item.name] = {type:item.type,sha:item.sha}; 
+					//$('#first').append('<li id="li_'+item.sha+'"><a href="">'+item.name+'</a></li>');
+					if(item.type ==='tree') {
+						$('#toc').append('<li id="li_'+item.sha+'"><b>'+item.name+'</b></li>');
+						$('#li_'+item.sha).append('<ul id="ul_'+item.sha+'"></li>');
+
+						gitHubStorage.getItemsOfItem(item, function(chapters){
+							//console.log(item.name, item.type, item.sha);
+							//console.log("PATH = ",path+item.name+"/");
+							
+							var pathPart = path+item.name+"/";
+							
+							chapters.forEach(function(chapter) {
+								/*console.log("  -> ",chapter.name, chapter.type, chapter.sha);
+								toc[item.name][chapter.name] = {
+										type:chapter.type,
+										sha:chapter.sha,
+									};*/
+								$('#ul_'+item.sha).append('<li id="li_'+chapter.sha+'"><a href="#'+pathPart+chapter.name+'">'+chapter.name+'</a></li>')
+								$('#li_'+chapter.sha)
+								.bind('click',function(element){ getChapterContent(element); });
+								/* get content
+								gitHubStorage.getContent(pathPart+chapter.name, function(content){
+									toc[item.name][chapter.name] = {
+											type:chapter.type,
+											sha:chapter.sha,
+											content : content
+										};
+								});
+								*/
+								
+							});
+							
+						});
+					} else { //Blob
+						$('#toc')
+						.append('<li id="li_'+item.sha+'"><a href="#'+path+item.name+'">'+item.name+'</a></li>');
+						$('#li_'+item.sha)
+						.bind('click',function(element){ getChapterContent(element); });
+					}
+				});
+				
+			});
+
+		});
+	});
+	
+	/*----------------------*/
+	var 
+		leftView		= $('#leftView'),
+		rightView		= $('#rightView')
+		containers 		= $('.container'), 
+		barsHeight 		= $('[class="head"]').offset().height;
+		
+	var height = window.innerHeight - (barsHeight * 2);
+	containers.css('height', height+'px');
+
+	function hideLeftView() {
+		leftView.removeClass("left").addClass("hide");
+		rightView.removeClass("right");				
+	}
+	
+	function showLeftView() {
+		leftView.addClass("left").removeClass("hide"); 
+		rightView.addClass("right");
+	}
+
+	$('#cmdHideMenuBar').bind('click', function() {
+		hideLeftView();
+	});
+	
+	$('#cmdShowMenuBar').bind('click', function() {
+		showLeftView();
+	});
+	
+	$('#cmdHome').bind('click', function() {
+		$("#details-container").html(news.content);
+		sh_highlightDocument();
+	});
+	
+});
+
+</script>
+
+
+</html>
