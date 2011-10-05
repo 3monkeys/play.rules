@@ -1,5 +1,5 @@
 <div class="bigHighlight">
-<h1>Les News chez <strong>Play.Rules</strong></h1>
+<h1>Les News chez <strong>Play.Rules!</strong><small>►</small></h1>
 </div>
 
 ##Mercredi 5 octobre
