@@ -91,7 +91,7 @@ $(document).ready(function() {
 			this.repo = repo;
 			var branches = gh.repo(this.user, this.repo).branches(function(data){
 				that.branches = data.branches;
-				console.log("Branches of ",that.repo," are loaded : ", that.branches);
+				//console.log("Branches of ",that.repo," are loaded : ", that.branches);
 				
 				if(callBk) { callBk(); }
 			});
@@ -100,14 +100,14 @@ $(document).ready(function() {
 		getItemsOfBranch : function(name, callBk) {
 			var that = this;
 			gh.object(this.user, this.repo).tree(this.getBranchId(name),function(items){
-				console.log("Items of ",name," are loaded : ");
+				//console.log("Items of ",name," are loaded : ");
 				if(callBk) { callBk(items.tree); }
 			});
 		},
 		getItemsOfItem : function(item, callBk) {
 			var that = this;
 			gh.object(this.user, this.repo).tree(item.sha,function(items){
-				console.log("Items of ",item.name,"(",item.sha,")"," are loaded : ");
+				//console.log("Items of ",item.name,"(",item.sha,")"," are loaded : ");
 				if(callBk) { callBk(items.tree); }
 			});			
 		},
@@ -119,16 +119,13 @@ $(document).ready(function() {
 		}
 	});
 	
-	
-	
-	//var toc = {};
+
 	var path = "livre/";
 	var converter = new Showdown.converter();
 	
 	var gitHubStorage = new Store('3monkeys','play.rules', function(){
 		
 		function getChapterContent(clickedLink) {
-			//console.log(clickedLink.srcElement.href.split('#')[1]);
 			var selDoc = clickedLink.srcElement.href.split('#')[1];
 			gitHubStorage.getContent(selDoc, function(content){
 				$("#details-container").html(converter.makeHtml(washCode(content)));
@@ -151,37 +148,20 @@ $(document).ready(function() {
 			gitHubStorage.getItemsOfItem(livre, function(items){
 
 				items.forEach(function(item) {
-					//toc[item.name] = {type:item.type,sha:item.sha}; 
-					//$('#first').append('<li id="li_'+item.sha+'"><a href="">'+item.name+'</a></li>');
 					if(item.type ==='tree') {
 						$('#toc').append('<li id="li_'+item.sha+'"><b>'+item.name+'</b></li>');
 						$('#li_'+item.sha).append('<ul id="ul_'+item.sha+'"></li>');
 
 						gitHubStorage.getItemsOfItem(item, function(chapters){
-							//console.log(item.name, item.type, item.sha);
-							//console.log("PATH = ",path+item.name+"/");
 							
 							var pathPart = path+item.name+"/";
 							
 							chapters.forEach(function(chapter) {
-								/*console.log("  -> ",chapter.name, chapter.type, chapter.sha);
-								toc[item.name][chapter.name] = {
-										type:chapter.type,
-										sha:chapter.sha,
-									};*/
+
 								$('#ul_'+item.sha).append('<li id="li_'+chapter.sha+'"><a href="#'+pathPart+chapter.name+'">'+chapter.name+'</a></li>')
 								$('#li_'+chapter.sha)
 								.bind('click',function(element){ getChapterContent(element); });
-								/* get content
-								gitHubStorage.getContent(pathPart+chapter.name, function(content){
-									toc[item.name][chapter.name] = {
-											type:chapter.type,
-											sha:chapter.sha,
-											content : content
-										};
-								});
-								*/
-								
+
 							});
 							
 						});
