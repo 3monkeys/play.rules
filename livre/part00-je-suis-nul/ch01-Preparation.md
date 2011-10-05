@@ -41,9 +41,18 @@ Vous devez avoir installé Java sur votre joujou préféré.
             PLAY_HOME=/Users/ton_user_name/play; export PLAY_HOME
             export PATH=$PATH:$PLAY_HOME
 
-> sous Linux, ça doit être comme sous OSX (non ?)
+> sous Linux, c'est presque comme sous OSX (on devrait dire l'inverse, non? )
 
-			/* TODO */
+            cd /opt
+            sudo unzip ~/Téléchargements/play-x.y.z.zip
+            sudo ln -s play-x.y.z play
+
+            cat >> ~/.profile  <<+EOF
+
+            #Play! config
+            PLAY_HOME=/opt/play; export PLAY_HOME
+            export PATH=\$PATH:\$PLAY_HOME
+            +EOF
 
 - en mode commande : tapez `play` pour voir. Si tout va bien, vous aurez ceci :
 
@@ -131,6 +140,10 @@ Nous avons donc installé Play, nous allons commencer à bosser :
             md c:\play_projects
             cd c:\play_projects
 
+> sous Linux :
+
+            mkdir ~/play_projects
+            cd ~/play_projects
 
 - Créer le squelette de l'application
 
