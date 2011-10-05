@@ -17,4 +17,4 @@ On vous le redit, si vous voulez participer, n'hésitez pas : [**"Fork us + pull
 
 Bien à vous ! [@loic_d](http://twitter.com/#!/loic_d) [@k33g_org](http://twitter.com/#!/k33g_org)
 
-(1) *on a une fammille, un travail, des enfants (surtout [@k33g_org](http://twitter.com/#!/k33g_org)), une vie sociale (surtout [@loic_d](http://twitter.com/#!/loic_d)) mais on va faire le maximum pour ajouter du contenu.*
+(1) *on a une famille, un travail, des enfants (surtout [@k33g_org](http://twitter.com/#!/k33g_org)), une vie sociale (surtout [@loic_d](http://twitter.com/#!/loic_d)) mais on va faire le maximum pour ajouter du contenu.*
