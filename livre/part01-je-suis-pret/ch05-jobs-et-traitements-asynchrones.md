@@ -99,27 +99,25 @@ var socket = new WebSocket('@@{AsyncController.asyncMessage()}');
 
 Voici le code complet de notre page :
 
-~~~ html
 #{extends 'main.html' /}
 
 <h1>Test</h1>
 
 <div id="message"></div>
 
-#{set 'moreScripts'}
-<script>
-    var socket = new WebSocket('@@{AsyncController.asyncMessage()}');
-
-    socket.onmessage = function(event) {
-        display(event.data);
-    }
-
-	var display = function(event) {
-        $('#message').append('' + event + '');
-    }
-</script>
-#{/set}
-~~~
+	#{set 'moreScripts'}
+	<script>
+	    var socket = new WebSocket('@@{AsyncController.asyncMessage()}');
+	
+	    socket.onmessage = function(event) {
+	        display(event.data);
+	    }
+	
+		var display = function(event) {
+	        $('#message').append('' + event + '');
+	    }
+	</script>
+	#{/set}
 
 Lorsqu'un message est reçu, il est affiché dans la div `#message`
 
@@ -186,9 +184,7 @@ Imaginons un job qui mette à jour les données de l'application une fois par jo
 
 Mais il est également possible de lancer l'action depuis la page courante. On ajoute ce lien : 
 
-~~~ html
-<a id="longTask" href="#">Long task</a> 
-~~~ 
+	<a id="longTask" href="#">Long task</a> 
 
 Un clic sur ce lien lance la tache asynchrone :
 
