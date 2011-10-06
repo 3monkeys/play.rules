@@ -510,42 +510,44 @@ On créer aussi une `div` pour afficher un message en cas de succès :
 Cette section sera masquée par défaut, à l'aide de CSS : 
 
 ~~~ css
-.info {
-    display: none;
-}
+
+	.info {
+	    display: none;
+	}
 ~~~
 
 Ce code JavaScript permet d'intercepter les clicks et de rafraîchir l'écran :
 	
-~~~ js
-//On récupère les span dont l'id commence par "nbVotes" pour trouver la zone à mettre à jour
-var nbvotes = $('span[id^="nbVotes"]');
-clickVote = function() {
-    //Récupération de l'id de l'album sur lequel on a cliqué
-    var id = t.attr('id').split('-')[0],
-    //Zone à zone à mettre à jour pour cet id : les spans commençant par "nbVotes" et finissant par l'id
-    voteTarget = nbvotes.filter("[id$=" + id + "]");
+~~~ javascript
 
-    // un seul vote possible par album : on cache le bouton
-    $(this).hide();
+	//On récupère les span dont l'id commence par "nbVotes" pour trouver la zone à mettre à jour
+	var nbvotes = $('span[id^="nbVotes"]');
+	clickVote = function() {
+	    //Récupération de l'id de l'album sur lequel on a cliqué
+	    var id = t.attr('id').split('-')[0],
+	    //Zone à zone à mettre à jour pour cet id : les spans commençant par "nbVotes" et finissant par l'id
+	    voteTarget = nbvotes.filter("[id$=" + id + "]");
 
-    $.ajax({
-        //Cette URL redirige vers la méthode vote() du contrôleur
-        url: '/application/vote',
-        type: "POST",
-        data: {id: id},
-        complete: function(req) {
-            var newTotal = req.responseText;
-            //si la réponse est OK
-            if (req.status === 200) {
-                //rafraichissement de l'écran
-                voteTarget.text(newTotal);
-                //Animation pour afficher le message
-                voteInfo.slideDown("slow").delay(3000).slideUp("slow");
-            }
-        }
-    });
-};
+	    // un seul vote possible par album : on cache le bouton
+	    $(this).hide();
+
+	    $.ajax({
+	        //Cette URL redirige vers la méthode vote() du contrôleur
+	        url: '/application/vote',
+	        type: "POST",
+	        data: {id: id},
+	        complete: function(req) {
+	            var newTotal = req.responseText;
+	            //si la réponse est OK
+	            if (req.status === 200) {
+	                //rafraichissement de l'écran
+	                voteTarget.text(newTotal);
+	                //Animation pour afficher le message
+	                voteInfo.slideDown("slow").delay(3000).slideUp("slow");
+	            }
+	        }
+	    });
+	};
 
 $('a.voteLink').click(clickVote);
 ~~~ 
