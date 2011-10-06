@@ -287,6 +287,22 @@ $(document).ready(function() {
 		window.document.getElementById("scroller").scrollTop = 0
 	});
 	
+	window.onhashchange = function(e) {
+        var file_name = document.location.toString().split('#')[1];
+		if(file_name.split('livre/').length>0) {
+			gitHubStorage.getContent(file_name, function(content){
+				//console.log(content);
+				$("#details-container").html(converter.makeHtml(washCode(content)));
+				sh_highlightDocument();	
+				//window.scrollTo(0,0);
+				//document.querySelector("#scroller").scrollTop = 0
+				window.document.getElementById("scroller").scrollTop = 0
+			});
+		}
+    };
+	
+
+	
 	
 });
 
