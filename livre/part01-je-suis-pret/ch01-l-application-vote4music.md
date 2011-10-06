@@ -358,22 +358,22 @@ Cette fonction de l'application permet d'afficher les 10 albums ayant reçu le p
 Sur la page d'accueil, on ajoute la possibilité de choisir le genre et l'année durant laquelle sont sortis les albums :
 
 ~~~ html 
-#{form @listByGenreAndYear()}
-<label for="year">Release Year</label>
-<select id="year" name="year">
-    #{list controllers.Application.getYearsToDisplay(), as:'year'}
-    <option  value="${year}">${year}</option>
-    #{/list}
-</select>
-<br/>
-<label for="genre">Genre:</label>
-<select id ="genre" name="genre">
-    #{list models.Genre.values(), as:'genre'}
-    <option  value="${genre}">${genre.toString().toLowerCase()}</option>
-    #{/list}
-</select>
-<input type="submit" class="button" value="View"/>
-#{/form}
+	#{form @listByGenreAndYear()}
+	<label for="year">Release Year</label>
+	<select id="year" name="year">
+	    #{list controllers.Application.getYearsToDisplay(), as:'year'}
+	    <option  value="${year}">${year}</option>
+	    #{/list}
+	</select>
+	<br/>
+	<label for="genre">Genre:</label>
+	<select id ="genre" name="genre">
+	    #{list models.Genre.values(), as:'genre'}
+	    <option  value="${genre}">${genre.toString().toLowerCase()}</option>
+	    #{/list}
+	</select>
+	<input type="submit" class="button" value="View"/>
+	#{/form}
 ~~~ 
 
 On rend cette fonctionnalité accessible depuis le contrôleur :
