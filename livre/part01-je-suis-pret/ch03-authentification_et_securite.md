@@ -96,15 +96,13 @@ Pour cela rien de plus simple, il suffit d’ajouter un lien au template main.ht
 
 On ajoute le code suivant :
 
-~~~ html
-<body>
-     #{if session.get("username").equals("admin")}
-      <div align="right">
-       <a href="@{Secure.logout()}">Logout</a>
-      </div>
-     #{/if}
- #{doLayout /}
- </body>
-~~~
+	<body>
+	     #{if session.get("username").equals("admin")}
+	      <div align="right">
+	       <a href="@{Secure.logout()}">Logout</a>
+	      </div>
+	     #{/if}
+	 #{doLayout /}
+	 </body>
 
 Et voilà, vous savez maintenant comment ajouter des fonctions d’administration et de la sécurité à un site public avec Play!►.
