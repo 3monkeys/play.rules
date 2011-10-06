@@ -197,14 +197,14 @@ si tout va bien, ceci devrait s'afficher :
 
 		22:35:07,352 ERROR ~ Could not bind on port 9000
 
-- Alors, rechercher ceci dans dans le fichier 'conf/application.conf' du projet. 
+- Alors, rechercher ceci dans dans le fichier 'conf/application.conf' du projet : 
 
 		# Server configuration
 		# ~~~~~
 		# If you need to change the HTTP port, uncomment this (default is set to 9000)
 		# http.port=9000
 
-- activer la ligne '# http.port=9000' en enlevant # et en remplaçant '9000' par un autre port, non utilisé celui-ci.
+- activer la ligne `# http.port=9000` en enlevant # et en remplaçant `9000` par un autre port, non utilisé celui-ci.
 
 ###Paramétrage de l'IDE
 
