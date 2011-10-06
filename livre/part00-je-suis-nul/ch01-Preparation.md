@@ -197,7 +197,7 @@ si tout va bien, ceci devrait s'afficher :
 
 		22:35:07,352 ERROR ~ Could not bind on port 9000
 
-- Alors, rechercher ceci dans dans le fichier 'conf/application.conf' du projet : 
+- Alors, rechercher ceci dans dans le fichier 'conf/application.conf' (1) du projet : 
 
 		# Server configuration
 		# ~~~~~
@@ -205,6 +205,8 @@ si tout va bien, ceci devrait s'afficher :
 		# http.port=9000
 
 - activer la ligne `# http.port=9000` en enlevant # et en remplaçant `9000` par un autre port, non utilisé celui-ci.
+
+
 
 ###Paramétrage de l'IDE
 
@@ -285,7 +287,9 @@ Voyons donc comment faire pour transformer notre squelette d'application en proj
 **Voilà, nous sommes prêts à démarrer, nous pouvons passer à l'étape suivante.**
 **Rendez-vous donc au chapitre suivant :** [ch02-Premiere-application](ch02-Premiere-application.md).
 
-
+- - -
+	
+- (1) : Pour plus d'informations sur la configuration du fichier `application.conf`, frendez-vous à l'annexe ["01-Subtilites-application.conf"](../part99-les-hors-serie/01-Subtilites-application.conf.md)
 
 
 
