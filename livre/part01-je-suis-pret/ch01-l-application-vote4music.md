@@ -325,7 +325,6 @@ Cette solution est plus simple pour nous du point de vue du code, par rapport à
 Le contrôleur intercepte l'appel de cette manière: 
 
 ~~~ java 
-
 	public static void search(String filter) {
 	    List<Album> albums = Album.findAll(filter);
 	    render(albums);
@@ -335,7 +334,6 @@ Le contrôleur intercepte l'appel de cette manière:
 La méthode `findAll` est définie comme ceci :
 
 ~~~ java
-
 	<T> List<T> findAll();
 ~~~
 
@@ -344,7 +342,6 @@ Le mécanisme d'inférence de type nous permet de récupérer une liste correcte
 La classe Album définit la méthode de recherche avec un filtre sur le nom :
 
 ~~~ java 
-
 	public static List<Album> findAll(String filter) {
 	    String likeFilter = "%" + filter + "%";
 	    //limit to 100 results
@@ -385,7 +382,6 @@ Sur la page d'accueil, on ajoute la possibilité de choisir le genre et l'année
 On rend cette fonctionnalité accessible depuis le contrôleur :
 
 ~~~ java 
-
 	public static void listByGenreAndYear(String genre, String year) {
 	    notFoundIfNull(genre);
 	    notFoundIfNull(year);
@@ -400,7 +396,6 @@ Les paramètres `genre` et `year` sont obligatoires. Cela veut dire que si on ap
 La classe Album définie les méthodes nécessaires à cette recherche :
 
 ~~~ java 
-
 	public static List<Album> findByGenreAndYear(String genre, String year) {
 	    List<Album> albums;
 	    Genre genreEnum = Genre.valueOf(genre.toString().toUpperCase());
@@ -418,7 +413,6 @@ Pour proposer les dates disponibles depuis le contrôleur, on calcule un interva
 Si la base est vide on donne des valeurs par défaut :	
 
 ~~~ java 
-
 	public static List<String> getYearsToDisplay() {
 	    List<String> years = new ArrayList<String>();
 	    for (int i = Album.getFirstAlbumYear(); i <= Album.getLastAlbumYear(); i++) {
@@ -432,7 +426,6 @@ Si la base est vide on donne des valeurs par défaut :
 La classe Album implémente les méthodes getFirstAlbumYear et getLastAlbumYear, qui récupèrent ces valeurs dans la base de données :
 
 ~~~ java 
-
 	private static SimpleDateFormat formatYear = new SimpleDateFormat("yyyy");
 
 	public static int getFirstAlbumYear() {
@@ -457,7 +450,6 @@ La méthode `em()` de classe `Model` de Play!► permet d'accéder à l'entity m
 La librairie lambdaj nous aide à filtrer l'ensemble des albums récupérés pour une année donnée. Grâce à elle, nous pouvons écrire nos filtres comme dans un langage fonctionnel, en évitant de créer des boucles pour parcourir la collection d'albums dans le but de la trier. Dans cet exemple, on utilise la fonction `select` :
 
 ~~~ java 
-
 	public static List<Album> filterByYear(List<Album> albums, String year) {
 	    return select(albums, having(on(Album.class).getReleaseYear(), equalTo(year)));
 	}
@@ -478,7 +470,6 @@ Voyons maintenant une fonctionnalité clé de cette application, le vote!
 Cette méthode du contrôleur permet d'enregistrer un vote pour un album :
 
 ~~~ java 
-
 	public static void vote(String id) {
 	    Album album = findById(Long.parseLong(id));
 	    album.vote();
@@ -497,7 +488,6 @@ Dans le cas présent, la méthode `vote` sera accessible depuis l'URL `/applicat
 La classe Album définit cette méthode pour mettre à jour le compteur des votes d'une instance d'album:
 
 ~~~ java 
-
 	public void vote() {
 	    nbVotes++;
 	    save();
@@ -520,12 +510,10 @@ On créer aussi une `div` pour afficher un message en cas de succès :
 
 Cette section sera masquée par défaut, à l'aide de CSS : 
 
-~~~ css
-
 	.info {
 	    display: none;
 	}
-~~~
+
 
 Ce code JavaScript permet d'intercepter les clicks et de rafraîchir l'écran :
 	
@@ -569,7 +557,6 @@ On veut maintenant ajouter la possibilité d'attacher l'image d'une pochette aux
 On enrichit la classe Album d'un nouveau champ :
 
 ~~~ java 
-
 	public boolean hasCover = false;
 ~~~ 
 
@@ -577,7 +564,6 @@ Ce booléen nous permettra de savoir si l'album possède une pochette ou non.
 On ajoute une colonne à la liste des albums. Lors de l'affichage, on effectue le test suivant : 
 
 ~~~ html 
-
 	<td>
 	    #{if album?.hasCover}
 	    <span class="cover"><a href="#">Show cover</a></span>
