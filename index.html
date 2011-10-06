@@ -177,9 +177,8 @@ $(document).ready(function() {
 	
 	var gitHubStorage = new Store('3monkeys','play.rules', function(){
 		
-		function getChapterContent(clickedLink) {
-			var selDoc = clickedLink.srcElement.href.split('#')[1];
-			gitHubStorage.getContent(selDoc, function(content){
+		function getChapterContent(clickedLink) {			
+			gitHubStorage.getContent(clickedLink, function(content){
 				$("#details-container").html(converter.makeHtml(washCode(content)));
 				sh_highlightDocument();	
 			});
@@ -214,7 +213,7 @@ $(document).ready(function() {
 
 								$('#ul_'+item.sha).append('<li id="li_'+chapter.sha+'"><a href="#'+pathPart+chapter.name+'">'+chapter.name+'</a></li>')
 								$('#li_'+chapter.sha)
-								.bind('click',function(element){ getChapterContent(element); });
+								.bind('click',function(element){ getChapterContent(pathPart+chapter.name); });
 
 							});
 							
@@ -223,7 +222,7 @@ $(document).ready(function() {
 						$('#toc')
 						.append('<li id="li_'+item.sha+'"><a href="#'+path+item.name+'">'+item.name+'</a></li>');
 						$('#li_'+item.sha)
-						.bind('click',function(element){ getChapterContent(element); });
+						.bind('click',function(element){ getChapterContent(path+item.name); });
 					}
 				});
 				
