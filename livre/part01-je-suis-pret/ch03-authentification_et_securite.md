@@ -34,6 +34,8 @@ Dans le fichier application.conf, ajouter la ligne suivante pour configurer les 
 	application.admin=admin
 	application.adminpwd=admin
 
+Remarque : cette configuration est données à titre d'exemple, il est bien sur déconseillé de laisser des mots passe dans un fichier non crypté!
+
 On déclare ensuite un contrôleur d’administration pour toutes les actions que l’on veut restreindre. On ajoute l’annotation @With à ce contrôleur pour lui dire qu’il doit s’appuyer sur le contrôleur du module Secure :
 
 ~~~ java 	
@@ -106,33 +108,3 @@ On ajoute le code suivant :
 ~~~
 
 Et voilà, vous savez maintenant comment ajouter des fonctions d’administration et de la sécurité à un site public avec Play!►.
-
-
-## L'internationalisation
-
-Dans le cas d'une application ou d'un site multilingue, on doit être capable de traduire facilement le contenu de nos pages.
-Pour le message d'accueil de notre application, on peut par exemple écrire :
-
-	<h1>&{welcome}</h1>
-
-Les paramètres entourés de `&{}` seront traduits à partir des clés définies dans les fichiers de configuration de Play!►.
-Les clés pour la langue par défaut se trouvent dans le fichier `/conf/messages` :
-
-	welcome=Welcome on Vote4Music!
-	
-On peut ensuite définir un fichier par lange supplémentaire, par exemple `messages_fr` pour le français.
-
-Ce mécanisme peut être utilisé pour traduire toutes sorte de clés. On peut par exemple afficher les valeurs de l'énum Genre dans notre application en modifiant la casse :
-	
-	<h1>Top albums in &{genre} for ${year}</h1>
-
-On renseigne ces clés dans le fichier `messages` :
-
-	ROCK=Rock
-	METAL=Metal
-	HIP_HOP=Hip Hop
-	WORLD=World
-	POP=pop
-	JAZZ=Jazz
-	BLUES=Blues
-	OTHER=Other
