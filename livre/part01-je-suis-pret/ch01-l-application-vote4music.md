@@ -107,14 +107,12 @@ La page d'accueil permet d'accéder aux principales fonctionnalités de l'applic
 
 Pour le top 10, vous pouvez choisir un style de musique. Pour cela, le template Play!► utilise l'enum Genre :
 
-~~~ html
-<label for="genre">Genre:</label>
-<select id ="genre" name="genre">
-    #{list models.Genre.values(), as:'genre'}
-    <option  value="${genre}">${genre.toString().toLowerCase()}</option>
-    #{/list}
-</select>
-~~~
+	<label for="genre">Genre:</label>
+	<select id ="genre" name="genre">
+	    #{list models.Genre.values(), as:'genre'}
+	    <option  value="${genre}">${genre.toString().toLowerCase()}</option>
+	    #{/list}
+	</select>
 
 **Remarque** : Le lange d'expression utilisé dans les templates est [Groovy](http://groovy.codehaus.org/). C'est un langage à typage dynamique très proche de Java, qui nous permet de manipuler facilement les objets renvoyés par le contrôleur.
 
@@ -132,72 +130,70 @@ En se référant aux routes, on voit que cette méthode est invoquée lorsque l'
 
 On utilise ensuite POST pour envoyer les données au contrôleur (voir le fichier de routes plus haut) Voici le code du formulaire :
 
-~~~ html 
+	#{extends 'main.html' /}
+	#{set title:'Album form' /}
 	
-#{extends 'main.html' /}
-#{set title:'Album form' /}
-
-<h1>Please write information about your favorite album</h1>
-
-#{form @Application.save(), id:'form', method:'POST', enctype:'multipart/form-data'}
-<input type="hidden" name="album.id" value="${album?.id}"/>
-
-<p class="field">
-    <label for="name">Album Name:</label>
-    <input type="text" name="album.name" id="name" value="${album?.name}"/>
-    <span class="error">${errors.forKey('album.name')}</span>
-</p>
-<p class="field">
-    <label for="artist">Artist:</label>
-    <input type="text" name="artist.name" id="artist" value="${album?.artist?.name}"/>
-    <span class="error">${errors.forKey('artist.name')}</span>
-</p>
-<p class="field">
-    <label for="genre">Genre:</label>
-    <select id="genre" name="album.genre">
-        #{list models.Genres.values(), as:'genre'}
-        #{if album?.genre == genre}
-        <option value="${genre}" selected="selected">${genre.toString().toLowerCase()}</option>
-        #{/if}
-        #{else}
-        <option value="${genre}">${genre.toString().toLowerCase()}</option>
-        #{/else}
-        #{/list}
-    </select>
-</p>
-<p class="field">
-    <label for="release-date">Release date</label>
-    <input type="text" name="album.releaseDate" id="release-date" value="${album?.releaseDate?.format('yyyy-MM-dd')}"/>
-    <span class="error">${errors.forKey('album.releaseDate')}</span>
-</p>
-
-<p class="buttons">
-    <a href="/albums" class="button">Cancel</a>
-    <span>or</span>
-    <input type="submit" class="button" value="Save this album"  id="saveAlbum"/>
-</p>
-
-#{/form}
-~~~
+	<h1>Please write information about your favorite album</h1>
 	
+	#{form @Application.save(), id:'form', method:'POST', enctype:'multipart/form-data'}
+	<input type="hidden" name="album.id" value="${album?.id}"/>
+	
+	<p class="field">
+	    <label for="name">Album Name:</label>
+	    <input type="text" name="album.name" id="name" value="${album?.name}"/>
+	    <span class="error">${errors.forKey('album.name')}</span>
+	</p>
+	<p class="field">
+	    <label for="artist">Artist:</label>
+	    <input type="text" name="artist.name" id="artist" value="${album?.artist?.name}"/>
+	    <span class="error">${errors.forKey('artist.name')}</span>
+	</p>
+	<p class="field">
+	    <label for="genre">Genre:</label>
+	    <select id="genre" name="album.genre">
+	        #{list models.Genres.values(), as:'genre'}
+	        #{if album?.genre == genre}
+	        <option value="${genre}" selected="selected">${genre.toString().toLowerCase()}</option>
+	        #{/if}
+	        #{else}
+	        <option value="${genre}">${genre.toString().toLowerCase()}</option>
+	        #{/else}
+	        #{/list}
+	    </select>
+	</p>
+	<p class="field">
+	    <label for="release-date">Release date</label>
+	    <input type="text" name="album.releaseDate" id="release-date" value="${album?.releaseDate?.format('yyyy-MM-dd')}"/>
+	    <span class="error">${errors.forKey('album.releaseDate')}</span>
+	</p>
+	
+	<p class="buttons">
+	    <a href="/albums" class="button">Cancel</a>
+	    <span>or</span>
+	    <input type="submit" class="button" value="Save this album"  id="saveAlbum"/>
+	</p>
+	
+	#{/form}
+
+		
 Ce formulaire nous permettra aussi bien de créer des utilisateurs que de les mettre à jour. C'est pour cette raison que nous utilisons une syntaxe comme `album?.name` pour la valeur des champs : si l'album existe déjà on affiche son nom. Sinon, on n'affiche rien. On retrouve également la sélection des genres à partir de l'Enum, comme sur la page d'accueil.
-
+	
 Pour permettre à l'utilisateur de sélectionner une date à l'aide d'un widget, on ajoute ce code JavaScript à notre template :
+	
 
-~~~ html
-#{set 'moreScripts'}
-<script src="@{'public/javascripts/jquery.validate.js'}"></script>
-<script>
-    $(document).ready(function() {
-        $("#form").validate();
-    });
-    $(function() {
-        // those stuff needs to be wrapped in a dom-ready callback. (same as $(document).ready)
-        $("#release-date").datepicker({dateFormat:'yy-mm-dd', showAnim:'fadeIn'});
-    });
-</script>
-#{/set}
-~~~
+	#{set 'moreScripts'}
+	<script src="@{'public/javascripts/jquery.validate.js'}"></script>
+	<script>
+	    $(document).ready(function() {
+	        $("#form").validate();
+	    });
+	    $(function() {
+	        // those stuff needs to be wrapped in a dom-ready callback. (same as $(document).ready)
+	        $("#release-date").datepicker({dateFormat:'yy-mm-dd', showAnim:'fadeIn'});
+	    });
+	</script>
+	#{/set}
+
 
 Ce script utilise jQuery, comme tous les exemples de code JavaScript que nous verrons dans ce chapitre.
 
@@ -275,31 +271,29 @@ $(document).ready(function(){
 
 Ceci suffit à ajouter des fonctions de pagination et de tri à un simple tableau HTML. Notre tableau est défini comme ceci :  
 
-~~~ html
-<table id="albumList">
-    <thead>
-        <tr>
-            <th>Artist</th>
-            <th>Album</th>
-            <th>Release date</th>
-            <th>Genre</th>
-            <th>Number of votes</th>
-        </tr>
-    </thead>
-    #{list _albums, as:'album'}
-    <tr id="album-${album.id}">
-        <td>${album.artist.name}</td>
-        <td>${album.name}</td>
-        <td>${album.releaseDate.format('yyyy-MM-dd')}</td>
-        <td>${album.genre.toString()}</td>
-        <td>
-            <span id="nbVotes${album.id}">${album.nbVotes}</span>
-            <a id="${album.id}-clickVote" class="voteLink" href="#">Vote for it!</a>
-        </td>
-    </tr>
-    #{/list}
-</table>
-~~~
+	<table id="albumList">
+	    <thead>
+	        <tr>
+	            <th>Artist</th>
+	            <th>Album</th>
+	            <th>Release date</th>
+	            <th>Genre</th>
+	            <th>Number of votes</th>
+	        </tr>
+	    </thead>
+	    #{list _albums, as:'album'}
+	    <tr id="album-${album.id}">
+	        <td>${album.artist.name}</td>
+	        <td>${album.name}</td>
+	        <td>${album.releaseDate.format('yyyy-MM-dd')}</td>
+	        <td>${album.genre.toString()}</td>
+	        <td>
+	            <span id="nbVotes${album.id}">${album.nbVotes}</span>
+	            <a id="${album.id}-clickVote" class="voteLink" href="#">Vote for it!</a>
+	        </td>
+	    </tr>
+	    #{/list}
+	</table>
 
 Nous plaçons ce code dans un fichier nommé `albumtable.tag`, séparé du reste de notre page, afin de pouvoir de réutiliser dans d'autres contextes : 
 
@@ -318,12 +312,10 @@ public static void list() {
 	
 Au dessus de notre tableau, nous définissons un champ de recherche qui permettra d'envoyer des filtres au serveur :
 
-~~~ html
-#{form @search()}
-<input type="text" id="filter" name="filter"/>
-<input type="submit" value="Filter" class="button" id="submitFilter">
-#{/form}
-~~~
+	#{form @search()}
+	<input type="text" id="filter" name="filter"/>
+	<input type="submit" value="Filter" class="button" id="submitFilter">
+	#{/form}
 
 La variable `filter` est récupérée dans le contrôleur. Elle permet de trouver des noms d'albums ou d'artistes correspondant à la saisie de l'utilisateur.
 Comme dans le cas précédent, on ne ramène que 100 résultats à la fois côté client. Si l'utilisateur a besoin de parcourir plus de résultats pour trouver ce qu'il cherche, on l'incite à utiliser le formulaire de recherche pour affiner les résultats.
@@ -365,7 +357,6 @@ Cette fonction de l'application permet d'afficher les 10 albums ayant reçu le p
 
 Sur la page d'accueil, on ajoute la possibilité de choisir le genre et l'année durant laquelle sont sortis les albums :
 
-~~~ html
 #{form @listByGenreAndYear()}
 <label for="year">Release Year</label>
 <select id="year" name="year">
@@ -382,7 +373,6 @@ Sur la page d'accueil, on ajoute la possibilité de choisir le genre et l'année
 </select>
 <input type="submit" class="button" value="View"/>
 #{/form}
-~~~
 
 On rend cette fonctionnalité accessible depuis le contrôleur :
 
@@ -504,19 +494,14 @@ Les entités du modèle pouvant auto-gérer leur état dans la base de données,
 La méthode du contrôleur renvoie directement le nouveau score de l'album au format texte. On récupérera cette réponse dans notre client HTML pour mettre à jour les informations affichées à l'écran. 
 Le bouton de vote est accessible dans la liste des albums :
 
-~~~ html
-<td>
-    <span id="nbVotes${album.id}">${album.nbVotes}</span>
-    <a id="${album.id}-clickVote" class="voteLink" href="#">Vote for it!</a>
-</td>
-~~~
+	<td>
+	    <span id="nbVotes${album.id}">${album.nbVotes}</span>
+	    <a id="${album.id}-clickVote" class="voteLink" href="#">Vote for it!</a>
+	</td>
 
 On créer aussi une `div` pour afficher un message en cas de succès :
 
-~~~ html
-<div id="voteInfo" class="info">One vote added!</div>
-~~~
-
+	<div id="voteInfo" class="info">One vote added!</div>
 
 Cette section sera masquée par défaut, à l'aide de CSS : 
 
@@ -573,13 +558,11 @@ public boolean hasCover = false;
 Ce booléen nous permettra de savoir si l'album possède une pochette ou non.
 On ajoute une colonne à la liste des albums. Lors de l'affichage, on effectue le test suivant : 
 
-~~~ html
 <td>
     #{if album?.hasCover}
     <span class="cover"><a href="#">Show cover</a></span>
     #{/if}
 </td>
-~~~
 
 Lors du survol de ce lien, on affiche une miniature de la pochette avec un peu de JavaScript :
 
@@ -615,16 +598,14 @@ Voyons maintenant comment enregistrer l'image dans ce répertoire lors de la cr�
 
 On ajoute un champ dans le formulaire de création (et d'édition) de l'album :
 
-~~~ html
-<p class="field">
-    <label for="cover">Cover</label>
-    <input type="file" id="cover" name="cover" accept="image/*"/>
-     #{if album?.hasCover}
-     <br/>
-     <img src="@{'/public/shared/covers'}/${album?.id}" alt="no cover" widht="50px" height="50px"/>
-     #{/if}
-</p>
-~~~
+	<p class="field">
+	    <label for="cover">Cover</label>
+	    <input type="file" id="cover" name="cover" accept="image/*"/>
+	     #{if album?.hasCover}
+	     <br/>
+	     <img src="@{'/public/shared/covers'}/${album?.id}" alt="no cover" widht="50px" height="50px"/>
+	     #{/if}
+	</p>
 
 Ce champ permet d'uploader une image. En mode édition, si une image est enregistrée elle sera affichée.
 
