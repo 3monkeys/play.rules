@@ -34,7 +34,7 @@ Dans le fichier application.conf, ajouter la ligne suivante pour configurer les 
 	application.admin=admin
 	application.adminpwd=admin
 
-Remarque : cette configuration est données à titre d'exemple, il est bien sur déconseillé de laisser des mots passe dans un fichier non crypté!
+Remarque : cette configuration est donnée à titre d'exemple, il est bien sur déconseillé de laisser des mots passe dans un fichier non crypté!
 
 On déclare ensuite un contrôleur d’administration pour toutes les actions que l’on veut restreindre. On ajoute l’annotation @With à ce contrôleur pour lui dire qu’il doit s’appuyer sur le contrôleur du module Secure :
 
