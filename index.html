@@ -118,20 +118,20 @@ $(document).ready(function() {
 	function washCode(data){
 	    /*TODO : a better regex*/
 
-	    data = data.replace(/```html/g,"");
-	    data = data.replace(/``` html/g,"");
-	    data = data.replace(/~~~html/g,"");
-	    data = data.replace(/~~~ html/g,"");
+	    data = data.replace(/```html/g,'<pre class="sh_html">');
+	    data = data.replace(/``` html/g,'<pre class="sh_html">');
+	    data = data.replace(/~~~html/g,'<pre class="sh_html">');
+	    data = data.replace(/~~~ html/g,'<pre class="sh_html">');
 
 	    data = data.replace(/```xml/g,"");
 	    data = data.replace(/``` xml/g,"");
 	    data = data.replace(/~~~xml/g,"");
 	    data = data.replace(/~~~ xml/g,"");
 
-	    data = data.replace(/```js/g,"");
-	    data = data.replace(/``` js/g,"");
-	    data = data.replace(/~~~js/g,"");
-	    data = data.replace(/~~~ js/g,"");
+	    data = data.replace(/```js/g,'<pre class="sh_javascript">');
+	    data = data.replace(/``` js/g,'<pre class="sh_javascript">');
+	    data = data.replace(/~~~js/g,'<pre class="sh_javascript">');
+	    data = data.replace(/~~~ js/g,'<pre class="sh_javascript">');
 		//<pre class="sh_javascript">
 	    data = data.replace(/```java/g,'<pre class="sh_java">');
 	    data = data.replace(/``` java/g,'<pre class="sh_java">');
