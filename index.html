@@ -285,6 +285,8 @@ $(document).ready(function() {
 	$('#cmdHome').bind('click', function() {
 		$("#details-container").html(news.content);
 		sh_highlightDocument();
+		//document.querySelector("#scroller").scrollTop = 0
+		window.document.getElementById("scroller").scrollTop = 0
 	});
 	
 	
