@@ -65,44 +65,41 @@ public static void listXml(String genre) {
 Je recherche simplement les albums correspondant au genre passé en paramètre, et je demande le rendu de la liste. Au passage on voit la simplicité d'utilisation de JPA avec Play!►. Le rendu sera fait dans le fichier portant le nom de la méthode et l'extension xml : listXml.xml.
 Ce template, placé dans le repertoire app/views, est défini comme ceci :
 
-~~~ xml
-<albums>
-#{list albums, as:'album'}
-    <album>
-        <artist>${album.artist.name}</artist>
-        <name>${album.name}</name>
-        <release-date>${album.releaseDate.format('yyyy')}</release-date>
-        <genre>${album.genre.toString()}</genre>
-    </album>
-#{/list}
-</albums>
-~~~
+
+	<albums>
+	#{list albums, as:'album'}
+	    <album>
+	        <artist>${album.artist.name}</artist>
+	        <name>${album.name}</name>
+	        <release-date>${album.releaseDate.format('yyyy')}</release-date>
+	        <genre>${album.genre.toString()}</genre>
+	    </album>
+	#{/list}
+	</albums>
 
 
 Voilà, cela suffit pour exposer nos albums en XML. En respectant le pattern d'URL défini dans le fichier routes, par exemple en appelant `http://localhost:9000/albums/rock`, on obtient le résultat suivant :
 
-~~~ xml
-<albums>
-   <album>
-      <artist>Nirvana</artist>
-      <name>Nevermind</name>
-      <release-date>1991</release-date>
-      <genre>ROCK</genre>
-   </album>
-   <album>
-      <artist>Muse</artist>
-      <name>Origin of Symmetry</name>
-      <release-date>2001</release-date>
-      <genre>ROCK</genre>
-      </album>
-   <album>
-      <artist>Muse</artist>
-      <name>Black Holes and Revelations</name>
-      <release-date>2006</release-date>
-      <genre>ROCK</genre>
-   </album>
-</albums>
-~~~
+	<albums>
+	   <album>
+	      <artist>Nirvana</artist>
+	      <name>Nevermind</name>
+	      <release-date>1991</release-date>
+	      <genre>ROCK</genre>
+	   </album>
+	   <album>
+	      <artist>Muse</artist>
+	      <name>Origin of Symmetry</name>
+	      <release-date>2001</release-date>
+	      <genre>ROCK</genre>
+	      </album>
+	   <album>
+	      <artist>Muse</artist>
+	      <name>Black Holes and Revelations</name>
+	      <release-date>2006</release-date>
+	      <genre>ROCK</genre>
+	   </album>
+	</albums>
 
 ### Envoi de données à travers un service REST
 
@@ -111,14 +108,12 @@ Maintenant nous allons effectuer l'opération inverse, l'envoi d'un contenu XML 
 
 On veut par exemple envoyer le contenu suivant en POST avec un content type application/xml :
 
-~~~ xml
-<album>
-      <artist>Metallica</artist>
-      <name>Death Magnetic</name>
-      <release-date>2008</release-date>
-      <genre>METAL</genre>
-</album>
-~~~
+	<album>
+	      <artist>Metallica</artist>
+	      <name>Death Magnetic</name>
+	      <release-date>2008</release-date>
+	      <genre>METAL</genre>
+	</album>
 
 
 Pour cela on ajoute la ligne suivante au fichier routes pour autoriser l'opération POST sur l'url `/album`:
