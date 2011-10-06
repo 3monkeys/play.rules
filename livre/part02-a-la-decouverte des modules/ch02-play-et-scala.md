@@ -144,15 +144,14 @@ La méthode `Action` permet d'effectuer une redirection vers une autre action du
 
 Play-Scala propose un moteur de template full Scala. Ce moteur permet d'écrire du code Scala autour de notre code HTML pour définir l'affichage des pages :
 
-~~~ html
-@(messages:List[String])
+	@(messages:List[String])
+	
+	<ul>
+	@messages.map{ message =>
+	  <li>@message</li>
+	}
+	</ul>
 
-<ul>
-@messages.map{ message =>
-  <li>@message</li>
-}
-</ul>
-~~~
 
 Ce template prend en paramètre une liste de messages.
 La méthode map permet ici de parcourir la liste des éléments.
@@ -171,51 +170,46 @@ Comme dans tout moteur de template qui se respecte, il est possible de créer de
 
 Par exemple, pour définir un tag qui affiche les informations concernant une personne, on crée un fichier `persons.scala.html` :
 
-~~~ html
-@(person:Person)
+	@(person:Person)
+	
+	<span>Name: </span> <span>@person.name</span> 
+	<span>Address: </span> <span>@person.address</span>
+	<span>Phone Number: </span> <span>@person.phoneNumber</span>
 
-<span>Name: </span> <span>@person.name</span> 
-<span>Address: </span> <span>@person.address</span>
-<span>Phone Number: </span> <span>@person.phoneNumber</span>
-~~~
 
 On peut ensuite appeler ce tag depuis une autre page :
 
-~~~ html
-...
-@persons(person=p)
-...
-~~~ 
+	...
+	@persons(person=p)
+	...
 
 On utilise également ce procédé pour créer des layouts.
 
 Pour cela, on crée un fichier `layout.scala.html` :
 
-~~~ html
-@(title:String)(content: => Html)
- 
-<h1>@title</h1>
- 
-<div id="menu">
+	@(title:String)(content: => Html)
+	 
+	<h1>@title</h1>
+	 
+	<div id="menu">
+	
+	</div>
+	 
+	<div id="content">
+	    @content
+	</div>
+	  
+	<div id="footer">© Mon super site</div>
 
-</div>
- 
-<div id="content">
-    @content
-</div>
-  
-<div id="footer">© Mon super site</div>
-~~~ 
 
 Pour créer une nouvelle page qui utilise ce layout, on procède comme ceci :
 
-~~~ html
-@main(title = "maPage") {
-    
- <p>Mon contenu</p>
-    
-}
-~~~ 
+	@main(title = "maPage") {
+	    
+	 <p>Mon contenu</p>
+	    
+	}
+
 
 Le titre sera remplacé par "ma page" et le contenu prendra place dans la balise `content`.
 
@@ -241,39 +235,38 @@ Pour parcourir une liste de résultats, par exemple un objet de type List[Album,
   }
 ~~~
 
-~~~ html
-@(entries:List[(models.Album,models.Artist)])
-@import controllers._
-<table id="albumList">
-    <thead>
-        <tr>
-            <th>Album</th>
-            <th>Artist</th>
-            <th>Cover</th>
-            <th>Release date</th>
-            <th>Genre</th>
-            <th>Number of votes</th>
-        </tr>
-    </thead>
+	@(entries:List[(models.Album,models.Artist)])
+	@import controllers._
+	<table id="albumList">
+	    <thead>
+	        <tr>
+	            <th>Album</th>
+	            <th>Artist</th>
+	            <th>Cover</th>
+	            <th>Release date</th>
+	            <th>Genre</th>
+	            <th>Number of votes</th>
+	        </tr>
+	    </thead>
+	
+	    @entries.map { entry =>
+	        <tr id="album-@entry._1.id">
+	            <td>@entry._1.name</td>
+	            <td>@entry._2.name</td>
+	            <td>
+	                @if(entry._1.hasCover){
+	                    <span class="cover"><a href="#">Show cover</a></span>
+	                }
+	            </td>
+	            <td>@Option(entry._1).map(_.releaseDate.format("yyyy-MM-dd"))</td>
+	            <td>@entry._1.genre</td>
+	            <td>
+	                <span id="nbVotes@entry._1.id">@entry._1.nbVotes</span>
+	            </td>
+	        </tr>
+	    }
+	</table>
 
-    @entries.map { entry =>
-        <tr id="album-@entry._1.id">
-            <td>@entry._1.name</td>
-            <td>@entry._2.name</td>
-            <td>
-                @if(entry._1.hasCover){
-                    <span class="cover"><a href="#">Show cover</a></span>
-                }
-            </td>
-            <td>@Option(entry._1).map(_.releaseDate.format("yyyy-MM-dd"))</td>
-            <td>@entry._1.genre</td>
-            <td>
-                <span id="nbVotes@entry._1.id">@entry._1.nbVotes</span>
-            </td>
-        </tr>
-    }
-</table>
-~~~
 
 Le template définie un paramètre `entries` qui correspond à la liste des tuples d'albums et d'artistes renvoyée par `Album.findAll`.
 A l'intérieur d'un tuple, on accède à un album avec l'expression `entry._1` et à un artiste avec `entry._2`.	
@@ -345,27 +338,26 @@ object Authentication extends Controller {
 
 Le template `login.scala.html` est un formulaire très simple qui transmet le login et le mot de passe saisis à l'action `authenticate` :
 
-~~~ html
-@form(controllers.Authentication.authenticate()){
-    @if(flash.get("error")){
-        <p class="error">
-            @flash.get("error")
-        </p>
-    }
+	@form(controllers.Authentication.authenticate()){
+	    @if(flash.get("error")){
+	        <p class="error">
+	            @flash.get("error")
+	        </p>
+	    }
+	
+	    <p id="username-field">
+	        <label for="username">User name</label>
+	        <input type="text" name="username" id="username"/>
+	    </p>
+	    <p id="password-field">
+	        <label for="password">Password</label>
+	        <input type="password" name="password" id="password" value="" />
+	    </p>
+	    <p id="signin-field">
+	        <input type="submit" id="signin" value="Sign in" />
+	    </p>
+	}
 
-    <p id="username-field">
-        <label for="username">User name</label>
-        <input type="text" name="username" id="username"/>
-    </p>
-    <p id="password-field">
-        <label for="password">Password</label>
-        <input type="password" name="password" id="password" value="" />
-    </p>
-    <p id="signin-field">
-        <input type="submit" id="signin" value="Sign in" />
-    </p>
-}
-~~~
 
 **Remarque** : le scope `flash` est utilisé lorsque l'on veut récupérer une information dans la requête suivant le traitement. On s'en sert ici pour afficher le message d'erreur si les identifiants saisis sont invalides.
 
