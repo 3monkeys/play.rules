@@ -262,6 +262,11 @@ $(document).ready(function() {
 	var height = window.innerHeight - (barsHeight * 2);
 	containers.css('height', height+'px');
 
+	window.onresize = function () {
+		var height = window.innerHeight - (barsHeight * 2);
+		containers.css('height', height+'px');
+	}
+
 	function hideLeftView() {
 		leftView.removeClass("left").addClass("hide");
 		rightView.removeClass("right");				
