@@ -18,3 +18,13 @@ On vous le redit, si vous voulez participer, n'hésitez pas : [**"Fork us + pull
 Bien à vous ! [@loic_d](http://twitter.com/#!/loic_d) [@k33g_org](http://twitter.com/#!/k33g_org)
 
 (1) *on a une famille, un travail, des enfants (surtout [@k33g_org](http://twitter.com/#!/k33g_org)), une vie sociale (surtout [@loic_d](http://twitter.com/#!/loic_d)) mais on va faire le maximum pour ajouter du contenu.*
+
+##Nous utilisons :
+
+- Zepto.js
+- github.js
+- showdown.js
+- SHJS
+- nos mimines
+
+**C'est plus sympa d'utiliser un navigateur de type "Webkit" pour visualiser le site, mais ça devrait le faire avec la dernière version de FF. Pour IE, je ne sais pas, je dois regarder ... Sur iPad+iOS5 ça doit être pas mal non plus :) @k33g_org**
