@@ -218,7 +218,7 @@ La première ligne de cette méthode vérifie que les valeurs envoyées au contr
 Dans le cas contraire, on retourne au formulaire, qui affichera les erreurs grâce aux balises d'erreur que l'on écrit, comme 	
 
 	<span class="error">${errors.forKey('album.name')}</span>
-	
+
 La méthode replaceDuplicateArtist de la classe Album permet d'éviter les doublons de nom d'artistes dans la base de données :
 
 ~~~ java 
@@ -264,7 +264,6 @@ On utilise jQuery et le plugin datatables pour améliorer le rendu du tableau de
 Ce plugin est très simple à utiliser, il suffit d'écrire ces quelques lignes pour l'activer : 
 
 ~~~ js
-
 	$(document).ready(function(){
 	    $('#albumList').dataTable();
 	  });
@@ -358,8 +357,6 @@ Cette fonction de l'application permet d'afficher les 10 albums ayant reçu le p
 
 Sur la page d'accueil, on ajoute la possibilité de choisir le genre et l'année durant laquelle sont sortis les albums :
 
-~~~ html 
-
 	#{form @listByGenreAndYear()}
 	<label for="year">Release Year</label>
 	<select id="year" name="year">
@@ -377,7 +374,6 @@ Sur la page d'accueil, on ajoute la possibilité de choisir le genre et l'année
 	<input type="submit" class="button" value="View"/>
 	#{/form}
 	
-~~~ 
 
 On rend cette fonctionnalité accessible depuis le contrôleur :
 
@@ -563,18 +559,16 @@ On enrichit la classe Album d'un nouveau champ :
 Ce booléen nous permettra de savoir si l'album possède une pochette ou non.
 On ajoute une colonne à la liste des albums. Lors de l'affichage, on effectue le test suivant : 
 
-~~~ html 
 	<td>
 	    #{if album?.hasCover}
 	    <span class="cover"><a href="#">Show cover</a></span>
 	    #{/if}
 	</td>
-~~~ 
+	
 
 Lors du survol de ce lien, on affiche une miniature de la pochette avec un peu de JavaScript :
 
 ~~~ js
-
 	$('.cover').each(function(i, val) {
 	    var t = $(this);
 	    //Récupération de l'id courant
@@ -582,7 +576,6 @@ Lors du survol de ce lien, on affiche une miniature de la pochette avec un peu d
 	    var id = album.match(/album-(\d)/)[1];
 	    displayCover(id, t);
 	});
-
 	//Affichage de l'image
 	displayCover = function(id, albumMarkup){
 	    var root = '/public/shared/covers';
@@ -606,8 +599,6 @@ Voyons maintenant comment enregistrer l'image dans ce répertoire lors de la cr�
 
 On ajoute un champ dans le formulaire de création (et d'édition) de l'album :
 
-~~~ html
-
 	<p class="field">
 	    <label for="cover">Cover</label>
 	    <input type="file" id="cover" name="cover" accept="image/*"/>
@@ -616,7 +607,6 @@ On ajoute un champ dans le formulaire de création (et d'édition) de l'album :
 	     <img src="@{'/public/shared/covers'}/${album?.id}" alt="no cover" widht="50px" height="50px"/>
 	     #{/if}
 	</p>
-~~~ 
 
 Ce champ permet d'uploader une image. En mode édition, si une image est enregistrée elle sera affichée.
 
