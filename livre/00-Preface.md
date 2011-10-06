@@ -1,5 +1,5 @@
-Ce livre est conçu et écrit par @k33g_org et @loic_d (nos petits noms sur Twitter). 
-L'idée d'écrire cet ouvrage nous a été insufflée par @mklabs.
+Ce livre est conçu et écrit par [@k33g_org](http://www.twitter.com/k33g_org) et [@loic_d](http://www.twitter.com/loic_d) (nos petits noms sur Twitter). 
+L'idée d'écrire cet ouvrage nous a été insufflée par [@mklabs](http://www.twitter.com/mklabs)
 
 #Vision de [@k33g_org](@k33g_org)
 
@@ -23,7 +23,7 @@ Dans le désordre :
 
 ##Dédicace
 
-Tout simplement aux 2 autres singes, [@loic_d](@loic_d) parce qu'à défaut de ne plus pouvoir travailler professionnellement avec lui (et je vous garantie que c'est une chance), je vais pouvoir remettre ça sur ce projet, [@mklabs](@mklabs) dont l'enthousiasme sans limite me sidère et nous fait avancer (c'est à cause de lui que je lis tout ce que je peux sur le javascript)
+Tout simplement aux 2 autres singes, [@loic_d](http://www.twitter.com/loic_d) parce qu'à défaut de ne plus pouvoir travailler professionnellement avec lui (et je vous garantie que c'est une chance), je vais pouvoir remettre ça sur ce projet, [@mklabs](@mklabs) dont l'enthousiasme sans limite me sidère et nous fait avancer (c'est à cause de lui que je lis tout ce que je peux sur le javascript)
 
 (1) C'est pas de la référence ça !? J'ai toujours aimé les citations
 
