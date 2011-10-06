@@ -305,7 +305,6 @@ Pour intégrer ce tag Play!► à notre page, on écrit la directive suivante :
 Par défaut, on affiche les 100 derniers résultats trouvés dans la base de données : 
 	
 ~~~ java 
-
 	public static void list() {
 	    List<Album> albums = Album.all().fetch(100);
 	    render(albums);
