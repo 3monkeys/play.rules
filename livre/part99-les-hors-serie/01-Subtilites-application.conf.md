@@ -1,3 +1,3 @@
-#Play!► & les subtilités du fichier `application.conf`
+#Play!► & les subtilités du fichier application.conf
 
 	//En préparation
