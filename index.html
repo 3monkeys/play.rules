@@ -33,7 +33,7 @@
 			<a href="https://twitter.com/share" class="twitter-share-button" data-count="horizontal" data-via="k33g_org, @loic_d">Tweet</a><script type="text/javascript" src="//platform.twitter.com/widgets.js"></script>
 			<a id="cmdHome" class="barRightButton">⟰</a>
 		</div>
-    	<div class="container scrollable">
+    	<div id="scroller" class="container scrollable">
     		<p id="details-container" style="margin-right:40px; margin-left:20px;"></p>
 			
 			<br>
@@ -144,7 +144,6 @@ $(document).ready(function() {
 			var branches = gh.repo(this.user, this.repo).branches(function(data){
 				that.branches = data.branches;
 				//console.log("Branches of ",that.repo," are loaded : ", that.branches);
-				
 				if(callBk) { callBk(); }
 			});
 		},
@@ -179,8 +178,12 @@ $(document).ready(function() {
 		
 		function getChapterContent(clickedLink) {			
 			gitHubStorage.getContent(clickedLink, function(content){
+				
 				$("#details-container").html(converter.makeHtml(washCode(content)));
 				sh_highlightDocument();	
+				//window.scrollTo(0,0);
+				//document.querySelector("#scroller").scrollTop = 0
+				window.document.getElementById("scroller").scrollTop = 0
 			});
 		}
 				
@@ -189,11 +192,15 @@ $(document).ready(function() {
 			window.news = items.filter(function(item) { return item.name === "NEWS.md"; })[0];
 			
 			gitHubStorage.getContent(news.name, function(content){
+				
 				news.content = converter.makeHtml(washCode(content));
 				$("#details-container").html(news.content);
 				sh_highlightDocument();	
 				
 				twitter.removeClass("hide").addClass("show");
+				//window.scrollTo(0,0);
+				//document.querySelector("#scroller").scrollTop = 0
+				window.document.getElementById("scroller").scrollTop = 0
 			});			
 			
 			var livre  = items.filter(function(item) { return item.name === "livre"; })[0];
