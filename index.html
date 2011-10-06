@@ -6,7 +6,8 @@
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />	
 	<link rel="stylesheet" href="css/lavanja.css">
 	<link rel="stylesheet" type="text/css" href="css/sh_style.css"> </style>
-		
+	
+	<script type="text/javascript" src="https://apis.google.com/js/plusone.js"></script>
 </head>
 
 <body>
@@ -17,22 +18,44 @@
 			Play.Rules<b>!</b><small>►</small> eBook
 			<a id="cmdHideMenuBar" class="barRightButton">✖</a>
 		</div>
-		<div  class="container scrollable" id="toc-container">
+		<div class="container scrollable" id="toc-container">
+			<h2><center>T.D.M.</center></h2>
 			<ul id="toc"><ul>
+
 		</div>
+
 	</div>
     <div class="container right scrollable" id="rightView">
 		<div class="head">
 			<a id="cmdShowMenuBar" class="barLeftButton">➼</a>
+			<g:plusone size="medium"></g:plusone>
 			<a id="cmdHome" class="barRightButton">⟰</a>
 		</div>
     	<div class="container scrollable">
     		<p id="details-container" style="margin-right:40px; margin-left:20px;"></p>
+			
+			<br>
+			<div id="twitter" class="hide">
+				<h2 class="border">@Twitter</h2>
+				<section class="threeColumns border paddingTop">
+	                <h3 class="border">#PlayFramework</h2>
+					<div id="PlayFramework"></div>
+
+	                <h3 class="border">@loic_d</h2>
+					<div id="loic_d"></div>
+
+	                <h3 class="border">@k33g_org</h2>
+					<div id="k33g_org"></div>
+				
+	            </section>
+			</div>
+			
     	</div>
     </div>
 
 	
 </body>
+<script src="js/twitter.js"></script>
 <script src="js/class.js"></script>
 
 <script src="js/vendor/sh_main.min.js"></script>
@@ -47,8 +70,35 @@
 
 
 <script>
-$(document).ready(function() {
+/*
+	Code fait à l'arrache par k33g_org
 	
+	TODO :
+		- repositionner chaque nouvelle page "en haut"
+		- rajouter la posibilité d'utiliser "history" -> pour le bookmark des urls
+	
+*/
+$(document).ready(function() {
+	/* à refactorer */
+	var loic = $('#loic_d'), k33g = $('#k33g_org'), playframework = $('#PlayFramework'), twitter = $('#twitter');
+    tw.search('#playframework',function(data){
+        for(var i = 0; i < 3; i+=1){
+			playframework.append('<li><span> (' + data[i].user + ')</span> &raquo; ' + data[i].msg+'</li>');
+        }
+		tw.search('from:loic_d',function(data){
+	        for(var i = 0; i <3; i+=1){
+				loic.append('<li>' + data[i].msg+'</li>');
+	        }
+			tw.search('from:k33g_org',function(data){
+		        for(var i = 0; i <3; i+=1){
+					k33g.append('<li>' + data[i].msg+'</li>');
+		        }
+		    });
+	    });
+
+    });	
+	
+
 	function washCode(data){
 	    /*TODO : a better regex*/
 
@@ -141,6 +191,8 @@ $(document).ready(function() {
 				news.content = converter.makeHtml(washCode(content));
 				$("#details-container").html(news.content);
 				sh_highlightDocument();	
+				
+				twitter.removeClass("hide").addClass("show");
 			});			
 			
 			var livre  = items.filter(function(item) { return item.name === "livre"; })[0];
@@ -210,6 +262,7 @@ $(document).ready(function() {
 		$("#details-container").html(news.content);
 		sh_highlightDocument();
 	});
+	
 	
 });
 
