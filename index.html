@@ -118,10 +118,10 @@ $(document).ready(function() {
 	function washCode(data){
 	    /*TODO : a better regex*/
 
-	    data = data.replace(/```html/g,'<pre class="sh_html">');
-	    data = data.replace(/``` html/g,'<pre class="sh_html">');
-	    data = data.replace(/~~~html/g,'<pre class="sh_html">');
-	    data = data.replace(/~~~ html/g,'<pre class="sh_html">');
+	    data = data.replace(/```html/g,'');
+	    data = data.replace(/``` html/g,'');
+	    data = data.replace(/~~~html/g,'');
+	    data = data.replace(/~~~ html/g,'');
 
 	    data = data.replace(/```xml/g,"");
 	    data = data.replace(/``` xml/g,"");
