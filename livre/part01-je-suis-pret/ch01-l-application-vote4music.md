@@ -562,36 +562,40 @@ public boolean hasCover = false;
 Ce booléen nous permettra de savoir si l'album possède une pochette ou non.
 On ajoute une colonne à la liste des albums. Lors de l'affichage, on effectue le test suivant : 
 
-<td>
-    #{if album?.hasCover}
-    <span class="cover"><a href="#">Show cover</a></span>
-    #{/if}
-</td>
+~~~ java 
+
+	<td>
+	    #{if album?.hasCover}
+	    <span class="cover"><a href="#">Show cover</a></span>
+	    #{/if}
+	</td>
+~~~ 
 
 Lors du survol de ce lien, on affiche une miniature de la pochette avec un peu de JavaScript :
 
-~~~ js 
-$('.cover').each(function(i, val) {
-    var t = $(this);
-    //Récupération de l'id courant
-    var album = t.closest('tr').attr("id");
-    var id = album.match(/album-(\d)/)[1];
-    displayCover(id, t);
-});
+~~~ javascript
 
-//Affichage de l'image
-displayCover = function(id, albumMarkup){
-    var root = '/public/shared/covers';
-    var markup = '<img src="' + root + '/' + id + '" width="200" height="200">';
-    albumMarkup.bt(markup, {
-        width: 200,
-        fill: 'white',
-        cornerRadius: 20,
-        padding: 20,
-        strokeWidth: 1,
-        trigger: ['mouseover', 'click']
-    });
-};
+	$('.cover').each(function(i, val) {
+	    var t = $(this);
+	    //Récupération de l'id courant
+	    var album = t.closest('tr').attr("id");
+	    var id = album.match(/album-(\d)/)[1];
+	    displayCover(id, t);
+	});
+
+	//Affichage de l'image
+	displayCover = function(id, albumMarkup){
+	    var root = '/public/shared/covers';
+	    var markup = '<img src="' + root + '/' + id + '" width="200" height="200">';
+	    albumMarkup.bt(markup, {
+	        width: 200,
+	        fill: 'white',
+	        cornerRadius: 20,
+	        padding: 20,
+	        strokeWidth: 1,
+	        trigger: ['mouseover', 'click']
+	    });
+	};
 ~~~ 
 	
 Ce code récupère une image dans un répertoire du serveur et effectue son rendu à l'aide du plugin jQuery bt (BeautyTips).
@@ -602,6 +606,8 @@ Voyons maintenant comment enregistrer l'image dans ce répertoire lors de la cr�
 
 On ajoute un champ dans le formulaire de création (et d'édition) de l'album :
 
+~~~ html
+
 	<p class="field">
 	    <label for="cover">Cover</label>
 	    <input type="file" id="cover" name="cover" accept="image/*"/>
@@ -610,6 +616,7 @@ On ajoute un champ dans le formulaire de création (et d'édition) de l'album :
 	     <img src="@{'/public/shared/covers'}/${album?.id}" alt="no cover" widht="50px" height="50px"/>
 	     #{/if}
 	</p>
+~~~ 
 
 Ce champ permet d'uploader une image. En mode édition, si une image est enregistrée elle sera affichée.
 
