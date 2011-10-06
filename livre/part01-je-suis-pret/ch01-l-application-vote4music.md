@@ -264,9 +264,10 @@ On utilise jQuery et le plugin datatables pour améliorer le rendu du tableau de
 Ce plugin est très simple à utiliser, il suffit d'écrire ces quelques lignes pour l'activer : 
 
 ~~~ js
-$(document).ready(function(){
-    $('#albumList').dataTable();
-  });
+
+	$(document).ready(function(){
+	    $('#albumList').dataTable();
+	  });
 ~~~
 
 Ceci suffit à ajouter des fonctions de pagination et de tri à un simple tableau HTML. Notre tableau est défini comme ceci :  
@@ -304,10 +305,11 @@ Pour intégrer ce tag Play!► à notre page, on écrit la directive suivante :
 Par défaut, on affiche les 100 derniers résultats trouvés dans la base de données : 
 	
 ~~~ java 
-public static void list() {
-    List<Album> albums = Album.all().fetch(100);
-    render(albums);
-}
+
+	public static void list() {
+	    List<Album> albums = Album.all().fetch(100);
+	    render(albums);
+	}
 ~~~ 
 	
 Au dessus de notre tableau, nous définissons un champ de recherche qui permettra d'envoyer des filtres au serveur :
@@ -324,16 +326,18 @@ Cette solution est plus simple pour nous du point de vue du code, par rapport à
 Le contrôleur intercepte l'appel de cette manière: 
 
 ~~~ java 
-public static void search(String filter) {
-    List<Album> albums = Album.findAll(filter);
-    render(albums);
-}
+
+	public static void search(String filter) {
+	    List<Album> albums = Album.findAll(filter);
+	    render(albums);
+	}
 ~~~ 
 
 La méthode `findAll` est définie comme ceci :
 
 ~~~ java
-<T> List<T> findAll();
+
+	<T> List<T> findAll();
 ~~~
 
 Le mécanisme d'inférence de type nous permet de récupérer une liste correctement typée (ici, `List<Album>`). 
@@ -341,12 +345,13 @@ Le mécanisme d'inférence de type nous permet de récupérer une liste correcte
 La classe Album définit la méthode de recherche avec un filtre sur le nom :
 
 ~~~ java 
-public static List<Album> findAll(String filter) {
-    String likeFilter = "%" + filter + "%";
-    //limit to 100 results
-    List<Album> albums = find("byNameLike", likeFilter).fetch(100);
-    return albums;
-}
+
+	public static List<Album> findAll(String filter) {
+	    String likeFilter = "%" + filter + "%";
+	    //limit to 100 results
+	    List<Album> albums = find("byNameLike", likeFilter).fetch(100);
+	    return albums;
+	}
 ~~~ 	
 
 Selon nos besoins, on peut bien sûr enrichir les filtres et les requêtes pour obtenir des résultats plus précis. 
@@ -381,12 +386,13 @@ Sur la page d'accueil, on ajoute la possibilité de choisir le genre et l'année
 On rend cette fonctionnalité accessible depuis le contrôleur :
 
 ~~~ java 
-public static void listByGenreAndYear(String genre, String year) {
-    notFoundIfNull(genre);
-    notFoundIfNull(year);
-    List<Album> albums = Album.findByGenreAndYear(genre, year);
-    render(genre, year, albums);
-}
+
+	public static void listByGenreAndYear(String genre, String year) {
+	    notFoundIfNull(genre);
+	    notFoundIfNull(year);
+	    List<Album> albums = Album.findByGenreAndYear(genre, year);
+	    render(genre, year, albums);
+	}
 ~~~ 
 
 Les paramètres `genre` et `year` sont obligatoires. Cela veut dire que si on appelle ce contrôleur dans ces paramètres, il renverra une erreur 404 (not found).
@@ -395,15 +401,16 @@ Les paramètres `genre` et `year` sont obligatoires. Cela veut dire que si on ap
 La classe Album définie les méthodes nécessaires à cette recherche :
 
 ~~~ java 
-public static List<Album> findByGenreAndYear(String genre, String year) {
-    List<Album> albums;
-    Genre genreEnum = Genre.valueOf(genre.toString().toUpperCase());
-    //tri par popularité
-    albums = find("genre = ? order by nbVotes desc", genreEnum).fetch(100);
-    //exemple lambdaj
-    albums = filterByYear(albums, year);
-    return albums;
-}
+
+	public static List<Album> findByGenreAndYear(String genre, String year) {
+	    List<Album> albums;
+	    Genre genreEnum = Genre.valueOf(genre.toString().toUpperCase());
+	    //tri par popularité
+	    albums = find("genre = ? order by nbVotes desc", genreEnum).fetch(100);
+	    //exemple lambdaj
+	    albums = filterByYear(albums, year);
+	    return albums;
+	}
 ~~~ 
 
 La syntaxe de notre requête est un peu différente de celle que l'on a utilisé dans les exemples précédents. La méthode `find` est capable de traiter différents types de syntaxe. Ici on utilise la syntaxe standard JPQL (JPA Query Language), plus adaptée pour faire des requêtes avancées.
@@ -412,36 +419,38 @@ Pour proposer les dates disponibles depuis le contrôleur, on calcule un interva
 Si la base est vide on donne des valeurs par défaut :	
 
 ~~~ java 
-public static List<String> getYearsToDisplay() {
-    List<String> years = new ArrayList<String>();
-    for (int i = Album.getFirstAlbumYear(); i <= Album.getLastAlbumYear(); i++) {
-        years.add(String.valueOf(i));
-    }
-    Collections.reverse(years);
-    return years;
-}
+
+	public static List<String> getYearsToDisplay() {
+	    List<String> years = new ArrayList<String>();
+	    for (int i = Album.getFirstAlbumYear(); i <= Album.getLastAlbumYear(); i++) {
+	        years.add(String.valueOf(i));
+	    }
+	    Collections.reverse(years);
+	    return years;
+	}
 ~~~
 
 La classe Album implémente les méthodes getFirstAlbumYear et getLastAlbumYear, qui récupèrent ces valeurs dans la base de données :
 
 ~~~ java 
-private static SimpleDateFormat formatYear = new SimpleDateFormat("yyyy");
 
-public static int getFirstAlbumYear() {
-    Date result = (Date) em().createQuery("select min(a.releaseDate) from Album a").getSingleResult();
-    if (result != null)
-        return Integer.parseInt(formatYear.format(result));
-    //if no album is registered return 1990
-    return 1990;
-}
+	private static SimpleDateFormat formatYear = new SimpleDateFormat("yyyy");
 
-public static int getLastAlbumYear() {
-    Date result = (Date) em().createQuery("select max(a.releaseDate) from Album a").getSingleResult();
-    if (result != null)
-        return Integer.parseInt(formatYear.format(result));
-    //if no album is registered return current year
-    return Integer.parseInt(formatYear.format(new Date()));
-}
+	public static int getFirstAlbumYear() {
+	    Date result = (Date) em().createQuery("select min(a.releaseDate) from Album a").getSingleResult();
+	    if (result != null)
+	        return Integer.parseInt(formatYear.format(result));
+	    //if no album is registered return 1990
+	    return 1990;
+	}
+
+	public static int getLastAlbumYear() {
+	    Date result = (Date) em().createQuery("select max(a.releaseDate) from Album a").getSingleResult();
+	    if (result != null)
+	        return Integer.parseInt(formatYear.format(result));
+	    //if no album is registered return current year
+	    return Integer.parseInt(formatYear.format(new Date()));
+	}
 ~~~
     
 La méthode `em()` de classe `Model` de Play!► permet d'accéder à l'entity manager de JPA (Java Persistence API). Ceci peut être utile dans certains cas, notamment lorsque l'on veut ramener autre chose que des objets du modèle (ici une date).
@@ -449,9 +458,10 @@ La méthode `em()` de classe `Model` de Play!► permet d'accéder à l'entity m
 La librairie lambdaj nous aide à filtrer l'ensemble des albums récupérés pour une année donnée. Grâce à elle, nous pouvons écrire nos filtres comme dans un langage fonctionnel, en évitant de créer des boucles pour parcourir la collection d'albums dans le but de la trier. Dans cet exemple, on utilise la fonction `select` :
 
 ~~~ java 
-public static List<Album> filterByYear(List<Album> albums, String year) {
-    return select(albums, having(on(Album.class).getReleaseYear(), equalTo(year)));
-}
+
+	public static List<Album> filterByYear(List<Album> albums, String year) {
+	    return select(albums, having(on(Album.class).getReleaseYear(), equalTo(year)));
+	}
 ~~~ 
 
 	
@@ -469,11 +479,12 @@ Voyons maintenant une fonctionnalité clé de cette application, le vote!
 Cette méthode du contrôleur permet d'enregistrer un vote pour un album :
 
 ~~~ java 
-public static void vote(String id) {
-    Album album = findById(Long.parseLong(id));
-    album.vote();
-    renderText(album.nbVotes);
-}
+
+	public static void vote(String id) {
+	    Album album = findById(Long.parseLong(id));
+	    album.vote();
+	    renderText(album.nbVotes);
+	}
 ~~~ 
 
 Si vous avez une bonne mémoire, vous vous souvenez qu'on avait ajouté une route "catch all" à notre ficher de configuration `routes` :
@@ -487,10 +498,11 @@ Dans le cas présent, la méthode `vote` sera accessible depuis l'URL `/applicat
 La classe Album définit cette méthode pour mettre à jour le compteur des votes d'une instance d'album:
 
 ~~~ java 
-public void vote() {
-    nbVotes++;
-    save();
-}
+
+	public void vote() {
+	    nbVotes++;
+	    save();
+	}
 ~~~ 
 
 Les entités du modèle pouvant auto-gérer leur état dans la base de données, on peut directement appeler la méthode `save` pour sauvegarder ce nouvel état.
@@ -518,7 +530,7 @@ Cette section sera masquée par défaut, à l'aide de CSS :
 
 Ce code JavaScript permet d'intercepter les clicks et de rafraîchir l'écran :
 	
-~~~ javascript
+~~~ js
 
 	//On récupère les span dont l'id commence par "nbVotes" pour trouver la zone à mettre à jour
 	var nbvotes = $('span[id^="nbVotes"]');
@@ -549,7 +561,7 @@ Ce code JavaScript permet d'intercepter les clicks et de rafraîchir l'écran :
 	    });
 	};
 
-$('a.voteLink').click(clickVote);
+	$('a.voteLink').click(clickVote);
 ~~~ 
 	 	
 ## Gestion des pochettes d'albums
@@ -558,13 +570,14 @@ On veut maintenant ajouter la possibilité d'attacher l'image d'une pochette aux
 On enrichit la classe Album d'un nouveau champ :
 
 ~~~ java 
-public boolean hasCover = false;
+
+	public boolean hasCover = false;
 ~~~ 
 
 Ce booléen nous permettra de savoir si l'album possède une pochette ou non.
 On ajoute une colonne à la liste des albums. Lors de l'affichage, on effectue le test suivant : 
 
-~~~ java 
+~~~ html 
 
 	<td>
 	    #{if album?.hasCover}
@@ -575,7 +588,7 @@ On ajoute une colonne à la liste des albums. Lors de l'affichage, on effectue l
 
 Lors du survol de ce lien, on affiche une miniature de la pochette avec un peu de JavaScript :
 
-~~~ javascript
+~~~ js
 
 	$('.cover').each(function(i, val) {
 	    var t = $(this);
