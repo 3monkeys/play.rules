@@ -259,8 +259,8 @@ $(document).ready(function() {
 		containers 		= $('.container'), 
 		barsHeight 		= $('[class="head"]').offset().height;
 		
-	var height = window.innerHeight - (barsHeight * 2);
-	containers.css('height', height+'px');
+	//var height = window.innerHeight - (barsHeight * 2);
+	//containers.css('height', height+'px');
 
 	window.onresize = function () {
 		var height = window.innerHeight - (barsHeight * 2);
@@ -305,7 +305,31 @@ $(document).ready(function() {
 			});
 		}
     };
+	/*--- pour les tablettes et mobiles ---*/
+	$(document.body).bind('orientationchange', function(){
+		var height = window.innerHeight - (barsHeight * 2);
+		containers.css('height', height+'px');
+						
+		var orientation = window.orientation;
+	    switch(orientation) {  
+	      case 90: case -90: case undefined: /* if undefined not a mobile */
+	        orientation = 'landscape';  
+	      break;  
+	      default:  
+	        orientation = 'portrait';  
+	    }				
+		
+		
+		if(orientation == 'portrait') {
+			hideLeftView()
+		} else {
+			showLeftView();				
+		}
+		
+    });
 	
+	$(document.body).trigger('orientationchange');
+	/*-------------------------------------*/
 
 	
 	
