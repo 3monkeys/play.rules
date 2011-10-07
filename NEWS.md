@@ -24,7 +24,7 @@ Bien à vous ! [@loic_d](http://twitter.com/#!/loic_d) [@k33g_org](http://twitte
 - Zepto.js
 - github.js
 - showdown.js
-- SHJS
+- highlight.js
 - nos mimines
 
 **C'est plus sympa d'utiliser un navigateur de type "Webkit" pour visualiser le site, mais ça devrait le faire avec la dernière version de FF. Pour IE, je ne sais pas, je dois regarder ... Sur iPad+iOS5 ça doit être pas mal non plus :) @k33g_org**
