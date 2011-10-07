@@ -6,8 +6,9 @@
     <meta name="viewport" content="user-scalable=no, width=device-width, initial-scale=1.0, maximum-scale=1.0;" />
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />	
 	<link rel="stylesheet" href="css/lavanja.css">
+	<!--
 	<link rel="stylesheet" type="text/css" href="css/sh_style.css"> </style>
-	
+	-->
 	<script type="text/javascript" src="https://apis.google.com/js/plusone.js"></script>
 	<script type="text/javascript">
 
@@ -21,7 +22,9 @@
 	    var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
 	  })();
 
-	</script>	
+	</script>
+	<script src="js/vendor/highlight.min.js"></script>
+	<link rel="stylesheet" href="css/default.min.css">
 </head>
 
 <body>
@@ -73,10 +76,10 @@
 <script src="js/twitter.js"></script>
 <script src="js/class.js"></script>
 
-<script src="js/vendor/sh_main.min.js"></script>
+<!--<script src="js/vendor/sh_main.min.js"></script>
 <script src="js/vendor/sh_java.min.js"></script>
 <script src="js/vendor/sh_javascript.min.js"></script>
-<script src="js/vendor/sh_html.min.js"></script>
+<script src="js/vendor/sh_html.min.js"></script>-->
 <script src="js/vendor/showdown.js"></script>
 <script src="js/vendor/github.js"></script>
 <script src="js/vendor/zepto.min.js"></script>
@@ -129,11 +132,25 @@ $(document).ready(function() {
 	    data = data.replace(/~~~xml/g,"");
 	    data = data.replace(/~~~ xml/g,"");
 
-	    data = data.replace(/```js/g,'<pre class="sh_javascript">');
+	    data = data.replace(/```js/g,'');
+	    data = data.replace(/``` js/g,'');
+	    data = data.replace(/~~~js/g,'');
+	    data = data.replace(/~~~ js/g,'');
+
+	    data = data.replace(/```java/g,'');
+	    data = data.replace(/``` java/g,'');
+	    data = data.replace(/~~~java/g,'');
+	    data = data.replace(/~~~ java/g,'');
+
+	    data = data.replace(/```css/g,'');
+	    data = data.replace(/``` css/g,'');
+	    data = data.replace(/~~~css/g,'');
+	    data = data.replace(/~~~ css/g,'');
+	    /*data = data.replace(/```js/g,'<pre class="sh_javascript">');
 	    data = data.replace(/``` js/g,'<pre class="sh_javascript">');
 	    data = data.replace(/~~~js/g,'<pre class="sh_javascript">');
 	    data = data.replace(/~~~ js/g,'<pre class="sh_javascript">');
-		//<pre class="sh_javascript">
+
 	    data = data.replace(/```java/g,'<pre class="sh_java">');
 	    data = data.replace(/``` java/g,'<pre class="sh_java">');
 	    data = data.replace(/~~~java/g,'<pre class="sh_java">');
@@ -142,7 +159,7 @@ $(document).ready(function() {
 	    data = data.replace(/```rb/g,"");
 	    data = data.replace(/``` rb/g,"");
 	    data = data.replace(/~~~rb/g,"");
-	    data = data.replace(/~~~ rb/g,"");
+	    data = data.replace(/~~~ rb/g,"");*/
 
 	    data = data.replace(/```/g,"</pre>");
 	    data = data.replace(/~~~/g,"</pre>");
@@ -195,7 +212,9 @@ $(document).ready(function() {
 			gitHubStorage.getContent(clickedLink, function(content){
 				
 				$("#details-container").html(converter.makeHtml(washCode(content)));
-				sh_highlightDocument();	
+				$('pre code').each(function(i, e) {hljs.highlightBlock(e, '    ')});
+				//sh_highlightDocument();	
+				
 				//window.scrollTo(0,0);
 				//document.querySelector("#scroller").scrollTop = 0
 				window.document.getElementById("scroller").scrollTop = 0
@@ -210,7 +229,9 @@ $(document).ready(function() {
 				
 				news.content = converter.makeHtml(washCode(content));
 				$("#details-container").html(news.content);
-				sh_highlightDocument();	
+				$('pre code').each(function(i, e) {hljs.highlightBlock(e, '    ')});
+				//sh_highlightDocument();	
+				
 				
 				twitter.removeClass("hide").addClass("show");
 				//window.scrollTo(0,0);
