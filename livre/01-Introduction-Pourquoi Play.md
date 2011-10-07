@@ -15,7 +15,7 @@ On peut par exemple écrire le code suivant pour manipuler une entité "Personne
 
 ``` java
     // Si on voulait récupérer toutes les personnes
-    // List<Personne> personnes = find("byName","Dupont");
+    List<Personne> personnes = Personne.find("byName","Dupont").fetch();
     // Récupérer la personne ayant l'id 1
     Personne p1 = Personne.findById(1);
     // Modification de l'entité
@@ -39,14 +39,14 @@ Ceci est renforcé par l'aspect `stateless` du framework. Le serveur ne stockant
 Play!► se veut respectueux de l'architecture du Web et donc des architectures REST. Guillaume Bort a fait le choix de ne rien stocker côté serveur.
 Cela signifie qu'il n'existe pas de session utilisateur sur la partie serveur du framework. 
 Ceci peut sembler déstabilisant lorsque l'on a l'habitude de travailler des frameworks comme JSF ou Wicket. Mais finalement ce mode de fonctionnement simplifie vraiment les choses.
-En effet on n'a pas besoin de gérer l'état du serveur, il ne fait que traiter les requêtes qui arrivent et renvoyer la réponse. Ceux qui ont déjà eu des problèmes avec Wicket et sa manie de tout garder en session, même les objets "ou of date" comprendront ce que je veux dire.
+En effet on n'a pas besoin de gérer l'état du serveur, il ne fait que traiter les requêtes qui arrivent et renvoyer la réponse. Ceux qui ont déjà eu des problèmes avec Wicket et sa manie de tout garder en session, même les objets "out of date" comprendront ce que je veux dire.
 Notre framework propose un objet "session" qui permet de stocker un identifiant de session utilisateur en écrivant dans un cookie côté client (dans le navigateur).
 Pour stocker des volumes plus importants de données côté client, vous serez incité à utiliser les API de stockage de HTML 5 (web storage).
 Si pour des raisons de performances vous ne voulez pas répéter trop souvent les mêmes requêtes vers la base de données, il est également possible d'utiliser un cache distribué. Play!► fournit une implémentation de cache par défaut.
     
 Une autre conséquence de ce mode stateless est bien sur la capacité à monter en charge (scalabilité). Si le trafic de votre application augmente, il suffira de rajouter un serveur derrière un load balancer pour tenir la charge.
 Ceci prend tout son sens dans les environnements de type cloud ou des noeuds de serveurs peuvent être ajoutés et retirés dynamiquement selon la demande.
-Autre avantage : la tolérance aux pannes. Si un serveur tombe en panne, les appels pourront passer sur un autre serveur sans que l'utilisateur s'en rende compte.
+Autre avantage : la tolérance aux pannes. Si un serveur tombe en panne, les appels pourront passer sur un autre serveur sans que l'utilisateur ne s'en rende compte.
 Avec des framework stateful, vous seriez obligé de dupliquer les sessions utilisateurs d'un serveur à l'autre pour que les utilisateurs ne perdent pas leur contexte de travail.
 
   
@@ -90,7 +90,7 @@ permettra de consulter les articles que vous avez demandé en ajoutant des param
     }
 ```
 
-Le `biding` intelligent fonctionne avec n'importe quelle classe :
+Le `binding` intelligent fonctionne avec n'importe quelle classe :
 
 ``` java
     public class Person {
