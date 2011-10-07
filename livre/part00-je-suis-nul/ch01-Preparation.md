@@ -193,6 +193,21 @@ si tout va bien, ceci devrait s'afficher :
 
 **Wouaaoo ! Vous êtes trop forts, on va bientôt pouvoir commencer.**
 
+- si rien ne répond sur le port par défaut (9000), c'est peut-être que le port est déjà utilisé par une autre application. Dans ce cas, la commande 'play run azerguespeches' s'est terminée avec le message suivant : 
+
+		22:35:07,352 ERROR ~ Could not bind on port 9000
+
+- Alors, rechercher ceci dans dans le fichier 'conf/application.conf' (1) du projet : 
+
+		# Server configuration
+		# ~~~~~
+		# If you need to change the HTTP port, uncomment this (default is set to 9000)
+		# http.port=9000
+
+- activer la ligne `# http.port=9000` en enlevant # et en remplaçant `9000` par un autre port, non utilisé celui-ci.
+
+
+
 ###Paramétrage de l'IDE
 
 En ce qui concerne l'IDE, vous pouvez très bien utiliser un simple éditeur de code avec colorisation syntaxique (Vous avez par exemple KomodoEdit qui fonctionne sur toutes les plateformes qui est assez sympa ... et open-source), mais c'est vraiment si vous voulez vous la jouer en démo ou que vous connaissez Java par coeur ou que vous codez sur un eeepc 701.
@@ -272,7 +287,9 @@ Voyons donc comment faire pour transformer notre squelette d'application en proj
 **Voilà, nous sommes prêts à démarrer, nous pouvons passer à l'étape suivante.**
 **Rendez-vous donc au chapitre suivant :** [ch02-Premiere-application](ch02-Premiere-application.md).
 
-
+- - -
+	
+- (1) : Pour plus d'informations sur la configuration du fichier `application.conf`, frendez-vous à l'annexe ["01-Subtilites-application.conf"](../part99-les-hors-serie/01-Subtilites-application.conf.md)
 
 
 
