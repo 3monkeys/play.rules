@@ -39,29 +39,29 @@ Remarque : cette configuration est donnée à titre d'exemple, il est bien sur d
 On déclare ensuite un contrôleur d’administration pour toutes les actions que l’on veut restreindre. On ajoute l’annotation @With à ce contrôleur pour lui dire qu’il doit s’appuyer sur le contrôleur du module Secure :
 
 ~~~ java 	
-@With(Secure.class)
-public class Admin extends Controller {
-....
-}
+	@With(Secure.class)
+	public class Admin extends Controller {
+		....
+	}
 ~~~  
 
 On ajoute ensuite un contrôle sur l'action delete en utilisant l'annotation @Check :
 
 ~~~ java 
-Check("admin")
-public static void delete(Long id) {
-...
-}
+	Check("admin")
+	public static void delete(Long id) {
+		...
+	}
 ~~~ 
 
 On redefinie également la méthode check en créant une nouvelle classe dans le package contrôler, héritant de la classe Secure.Security :
 
 ~~~ java 
-static boolean check(String profile) {
-    if(profile.equals("admin"))
-        return session.get("username").equals("admin");
-    return false;
-}
+	static boolean check(String profile) {
+	    if(profile.equals("admin"))
+	        return session.get("username").equals("admin");
+	    return false;
+	}
 ~~~ 
   
 Ce code permet de demander au module Secure de vérifier que l’utilisateur en session est bien “admin” lorsque l’annotation @check(“admin”) est trouvée. 
@@ -69,9 +69,9 @@ Ce code permet de demander au module Secure de vérifier que l’utilisateur en 
 Dans la même classe, on redéfinie la méthode authentify. C'est sur cette méthode que le formulaire d’authentification du module Secure s'appuie pour laisser passer ou non l'utilisateur :
 
 ~~~ java 
-static boolean authentify(String username, String password) {
-    return Play.configuration.getProperty("application.admin").equals(username)&& Play.configuration.getProperty("application.adminpwd").equals(password);
-}
+	static boolean authentify(String username, String password) {
+	    return Play.configuration.getProperty("application.admin").equals(username)&& Play.configuration.getProperty("application.adminpwd").equals(password);
+	}
 ~~~  
 
 Avec cette configuration, si on essaie d’entrer l’URL /admin/delete?id=11, on arrivera directement sur le formulaire d’authentification pour prouver que l’on est bien administrateur.
@@ -82,9 +82,9 @@ On aimerait maintenant pouvoir aller directement sur ce formulaire pour mettre e
 Il suffit d’ajouter le code suivant dans le contrôleur Admin pour exposer le formulaire de login à l’URL /admin/login :
 
 ~~~ java 
-public static void login() {
-  Application.list();
- }
+	public static void login() {
+	  Application.list();
+	 }
 ~~~ 
 
 Toutes les méthodes que l’on définit dans ce contrôleur étant soumises à un contrôle de l’utilisateur en session, vous vous retrouverez directement sur le formulaire d’authentification.

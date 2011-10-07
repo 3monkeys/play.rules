@@ -15,12 +15,12 @@ Pour activer ce module, après l'avoir téléchargé il suffit d'ajouter cette l
 Sur une entité du modèle, on ajoute une annotation de validation pour indiquer qu'un des champs est obligatoire : 
 
 ~~~ java
-@Entity
-public class Album extends Model {
+	@Entity
+	public class Album extends Model {
 
-    @Required
-    public String name;
-}
+	    @Required
+	    public String name;
+	}
 ~~~  
 
 Dans le formulaire HTML, on peut utiliser un nouveau tag, #{input} : 
@@ -62,21 +62,21 @@ Elastic Search est basé sur une architecture REST et est capable d'indexer du c
 Avec l'API Java fournie par Elastic Search, on peut écrire ce genre de requêtes :
 
 ~~~ java
-QueryBuilder qb = filteredQuery(
-            termQuery("name", name),
-            rangeFilter("nbVotes")
-                .from(100)
-                .to(90)
-            );
+	QueryBuilder qb = filteredQuery(
+	            termQuery("name", name),
+	            rangeFilter("nbVotes")
+	                .from(100)
+	                .to(90)
+	            );
 ~~~	
 
 Mais il n'est pas nécessaire de maitriser l'API Elastic Search pour profiter de ce module : celui ci propose également un mode inspiré du module CRUD. En héritant de la classe `ElasticSearchController` et en utilisant l'annotation du même nom pour indiquer le type d'entité à rechercher, on peut générer tous le code et les écrans nécessaires pour la création et la recherche de nos entités :
 
 ~~~ java
-@ElasticSearchController.For(Album.class)
-public class AlbumSearch extends ElasticSearchController {
+	@ElasticSearchController.For(Album.class)
+	public class AlbumSearch extends ElasticSearchController {
 
-}
+	}
 ~~~
 
 Si vous souhaitez conserver le comportement par défaut du module, rien à ajouter dans cette classe! Mais comme pour le module CRUD vous pouvez surcharger ce comportement si vous le désirez.

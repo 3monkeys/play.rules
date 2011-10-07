@@ -9,16 +9,16 @@ Play!► propose un système de jobs qui permet de programmer des traitements sa
 Le code suivant permet de charger un jeu de données au démarrage de l'application :
 
 ~~~ java
-@OnApplicationStart
-public class PopulateOnStart extends Job {
+	@OnApplicationStart
+	public class PopulateOnStart extends Job {
 
-    public void doJob() {
-        // Check if the database is empty
-        if(Album.count() == 0) {
-            Fixtures.load("init-data.yml");
-        }
-    }
-}
+	    public void doJob() {
+	        // Check if the database is empty
+	        if(Album.count() == 0) {
+	            Fixtures.load("init-data.yml");
+	        }
+	    }
+	}
 ~~~
 
 Pour que ça fonctionne il suffit de déposer le fichier init-data.yml dans le répertoire conf/
@@ -45,13 +45,13 @@ Voici un exemple de fichier yml :
 Dans cet exemple, on souhaite recharger les albums toutes les heures à partir de notre fichier yml :
 
 ~~~ java 	
-@Every("1h")
-public class ReloadData extends Job {
-    public void doJob() {
-        Fixtures.deleteAll();
-        Fixtures.load("data.yml");
-    }
-}
+	@Every("1h")
+	public class ReloadData extends Job {
+	    public void doJob() {
+	        Fixtures.deleteAll();
+	        Fixtures.load("data.yml");
+	    }
+	}
 ~~~ 
 
 On peut imaginer beaucoup d'applications possibles pour ce genre de traitements périodiques. On pourrait par exemple envoyer un résumé d'activité par mail tous les lundi à l'ensemble des utilisateurs.
@@ -78,33 +78,33 @@ On crée une nouvelle page dans le dossier app/views. On l'appelle par exemple f
 On ajoute cette méthode au contrôleur principal de notre application : 
 
 ~~~ java 
-public static void firstWebSocket() {
-        render();
-    }
+	public static void firstWebSocket() {
+	        render();
+	    }
 ~~~ 
 
 Ce code javascript utilise l'API WebSocket HTML5 pour ouvrir la communication entre le navigateur et le serveur :
 
 ~~~ javascript 
-var socket = new WebSocket('@@{AsyncController.asyncMessage()}');
+	var socket = new WebSocket('@@{AsyncController.asyncMessage()}');
 	
-    socket.onmessage = function(event) {
-        display(event.data);
-    }
+	    socket.onmessage = function(event) {
+	        display(event.data);
+	    }
 
-    var display = function(event) {
-       //traitement de l'évenement
-    }
+	    var display = function(event) {
+	       //traitement de l'évenement
+	    }
 ~~~
 
 Voici le code complet de notre page :
 
 #{extends 'main.html' /}
 
-<h1>Test</h1>
-
-<div id="message"></div>
-
+	<h1>Test</h1>
+	
+	<div id="message"></div>
+	
 	#{set 'moreScripts'}
 	<script>
 	    var socket = new WebSocket('@@{AsyncController.asyncMessage()}');
@@ -127,19 +127,19 @@ Lorsqu'un message est reçu, il est affiché dans la div `#message`
 On crée l'objet liveStream qui sera une sorte de file d'attente de messages. Dès que la file reçoit un message, l'objet outboud (hérité de la classe `WebSocketController`) est invoqué pour envoyer ce message au client :
 
 ~~~ java 
-public class AsyncController extends WebSocketController {
+	public class AsyncController extends WebSocketController {
 
-    public static EventStream<String> liveStream = new EventStream<String>();
+	    public static EventStream<String> liveStream = new EventStream<String>();
 
-    public static void asyncMessage() {
-        while (inbound.isOpen()) {
-            String message = await(liveStream.nextEvent());
-            if (message != null) {
-                outbound.send(message);
-            }
-        }
-    }
-}
+	    public static void asyncMessage() {
+	        while (inbound.isOpen()) {
+	            String message = await(liveStream.nextEvent());
+	            if (message != null) {
+	                outbound.send(message);
+	            }
+	        }
+	    }
+	}
 ~~~
 
 On met à jour les routes pour spécifier l'utilisation du protocole `WS` (WebSocket) au lieu de `HTTP` : 
@@ -152,14 +152,14 @@ On met à jour les routes pour spécifier l'utilisation du protocole `WS` (WebSo
 Voici le code de notre traitement long (on simule une longue durée avec un sleep): 
 
 ~~~ java 
-public static void publishEvent(String message) throws IOException {
-        try {
-            Thread.sleep(5000);
-        } catch (InterruptedException e) {
-            Logger.error(e.getMessage());
-        }
-        AsyncController.liveStream.publish(message);
-    }
+	public static void publishEvent(String message) throws IOException {
+	        try {
+	            Thread.sleep(5000);
+	        } catch (InterruptedException e) {
+	            Logger.error(e.getMessage());
+	        }
+	        AsyncController.liveStream.publish(message);
+	    }
 ~~~
 
 On ajoute cette méthode au contrôleur principal de notre application.
@@ -189,11 +189,11 @@ Mais il est également possible de lancer l'action depuis la page courante. On a
 Un clic sur ce lien lance la tache asynchrone :
 
 ~~~ javascript 
-$(document).ready(function() {
-        $('#longTask').click(
-            function() {
-                $.post('@@{Application.publishEvent()}', { message: 'Ok it works!!! ' } );
-            }
-        );
-    });
+	$(document).ready(function() {
+	        $('#longTask').click(
+	            function() {
+	                $.post('@@{Application.publishEvent()}', { message: 'Ok it works!!! ' } );
+	            }
+	        );
+	    });
 ~~~

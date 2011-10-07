@@ -8,30 +8,30 @@ Les tests unitaires testent une partie précise du code de notre application.
 Voici un exemple de test unitaire :
 
 ~~~ java 
-public class CoreTest extends UnitTest {
+	public class CoreTest extends UnitTest {
 
-    @Test
-    public void filterByYearTest() {
-        //Création de 2 albums
-        List<Album> albums = new ArrayList<Album>();
-        Album album1 = new Album("album1");
-        Calendar c1 = Calendar.getInstance();
-        c1.set(2010, 1, 1);
-        album1.releaseDate= c1.getTime();
-        albums.add(album1);
-        Album album2 = new Album("album1");
-        Calendar c2 = Calendar.getInstance();
-        c2.set(2009, 1, 1);
-        album2.releaseDate= c2.getTime();
-        albums.add(album2);
+	    @Test
+	    public void filterByYearTest() {
+	        //Création de 2 albums
+	        List<Album> albums = new ArrayList<Album>();
+	        Album album1 = new Album("album1");
+	        Calendar c1 = Calendar.getInstance();
+	        c1.set(2010, 1, 1);
+	        album1.releaseDate= c1.getTime();
+	        albums.add(album1);
+	        Album album2 = new Album("album1");
+	        Calendar c2 = Calendar.getInstance();
+	        c2.set(2009, 1, 1);
+	        album2.releaseDate= c2.getTime();
+	        albums.add(album2);
 
-        //Test de la méthodefilter by year
-        albums = Album.filterByYear(albums, "2010");
+	        //Test de la méthodefilter by year
+	        albums = Album.filterByYear(albums, "2010");
 
-        //Un seul album a la date 2010
-        assertTrue(albums.size()==1);
-    }
-}
+	        //Un seul album a la date 2010
+	        assertTrue(albums.size()==1);
+	    }
+	}
 ~~~  
 
 Cette classe hérite de la classe UnitTest fournie par Play!►. La méthode `filterByYearTest` permet de tester la méthode `filterByYear` de la classe Album.
@@ -42,33 +42,33 @@ Les tests fonctionnels permettent de tester l'application à partir de son contr
 Ce test permet par exemple d'utiliser un service REST et valider la réponse obtenue : 
 
 ~~~ java
-public class ApplicationTest extends FunctionalTest {
+	public class ApplicationTest extends FunctionalTest {
 
-    @Before
-    public void setUp() {
-        Fixtures.deleteAll();
-    }
+	    @Before
+	    public void setUp() {
+	        Fixtures.deleteAll();
+	    }
 
-    @Test
-    public void testYML() {
-    Response response = GET("/api/albums.xml");
-    assertIsOk(response);
+	    @Test
+	    public void testYML() {
+	    Response response = GET("/api/albums.xml");
+	    assertIsOk(response);
 
-    //On récupère la réponse
-    String xmlTree = response.out.toString();
-    DocumentBuilderFactory factory = DocumentBuilderFactory.newInstance();
-    Document document = null;
-    try {
-        DocumentBuilder builder = factory.newDocumentBuilder();
-        document = builder.parse(new ByteArrayInputStream(xmlTree.getBytes()));
-    } catch (Exception e) {
-        Logger.error(e.getMessage());
-    }
-    Element rootNode = document.getDocumentElement();
+	    //On récupère la réponse
+	    String xmlTree = response.out.toString();
+	    DocumentBuilderFactory factory = DocumentBuilderFactory.newInstance();
+	    Document document = null;
+	    try {
+	        DocumentBuilder builder = factory.newDocumentBuilder();
+	        document = builder.parse(new ByteArrayInputStream(xmlTree.getBytes()));
+	    } catch (Exception e) {
+	        Logger.error(e.getMessage());
+	    }
+	    Element rootNode = document.getDocumentElement();
 
-    //On vérifie qu'on a le bon nombre d'éléments dans le fichier XML
-    assertTrue(rootNode.getElementsByTagName("album").getLength() == 2);
-}
+	    //On vérifie qu'on a le bon nombre d'éléments dans le fichier XML
+	    assertTrue(rootNode.getElementsByTagName("album").getLength() == 2);
+	}
 ~~~
 
 La méthode setUp permet de réinitaliser les données avant chaque méthode de test.
@@ -121,7 +121,7 @@ On peut également vérifier le bon fonctionnement de nos services REST :
 ~~~
 
 ## Tests Selenium
-	
+
 Ces tests permettent de simuler des clicks dans l'application à l'aide de l'outil Selenium.
 Ce code permet de déclencher la création d'un album, puis de vérifier sa présence dans la liste des albums :
 

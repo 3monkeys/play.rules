@@ -22,10 +22,10 @@ La classe `HTMLValidationTags` étend `FastTags`. Cette dernière permet de cré
 Le tag comporte une seule méthode publique, qui sera appelée pour effectuer le rendu :
 
 ~~~ java 	
-public static void _input(final Map<?, ?> args, final Closure body, final PrintWriter out,
-        final ExecutableTemplate template, final int fromLine) {
-...
-}
+	public static void _input(final Map<?, ?> args, final Closure body, final PrintWriter out,
+	        final ExecutableTemplate template, final int fromLine) {
+				...
+	}
 ~~~ 	
 
 Les paramètres `args` et `body` correspondent au contenu du tag dans la vue HTML. Dans notre cas, le tag est toujours fermé à la fin de sa déclaration, il n'y a donc pas de body. 
@@ -36,24 +36,24 @@ Le nom du tag est défini par le nom de la méthode, sans le underscore.
 Le corps de la méthode écrit dans le flux sortie HTML en fonction des paramètres d'entrée :
 
 ~~~ java 	
-out.print("<input");
+	out.print("<input");
 
-// Print standard attributes
-printStandardAttributes(args, out);
+	// Print standard attributes
+	printStandardAttributes(args, out);
 
-// Print validation attributes
-printValidationAttributes(args, out);
+	// Print validation attributes
+	printValidationAttributes(args, out);
 
-// Close input tag
-out.println(">");
+	// Close input tag
+	out.println(">");
 ~~~ 	
 
 Si on a un modèle comme ceci : 
 
 ~~~ java 	
-@Required
-@Match("[a-z]*")
-public String name;
+	@Required
+	@Match("[a-z]*")
+	public String name;
 ~~~ 	
 
 Alors le template `#{input for:'user.name', id:'YourID', class:'class1 class2' /}` rendra  le code HTML suivant : `<input name="user.name" value="${user?.name}" id="YourID" class="class1 class2" required pattern="[a-z]*">`
@@ -61,38 +61,38 @@ Alors le template `#{input for:'user.name', id:'YourID', class:'class1 class2' /
 Ce code permet de déterminer le champ que l'on est entrain de manipuler :
 
 ~~~ java 	
-final String fieldname = args.get("for").toString();
-    final String[] components = fieldname.split("\\.");
+	final String fieldname = args.get("for").toString();
+	    final String[] components = fieldname.split("\\.");
 
-    // Find class
-    Class<?> clazz = null;
+	    // Find class
+	    Class<?> clazz = null;
 
-    for (final Class<?> current : Play.classloader.getAllClasses()) {
-        if (current.getSimpleName().equalsIgnoreCase(components[0])) {
-            clazz = current;
-        }
-    }
+	    for (final Class<?> current : Play.classloader.getAllClasses()) {
+	        if (current.getSimpleName().equalsIgnoreCase(components[0])) {
+	            clazz = current;
+	        }
+	    }
 
-    // Find field
-    final Field field = clazz.getField(components[1]);
+	    // Find field
+	    final Field field = clazz.getField(components[1]);
 ~~~ 	
 
 
 Et voici le code utilisé pour détecter et traiter l'annotation `@Required` :
 
 ~~~ java 	
-if (field.isAnnotationPresent(Required.class)) {
-    printAttribute("required", "required", out);
-}
-~~~ 
+	if (field.isAnnotationPresent(Required.class)) {
+	    printAttribute("required", "required", out);
+	}
+	~~~ 
 
 Pour `@Match` :  
   
 ~~~ java 	
-if (field.isAnnotationPresent(Match.class)) {
-    final Match match = field.getAnnotation(Match.class);
-    printAttribute("pattern", match.value(), out);
-}	
+	if (field.isAnnotationPresent(Match.class)) {
+	    final Match match = field.getAnnotation(Match.class);
+	    printAttribute("pattern", match.value(), out);
+	}	
 ~~~ 	
 
 **Remarque** : Vous pouvez voir le détail des méthodes `printAttribute`, `printStandardAttributes` et `printValidationAttributes` dans le [code du module](https://github.com/oasits/play-html5-validation).
@@ -149,22 +149,22 @@ Nous allons désormais nous occuper de la création de notre modèle. Dans notre
 Vient ensuite la dernière partie de la mise en place de notre exemple d'application avec la définition d'un Job pour charger les données au démarrage :
 
 ~~~ java 	   
- @OnApplicationStart
-    public class Bootstrap extends Job {
+	 @OnApplicationStart
+	    public class Bootstrap extends Job {
 
-    	@Override
-    	public void doJob() {
-    		if (LocalisedTimeZone.count() == 0) {
-    			for (String id : TimeZone.getAvailableIDs()) {
-    				final TimeZone zone = TimeZone.getTimeZone(id);
-    				new LocalisedTimeZone(zone, Locale.ENGLISH).save();
-    				new LocalisedTimeZone(zone, Locale.FRENCH).save();
-    				new LocalisedTimeZone(zone, new Locale("nl")).save();
-    			}
-    		}
-    	}
+	    	@Override
+	    	public void doJob() {
+	    		if (LocalisedTimeZone.count() == 0) {
+	    			for (String id : TimeZone.getAvailableIDs()) {
+	    				final TimeZone zone = TimeZone.getTimeZone(id);
+	    				new LocalisedTimeZone(zone, Locale.ENGLISH).save();
+	    				new LocalisedTimeZone(zone, Locale.FRENCH).save();
+	    				new LocalisedTimeZone(zone, new Locale("nl")).save();
+	    			}
+	    		}
+	    	}
 
-    }
+	    }
 ~~~ 	
 
 Okay, notre modèle est prêt à être utilisé. Ils nous manque encore le contrôleur CRUD pour afficher le tout.
@@ -225,7 +225,7 @@ Chacun des contrôleurs crées se verra alors attribuer une route automatiquemen
 
 Ici, un rapide test vers [localhost:9000/localisedtimezones.json](http://localhost:9000/localisedtimezones.json) devrait nous donner quelque chose comme:
 
-    [{"timeZoneId":"Etc/GMT+12","name":"GMT-12:00","language":"anglais","offset":-12,"id":1},{"timeZoneId":"Etc/GMT+12","name":"GMT-12:00","language":"français","offset":-12,"id":2},{"timeZoneId":"Etc/GMT+12","name":"GMT-12:00","language":"néerlandais","offset":-12,"id":3},{"timeZoneId":"Etc/GMT+11","name":"GMT-11:00","language":"anglais","offset":-11,"id":4},{"timeZoneId":"Etc/GMT+11","name":"GMT-11:00","language":"français","offset":-11,"id":5},{"timeZoneId":"Etc/GMT+11","name":"GMT-11:00","language":"néerlandais","offset":-11,"id":6},...]
+	 [{"timeZoneId":"Etc/GMT+12","name":"GMT-12:00","language":"anglais","offset":-12,"id":1},{"timeZoneId":"Etc/GMT+12","name":"GMT-12:00","language":"français","offset":-12,"id":2},{"timeZoneId":"Etc/GMT+12","name":"GMT-12:00","language":"néerlandais","offset":-12,"id":3},{"timeZoneId":"Etc/GMT+11","name":"GMT-11:00","language":"anglais","offset":-11,"id":4},{"timeZoneId":"Etc/GMT+11","name":"GMT-11:00","language":"français","offset":-11,"id":5},{"timeZoneId":"Etc/GMT+11","name":"GMT-11:00","language":"néerlandais","offset":-11,"id":6},...]
 
 A ce stade, nous avons donc de disponible les routes suivantes:
 
