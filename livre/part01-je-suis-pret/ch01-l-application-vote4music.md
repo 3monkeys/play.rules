@@ -21,19 +21,19 @@ La classe Album contient les informations suivante :
 Voici le code de cette classe :
 
 ~~~ java 
-@Entity
-public class Album extends Model {
-@Required
-public String name;
-@Required
-@ManyToOne(cascade = {CascadeType.PERSIST, CascadeType.MERGE})
-public Artist artist;
-@Required
-public Date releaseDate;
-@Enumerated(EnumType.STRING)
-public Genre genre;
-//...
-}
+	@Entity
+	public class Album extends Model {
+		@Required
+		public String name;
+		@Required
+		@ManyToOne(cascade = {CascadeType.PERSIST, CascadeType.MERGE})
+		public Artist artist;
+		@Required
+		public Date releaseDate;
+		@Enumerated(EnumType.STRING)
+		public Genre genre;
+		//...
+	}
 ~~~ 
 
 Nous verrons le code métier de cette classe dans la suite du chapitre.
@@ -43,12 +43,12 @@ Nous verrons le code métier de cette classe dans la suite du chapitre.
 La classe Artist est définie comme ceci :
 
 ~~~ java 	
-public class Artist extends Model{
-    @Required
-    @Column(unique = true)
-    public String name;
-    //...
-}
+	public class Artist extends Model{
+	    @Required
+	    @Column(unique = true)
+	    public String name;
+	    //...
+	}
 ~~~ 
 
 ### L'enum Genre
@@ -56,9 +56,9 @@ public class Artist extends Model{
 Le genre est une simple Enum, définie comme cela :
 
 ~~~ java 
-public enum Genre {
-    ROCK, METAL, JAZZ, BLUES, POP, WORLD, HIP_HOP, OTHER
-}
+	public enum Genre {
+	    ROCK, METAL, JAZZ, BLUES, POP, WORLD, HIP_HOP, OTHER
+	}
 ~~~  
 
 Vous pouvez bien sur ajouter autant que genres que vous voulez.
@@ -121,9 +121,9 @@ Pour le top 10, vous pouvez choisir un style de musique. Pour cela, le template 
 Dans le contrôleur, on crée une méthode pour obtenir le formulaire :
 
 ~~~ java 
-public static void form() {
-    render();
-}
+	public static void form() {
+	    render();
+	}
 ~~~
 
 En se référant aux routes, on voit que cette méthode est invoquée lorsque l'on utilise le verbe HTTP GET. C'est la méthode utilisée par le navigateur lorsque l'on tape une URL ou lorsque l'on clique sur un lien.
@@ -200,18 +200,18 @@ Ce script utilise jQuery, comme tous les exemples de code JavaScript que nous ve
 Enfin, définissons la méthode du contrôleur qui va nous permettre d'enregistrer un album dans la base : 
 
 ~~~ java 
-public static void save(@Valid Album album, @Valid Artist artist, File cover) {
-    if (Validation.hasErrors()) {
-        render("@form", album);
-    }
-    album.artist = artist;
-    //recherche des doublons
-    album.replaceDuplicateArtist();
-    album.save();
+	public static void save(@Valid Album album, @Valid Artist artist, File cover) {
+	    if (Validation.hasErrors()) {
+	        render("@form", album);
+	    }
+	    album.artist = artist;
+	    //recherche des doublons
+	    album.replaceDuplicateArtist();
+	    album.save();
 
-    //return to album list
-    list();
-}
+	    //return to album list
+	    list();
+	}
 ~~~ 	
 
 La première ligne de cette méthode vérifie que les valeurs envoyées au contrôleur sont conformes au modèle défini dans les classes Album et Artist (par exemple le nom obligatoire pour l'album).
@@ -222,12 +222,12 @@ Dans le cas contraire, on retourne au formulaire, qui affichera les erreurs grâ
 La méthode replaceDuplicateArtist de la classe Album permet d'éviter les doublons de nom d'artistes dans la base de données :
 
 ~~~ java 
-public void replaceDuplicateArtist() {
-    Artist existingArtist = Artist.find("byName", name).first();
-    if (existingArtist!=null) {
-        artist = existingArtist;
-    }
-}
+	public void replaceDuplicateArtist() {
+	    Artist existingArtist = Artist.find("byName", name).first();
+	    if (existingArtist!=null) {
+	        artist = existingArtist;
+	    }
+	}
 ~~~	
 
 On accède à la base de données en utilisant les méthodes statiques fournies par la classe `Model`. La méthode `find` permet de passer des requêtes pour obtenir des entités enregistrées précédemment.
@@ -253,7 +253,7 @@ Les mots clés peuvent être liés avec des "And". On peut par exemple écrire `
 La méthode `find` prend un nombre indéfini de paramètres (grâce à la syntaxe `...`) : 
 
 ~~~ java 
-JPAQuery find(String query, Object... params);
+	JPAQuery find(String query, Object... params);
 ~~~
 
 *Il existe différents types de 'like' selon la sensibilité qu'on veut donner à la casse. Le mot clé `Like` va chercher des mots clés en minuscule dans la base, `Ilike` est complètement insensible à la casse, alors que `Elike` et équivalent au `like` SQL n'effectue aucune conversion.
@@ -514,7 +514,6 @@ Cette section sera masquée par défaut, à l'aide de CSS :
 Ce code JavaScript permet d'intercepter les clicks et de rafraîchir l'écran :
 	
 ~~~ js
-
 	//On récupère les span dont l'id commence par "nbVotes" pour trouver la zone à mettre à jour
 	var nbvotes = $('span[id^="nbVotes"]');
 	clickVote = function() {
@@ -613,31 +612,31 @@ Ce champ permet d'uploader une image. En mode édition, si une image est enregis
 On modifié également la méthode _save_ du contrôleur pour traiter cet upload :
 
 ~~~ java 
-public static void save(@Valid Album album, @Valid Artist artist, File cover) {
-    if (Validation.hasErrors()) {
-        render("@form", album);
-    }
-    album.artist = artist;
-    //recherche des doublons
-    album.replaceDuplicateArtist();
-    album.save();
+	public static void save(@Valid Album album, @Valid Artist artist, File cover) {
+	    if (Validation.hasErrors()) {
+	        render("@form", album);
+	    }
+	    album.artist = artist;
+	    //recherche des doublons
+	    album.replaceDuplicateArtist();
+	    album.save();
 
-    //pochette
-    if (cover != null) {
-        String path = "/public/shared/covers/" + album.id;
-        album.hasCover = true;
-        File newFile = Play.getFile(path);
-        //suppression des anciennes pochettes si elles existent
-        if (newFile.exists())
-            newFile.delete();
-        cover.renameTo(newFile);
+	    //pochette
+	    if (cover != null) {
+	        String path = "/public/shared/covers/" + album.id;
+	        album.hasCover = true;
+	        File newFile = Play.getFile(path);
+	        //suppression des anciennes pochettes si elles existent
+	        if (newFile.exists())
+	            newFile.delete();
+	        cover.renameTo(newFile);
 
-        album.save();
-    }
+	        album.save();
+	    }
 
-    //return to album list
-    list();
-}
+	    //return to album list
+	    list();
+	}
 ~~~ 
 
 Comme vous pouvez le voir il suffit d'ajouter un paramètre de type `File` à la méthode `save` puis de le traiter avec les méthodes `Play.getFile` (pour déterminer le chemin de destination du fichier) et `renameTo`.
