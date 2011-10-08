@@ -183,7 +183,7 @@ $(document).ready(function() {
 				$('pre code').each(function(i, e) {hljs.highlightBlock(e, '    ')});
 
 				showContent();
-				
+				containers.css('height', '200%');
 				window.document.getElementById("scroller").scrollTop = 0;
 				
 			});
@@ -264,7 +264,7 @@ $(document).ready(function() {
 		//var height = window.innerHeight - (barsHeight * 2);
 		//containers.css('height', height+'px');
 		
-		containers.css('height', '100%');			
+		containers.css('height', '200%');			
 	}
 	
 	function hideContent() {
