@@ -220,7 +220,7 @@ var App = (function() {
 				}else {
 					if(id==="NEWS") {
 						html.setData('<br>' + news.content);
-						$('pre code').each(function(i, e) {hljs.highlightBlock(e, '    ')});
+						//$('pre code').each(function(i, e) {hljs.highlightBlock(e, '    ')});
 						
 						list.deselect();
 						stack.push(page);
@@ -229,7 +229,7 @@ var App = (function() {
 						gitHubStorage.getContent(id.name, function(content){
 							//console.log(id.name);
 							html.setData(converter.makeHtml(washCode(content)));
-							$('pre code').each(function(i, e) {hljs.highlightBlock(e, '    ')});
+							//$('pre code').each(function(i, e) {hljs.highlightBlock(e, '    ')});
 							stack.push(page);
 						});
 						
