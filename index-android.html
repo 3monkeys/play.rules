@@ -176,7 +176,8 @@ $(document).ready(function() {
 	
 	var gitHubStorage = new Store('3monkeys','play.rules', function(){
 		
-		function getChapterContent(clickedLink) {			
+		function getChapterContent(clickedLink) {	
+			console.log(clickedLink);	
 			gitHubStorage.getContent(clickedLink, function(content){
 				
 				$("#details-container").html(converter.makeHtml(washCode(content)));

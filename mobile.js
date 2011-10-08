@@ -128,94 +128,24 @@ var App = (function() {
 			var style = new joCSSRule('jostack > joscroller > *:last-child:after { content: ""; display: block; height: ' + (toolbar.container.offsetHeight) + 'px; }');
 		});
 		---*/
-		var ex;
-	
-		testds = new joRecord({
-			uid: "jo",
-			pwd: "password",
-			num: 1,
-			fruit: 2,
-			active: true,
-			note: false
-		}).setAutoSave(false);
-		
-		// our bogus login view
-		login = new joCard([
-			new joGroup([
-				new joLabel("Username"),
-				new joFlexrow(nameinput = new joInput(testds.link("uid"))),
-				new joLabel("Password"),
-				new joFlexrow(new joPasswordInput(testds.link("pwd"))),
-				new joLabel("Options"),
-				new joFlexrow(option = new joOption([
-					"One", "Two", "Three", "Four", "Five"
-				], testds.link("num")).selectEvent.subscribe(function(value) {
-					console.log("option selected: " + value);
-				})),
-				new joLabel("Selection"),
-				select = new joSelect([
-					"Apple", "Orange", "Banana", "Grape", "Cherry", "Mango"
-				], testds.link("fruit")),
-				new joFlexrow([
-					new joLabel("Activate").setStyle("left"),
-					new joToggle(testds.link("active"))
-				]),
-				new joFlexrow([
-					new joLabel("Notify").setStyle("left"),
-					new joToggle(testds.link("note")).setLabels(["No", "Yes"])
-				])
-			]),
-			new joDivider(),
-			ex = new joExpando([
-				new joExpandoTitle("Advanced Settings"),
-				new joExpandoContent([
-					new joLabel("Domain"),
-					new joFlexrow(new joInput("localhost")),
-					new joLabel("Port"),
-					new joFlexrow(new joInput("80"))
-				])
-			]).openEvent.subscribe(function() {
-				stack.scrollTo(ex);
-				console.log("scrollto");
-			}),
-			new joFooter([
-				new joDivider(),
-				button = new joButton("Login"),
-				cancelbutton = new joButton("Back")
-			])
-		]).setTitle("Form Widget Demo");
-		
-//	was demoing how to disable a control, but decided having a "back"
-// button was more important right now
-//		cancelbutton.disable();
-		cancelbutton.selectEvent.subscribe(back, this);
+
 		
 		// some arbitrary HTML shoved into a joHTML control
 		var html = new joHTML('<h1>Disclaimer</h1><p>This is a disclaimer. For more information, you can check <a href="moreinfo.html">this <b>file</b></a> for more info, or try your luck with <a href="someotherfile.html">this file</a>.');
 		var htmlgroup;
 		
+		var selectedDoc, selectedLabel;
+		
 		page = new joCard([
-			new joLabel("HTML Control"),
-			htmlgroup = new joGroup(html),
-			new joCaption("Note that the HTML control above is using another stylesheet without impacting our controls."),
-			new joFooter([
-				new joDivider(),
-				backbutton = new joButton("Back")
-			])
+			//selectedLabel = new joLabel("HTML Control : "),
+			html
+			//htmlgroup = new joGroup(html)
 		]).setTitle("Success");
 		
-		htmlgroup.setStyle("htmlgroup");
 		
-		more = new joCard([
-			new joGroup([
-				new joCaption("Good job! This is more info. Not very informative, is it?"),
-				new joCaption(urldata = new joDataSource(""))
-			]),
-			new joFooter([
-				new joDivider(),
-				moreback = new joButton("Back Again")
-			])
-		]).setTitle("URL Demo");
+		//htmlgroup.setStyle("htmlgroup");
+		
+		//backbutton.selectEvent.subscribe(back, this);
 		
 		/*--------Github----------*/
 		
@@ -225,6 +155,7 @@ var App = (function() {
 
 		var gitHubStorage = new Store('3monkeys','play.rules', function(){
 			console.log("gitHubStorage");
+			
 			function getChapterContent(clickedLink) {			
 				gitHubStorage.getContent(clickedLink, function(content){
 					
@@ -252,7 +183,7 @@ var App = (function() {
 				var livre  = items.filter(function(item) { return item.name === "livre"; })[0];
 
 				gitHubStorage.getItemsOfItem(livre, function(items){
-
+					list_items.push({title:"<b>Voir les news</b>", id:"NEWS"});
 					items.forEach(function(item) {
 						if(item.type ==='tree') {
 							//{ title: "Form Widgets", id: "login" },
@@ -268,6 +199,8 @@ var App = (function() {
 
 								var pathPart = path+item.name+"/";
 								list_items[item.name] = [];
+								list_items[item.name].push({title:"<b>Retour TDM ...</b>", id:"TDM"});
+								
 								chapters.forEach(function(chapter) {
 									
 									list_items[item.name].push({title:chapter.name, id:{sha:chapter.sha,name:pathPart+chapter.name}});
@@ -282,7 +215,7 @@ var App = (function() {
 								//list.setData(list_items);
 							});
 						} else { //Blob
-							list_items.push({title:item.name, id:{sha:item.sha,name:item.name}});
+							list_items.push({title:item.name, id:{sha:item.sha,name:path+item.name}});
 							//console.log(">>>",{title:item.name, id:item.sha});
 							/*$('#toc')
 							.append('<li id="li_'+item.sha+'"><a href="#'+path+item.name+'">'+item.name+'</a></li>');
@@ -301,10 +234,9 @@ var App = (function() {
 		menu = new joCard([
 			list = new joMenu([
 				{ title: "Patientez pendant le chargement ...", id: "" }
-			]),
-			new joDivider(),
-			TDMButton = new joButton("Les News ...")
-		]).setTitle("Play.Rules!► eBook");
+			])
+			//TDMButton = new joButton("Les News ...")
+		]).setTitle("Play.Rules<b>!</b>&raquo; eBook");
 		menu.activate = function() {
 			// maybe this should be built into joMenu...
 			list.deselect();
@@ -313,27 +245,49 @@ var App = (function() {
 		list.selectEvent.subscribe(function(id) {
 			console.log(id);
 			if(list_items[id.name]){
-				TDMButton.setData("<< Back");
+				//TDMButton.setData("<< Back");
 				console.log(list_items[id.name]);
 				list.setData(list_items[id.name]);
+				list.deselect();
+			} else {
+				if(id==="TDM") {
+					list.setData(list_items);
+					list.deselect();
+					
+				}else {
+					if(id==="NEWS") {
+						list.setData(list_items);
+						list.deselect();
+					} else {
+						//selectedLabel.setData(id.name);
+						page.setTitle(id.name);
+						
+						gitHubStorage.getContent(id.name, function(content){
+							//console.log(id.name);
+							html.setData(converter.makeHtml(washCode(content)));
+							$('pre code').each(function(i, e) {hljs.highlightBlock(e, '    ')});
+							stack.push(page);
+						});
+						
+
+					}
+				}
+			
 			}
-			/*if (id == "login")
-				stack.push(login);
-			else if (id == "popup")
-				scn.alert("Hello!", "Is this the popup you were looking for? This is a very simple one; you can put much more in a popup if you were inclined.", function() { list.deselect(); });
-			else if (id != "help")
-				stack.push(joCache.get(id));*/
+
+
 		}, this);
 		
-		TDMButton.selectEvent.subscribe(function() {
+
+			
+		
+		/*TDMButton.selectEvent.subscribe(function() {
 			TDMButton.setData("Les News ...");
 			list.setData(list_items);
-		}, this);
+		}, this);*/
 
 
-		moreback.selectEvent.subscribe(function() { stack.pop(); }, this);
-		button.selectEvent.subscribe(click.bind(this));
-		backbutton.selectEvent.subscribe(back, this);
+		//backbutton.selectEvent.subscribe(back, this);
 		html.selectEvent.subscribe(link, this);
 		
 		stack.pushEvent.subscribe(blip, this);
