@@ -1,0 +1,369 @@
+<!DOCTYPE HTML PUBLIC>
+<html>
+<head>
+    <title>Play.Rules!► eBook</title>
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="viewport" content="user-scalable=no, width=device-width, initial-scale=1.0, maximum-scale=1.0;" />
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />	
+	<link rel="stylesheet" href="css/lavanja.css">
+	<!--
+	<link rel="stylesheet" type="text/css" href="css/sh_style.css"> </style>
+	-->
+	<script type="text/javascript" src="https://apis.google.com/js/plusone.js"></script>
+	<script type="text/javascript">
+
+	  var _gaq = _gaq || [];
+	  _gaq.push(['_setAccount', 'UA-11383603-6']);
+	  _gaq.push(['_trackPageview']);
+
+	  (function() {
+	    var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+	    ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+	    var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+	  })();
+
+	</script>
+	<script src="js/vendor/highlight.min.js"></script>
+	<link rel="stylesheet" href="css/default.min.css">
+</head>
+
+<body>
+
+	<div class="container" id="leftView">
+		<div class="head">
+			Play.Rules<b>!</b><small>►</small> eBook
+			<a id="cmdHideMenuBar" class="barRightButton">✖</a>
+		</div>
+		<!-- Menu -->
+		<div class="container scrollable" id="toc-container">
+			<h2><center>T.D.M.</center></h2>
+			<!--/* modif android class="list"*/-->
+			<ul id="toc" class="list"><ul>
+
+		</div>
+		
+		<!-- Details -->
+		<div id="scroller" class="container scrollable hide">
+    		<p id="details-container" style="margin-right:40px; margin-left:20px;"></p>
+			
+			<br>
+			<div id="twitter" class="hide">
+				<h2 class="border">@Twitter</h2>
+				<section class="threeColumns border paddingTop">
+	                <h3 class="border">#PlayFramework</h2>
+					<div id="PlayFramework"></div>
+
+	                <h3 class="border">@loic_d</h2>
+					<div id="loic_d"></div>
+
+	                <h3 class="border">@k33g_org</h2>
+					<div id="k33g_org"></div>
+				
+	            </section>
+			</div>
+			
+    	</div>
+
+	</div>
+	
+	<!--
+    <div class="container scrollable " id="rightView">
+		<div class="head">
+			<a id="cmdShowMenuBar" class="barLeftButton">➼</a>
+			
+			<g:plusone size="medium"></g:plusone>
+			<a href="https://twitter.com/share" class="twitter-share-button" data-count="horizontal" data-via="k33g_org, @loic_d">Tweet</a><script type="text/javascript" src="//platform.twitter.com/widgets.js"></script>
+			<a id="cmdHome" class="barRightButton">⟰</a>
+		</div>
+
+    </div>
+	-->
+	
+</body>
+<script src="js/twitter.js"></script>
+<script src="js/class.js"></script>
+
+<script src="js/vendor/showdown.js"></script>
+<script src="js/vendor/github.js"></script>
+<script src="js/vendor/zepto.min.js"></script>
+
+
+
+
+<script>
+/*
+	Code fait à l'arrache par k33g_org
+	
+	TODO :
+		- repositionner chaque nouvelle page "en haut" -> OK
+		- rajouter la posibilité d'utiliser "history" -> pour le bookmark des urls
+		- faire évoluer la feuille de style pour firefox
+		- ajouter les éléments nécessaires pour tablette
+	
+*/
+$(document).ready(function() {
+	/* à refactorer */
+	var loic = $('#loic_d'), k33g = $('#k33g_org'), playframework = $('#PlayFramework'), twitter = $('#twitter');
+    tw.search('#playframework',function(data){
+        for(var i = 0; i < 3; i+=1){
+			playframework.append('<li><span> (' + data[i].user + ')</span> &raquo; ' + data[i].msg+'</li>');
+        }
+		tw.search('from:loic_d',function(data){
+	        for(var i = 0; i <3; i+=1){
+				loic.append('<li>' + data[i].msg+'</li>');
+	        }
+			tw.search('from:k33g_org',function(data){
+		        for(var i = 0; i <3; i+=1){
+					k33g.append('<li>' + data[i].msg+'</li>');
+		        }
+		    });
+	    });
+
+    });	
+	
+
+	function washCode(data){
+	    /*TODO : a better regex*/
+
+	    data = data.replace(/```html/g,'');
+	    data = data.replace(/``` html/g,'');
+	    data = data.replace(/~~~html/g,'');
+	    data = data.replace(/~~~ html/g,'');
+
+	    data = data.replace(/```xml/g,"");
+	    data = data.replace(/``` xml/g,"");
+	    data = data.replace(/~~~xml/g,"");
+	    data = data.replace(/~~~ xml/g,"");
+
+	    data = data.replace(/```js/g,'');
+	    data = data.replace(/``` js/g,'');
+	    data = data.replace(/~~~js/g,'');
+	    data = data.replace(/~~~ js/g,'');
+
+	    data = data.replace(/```java/g,'');
+	    data = data.replace(/``` java/g,'');
+	    data = data.replace(/~~~java/g,'');
+	    data = data.replace(/~~~ java/g,'');
+
+	    data = data.replace(/```css/g,'');
+	    data = data.replace(/``` css/g,'');
+	    data = data.replace(/~~~css/g,'');
+	    data = data.replace(/~~~ css/g,'');
+	    /*data = data.replace(/```js/g,'<pre class="sh_javascript">');
+	    data = data.replace(/``` js/g,'<pre class="sh_javascript">');
+	    data = data.replace(/~~~js/g,'<pre class="sh_javascript">');
+	    data = data.replace(/~~~ js/g,'<pre class="sh_javascript">');
+
+	    data = data.replace(/```java/g,'<pre class="sh_java">');
+	    data = data.replace(/``` java/g,'<pre class="sh_java">');
+	    data = data.replace(/~~~java/g,'<pre class="sh_java">');
+	    data = data.replace(/~~~ java/g,'<pre class="sh_java">');
+
+	    data = data.replace(/```rb/g,"");
+	    data = data.replace(/``` rb/g,"");
+	    data = data.replace(/~~~rb/g,"");
+	    data = data.replace(/~~~ rb/g,"");*/
+
+	    data = data.replace(/```/g,"</pre>");
+	    data = data.replace(/~~~/g,"</pre>");
+
+	    return data;
+	}	
+	
+	var Store = Class({
+		constructor : function Store (user,repo, callBk) {
+			var that = this;
+			this.branches = {};
+			this.user = user;
+			this.repo = repo;
+			var branches = gh.repo(this.user, this.repo).branches(function(data){
+				that.branches = data.branches;
+				//console.log("Branches of ",that.repo," are loaded : ", that.branches);
+				if(callBk) { callBk(); }
+			});
+		},
+		getBranchId : function(name) { return this.branches[name]; },
+		getItemsOfBranch : function(name, callBk) {
+			var that = this;
+			gh.object(this.user, this.repo).tree(this.getBranchId(name),function(items){
+				//console.log("Items of ",name," are loaded : ");
+				if(callBk) { callBk(items.tree); }
+			});
+		},
+		getItemsOfItem : function(item, callBk) {
+			var that = this;
+			gh.object(this.user, this.repo).tree(item.sha,function(items){
+				//console.log("Items of ",item.name,"(",item.sha,")"," are loaded : ");
+				if(callBk) { callBk(items.tree); }
+			});			
+		},
+		getContent : function(pathOfFile, callBk){
+			gh.object(this.user, this.repo).blob(pathOfFile, this.getBranchId('master'),function(result){
+				//console.log(result);
+				if(callBk) { callBk(result.blob.data); }
+			});
+		}
+	});
+	
+
+	var path = "livre/";
+	var converter = new Showdown.converter();
+	
+	var gitHubStorage = new Store('3monkeys','play.rules', function(){
+		
+		function getChapterContent(clickedLink) {			
+			gitHubStorage.getContent(clickedLink, function(content){
+				
+				$("#details-container").html(converter.makeHtml(washCode(content)));
+				$('pre code').each(function(i, e) {hljs.highlightBlock(e, '    ')});
+				//sh_highlightDocument();	
+				
+				//window.scrollTo(0,0);
+				//document.querySelector("#scroller").scrollTop = 0
+				window.document.getElementById("scroller").scrollTop = 0
+			});
+		}
+				
+		gitHubStorage.getItemsOfBranch('master', function(items){ 
+			
+			window.news = items.filter(function(item) { return item.name === "NEWS.md"; })[0];
+			
+			gitHubStorage.getContent(news.name, function(content){
+				
+				news.content = converter.makeHtml(washCode(content));
+				$("#details-container").html(news.content);
+				$('pre code').each(function(i, e) {hljs.highlightBlock(e, '    ')});
+				//sh_highlightDocument();	
+				
+				
+				twitter.removeClass("hide").addClass("show");
+				//window.scrollTo(0,0);
+				//document.querySelector("#scroller").scrollTop = 0
+				window.document.getElementById("scroller").scrollTop = 0
+			});			
+			
+			var livre  = items.filter(function(item) { return item.name === "livre"; })[0];
+			
+			gitHubStorage.getItemsOfItem(livre, function(items){
+
+				items.forEach(function(item) {
+					if(item.type ==='tree') {
+						/* modif android class="part" style="padding:0px"*/
+						$('#toc').append('<li class="part" style="width:100%;padding-left:0px;" id="li_'+item.sha+'"><b style="padding-left:5px">'+item.name+'</b></li>');
+						
+						$('#li_'+item.sha).append('<ul class="list" id="ul_'+item.sha+'"></li>');
+
+						gitHubStorage.getItemsOfItem(item, function(chapters){
+							
+							var pathPart = path+item.name+"/";
+							
+							chapters.forEach(function(chapter) {
+
+								$('#ul_'+item.sha).append('<li style="width:100%" id="li_'+chapter.sha+'"><a href="#'+pathPart+chapter.name+'">'+chapter.name+'</a></li>')
+								//$('#toc').append('<li id="li_'+chapter.sha+'"><a href="#'+pathPart+chapter.name+'">'+chapter.name+'</a></li>')
+								$('#li_'+chapter.sha)
+								.bind('click',function(element){ getChapterContent(pathPart+chapter.name); });
+
+							});
+							
+						});
+					} else { //Blob
+						$('#toc')
+						.append('<li id="li_'+item.sha+'"><a href="#'+path+item.name+'">'+item.name+'</a></li>');
+						$('#li_'+item.sha)
+						.bind('click',function(element){ getChapterContent(path+item.name); });
+					}
+				});
+				
+			});
+
+		});
+	});
+	
+	/*----------------------*/
+	var 
+		leftView		= $('#leftView'),
+		rightView		= $('#rightView')
+		containers 		= $('.container'), 
+		barsHeight 		= $('[class="head"]').offset().height;
+		
+	//var height = window.innerHeight - (barsHeight * 2);
+	//containers.css('height', height+'px');
+
+	window.onresize = function () {
+		var height = window.innerHeight - (barsHeight * 2);
+		containers.css('height', height+'px');
+	}
+
+	function hideLeftView() {
+		leftView.addClass("hide");
+		//rightView.removeClass("right");				
+	}
+	
+	function showLeftView() {
+		leftView.removeClass("hide"); 
+		//rightView.addClass("right");
+	}
+
+	$('#cmdHideMenuBar').bind('click', function() {
+		hideLeftView();
+	});
+	
+	$('#cmdShowMenuBar').bind('click', function() {
+		showLeftView();
+	});
+	
+	$('#cmdHome').bind('click', function() {
+		$("#details-container").html(news.content);
+		sh_highlightDocument();
+		//document.querySelector("#scroller").scrollTop = 0
+		window.document.getElementById("scroller").scrollTop = 0
+	});
+	
+	window.onhashchange = function(e) {
+        var file_name = document.location.toString().split('#')[1];
+		if(file_name.split('livre/').length>0) {
+			gitHubStorage.getContent(file_name, function(content){
+				//console.log(content);
+				$("#details-container").html(converter.makeHtml(washCode(content)));
+				sh_highlightDocument();	
+				//window.scrollTo(0,0);
+				//document.querySelector("#scroller").scrollTop = 0
+				window.document.getElementById("scroller").scrollTop = 0
+			});
+		}
+    };
+	/*--- pour les tablettes et mobiles ---*/
+	$(document.body).bind('orientationchange', function(){
+		var height = window.innerHeight - (barsHeight * 2);
+		containers.css('height', height+'px');
+						
+		var orientation = window.orientation;
+	    switch(orientation) {  
+	      case 90: case -90: case undefined: /* if undefined not a mobile */
+	        orientation = 'landscape';  
+	      break;  
+	      default:  
+	        orientation = 'portrait';  
+	    }				
+		
+		
+		if(orientation == 'portrait') {
+			hideLeftView()
+		} else {
+			showLeftView();				
+		}
+		
+    });
+	
+	$(document.body).trigger('orientationchange');
+	/*-------------------------------------*/
+
+	
+	
+});
+
+</script>
+
+
+</html>

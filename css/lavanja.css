@@ -111,6 +111,14 @@ ul.list li a:hover {
 	background                  : #0069D6;
 	color                       : white;
 }
+/* modif android class="part"*/
+
+.part {
+	color                       : #0069D6;;
+	padding                     : 10px 8px;	
+	margin 						: auto;
+}
+
 
 .bigHighlight {
 	background-color 			: whiteSmoke;
