@@ -276,10 +276,10 @@ $(document).ready(function() {
 		containers 		= $('.container'), 
 		barsHeight 		= $('[class="head"]').offset().height;
 		
-	//var height = window.innerHeight - (barsHeight * 2);
-	//containers.css('height', height+'px');
+	var height = window.innerHeight - (barsHeight * 2);
+	containers.css('height', height+'px');
 	
-	containers.css('height', '100%');
+	//containers.css('height', '100%');
 
 	/*window.onresize = function () {
 		var height = window.innerHeight - (barsHeight * 2);
