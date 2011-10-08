@@ -30,20 +30,22 @@
 <body>
 
 	<!--<div class="container" id="leftView">-->
-		<div class="head">
+		<div class="head" style="width:100%;">
 			Play.Rules<b>!</b><small>►</small> eBook
 			<a id="cmdHideMenuBar" class="barRightButton">✖</a>
 		</div>
 		<!-- Menu -->
-		<div class="container scrollable" id="toc-container">
-			<h2><center>T.D.M.</center></h2>
-			<!--/* modif android class="list"*/-->
-			<ul id="toc" class="list"><ul>
-
+		<div class="container" id="toc-container">
+			<div class="">
+				<h2><center>T.D.M.</center></h2>
+				<!--/* modif android class="list"*/-->
+				<ul id="toc" class="list"><ul>
+			</div>
+			<!--<p id="details-container" style="margin-right:40px; margin-left:20px;"></p>-->
 		</div>
 		
 		<!-- Details -->
-		
+		<!--
 		<div id="scroller" class="container scrollable hide">
     		<p id="details-container" style="margin-right:40px; margin-left:20px;"></p>
 			
@@ -64,7 +66,7 @@
 			</div>
 			
     	</div>
-		
+		-->
 
 	<!--</div>-->
 	
@@ -279,7 +281,7 @@ $(document).ready(function() {
 	//var height = window.innerHeight - (barsHeight * 2);
 	//containers.css('height', height+'px');
 	
-	containers.css('height', '100%');
+	containers.css('height', '200%');
 
 	/*window.onresize = function () {
 		var height = window.innerHeight - (barsHeight * 2);
