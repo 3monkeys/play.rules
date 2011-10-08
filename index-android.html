@@ -43,6 +43,7 @@
 		</div>
 		
 		<!-- Details -->
+		
 		<div id="scroller" class="container scrollable hide">
     		<p id="details-container" style="margin-right:40px; margin-left:20px;"></p>
 			
@@ -63,6 +64,7 @@
 			</div>
 			
     	</div>
+		
 
 	</div>
 	
@@ -149,20 +151,6 @@ $(document).ready(function() {
 	    data = data.replace(/``` css/g,'');
 	    data = data.replace(/~~~css/g,'');
 	    data = data.replace(/~~~ css/g,'');
-	    /*data = data.replace(/```js/g,'<pre class="sh_javascript">');
-	    data = data.replace(/``` js/g,'<pre class="sh_javascript">');
-	    data = data.replace(/~~~js/g,'<pre class="sh_javascript">');
-	    data = data.replace(/~~~ js/g,'<pre class="sh_javascript">');
-
-	    data = data.replace(/```java/g,'<pre class="sh_java">');
-	    data = data.replace(/``` java/g,'<pre class="sh_java">');
-	    data = data.replace(/~~~java/g,'<pre class="sh_java">');
-	    data = data.replace(/~~~ java/g,'<pre class="sh_java">');
-
-	    data = data.replace(/```rb/g,"");
-	    data = data.replace(/``` rb/g,"");
-	    data = data.replace(/~~~rb/g,"");
-	    data = data.replace(/~~~ rb/g,"");*/
 
 	    data = data.replace(/```/g,"</pre>");
 	    data = data.replace(/~~~/g,"</pre>");
@@ -237,6 +225,7 @@ $(document).ready(function() {
 				
 				
 				twitter.removeClass("hide").addClass("show");
+				
 				//window.scrollTo(0,0);
 				//document.querySelector("#scroller").scrollTop = 0
 				window.document.getElementById("scroller").scrollTop = 0
@@ -289,6 +278,8 @@ $(document).ready(function() {
 		
 	//var height = window.innerHeight - (barsHeight * 2);
 	//containers.css('height', height+'px');
+	
+	containers.css('height', '100%');
 
 	/*window.onresize = function () {
 		var height = window.innerHeight - (barsHeight * 2);
