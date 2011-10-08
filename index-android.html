@@ -290,10 +290,10 @@ $(document).ready(function() {
 	//var height = window.innerHeight - (barsHeight * 2);
 	//containers.css('height', height+'px');
 
-	window.onresize = function () {
+	/*window.onresize = function () {
 		var height = window.innerHeight - (barsHeight * 2);
 		containers.css('height', height+'px');
-	}
+	}*/
 
 	function hideLeftView() {
 		leftView.addClass("hide");
@@ -335,12 +335,12 @@ $(document).ready(function() {
     };
 	/*--- pour les tablettes et mobiles ---*/
 	$(document.body).bind('orientationchange', function(){
-		var height = window.innerHeight - (barsHeight * 2);
+		/*var height = window.innerHeight - (barsHeight * 2);
 		containers.css('height', height+'px');
 						
 		var orientation = window.orientation;
 	    switch(orientation) {  
-	      case 90: case -90: case undefined: /* if undefined not a mobile */
+	      case 90: case -90: case undefined: 
 	        orientation = 'landscape';  
 	      break;  
 	      default:  
@@ -352,11 +352,11 @@ $(document).ready(function() {
 			hideLeftView()
 		} else {
 			showLeftView();				
-		}
+		}*/
 		
     });
 	
-	$(document.body).trigger('orientationchange');
+	//$(document.body).trigger('orientationchange');
 	/*-------------------------------------*/
 
 	
