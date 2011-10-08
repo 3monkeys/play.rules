@@ -4,7 +4,7 @@
 
 ##Mercredi 5 octobre
 
-Nous avons mis le temps, mais nous nous sommes enfin décidés à créer un mini-site lié au repository [https://github.com/3monkeys/play.rules](https://github.com/3monkeys/play.rules). Il vous permettra de naviguer dans les chapitres déjà écrits (il reste quelques réglage de mise en page pour le rendu, mais c'est déjà utilisable).
+Nous avons mis le temps, mais nous nous sommes enfin décidés à créer un mini-site lié au repository [https://github.com/3monkeys/play.rules](https://github.com/3monkeys/play.rules). Il vous permettra de naviguer dans les chapitres déjà écrits (il reste quelques réglages de mise en page pour le rendu, mais c'est déjà utilisable).
 
 On vous le redit, si vous voulez participer, n'hésitez pas : [**"Fork us + pull requests"**](https://github.com/3monkeys/play.rules/fork). Vous pouvez aussi donner des idées (allez faire un tour dans les [issues](https://github.com/3monkeys/play.rules/issues)).
 
