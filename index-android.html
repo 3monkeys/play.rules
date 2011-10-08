@@ -252,7 +252,7 @@ $(document).ready(function() {
 		
 
 	
-	containers.css('height', '180%');
+	containers.css('height', '200%');
 	window.document.getElementById("toc-container").scrollTop = 0;
 
 
@@ -261,8 +261,10 @@ $(document).ready(function() {
 		myToc.removeClass("show").addClass("hide");	
 		myContent.removeClass("hide").addClass("show");	
 		
-		var height = window.innerHeight - (barsHeight * 2);
-		containers.css('height', height+'px');			
+		//var height = window.innerHeight - (barsHeight * 2);
+		//containers.css('height', height+'px');
+		
+		containers.css('height', '100%');			
 	}
 	
 	function hideContent() {
@@ -270,7 +272,7 @@ $(document).ready(function() {
 		myContent.removeClass("show").addClass("hide");
 		myToc.removeClass("hise").addClass("show");	
 		
-		containers.css('height', '180%');
+		containers.css('height', '200%');
 		window.document.getElementById("toc-container").scrollTop = 0;
 	}
 
