@@ -154,7 +154,7 @@ var App = (function() {
 						'<h2 class="border">@Twitter</h2>'+
 						'<h3 class="border">#PlayFramework</h3>'+
 						playframework+
-						'<h3 class="border">@loic_d</h2>'+
+						'<h3 class="border">@loic_d</h3>'+
 						loic+
 						'<h3 class="border">@k33g_org</h3>'+
 						k33g
