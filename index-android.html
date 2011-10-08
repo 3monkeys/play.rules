@@ -29,7 +29,7 @@
 
 <body>
 
-	<div class="container" id="leftView">
+	<!--<div class="container" id="leftView">-->
 		<div class="head">
 			Play.Rules<b>!</b><small>►</small> eBook
 			<a id="cmdHideMenuBar" class="barRightButton">✖</a>
@@ -66,7 +66,7 @@
     	</div>
 		
 
-	</div>
+	<!--</div>-->
 	
 	<!--
     <div class="container scrollable " id="rightView">
@@ -276,10 +276,10 @@ $(document).ready(function() {
 		containers 		= $('.container'), 
 		barsHeight 		= $('[class="head"]').offset().height;
 		
-	var height = window.innerHeight - (barsHeight * 2);
-	containers.css('height', height+'px');
+	//var height = window.innerHeight - (barsHeight * 2);
+	//containers.css('height', height+'px');
 	
-	//containers.css('height', '100%');
+	containers.css('height', '100%');
 
 	/*window.onresize = function () {
 		var height = window.innerHeight - (barsHeight * 2);
