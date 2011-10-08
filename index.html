@@ -48,15 +48,16 @@
 			<!-- gplus -->
 			<g:plusone size="medium"></g:plusone>
 			<a href="https://twitter.com/share" class="twitter-share-button" data-count="horizontal" data-via="k33g_org, @loic_d">Tweet</a><script type="text/javascript" src="//platform.twitter.com/widgets.js"></script>
-			<a id="cmdHome" class="barRightButton">⟰</a>
+			<a id="cmdHome" class="barRightButton">News</a>
 		</div>
     	<div id="scroller" class="container scrollable">
     		<p id="details-container" style="margin-right:40px; margin-left:20px;"></p>
 			
 			<br>
 			<div id="twitter" class="hide">
-				<h2 class="border">@Twitter</h2>
+				
 				<section class="threeColumns border paddingTop">
+					<h2 class="border">@Twitter</h2>
 	                <h3 class="border">#PlayFramework</h2>
 					<div id="PlayFramework"></div>
 
@@ -76,10 +77,6 @@
 <script src="js/twitter.js"></script>
 <script src="js/class.js"></script>
 
-<!--<script src="js/vendor/sh_main.min.js"></script>
-<script src="js/vendor/sh_java.min.js"></script>
-<script src="js/vendor/sh_javascript.min.js"></script>
-<script src="js/vendor/sh_html.min.js"></script>-->
 <script src="js/vendor/showdown.js"></script>
 <script src="js/vendor/github.js"></script>
 <script src="js/vendor/zepto.min.js"></script>
@@ -88,16 +85,7 @@
 
 
 <script>
-/*
-	Code fait à l'arrache par k33g_org
-	
-	TODO :
-		- repositionner chaque nouvelle page "en haut" -> OK
-		- rajouter la posibilité d'utiliser "history" -> pour le bookmark des urls
-		- faire évoluer la feuille de style pour firefox
-		- ajouter les éléments nécessaires pour tablette
-	
-*/
+
 $(document).ready(function() {
 	/* à refactorer */
 	var loic = $('#loic_d'), k33g = $('#k33g_org'), playframework = $('#PlayFramework'), twitter = $('#twitter');
@@ -309,7 +297,8 @@ $(document).ready(function() {
 	
 	$('#cmdHome').bind('click', function() {
 		$("#details-container").html(news.content);
-		sh_highlightDocument();
+		$('pre code').each(function(i, e) {hljs.highlightBlock(e, '    ')});
+		//sh_highlightDocument();
 		//document.querySelector("#scroller").scrollTop = 0
 		window.document.getElementById("scroller").scrollTop = 0
 	});
@@ -320,7 +309,7 @@ $(document).ready(function() {
 			gitHubStorage.getContent(file_name, function(content){
 				//console.log(content);
 				$("#details-container").html(converter.makeHtml(washCode(content)));
-				sh_highlightDocument();	
+				$('pre code').each(function(i, e) {hljs.highlightBlock(e, '    ')});
 				//window.scrollTo(0,0);
 				//document.querySelector("#scroller").scrollTop = 0
 				window.document.getElementById("scroller").scrollTop = 0

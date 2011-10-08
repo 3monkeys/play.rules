@@ -28,11 +28,10 @@
 </head>
 
 <body>
-
-	<!--<div class="container" id="leftView">-->
 		<div class="head" style="width:100%;">
-			Play.Rules<b>!</b><small>►</small> eBook
-			<a id="cmdHideMenuBar" class="barRightButton">✖</a>
+			<a id="cmdTDM" class="barLeftButton">TDM</a>
+			Play.Rules<b>!</b>&raquo; eBook
+			<a id="cmdNEWS" class="barRightButton">NEWS</a>
 		</div>
 		<!-- Menu -->
 		<div class="container" id="toc-container">
@@ -45,14 +44,15 @@
 		</div>
 		
 		<!-- Details -->
-		<!--
+		
 		<div id="scroller" class="container scrollable hide">
     		<p id="details-container" style="margin-right:40px; margin-left:20px;"></p>
 			
 			<br>
 			<div id="twitter" class="hide">
-				<h2 class="border">@Twitter</h2>
-				<section class="threeColumns border paddingTop">
+				
+				<section>
+					<h2 class="border">@Twitter</h2>
 	                <h3 class="border">#PlayFramework</h2>
 					<div id="PlayFramework"></div>
 
@@ -66,23 +66,7 @@
 			</div>
 			
     	</div>
-		-->
-
-	<!--</div>-->
-	
-	<!--
-    <div class="container scrollable " id="rightView">
-		<div class="head">
-			<a id="cmdShowMenuBar" class="barLeftButton">➼</a>
 			
-			<g:plusone size="medium"></g:plusone>
-			<a href="https://twitter.com/share" class="twitter-share-button" data-count="horizontal" data-via="k33g_org, @loic_d">Tweet</a><script type="text/javascript" src="//platform.twitter.com/widgets.js"></script>
-			<a id="cmdHome" class="barRightButton">⟰</a>
-		</div>
-
-    </div>
-	-->
-	
 </body>
 <script src="js/twitter.js"></script>
 <script src="js/class.js"></script>
@@ -95,16 +79,7 @@
 
 
 <script>
-/*
-	Code fait à l'arrache par k33g_org
-	
-	TODO :
-		- repositionner chaque nouvelle page "en haut" -> OK
-		- rajouter la posibilité d'utiliser "history" -> pour le bookmark des urls
-		- faire évoluer la feuille de style pour firefox
-		- ajouter les éléments nécessaires pour tablette
-	
-*/
+
 $(document).ready(function() {
 	/* à refactorer */
 	var loic = $('#loic_d'), k33g = $('#k33g_org'), playframework = $('#PlayFramework'), twitter = $('#twitter');
@@ -206,11 +181,11 @@ $(document).ready(function() {
 				
 				$("#details-container").html(converter.makeHtml(washCode(content)));
 				$('pre code').each(function(i, e) {hljs.highlightBlock(e, '    ')});
-				//sh_highlightDocument();	
+
+				showContent();
 				
-				//window.scrollTo(0,0);
-				//document.querySelector("#scroller").scrollTop = 0
-				window.document.getElementById("scroller").scrollTop = 0
+				window.document.getElementById("scroller").scrollTop = 0;
+				
 			});
 		}
 				
@@ -223,13 +198,9 @@ $(document).ready(function() {
 				news.content = converter.makeHtml(washCode(content));
 				$("#details-container").html(news.content);
 				$('pre code').each(function(i, e) {hljs.highlightBlock(e, '    ')});
-				//sh_highlightDocument();	
-				
 				
 				twitter.removeClass("hide").addClass("show");
-				
-				//window.scrollTo(0,0);
-				//document.querySelector("#scroller").scrollTop = 0
+
 				window.document.getElementById("scroller").scrollTop = 0
 			});			
 			
@@ -264,6 +235,7 @@ $(document).ready(function() {
 						$('#li_'+item.sha)
 						.bind('click',function(element){ getChapterContent(path+item.name); });
 					}
+					
 				});
 				
 			});
@@ -273,86 +245,46 @@ $(document).ready(function() {
 	
 	/*----------------------*/
 	var 
-		leftView		= $('#leftView'),
-		rightView		= $('#rightView')
 		containers 		= $('.container'), 
+		myToc			= $('#toc-container'),
+		myContent		= $('#scroller'),
 		barsHeight 		= $('[class="head"]').offset().height;
 		
-	//var height = window.innerHeight - (barsHeight * 2);
-	//containers.css('height', height+'px');
-	
-	containers.css('height', '200%');
 
-	/*window.onresize = function () {
+	
+	containers.css('height', '180%');
+	window.document.getElementById("toc-container").scrollTop = 0;
+
+
+	function showContent() {
+		
+		myToc.removeClass("show").addClass("hide");	
+		myContent.removeClass("hide").addClass("show");	
+		
 		var height = window.innerHeight - (barsHeight * 2);
-		containers.css('height', height+'px');
-	}*/
-
-	function hideLeftView() {
-		leftView.addClass("hide");
-		//rightView.removeClass("right");				
+		containers.css('height', height+'px');			
 	}
 	
-	function showLeftView() {
-		leftView.removeClass("hide"); 
-		//rightView.addClass("right");
+	function hideContent() {
+
+		myContent.removeClass("show").addClass("hide");
+		myToc.removeClass("hise").addClass("show");	
+		
+		containers.css('height', '180%');
+		window.document.getElementById("toc-container").scrollTop = 0;
 	}
 
-	$('#cmdHideMenuBar').bind('click', function() {
-		hideLeftView();
+	$('#cmdTDM').bind('click', function() {
+		hideContent();
 	});
 	
-	$('#cmdShowMenuBar').bind('click', function() {
-		showLeftView();
-	});
-	
-	$('#cmdHome').bind('click', function() {
+
+	$('#cmdNEWS').bind('click', function() {
 		$("#details-container").html(news.content);
-		sh_highlightDocument();
-		//document.querySelector("#scroller").scrollTop = 0
-		window.document.getElementById("scroller").scrollTop = 0
-	});
-	
-	window.onhashchange = function(e) {
-        var file_name = document.location.toString().split('#')[1];
-		if(file_name.split('livre/').length>0) {
-			gitHubStorage.getContent(file_name, function(content){
-				//console.log(content);
-				$("#details-container").html(converter.makeHtml(washCode(content)));
-				sh_highlightDocument();	
-				//window.scrollTo(0,0);
-				//document.querySelector("#scroller").scrollTop = 0
-				window.document.getElementById("scroller").scrollTop = 0
-			});
-		}
-    };
-	/*--- pour les tablettes et mobiles ---*/
-	$(document.body).bind('orientationchange', function(){
-		/*var height = window.innerHeight - (barsHeight * 2);
-		containers.css('height', height+'px');
-						
-		var orientation = window.orientation;
-	    switch(orientation) {  
-	      case 90: case -90: case undefined: 
-	        orientation = 'landscape';  
-	      break;  
-	      default:  
-	        orientation = 'portrait';  
-	    }				
-		
-		
-		if(orientation == 'portrait') {
-			hideLeftView()
-		} else {
-			showLeftView();				
-		}*/
-		
-    });
-	
-	//$(document.body).trigger('orientationchange');
-	/*-------------------------------------*/
 
-	
+		$('pre code').each(function(i, e) {hljs.highlightBlock(e, '    ')});
+		showContent();
+	});
 	
 });
 
