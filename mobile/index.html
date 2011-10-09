@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta http-equiv="Content-Type" content="text/html; charset=utf-8"> 
+		<link rel="stylesheet" href="sencha/sencha-touch.css" type="text/css">
+		
+		<link rel="stylesheet" href="../css/lavanja.css">
+
+		<script src="../js/twitter.js"></script>
+		<script src="../js/class.js"></script>
+
+		<script src="../js/vendor/showdown.js"></script>
+		<script src="../js/vendor/github.js"></script>
+
+		<script type="text/javascript" src="sencha/sencha-touch.js"></script>
+		<script type="text/javascript" src="data.js"></script>	
+	    <script type="text/javascript" src="core.js"></script>
+	
+	<head>
+	
+	<body>
+		
+	</body>
+	<script>
+		Ext.setup({
+		    //icon: 'icon.png',
+		    //tabletStartupScreen: 'tablet_startup.png',
+		    //phoneStartupScreen: 'phone_startup.png',
+		    //glossOnIcon: false,
+		    onReady: function() {
+
+	        //---------------------------------
+	        //	HEADER AND FOOTER
+	        //---------------------------------
+
+	        var header = abk.getHeader("Play!Rules>eBook");
+	        var footer = abk.getFooter("by k33g_org & loic_d");
+
+
+	        //---------------------------------
+	        //	CARDS
+	        //---------------------------------
+			var homeCard = abk.getHomeCard();
+
+
+
+	        //---------------------------------
+	        // LEFT SIDE PANEL
+	        //---------------------------------
+
+	        var leftSidePanel = abk.getLeftSidePanel(homeCard);
+
+	        //---------------------------------
+	        //	MAIN SCREEN
+	        //---------------------------------
+
+	        var mainScreen = abk.getMainScreen({
+	                                                header:header,
+	                                                footer:footer,
+	                                                leftSidePanel:leftSidePanel,
+	                                                rightSidePanel:homeCard,
+	                                                phone:false}) ;
+
+		    }/*onReady*/
+		});		
+	</script>
+</html>
