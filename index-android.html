@@ -286,10 +286,14 @@ $(document).ready(function() {
 	
 
 	$('#cmdNEWS').bind('click', function() {
-		$("#details-container").html(news.content);
+		
+		var height = window.innerHeight - (barsHeight * 2);
+		containers.css('height', height+'px');
+		
+		/*$("#details-container").html(news.content);
 
 		$('pre code').each(function(i, e) {hljs.highlightBlock(e, '    ')});
-		showContent();
+		showContent();*/
 	});
 	
 });
