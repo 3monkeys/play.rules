@@ -2,7 +2,7 @@
 
 Dans la partie précédente nous avons vu comment générer une partie des traitements de notre application grâce au module CRUD.
 Nous allons maintenant apprendre à développer une petite application entièrement "à la main".
-Le but de cette webapp est d'offrir la possibilité de parcourir une CDthèque, d'en ajouter de nouveaux et de voter pour vos albums préférés. Elle notre fil conducteur tout au long de cette partie.
+Le but de cette webapp est d'offrir la possibilité de parcourir une CDthèque, d'en ajouter de nouveaux et de voter pour vos albums préférés. Elle est notre fil conducteur tout au long de cette partie.
 
 Le code complet de l'application est disponible [ici](https://github.com/loicdescotte/vote4music)
 
@@ -43,6 +43,7 @@ Nous verrons le code métier de cette classe dans la suite du chapitre.
 La classe Artist est définie comme ceci :
 
 ~~~ java 	
+@Entity
 public class Artist extends Model{
     @Required
     @Column(unique = true)
@@ -120,7 +121,7 @@ Pour le top 10, vous pouvez choisir un style de musique. Pour cela, le template 
 
 ## Le formulaire d'ajout
 
-Dans le contrôleur, on crée une méthode pour obtenir le formulaire :
+Dans le contrôleur de notre `controllers/Application.java`, on crée une méthode pour obtenir le formulaire :
 
 ~~~ java 
 public static void form() {
@@ -130,7 +131,7 @@ public static void form() {
 
 En se référant aux routes, on voit que cette méthode est invoquée lorsque l'on utilise le verbe HTTP GET. C'est la méthode utilisée par le navigateur lorsque l'on tape une URL ou lorsque l'on clique sur un lien.
 
-On utilise ensuite POST pour envoyer les données au contrôleur (voir le fichier de routes plus haut) Voici le code du formulaire :
+On utilise ensuite POST pour envoyer les données au contrôleur (voir le fichier de routes plus haut) Voici le code du formulaire `views/Application/form.html` :
 
 ~~~ html 
 	
@@ -180,9 +181,9 @@ On utilise ensuite POST pour envoyer les données au contrôleur (voir le fichie
 #{/form}
 ~~~
 	
-Ce formulaire nous permettra aussi bien de créer des utilisateurs que de les mettre à jour. C'est pour cette raison que nous utilisons une syntaxe comme `album?.name` pour la valeur des champs : si l'album existe déjà on affiche son nom. Sinon, on n'affiche rien. On retrouve également la sélection des genres à partir de l'Enum, comme sur la page d'accueil.
+Ce formulaire nous permettra aussi bien de créer des almbums que de les mettre à jour. C'est pour cette raison que nous utilisons une syntaxe comme `album?.name` pour la valeur des champs : si l'album existe déjà on affiche son nom. Sinon, on n'affiche rien. On retrouve également la sélection des genres à partir de l'Enum, comme sur la page d'accueil.
 
-Pour permettre à l'utilisateur de sélectionner une date à l'aide d'un widget, on ajoute ce code JavaScript à notre template :
+Pour permettre à l'utilisateur de sélectionner une date à l'aide d'un widget, on ajoute ce code JavaScript à la fin du template que nous venons de créer :
 
 ~~~ html
 #{set 'moreScripts'}
@@ -219,7 +220,7 @@ public static void save(@Valid Album album, @Valid Artist artist, File cover) {
 ~~~ 	
 
 La première ligne de cette méthode vérifie que les valeurs envoyées au contrôleur sont conformes au modèle défini dans les classes Album et Artist (par exemple le nom obligatoire pour l'album).
-Dans le cas contraire, on retourne au formulaire, qui affichera les erreurs grâce aux balises d'erreur que l'on écrit, comme 	
+Dans le cas contraire, on retourne au formulaire, qui affichera les erreurs grâce aux balises d'erreur que l'on a déjà écrites dans le formulaire, comme celle-ci 	
 
 	<span class="error">${errors.forKey('album.name')}</span>
 	
@@ -264,13 +265,20 @@ JPAQuery find(String query, Object... params);
 
 ## Lister et rechercher des albums
 
-On utilise jQuery et le plugin datatables pour améliorer le rendu du tableau des résultats. Ce plugin permet d'afficher des liens pour trier le tableau, et ajoute la pagination des données.
+On utilise jQuery et le plugin datatables pour améliorer le rendu du tableau des résultats. Ce plugin permet d'afficher des liens pour trier le tableau, et ajoute la pagination des données. Il faut l'installer (`jquery.dataTables.min.js`) dans le répertoire `public/javascripts`.
 Ce plugin est très simple à utiliser, il suffit d'écrire ces quelques lignes pour l'activer : 
 
 ~~~ js
-$(document).ready(function(){
-    $('#albumList').dataTable();
-  });
+#{set 'moreScripts'}
+<script src="@{'public/javascripts/jquery.datatables.min.js'}"></script>
+<script>
+    (function($, global) {
+      $(document).ready(function(){
+          $('#albumList').dataTable();
+      });
+    })(this.jQuery, this)
+</script>
+#{/set}
 ~~~
 
 Ceci suffit à ajouter des fonctions de pagination et de tri à un simple tableau HTML. Notre tableau est défini comme ceci :  
@@ -301,9 +309,9 @@ Ceci suffit à ajouter des fonctions de pagination et de tri à un simple tablea
 </table>
 ~~~
 
-Nous plaçons ce code dans un fichier nommé `albumtable.tag`, séparé du reste de notre page, afin de pouvoir de réutiliser dans d'autres contextes : 
+Nous plaçons ces deux blocs de code dans un fichier nommé `albumtable.tag`, séparé du reste de notre page, afin de pouvoir le réutiliser dans d'autres contextes : 
 
-Pour intégrer ce tag Play!► à notre page, on écrit la directive suivante :
+Pour intégrer ce tag Play!► (et donc notre tableau) à notre page, on écrit la directive suivante (dans la vue `Application/list.html`) :
 
 	#{albumtable albums:albums/}
 
@@ -395,7 +403,7 @@ public static void listByGenreAndYear(String genre, String year) {
 }
 ~~~ 
 
-Les paramètres `genre` et `year` sont obligatoires. Cela veut dire que si on appelle ce contrôleur dans ces paramètres, il renverra une erreur 404 (not found).
+Les paramètres `genre` et `year` sont obligatoires. Cela veut dire que si on appelle ce contrôleur sans ces paramètres, il renverra une erreur 404 (not found).
 
 
 La classe Album définie les méthodes nécessaires à cette recherche :
@@ -455,15 +463,27 @@ La méthode `em()` de classe `Model` de Play!► permet d'accéder à l'entity m
 La librairie lambdaj nous aide à filtrer l'ensemble des albums récupérés pour une année donnée. Grâce à elle, nous pouvons écrire nos filtres comme dans un langage fonctionnel, en évitant de créer des boucles pour parcourir la collection d'albums dans le but de la trier. Dans cet exemple, on utilise la fonction `select` :
 
 ~~~ java 
+import static ch.lambdaj.Lambda.*;
+//...
 public static List<Album> filterByYear(List<Album> albums, String year) {
     return select(albums, having(on(Album.class).getReleaseYear(), equalTo(year)));
 }
 ~~~ 
 
+La librairie lambdaj est complétée de la librairie harmcrest (fonction equalTo) disponible à l'adresse http://code.google.com/p/hamcrest/.
+
+Il faut implémenter la méthode getReleaseYear pour récupérer l'année de sortie d'une album :
+
+~~~ java 
+    public String getReleaseYear() {
+        return formatYear.format(releaseDate);
+    }
+~~~ 
+
 	
 **Remarque** : On aurait pu se passer de cette libraire, appliquer les filtres à l'aide d'une requête en base de données. Mais cet exemple nous permet de voir comment intégrer d'autres librairies à notre application Play!►, tout en obtenant un code intéressant du point de vue de la syntaxe.
 	
-Pour que Play!► puisse bénéficier de lambdaj, on ajoute cette ligne à la section `require` du fichier dependencies.yml :
+Pour que Play!► puisse bénéficier de lambdaj, on installe le jar dans le répertoire `lib` (téléchargeable à cette adresse : http://code.google.com/p/lambdaj/) et on ajoute cette ligne à la section `require` du fichier dependencies.yml :
    
 	- com.googlecode.lambdaj -> lambdaj 2.2
 
@@ -476,7 +496,7 @@ Cette méthode du contrôleur permet d'enregistrer un vote pour un album :
 
 ~~~ java 
 public static void vote(String id) {
-    Album album = findById(Long.parseLong(id));
+    Album album = Album.findById(Long.parseLong(id));
     album.vote();
     renderText(album.nbVotes);
 }
@@ -493,6 +513,8 @@ Dans le cas présent, la méthode `vote` sera accessible depuis l'URL `/applicat
 La classe Album définit cette méthode pour mettre à jour le compteur des votes d'une instance d'album:
 
 ~~~ java 
+public long nbVotes = 0L;
+//...
 public void vote() {
     nbVotes++;
     save();
@@ -502,7 +524,7 @@ public void vote() {
 Les entités du modèle pouvant auto-gérer leur état dans la base de données, on peut directement appeler la méthode `save` pour sauvegarder ce nouvel état.
 
 La méthode du contrôleur renvoie directement le nouveau score de l'album au format texte. On récupérera cette réponse dans notre client HTML pour mettre à jour les informations affichées à l'écran. 
-Le bouton de vote est accessible dans la liste des albums :
+Nous avons déjà défini le bouton de vote, accessible dans la liste des albums :
 
 ~~~ html
 <td>
@@ -511,14 +533,14 @@ Le bouton de vote est accessible dans la liste des albums :
 </td>
 ~~~
 
-On créer aussi une `div` pour afficher un message en cas de succès :
+On va créer aussi une `div` au-dessus du tableau pour afficher un message en cas de succès :
 
 ~~~ html
 <div id="voteInfo" class="info">One vote added!</div>
 ~~~
 
 
-Cette section sera masquée par défaut, à l'aide de CSS : 
+Cette section sera masquée par défaut, à l'aide de CSS (présent sous le répertoire `public/stylesheets/main.css): 
 
 ~~~ css
 .info {
