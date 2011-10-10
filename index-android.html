@@ -186,9 +186,9 @@ $(document).ready(function() {
 				$("#details-container").html(converter.makeHtml(washCode(content)));
 				$('pre code').each(function(i, e) {hljs.highlightBlock(e, '    ')});
 
-				showContent();
-				var height = window.innerHeight - ($('[class="head"]').offset().height * 2);
-				$('.container').css('height', height+'px');
+				//showContent();
+				//var height = window.innerHeight - ($('[class="head"]').offset().height * 2);
+				//$('.container').css('height', height+'px');
 				
 				window.document.getElementById("scroller").scrollTop = 0;
 				
