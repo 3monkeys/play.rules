@@ -35,40 +35,13 @@
 		</div>
 		<!-- Menu -->
 		<div class="container" id="toc-container">
-			<div class="">
+			<div id="TDM">
+				<a name="topoftoc"><br><br></a>
 				<h2><center>T.D.M.</center></h2>
-				<!--/* modif android class="list"*/-->
 				<ul id="toc" class="list"><ul>
 			</div>
-			<!--<p id="details-container" style="margin-right:40px; margin-left:20px;"></p>-->
 			<p id="details-container" style="margin-right:40px; margin-left:20px;"></p>
 		</div>
-		
-		<!-- Details -->
-		<!--
-		<div id="scroller" class="container hide">
-    		<p id="details-container" style="margin-right:40px; margin-left:20px;"></p>
-			
-			<br>
-			<div id="twitter" class="hide">
-				
-				<section>
-					<h2 class="border">@Twitter</h2>
-	                <h3 class="border">#PlayFramework</h2>
-					<div id="PlayFramework"></div>
-
-	                <h3 class="border">@loic_d</h2>
-					<div id="loic_d"></div>
-
-	                <h3 class="border">@k33g_org</h2>
-					<div id="k33g_org"></div>
-				
-	            </section>
-			</div>
-			
-			
-    	</div>
-		-->
 			
 </body>
 <script src="js/twitter.js"></script>
@@ -183,15 +156,11 @@ $(document).ready(function() {
 			console.log(clickedLink);	
 			gitHubStorage.getContent(clickedLink, function(content){
 				
-				$("#details-container").html(converter.makeHtml(washCode(content)));
+				$("#details-container").html('<a name="topofdoc">top of the doc</a>'+converter.makeHtml(washCode(content)));
 				$('pre code').each(function(i, e) {hljs.highlightBlock(e, '    ')});
 
-				//showContent();
-				//var height = window.innerHeight - ($('[class="head"]').offset().height * 2);
-				//$('.container').css('height', height+'px');
-				
-				window.document.getElementById("scroller").scrollTop = 0;
-				
+				showContent();
+				window.location.hash="topofdoc";				
 			});
 		}
 				
@@ -200,14 +169,8 @@ $(document).ready(function() {
 			window.news = items.filter(function(item) { return item.name === "NEWS.md"; })[0];
 			
 			gitHubStorage.getContent(news.name, function(content){
-				
 				news.content = converter.makeHtml(washCode(content));
-				$("#details-container").html(news.content);
-				$('pre code').each(function(i, e) {hljs.highlightBlock(e, '    ')});
-				
 				//twitter.removeClass("hide").addClass("show");
-
-				window.document.getElementById("scroller").scrollTop = 0
 			});			
 			
 			var livre  = items.filter(function(item) { return item.name === "livre"; })[0];
@@ -216,7 +179,7 @@ $(document).ready(function() {
 
 				items.forEach(function(item) {
 					if(item.type ==='tree') {
-						/* modif android class="part" style="padding:0px"*/
+
 						$('#toc').append('<li class="part" style="width:100%;padding-left:0px;" id="li_'+item.sha+'"><b style="padding-left:5px">'+item.name+'</b></li>');
 						
 						$('#li_'+item.sha).append('<ul class="list" id="ul_'+item.sha+'"></li>');
@@ -228,7 +191,7 @@ $(document).ready(function() {
 							chapters.forEach(function(chapter) {
 
 								$('#ul_'+item.sha).append('<li style="width:100%" id="li_'+chapter.sha+'"><a href="#'+pathPart+chapter.name+'">'+chapter.name+'</a></li>')
-								//$('#toc').append('<li id="li_'+chapter.sha+'"><a href="#'+pathPart+chapter.name+'">'+chapter.name+'</a></li>')
+
 								$('#li_'+chapter.sha)
 								.bind('click',function(element){ getChapterContent(pathPart+chapter.name); });
 
@@ -250,51 +213,31 @@ $(document).ready(function() {
 	});
 	
 	/*----------------------*/
-	var 
-		containers 		= $('.container'), 
-		myToc			= $('#toc-container'),
-		myContent		= $('#scroller'),
-		barsHeight 		= $('[class="head"]').offset().height;
-		
+	var myToc			= $('#TDM');
 
-	
-	//containers.css('height', '200%');
-	window.document.getElementById("toc-container").scrollTop = 0;
-
+	$("#details-container").hide();
 
 	function showContent() {
+		myToc.hide();
+		$("#details-container").show();
 		
-		myToc.removeClass("show").addClass("hide");	
-		myContent.removeClass("hide").addClass("show");	
-				
-		//containers.css('height', '3000%');			
 	}
 	
-	function hideContent() {
-
-		myContent.removeClass("show").addClass("hide");
-		myToc.removeClass("hise").addClass("show");	
-		
-		//var height = window.innerHeight - (barsHeight * 2);
-		//containers.css('height', height+'px');
-		//containers.css('height', '200%');
-		window.document.getElementById("toc-container").scrollTop = 0;
-	}
-
 	$('#cmdTDM').bind('click', function() {
-		hideContent();
+		$("#details-container").hide();
+		myToc.show();
+		
+		window.location.hash="topoftoc";
 	});
 	
 
 	$('#cmdNEWS').bind('click', function() {
 		
-		var height = window.innerHeight - (barsHeight * 2);
-		containers.css('height', height+'px');
-		
-		/*$("#details-container").html(news.content);
-
+		$("#details-container").html('<a name="topofdoc">top of the doc</a>'+news.content);
 		$('pre code').each(function(i, e) {hljs.highlightBlock(e, '    ')});
-		showContent();*/
+		showContent();
+		
+		window.location.hash="topofdoc";
 	});
 	
 });
