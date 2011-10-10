@@ -185,6 +185,8 @@ $(document).ready(function() {
 				$('pre code').each(function(i, e) {hljs.highlightBlock(e, '    ')});
 
 				showContent();
+				var height = window.innerHeight - ($('[class="head"]').offset().height * 2);
+				$('.container').css('height', height+'px');
 				
 				window.document.getElementById("scroller").scrollTop = 0;
 				
@@ -262,10 +264,7 @@ $(document).ready(function() {
 		
 		myToc.removeClass("show").addClass("hide");	
 		myContent.removeClass("hide").addClass("show");	
-		
-		var height = window.innerHeight - (barsHeight * 2);
-		containers.css('height', height+'px');
-		
+				
 		//containers.css('height', '3000%');			
 	}
 	
@@ -274,8 +273,8 @@ $(document).ready(function() {
 		myContent.removeClass("show").addClass("hide");
 		myToc.removeClass("hise").addClass("show");	
 		
-		var height = window.innerHeight - (barsHeight * 2);
-		containers.css('height', height+'px');
+		//var height = window.innerHeight - (barsHeight * 2);
+		//containers.css('height', height+'px');
 		//containers.css('height', '200%');
 		window.document.getElementById("toc-container").scrollTop = 0;
 	}
