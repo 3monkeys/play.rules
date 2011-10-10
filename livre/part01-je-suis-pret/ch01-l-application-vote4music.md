@@ -121,7 +121,7 @@ Pour le top 10, vous pouvez choisir un style de musique. Pour cela, le template 
 
 ## Le formulaire d'ajout
 
-Dans le contrôleur de notre `controllers/Application.java`, on crée une méthode pour obtenir le formulaire :
+Dans le contrôleur de notre application (`controllers/Application.java`), on crée une méthode pour obtenir le formulaire :
 
 ~~~ java 
 public static void form() {
@@ -181,7 +181,7 @@ On utilise ensuite POST pour envoyer les données au contrôleur (voir le fichie
 #{/form}
 ~~~
 	
-Ce formulaire nous permettra aussi bien de créer des almbums que de les mettre à jour. C'est pour cette raison que nous utilisons une syntaxe comme `album?.name` pour la valeur des champs : si l'album existe déjà on affiche son nom. Sinon, on n'affiche rien. On retrouve également la sélection des genres à partir de l'Enum, comme sur la page d'accueil.
+Ce formulaire nous permettra aussi bien de créer des albums que de les mettre à jour. C'est pour cette raison que nous utilisons une syntaxe comme `album?.name` pour la valeur des champs : si l'album existe déjà on affiche son nom. Sinon, on n'affiche rien. On retrouve également la sélection des genres à partir de l'Enum, comme sur la page d'accueil.
 
 Pour permettre à l'utilisateur de sélectionner une date à l'aide d'un widget, on ajoute ce code JavaScript à la fin du template que nous venons de créer :
 
