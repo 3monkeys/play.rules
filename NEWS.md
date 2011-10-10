@@ -1,6 +1,9 @@
 <div class="bigHighlight">
 <h1>Les News chez <strong>Play.Rules!</strong><small>►</small></h1>
 </div>
+##Lundi 10 octobre
+
+- Une version pour mobile en ligne (beta à optimiser) : [http://3monkeys.github.com/play.rules/m.html](http://3monkeys.github.com/play.rules/m.html)
 
 ##Mercredi 5 octobre
 
