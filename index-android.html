@@ -47,7 +47,7 @@
 		
 		<div id="scroller" class="container scrollable hide">
     		<p id="details-container" style="margin-right:40px; margin-left:20px;"></p>
-			
+			<!--
 			<br>
 			<div id="twitter" class="hide">
 				
@@ -64,6 +64,7 @@
 				
 	            </section>
 			</div>
+			-->
 			
     	</div>
 			
@@ -82,7 +83,7 @@
 
 $(document).ready(function() {
 	/* à refactorer */
-	var loic = $('#loic_d'), k33g = $('#k33g_org'), playframework = $('#PlayFramework'), twitter = $('#twitter');
+	/*var loic = $('#loic_d'), k33g = $('#k33g_org'), playframework = $('#PlayFramework'), twitter = $('#twitter');
     tw.search('#playframework',function(data){
         for(var i = 0; i < 3; i+=1){
 			playframework.append('<li><span> (' + data[i].user + ')</span> &raquo; ' + data[i].msg+'</li>');
@@ -98,7 +99,7 @@ $(document).ready(function() {
 		    });
 	    });
 
-    });	
+    });	*/
 	
 
 	function washCode(data){
@@ -200,7 +201,7 @@ $(document).ready(function() {
 				$("#details-container").html(news.content);
 				$('pre code').each(function(i, e) {hljs.highlightBlock(e, '    ')});
 				
-				twitter.removeClass("hide").addClass("show");
+				//twitter.removeClass("hide").addClass("show");
 
 				window.document.getElementById("scroller").scrollTop = 0
 			});			
@@ -262,10 +263,10 @@ $(document).ready(function() {
 		myToc.removeClass("show").addClass("hide");	
 		myContent.removeClass("hide").addClass("show");	
 		
-		//var height = window.innerHeight - (barsHeight * 2);
-		//containers.css('height', height+'px');
+		var height = window.innerHeight - (barsHeight * 2);
+		containers.css('height', height+'px');
 		
-		containers.css('height', '3000%');			
+		//containers.css('height', '3000%');			
 	}
 	
 	function hideContent() {
@@ -273,7 +274,9 @@ $(document).ready(function() {
 		myContent.removeClass("show").addClass("hide");
 		myToc.removeClass("hise").addClass("show");	
 		
-		containers.css('height', '200%');
+		var height = window.innerHeight - (barsHeight * 2);
+		containers.css('height', height+'px');
+		//containers.css('height', '200%');
 		window.document.getElementById("toc-container").scrollTop = 0;
 	}
 
