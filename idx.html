@@ -110,6 +110,7 @@ $(document).ready(function() {
 
 	    return data;
 	}	
+	var myToc = $('#TDM'),toclist = $('#toc') , details = $("#details-container");
 	
 	var Store = Class({
 		constructor : function Store (user,repo, callBk) {
@@ -156,7 +157,7 @@ $(document).ready(function() {
 			console.log(clickedLink);	
 			gitHubStorage.getContent(clickedLink, function(content){
 				
-				$("#details-container").html('<a name="topofdoc">top of the doc</a>'+converter.makeHtml(washCode(content)));
+				details.html('<a name="topofdoc">top of the doc</a>'+converter.makeHtml(washCode(content)));
 				$('pre code').each(function(i, e) {hljs.highlightBlock(e, '    ')});
 
 				showContent();
@@ -180,7 +181,7 @@ $(document).ready(function() {
 				items.forEach(function(item) {
 					if(item.type ==='tree') {
 
-						$('#toc').append('<li class="part" style="width:100%;padding-left:0px;" id="li_'+item.sha+'"><b style="padding-left:5px">'+item.name+'</b></li>');
+						toclist.append('<li class="part" style="width:100%;padding-left:0px;" id="li_'+item.sha+'"><b style="padding-left:5px">'+item.name+'</b></li>');
 						
 						$('#li_'+item.sha).append('<ul class="list" id="ul_'+item.sha+'"></li>');
 
@@ -199,7 +200,7 @@ $(document).ready(function() {
 							
 						});
 					} else { //Blob
-						$('#toc')
+						toclist
 						.append('<li id="li_'+item.sha+'"><a href="#'+path+item.name+'">'+item.name+'</a></li>');
 						$('#li_'+item.sha)
 						.bind('click',function(element){ getChapterContent(path+item.name); });
@@ -213,30 +214,24 @@ $(document).ready(function() {
 	});
 	
 	/*----------------------*/
-	var myToc			= $('#TDM');
-
-	$("#details-container").hide();
+	
+	details.hide();
 
 	function showContent() {
 		myToc.hide();
-		$("#details-container").show();
-		
+		details.show();
 	}
 	
 	$('#cmdTDM').bind('click', function() {
-		$("#details-container").hide();
+		details.hide();
 		myToc.show();
-		
 		window.location.hash="topoftoc";
 	});
-	
 
 	$('#cmdNEWS').bind('click', function() {
-		
-		$("#details-container").html('<a name="topofdoc">top of the doc</a>'+news.content);
+		details.html('<a name="topofdoc">top of the doc</a>'+news.content);
 		$('pre code').each(function(i, e) {hljs.highlightBlock(e, '    ')});
 		showContent();
-		
 		window.location.hash="topofdoc";
 	});
 	
