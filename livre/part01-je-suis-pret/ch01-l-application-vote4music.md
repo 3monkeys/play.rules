@@ -503,7 +503,7 @@ Le bouton de vote est accessible dans la liste des albums :
 	    <a id="${album.id}-clickVote" class="voteLink" href="#">Vote for it!</a>
 	</td>
 
-On créer aussi une `div` pour afficher un message en cas de succès :
+On crée aussi une `div` pour afficher un message en cas de succès :
 
 	<div id="voteInfo" class="info">One vote added!</div>
 
