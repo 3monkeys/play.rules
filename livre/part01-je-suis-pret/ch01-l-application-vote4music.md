@@ -271,6 +271,8 @@ Ce plugin est très simple à utiliser, il suffit d'écrire ces quelques lignes 
 	  });
 ~~~
 
+Remarque : pour ajouter des librairies JavaScript supplémentaires on les place dans le répertoire `public/javascripts`.
+
 Ceci suffit à ajouter des fonctions de pagination et de tri à un simple tableau HTML. Notre tableau est défini comme ceci :  
 
 	<table id="albumList">
@@ -506,7 +508,7 @@ On crée aussi une `div` pour afficher un message en cas de succès :
 
 	<div id="voteInfo" class="info">One vote added!</div>
 
-Cette section sera masquée par défaut, à l'aide de CSS : 
+Cette section sera masquée par défaut, à l'aide d'un bout de CSS que l'on place dans le répertoire `public/stylesheets` : 
 
 	.info {
 	    display: none;
