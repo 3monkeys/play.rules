@@ -271,8 +271,6 @@ Ce plugin est très simple à utiliser, il suffit d'écrire ces quelques lignes 
 	  });
 ~~~
 
-Remarque : pour ajouter des librairies JavaScript supplémentaires on les place dans le répertoire `public/javascripts`.
-
 Ceci suffit à ajouter des fonctions de pagination et de tri à un simple tableau HTML. Notre tableau est défini comme ceci :  
 
 	<table id="albumList">
