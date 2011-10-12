@@ -32,6 +32,7 @@ Voici le code de cette classe :
 		public Date releaseDate;
 		@Enumerated(EnumType.STRING)
 		public Genre genre;
+		public long nbVotes = 0L;
 		//...
 	}
 ~~~ 
