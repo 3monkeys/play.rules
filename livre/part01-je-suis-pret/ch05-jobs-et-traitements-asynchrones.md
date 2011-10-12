@@ -197,3 +197,17 @@ Un clic sur ce lien lance la tache asynchrone :
 	        );
 	    });
 ~~~
+
+## Suspension de requêtes HTTP
+
+Si on ne peut pas (ou si on ne souhaite pas) utiliser les WebSockets, il existe une autre manière d'executer de longs traitements de manière asynchrone.
+Ceci peut être implémenté via un mécanisme de long pooling (pour éviter les timeouts dans le navigateur) et de suspension de requêtes. Le code suivant permet par exemple d’analyser un gros fichier de manière asynchrone :
+
+~~~ java
+public static void generateReport(File salesData) {
+	Promise<Report> report= new Report(salesData).now();
+    Report reportResult = await(report);
+    render(reportResult);
+}
+~~~
+Avec l’utilisation de la classe Promise, la requête HTTP est suspendue et ne sera réactivée que lorsque la génération du rapport sera terminée, pour ne pas monopoliser un thread de connexion sur le serveur pendant toute la durée du traitement.
