@@ -470,7 +470,7 @@ Cette méthode du contrôleur permet d'enregistrer un vote pour un album :
 
 ~~~ java 
 	public static void vote(String id) {
-	    Album album = findById(Long.parseLong(id));
+	    Album album = Album.findById(Long.parseLong(id));
 	    album.vote();
 	    renderText(album.nbVotes);
 	}
