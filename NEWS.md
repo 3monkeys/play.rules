@@ -39,4 +39,9 @@ Bien à vous ! [@loic_d](http://twitter.com/#!/loic_d) [@k33g_org](http://twitte
 - highlight.js
 - nos mimines
 
+##Pub!
+
+- le blog de [@loic_d](http://twitter.com/#!/loic_d) : [http://coffeebean.loicdescotte.com/](http://coffeebean.loicdescotte.com/)
+- le blog de [@k33g_org](http://twitter.com/#!/k33g_org) : [http://k33g.github.com/](http://k33g.github.com/)
+
 **C'est plus sympa d'utiliser un navigateur de type "Webkit" pour visualiser le site, mais ça devrait le faire avec la dernière version de FF. Pour IE, je ne sais pas, je dois regarder ... Sur iPad+iOS5 ça doit être pas mal non plus :) @k33g_org**
