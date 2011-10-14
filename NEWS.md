@@ -1,6 +1,14 @@
 <div class="bigHighlight">
 <h1>Les News chez <strong>Play.Rules!</strong><small>►</small></h1>
 </div>
+
+##Vendredi 14 octobre
+
+- amélioration du scrolling sous iOS5 (juste 1 ligne à changer!)
+ >- la version "normale" du site est donc optimisée pour iPad (testée sur iPad 1 + iOS5)
+ >- la version "mobile" devrait être pas mal sous iPhone (iOS5)
+ >- la version "mobile" sous android s'en sort bien (testée sur HTC Desire)
+
 ##Lundi 10 octobre
 
 - Une version pour mobile en ligne (beta à optimiser) : [http://3monkeys.github.com/play.rules/m.html](http://3monkeys.github.com/play.rules/m.html)
