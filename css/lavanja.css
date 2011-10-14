@@ -84,7 +84,8 @@ body {
 }
 
 .scrollable {
-    overflow: scroll;
+	overflow-y : scroll;
+    /*overflow: scroll;*/
 	-webkit-overflow-scrolling:touch;
 }
 
