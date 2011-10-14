@@ -5,9 +5,10 @@
 ##Vendredi 14 octobre
 
 - amélioration du scrolling sous iOS5 (juste 1 ligne à changer!)
- >- la version "normale" du site est donc optimisée pour iPad (testée sur iPad 1 + iOS5)
- >- la version "mobile" devrait être pas mal sous iPhone (iOS5)
- >- la version "mobile" sous android s'en sort bien (testée sur HTC Desire)
+
+	la version "normale" du site est donc optimisée pour iPad (testée sur iPad 1 + iOS5)
+	la version "mobile" devrait être pas mal sous iPhone (iOS5)
+	la version "mobile" sous android s'en sort bien (testée sur HTC Desire)
 
 ##Lundi 10 octobre
 
