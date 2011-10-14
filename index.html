@@ -42,7 +42,8 @@
 		</div>
 
 	</div>
-    <div class="container right scrollable" id="rightView">
+	
+    <div class="container right" id="rightView">
 		<div class="head">
 			<a id="cmdShowMenuBar" class="barLeftButton">➼</a>
 			<!-- gplus -->
@@ -54,21 +55,6 @@
     		<p id="details-container" style="margin-right:40px; margin-left:20px;"></p>
 			
 			<br>
-			<div id="twitter" class="hide">
-				
-				<section class="threeColumns border paddingTop">
-					<h2 class="border">@Twitter</h2>
-	                <h3 class="border">#PlayFramework</h3>
-					<div id="PlayFramework"></div>
-
-	                <h3 class="border">@loic_d</h3>
-					<div id="loic_d"></div>
-
-	                <h3 class="border">@k33g_org</h3>
-					<div id="k33g_org"></div>
-				
-	            </section>
-			</div>
 			
     	</div>
     </div>
@@ -82,25 +68,54 @@
 <script src="js/vendor/zepto.min.js"></script>
 
 
+<!-- 
+<div id="twitter" class="hide">
+	
+	<section class="threeColumns border paddingTop">
+		<h2 class="border">@Twitter</h2>
+        <h3 class="border">#PlayFramework</h3>
+		<div id="PlayFramework"></div>
 
+        <h3 class="border">@loic_d</h3>
+		<div id="loic_d"></div>
+
+        <h3 class="border">@k33g_org</h3>
+		<div id="k33g_org"></div>
+	
+    </section>
+</div>
+-->
 
 <script>
 
 $(document).ready(function() {
 	/* à refactorer */
-	var loic = $('#loic_d'), k33g = $('#k33g_org'), playframework = $('#PlayFramework'), twitter = $('#twitter');
-    tw.search('#playframework',function(data){
+	//var loic = $('#loic_d'), k33g = $('#k33g_org'), playframework = $('#PlayFramework'), twitter = $('#twitter');
+	
+	var twitterHtml = [
+			'<section class="threeColumns border paddingTop">',
+			'	<h2 class="border">@Twitter</h2>'
+		];
+    
+	tw.search('#playframework',function(data){
+		twitterHtml.push('<h3 class="border">#PlayFramework</h3><div>');
         for(var i = 0; i < 3; i+=1){
-			playframework.append('<li><span> (' + data[i].user + ')</span> &raquo; ' + data[i].msg+'</li>');
+			twitterHtml.push('<li><span> (' + data[i].user + ')</span> &raquo; ' + data[i].msg+'</li>');
         }
+		twitterHtml.push('</div>');
 		tw.search('from:loic_d',function(data){
+			twitterHtml.push('<h3 class="border">@loic_d</h3><div>');
 	        for(var i = 0; i <3; i+=1){
-				loic.append('<li>' + data[i].msg+'</li>');
+				twitterHtml.push('<li>' + data[i].msg+'</li>');
 	        }
+			twitterHtml.push('</div>');
 			tw.search('from:k33g_org',function(data){
+				twitterHtml.push('<h3 class="border">@k33g_org</h3><div>');
 		        for(var i = 0; i <3; i+=1){
-					k33g.append('<li>' + data[i].msg+'</li>');
+					twitterHtml.push('<li>' + data[i].msg+'</li>');
 		        }
+				twitterHtml.push('</div></section>');
+				
 		    });
 	    });
 
@@ -216,12 +231,12 @@ $(document).ready(function() {
 			gitHubStorage.getContent(news.name, function(content){
 				
 				news.content = converter.makeHtml(washCode(content));
-				$("#details-container").html(news.content);
+				$("#details-container").html(news.content + twitterHtml.join(""));
 				$('pre code').each(function(i, e) {hljs.highlightBlock(e, '    ')});
 				//sh_highlightDocument();	
 				
 				
-				twitter.removeClass("hide").addClass("show");
+				//twitter.removeClass("hide").addClass("show");
 				//window.scrollTo(0,0);
 				//document.querySelector("#scroller").scrollTop = 0
 				window.document.getElementById("scroller").scrollTop = 0
