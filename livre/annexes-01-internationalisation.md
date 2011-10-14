@@ -1,6 +1,4 @@
-# Annexes
-
-## L'internationalisation
+# L'internationalisation
 
 Dans le cas d'une application ou d'un site multilingue, on doit être capable de traduire facilement le contenu de nos pages.
 Pour le message d'accueil de notre application, on peut par exemple écrire :

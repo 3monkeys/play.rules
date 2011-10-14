@@ -2,7 +2,7 @@
 
 Dans la partie précédente nous avons vu comment générer une partie des traitements de notre application grâce au module CRUD.
 Nous allons maintenant apprendre à développer une petite application entièrement "à la main".
-Le but de cette webapp est d'offrir la possibilité de parcourir une CDthèque, d'en ajouter de nouveaux et de voter pour vos albums préférés. Elle notre fil conducteur tout au long de cette partie.
+Le but de cette webapp est d'offrir la possibilité de parcourir une CDthèque, d'en ajouter de nouveaux et de voter pour vos albums préférés. Elle seranotre fil conducteur tout au long de cette partie.
 
 Le code complet de l'application est disponible [ici](https://github.com/loicdescotte/vote4music)
 
@@ -32,6 +32,7 @@ Voici le code de cette classe :
 		public Date releaseDate;
 		@Enumerated(EnumType.STRING)
 		public Genre genre;
+		public long nbVotes = 0L;
 		//...
 	}
 ~~~ 
@@ -42,7 +43,8 @@ Nous verrons le code métier de cette classe dans la suite du chapitre.
 
 La classe Artist est définie comme ceci :
 
-~~~ java 	
+~~~ java 
+	@Entity
 	public class Artist extends Model{
 	    @Required
 	    @Column(unique = true)
@@ -118,7 +120,7 @@ Pour le top 10, vous pouvez choisir un style de musique. Pour cela, le template 
 
 ## Le formulaire d'ajout
 
-Dans le contrôleur, on crée une méthode pour obtenir le formulaire :
+Dans le contrôleur `Application.java`, on crée une méthode pour obtenir le formulaire :
 
 ~~~ java 
 	public static void form() {
@@ -128,7 +130,7 @@ Dans le contrôleur, on crée une méthode pour obtenir le formulaire :
 
 En se référant aux routes, on voit que cette méthode est invoquée lorsque l'on utilise le verbe HTTP GET. C'est la méthode utilisée par le navigateur lorsque l'on tape une URL ou lorsque l'on clique sur un lien.
 
-On utilise ensuite POST pour envoyer les données au contrôleur (voir le fichier de routes plus haut) Voici le code du formulaire :
+On utilise ensuite POST pour envoyer les données au contrôleur (voir le fichier de routes plus haut) Voici le code du formulaire `form.html`:
 
 	#{extends 'main.html' /}
 	#{set title:'Album form' /}
@@ -176,7 +178,7 @@ On utilise ensuite POST pour envoyer les données au contrôleur (voir le fichie
 	#{/form}
 
 		
-Ce formulaire nous permettra aussi bien de créer des utilisateurs que de les mettre à jour. C'est pour cette raison que nous utilisons une syntaxe comme `album?.name` pour la valeur des champs : si l'album existe déjà on affiche son nom. Sinon, on n'affiche rien. On retrouve également la sélection des genres à partir de l'Enum, comme sur la page d'accueil.
+Ce formulaire nous permettra aussi bien de créer des albums que de les mettre à jour. C'est pour cette raison que nous utilisons une syntaxe comme `album?.name` pour la valeur des champs : si l'album existe déjà on affiche son nom. Sinon, on n'affiche rien. On retrouve également la sélection des genres à partir de l'Enum, comme sur la page d'accueil.
 	
 Pour permettre à l'utilisateur de sélectionner une date à l'aide d'un widget, on ajoute ce code JavaScript à notre template :
 	
@@ -268,6 +270,8 @@ Ce plugin est très simple à utiliser, il suffit d'écrire ces quelques lignes 
 	    $('#albumList').dataTable();
 	  });
 ~~~
+
+Remarque : pour ajouter des librairies JavaScript supplémentaires on les place dans le répertoire `public/javascripts`.
 
 Ceci suffit à ajouter des fonctions de pagination et de tri à un simple tableau HTML. Notre tableau est défini comme ceci :  
 
@@ -386,7 +390,7 @@ On rend cette fonctionnalité accessible depuis le contrôleur :
 	}
 ~~~ 
 
-Les paramètres `genre` et `year` sont obligatoires. Cela veut dire que si on appelle ce contrôleur dans ces paramètres, il renverra une erreur 404 (not found).
+Les paramètres `genre` et `year` sont obligatoires. Cela veut dire que si on appelle ce contrôleur sans ces paramètres, il renverra une erreur 404 (not found).
 
 
 La classe Album définie les méthodes nécessaires à cette recherche :
@@ -467,7 +471,7 @@ Cette méthode du contrôleur permet d'enregistrer un vote pour un album :
 
 ~~~ java 
 	public static void vote(String id) {
-	    Album album = findById(Long.parseLong(id));
+	    Album album = Album.findById(Long.parseLong(id));
 	    album.vote();
 	    renderText(album.nbVotes);
 	}
@@ -500,11 +504,11 @@ Le bouton de vote est accessible dans la liste des albums :
 	    <a id="${album.id}-clickVote" class="voteLink" href="#">Vote for it!</a>
 	</td>
 
-On créer aussi une `div` pour afficher un message en cas de succès :
+On crée aussi une `div` pour afficher un message en cas de succès :
 
 	<div id="voteInfo" class="info">One vote added!</div>
 
-Cette section sera masquée par défaut, à l'aide de CSS : 
+Cette section sera masquée par défaut, à l'aide d'un bout de CSS que l'on place dans le répertoire `public/stylesheets` : 
 
 	.info {
 	    display: none;
