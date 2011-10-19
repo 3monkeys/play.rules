@@ -24,14 +24,14 @@ Gardons l'exemple de notre bibliothèque musicale. Notre modèle comporte des al
 Pour rappel, la classe Album se présente comme ceci :
 
 ~~~ java
-@Entity
-public class Album extends Model {
-public String name;
-@ManyToOne(cascade = {CascadeType.PERSIST, CascadeType.MERGE})
-public Artist artist;
-public Date releaseDate;
-@Enumerated(EnumType.STRING)
-public Genre genre;
+	@Entity
+	public class Album extends Model {
+		public String name;
+		@ManyToOne(cascade = {CascadeType.PERSIST, CascadeType.MERGE})
+		public Artist artist;
+		public Date releaseDate;
+		@Enumerated(EnumType.STRING)
+		public Genre genre;
 ~~~
 
 Nous voulons définir une URL qui renvoie lors d'un GET la liste des albums au format XML pour un genre donné.
@@ -55,54 +55,50 @@ J'ai donc opté pour une séparation du rendu dans deux méthodes distinctes.
 Le code de la méthode Application.listXml est le suivant :
 
 ~~~ java
-public static void listXml(String genre) {
-        Genre genreEnum = Genre.valueOf(genre.toString().toUpperCase());
-        List<Album> albums= Album.find("byGenre",genreEnum).fetch();
-        render(albums);
-}
+	public static void listXml(String genre) {
+	        Genre genreEnum = Genre.valueOf(genre.toString().toUpperCase());
+	        List<Album> albums= Album.find("byGenre",genreEnum).fetch();
+	        render(albums);
+	}
 ~~~
 
 Je recherche simplement les albums correspondant au genre passé en paramètre, et je demande le rendu de la liste. Au passage on voit la simplicité d'utilisation de JPA avec Play!►. Le rendu sera fait dans le fichier portant le nom de la méthode et l'extension xml : listXml.xml.
 Ce template, placé dans le repertoire app/views/Application, est défini comme ceci :
 
-~~~ xml
-<albums>
-#{list albums, as:'album'}
-    <album>
-        <artist>${album.artist.name}</artist>
-        <name>${album.name}</name>
-        <release-date>${album.releaseDate.format('yyyy')}</release-date>
-        <genre>${album.genre.toString()}</genre>
-    </album>
-#{/list}
-</albums>
-~~~
+	<albums>
+	#{list albums, as:'album'}
+	    <album>
+	        <artist>${album.artist.name}</artist>
+	        <name>${album.name}</name>
+	        <release-date>${album.releaseDate.format('yyyy')}</release-date>
+	        <genre>${album.genre.toString()}</genre>
+	    </album>
+	#{/list}
+	</albums>
 
 
 Voilà, cela suffit pour exposer nos albums en XML. En respectant le pattern d'URL défini dans le fichier routes, par exemple en appelant `http://localhost:9000/api/albums/rock`, on obtient le résultat suivant :
 
-~~~ xml
-<albums>
-   <album>
-      <artist>Nirvana</artist>
-      <name>Nevermind</name>
-      <release-date>1991</release-date>
-      <genre>ROCK</genre>
-   </album>
-   <album>
-      <artist>Muse</artist>
-      <name>Origin of Symmetry</name>
-      <release-date>2001</release-date>
-      <genre>ROCK</genre>
-      </album>
-   <album>
-      <artist>Muse</artist>
-      <name>Black Holes and Revelations</name>
-      <release-date>2006</release-date>
-      <genre>ROCK</genre>
-   </album>
-</albums>
-~~~
+	<albums>
+	   <album>
+	      <artist>Nirvana</artist>
+	      <name>Nevermind</name>
+	      <release-date>1991</release-date>
+	      <genre>ROCK</genre>
+	   </album>
+	   <album>
+	      <artist>Muse</artist>
+	      <name>Origin of Symmetry</name>
+	      <release-date>2001</release-date>
+	      <genre>ROCK</genre>
+	      </album>
+	   <album>
+	      <artist>Muse</artist>
+	      <name>Black Holes and Revelations</name>
+	      <release-date>2006</release-date>
+	      <genre>ROCK</genre>
+	   </album>
+	</albums>
 
 ### Envoi de données à travers un service REST
 
@@ -111,14 +107,12 @@ Maintenant nous allons effectuer l'opération inverse, l'envoi d'un contenu XML 
 
 On veut par exemple envoyer le contenu suivant en POST avec un content type application/xml :
 
-~~~ xml
-<album>
-      <artist><name>Metallica</name></artist>
-      <name>Death Magnetic</name>
-      <release-date>2008</release-date>
-      <genre>METAL</genre>
-</album>
-~~~
+	<album>
+	      <artist>Metallica</artist>
+	      <name>Death Magnetic</name>
+	      <release-date>2008</release-date>
+	      <genre>METAL</genre>
+	</album>
 
 
 Pour cela on ajoute la ligne suivante au fichier routes pour autoriser l'opération POST sur l'url `/album`:
@@ -129,42 +123,42 @@ La méthode `saveXml` récupère le contenu de la requête dans la variable `req
 Elle parse ensuite le contenu pour créer un album et l'enregistrer dans la base. La classe play.libs.XPath facilite le parcours de documents XML :
 
 ~~~ java
-public static void saveXML(){
-    DocumentBuilderFactory factory = DocumentBuilderFactory.newInstance();
-    Document document = null;
-    try{
-    //création du document XML à partir de la requête
-    DocumentBuilder builder = factory.newDocumentBuilder();
-    document = builder.parse(request.body);
-    }
-    catch(Exception e){
-    }
-    //parsing du contenu XML
-    Element albumNode = document.getDocumentElement();
-	//artiste
-	Node artistNode = XPath.selectNode("artist", albumNode);
-	String artistName = XPath.selectText("name",artistNode);
-	Artist artist = new Artist(artistName);
-	//get the name
-	String albumName = XPath.selectText("name", albumNode);
-	Album album = new Album(albumName);
-	//get the date
-	String date = XPath.selectText("release-date",albumNode);
-	DateFormat dateFormat = new SimpleDateFormat("yyyy");
-	try {
-		album.releaseDate = dateFormat.parse(date);
-	} catch (ParseException e) {
-		Logger.error(e.getMessage());
-	}
-	//genre
-	String genre = XPath.selectText("genre", albumNode);
-	Genre genreEnum = Genre.valueOf(genre.toString().toUpperCase());
-	album.genre = genreEnum;
+	public static void saveXML(){
+	    DocumentBuilderFactory factory = DocumentBuilderFactory.newInstance();
+	    Document document = null;
+	    try{
+	    //création du document XML à partir de la requête
+	    DocumentBuilder builder = factory.newDocumentBuilder();
+	    document = builder.parse(request.body);
+	    }
+	    catch(Exception e){
+	    }
+	    //parsing du contenu XML
+	    Element albumNode = document.getDocumentElement();
+		//artiste
+		Node artistNode = XPath.selectNode("artist", albumNode);
+		String artistName = XPath.selectText("name",artistNode);
+		Artist artist = new Artist(artistName);
+		//get the name
+		String albumName = XPath.selectText("name", albumNode);
+		Album album = new Album(albumName);
+		//get the date
+		String date = XPath.selectText("release-date",albumNode);
+		DateFormat dateFormat = new SimpleDateFormat("yyyy");
+		try {
+			album.releaseDate = dateFormat.parse(date);
+		} catch (ParseException e) {
+			Logger.error(e.getMessage());
+		}
+		//genre
+		String genre = XPath.selectText("genre", albumNode);
+		Genre genreEnum = Genre.valueOf(genre.toString().toUpperCase());
+		album.genre = genreEnum;
 
-	//sauvegarde
-	album.artist = artist;
-	album.save();
-}
+		//sauvegarde
+		album.artist = artist;
+		album.save();
+	}
 ~~~
 
 NB: il est bien sûr possible d'obtenir un code moins verbeux en dé-sérialisant l'objet à l'aide d'un outil comme JAXB ou XStream, mais ce n'est pas l'objet de ce chapitre.
@@ -173,16 +167,16 @@ Lorsqu'on écrit le code album.artist=artist, la méthode `setArtist` est appel�
 La méthode save() de la classe Album s'occupe alors d'enregistrer l'album en base, ainsi que l'artiste si il est inconnu dans la bibliothèque(à l'aide d'un cascade JPA).
 
 ~~~ java
-public void setArtist(Artist artist){
-    List<Artist> existingArtists = Artist.find("byName", artist.name).fetch();
-    if(existingArtists.size()>0){
-        //Le nom d'artiste est unique
-        this.artist=existingArtists.get(0);
-    }
-    else{
-        this.artist=artist;
-    }
-}
+	public void setArtist(Artist artist){
+	    List<Artist> existingArtists = Artist.find("byName", artist.name).fetch();
+	    if(existingArtists.size()>0){
+		//Le nom d'artiste est unique
+		this.artist=existingArtists.get(0);
+	    }
+	    else{
+		this.artist=artist;
+	    }
+	}
 ~~~
 
 Notre API REST/XML nous permet donc maintenant de lire la liste des albums de note bibliothèque musicale et d'ajouter des albums.
@@ -210,10 +204,10 @@ Si on écrit cette ligne dans le fichier routes :
 Et cette méthode dans le contrôleur :
 
 ~~~ java 	
-public static void listAlbumsInJson(){
-        List<Album> albums = Album.findAll();
-        renderJSON(albums);
-}
+	public static void listAlbumsInJson(){
+		List<Album> albums = Album.findAll();
+		renderJSON(albums);
+	}
 ~~~	 
 
 L'appel de l'URL http://monappli/api/albums.json renverra directement notre liste d'objets albums au format JSON. Difficile de faire plus simple!
@@ -227,12 +221,12 @@ En appelant `api/albums.xml` , Play!► appellera la méthode `listAlbums` avec 
 On peut ensuite s'en servir dans le contrôleur : 
 
 ~~~ java 	
-public static void listAlbums() {
-    List<Album> albums = Album.all().fetch();
-    if(request.format.equals("json"))
-    renderJSON(albums);
-    render(albums);
-}
+	public static void listAlbums() {
+	    List<Album> albums = Album.all().fetch();
+	    if(request.format.equals("json"))
+	    renderJSON(albums);
+	    render(albums);
+	}
 ~~~ 
 	  
 Si vous tapez l'URL `api/albums.xml`, Play!► cherchera un fichier de template XML nommé `api/listAlbums.xml` (une autre extension fonctionnerait aussi) pour effectuer le rendu.
@@ -243,12 +237,12 @@ Maintenant que nous savons exposer des données au format JSON à travers un ser
 Cette méthode du contrôleur permet de résoudre cette problématique :
 
 ~~~ java 
-public static void saveAlbumJson() {
-    Gson gson = new Gson();
-    Album album = gson.fromJson(new InputStreamReader(request.body),Album.class);
-    album.replaceDuplicateArtist();
-    album.save();
-}
+	public static void saveAlbumJson() {
+	    Gson gson = new Gson();
+	    Album album = gson.fromJson(new InputStreamReader(request.body),Album.class);
+	    album.replaceDuplicateArtist();
+	    album.save();
+	}
 ~~~ 
 
 En récupérant l'objet `request.body`, on peut analyser le flux entrant et enregistrer un album dans la base de données.
@@ -263,12 +257,12 @@ A la place de la ligne `POST /api/album  Application.saveXml` dans le fichier ro
 On ajoute ensuite cette méthode dans le contrôleur :
 
 ~~~java
-public static void saveAlbumByApi() {
-	if (request.contentType.equalsIgnoreCase("application/xml"))
-		saveXML(request.body);
-	else if (request.contentType.equalsIgnoreCase("application/json"))
-		saveAlbumJson(request.body);
-    }
+	public static void saveAlbumByApi() {
+		if (request.contentType.equalsIgnoreCase("application/xml"))
+			saveXML(request.body);
+		else if (request.contentType.equalsIgnoreCase("application/json"))
+			saveAlbumJson(request.body);
+	    }
 ~~~		
 
 Il faut alors modifier les deux méthodes de sauvegarde pour prendre en paramètre la requête http (par exemple `public static void saveAlbumJson(InputStream requestBody)` et remplacer les références à `request.body` par le paramètre.
