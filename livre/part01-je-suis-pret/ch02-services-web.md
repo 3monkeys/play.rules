@@ -127,11 +127,11 @@ Elle parse ensuite le contenu pour créer un album et l'enregistrer dans la base
 	    DocumentBuilderFactory factory = DocumentBuilderFactory.newInstance();
 	    Document document = null;
 	    try{
-	    //création du document XML à partir de la requête
-	    DocumentBuilder builder = factory.newDocumentBuilder();
-	    document = builder.parse(request.body);
+	      //création du document XML à partir de la requête
+	      DocumentBuilder builder = factory.newDocumentBuilder();
+	      document = builder.parse(request.body);
 	    }
-	    catch(Exception e){
+	      catch(Exception e){
 	    }
 	    //parsing du contenu XML
 	    Element albumNode = document.getDocumentElement();
@@ -170,11 +170,11 @@ La méthode save() de la classe Album s'occupe alors d'enregistrer l'album en ba
 	public void setArtist(Artist artist){
 	    List<Artist> existingArtists = Artist.find("byName", artist.name).fetch();
 	    if(existingArtists.size()>0){
-		//Le nom d'artiste est unique
-		this.artist=existingArtists.get(0);
+	        //Le nom d'artiste est unique
+	        this.artist=existingArtists.get(0);
 	    }
 	    else{
-		this.artist=artist;
+	        this.artist=artist;
 	    }
 	}
 ~~~
@@ -205,8 +205,8 @@ Et cette méthode dans le contrôleur :
 
 ~~~ java 	
 	public static void listAlbumsInJson(){
-		List<Album> albums = Album.findAll();
-		renderJSON(albums);
+	        List<Album> albums = Album.findAll();
+	        renderJSON(albums);
 	}
 ~~~	 
 
@@ -272,20 +272,20 @@ Il faut alors modifier les deux méthodes de sauvegarde pour prendre en paramèt
 Play!► inclue également une libraire pour écrire des clients de services REST. Pour appeler un service externe, on peut écrire :
 
 ~~~java
-import play.libs.WS;
-//...
-HttpResponse response = WS.url("http://api.twitter.com/1/statuses/user_timeline/loic_d.json").get();
+	import play.libs.WS;
+	//...
+	HttpResponse response = WS.url("http://api.twitter.com/1/statuses/user_timeline/loic_d.json").get();
 ~~~
 
 On peut ensuite récupérer le résultat comme ceci : 
 
 ~~~java
-JsonElement json = response.getJson();
+	JsonElement json = response.getJson();
 ~~~	
 
 Cette librairie est aussi compatible avec les services renvoyant du XML ou du texte brut :
 
 ~~~java
-String content = response.getString();
-Document xml= response.getXml();
+	String content = response.getString();
+	Document xml= response.getXml();
 ~~~
