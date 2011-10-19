@@ -108,7 +108,7 @@ Maintenant nous allons effectuer l'opération inverse, l'envoi d'un contenu XML 
 On veut par exemple envoyer le contenu suivant en POST avec un content type application/xml :
 
 	<album>
-	      <artist>Metallica</artist>
+	      <artist><name>Metallica</name></artist>
 	      <name>Death Magnetic</name>
 	      <release-date>2008</release-date>
 	      <genre>METAL</genre>
