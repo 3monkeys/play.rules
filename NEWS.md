@@ -2,6 +2,12 @@
 <h1>Les News chez <strong>Play.Rules!</strong><small>►</small></h1>
 </div>
 
+##Samedi 22 octobre
+
+- Ajout d'une nouvelle partie dediée au déploiement
+- Et on commence avec Tomcat
+- Contributions bienvenues ;)
+
 ##Vendredi 14 octobre
 
 - amélioration du scrolling sous iOS5 (juste 1 ligne à changer!)
