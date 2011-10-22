@@ -63,8 +63,7 @@ Le code de la méthode Application.listXml est le suivant :
 ~~~
 
 Je recherche simplement les albums correspondant au genre passé en paramètre, et je demande le rendu de la liste. Au passage on voit la simplicité d'utilisation de JPA avec Play!►. Le rendu sera fait dans le fichier portant le nom de la méthode et l'extension xml : listXml.xml.
-Ce template, placé dans le repertoire app/views, est défini comme ceci :
-
+Ce template, placé dans le repertoire app/views/Application, est défini comme ceci :
 
 	<albums>
 	#{list albums, as:'album'}
@@ -78,7 +77,7 @@ Ce template, placé dans le repertoire app/views, est défini comme ceci :
 	</albums>
 
 
-Voilà, cela suffit pour exposer nos albums en XML. En respectant le pattern d'URL défini dans le fichier routes, par exemple en appelant `http://localhost:9000/albums/rock`, on obtient le résultat suivant :
+Voilà, cela suffit pour exposer nos albums en XML. En respectant le pattern d'URL défini dans le fichier routes, par exemple en appelant `http://localhost:9000/api/albums/rock`, on obtient le résultat suivant :
 
 	<albums>
 	   <album>
@@ -109,7 +108,7 @@ Maintenant nous allons effectuer l'opération inverse, l'envoi d'un contenu XML 
 On veut par exemple envoyer le contenu suivant en POST avec un content type application/xml :
 
 	<album>
-	      <artist>Metallica</artist>
+	      <artist><name>Metallica</name></artist>
 	      <name>Death Magnetic</name>
 	      <release-date>2008</release-date>
 	      <genre>METAL</genre>
@@ -128,11 +127,11 @@ Elle parse ensuite le contenu pour créer un album et l'enregistrer dans la base
 	    DocumentBuilderFactory factory = DocumentBuilderFactory.newInstance();
 	    Document document = null;
 	    try{
-		    //création du document XML à partir de la requête
-		    DocumentBuilder builder = factory.newDocumentBuilder();
-		    document = builder.parse(request.body);
+	      //création du document XML à partir de la requête
+	      DocumentBuilder builder = factory.newDocumentBuilder();
+	      document = builder.parse(request.body);
 	    }
-	    	catch(Exception e){
+	      catch(Exception e){
 	    }
 	    //parsing du contenu XML
 	    Element albumNode = document.getDocumentElement();
@@ -159,7 +158,7 @@ Elle parse ensuite le contenu pour créer un album et l'enregistrer dans la base
 		//sauvegarde
 		album.artist = artist;
 		album.save();
-}
+	}
 ~~~
 
 NB: il est bien sûr possible d'obtenir un code moins verbeux en dé-sérialisant l'objet à l'aide d'un outil comme JAXB ou XStream, mais ce n'est pas l'objet de ce chapitre.
@@ -211,13 +210,13 @@ Et cette méthode dans le contrôleur :
 	}
 ~~~	 
 
-L'appel de l'URL http://monappli/albums.json renverra directement notre liste d'objets albums au format JSON. Difficile de faire plus simple!
+L'appel de l'URL http://monappli/api/albums.json renverra directement notre liste d'objets albums au format JSON. Difficile de faire plus simple!
 
 Autre astuce (que j'ai découvert grâce site zengularity.com) : pour déterminer directement le format de données à partir de l'URL, il est possible d'utiliser cette syntaxe dans le fichier routes :
 
 	GET /api/albums.{<json|xml>format} Application.listAlbums  
 
-En appelant /albums.xml , Play!► appellera la méthode `listAlbums` avec le paramètre 'format' initialisé à 'xml', et en appelant `/albums.json` ce même paramètre aura la valeur 'json'. 
+En appelant `api/albums.xml` , Play!► appellera la méthode `listAlbums` avec le paramètre 'format' initialisé à 'xml', et en appelant `api/albums.json` ce même paramètre aura la valeur 'json'. 
 
 On peut ensuite s'en servir dans le contrôleur : 
 
@@ -230,7 +229,7 @@ On peut ensuite s'en servir dans le contrôleur :
 	}
 ~~~ 
 	  
-Si vous tapez l'URL /albums.xml, Play!► cherchera un fichier de template XML nommé `listAlbums.xml` (une autre extension fonctionnerait aussi) pour effectuer le rendu.
+Si vous tapez l'URL `api/albums.xml`, Play!► cherchera un fichier de template XML nommé `api/listAlbums.xml` (une autre extension fonctionnerait aussi) pour effectuer le rendu.
 
 ### Recevoir un message JSON
 
@@ -260,11 +259,13 @@ On ajoute ensuite cette méthode dans le contrôleur :
 ~~~java
 	public static void saveAlbumByApi() {
 		if (request.contentType.equalsIgnoreCase("application/xml"))
-			saveAlbumXml();
+			saveXML(request.body);
 		else if (request.contentType.equalsIgnoreCase("application/json"))
-			saveAlbumJson();
+			saveAlbumJson(request.body);
 	    }
 ~~~		
+
+Il faut alors modifier les deux méthodes de sauvegarde pour prendre en paramètre la requête http (par exemple `public static void saveAlbumJson(InputStream requestBody)` et remplacer les références à `request.body` par le paramètre.
 
 ## Appeler un service externe avec Play!►.libs.WS
 
