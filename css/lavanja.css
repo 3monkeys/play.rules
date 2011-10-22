@@ -59,7 +59,7 @@ body {
     overflow                    : hidden;
     position                    : absolute;
     display                     : block;
-    width                       : 100%;
+    /*width                       : 100%;*/
 
     padding-top                 : 40px;
     padding-bottom              : 40px;
