@@ -11,5 +11,5 @@ Idéalement, j'espère pouvoir traiter les serveurs d'applications, le cloud et 
 
 Pour inaugurer cette nouvelle partie, nous commencerons par quelque chose de très simple : installer Tomcat sous linux et déployer un war d'une application Play!► sous ce même serveur d'applications, tout ça en quelques minutes, sans même se préoccuper des bonnes pratiques de réglages avant une mise en production (cela fera l'objet d'un autre chapitre).
 
-Ce chapitre d'introduction est amener "à bouger", il dépendra énormément du contenu à venir dans cette partie.
+Ce chapitre d'introduction est amené "à bouger", il dépendra énormément du contenu à venir dans cette partie.
 
