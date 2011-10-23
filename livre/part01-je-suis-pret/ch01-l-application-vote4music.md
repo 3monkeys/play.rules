@@ -299,7 +299,7 @@ Ceci suffit à ajouter des fonctions de pagination et de tri à un simple tablea
 	    #{/list}
 	</table>
 
-Nous plaçons ce code dans un fichier nommé `albumtable.tag`, séparé du reste de notre page, afin de pouvoir de réutiliser dans d'autres contextes : 
+Nous plaçons ce code dans un fichier nommé `views/tags/albumtable.tag`, séparé du reste de notre page, afin de pouvoir de réutiliser dans d'autres contextes : 
 
 Pour intégrer ce tag Play!► à notre page, on écrit la directive suivante :
 
@@ -330,9 +330,11 @@ Le contrôleur intercepte l'appel de cette manière:
 ~~~ java 
 	public static void search(String filter) {
 	    List<Album> albums = Album.findAll(filter);
-	    render(albums);
+	    render("@list", albums);
 	}
 ~~~ 
+
+Nous précisons `"@list"` dans l'appel à la méthode render afin d'appeler la vue `list.html` (et non la vue par défaut `search.html` correspondant au nom de la méthode courante.
 
 La méthode `findAll` est définie comme ceci :
 
@@ -392,6 +394,19 @@ On rend cette fonctionnalité accessible depuis le contrôleur :
 
 Les paramètres `genre` et `year` sont obligatoires. Cela veut dire que si on appelle ce contrôleur sans ces paramètres, il renverra une erreur 404 (not found).
 
+La vue affichant dce top top 10 est `listByGenreAndYear.html`. On voit l'utilité d'avoir créer un tag, car il est réutiliser dans cette vue : 
+
+	#{extends 'main.html' /}
+	#{set title:'Album list' /}
+
+	<h1>Top albums in &{genre} for ${year}</h1>
+
+	<!-- Album table -->
+	#{albumtable albums:albums/}
+
+	<ul id="links">
+	    <li><a href="/" class="button">Back</a></li>
+	</ul>
 
 La classe Album définie les méthodes nécessaires à cette recherche :
 

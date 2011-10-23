@@ -8,7 +8,7 @@ Play!► permet d’écrire les informations de session utilisateur dans un cook
 Une des choses que l’on souhaite ajouter à l’application web si l’utilisateur est admin est un lien “Supprimer” dans le tableau html qui liste nos entités métiers (on liste des albums de musique pour reprendre les exemples précédents). On peut donc utiliser le code suivant:
 
 	#{if session.get("username").equals("admin")}    
-	<a href="@{Application.delete(album.id)}">Supprimer</a>  
+	<td><a href="@{Admin.delete(album.id)}">Supprimer</a></td>  
 	#{/if}  
 
 Mais on se retrouve vite confronté à un problème, un clic sur ce lien mène à une URL comme celle ci :
@@ -25,11 +25,13 @@ Pour activer le module secure, on commence par modifier le fichier dependencies.
 
         - play -> secure
 
-Dans le fichier application.conf, ajouter la ligne suivante pour configurer les routes :
+Dans le fichier `routes`, ajouter la ligne suivante pour configurer les routes :
 
 	# Import Secure routes
 	* / module:secure
-	Toujours dans ce fichier, on ajout les identifiants d’admin :
+
+Puis dans le fichier `application.conf`, on ajout les identifiants d’admin :
+
 	# Admin tokens
 	application.admin=admin
 	application.adminpwd=admin
@@ -48,13 +50,13 @@ On déclare ensuite un contrôleur d’administration pour toutes les actions qu
 On ajoute ensuite un contrôle sur l'action delete en utilisant l'annotation @Check :
 
 ~~~ java 
-	Check("admin")
+	@Check("admin")
 	public static void delete(Long id) {
 		...
 	}
 ~~~ 
 
-On redefinie également la méthode check en créant une nouvelle classe dans le package contrôler, héritant de la classe Secure.Security :
+On redefinie également la méthode check en créant une nouvelle classe `Security` dans le package `controllers`, héritant de la classe Secure.Security :
 
 ~~~ java 
 	static boolean check(String profile) {
