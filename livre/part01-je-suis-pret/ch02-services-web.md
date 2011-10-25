@@ -78,7 +78,7 @@ Ce template, placé dans le repertoire app/views, est défini comme ceci :
 	</albums>
 
 
-Voilà, cela suffit pour exposer nos albums en XML. En respectant le pattern d'URL défini dans le fichier routes, par exemple en appelant `http://localhost:9000/albums/rock`, on obtient le résultat suivant :
+Voilà, cela suffit pour exposer nos albums en XML. En respectant le pattern d'URL défini dans le fichier routes, par exemple en appelant `http://localhost:9000/api/albums/rock`, on obtient le résultat suivant :
 
 	<albums>
 	   <album>
@@ -230,7 +230,7 @@ On peut ensuite s'en servir dans le contrôleur :
 	}
 ~~~ 
 	  
-Si vous tapez l'URL /albums.xml, Play!► cherchera un fichier de template XML nommé `listAlbums.xml` (une autre extension fonctionnerait aussi) pour effectuer le rendu.
+Si vous tapez l'URL /api/albums.xml, Play!► cherchera un fichier de template XML nommé `listAlbums.xml` (une autre extension fonctionnerait aussi) pour effectuer le rendu.
 
 ### Recevoir un message JSON
 
