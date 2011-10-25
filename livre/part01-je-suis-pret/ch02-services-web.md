@@ -217,7 +217,7 @@ Autre astuce (que j'ai découvert grâce site zengularity.com) : pour détermine
 
 	GET /api/albums.{<json|xml>format} Application.listAlbums  
 
-En appelant /albums.xml , Play!► appellera la méthode `listAlbums` avec le paramètre 'format' initialisé à 'xml', et en appelant `/albums.json` ce même paramètre aura la valeur 'json'. 
+En appelant /api/albums.xml , Play!► appellera la méthode `listAlbums` avec le paramètre 'format' initialisé à 'xml', et en appelant `/albums.json` ce même paramètre aura la valeur 'json'. 
 
 On peut ensuite s'en servir dans le contrôleur : 
 
