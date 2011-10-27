@@ -137,8 +137,7 @@ Elle parse ensuite le contenu pour créer un album et l'enregistrer dans la base
 	    //parsing du contenu XML
 	    Element albumNode = document.getDocumentElement();
 		//artiste
-		Node artistNode = XPath.selectNode("artist", albumNode);
-		String artistName = XPath.selectText("name",artistNode);
+		String artistName = XPath.selectText("artist",albumNode);
 		Artist artist = new Artist(artistName);
 		//get the name
 		String albumName = XPath.selectText("name", albumNode);
