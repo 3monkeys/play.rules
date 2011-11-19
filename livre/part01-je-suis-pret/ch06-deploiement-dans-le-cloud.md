@@ -33,7 +33,7 @@ Si vous utilisez un Mac, ces outils sont installés par défaut. Dans le cas con
 
 Cette commande installera Heroku sur votre ordinateur : 
 
-	gem heroku
+	gem install heroku
 	
 Celle ci va mettre en place l'infrastructure nécessaire pour faire tourner une application web :
  
