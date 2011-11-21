@@ -188,7 +188,7 @@ Mais il est également possible de lancer l'action depuis la page courante. On a
 
 Un clic sur ce lien lance la tache asynchrone :
 
-~~~ javascript 
+~~~ java
 	$(document).ready(function() {
 	        $('#longTask').click(
 	            function() {
@@ -205,7 +205,7 @@ Ceci peut être implémenté via un mécanisme de long pooling (pour éviter les
 
 ~~~ java
 public static void generateReport(File salesData) {
-	Promise<Report> report= new Report(salesData).now();
+    Promise<Report> report= new Report(salesData).now();
     Report reportResult = await(report);
     render(reportResult);
 }
