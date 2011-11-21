@@ -188,7 +188,7 @@ Mais il est également possible de lancer l'action depuis la page courante. On a
 
 Un clic sur ce lien lance la tache asynchrone :
 
-~~~ java
+~~~ javascript
 	$(document).ready(function() {
 	        $('#longTask').click(
 	            function() {
@@ -205,9 +205,9 @@ Ceci peut être implémenté via un mécanisme de long pooling (pour éviter les
 
 ~~~ java
 public static void generateReport(File salesData) {
-    Promise<Report> report= new Report(salesData).now();
-    Report reportResult = await(report);
-    render(reportResult);
+	Promise<Report> report= new Report(salesData).now();
+	Report reportResult = await(report);
+	render(reportResult);
 }
 ~~~
 Avec l’utilisation de la classe Promise, la requête HTTP est suspendue et ne sera réactivée que lorsque la génération du rapport sera terminée, pour ne pas monopoliser un thread de connexion sur le serveur pendant toute la durée du traitement.
