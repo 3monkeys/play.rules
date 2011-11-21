@@ -99,7 +99,7 @@ Ce code javascript utilise l'API WebSocket HTML5 pour ouvrir la communication en
 
 Voici le code complet de notre page :
 
-#{extends 'main.html' /}
+	#{extends 'main.html' /}
 
 	<h1>Test</h1>
 	
