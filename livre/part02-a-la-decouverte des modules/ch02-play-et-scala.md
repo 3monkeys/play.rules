@@ -52,9 +52,9 @@ En Java, ces exemples auraient nécessité de passer par d'horribles boucles for
 
 Voyons maintenant quelles sont les spécifités de Play-Scala et comment porter entièrement vote4music avec ce nouveau langage.
 
-## Le moteur de template
+## Le moteur de templates
 
-Play-Scala propose un moteur de template full Scala. Ce moteur permet d'écrire du code Scala autour de notre code HTML pour définir l'affichage des pages :
+Play-Scala propose un moteur de templates full Scala. Ce moteur permet d'écrire du code Scala autour de notre code HTML pour définir l'affichage des pages :
 
 	@(messages:List[String])
 	
