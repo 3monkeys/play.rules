@@ -52,94 +52,6 @@ En Java, ces exemples auraient nécessité de passer par d'horribles boucles for
 
 Voyons maintenant quelles sont les spécifités de Play-Scala et comment porter entièrement vote4music avec ce nouveau langage.
 
-## Accès à la base de données avec l'API Anorm
-
-Play-Scala intègre une API qui permet d'effectuer très facilement des requêtes SQL et de mapper les résultats dans des objets Scala.
-
-### Définition d'une entité
-
-Une entités est une classe du modèle :
-
-~~~ java
-	case class Artist(var id:Pk[Long], @Required var name: String){
-		...
-	}
-~~~
-
-Le mot clé `case` en Scala ajoute des facilités pour faire du pattern matching sur les classes et leurs attributs. Ces facilités seront exploitées par Anorm lors de l'exécution des requêtes.
-
-**Remarque** : Comme vous le voyez nous pouvons continuer à utiliser les annotations de validation du modèle, comme `@Required`.
-
-### La classe Magic
-
-En créant un objet Scala qui hérite de la classe `Magic`, on obtient des méthodes pour manipuler les objets dans la base.
-
-Si on déclare :
-
-~~~ java
-	object Album extends Magic[Album]
-~~~
-
-On peut par exemple écrire :
-
-~~~ java
-	//récupération du premier élément
-	Album.find().first()
-	//recherche par genre
-	Album.find("genre = {g}").on("g" -> "ROCK").list()
-	//insertion
-	Album.create()
-	//mise à jour
-	Album.update()
-~~~
-
-### Requêtes plus complexes
-
-On a souvent besoin de ramener plus d'un type d'objet à la fois. Cette méthode permet de récupérer tous les albums et les artistes dans la base de données :
-
-~~~ java
-	def findAll:List[(Album,Artist)] =
-	      SQL(
-	       """
-	           select * from Album al
-	           join Artist ar on al.artist_id = ar.id
-	           order by al.nbVotes desc
-	           limit 100;
-	       """
-	      ).as( Album ~< Artist ^^ flatten * )
-~~~
-
-La dernière ligne utilise des 'matchers' définis par le framework pour mapper les résultats vers nos objets du modèle et les ranger dans une liste de pairs d'éléments (un album et son artiste).
-
-Pour effectuer une recherche, on écrit la requête suivante :
-
-~~~ java
-	def search(filter: String):List[(Album,Artist)] = {
-	      val likeFilter = "%".concat(filter).concat("%")
-	      SQL(
-	       """
-	           select * from Album al
-	           join Artist ar on al.artist_id = ar.id
-	           where al.name like {n}
-	           or ar.name like {n}
-	           order by al.nbVotes desc
-	           limit 100;
-	       """
-	      ).on("n"->likeFilter)
-	      .as( Album ~< Artist ^^ flatten * )
-	  }
-~~~
-
-La suppression des albums se déroule comme ceci :
-
-	def delete(id: Option[Long]) = {
-	    id.map(id => Album.delete("id={c}").onParams(id).executeUpdate())
-	    Action(Application.list)
-	  }
-
-Option est un type Scala qui permet d'éviter les erreurs liées aux pointeurs nulls (NullPointerException). Quand on récupère un objet de type Option, il peut avoir la valeur `Some` ou `None`. La méthode `map` appliquée à cette option nous permet de traiter les résultats différents de `None`. 
-La méthode `Action` permet d'effectuer une redirection vers une autre action du contrôleur.
-
 ## Le moteur de template
 
 Play-Scala propose un moteur de template full Scala. Ce moteur permet d'écrire du code Scala autour de notre code HTML pour définir l'affichage des pages :
@@ -378,6 +290,94 @@ Enfin, on peut écrire le contrôleur `Admin` qui contiendra les méthodes pour 
 ~~~
 
 Grâce au mot clé `with` ce contrôleur hérite des comportements définis dans nos traits.
+
+## Accès à la base de données avec l'API Anorm
+
+Play-Scala intègre une API qui permet d'effectuer très facilement des requêtes SQL et de mapper les résultats dans des objets Scala.
+
+### Définition d'une entité
+
+Une entités est une classe du modèle :
+
+~~~ java
+	case class Artist(var id:Pk[Long], @Required var name: String){
+		...
+	}
+~~~
+
+Le mot clé `case` en Scala ajoute des facilités pour faire du pattern matching sur les classes et leurs attributs. Ces facilités seront exploitées par Anorm lors de l'exécution des requêtes.
+
+**Remarque** : Comme vous le voyez nous pouvons continuer à utiliser les annotations de validation du modèle, comme `@Required`.
+
+### La classe Magic
+
+En créant un objet Scala qui hérite de la classe `Magic`, on obtient des méthodes pour manipuler les objets dans la base.
+
+Si on déclare :
+
+~~~ java
+	object Album extends Magic[Album]
+~~~
+
+On peut par exemple écrire :
+
+~~~ java
+	//récupération du premier élément
+	Album.find().first()
+	//recherche par genre
+	Album.find("genre = {g}").on("g" -> "ROCK").list()
+	//insertion
+	Album.create()
+	//mise à jour
+	Album.update()
+~~~
+
+### Requêtes plus complexes
+
+On a souvent besoin de ramener plus d'un type d'objet à la fois. Cette méthode permet de récupérer tous les albums et les artistes dans la base de données :
+
+~~~ java
+	def findAll:List[(Album,Artist)] =
+	      SQL(
+	       """
+	           select * from Album al
+	           join Artist ar on al.artist_id = ar.id
+	           order by al.nbVotes desc
+	           limit 100;
+	       """
+	      ).as( Album ~< Artist ^^ flatten * )
+~~~
+
+La dernière ligne utilise des 'matchers' définis par le framework pour mapper les résultats vers nos objets du modèle et les ranger dans une liste de pairs d'éléments (un album et son artiste).
+
+Pour effectuer une recherche, on écrit la requête suivante :
+
+~~~ java
+	def search(filter: String):List[(Album,Artist)] = {
+	      val likeFilter = "%".concat(filter).concat("%")
+	      SQL(
+	       """
+	           select * from Album al
+	           join Artist ar on al.artist_id = ar.id
+	           where al.name like {n}
+	           or ar.name like {n}
+	           order by al.nbVotes desc
+	           limit 100;
+	       """
+	      ).on("n"->likeFilter)
+	      .as( Album ~< Artist ^^ flatten * )
+	  }
+~~~
+
+La suppression des albums se déroule comme ceci :
+
+	def delete(id: Option[Long]) = {
+	    id.map(id => Album.delete("id={c}").onParams(id).executeUpdate())
+	    Action(Application.list)
+	  }
+
+Option est un type Scala qui permet d'éviter les erreurs liées aux pointeurs nulls (NullPointerException). Quand on récupère un objet de type Option, il peut avoir la valeur `Some` ou `None`. La méthode `map` appliquée à cette option nous permet de traiter les résultats différents de `None`. 
+La méthode `Action` permet d'effectuer une redirection vers une autre action du contrôleur.
 
 ## Les tests
 
