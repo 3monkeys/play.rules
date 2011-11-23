@@ -334,6 +334,7 @@ $(document).ready(function() {
     
     	$(window).bind('hashchange', function(){ /* lorsque l'on change l'url ...*/
         	var file_name = document.location.toString().split('#')[1];
+        	console.log(file_name);
 		if(file_name.split('livre/').length>0) {
 			gitHubStorage.getContent(file_name, function(content){
 				//console.log(content);
