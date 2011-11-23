@@ -318,8 +318,22 @@ $(document).ready(function() {
 		window.document.getElementById("scroller").scrollTop = 0
 	});
 	
-	window.onhashchange = function(e) {
-        var file_name = document.location.toString().split('#')[1];
+/*	window.onhashchange = function(e) {
+        	var file_name = document.location.toString().split('#')[1];
+		if(file_name.split('livre/').length>0) {
+			gitHubStorage.getContent(file_name, function(content){
+
+				$("#details-container").html(converter.makeHtml(washCode(content)));
+				$('pre code').each(function(i, e) {hljs.highlightBlock(e, '    ')});
+
+				window.document.getElementById("scroller").scrollTop = 0
+			});
+		}
+    	};
+*/
+    
+    	$(window).bind('hashchange', function(){ /* lorsque l'on change l'url ...*/
+        	var file_name = document.location.toString().split('#')[1];
 		if(file_name.split('livre/').length>0) {
 			gitHubStorage.getContent(file_name, function(content){
 				//console.log(content);
@@ -330,7 +344,11 @@ $(document).ready(function() {
 				window.document.getElementById("scroller").scrollTop = 0
 			});
 		}
-    };
+	});
+
+	/* on déclenche l'évènement hashchange au chargement pour vérifier le paramètre de l'url */
+	$(window).trigger('hashchange');
+    
 	/*--- pour les tablettes et mobiles ---*/
 	$(document.body).bind('orientationchange', function(){
 		var height = window.innerHeight - (barsHeight * 2);
