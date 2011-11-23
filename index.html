@@ -232,8 +232,8 @@ $(document).ready(function() {
 				
 				news.content = converter.makeHtml(washCode(content));
 				
-				//$("#details-container").html(news.content + twitterHtml.join(""));
-				//$('pre code').each(function(i, e) {hljs.highlightBlock(e, '    ')});
+				$("#details-container").html(news.content + twitterHtml.join(""));
+				$('pre code').each(function(i, e) {hljs.highlightBlock(e, '    ')});
 				
 				//sh_highlightDocument();	
 				
