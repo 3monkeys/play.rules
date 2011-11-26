@@ -212,7 +212,7 @@ Et cette méthode dans le contrôleur :
 
 L'appel de l'URL http://monappli/albums.json renverra directement notre liste d'objets albums au format JSON. Difficile de faire plus simple!
 
-Autre astuce (que j'ai découvert grâce site zengularity.com) : pour déterminer directement le format de données à partir de l'URL, il est possible d'utiliser cette syntaxe dans le fichier routes :
+Autre astuce : pour déterminer directement le format de données à partir de l'URL, il est possible d'utiliser cette syntaxe dans le fichier routes :
 
 	GET /api/albums.{<json|xml>format} Application.listAlbums  
 
