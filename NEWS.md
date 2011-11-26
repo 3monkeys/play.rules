@@ -2,6 +2,10 @@
 <h1>Les News chez <strong>Play.Rules!</strong><small>►</small></h1>
 </div>
 
+##Samedi 26 novembre
+
+- Ajout d'une fiche pratique sur la gestion du cache
+
 ##Samedi 22 octobre
 
 - Ajout d'une nouvelle partie dediée au déploiement
