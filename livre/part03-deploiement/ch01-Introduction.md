@@ -13,3 +13,16 @@ Pour inaugurer cette nouvelle partie, nous commencerons par quelque chose de tr�
 
 Ce chapitre d'introduction est amené "à bouger", il dépendra énormément du contenu à venir dans cette partie.
 
+## Pré-requis
+
+Commençons par passer notre application en mode `prod` en modifiant le fichier application.conf :
+`%production.application.mode=prod`
+
+On renseigne ensuite les paramètres de base de données de production, par exemple :
+
+    %production.db.url=jdbc:mysql://localhost/myDb
+    %production.db.driver=com.mysql.jdbc.Driver
+    %production.db.user=root
+    %production.db.pass=***
+
+Et voilà, on a déjà les bases pour la mise en production :)

@@ -27,18 +27,6 @@ et pour l'arrêter :
 
 ##Préparation du war de notre application 
 
-Commencez par passer votre application en mode `prod` en modifiant le fichier application.conf :
-`%production.application.mode=prod`
-
-Renseignez les paramètres de votre base de données de production, par exemple :
-
-    %production.db.url=jdbc:mysql://localhost/myDb
-    %production.db.driver=com.mysql.jdbc.Driver
-    %production.db.user=root
-    %production.db.pass=***
-  
-Déroulez ensuite les étapes suivantes :  
-
 - Placez vous dans votre répertoire de travail (un cran au dessus du répertoire de l'application que vous souhaitez déployer) et tapez la commande suivante : `play war monappli -o monappli_prod --zip`
 - Vous allez obtenir une duplication de votre arborescence `monappli` nommée `monappli_prod`, ainsi qu'un fichier `monappli_prod.war`.
 - **Déposez** le fichier war dans le répertoire `/tools/tomcat6/webapps/` de votre instance Tomcat (dans votre Home)
