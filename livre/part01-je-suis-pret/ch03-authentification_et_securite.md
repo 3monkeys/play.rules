@@ -91,17 +91,23 @@ Toutes les méthodes que l’on définit dans ce contrôleur étant soumises à 
 
 L’utilisateur sera ensuite redirigé vers l’écran principal de l’application (la liste des albums dans cet exemple).
 
+On peut maintenant modifier notre template pour masquer les liens relatifs à des actions d'administration à l'aide du tag `secure.check` (inclus dans le module secure) :  
+	
+	#{secure.check 'admin'}
+            <a href="@{Admin.delete(album.id)}">Delete</a>
+        #{/secure.check}
+
 Pour terminer, on souhaite permettre à un utilisateur identifié en tant qu’admin de se déconnecter.
 Pour cela rien de plus simple, il suffit d’ajouter un lien au template `main.html`, dont toutes les pages héritent.
 
 On ajoute le code suivant :
 
 	<body>
-	     #{if session.get("username").equals("admin")}
+ 	    #{secure.check 'admin'}
 	      <div align="right">
 	       <a href="@{Secure.logout()}">Logout</a>
 	      </div>
-	     #{/if}
+	    #{/secure.check}
 	 #{doLayout /}
 	 </body>
 
