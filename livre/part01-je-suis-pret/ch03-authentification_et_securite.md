@@ -21,7 +21,7 @@ Le module Secure de Play!► va nous permettre de faire ça de manière élégan
 
 ## Mise en oeuvre du module Secure
 
-Pour activer le module secure, on commence par modifier le fichier dependencies.yml pour y ajouter la ligne suivante dans la section `require` :
+Pour activer le module secure, on commence par modifier le fichier `dependencies.yml` pour y ajouter la ligne suivante dans la section `require` :
 
         - play -> secure
 
@@ -29,7 +29,7 @@ Dans le fichier application.conf, ajouter la ligne suivante pour configurer les 
 
 	# Import Secure routes
 	* / module:secure
-	Toujours dans ce fichier, on ajout les identifiants d’admin :
+	Toujours dans ce fichier, on ajoute les identifiants d’admin :
 	# Admin tokens
 	application.admin=admin
 	application.adminpwd=admin
@@ -92,7 +92,7 @@ Toutes les méthodes que l’on définit dans ce contrôleur étant soumises à 
 L’utilisateur sera ensuite redirigé vers l’écran principal de l’application (la liste des albums dans cet exemple).
 
 Pour terminer, on souhaite permettre à un utilisateur identifié en tant qu’admin de se déconnecter.
-Pour cela rien de plus simple, il suffit d’ajouter un lien au template main.html, dont toutes les pages héritent.
+Pour cela rien de plus simple, il suffit d’ajouter un lien au template `main.html`, dont toutes les pages héritent.
 
 On ajoute le code suivant :
 
