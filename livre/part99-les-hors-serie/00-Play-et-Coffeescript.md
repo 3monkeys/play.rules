@@ -1,3 +1,0 @@
-#Play!► & Coffeescript
-
-	//En préparation

@@ -5,7 +5,7 @@ Pour le message d'accueil de notre application, on peut par exemple écrire :
 
 	<h1>&{welcome}</h1>
 
-Les paramètres entourés de `&{}` seront traduits à partir des clés définies dans les fichiers de configuration de Play!►.
+Les paramètres entourés de `&{}` seront traduits à partir des clés définies dans les fichiers de configuration de Play.
 Les clés pour la langue par défaut se trouvent dans le fichier `/conf/messages` :
 
 	welcome=Welcome on Vote4Music!
@@ -25,6 +25,4 @@ On renseigne ces clés dans le fichier `messages` :
 	POP=pop
 	JAZZ=Jazz
 	BLUES=Blues
-	OTHER=Other	
-	
-	//TODO more tips to come
+	OTHER=Other
