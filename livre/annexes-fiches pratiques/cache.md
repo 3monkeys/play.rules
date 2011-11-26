@@ -19,7 +19,7 @@ On peut faire la même chose en appellant `response.cacheFor` :
 ~~~ java       
 	public static void proxyCache() {
 		List<Album> albums = Album.findAll();
-			if(iWant=true){
+			if(iWant==true){
 				response.cacheFor("1h");
 			}
 		render(albums);	}
