@@ -330,10 +330,11 @@ Le contrôleur intercepte l'appel de cette manière:
 ~~~ java 
 	public static void search(String filter) {
 	    List<Album> albums = Album.findAll(filter);
-	    render(albums);
+	    render("@list", albums);
 	}
 ~~~ 
-
+Nous précisons `"@list"` dans l'appel à la méthode render afin d'appeler la vue `list.html` (et non la vue par défaut `search.html` correspondant au nom de la méthode courante).	
+ 	 
 La méthode `findAll` est définie comme ceci :
 
 ~~~ java
@@ -391,7 +392,6 @@ On rend cette fonctionnalité accessible depuis le contrôleur :
 ~~~ 
 
 Les paramètres `genre` et `year` sont obligatoires. Cela veut dire que si on appelle ce contrôleur sans ces paramètres, il renverra une erreur 404 (not found).
-
 
 La classe Album définie les méthodes nécessaires à cette recherche :
 
