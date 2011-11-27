@@ -25,6 +25,19 @@ On peut ensuite modifier un contrôleurs de cette façon :
 	 	...
 	}
 	
+On peut bien sur utiliser également les annotations correspondant aux autres méthodes HTTP (`@Put`, `@Delete`, `@Head`), ainsi que `@WS` pour les Web Sockets et enfin `@Any` pour mapper une méthode vers n'importe quelle verbe HTTP.
+On peut aussi modifier l'accès aux ressources statiques en positionnant l'annotation `@ServerStatic` au niveau de classe du contrôleur :
+
+	@ServeStatic(value = "/public/", directory = "public")
+	public class Application extends Controller {...}
+
+Pour spécifier plusieurs routes statiques on utilise l'annotation `@StaticRoutes` :
+	
+	@StaticRoutes({
+		@ServeStatic(value = "/public/", directory = "public"),
+		@ServeStatic(value = "/images/", directory = "images")
+	})
+
 ## Configuration dev/prod
 
 On peut également limiter certaines URL au développement ou à la production dans le fichier routes :

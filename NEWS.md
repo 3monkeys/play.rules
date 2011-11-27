@@ -2,6 +2,10 @@
 <h1>Les News chez <strong>Play.Rules!</strong><small>►</small></h1>
 </div>
 
+##Dimanche 27 novembre
+
+- Ajout d'une fiche pratique sur la gestion des routes et des URL
+
 ##Samedi 26 novembre
 
 - Ajout d'une fiche pratique sur la gestion du cache
