@@ -26,7 +26,7 @@ On peut ensuite modifier un contrôleurs de cette façon :
 	}
 	
 On peut bien sur utiliser également les annotations correspondant aux autres méthodes HTTP (`@Put`, `@Delete`, `@Head`), ainsi que `@WS` pour les Web Sockets et enfin `@Any` pour mapper une méthode vers n'importe quelle verbe HTTP.
-On peut aussi modifier l'accès aux ressources statiques en positionnant l'annotation `@ServerStatic` au niveau de classe du contrôleur :
+On peut aussi modifier l'accès aux ressources statiques(images, fichiers CSS et JS...) en positionnant l'annotation `@ServerStatic` au niveau de classe du contrôleur :
 
 	@ServeStatic(value = "/public/", directory = "public")
 	public class Application extends Controller {...}
@@ -59,7 +59,6 @@ On peut également limiter certaines URL au développement ou à la production d
 Dans les contrôleurs, il est possible de définir des interceptions pour réaliser des traitements spécifiques.
 
 L'annotation @Before permet de définir une action à exécuter avant chaque méthode du contrôleur :
-
 	
 	@Before
 	static void checkAuthentification() {
@@ -68,7 +67,7 @@ L'annotation @Before permet de définir une action à exécuter avant chaque mé
 		}
 	}
 	
-Parfois, on ne veut pas intercepeter les appels de toutes les méthodes. Dans ce cas, on liste les méthodes à prendre en compte : 
+Parfois, on ne veut pas intercepter les appels de toutes les méthodes. Dans ce cas, on liste les méthodes à prendre en compte : 
 
 	@Before(only={"myMethod1","myMethod2"})
 
@@ -76,7 +75,7 @@ Ou alors on on spécifie celles à ne pas intercepter :
 
 	@Before(unless={"myMethod3","myMethod4"})
 	
-@After fonctionne exactement de la même manière mais s'exécute après les actions du contrôleur (really??? :0 )
+@After fonctionne exactement de la même manière que @Before, mais s'exécute **après** les actions du contrôleur (really??? :0 ).
 
 ### @With
 
