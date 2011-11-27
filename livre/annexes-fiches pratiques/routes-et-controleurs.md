@@ -42,15 +42,15 @@ Pour spécifier plusieurs routes statiques on utilise l'annotation `@StaticRoute
 
 On peut également limiter certaines URL au développement ou à la production dans le fichier routes :
 
-%{ if (play.mode.isProd()) { }%
-#mes routes de prod
-...
-%{ } }%
+	%{ if (play.mode.isProd()) { }%
+	#mes routes de prod
+	...
+	%{ } }%
 
-%{ if (play.mode.isDev()) { }%
-#mes routes de dev
-...
-%{ } }%
+	%{ if (play.mode.isDev()) { }%
+	#mes routes de dev
+	...
+	%{ } }%
 
 ## Les hooks
 
