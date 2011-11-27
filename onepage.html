@@ -1,0 +1,224 @@
+<!DOCTYPE HTML PUBLIC>
+<html>
+<head>
+    <title>Play.Rules!► eBook</title>
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="viewport" content="user-scalable=no, width=device-width, initial-scale=1.0, maximum-scale=1.0;" />
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />	
+
+    <link rel="stylesheet" href="css/lavanja-book.css">
+
+	<script src="js/vendor/highlight.min.js"></script>
+	<link rel="stylesheet" href="css/default.min.css">
+</head>
+
+<body>
+
+       	<div id="book">
+
+
+    	</div>
+
+
+</body>
+
+<script src="js/class.js"></script>
+
+<script src="js/vendor/showdown.js"></script>
+<script src="js/vendor/github.js"></script>
+<script src="js/vendor/zepto.min.js"></script>
+
+
+
+
+<script>
+
+$(document).ready(function() {
+
+	function washCode(data){
+	    /*TODO : a better regex*/
+
+	    data = data.replace(/```html/g,'');
+	    data = data.replace(/``` html/g,'');
+	    data = data.replace(/~~~html/g,'');
+	    data = data.replace(/~~~ html/g,'');
+
+	    data = data.replace(/```xml/g,"");
+	    data = data.replace(/``` xml/g,"");
+	    data = data.replace(/~~~xml/g,"");
+	    data = data.replace(/~~~ xml/g,"");
+
+	    data = data.replace(/```js/g,'');
+	    data = data.replace(/``` js/g,'');
+	    data = data.replace(/~~~js/g,'');
+	    data = data.replace(/~~~ js/g,'');
+
+	    data = data.replace(/```java/g,'');
+	    data = data.replace(/``` java/g,'');
+	    data = data.replace(/~~~java/g,'');
+	    data = data.replace(/~~~ java/g,'');
+
+	    data = data.replace(/```css/g,'');
+	    data = data.replace(/``` css/g,'');
+	    data = data.replace(/~~~css/g,'');
+	    data = data.replace(/~~~ css/g,'');
+	    /*data = data.replace(/```js/g,'<pre class="sh_javascript">');
+	    data = data.replace(/``` js/g,'<pre class="sh_javascript">');
+	    data = data.replace(/~~~js/g,'<pre class="sh_javascript">');
+	    data = data.replace(/~~~ js/g,'<pre class="sh_javascript">');
+
+	    data = data.replace(/```java/g,'<pre class="sh_java">');
+	    data = data.replace(/``` java/g,'<pre class="sh_java">');
+	    data = data.replace(/~~~java/g,'<pre class="sh_java">');
+	    data = data.replace(/~~~ java/g,'<pre class="sh_java">');
+
+	    data = data.replace(/```rb/g,"");
+	    data = data.replace(/``` rb/g,"");
+	    data = data.replace(/~~~rb/g,"");
+	    data = data.replace(/~~~ rb/g,"");*/
+
+	    data = data.replace(/```/g,"</pre>");
+	    data = data.replace(/~~~/g,"</pre>");
+
+	    return data;
+	}	
+	
+	var Store = Class({
+		constructor : function Store (user,repo, callBk) {
+			var that = this;
+			this.branches = {};
+			this.user = user;
+			this.repo = repo;
+			var branches = gh.repo(this.user, this.repo).branches(function(data){
+				that.branches = data.branches;
+				//console.log("Branches of ",that.repo," are loaded : ", that.branches);
+				if(callBk) { callBk(); }
+			});
+		},
+		getBranchId : function(name) { return this.branches[name]; },
+		getItemsOfBranch : function(name, callBk) {
+			var that = this;
+			gh.object(this.user, this.repo).tree(this.getBranchId(name),function(items){
+				//console.log("Items of ",name," are loaded : ");
+				if(callBk) { callBk(items.tree); }
+			});
+		},
+		getItemsOfItem : function(item, callBk) {
+			var that = this;
+			gh.object(this.user, this.repo).tree(item.sha,function(items){
+				//console.log("Items of ",item.name,"(",item.sha,")"," are loaded : ");
+				if(callBk) { callBk(items.tree); }
+			});			
+		},
+		getContent : function(pathOfFile, callBk){
+			gh.object(this.user, this.repo).blob(pathOfFile, this.getBranchId('master'),function(result){
+				//console.log(result);
+				if(callBk) { callBk(result.blob.data); }
+			});
+		}
+	});
+	
+
+	var path = "livre/";
+	var converter = new Showdown.converter();
+    window.tocplayrules = [];
+	
+	var gitHubStorage = new Store('3monkeys','play.rules', function(){
+		
+		window.getChapterContent = function (link,divid) {
+			gitHubStorage.getContent(link, function(content){
+				
+				$("#"+divid).html(converter.makeHtml(washCode(content)));
+				$('pre code').each(function(i, e) {hljs.highlightBlock(e, '    ')});
+
+			});
+		}
+				
+		gitHubStorage.getItemsOfBranch('master', function(items){ 
+
+			var livre  = items.filter(function(item) { return item.name === "livre"; })[0];
+			
+			gitHubStorage.getItemsOfItem(livre, function(items){
+
+				items.forEach(function(item) {
+					if(item.type ==='tree') {
+
+                        tocplayrules.push(["tree",item.sha, item.name]);
+
+						gitHubStorage.getItemsOfItem(item, function(chapters){
+							
+							var pathPart = path+item.name+"/";
+							
+							chapters.forEach(function(chapter) {
+                                tocplayrules.push(["chapter",item.sha, pathPart+chapter.name]);
+
+							});
+							
+						});
+					} else { //Blob
+                        tocplayrules.push(["intro",item.sha, path+item.name]);
+					}
+				});
+				
+			});
+
+		});
+	});
+	
+	/*----------------------*/
+    var book = $('#book');
+    window.createbook = function () {
+        items = [];
+        parts = tocplayrules.filter(function(e){ return e[0]=="tree";});
+        parts.forEach(function(part){
+            tocplayrules
+                .filter(function(e){ return e[2].split(part[2]).length == 2;})
+                .forEach(function(e){
+                    //console.log(e[0],e[2]);
+                    items.push([e[0],e[2]]);
+                });
+        });
+        /*items.forEach(function(item){
+            console.log(item[0],item[1], item[1].split("annexes-fiches pratiques"));
+        });*/
+        //"annexes-fiches pratiques"
+
+        chapters = items.filter(function(e){ return e[1].split("annexes-fiches pratiques").length!=2; });
+        /*chapters.forEach(function(item){
+            console.log(item[0],item[1]);
+        });*/
+        annexes = items.filter(function(e){ return e[1].split("annexes-fiches pratiques").length==2; });
+        /*annexes.forEach(function(item){
+            console.log(item[0],item[1]);
+        });*/
+        items = chapters.concat(annexes);
+        /*items.forEach(function(item){
+            console.log(item[0],item[1]);
+        });*/
+
+        for(i=0;i<items.length;i++){
+            console.log(items[i][0],items[i][1]);
+            if(items[i][0]=="tree"){
+                book.append('<h1 id="'+items[i][0]+'-'+i+'">'+items[i][1]+'</h1><hr>');
+            } else {
+                book.append('<p id="'+items[i][0]+'-'+i+'" style="margin-right:40px; margin-left:20px;"></p>');
+            }
+        }
+        for(i=0;i<items.length;i++){
+            console.log(items[i][0],items[i][1]);
+            if(items[i][0]=="chapter"){
+               getChapterContent(items[i][1], items[i][0]+'-'+i);
+            }
+        }
+
+
+
+    }
+
+	
+});
+
+</script>
+
+
+</html>
