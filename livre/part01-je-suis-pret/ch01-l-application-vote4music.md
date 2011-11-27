@@ -342,6 +342,7 @@ La méthode `findAll` est définie comme ceci :
 ~~~
 
 Le mécanisme d'inférence de type nous permet de récupérer une liste correctement typée (ici, `List<Album>`). 
+Remarque : Play utilise une technique de modification du byte code Java pour retourner le bon type.
 
 La classe Album définit la méthode de recherche avec un filtre sur le nom :
 
