@@ -2,7 +2,7 @@
 <h1>Les News chez <strong>Play.Rules!</strong><small>►</small></h1>
 </div>
 
-##Une première version [disponible en pdf](https://github.com/3monkeys/play.rules/blob/master/Play.Rules!►%20eBook.pdf?raw=true) : 
+##Une première version [disponible en pdf](https://github.com/3monkeys/play.rules/blob/master/Play.Rules!►%20eBook.pdf?raw=true)
 
 ##Dimanche 27 novembre
 
