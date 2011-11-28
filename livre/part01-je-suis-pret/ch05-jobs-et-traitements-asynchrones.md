@@ -85,7 +85,7 @@ On ajoute cette méthode au contrôleur principal de notre application :
 
 Ce code javascript utilise l'API WebSocket HTML5 pour ouvrir la communication entre le navigateur et le serveur :
 
-~~~ javascript
+~~~ java
 	var socket = new WebSocket('@@{AsyncController.asyncMessage()}');
 	socket.onmessage = function(event) {
 		display(event.data);
@@ -186,7 +186,7 @@ Mais il est également possible de lancer l'action depuis la page courante. On a
 
 Un clic sur ce lien lance la tache asynchrone :
 
-~~~ javascript
+~~~ java
 	$(document).ready(function() {
 	        $('#longTask').click(
 	            function() {
@@ -202,10 +202,10 @@ Si on ne peut pas (ou si on ne souhaite pas) utiliser les WebSockets, il existe 
 Ceci peut être implémenté via un mécanisme de long pooling (pour éviter les timeouts dans le navigateur) et de suspension de requêtes. Le code suivant permet par exemple d’analyser un gros fichier de manière asynchrone :
 
 ~~~ java
-public static void generateReport(File salesData) {
-	Promise<Report> report= new Report(salesData).now();
-	Report reportResult = await(report);
-	render(reportResult);
-}
+	public static void generateReport(File salesData) {
+		Promise<Report> report= new Report(salesData).now();
+		Report reportResult = await(report);
+		render(reportResult);
+	}
 ~~~
 Avec l’utilisation de la classe Promise, la requête HTTP est suspendue et ne sera réactivée que lorsque la génération du rapport sera terminée, pour ne pas monopoliser un thread de connexion sur le serveur pendant toute la durée du traitement.
