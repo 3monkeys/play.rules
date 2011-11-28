@@ -188,7 +188,7 @@ Mais il est également possible de lancer l'action depuis la page courante. On a
 
 Un clic sur ce lien lance la tache asynchrone :
 
-~~~ javascript
+~~~ java
 	$(document).ready(function() {
 	        $('#longTask').click(
 	            function() {
