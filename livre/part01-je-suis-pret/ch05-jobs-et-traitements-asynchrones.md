@@ -85,16 +85,14 @@ On ajoute cette méthode au contrôleur principal de notre application :
 
 Ce code javascript utilise l'API WebSocket HTML5 pour ouvrir la communication entre le navigateur et le serveur :
 
-~~~ javascript 
+~~~ javascript
 	var socket = new WebSocket('@@{AsyncController.asyncMessage()}');
-	
-	    socket.onmessage = function(event) {
-	        display(event.data);
-	    }
-
-	    var display = function(event) {
-	       //traitement de l'évenement
-	    }
+	socket.onmessage = function(event) {
+		display(event.data);
+	}
+	var display = function(event) {
+		//traitement de l'évenement
+	}
 ~~~
 
 Voici le code complet de notre page :
@@ -188,7 +186,7 @@ Mais il est également possible de lancer l'action depuis la page courante. On a
 
 Un clic sur ce lien lance la tache asynchrone :
 
-~~~ java
+~~~ javascript
 	$(document).ready(function() {
 	        $('#longTask').click(
 	            function() {
