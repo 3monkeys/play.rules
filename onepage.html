@@ -14,7 +14,7 @@
 
 <body>
 
-       	<div id="book">
+       	<div id="book"style="font-size:150%">
 
 
     	</div>
@@ -183,6 +183,7 @@ $(document).ready(function() {
         });*/
         //"annexes-fiches pratiques"
 
+	intro = tocplayrules.filter(function(item){ return item[0] == "intro"; });
         chapters = items.filter(function(e){ return e[1].split("annexes-fiches pratiques").length!=2; });
         /*chapters.forEach(function(item){
             console.log(item[0],item[1]);
@@ -191,14 +192,15 @@ $(document).ready(function() {
         /*annexes.forEach(function(item){
             console.log(item[0],item[1]);
         });*/
-        items = chapters.concat(annexes);
+	items = intro.concat(chapters);
+	items = items.concat(annexes);
         /*items.forEach(function(item){
             console.log(item[0],item[1]);
         });*/
 
         for(i=0;i<items.length;i++){
-            console.log(items[i][0],items[i][1]);
-            if(items[i][0]=="tree"){
+            console.log(items[i][0],items[i][1],items[i][2]);
+	if(items[i][0]=="tree"){
                 book.append('<h1 id="'+items[i][0]+'-'+i+'">'+items[i][1]+'</h1><hr>');
             } else {
                 book.append('<p id="'+items[i][0]+'-'+i+'" style="margin-right:40px; margin-left:20px;"></p>');
@@ -209,6 +211,9 @@ $(document).ready(function() {
             if(items[i][0]=="chapter"){
                getChapterContent(items[i][1], items[i][0]+'-'+i);
             }
+	    else if(items[i][0]=="intro"){
+		getChapterContent(items[i][2], items[i][0]+'-'+i);
+	    }
         }
 
 
