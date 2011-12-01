@@ -197,7 +197,7 @@ Un clic sur ce lien lance la tache asynchrone :
 ~~~
 
 
-Ce système de push peut être utile dans bien des cas de figure. On peut par exemple imaginer déclencher des mises à jours de pages sur le navigateur des internautes, sur un site de news lorsqu'une brève important arrive ou sur un site d'e-commerce lors de la mise en place d'une promotion flash!
+Ce système de push peut être utile dans bien d'autres cas de figure. On peut par exemple imaginer déclencher des mises à jours de pages sur le navigateur des internautes, sur un site de news lorsqu'une brève important arrive ou sur un site d'e-commerce lors de la mise en place d'une promotion flash!
 
 ## Suspension de requêtes HTTP
 
