@@ -2,6 +2,9 @@
 <h1>Les News chez <strong>Play.Rules!</strong><small>►</small></h1>
 </div>
 
+##Samedi 28 Janvier
+Mise en ligne d'une présentation interactive du framework avec tutoriels intégrés : [voir ici](http://3monkeys.github.com/prez.play/)
+
 ##Lundi 28 novembre
 Une première version [disponible en pdf](https://github.com/3monkeys/play.rules/blob/master/Play.Rules!►%20eBook.pdf?raw=true)
 
