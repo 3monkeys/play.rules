@@ -138,11 +138,11 @@ Créer les 2 Classes `Competition` et `Prise` dans le répertoire `models` :
 	}
 ~~~
 
-- - -
+---
 **Remarque :** nous venons d'utiliser des annotations JPA pour "lier" nos modèles : @OneToOne, @ManyToOne, @OneToMany ...
 Vous pouvez trouver une description de ces annotation ici [http://www.oracle.com/technetwork/middleware/ias/toplink-jpa-annotations-096251.html](http://www.oracle.com/technetwork/middleware/ias/toplink-jpa-annotations-096251.html) 
 
-- - -
+---
 
 ##N'oublions pas les contrôleurs
 
@@ -194,10 +194,10 @@ Comme vous avez pu vous en apercevoir, dans les formulaire CRUD les libellés de
 
 Dans le répertoire `conf` de l'arborescence, il y a le fichier `messages.fr`, dans lequel vous pouvez saisir des libellés "plus parlants" qui seront utilisés (entre autre) par les formulaires CRUD.
 
-- - -
+---
 **Remarque :** il est aussi possible de saisir dans le fichier `messages` (sans extension) mais cela sera valable pour toutes les langues
 
-- - -
+---
 
 Saisissons dans ce fichier, ceci :
 
@@ -212,10 +212,10 @@ Allez faire un tour dans l'écran des prises :
 
 C'est plus pro, ça coûte pas cher, et c'est facile, voire trop facile! (la magie de Play!►)
 
-- - -
+---
 **Remarque :** il est possible d'avoir autant de fichiers `messages.xxx` que de langues.
 
-- - -
+---
 
 ###Modifications plus "profondes"
 
@@ -261,10 +261,10 @@ Cela vient de créer dans le répertoire `views` un répertoire `Competitions` a
 
 **Donc**, dorénavant, lorsque vous utiliserez le formulaire d'édition des compétitions, ce sera ce template qui sera utilisé.
 
-- - -
+---
 **Remarque :** pour modifier le formulaire de liste (toujours du module CRUD), la commande serait la suivante : `play crud:ov --template Competitions/list`, pour modifier le template CRUD general (layout.html) dont héritent toutes les vues CRUD, la commande serait la suivante : `play crud:ov --layout` ... Amusez vous (sauvegardez avant).
 
-- - -
+---
 
 ####Nous allons créer un "tag" qui va permettre d'afficher la liste des prises d'une compétition
 
@@ -283,10 +283,10 @@ Puis au sein de la nouvelle balise, saisissez le code suivant :
     #{/crud.custom}
 ~~~
 
-- - -
+---
 **Remarque :** object représente l'objet (l'instance de classe) lié au formulaire. Dans le cas qui nous intéresse, c'est une compétition. Or, il se trouve que la classe `Competition` a une propriété `prises` qui contient la liste des prises d'une compétition.
 Donc pour avoir la liste, il suffit d'appeler `object.prises` et de le parcourir avec `#{list}#{/list}`.
-- - -
+---
 
 ####Au final, votre template devrait ressembler à ceci :
 

@@ -116,7 +116,7 @@ Pour le top 10, vous pouvez choisir un style de musique. Pour cela, le template 
 	    #{/list}
 	</select>
 
-**Remarque** : Le lange d'expression utilisé dans les templates est [Groovy](http://groovy.codehaus.org/). C'est un langage à typage dynamique très proche de Java, qui nous permet de manipuler facilement les objets renvoyés par le contrôleur.
+**Remarque** : Le langage d'expression utilisé dans les templates est [Groovy](http://groovy.codehaus.org/). C'est un langage à typage dynamique très proche de Java, qui nous permet de manipuler facilement les objets renvoyés par le contrôleur.
 
 ## Le formulaire d'ajout
 
