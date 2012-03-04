@@ -10,8 +10,9 @@ A télécharger ici : [https://github.com/3monkeys/play.rules/raw/master/livre.p
 
 C'est une 1ère version, mais l'ebook au format epub est disponible. Donc normalement, lisible sur iPad (je confirme), iPhone (mais un peu petit), Kindle, etc. ...
 
-Retours appréciés ;)
+Pour lire le livre sur PC ou Mac vous pouvez utiliser le logiciel [Calibre](http://calibre-ebook.com/download)
 
+Retours appréciés ;)
 
 ##Samedi 28 Janvier
 Mise en ligne d'une présentation interactive du framework avec tutoriels intégrés : [voir ici](http://3monkeys.github.com/prez.play/)
