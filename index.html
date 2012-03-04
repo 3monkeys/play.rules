@@ -47,7 +47,6 @@ Play.Rules<b>!</b><small>►</small> eBook
     </div>
 	
 </body>
-<script src="js/twitter.js"></script>
 <script src="js/vendor/showdown.js"></script>
 <script src="js/vendor/zepto.min.js"></script>
 
@@ -56,44 +55,12 @@ Play.Rules<b>!</b><small>►</small> eBook
 <script>
 
 $(document).ready(function() {
-	/* à refactorer */
-	//var loic = $('#loic_d'), k33g = $('#k33g_org'), playframework = $('#PlayFramework'), twitter = $('#twitter');
-	
-	var twitterHtml = [
-			'<section class="threeColumns border paddingTop">',
-			'	<h2 class="border">@Twitter</h2>'
-		];
-    
-	tw.search('#playframework',function(data){
-		twitterHtml.push('<h3 class="border">#PlayFramework</h3><div>');
-        for(var i = 0; i < 3; i+=1){
-			twitterHtml.push('<li><span> (' + data[i].user + ')</span> &raquo; ' + data[i].msg+'</li>');
-        }
-		twitterHtml.push('</div>');
-		tw.search('from:loic_d',function(data){
-			twitterHtml.push('<h3 class="border">@loic_d</h3><div>');
-	        for(var i = 0; i <3; i+=1){
-				twitterHtml.push('<li>' + data[i].msg+'</li>');
-	        }
-			twitterHtml.push('</div>');
-			tw.search('from:k33g_org',function(data){
-				twitterHtml.push('<h3 class="border">@k33g_org</h3><div>');
-		        for(var i = 0; i <3; i+=1){
-					twitterHtml.push('<li>' + data[i].msg+'</li>');
-		        }
-				twitterHtml.push('</div></section>');
-				
-		    });
-	    });
-
-    });	
 		
 	var converter = new Showdown.converter();
 
 	$.get("NEWS.md", function(page) { 
 		$("#news").html(converter.makeHtml(page));
-		console.log(page);
-		$("#twitts").html(twitterHtml.join(''));
+
 	} );
 
  
