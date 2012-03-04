@@ -350,8 +350,6 @@ c'est dans le chapitre suivant : [ch04-Premiere-application-CRUD-part2](ch04-Pre
 
 Vous n'avez pas encore le statut "demi-dieu" de la programmation Web en java *(1)*, mais je sens déjà quelque chose frétiller en vous :) Non ? Vous avouerez que pour le moment c'est assez facile et sans effort et pourtant ça a déjà de la gueule. J'espère que cela vous donne envie de continuer.
 
----
-
 - (1) : ne vous inquiétez pas, je n'ai pas cette prétention non plus ;), mais nous allons progresser ensemble
 
 
