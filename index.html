@@ -26,65 +26,33 @@
 	<script src="js/vendor/highlight.min.js"></script>
 	<link rel="stylesheet" href="css/default.min.css">
 </head>
+<!-- 
+https://raw.github.com/3monkeys/play.rules/master/NEWS.md
 
+$.get("https://raw.github.com/3monkeys/play.rules/master/NEWS.md", function(page) { 
+	console.log(page)
+} );
+
+Play.Rules<b>!</b><small>►</small> eBook
+-->
 <body>
 
-	
-	<div class="container left" id="leftView">
-		<div class="head">
-			Play.Rules<b>!</b><small>►</small> eBook
-			<a id="cmdHideMenuBar" class="barRightButton">✖</a>
-		</div>
-		<div class="container scrollable" id="toc-container">
-			<h2><center>T.D.M.</center></h2>
-			<ul id="toc"></ul>
+	<g:plusone size="medium"></g:plusone>
+	<a href="https://twitter.com/share" class="twitter-share-button" data-count="horizontal" data-via="k33g_org, @loic_d">Tweet</a><script type="text/javascript" src="//platform.twitter.com/widgets.js"></script>
+    <div id="news" style="margin:40px">
 
-		</div>
-
-	</div>
+    </div>
 	
-    <div class="container right" id="rightView">
-		<div class="head">
-			<a id="cmdShowMenuBar" class="barLeftButton">➼</a>
-			<!-- gplus -->
-			<g:plusone size="medium"></g:plusone>
-			<a href="https://twitter.com/share" class="twitter-share-button" data-count="horizontal" data-via="k33g_org, @loic_d">Tweet</a><script type="text/javascript" src="//platform.twitter.com/widgets.js"></script>
-			<a id="cmdHome" class="barRightButton">News</a>
-		</div>
-    	<div id="scroller" class="container scrollable">
-    		<p id="details-container" style="margin-right:40px; margin-left:20px;"></p>
-			
-			<br>
-			
-    	</div>
+	<div id="twitts" style="margin:40px">
+
     </div>
 	
 </body>
 <script src="js/twitter.js"></script>
-<script src="js/class.js"></script>
-
 <script src="js/vendor/showdown.js"></script>
-<script src="js/vendor/github.js"></script>
 <script src="js/vendor/zepto.min.js"></script>
 
 
-<!-- 
-<div id="twitter" class="hide">
-	
-	<section class="threeColumns border paddingTop">
-		<h2 class="border">@Twitter</h2>
-        <h3 class="border">#PlayFramework</h3>
-		<div id="PlayFramework"></div>
-
-        <h3 class="border">@loic_d</h3>
-		<div id="loic_d"></div>
-
-        <h3 class="border">@k33g_org</h3>
-		<div id="k33g_org"></div>
-	
-    </section>
-</div>
--->
 
 <script>
 
@@ -120,266 +88,16 @@ $(document).ready(function() {
 	    });
 
     });	
-	
-
-	function washCode(data){
-	    /*TODO : a better regex*/
-
-	    data = data.replace(/```html/g,'');
-	    data = data.replace(/``` html/g,'');
-	    data = data.replace(/~~~html/g,'');
-	    data = data.replace(/~~~ html/g,'');
-
-	    data = data.replace(/```xml/g,"");
-	    data = data.replace(/``` xml/g,"");
-	    data = data.replace(/~~~xml/g,"");
-	    data = data.replace(/~~~ xml/g,"");
-
-	    data = data.replace(/```js/g,'');
-	    data = data.replace(/``` js/g,'');
-	    data = data.replace(/~~~js/g,'');
-	    data = data.replace(/~~~ js/g,'');
-
-	    data = data.replace(/```java/g,'');
-	    data = data.replace(/``` java/g,'');
-	    data = data.replace(/~~~java/g,'');
-	    data = data.replace(/~~~ java/g,'');
-
-	    data = data.replace(/```css/g,'');
-	    data = data.replace(/``` css/g,'');
-	    data = data.replace(/~~~css/g,'');
-	    data = data.replace(/~~~ css/g,'');
-	    /*data = data.replace(/```js/g,'<pre class="sh_javascript">');
-	    data = data.replace(/``` js/g,'<pre class="sh_javascript">');
-	    data = data.replace(/~~~js/g,'<pre class="sh_javascript">');
-	    data = data.replace(/~~~ js/g,'<pre class="sh_javascript">');
-
-	    data = data.replace(/```java/g,'<pre class="sh_java">');
-	    data = data.replace(/``` java/g,'<pre class="sh_java">');
-	    data = data.replace(/~~~java/g,'<pre class="sh_java">');
-	    data = data.replace(/~~~ java/g,'<pre class="sh_java">');
-
-	    data = data.replace(/```rb/g,"");
-	    data = data.replace(/``` rb/g,"");
-	    data = data.replace(/~~~rb/g,"");
-	    data = data.replace(/~~~ rb/g,"");*/
-
-	    data = data.replace(/```/g,"</pre>");
-	    data = data.replace(/~~~/g,"</pre>");
-
-	    return data;
-	}	
-	
-	var Store = Class({
-		constructor : function Store (user,repo, callBk) {
-			var that = this;
-			this.branches = {};
-			this.user = user;
-			this.repo = repo;
-			var branches = gh.repo(this.user, this.repo).branches(function(data){
-				that.branches = data.branches;
-				//console.log("Branches of ",that.repo," are loaded : ", that.branches);
-				if(callBk) { callBk(); }
-			});
-		},
-		getBranchId : function(name) { return this.branches[name]; },
-		getItemsOfBranch : function(name, callBk) {
-			var that = this;
-			gh.object(this.user, this.repo).tree(this.getBranchId(name),function(items){
-				//console.log("Items of ",name," are loaded : ");
-				if(callBk) { callBk(items.tree); }
-			});
-		},
-		getItemsOfItem : function(item, callBk) {
-			var that = this;
-			gh.object(this.user, this.repo).tree(item.sha,function(items){
-				//console.log("Items of ",item.name,"(",item.sha,")"," are loaded : ");
-				if(callBk) { callBk(items.tree); }
-			});			
-		},
-		getContent : function(pathOfFile, callBk){
-			gh.object(this.user, this.repo).blob(pathOfFile, this.getBranchId('master'),function(result){
-				//console.log(result);
-				if(callBk) { callBk(result.blob.data); }
-			});
-		}
-	});
-	
-
-	var path = "livre/";
+		
 	var converter = new Showdown.converter();
-	
-	var gitHubStorage = new Store('3monkeys','play.rules', function(){
-		
-		function getChapterContent(clickedLink) {			
-			gitHubStorage.getContent(clickedLink, function(content){
-				
-				$("#details-container").html(converter.makeHtml(washCode(content)));
-				$('pre code').each(function(i, e) {hljs.highlightBlock(e, '    ')});
-				//sh_highlightDocument();	
-				
-				//window.scrollTo(0,0);
-				//document.querySelector("#scroller").scrollTop = 0
-				window.document.getElementById("scroller").scrollTop = 0
-			});
-		}
-				
-		gitHubStorage.getItemsOfBranch('master', function(items){ 
-			
-			window.news = items.filter(function(item) { return item.name === "NEWS.md"; })[0];
-			
-			gitHubStorage.getContent(news.name, function(content){
-				
-				news.content = converter.makeHtml(washCode(content));
-				
-				$("#details-container").html(news.content + twitterHtml.join(""));
-				$('pre code').each(function(i, e) {hljs.highlightBlock(e, '    ')});
-				
-				//sh_highlightDocument();	
-				
-				
-				//twitter.removeClass("hide").addClass("show");
-				//window.scrollTo(0,0);
-				//document.querySelector("#scroller").scrollTop = 0
-				window.document.getElementById("scroller").scrollTop = 0
-			});			
-			
-			var livre  = items.filter(function(item) { return item.name === "livre"; })[0];
-			
-			gitHubStorage.getItemsOfItem(livre, function(items){
 
-				items.forEach(function(item) {
-					if(item.type ==='tree') {
-						$('#toc').append('<li id="li_'+item.sha+'"><b>'+item.name+'</b></li>');
-						$('#li_'+item.sha).append('<ul id="ul_'+item.sha+'"></li>');
+	$.get("https://raw.github.com/3monkeys/play.rules/master/NEWS.md", function(page) { 
+		$("#news").html(converter.makeHtml(page));
+		console.log(page);
+		$("#twitts").html(twitterHtml.join(''));
+	} );
 
-						gitHubStorage.getItemsOfItem(item, function(chapters){
-							
-							var pathPart = path+item.name+"/";
-							
-							chapters.forEach(function(chapter) {
-
-								$('#ul_'+item.sha).append('<li id="li_'+chapter.sha+'"><a href="#'+pathPart+chapter.name+'">'+chapter.name+'</a></li>')
-								$('#li_'+chapter.sha)
-								.bind('click',function(element){ getChapterContent(pathPart+chapter.name); });
-
-							});
-							
-						});
-					} else { //Blob
-						$('#toc')
-						.append('<li id="li_'+item.sha+'"><a href="#'+path+item.name+'">'+item.name+'</a></li>');
-						$('#li_'+item.sha)
-						.bind('click',function(element){ getChapterContent(path+item.name); });
-					}
-				});
-				
-			});
-
-		});
-	});
-	
-	/*----------------------*/
-	var 
-		leftView		= $('#leftView'),
-		rightView		= $('#rightView')
-		containers 		= $('.container'), 
-		barsHeight 		= $('[class="head"]').offset().height;
-		
-	//var height = window.innerHeight - (barsHeight * 2);
-	//containers.css('height', height+'px');
-
-	window.onresize = function () {
-		var height = window.innerHeight - (barsHeight * 2);
-		containers.css('height', height+'px');
-	}
-
-	function hideLeftView() {
-		leftView.removeClass("left").addClass("hide");
-		rightView.removeClass("right");				
-	}
-	
-	function showLeftView() {
-		leftView.addClass("left").removeClass("hide"); 
-		rightView.addClass("right");
-	}
-
-	$('#cmdHideMenuBar').bind('click', function() {
-		hideLeftView();
-	});
-	
-	$('#cmdShowMenuBar').bind('click', function() {
-		showLeftView();
-	});
-	
-	$('#cmdHome').bind('click', function() {
-		$("#details-container").html(news.content);
-		$('pre code').each(function(i, e) {hljs.highlightBlock(e, '    ')});
-		//sh_highlightDocument();
-		//document.querySelector("#scroller").scrollTop = 0
-		window.document.getElementById("scroller").scrollTop = 0
-	});
-	
-/*	window.onhashchange = function(e) {
-        	var file_name = document.location.toString().split('#')[1];
-		if(file_name.split('livre/').length>0) {
-			gitHubStorage.getContent(file_name, function(content){
-
-				$("#details-container").html(converter.makeHtml(washCode(content)));
-				$('pre code').each(function(i, e) {hljs.highlightBlock(e, '    ')});
-
-				window.document.getElementById("scroller").scrollTop = 0
-			});
-		}
-    	};
-*/
-    
-    	$(window).bind('hashchange', function(){ /* lorsque l'on change l'url ...*/
-        	var file_name = document.location.toString().split('#')[1];
-        	console.log(file_name);
-		if(file_name.split('livre/').length>0) {
-			gitHubStorage.getContent(file_name, function(content){
-				//console.log(content);
-				$("#details-container").html(converter.makeHtml(washCode(content)));
-				$('pre code').each(function(i, e) {hljs.highlightBlock(e, '    ')});
-				//window.scrollTo(0,0);
-				//document.querySelector("#scroller").scrollTop = 0
-				window.document.getElementById("scroller").scrollTop = 0
-			});
-		}
-	});
-
-	/* on déclenche l'évènement hashchange au chargement pour vérifier le paramètre de l'url */
-	$(window).trigger('hashchange');
-    
-	/*--- pour les tablettes et mobiles ---*/
-	$(document.body).bind('orientationchange', function(){
-		var height = window.innerHeight - (barsHeight * 2);
-		containers.css('height', height+'px');
-						
-		var orientation = window.orientation;
-	    switch(orientation) {  
-	      case 90: case -90: case undefined: /* if undefined not a mobile */
-	        orientation = 'landscape';  
-	      break;  
-	      default:  
-	        orientation = 'portrait';  
-	    }				
-		
-		
-		if(orientation == 'portrait') {
-			hideLeftView()
-		} else {
-			showLeftView();				
-		}
-		
-    });
-	
-	$(document.body).trigger('orientationchange');
-	/*-------------------------------------*/
-
-	
-	
+ 
 });
 
 </script>
