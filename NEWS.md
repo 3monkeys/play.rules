@@ -14,6 +14,8 @@ A télécharger ici :
 
 C'est une 1ère version, mais l'ebook au format epub est disponible. Donc normalement, lisible sur iPad (je confirme), iPhone (mais un peu petit), etc. ...
 
+Pour Android, le reader **Blio** permet d'avoir la colorisation du code source : [https://market.android.com/details?id=com.blio.androidreader&hl=en](https://market.android.com/details?id=com.blio.androidreader&hl=en)
+
 Pour le Kindle, en cours de recherche de solution.
 
 Pour lire le livre sur PC ou Mac vous pouvez utiliser le logiciel [Calibre](http://calibre-ebook.com/download)
