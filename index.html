@@ -23,8 +23,7 @@
 	  })();
 
 	</script>
-	<script src="js/vendor/highlight.min.js"></script>
-	<link rel="stylesheet" href="css/default.min.css">
+
 </head>
 <!-- 
 https://raw.github.com/3monkeys/play.rules/master/NEWS.md
@@ -91,7 +90,7 @@ $(document).ready(function() {
 		
 	var converter = new Showdown.converter();
 
-	$.get("https://raw.github.com/3monkeys/play.rules/master/NEWS.md", function(page) { 
+	$.get("NEWS.md", function(page) { 
 		$("#news").html(converter.makeHtml(page));
 		console.log(page);
 		$("#twitts").html(twitterHtml.join(''));
