@@ -4,7 +4,12 @@
 
 ##Dimanche 4 mars
 
-**L'ebook est là**
+**L'ebook est là** : [https://github.com/3monkeys/play.rules/blob/master/livre.play.un/play.rules.one.epub](https://github.com/3monkeys/play.rules/blob/master/livre.play.un/play.rules.one.epub)
+
+C'est une 1ère version, mais l'ebook au format epub est disponible. Donc normalement, lisible sur iPad (je confirme), iPhone (mais un peu petit), Kindle, etc. ...
+
+Retours appréciés ;)
+
 
 ##Samedi 28 Janvier
 Mise en ligne d'une présentation interactive du framework avec tutoriels intégrés : [voir ici](http://3monkeys.github.com/prez.play/)
