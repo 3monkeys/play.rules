@@ -6,7 +6,11 @@
 
 **L'ebook est là !!!** 
 
-A télécharger ici : [https://github.com/3monkeys/play.rules/raw/master/livre.play.un/play.rules.one.epub](https://github.com/3monkeys/play.rules/raw/master/livre.play.un/play.rules.one.epub)
+A télécharger ici : 
+
+- epub : [https://github.com/3monkeys/play.rules/raw/master/livre.play.un/play.rules.one.epub](https://github.com/3monkeys/play.rules/raw/master/livre.play.un/play.rules.one.epub)
+- docx : [https://github.com/3monkeys/play.rules/raw/master/livre.play.un/play.rules.one.docx](https://github.com/3monkeys/play.rules/raw/master/livre.play.un/play.rules.one.docx)
+
 
 C'est une 1ère version, mais l'ebook au format epub est disponible. Donc normalement, lisible sur iPad (je confirme), iPhone (mais un peu petit), Kindle, etc. ...
 
