@@ -12,7 +12,9 @@ A télécharger ici :
 - docx : [https://github.com/3monkeys/play.rules/raw/master/livre.play.un/play.rules.one.docx](https://github.com/3monkeys/play.rules/raw/master/livre.play.un/play.rules.one.docx)
 
 
-C'est une 1ère version, mais l'ebook au format epub est disponible. Donc normalement, lisible sur iPad (je confirme), iPhone (mais un peu petit), Kindle, etc. ...
+C'est une 1ère version, mais l'ebook au format epub est disponible. Donc normalement, lisible sur iPad (je confirme), iPhone (mais un peu petit), etc. ...
+
+Pour le Kindle, en cours de recherche de solution.
 
 Pour lire le livre sur PC ou Mac vous pouvez utiliser le logiciel [Calibre](http://calibre-ebook.com/download)
 
