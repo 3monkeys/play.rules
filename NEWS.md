@@ -9,6 +9,7 @@
 A télécharger ici : 
 
 - epub : [https://github.com/3monkeys/play.rules/raw/master/livre.play.un/play.rules.one.epub](https://github.com/3monkeys/play.rules/raw/master/livre.play.un/play.rules.one.epub)
+- pdf :  [https://github.com/3monkeys/play.rules/blob/master/Play.Rules!►%20eBook.pdf?raw=true](https://github.com/3monkeys/play.rules/blob/master/Play.Rules!►%20eBook.pdf?raw=true)
 - docx : [https://github.com/3monkeys/play.rules/raw/master/livre.play.un/play.rules.one.docx](https://github.com/3monkeys/play.rules/raw/master/livre.play.un/play.rules.one.docx)
 
 
@@ -27,7 +28,6 @@ Mise en ligne d'une présentation interactive du framework avec tutoriels intég
 
 ##Lundi 28 novembre
 Une première version [disponible en pdf](https://github.com/3monkeys/play.rules/blob/master/Play.Rules!►%20eBook.pdf?raw=true)
-warning : cette version n'est plus à jour, voir le fichier epub à la place
 
 ##Dimanche 27 novembre
 
