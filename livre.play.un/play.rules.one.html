@@ -28,10 +28,276 @@ code > span.er { color: #ff0000; font-weight: bold; }
 <div id="header">
 <h1 class="title">Play.Rules</h1>
 </div>
+<div id="TOC">
+<ul>
+<li><a href="#remerciements">Remerciements</a></li>
+<li><a href="#préface">Préface</a></li>
+<li><a href="#vision-de-k33g_org">Vision de <a href="http://www.twitter.com/k33g_org">@k33g_org</a></a><ul>
+<li><a href="#comment-est-née-lidée-de-ce-livre">Comment est née l'idée de ce livre ?</a></li>
+<li><a href="#pourquoi-open-source">Pourquoi open-source ?</a></li>
+<li><a href="#qui-suis-je">Qui suis-je ?</a></li>
+<li><a href="#dédicace">Dédicace</a></li>
+</ul></li>
+<li><a href="#vision-de-loic_d">Vision de <a href="http://www.twitter.com/loic_d">@loic_d</a></a><ul>
+<li><a href="#comment-est-née-lidée-de-ce-livre-1">Comment est née l'idée de ce livre ?</a></li>
+<li><a href="#pourquoi-open-source-1">Pourquoi open-source ?</a></li>
+<li><a href="#qui-suis-je-1">Qui suis-je ?</a></li>
+<li><a href="#dédicace-1">Dédicace</a></li>
+</ul></li>
+<li><a href="#introduction---pourquoi-play">Introduction - Pourquoi Play!►</a><ul>
+<li><a href="#architecture-simple">Architecture simple</a></li>
+<li><a href="#orienté-rest">Orienté REST</a></li>
+<li><a href="#stateless-et-scalable">Stateless et scalable</a></li>
+<li><a href="#productif">Productif</a></li>
+<li><a href="#modulaire-et-extensible">Modulaire et extensible</a></li>
+<li><a href="#pur-java">Pur Java</a></li>
+<li><a href="#trucs-cool-que-lon-peut-faire-avec-play">5 trucs cool que l'on peut faire avec Play!►</a><ul>
+<li><a href="#mapper-des-paramètres-http-et-une-méthode-java">1. Mapper des paramètres HTTP et une méthode Java</a></li>
+<li><a href="#redirection-vers-une-action-en-appelant-simplement-une-méthode-java">2. Redirection vers une action, en appelant simplement une méthode Java</a></li>
+<li><a href="#ne-vous-répetez-pas-en-passant-des-paramètres-aux-templates">3. Ne vous répetez pas en passant des paramètres aux templates</a></li>
+<li><a href="#jpa-sous-steroids">4. JPA sous steroids</a></li>
+<li><a href="#uploadez-facilement-des-fichiers">5. Uploadez facilement des fichiers</a></li>
+</ul></li>
+</ul></li>
+<li><a href="#je-suis-nul">Je suis nul</a></li>
+<li><a href="#on-se-met-en-jambes">On se met en jambes</a><ul>
+<li><a href="#play-cest-quoi">Play!► c'est quoi ?</a></li>
+<li><a href="#bon-on-sy-colle">Bon on s'y colle ?</a><ul>
+<li><a href="#pré-requis">Pré-requis</a></li>
+<li><a href="#installation">Installation</a></li>
+<li><a href="#lappel-doffres">L'Appel d'Offres</a><ul>
+<li><a href="#er-jour-confrontation-avec-votre-chef-dagence">1er jour : confrontation avec votre chef d'agence</a></li>
+<li><a href="#pétage-de-plombs">Pétage de plombs</a></li>
+<li><a href="#le-cahier-des-charges">Le Cahier des Charges</a></li>
+</ul></li>
+<li><a href="#créer-le-squelette-de-lapplication">Créer le squelette de l'application</a></li>
+<li><a href="#paramétrage-de-lide">Paramétrage de l'IDE</a></li>
+</ul></li>
+<li><a href="#paramétrage-declipse">Paramétrage d'Eclipse</a></li>
+</ul></li>
+<li><a href="#faut-bosser-maintenant">Faut bosser maintenant !!!</a><ul>
+<li><a href="#introduction">Introduction</a><ul>
+<li><a href="#petit-rappel-mvc">Petit rappel : MVC</a></li>
+<li><a href="#suite-de-lintroduction-où-jai-donc-décidé-dapprendre-struts">Suite de l'introduction (où j'ai donc décidé d'apprendre STRUTS)</a></li>
+</ul></li>
+<li><a href="#avec-play-mvc-cest-limpide">Avec Play!►, MVC c'est limpide !</a><ul>
+<li><a href="#structure-dazerguespeche-et-1ère-page">Structure d'azerguespeche et 1ère page</a><ul>
+<li><a href="#er-modèle">1er modèle</a></li>
+<li><a href="#et-le-contrôleur">Et le contrôleur ?</a></li>
+<li><a href="#allons-modifier-la-vue-application">Allons modifier la vue Application</a></li>
+</ul></li>
+</ul></li>
+<li><a href="#vous-êtes-prêts-...-pour-aller-plus-loin-des-objets-des-écrans-...">Vous êtes prêts ! ... pour aller plus loin : des objets, des écrans ...</a><ul>
+<li><a href="#préparation">Préparation</a></li>
+</ul></li>
+</ul></li>
+<li><a href="#le-socle-de-notre-application-grâce-au-module-crud">Le SOCLE de notre application grâce au module CRUD</a><ul>
+<li><a href="#préparation-de-notre-environnement">Préparation de notre environnement</a><ul>
+<li><a href="#nous-allons-avoir-besoin-dune-base-de-données">Nous allons avoir besoin d'une base de données</a></li>
+<li><a href="#nous-allons-activer-le-module-crud">Nous allons activer le module CRUD</a></li>
+</ul></li>
+<li><a href="#il-est-temps-de-créer-notre-modèle-objet-model">Il est temps de créer notre modèle objet (model)</a><ul>
+<li><a href="#la-classe-pecheur">La classe Pecheur</a></li>
+<li><a href="#la-classe-poisson">La classe Poisson</a></li>
+</ul></li>
+<li><a href="#maintenant-au-tour-des-contrôleurs">Maintenant, au tour des contrôleurs</a><ul>
+<li><a href="#la-classe-pecheurs">La classe Pecheur<strong>s</strong></a></li>
+<li><a href="#la-classe-poissons">La classe Poisson<strong>s</strong></a></li>
+<li><a href="#retournons-vite-modifier-le-code-de-nos-modèles">Retournons vite modifier le code de nos modèles :</a><ul>
+<li><a href="#dans-classe-pecheur">Dans Classe Pecheur</a></li>
+<li><a href="#dans-classe-poisson">Dans Classe Poisson</a></li>
+</ul></li>
+<li><a href="#comment-rendre-la-saisie-obligatoire">Comment rendre la saisie obligatoire ?</a></li>
+<li><a href="#comment-exiger-un-format-de-saisie">Comment &quot;exiger&quot; un format de saisie</a></li>
+</ul></li>
+<li><a href="#quelques-remarques">Quelques remarques</a><ul>
+<li><a href="#recherches">Recherches</a></li>
+<li><a href="#modèles">Modèles</a></li>
+</ul></li>
+<li><a href="#la-suite-cest-fini-pour-cette-partie">La suite (c'est fini pour cette partie)</a></li>
+</ul></li>
+<li><a href="#notre-application-crud-...-la-suite">Notre application CRUD ... la suite</a><ul>
+<li><a href="#introduction-1">Introduction</a></li>
+<li><a href="#tout-dabord-quelques-réglages">Tout d'abord quelques réglages</a></li>
+<li><a href="#evolutions-de-notre-modèle">Evolutions de notre modèle :</a><ul>
+<li><a href="#la-compétition">La Compétition</a></li>
+<li><a href="#la-prise">La Prise</a></li>
+</ul></li>
+<li><a href="#noublions-pas-les-contrôleurs">N'oublions pas les contrôleurs</a><ul>
+<li><a href="#contrôleur-competitions">Contrôleur Competitions</a></li>
+<li><a href="#contrôleur-prise">Contrôleur Prise</a></li>
+</ul></li>
+<li><a href="#on-passe-une-vitesse-modifions-les-formulaires-crud">On passe une vitesse : Modifions les formulaires CRUD !</a><ul>
+<li><a href="#modifications-simples">Modifications simples</a></li>
+<li><a href="#modifications-plus-profondes">Modifications plus &quot;profondes&quot;</a><ul>
+<li><a href="#nous-allons-créer-un-tag-qui-va-permettre-dafficher-la-liste-des-prises-dune-compétition">Nous allons créer un &quot;tag&quot; qui va permettre d'afficher la liste des prises d'une compétition</a></li>
+<li><a href="#au-final-votre-template-devrait-ressembler-à-ceci">Au final, votre template devrait ressembler à ceci :</a></li>
+</ul></li>
+</ul></li>
+<li><a href="#la-suite-cest-fini-pour-cette-partie-1">La suite (c'est fini pour cette partie)</a></li>
+</ul></li>
+<li><a href="#allez-on-se-cogne-laffichage">Allez, on se cogne l'affichage</a><ul>
+<li><a href="#introduction-2">Introduction</a></li>
+<li><a href="#tout-dabord-les-spécifications">Tout d'abord, les &quot;spécifications&quot;</a></li>
+<li><a href="#modifions-le-contrôleur">Modifions le contrôleur</a><ul>
+<li><a href="#on-code">On code :</a><ul>
+<li><a href="#ramener-une-liste-denregistrements">&quot;Ramener&quot; une liste d'enregistrements ?</a></li>
+<li><a href="#et-finalement-ce-contrôleur-il-va-ressembler-à-quoi">Et finalement ce contrôleur, il va ressembler à quoi ?</a></li>
+</ul></li>
+</ul></li>
+<li><a href="#modifions-la-vue">Modifions la vue</a><ul>
+<li><a href="#je-souhaite-afficher-la-liste-des-pêcheurs">Je souhaite afficher la liste des pêcheurs</a></li>
+<li><a href="#allez-on-termine">Allez, on termine …</a></li>
+<li><a href="#on-fignole">On fignole</a><ul>
+<li><a href="#classer-les-compétitions-de-la-plus-récente-à-la-plus-vieille">Classer les compétitions de la plus récente à la plus vieille :</a></li>
+<li><a href="#ajouter-des-liens-pour-avoir-le-détail-des-compétitions">Ajouter des liens pour avoir le détail des compétitions</a></li>
+<li><a href="#modifions-le-contrôlleur-et-terminons-la-vue-competition">Modifions le contrôlleur et terminons la vue &quot;competition&quot;</a></li>
+</ul></li>
+</ul></li>
+<li><a href="#cest-moche">C'est moche !</a><ul>
+<li><a href="#la-feuille-de-style-main.css">La feuille de style : main.css</a></li>
+<li><a href="#derniers-réglages">Derniers réglages</a></li>
+</ul></li>
+</ul></li>
+<li><a href="#note-pour-le-chargement-du-module-crud">Note pour le chargement du module CRUD :</a></li>
+<li><a href="#je-suis-prêt">Je suis prêt</a></li>
+<li><a href="#mise-en-place-de-lapplication-vote4music">Mise en place de l'application Vote4Music</a><ul>
+<li><a href="#le-modèle-de-données">Le modèle de données</a><ul>
+<li><a href="#la-classe-album">La classe Album</a></li>
+<li><a href="#la-classe-artist">La classe Artist</a></li>
+<li><a href="#lenum-genre">L'enum Genre</a></li>
+</ul></li>
+<li><a href="#définition-des-routes">Définition des routes</a></li>
+<li><a href="#la-page-daccueil">La page d'accueil</a></li>
+<li><a href="#le-formulaire-dajout">Le formulaire d'ajout</a></li>
+<li><a href="#lister-et-rechercher-des-albums">Lister et rechercher des albums</a></li>
+<li><a href="#le-top-10">Le top 10</a></li>
+<li><a href="#la-fonction-de-vote">La fonction de vote</a></li>
+<li><a href="#gestion-des-pochettes-dalbums">Gestion des pochettes d'albums</a><ul>
+<li><a href="#upload-et-sauvegarde-dune-image">Upload et sauvegarde d'une image</a></li>
+</ul></li>
+</ul></li>
+<li><a href="#services-web">Services Web</a><ul>
+<li><a href="#rest-et-restful-quest-ce-que-cest">REST et RESTful, qu'est ce que c'est?</a></li>
+<li><a href="#play-et-les-services-rest">Play!► et les services REST</a><ul>
+<li><a href="#exposer-des-données-avec-un-service-rest">Exposer des données avec un service REST</a></li>
+<li><a href="#envoi-de-données-à-travers-un-service-rest">Envoi de données à travers un service REST</a></li>
+<li><a href="#services-restjson">Services REST/JSON</a><ul>
+<li><a href="#le-format-json">Le format JSON</a></li>
+</ul></li>
+<li><a href="#recevoir-un-message-json">Recevoir un message JSON</a></li>
+</ul></li>
+<li><a href="#appeler-un-service-externe-avec-play.libs.ws">Appeler un service externe avec Play!►.libs.WS</a></li>
+</ul></li>
+<li><a href="#authentification-et-sécurité">Authentification et sécurité</a><ul>
+<li><a href="#mise-en-oeuvre-du-module-secure">Mise en oeuvre du module Secure</a></li>
+</ul></li>
+<li><a href="#tester-notre-application">Tester notre application</a><ul>
+<li><a href="#tests-unitaires">Tests unitaires</a></li>
+<li><a href="#tests-fonctionnels">Tests fonctionnels</a></li>
+<li><a href="#tests-selenium">Tests Selenium</a></li>
+<li><a href="#lancer-les-tests">Lancer les tests</a></li>
+</ul></li>
+<li><a href="#jobs-et-traitements-asynchrones">Jobs et traitements asynchrones</a><ul>
+<li><a href="#les-jobs">Les jobs</a><ul>
+<li><a href="#au-démarrage-de-lapplication">Au démarrage de l'application</a></li>
+<li><a href="#effectuer-des-traitements-périodiques">Effectuer des traitements périodiques</a></li>
+</ul></li>
+<li><a href="#traitements-asynchrones-websockets">Traitements asynchrones : WebSockets</a><ul>
+<li><a href="#déclaration-de-la-websocket-dans-le-navigateur">Déclaration de la WebSocket dans le navigateur</a></li>
+<li><a href="#implémentation-côté-serveur">Implémentation côté serveur</a></li>
+<li><a href="#push-de-données-depuis-le-serveur">Push de données depuis le serveur</a></li>
+<li><a href="#mise-en-action">Mise en action</a></li>
+</ul></li>
+<li><a href="#suspension-de-requêtes-http">Suspension de requêtes HTTP</a></li>
+</ul></li>
+<li><a href="#a-la-découverte-des-modules">A la découverte des modules</a></li>
+<li><a href="#découverte-des-modules">Découverte des modules</a><ul>
+<li><a href="#validation-côté-client-avec-html5">Validation côté client avec HTML5</a></li>
+<li><a href="#elastic-search">Elastic Search</a></li>
+<li><a href="#et-plein-dautres-modules">Et plein d'autres modules!</a></li>
+</ul></li>
+<li><a href="#play-et-scala">Play!► et Scala</a><ul>
+<li><a href="#le-langage-scala">Le langage Scala</a><ul>
+<li><a href="#quelques-exemples-de-code">Quelques exemples de code</a></li>
+</ul></li>
+<li><a href="#le-moteur-de-templates">Le moteur de templates</a><ul>
+<li><a href="#tags-et-layouts">Tags et layouts</a></li>
+<li><a href="#un-exemple-concret">Un exemple concret</a></li>
+</ul></li>
+<li><a href="#authentification-à-laide-des-traits">Authentification à l'aide des traits</a></li>
+<li><a href="#accès-à-la-base-de-données-avec-lapi-anorm">Accès à la base de données avec l'API Anorm</a><ul>
+<li><a href="#définition-dune-entité">Définition d'une entité</a></li>
+<li><a href="#la-classe-magic">La classe Magic</a></li>
+<li><a href="#requêtes-plus-complexes">Requêtes plus complexes</a></li>
+</ul></li>
+<li><a href="#les-tests">Les tests</a></li>
+<li><a href="#installer-le-module-scala">Installer le module Scala</a></li>
+<li><a href="#apprendre-scala">Apprendre Scala</a></li>
+</ul></li>
+<li><a href="#créer-son-propre-module">Créer son propre module</a><ul>
+<li><a href="#exemple-1-créer-un-tag-personnalisé">Exemple 1 : Créer un tag personnalisé</a><ul>
+<li><a href="#structure-du-module">Structure du module</a></li>
+</ul></li>
+<li><a href="#exemple-2-amélioration-du-module-crud-avec-jquery-ui">Exemple 2 : Amélioration du module CRUD avec JQuery UI</a><ul>
+<li><a href="#le-plan">Le plan</a></li>
+<li><a href="#mise-en-place-de-lapplication-exemple">Mise en place de l'application exemple</a></li>
+<li><a href="#contrôleurs-et-modifications-des-vues-du-module-crud">Contrôleurs, et modifications des vues du module CRUD</a><ul>
+<li><a href="#contrôleurs">Contrôleurs</a></li>
+<li><a href="#vues">Vues</a></li>
+</ul></li>
+<li><a href="#création-du-module-crud-grid">Création du module crud-grid</a></li>
+<li><a href="#ui-grid">UI GRID!</a></li>
+<li><a href="#améliorations-possibles">Améliorations possibles</a></li>
+<li><a href="#références">Références</a></li>
+</ul></li>
+<li><a href="#aller-plus-loin">Aller plus loin</a></li>
+</ul></li>
+<li><a href="#déploiement">Déploiement</a></li>
+<li><a href="#play-et-le-déploiement">Play!► et le déploiement</a><ul>
+<li><a href="#quel-contenu">Quel contenu ?</a></li>
+<li><a href="#pré-requis-1">Pré-requis</a></li>
+</ul></li>
+<li><a href="#déploiement-sous-tomcat">Déploiement sous Tomcat</a><ul>
+<li><a href="#installation-de-tomcat-v6-sous-linux">Installation de Tomcat (v°6) sous Linux</a></li>
+<li><a href="#préparation-du-war-de-notre-application">Préparation du war de notre application</a></li>
+<li><a href="#derniers-réglages-1">Derniers réglages</a></li>
+</ul></li>
+<li><a href="#déploiment-avec-puppet">Déploiment avec Puppet</a><ul>
+<li><a href="#traiter-votre-infrastructure-comme-du-code">Traiter votre infrastructure comme du code</a></li>
+<li><a href="#playing-with-puppet">Playing with Puppet</a></li>
+<li><a href="#less-conversation-more-action-please">Less conversation, more action Please</a></li>
+<li><a href="#conclusion">Conclusion</a></li>
+</ul></li>
+<li><a href="#déploiement-dune-application-dans-le-cloud-avec-heroku">Déploiement d'une application dans le cloud avec Heroku</a><ul>
+<li><a href="#installation-de-lenvironnement">Installation de l'environnement</a></li>
+<li><a href="#mise-à-jour-de-lapplication">Mise à jour de l'application</a></li>
+<li><a href="#configuration-dune-base-de-données">Configuration d'une base de données</a></li>
+<li><a href="#logs">Logs</a></li>
+<li><a href="#redis">Redis</a></li>
+</ul></li>
+<li><a href="#fiches-pratiques">Fiches pratiques</a></li>
+<li><a href="#utilisation-dun-cache">Utilisation d'un cache</a><ul>
+<li><a href="#mise-en-cache-des-méthodes-du-contrôleur">Mise en cache des méthodes du contrôleur</a></li>
+<li><a href="#utilisation-dun-cache-devant-la-base-de-données">Utilisation d'un cache devant la base de données</a></li>
+<li><a href="#choisir-une-implémentation-de-cache">Choisir une implémentation de cache</a></li>
+</ul></li>
+<li><a href="#linternationalisation">L'internationalisation</a></li>
+<li><a href="#routes-et-contrôleurs">Routes et contrôleurs</a><ul>
+<li><a href="#gérer-les-routes-avec-les-annotations">Gérer les routes avec les annotations</a></li>
+<li><a href="#configuration-devprod-des-routes">Configuration dev/prod des routes</a></li>
+<li><a href="#les-hooks">Les hooks</a><ul>
+<li><a href="#before-et-after">@Before et @After</a></li>
+<li><a href="#with">@With</a></li>
+</ul></li>
+</ul></li>
+<li><a href="#gestion-de-la-session-utilisateur">Gestion de la session utilisateur</a></li>
+</ul>
+</div>
 <div class="figure">
 <img src="rsrc/Play_rules.png" /><p class="caption"></p>
 </div>
-<h2 id="remerciements">Remerciements</h2>
+<h2 id="remerciements"><a href="#TOC">Remerciements</a></h2>
 <p>Un grand <strong>MERCI</strong> pour les participations de :</p>
 <ul>
 <li>@chprome</li>
@@ -47,12 +313,12 @@ code > span.er { color: #ff0000; font-weight: bold; }
 <li>@fboulay</li>
 <li>@mklabs</li>
 </ul>
-<h1 id="préface">Préface</h1>
+<h1 id="préface"><a href="#TOC">Préface</a></h1>
 <p>Ce livre est conçu et écrit par <a href="http://www.twitter.com/k33g_org">@k33g_org</a> et <a href="http://www.twitter.com/loic_d">@loic_d</a> (nos petits noms sur Twitter). L'idée d'écrire cet ouvrage nous a été insufflée par <a href="http://www.twitter.com/mklabs">@mklabs</a></p>
-<h1 id="vision-de-k33g_org">Vision de <a href="http://www.twitter.com/k33g_org">@k33g_org</a></h1>
-<h2 id="comment-est-née-lidée-de-ce-livre">Comment est née l'idée de ce livre ?</h2>
+<h1 id="vision-de-k33g_org"><a href="#TOC">Vision de <a href="http://www.twitter.com/k33g_org">@k33g_org</a></a></h1>
+<h2 id="comment-est-née-lidée-de-ce-livre"><a href="#TOC">Comment est née l'idée de ce livre ?</a></h2>
 <p>De mémoire, car les choses sont allez finalement assez vite et j'ai une mémoire de poisson rouge. Cela faisait un moment que <a href="@loic_d">@loic_d</a> me parlait de Play Framework, j'ai mis un peu de temps avant de me décider. Et là la révélation !, j'ai tellement été emballé, imaginez sortir une application web Java en 2 coups de cuillère à pot, moi le &quot;vieux&quot; geek de 42 balais nourri au Turbo Pascal et à VB6, issu du monde Microsoft (.Net et tout ce qui va avec), (phrase trop longue désolé) que j'ai décidé d'écrire des tutos sur mon blog au fur et à mesure de mon apprentissage. Un week-end <a href="@mklabs">@mklabs</a>, qui passait par là, a relu ma prose (on fait ça de temps en temps pour voir si nos articles sont lisibles), du coup s'est mis aussi à Play!Framework, à la fin du même week-end, il était au taquet et nous lançait un défi (à <a href="@loic_d">@loic_d</a> &amp; à moi <a href="@k33g_org">@k33g_org</a>). <em>&quot;Debout les gars réveillez-vous, y va falloir en mettre un coup&quot;</em> (1) <em>&quot;Si vous écriviez un livre sur Play!?&quot;</em>. Et voilà ... on y est.</p>
-<h2 id="pourquoi-open-source">Pourquoi open-source ?</h2>
+<h2 id="pourquoi-open-source"><a href="#TOC">Pourquoi open-source ?</a></h2>
 <p>Dans le désordre :</p>
 <ul>
 <li>Parce que nous ne sommes pas encore trop prétentieux (même si <a href="@mklabs">@mklabs</a> il se la joue sur la Home de HTML5 BoilerPlate et que <a href="@loic_d">@loic_d</a> c'est quand même Monsieur co-Jug-Leader de l'Alpes JUG), je ne vais quand même pas aller sur un projet avec des bras cassés ;)</li>
@@ -61,7 +327,7 @@ code > span.er { color: #ff0000; font-weight: bold; }
 <li>Parce que je suis toujours content de trouver de bons tutos gratuits par des bons p'tits gars qui on envie de partager</li>
 <li>...</li>
 </ul>
-<h2 id="qui-suis-je">Qui suis-je ?</h2>
+<h2 id="qui-suis-je"><a href="#TOC">Qui suis-je ?</a></h2>
 <pre><code>@k33g_org =
     geek : true
     age : 43
@@ -87,23 +353,23 @@ code > span.er { color: #ff0000; font-weight: bold; }
         maintenant : [&quot;Java (Play)&quot;, &quot;Javascript&quot;, &quot;...&quot;]
 
     signeParticulier : [&quot;Mac Addict&quot;, &quot;SmartPhone Addict&quot;]</code></pre>
-<h2 id="dédicace">Dédicace</h2>
+<h2 id="dédicace"><a href="#TOC">Dédicace</a></h2>
 <p>Tout simplement aux 2 autres singes, <a href="http://www.twitter.com/loic_d">@loic_d</a> parce qu'à défaut de ne plus pouvoir travailler professionnellement avec lui (et je vous garantie que c'est une chance), je vais pouvoir remettre ça sur ce projet, <a href="@mklabs">@mklabs</a> dont l'enthousiasme sans limite me sidère et nous fait avancer (c'est à cause de lui que je lis tout ce que je peux sur le javascript)</p>
 <ol style="list-style-type: decimal">
 <li>C'est pas de la référence ça !? J'ai toujours aimé les citations</li>
 </ol>
-<h1 id="vision-de-loic_d">Vision de <a href="http://www.twitter.com/loic_d">@loic_d</a></h1>
-<h2 id="comment-est-née-lidée-de-ce-livre-1">Comment est née l'idée de ce livre ?</h2>
+<h1 id="vision-de-loic_d"><a href="#TOC">Vision de <a href="http://www.twitter.com/loic_d">@loic_d</a></a></h1>
+<h2 id="comment-est-née-lidée-de-ce-livre-1"><a href="#TOC">Comment est née l'idée de ce livre ?</a></h2>
 <p>La première réunion que nous avons organisé avec l'Alpes JUG (Java User Group grenoblois) était un coding dojo sur Play!► avec Guillaume Bort, l'auteur du framework. Ce jour là ce fût une vrai claque et cette présentation reste pour moi parmi les plus marquantes que j'ai pu voir. Guillaume nous a présenté non pas un simple framework mais une plateforme complète pour le développement et l’exécution d'applications Web. J'ai été extrêmement enthousiasmé par sa vision des architectures Web et de la sur-complexité vendue depuis des années par les éditeurs de middleware dans le monde Java... Depuis je n'ai pas arrêté de coder avec Play!► et d'écrire des article sur ce sujet pour mon blog <a href="http://coffeebean.loicdescotte.com">CoffeeBean</a>. Quand <a href="http://www.twitter.com/@mklabs">@mklabs</a> nous a soumis l'idée d'écrire cet ebook, je ne pouvais pas refuser de travailler sur un sujet aussi excitant!</p>
-<h2 id="pourquoi-open-source-1">Pourquoi open-source ?</h2>
+<h2 id="pourquoi-open-source-1"><a href="#TOC">Pourquoi open-source ?</a></h2>
 <p>Pour coller à l'esprit de Play!►. Et aussi car je pense qu'avec un maximum de relecteurs et de contributeurs le résultat ne pourra être que meilleur!</p>
-<h2 id="qui-suis-je-1">Qui suis-je ?</h2>
+<h2 id="qui-suis-je-1"><a href="#TOC">Qui suis-je ?</a></h2>
 <p>Un geek, un fan de Java et depuis peu de Scala, aussi un musicien (guitare et un peu de batterie) à mes heures perdues. J'ai toujours préféré le développement backend au frontend (vive les services REST), mais je commence à prendre goût au développement JavaScript, notamment grâce aux bons conseils de <a href="http://www.twitter.com/">@mklabs</a> sur jQuery!.</p>
-<h2 id="dédicace-1">Dédicace</h2>
+<h2 id="dédicace-1"><a href="#TOC">Dédicace</a></h2>
 <p>Je ne vais pas être très original sur ce coup, comme <a href="http://www.twitter.com/@k33g_org">@k33g_org</a> je dédicace ce livre aux deux autres monkeys, sans qui ce projet ne pourrait se réaliser. Grâce à <a href="@k33g_org">@k33g_org</a>, j'ai d'excellents souvenirs des deux années que j'ai passé à Lyon : j'ai compris grâce à lui qu'on pouvait facilement mêler boulot et grosse déconnade! Quand à <a href="http://www.twitter.com/mklabs">@mklabs</a>, nous n'avons pas encore eu le temps de nous rencontrer physiquement au moment où j'écris ces lignes. Mais ça ne devrait pas tarder (la semaine prochaine normalement)!</p>
-<h1 id="introduction---pourquoi-play">Introduction - Pourquoi Play!►</h1>
+<h1 id="introduction---pourquoi-play"><a href="#TOC">Introduction - Pourquoi Play!►</a></h1>
 <p>Play Framework est une vraie révolution dans le monde des applications Web écrites en Java. Il vous fera oublier toutes les souffrances que vous avez pu vivre avec la pile Java EE classique, des frameworks comme Spring. Architectures techniques opaques, gestion chaotique des dépendances, longues phases de compilation, redémarrage du serveur à chaque modification du code... tout ça ne sera bientôt pour vous que de mauvais souvenirs :)</p>
-<h2 id="architecture-simple">Architecture simple</h2>
+<h2 id="architecture-simple"><a href="#TOC">Architecture simple</a></h2>
 <p>Play!► se base sur une architecture extrêmement simple en suivant le design pattern MVC. A côté de ça il ne rajoute pas de notions de couches service, couches DAO etc.</p>
 <p>Tout le code métier est porté par les objets du modèle, afin d'éviter le phénomène appelé <a href="http://en.wikipedia.org/wiki/Anemic_Domain_Model">Anemic Domain Model</a>, qui résulte en l'écriture de classes métier contenant uniquement des champs et des accesseurs (getters et setters), donc sans traitements ni intelligence. C'est ce qui arrive dès que l'on commence à implémenter le code métier de l'application dans des couches techniques (couches service, EJB...)</p>
 <p>Comme en Ruby On Rails, les objets du modèle sont conçus selon le pattern Active Record : ils ont la capacité de gérer eux même leur persistance dans la base de données.</p>
@@ -116,26 +382,26 @@ code > span.er { color: #ff0000; font-weight: bold; }
     p1.<span class="fu">firstName</span> = <span class="st">&quot;paul&quot;</span>;
     <span class="co">// Mise à jour dans la base de données</span>
     p1.<span class="fu">save</span>();</code></pre>
-<h2 id="orienté-rest">Orienté REST</h2>
+<h2 id="orienté-rest"><a href="#TOC">Orienté REST</a></h2>
 <p>Avec Play!►, il est extrêmement facile de faire correspondre des URL simples, lisibles et <code>bookmarkables</code> aux actions du controlleur.</p>
 <p>Par exemple, pour afficher toutes les personnes habitant à Paris dans un annuaire, on pourra utiliser une URL comme</p>
 <pre><code>/annuaire/personnes/paris</code></pre>
 <p>Ceci est renforcé par l'aspect <code>stateless</code> du framework. Le serveur ne stockant pas d'état, on n'aura pas de mauvaise surprise quant au rendu correspondant à une URL : le framework effectuera toujours le même traitement quelque soit le contexte (voir paragraphe suivant).</p>
-<h2 id="stateless-et-scalable">Stateless et scalable</h2>
+<h2 id="stateless-et-scalable"><a href="#TOC">Stateless et scalable</a></h2>
 <p>Play!► se veut respectueux de l'architecture du Web et donc des architectures REST. Guillaume Bort a fait le choix de ne rien stocker côté serveur. Cela signifie qu'il n'existe pas de session utilisateur sur la partie serveur du framework. Ceci peut sembler déstabilisant lorsque l'on a l'habitude de travailler des frameworks comme JSF ou Wicket. Mais finalement ce mode de fonctionnement simplifie vraiment les choses. En effet on n'a pas besoin de gérer l'état du serveur, il ne fait que traiter les requêtes qui arrivent et renvoyer la réponse. Ceux qui ont déjà eu des problèmes avec Wicket et sa manie de tout garder en session, même les objets &quot;out of date&quot; comprendront ce que je veux dire. Notre framework propose un objet &quot;session&quot; qui permet de stocker un identifiant de session utilisateur en écrivant dans un cookie côté client (dans le navigateur). Pour stocker des volumes plus importants de données côté client, vous serez incité à utiliser les API de stockage de HTML 5 (web storage). Si pour des raisons de performances vous ne voulez pas répéter trop souvent les mêmes requêtes vers la base de données, il est également possible d'utiliser un cache distribué. Play!► fournit une implémentation de cache par défaut.</p>
 <p>Une autre conséquence de ce mode stateless est bien sur la capacité à monter en charge (scalabilité). Si le trafic de votre application augmente, il suffira de rajouter un serveur derrière un load balancer pour tenir la charge. Ceci prend tout son sens dans les environnements de type cloud ou des noeuds de serveurs peuvent être ajoutés et retirés dynamiquement selon la demande. Autre avantage : la tolérance aux pannes. Si un serveur tombe en panne, les appels pourront passer sur un autre serveur sans que l'utilisateur ne s'en rende compte. Avec des framework stateful, vous seriez obligé de dupliquer les sessions utilisateurs d'un serveur à l'autre pour que les utilisateurs ne perdent pas leur contexte de travail.</p>
-<h2 id="productif">Productif</h2>
+<h2 id="productif"><a href="#TOC">Productif</a></h2>
 <p>Toute la pile est pré-configurée, de la vue à la base de données. Play!► suit la logique de <code>convention over configuration</code>. Ainsi, si le paramétrage par défaut vous convient, vous pourrez commencer à développer dès que vous aurez dézippé l'archive du framework! Ce principe sera également appliqué lors du développement de nos applications afin d'économiser des lignes de code tout au long du développement.</p>
 <p>Play!► embarque son propre serveur qui est capable de compiler lui même les fichiers source et de récupérer à chaud toutes les modifications de code. Vous n'aurez donc jamais à vous soucier des phases de compilation ou de déploiement de votre application. Si vous ajoutez une nouvelle ligne de code, un simple &quot;refresh&quot; dans votre navigateur vous permettra de la voir en action. Et si jamais votre code contient une erreur, vous verrez un message clair et explicite dans votre navigateur, bien plus simple à comprendre que les traditionnelles <code>stack trace</code> que l'on rencontre habituellement lorsque l'on fait du développement JEE.</p>
 <p>Enfin, le framework propose nativement un module <code>CRUD</code> permettant de générer les écrans, les traitements et les requêtes pour gérer les opération basiques relatives à une entité métier (création, lecture/recherche, mise à jour, suppression).</p>
-<h2 id="modulaire-et-extensible">Modulaire et extensible</h2>
+<h2 id="modulaire-et-extensible"><a href="#TOC">Modulaire et extensible</a></h2>
 <p>Il existe un grand nombre de modules pour ajouter des fonctionnalités au framework : déploiement sous Google APP Engine, authentification avec OAuth, validation des données côté client avec HTML5... La communauté est très active et de nouveaux plugins arrivent régulièrement dans le dépôt officiel.</p>
 <p>De plus le framework, bien que <code>full stack</code>, n'est pas monolithique, il est possible de n'utiliser que les parties de Play!► qui nous intéresse et de l'utiliser conjointement à d'autres technologies. On pourrait par exemple imaginer n'utiliser que la partie contrôleur de Play!► pour exposer des services REST à un front end écrit en HTML/JavaScript et s'appuyer sur des services Spring pour la partie métier.</p>
-<h2 id="pur-java">Pur Java</h2>
+<h2 id="pur-java"><a href="#TOC">Pur Java</a></h2>
 <p>Play!► est écrit en Java et est compatible avec toutes vos librairies Java préférées. De plus il facilite l'utilisation de Java grâce à un certain nombre d'astuces.Il génère par exemple automatiquement les accesseurs (getters et setters) dans les classes Java dans le but d'améliorer la lisibilité du code.</p>
-<h2 id="trucs-cool-que-lon-peut-faire-avec-play">5 trucs cool que l'on peut faire avec Play!►</h2>
+<h2 id="trucs-cool-que-lon-peut-faire-avec-play"><a href="#TOC">5 trucs cool que l'on peut faire avec Play!►</a></h2>
 <p>Les exemples suivants sont tirés <a href="http://www.playframework.org/documentation/1.0/5things">du site officiel de Play!►</a> et montrent en quelques lignes l'esprit et la simplicité du framework.</p>
-<h3 id="mapper-des-paramètres-http-et-une-méthode-java">1. Mapper des paramètres HTTP et une méthode Java</h3>
+<h3 id="mapper-des-paramètres-http-et-une-méthode-java"><a href="#TOC">1. Mapper des paramètres HTTP et une méthode Java</a></h3>
 <p>L'URL suivante /articles/archive?date=08/01/08&amp;page=2</p>
 <p>permettra de consulter les articles que vous avez demandé en ajoutant des paramètres ayant le même nom dans une méthode Java :</p>
 <pre class="sourceCode java"><code class="sourceCode java">    <span class="kw">public</span> <span class="dt">static</span> <span class="dt">void</span> <span class="fu">archive</span>(Date date, Integer page) {
@@ -156,7 +422,7 @@ code > span.er { color: #ff0000; font-weight: bold; }
         Name: <span class="kw">&lt;input</span><span class="ot"> type=</span><span class="st">&quot;text&quot;</span><span class="ot"> name=</span><span class="st">&quot;p.name&quot;</span> <span class="kw">/&gt;</span>
         Age: <span class="kw">&lt;input</span><span class="ot"> type=</span><span class="st">&quot;text&quot;</span><span class="ot"> name=</span><span class="st">&quot;p.age&quot;</span> <span class="kw">/&gt;</span>
     <span class="kw">&lt;/form&gt;</span></code></pre>
-<h3 id="redirection-vers-une-action-en-appelant-simplement-une-méthode-java">2. Redirection vers une action, en appelant simplement une méthode Java</h3>
+<h3 id="redirection-vers-une-action-en-appelant-simplement-une-méthode-java"><a href="#TOC">2. Redirection vers une action, en appelant simplement une méthode Java</a></h3>
 <p>Play!► n'a pas besoin de l'équivalent de la directive <code>forward</code> de Servlet pour la redirection vers d'autres actions. Il suffit d'appeler la bonne méthode dans le code Java :</p>
 <pre class="sourceCode java"><code class="sourceCode java">    <span class="kw">public</span> <span class="dt">static</span> <span class="dt">void</span> <span class="fu">show</span>(Long id) {
         Article article = Article.<span class="fu">findById</span>(id);
@@ -175,7 +441,7 @@ code > span.er { color: #ff0000; font-weight: bold; }
     That will generate the following HTML:
 
     <span class="kw">&lt;a</span><span class="ot"> href=</span><span class="st">&quot;/articles/15&quot;</span><span class="kw">&gt;</span>My new article<span class="kw">&lt;/a&gt;</span></code></pre>
-<h3 id="ne-vous-répetez-pas-en-passant-des-paramètres-aux-templates">3. Ne vous répetez pas en passant des paramètres aux templates</h3>
+<h3 id="ne-vous-répetez-pas-en-passant-des-paramètres-aux-templates"><a href="#TOC">3. Ne vous répetez pas en passant des paramètres aux templates</a></h3>
 <p>Dans la plupart des frameworks Java, pour passer des objets au moteur de template vous devrez utiliser une syntaxe comme :</p>
 <pre class="sourceCode java"><code class="sourceCode java">    Article article = Article.<span class="fu">findById</span>(id);
     User user = User.<span class="fu">getConnected</span>();
@@ -188,7 +454,7 @@ code > span.er { color: #ff0000; font-weight: bold; }
     User user = User.<span class="fu">getConnected</span>();
     <span class="fu">render</span>(article, user);</code></pre>
 <p>Et vous pourrez récupérer les objets à partir de leur nom dans le template. Encore des lignes de code gagnées!</p>
-<h3 id="jpa-sous-steroids">4. JPA sous steroids</h3>
+<h3 id="jpa-sous-steroids"><a href="#TOC">4. JPA sous steroids</a></h3>
 <p>Il est vraiment facile d'utiliser l'API de mapping objet/relationnel JPA avec Play!►. Rien à configurer, il synchronisera la base (également configurée et démarrée automatiquement en mode développement) avec vos objets.</p>
 <p>En plus, si vous utilisez la classe Model de Play!►, le code sera encore simplifié :</p>
 <pre class="sourceCode java"><code class="sourceCode java">    <span class="kw">public</span> <span class="dt">void</span> <span class="fu">messages</span>(<span class="dt">int</span> page) {
@@ -199,7 +465,7 @@ code > span.er { color: #ff0000; font-weight: bold; }
         ).<span class="fu">from</span>(page * <span class="dv">10</span>).<span class="fu">fetch</span>(<span class="dv">10</span>);
         <span class="fu">render</span>(connectedUser, messages);
     }</code></pre>
-<h3 id="uploadez-facilement-des-fichiers">5. Uploadez facilement des fichiers</h3>
+<h3 id="uploadez-facilement-des-fichiers"><a href="#TOC">5. Uploadez facilement des fichiers</a></h3>
 <p>Le formulaire HTML :</p>
 <pre class="sourceCode html"><code class="sourceCode html">    <span class="kw">&lt;form</span><span class="ot"> action=</span><span class="st">&quot;@{Article.uploadPhoto()}&quot;</span><span class="ot"> method=</span><span class="st">&quot;POST&quot;</span><span class="ot"> enctype=</span><span class="st">&quot;multipart/form-data&quot;</span><span class="kw">&gt;</span>
         <span class="kw">&lt;input</span><span class="ot"> type=</span><span class="st">&quot;text&quot;</span><span class="ot"> name=</span><span class="st">&quot;title&quot;</span> <span class="kw">/&gt;</span>
@@ -211,13 +477,13 @@ code > span.er { color: #ff0000; font-weight: bold; }
        ...
     }</code></pre>
 <p>Comment faire plus simple?</p>
-<h1 id="je-suis-nul">Je suis nul</h1>
-<h1 id="on-se-met-en-jambes">On se met en jambes</h1>
+<h1 id="je-suis-nul"><a href="#TOC">Je suis nul</a></h1>
+<h1 id="on-se-met-en-jambes"><a href="#TOC">On se met en jambes</a></h1>
 <p>Tout ce qui va se dire ici doit être oublié une fois que vous passerez au chapitre 1. Le chapitre &quot;zéro&quot; n'est là que pour désacraliser la bête. Vous ne vous sentez pas à l'aise avec le développement web en java, le pattern MVC vous donne des boutons (faut reconnaître qu'une indigestion de Struts c'est moyen), écrire des requêtes SQL vous angoisse, vous êtes débutant etc. ... Mais vous voulez vous y coller tout de suite (l'est-y pas tout plein de motivation !). Et bien, ce chapitre est pour vous (vous allez très vite comprendre pourquoi)</p>
-<h2 id="play-cest-quoi">Play!► c'est quoi ?</h2>
+<h2 id="play-cest-quoi"><a href="#TOC">Play!► c'est quoi ?</a></h2>
 <p>On l'a déjà dit dans l'intro ! Mais je vous donne ma définition : <em>&quot;c'est le moyen de se la jouer rapidement en java-web, alors que l'on n'est pas forcément le meilleur de l'équipe&quot;</em></p>
 <p>Lorsque vous aurez lu les chapitres du niveau supérieur et passé tous les boss de fin de niveau, vous verrez aussi que c'est un excellent framework qui vous permet de pondre des applications web de qualité, robustes, maintenables, &quot;scalables&quot; ... (Oh p... j'ai l'impression de répondre à un appel d'offre). Mais ça c'est pour mes petits camarades <a href="@loic_d">@loic_d</a> et <a href="@mklabs">@mklabs</a>. Du coup vous aurez compris que c'est moi qui ne suis pas le meilleur de l'équipe ;)</p>
-<h2 id="bon-on-sy-colle">Bon on s'y colle ?</h2>
+<h2 id="bon-on-sy-colle"><a href="#TOC">Bon on s'y colle ?</a></h2>
 <p>Nous allons voir comment :</p>
 <ul>
 <li>installer Play!►</li>
@@ -225,10 +491,10 @@ code > span.er { color: #ff0000; font-weight: bold; }
 <li>générer le squelette de l'application</li>
 <li>paramétrer votre IDE préféré (en fait je vais vous dire quel IDE utiliser)</li>
 </ul>
-<h3 id="pré-requis">Pré-requis</h3>
+<h3 id="pré-requis"><a href="#TOC">Pré-requis</a></h3>
 <p>Vous devez avoir installé Java sur votre joujou préféré.</p>
 <p><em>Si vous ne savez pas faire, créez une &quot;issue&quot; sur le repository git du bouquin : <a href="https://github.com/3monkeys/play.rules/issues">https://github.com/3monkeys/play.rules/issues</a>, ça veut dire que c'est utile à rajouter dans le bouquin.</em></p>
-<h3 id="installation">Installation</h3>
+<h3 id="installation"><a href="#TOC">Installation</a></h3>
 <ul>
 <li>Télécharger Play Framework : <a href="http://www.playframework.org/download">http://www.playframework.org/download</a></li>
 <li>dézipper quelque part</li>
@@ -276,10 +542,10 @@ code > span.er { color: #ff0000; font-weight: bold; }
 ~</code></pre></li>
 </ul>
 <p><strong><em>Remarque :</em></strong> <em>En ce qui me concerne, je fais toutes les manipulations sous OSX, mais globalement la logique est la même sous Linux ou Windows. Si vous avez un soucis, créez une &quot;issue&quot; sur le repository git du bouquin : <a href="https://github.com/3monkeys/play.rules/issues">https://github.com/3monkeys/play.rules/issues</a>.</em></p>
-<h3 id="lappel-doffres">L'Appel d'Offres</h3>
+<h3 id="lappel-doffres"><a href="#TOC">L'Appel d'Offres</a></h3>
 <p><em>Ou comment je vais être hors sujet pendant quelques minutes ... Imaginons ...</em></p>
 <p>Vous êtes Philou, chef de projet technique dans une cht'ite SSII parisienne, plutôt orienté (vous) technologies .Net. Pour des raisons personnelles (Dulcinée, marre de Panam, du RER, ...) vous décidez de retourner à la campagne (euh en province pardon) et intégrez une agence régionale d'une grande SSII nationale.</p>
-<h4 id="er-jour-confrontation-avec-votre-chef-dagence">1er jour : confrontation avec votre chef d'agence</h4>
+<h4 id="er-jour-confrontation-avec-votre-chef-dagence"><a href="#TOC">1er jour : confrontation avec votre chef d'agence</a></h4>
 <p><strong>Lui :</strong> <em>Tu sais, Philou, chez nous on est tous ingés, car on doit savoir tout faire, et on est tour à tour Chef de projet, architecte, développeur, ...</em></p>
 <p><strong>Vous :</strong> <em>Ah c'est pour ça que sur mon contrat de travail il y a marqué ingénieur d'études ?</em></p>
 <p><strong>Lui :</strong> <em>Exactement ! Je suis content que tu adhères à notre façon de penser, c'est très corporate, notre collaboration va être particulièrement entrichissante.</em></p>
@@ -293,13 +559,13 @@ code > span.er { color: #ff0000; font-weight: bold; }
 <p><strong>Lui :</strong> <em>Non, ne demande pas. Allez, je t'appelle dès qu'une mission en adéquation avec ton profil se présente.</em></p>
 <p>Et les semaines, mois, ... passent à apprendre Java à la terrasse du café en face de chez vous, le tout entrecoupé de quelques missions à forte valeur ajoutée autour de technologies d'avenir telles MS Access, Delphi, ...</p>
 <p><em>Toute ressemblance avec des personnages existants serait totalement fortuite.</em></p>
-<h4 id="pétage-de-plombs">Pétage de plombs</h4>
+<h4 id="pétage-de-plombs"><a href="#TOC">Pétage de plombs</a></h4>
 <p>Bon, apprendre Java tout seul, bof ... C'est le printemps, vous êtes dans une région magnifique où le réseau halieutique (les rivières, les étangs, ...) est très riche. Grande décision : vous avez décidez de vous mettre à la pêche &quot;sportive&quot; et f#%$ Java ! C'est parti pour les grandes balades au bord de l'eau.</p>
 <p>Après quelques jours sur le même spot, vous faites la connaissance de Julo qui fait partie de l'amicale des pêcheurs de l'Azergues. Quelques canettes de bières plus tard, vous tentez d'expliquer à Julo ce qu'est un ingénieur informaticien. C'est à ce moment là qu'il sort &quot;La Poire Maison&quot; de sa besace car ça y'est vous êtes &quot;potes de pêche&quot;. 1 heure après vous êtes LA PERSONNE qui va faire le site web de gestion des prises de pêches des concours de l'amicale des pêcheurs de l'Azergues et <em>en Play!►</em> bien sûr. Rendez-vous, donc, dimanche au local de l'amicale pour établir les spécifications, capturer les besoins, définir les exigences utilisateurs (eh oui, moi la poire ça me rend loquace)</p>
-<h4 id="le-cahier-des-charges">Le Cahier des Charges</h4>
+<h4 id="le-cahier-des-charges"><a href="#TOC">Le Cahier des Charges</a></h4>
 <p>Plusieurs fois par an, l'amicale des pêcheurs de l'Azergues organise un concours de pêche. L'amicale souhaiterait pouvoir gérer les inscrits et leurs prises lors de chacun des concours. C'est court (eh oui le client n'est pas mature dans l'expression de ses besoins), mais ça sera suffisant pour la création de notre application.</p>
 <p>Maintenant, j'arrête de délirer et nous repassons à la technique.</p>
-<h3 id="créer-le-squelette-de-lapplication">Créer le squelette de l'application</h3>
+<h3 id="créer-le-squelette-de-lapplication"><a href="#TOC">Créer le squelette de l'application</a></h3>
 <p>Nous avons donc installé Play, nous allons commencer à bosser :</p>
 <ul>
 <li>Créer un workspace (le répertoire qui hébergera tes applications), et &quot;aller dedans&quot;</li>
@@ -377,7 +643,7 @@ Listening for transport dt_socket at address: 8000
 # http.port=9000</code></pre></li>
 <li><p>activer la ligne <code># http.port=9000</code> en enlevant # et en remplaçant <code>9000</code> par un autre port, non utilisé celui-ci.</p></li>
 </ul>
-<h3 id="paramétrage-de-lide">Paramétrage de l'IDE</h3>
+<h3 id="paramétrage-de-lide"><a href="#TOC">Paramétrage de l'IDE</a></h3>
 <p>En ce qui concerne l'IDE, vous pouvez très bien utiliser un simple éditeur de code avec colorisation syntaxique (Vous avez par exemple KomodoEdit qui fonctionne sur toutes les plateformes qui est assez sympa ... et open-source), mais c'est vraiment si vous voulez vous la jouer en démo ou que vous connaissez Java par coeur ou que vous codez sur un eeepc 701.</p>
 <p>Play!► propose les commandes nécessaires pour transformer votre projet en projet Eclipse, NetBeans ou IntelliJ. Je suis particulièrement accro à NetBeans, mais pour avoir utilisé la version Community d'IntelliJ (Win, Tux, OSX), je vous conseille fortement de choisir cet IDE, étant donné que la version open source suffit largement pour faire du Play!, pourquoi se priver ?</p>
 <p>Voyons donc comment faire pour transformer notre squelette d'application en projet IntelliJ (bien sûr vous avez téléchargé IntelliJ : <a href="http://www.jetbrains.com/idea/">http://www.jetbrains.com/idea/</a>) :</p>
@@ -440,7 +706,7 @@ Listening for transport dt_socket at address: 8000
 </ul>
 <p><!--![Alt "ch00_10"](/3monkeys/play.rules/blob/master/rsrc/ch00_10.png?raw=true)--> <img src="rsrc/p00_ch01_10.png" /></p>
 <p><strong>Voilà, nous sommes prêts à démarrer, nous pouvons passer à l'étape suivante.</strong> <strong>Rendez-vous donc au chapitre suivant :</strong> <a href="ch02-Premiere-application.md">ch02-Premiere-application</a>.</p>
-<h2 id="paramétrage-declipse">Paramétrage d'Eclipse</h2>
+<h2 id="paramétrage-declipse"><a href="#TOC">Paramétrage d'Eclipse</a></h2>
 <ul>
 <li>Tout d'abord, nous devons arrêter notre application : faire <code>Control+c</code> dans la console pour quitter</li>
 <li><p>En mode commande, placez vous dans votre répertoire &quot;workspace&quot; d'Eclipse</p>
@@ -494,14 +760,14 @@ Listening for transport dt_socket at address: 8000
 </div>
 <p>Pour lancer (ou debugger) l'application ou les tests depuis Eclipse, on fait un clic droit sur les fichiers <code>.run</code> dans le répertoire <code>eclipse</code> du projet, puis on sélectionne l'action <code>run as</code> (ou debug as) dans le menu contextuel.</p>
 <p><strong>Voilà, nous sommes prêts à démarrer, nous pouvons passer à l'étape suivante.</strong></p>
-<h1 id="faut-bosser-maintenant">Faut bosser maintenant !!!</h1>
+<h1 id="faut-bosser-maintenant"><a href="#TOC">Faut bosser maintenant !!!</a></h1>
 <p>Dans ce chapitre nous allons :</p>
 <ul>
 <li>créer notre 1ère page selon les préceptes MVC (kézaco ?)</li>
 <li>construire les bases de notre application</li>
 </ul>
 <p>ces bases seront suffisantes pour avoir quelque chose qui tourne à montrer à nos copains les pêcheurs.</p>
-<h2 id="introduction">Introduction</h2>
+<h2 id="introduction"><a href="#TOC">Introduction</a></h2>
 <p><em>Remarque : si ça vous ennuie, il est tout à fait possible de passer au § suivant</em></p>
 <p>Alors, avant de remettre les mains dans le code, nous allons parler théorie. Et plus particulièrement &quot;design pattern&quot; (<em>definition ici : <a href="http://fr.wikipedia.org/wiki/Design_pattern">http://fr.wikipedia.org/wiki/Design_pattern</a> (1)</em>) et encore plus particulièrement : <strong>pattern MVC</strong>, sûrement le pattern que j'ai le plus détesté, que j'ai trouvé être le pattern le plus crétin et le plus improductif de l'histoire des patterns.</p>
 <p>Je m'explique, j'étais architecte .Net (v° 1.1), fan invétéré du modèle évènementiel d'ASP.Net (2) et en changeant de boîte (celle dont je parlais dans le chapitre précédent), j'ai hérité du pilotage d'une TMA Java avec des applications Web. Mon nouveau boss m'a dit : <em>&quot;Tu n'es pas là pour coder, tu es là pour faire du management et de la relation client, donc pas besoin de connaître Java&quot;</em>, <strong>Moi (dans ma tête) :</strong> <em>&quot;wahouuu, trop sympa, ... mais en même temps, l'équipe va me prendre pour un c...&quot;</em>.</p>
@@ -514,25 +780,25 @@ Listening for transport dt_socket at address: 8000
 <p>Je vous épargne la suite. Les anciens (la meilleure équipe que j'ai pu avoir (3)) de ce projet reconnaitront sûrement la personne à laquelle je fais allusion.</p>
 <p>... bon j'en étais où ?</p>
 <p>Ah oui, c'est alors que je décide de me mettre sérieusement à Java, et surtout de prendre les choses à l'envers et de brillamment m'auto-former à <strong>STRUTS</strong> (achat de bouqins, etc. ...) d'urgenge, car 5 jours pour une f@&amp;%ing login box, ça me fait mal.</p>
-<h3 id="petit-rappel-mvc">Petit rappel : MVC</h3>
+<h3 id="petit-rappel-mvc"><a href="#TOC">Petit rappel : MVC</a></h3>
 <p><strong>STRUTS</strong> c'est (c'était?) le framework web Java par excellence qui met en oeuvre le pattern <strong>MVC</strong> : <strong>Modèle Vue Contrôleur</strong> (Model View Controller). Il permet de séparer les responsabilités en 3 couches (m... j'en avais 5 moi ...) :</p>
 <ul>
 <li><em>la vue</em> : c'est l'IHM, elle va recevoir des infos du <strong>contrôleur</strong> (<em>&quot;tiens affiche moi ça&quot;</em>), elle va envoyer des infos au contrôleur (<em>&quot;au fait, on m'a clickée dessus, le gars il voudrait la liste des clients&quot;</em>)</li>
 <li><em>le contrôleur</em> : c'est lui donc qui reçoit des infos de la <strong>vue</strong>, qui va aller récupérer des données métiers chez le <strong>modèle</strong> (<em>&quot;j'ai besoin pour la vue de la liste des clients&quot;</em>), et va les renvoyer à la vue et éventuellement appliquer des traitements à ces données avant de les renvoyer.</li>
 <li><em>le modèle</em> : c'est vos objets clients, fournisseurs, users, ... avec toute la mécanique qui sert à les sauvegarder, retrouver, modifier, supprimer ...</li>
 </ul>
-<h3 id="suite-de-lintroduction-où-jai-donc-décidé-dapprendre-struts">Suite de l'introduction (où j'ai donc décidé d'apprendre STRUTS)</h3>
+<h3 id="suite-de-lintroduction-où-jai-donc-décidé-dapprendre-struts"><a href="#TOC">Suite de l'introduction (où j'ai donc décidé d'apprendre STRUTS)</a></h3>
 <p>Et là c'est le drame ! Après avoir passé le cap de l'installation de mon serveur d'application (ça a bien changé maintenant, mais quand en plus on est habitué à IIS ...), après avoir installé et paramétré tous les bons plugins Eclipse, ce fut le 1er contact avec <strong>STRUTS</strong>.</p>
 <p>Alors je ne suis pas complètement idiot, j'ai codé mes 1ers écrans et ma mire de login (en passant il ne faut pas 5 jours), mais alors qu'est ce que j'ai trouvé ça fastidieux et inutile ! Je ne sais combien de fichier pour un seul écran! <strong>STRUTS</strong> pas pour moi! (et là je suis tombé amoureux des <strong>JSF</strong>, si !).</p>
 <p>Et bien vous allez voir (pour ceux qui ne connaissent pas) que :</p>
-<h2 id="avec-play-mvc-cest-limpide">Avec Play!►, MVC c'est limpide !</h2>
+<h2 id="avec-play-mvc-cest-limpide"><a href="#TOC">Avec Play!►, MVC c'est limpide !</a></h2>
 <p>Dans le chapitre précédent, nous avons initialisé notre application <strong>AzerguesPeche</strong>, il est temps maintenant de coder notre première page en mode MVC, comme ça après on n'en parle plus de MVC. Ami lecteur-codeur-newbee, prépare toi à entrer dans le monde de <strong>Java + WEB</strong> sans mal ni effort avec Play Framework (si c'est pas un slogan de bouqin ça!).</p>
 <ul>
 <li>Tout d'abord relancez votre application si elle ne tourne plus (<code>play run azerguespeche</code>)</li>
 <li>Ouvrez votre projet dans votre ide préféré (cf. chapitre précédent : <a href="01-Preparation.fr.md">01-Preparation.fr.md</a>)</li>
 <li>Observons la structure de notre future &quot;killer-app&quot;</li>
 </ul>
-<h3 id="structure-dazerguespeche-et-1ère-page">Structure d'azerguespeche et 1ère page</h3>
+<h3 id="structure-dazerguespeche-et-1ère-page"><a href="#TOC">Structure d'azerguespeche et 1ère page</a></h3>
 <p>Dans IntelliJ vous pouvez voir dans l'arborescence de votre projet que vous avez plusieurs répertoires :</p>
 <pre><code>- azerguespeche
     - app
@@ -540,7 +806,7 @@ Listening for transport dt_socket at address: 8000
         - models
         - views
             - Application</code></pre>
-<h4 id="er-modèle">1er modèle</h4>
+<h4 id="er-modèle"><a href="#TOC">1er modèle</a></h4>
 <p>créeons un premier modèle <code>version</code> dans le répertoire <code>models</code> :</p>
 <pre class="sourceCode java"><code class="sourceCode java">
     <span class="kw">package models;</span>
@@ -556,7 +822,7 @@ Listening for transport dt_socket at address: 8000
         }
     }</code></pre>
 <p><strong>Remarque :</strong> vous pouvez voir qu'il n'y a pas de getter ni de setter, juste des &quot;champs&quot; publiques. Dans la majeure partie des cas vous n'en n'avez pas besoin, alors à quoi bon ? Sachez cependant que Play!► va les générer lui même à la compilation (vous ne verrez rien dans le code). Au besoin vous pouvez les écrire vous même si nécessaire.</p>
-<h4 id="et-le-contrôleur">Et le contrôleur ?</h4>
+<h4 id="et-le-contrôleur"><a href="#TOC">Et le contrôleur ?</a></h4>
 <p>Cette fois-ci nous allons modifier le contrôleur <code>Application</code> dans le répertoire <code>controllers</code> :</p>
 <p><em>Si vous n'avez touché à rien vous devez avoir le code suivant :</em></p>
 <pre class="sourceCode java"><code class="sourceCode java">
@@ -582,7 +848,7 @@ Listening for transport dt_socket at address: 8000
             <span class="fu">render</span>(version);
         }
     }</code></pre>
-<h4 id="allons-modifier-la-vue-application">Allons modifier la vue Application</h4>
+<h4 id="allons-modifier-la-vue-application"><a href="#TOC">Allons modifier la vue Application</a></h4>
 <ul>
 <li>Ouvrez la page <code>index.html</code> du répertoire <code>views/Application/</code></li>
 <li><p>Vous devez avoir le code suivant :</p>
@@ -626,12 +892,12 @@ GET /public/    staticDir:public
 <pre><code># Home page
 GET /   Application.index</code></pre>
 <p>explique que quand on appelle la racine du site dans l'url (le &quot;<code>/</code>&quot; tout seul), alors on ouvre la page index.html du répertoire Application (c'est une <strong>convention</strong>)</p>
-<h2 id="vous-êtes-prêts-...-pour-aller-plus-loin-des-objets-des-écrans-...">Vous êtes prêts ! ... pour aller plus loin : des objets, des écrans ...</h2>
+<h2 id="vous-êtes-prêts-...-pour-aller-plus-loin-des-objets-des-écrans-..."><a href="#TOC">Vous êtes prêts ! ... pour aller plus loin : des objets, des écrans ...</a></h2>
 <p>Où nous allons créer les bases d'<strong><em>Azergues Pêche</em></strong> grâce au module CRUD de Play</p>
-<h3 id="préparation">Préparation</h3>
+<h3 id="préparation"><a href="#TOC">Préparation</a></h3>
 <p>c'est dans le chapitre suivant : <a href="ch03-Premiere-application-CRUD.md">ch03-Premiere-application-CRUD</a>.</p>
 <p>- (1) : oui, je sais, ce n'est pas la meilleure source d'information qui soit, ni la plus fiable, mais bon ... n'hésitez pas à poster vos définitions dans les &quot;issues&quot; du projet : <a href="https://github.com/3monkeys/play.rules/issues">https://github.com/3monkeys/play.rules/issues</a>. - (2) : je le suis encore un peu, je dois l'avouer, mais on ne se refait pas. - (3) : sans aucune ironie</p>
-<h1 id="le-socle-de-notre-application-grâce-au-module-crud">Le SOCLE de notre application grâce au module CRUD</h1>
+<h1 id="le-socle-de-notre-application-grâce-au-module-crud"><a href="#TOC">Le SOCLE de notre application grâce au module CRUD</a></h1>
 <p>Dans ce chapitre nous allons :</p>
 <ul>
 <li>paramétrer notre projet pour utiliser la base de données embarquée : HSQLDB</li>
@@ -641,8 +907,8 @@ GET /   Application.index</code></pre>
 <li>apporter quelques modifications pour améliorer l'affichage et valider les saisies</li>
 </ul>
 <p>Et tout ceci facilement et rapidement</p>
-<h2 id="préparation-de-notre-environnement">Préparation de notre environnement</h2>
-<h3 id="nous-allons-avoir-besoin-dune-base-de-données">Nous allons avoir besoin d'une base de données</h3>
+<h2 id="préparation-de-notre-environnement"><a href="#TOC">Préparation de notre environnement</a></h2>
+<h3 id="nous-allons-avoir-besoin-dune-base-de-données"><a href="#TOC">Nous allons avoir besoin d'une base de données</a></h3>
 <ul>
 <li><p>chercher dans <code>/conf/application.conf</code> ceci :</p>
 <pre><code># Database configuration
@@ -655,7 +921,7 @@ GET /   Application.index</code></pre>
 # db=mem</code></pre></li>
 <li><p>activer la ligne <code># db=mem</code> en enlevant # et remplaçant <code>mem</code> par <code>fs</code></p></li>
 </ul>
-<h3 id="nous-allons-activer-le-module-crud">Nous allons activer le module CRUD</h3>
+<h3 id="nous-allons-activer-le-module-crud"><a href="#TOC">Nous allons activer le module CRUD</a></h3>
 <p><em>C'est quoi CRUD ?</em>, alors déjà, ça veut dire <strong>C</strong>reate <strong>R</strong>ead <strong>U</strong>pdate <strong>D</strong>elete, le module CRUD de Play!► va permettre de générer automatiquement pour vous les écrans de saisie des données à partir de votre modèle objet avec toute la mécanique qui va bien pour sauvegarder vos modifications. Je n'en dis pas plus, les exemples qui vont suivre parleront d'eux-même.</p>
 <p>Donc pour activer le module CRUD :</p>
 <ul>
@@ -674,9 +940,9 @@ module.crud=${play.path}/modules/crud</code></pre></li>
 <p><strong>Avant de continuer, arrêtez puis relancez votre application :</strong></p>
 <p>donc avec la commande : <code>play run azerguespeche</code> en mode console.</p>
 <p>Vous devriez voir apparaître un message du type : <code>07:48:26,643 INFO  ~ Module crud is available (/Users/k33g_org/play/modules/crud)</code></p>
-<h2 id="il-est-temps-de-créer-notre-modèle-objet-model">Il est temps de créer notre modèle objet (model)</h2>
+<h2 id="il-est-temps-de-créer-notre-modèle-objet-model"><a href="#TOC">Il est temps de créer notre modèle objet (model)</a></h2>
 <p>Pour se mettre en jambes nous allons créer des pêcheurs et des poissons. les sources des classes vont ici <code>/azerguespeche/app/models/</code>, (donc dans IntelliJ, vous faites un click-droit sur le répertoire models + new + Java Class)</p>
-<h3 id="la-classe-pecheur">La classe Pecheur</h3>
+<h3 id="la-classe-pecheur"><a href="#TOC">La classe Pecheur</a></h3>
 <p>aura le code suivant :</p>
 <pre class="sourceCode java"><code class="sourceCode java">    <span class="kw">package models;</span>
     <span class="kw">import javax.persistence.*;</span>
@@ -702,7 +968,7 @@ module.crud=${play.path}/modules/crud</code></pre></li>
 <p><em>Note : tous les modèles sont précédés par l'annotation <code>@Entity</code>, cela permet à Play!► de savoir que c'est un modèle qui sera &quot;persistable&quot; en base de données.</em></p>
 <p><em>Note bis : tous les modèles héritent de la classe <code>Model</code>, ce qui leur affecte différents &quot;comportements&quot;, comme la méthode <code>save()</code>.</em></p>
 <p><em>Note (encore) : vous pouvez remarquer que l'on n'utilise pas de getter ni de setter, mais directement des champs publiques, Play!► s'occupera de les générer à la compilation.</em></p>
-<h3 id="la-classe-poisson">La classe Poisson</h3>
+<h3 id="la-classe-poisson"><a href="#TOC">La classe Poisson</a></h3>
 <pre class="sourceCode java"><code class="sourceCode java">    <span class="kw">package models;</span>
     <span class="kw">import javax.persistence.*;</span>
     <span class="kw">import play.db.jpa.*;</span>
@@ -722,7 +988,7 @@ module.crud=${play.path}/modules/crud</code></pre></li>
         }
     }</code></pre>
 <p>ça c'est fait.</p>
-<h2 id="maintenant-au-tour-des-contrôleurs">Maintenant, au tour des contrôleurs</h2>
+<h2 id="maintenant-au-tour-des-contrôleurs"><a href="#TOC">Maintenant, au tour des contrôleurs</a></h2>
 <ul>
 <li>dans <code>/azerguespeche/app/controllers/</code> créer les 2 classes &quot;controllers&quot; correspondant à nos 2 classes &quot;models&quot; précédentes</li>
 </ul>
@@ -730,7 +996,7 @@ module.crud=${play.path}/modules/crud</code></pre></li>
 <p>pour info le contrôleur de Pecheur.java s'appellera Pecheur<strong>s</strong>.java (c'est la norme, on parle aussi de <strong>conventions</strong>)</p>
 </blockquote>
 <p>Vous allez voir, c'est tout simple avec le mode CRUD :</p>
-<h3 id="la-classe-pecheurs">La classe Pecheur<strong>s</strong></h3>
+<h3 id="la-classe-pecheurs"><a href="#TOC">La classe Pecheur<strong>s</strong></a></h3>
 <pre class="sourceCode java"><code class="sourceCode java">    <span class="kw">package controllers;</span>
 
     <span class="kw">import play.*;</span>
@@ -739,7 +1005,7 @@ module.crud=${play.path}/modules/crud</code></pre></li>
     <span class="kw">public</span> <span class="kw">class</span> Pecheurs <span class="kw">extends</span> CRUD {
 
     }</code></pre>
-<h3 id="la-classe-poissons">La classe Poisson<strong>s</strong></h3>
+<h3 id="la-classe-poissons"><a href="#TOC">La classe Poisson<strong>s</strong></a></h3>
 <pre class="sourceCode java"><code class="sourceCode java">    <span class="kw">package controllers;</span>
 
     <span class="kw">import play.*;</span>
@@ -771,14 +1037,14 @@ module.crud=${play.path}/modules/crud</code></pre></li>
 <div class="figure">
 <img src="rsrc/p00_ch03_04.png" /><p class="caption"></p>
 </div>
-<h3 id="retournons-vite-modifier-le-code-de-nos-modèles">Retournons vite modifier le code de nos modèles :</h3>
+<h3 id="retournons-vite-modifier-le-code-de-nos-modèles"><a href="#TOC">Retournons vite modifier le code de nos modèles :</a></h3>
 <p>Nous allons nous contenter de rajouter (surcharger en fait) la méthode <code>toString()</code> de nos 2 modèles</p>
-<h4 id="dans-classe-pecheur">Dans Classe Pecheur</h4>
+<h4 id="dans-classe-pecheur"><a href="#TOC">Dans Classe Pecheur</a></h4>
 <pre class="sourceCode java"><code class="sourceCode java">    @Override
     <span class="kw">public</span> String <span class="fu">toString</span>() {
         <span class="kw">return</span> identifiant+<span class="st">&quot; : &quot;</span>+nom+<span class="st">&quot; &quot;</span>+prenom;
     }</code></pre>
-<h4 id="dans-classe-poisson">Dans Classe Poisson</h4>
+<h4 id="dans-classe-poisson"><a href="#TOC">Dans Classe Poisson</a></h4>
 <pre class="sourceCode java"><code class="sourceCode java">    @Override
     <span class="kw">public</span> String <span class="fu">toString</span>() {
         <span class="kw">return</span> identifiant+<span class="st">&quot; : &quot;</span>+nom;
@@ -789,7 +1055,7 @@ module.crud=${play.path}/modules/crud</code></pre></li>
 </div>
 <p>C'est mieux, non ?</p>
 <p>Nous allons créer quelques poissons, mais avant de continuer ...</p>
-<h3 id="comment-rendre-la-saisie-obligatoire">Comment rendre la saisie obligatoire ?</h3>
+<h3 id="comment-rendre-la-saisie-obligatoire"><a href="#TOC">Comment rendre la saisie obligatoire ?</a></h3>
 <p>Tout simplement en utilisant l'annotation <code>@Required</code> au dessus des champs obligatoires (dans notre classe Poisson) et en ajoutant la référence suivante dans le code de la classe : <code>import play.data.validation.Required;</code>, nous aurons donc le code suivant :</p>
 <pre class="sourceCode java"><code class="sourceCode java">    <span class="kw">package models;</span>
     <span class="kw">import javax.persistence.*;</span>
@@ -828,7 +1094,7 @@ module.crud=${play.path}/modules/crud</code></pre></li>
 </div>
 <p>Play!► vous affiche un message d'erreur, et où sont les champs obligatoires, tout ça juste avec une simple annotation !</p>
 <p>Bon, maintenant, il faut les saisir ces poissons ...</p>
-<h3 id="comment-exiger-un-format-de-saisie">Comment &quot;exiger&quot; un format de saisie</h3>
+<h3 id="comment-exiger-un-format-de-saisie"><a href="#TOC">Comment &quot;exiger&quot; un format de saisie</a></h3>
 <p>Vous pouvez aussi déclarer qu'un type de format est nécessaire comme l'e-mail, un chiffre, etc. ... Pour cela allons modifier la classe <code>Pecheur</code> en ajoutant un champ email et un champ département.</p>
 <ul>
 <li>pour l'email, nous utiliserons l'annotation <code>@Email</code> (la référence à déclarer dans le code sera : <code>import play.data.validation.Email;</code>)</li>
@@ -889,8 +1155,8 @@ module.crud=${play.path}/modules/crud</code></pre></li>
 <img src="rsrc/p00_ch03_09.png" /><p class="caption"></p>
 </div>
 <p>Eh oui, Play!► propose bien un module &quot;anti-débile&quot; et vous explique ce qu'il faut saisir avant d'enregistrer.</p>
-<h2 id="quelques-remarques">Quelques remarques</h2>
-<h3 id="recherches">Recherches</h3>
+<h2 id="quelques-remarques"><a href="#TOC">Quelques remarques</a></h2>
+<h3 id="recherches"><a href="#TOC">Recherches</a></h3>
 <p>Je ne sais pas si vous avez vu, mais dans les pages du module CRUD il y a un &quot;petit&quot; module de recherche, on l'essaie ? En images :</p>
 <div class="figure">
 <img src="rsrc/p00_ch03_10.png" /><p class="caption"></p>
@@ -902,9 +1168,9 @@ module.crud=${play.path}/modules/crud</code></pre></li>
 <img src="rsrc/p00_ch03_12.png" /><p class="caption"></p>
 </div>
 <p>Plutôt sympa, vous n'avez rien eu à coder pour ça :)</p>
-<h3 id="modèles">Modèles</h3>
+<h3 id="modèles"><a href="#TOC">Modèles</a></h3>
 <p>Vous avez aussi noté (j'espère) que toutes les modifications apportées aux classes modèles étaient répercutées à la fois sur la partie base de données et la partie affichage, et tout cela sans gros effort.</p>
-<h2 id="la-suite-cest-fini-pour-cette-partie">La suite (c'est fini pour cette partie)</h2>
+<h2 id="la-suite-cest-fini-pour-cette-partie"><a href="#TOC">La suite (c'est fini pour cette partie)</a></h2>
 <p>Nous verrons comment :</p>
 <ul>
 <li>créer de nouveaux modèles et des relations entre eux (nous aborderons donc quelques notions de JPA)</li>
@@ -913,10 +1179,10 @@ module.crud=${play.path}/modules/crud</code></pre></li>
 <p>c'est dans le chapitre suivant : <a href="ch04-Premiere-application-CRUD-part2.md">ch04-Premiere-application-CRUD-part2</a>.</p>
 <p>Vous n'avez pas encore le statut &quot;demi-dieu&quot; de la programmation Web en java <em>(1)</em>, mais je sens déjà quelque chose frétiller en vous :) Non ? Vous avouerez que pour le moment c'est assez facile et sans effort et pourtant ça a déjà de la gueule. J'espère que cela vous donne envie de continuer.</p>
 <p>- (1) : ne vous inquiétez pas, je n'ai pas cette prétention non plus ;), mais nous allons progresser ensemble</p>
-<h1 id="notre-application-crud-...-la-suite">Notre application CRUD ... la suite</h1>
-<h2 id="introduction-1">Introduction</h2>
+<h1 id="notre-application-crud-...-la-suite"><a href="#TOC">Notre application CRUD ... la suite</a></h1>
+<h2 id="introduction-1"><a href="#TOC">Introduction</a></h2>
 <p>Dans l'épisode précédant nous avons initié notre application grâce au module CRUD. Cette fois ci nous allons aller un peu plus loin. Nous verrons comment &quot;franciser&quot; notre site, comment lier les modèles et enfin modifier nos formulaires (enfin un formulaire).</p>
-<h2 id="tout-dabord-quelques-réglages">Tout d'abord quelques réglages</h2>
+<h2 id="tout-dabord-quelques-réglages"><a href="#TOC">Tout d'abord quelques réglages</a></h2>
 <p>Dans <code>application.conf</code> cherchez le texte suivant :</p>
 <pre><code># i18n
 # ~~~~~
@@ -937,11 +1203,11 @@ date.format=yyyy-MM-dd
 date.format=yyyy-MM-dd
 date.format.fr=dd/MM/yyyy</code></pre>
 <p>Nous venons d'expliquer à Play que notre locale est française, et nous avons précisé le format de date, cela aura donc une incidence sur les écrans de saisie.</p>
-<h2 id="evolutions-de-notre-modèle">Evolutions de notre modèle :</h2>
+<h2 id="evolutions-de-notre-modèle"><a href="#TOC">Evolutions de notre modèle :</a></h2>
 <p>Nous allons créer des compétitions, qui serviront à enregistrer les prises faites par chacun des pêcheurs. Je ne vais pas gérer les inscriptions, on dit que l'on saisit uniquement les pêcheurs et leurs prises lors des compétitions.</p>
 <p>Nous aurons donc : une compétition est composée de prises, une prises c'est un poisson pris par un pêcheur.</p>
 <p>Créer les 2 Classes <code>Competition</code> et <code>Prise</code> dans le répertoire <code>models</code> :</p>
-<h3 id="la-compétition">La Compétition</h3>
+<h3 id="la-compétition"><a href="#TOC">La Compétition</a></h3>
 <pre class="sourceCode java"><code class="sourceCode java">    <span class="kw">package models;</span>
 
     <span class="kw">import javax.persistence.*;</span>
@@ -979,7 +1245,7 @@ date.format.fr=dd/MM/yyyy</code></pre>
             <span class="kw">return</span> nom + <span class="st">&quot; : &quot;</span> + date;
         }
     }</code></pre>
-<h3 id="la-prise">La Prise</h3>
+<h3 id="la-prise"><a href="#TOC">La Prise</a></h3>
 <pre class="sourceCode java"><code class="sourceCode java">    <span class="kw">package models;</span>
 
     <span class="kw">import javax.persistence.*;</span>
@@ -1028,10 +1294,10 @@ date.format.fr=dd/MM/yyyy</code></pre>
 
     }</code></pre>
 <p><strong>Remarque :</strong> nous venons d'utiliser des annotations JPA pour &quot;lier&quot; nos modèles : @OneToOne, @ManyToOne, @OneToMany ... Vous pouvez trouver une description de ces annotation ici <a href="http://www.oracle.com/technetwork/middleware/ias/toplink-jpa-annotations-096251.html">http://www.oracle.com/technetwork/middleware/ias/toplink-jpa-annotations-096251.html</a></p>
-<h2 id="noublions-pas-les-contrôleurs">N'oublions pas les contrôleurs</h2>
+<h2 id="noublions-pas-les-contrôleurs"><a href="#TOC">N'oublions pas les contrôleurs</a></h2>
 <p>Il n'y a pas grand chose à écrire, mais sans ça cela ne fonctionnera pas.</p>
 <p>Donc tout bêtement, créer les 2 Classes <code>Competitions</code> et <code>Prises</code> dans le répertoire <code>controllers</code> :</p>
-<h3 id="contrôleur-competitions">Contrôleur Competitions</h3>
+<h3 id="contrôleur-competitions"><a href="#TOC">Contrôleur Competitions</a></h3>
 <pre class="sourceCode java"><code class="sourceCode java">    <span class="kw">package controllers;</span>
 
     <span class="kw">import play.*;</span>
@@ -1040,7 +1306,7 @@ date.format.fr=dd/MM/yyyy</code></pre>
     <span class="kw">public</span> <span class="kw">class</span> Competitions <span class="kw">extends</span> CRUD {
 
     }</code></pre>
-<h3 id="contrôleur-prise">Contrôleur Prise</h3>
+<h3 id="contrôleur-prise"><a href="#TOC">Contrôleur Prise</a></h3>
 <pre class="sourceCode java"><code class="sourceCode java">    <span class="kw">package controllers;</span>
 
     <span class="kw">import play.*;</span>
@@ -1055,9 +1321,9 @@ date.format.fr=dd/MM/yyyy</code></pre>
 <li>saisissez quelques prises</li>
 </ul>
 <p>... Nous en aurons besoin pour la suite (pour le moment, je vous passe les &quot;screenshots&quot;, nous n'avons rien fait de très compliqué).</p>
-<h2 id="on-passe-une-vitesse-modifions-les-formulaires-crud">On passe une vitesse : Modifions les formulaires CRUD !</h2>
+<h2 id="on-passe-une-vitesse-modifions-les-formulaires-crud"><a href="#TOC">On passe une vitesse : Modifions les formulaires CRUD !</a></h2>
 <p>Sérieux, on va avoir la prétention de modifier un &quot;truc&quot; qui fonctionne bien (très bien même), qui a été codé par des &quot;pros&quot; ? Ben voui, on va se le permettre (et en plus Play est fait pour ça).</p>
-<h3 id="modifications-simples">Modifications simples</h3>
+<h3 id="modifications-simples"><a href="#TOC">Modifications simples</a></h3>
 <p>Comme vous avez pu vous en apercevoir, dans les formulaire CRUD les libellés des champs de saisie, correspondent au nom des propriétés des classes modèles, donc pas d'accent, pas d'espace, que du brut de décoffrage, donc bof. Il y a un moyen simple pour changer ceci.</p>
 <p>Dans le répertoire <code>conf</code> de l'arborescence, il y a le fichier <code>messages.fr</code>, dans lequel vous pouvez saisir des libellés &quot;plus parlants&quot; qui seront utilisés (entre autre) par les formulaires CRUD.</p>
 <p><strong>Remarque :</strong> il est aussi possible de saisir dans le fichier <code>messages</code> (sans extension) mais cela sera valable pour toutes les langues</p>
@@ -1072,7 +1338,7 @@ competition = Compétition</code></pre>
 </div>
 <p>C'est plus pro, ça coûte pas cher, et c'est facile, voire trop facile! (la magie de Play!►)</p>
 <p><strong>Remarque :</strong> il est possible d'avoir autant de fichiers <code>messages.xxx</code> que de langues.</p>
-<h3 id="modifications-plus-profondes">Modifications plus &quot;profondes&quot;</h3>
+<h3 id="modifications-plus-profondes"><a href="#TOC">Modifications plus &quot;profondes&quot;</a></h3>
 <p>J'aimerais (nous aimerions) bien que l'écran d'une compétition affiche la liste des prises de la compétition (ce qui n'est pas le cas actuellement si vous avez bien suivi).</p>
 <p>Le module CRUD permet de générer automatiquement le code d'une vue (liées à son controller), et donc de se passer de la version &quot;générée à la volée&quot;</p>
 <ul>
@@ -1110,7 +1376,7 @@ competition = Compétition</code></pre>
 </ul>
 <p><strong>Donc</strong>, dorénavant, lorsque vous utiliserez le formulaire d'édition des compétitions, ce sera ce template qui sera utilisé.</p>
 <p><strong>Remarque :</strong> pour modifier le formulaire de liste (toujours du module CRUD), la commande serait la suivante : <code>play crud:ov --template Competitions/list</code>, pour modifier le template CRUD general (layout.html) dont héritent toutes les vues CRUD, la commande serait la suivante : <code>play crud:ov --layout</code> ... Amusez vous (sauvegardez avant).</p>
-<h4 id="nous-allons-créer-un-tag-qui-va-permettre-dafficher-la-liste-des-prises-dune-compétition">Nous allons créer un &quot;tag&quot; qui va permettre d'afficher la liste des prises d'une compétition</h4>
+<h4 id="nous-allons-créer-un-tag-qui-va-permettre-dafficher-la-liste-des-prises-dune-compétition"><a href="#TOC">Nous allons créer un &quot;tag&quot; qui va permettre d'afficher la liste des prises d'une compétition</a></h4>
 <p>Dans un 1er temps, remplacer dans <code>show.html</code>, <code>#{crud.form /}</code> par <code>#{crud.form} #{/crud.form}</code>, Puis au sein de la nouvelle balise, saisissez le code suivant :</p>
 <pre class="sourceCode html"><code class="sourceCode html">    #{crud.custom &#39;prises&#39;}
     <span class="kw">&lt;div&gt;</span>
@@ -1122,7 +1388,7 @@ competition = Compétition</code></pre>
     <span class="kw">&lt;/div&gt;</span>
     #{/crud.custom}</code></pre>
 <p><strong>Remarque :</strong> object représente l'objet (l'instance de classe) lié au formulaire. Dans le cas qui nous intéresse, c'est une compétition. Or, il se trouve que la classe <code>Competition</code> a une propriété <code>prises</code> qui contient la liste des prises d'une compétition. Donc pour avoir la liste, il suffit d'appeler <code>object.prises</code> et de le parcourir avec <code>#{list}#{/list}</code>.</p>
-<h4 id="au-final-votre-template-devrait-ressembler-à-ceci">Au final, votre template devrait ressembler à ceci :</h4>
+<h4 id="au-final-votre-template-devrait-ressembler-à-ceci"><a href="#TOC">Au final, votre template devrait ressembler à ceci :</a></h4>
 <pre class="sourceCode html"><code class="sourceCode html">    #{extends &#39;CRUD/layout.html&#39; /}
 
     <span class="kw">&lt;div</span><span class="ot"> id=</span><span class="st">&quot;crudShow&quot;</span><span class="ot"> class=</span><span class="st">&quot;${type.name}&quot;</span><span class="kw">&gt;</span>
@@ -1166,17 +1432,17 @@ competition = Compétition</code></pre>
 <img src="rsrc/p00_ch04_02.png" /><p class="caption"></p>
 </div>
 <p>Ok, ça casse pas 3 pattes à un canard esthétiquement parlant (encore que j'ai vu beaucoup plus moche sur des projets facturés ;) ), mais avouez que l'effort est bien faible au regard du résultat. Est-ce que vous commencez à vous sentir plus &quot;à l'aise&quot; avec Play!► ? Encore quelques étapes, et vous en saurez assez pour commencer à &quot;bidouiller&quot; des choses un peu plus &quot;trapues&quot;.</p>
-<h2 id="la-suite-cest-fini-pour-cette-partie-1">La suite (c'est fini pour cette partie)</h2>
+<h2 id="la-suite-cest-fini-pour-cette-partie-1"><a href="#TOC">La suite (c'est fini pour cette partie)</a></h2>
 <p>Nous verrons comment :</p>
 <ul>
 <li>Créer des services (plutôt dans la partie &quot;part01 : Je suis prêt&quot;</li>
 <li>Créer &quot;from scratch&quot; des pages qui utilisent ces services</li>
 </ul>
-<h1 id="allez-on-se-cogne-laffichage">Allez, on se cogne l'affichage</h1>
-<h2 id="introduction-2">Introduction</h2>
+<h1 id="allez-on-se-cogne-laffichage"><a href="#TOC">Allez, on se cogne l'affichage</a></h1>
+<h2 id="introduction-2"><a href="#TOC">Introduction</a></h2>
 <p>Si vous vous souvenez, au chapitre &quot;ch02-Premiere-application&quot;, nous avions très rapidement (mais alors très très rapidement) modifié la vue principale de l'application, pour juste faire afficher un numéro de version. Cette vue, représentée par <code>index.html</code>, c'est la page principale de notre site, alors autant qu'elle affiche un peu plus d'informations.</p>
 <p>Actuellement dans sa version courante (1.x.y), Play!► utilise un moteur de template d'affichage basé sur Groovy. Attention, vous n'avez pas besoin de connaître (presque pas) Groovy pour vous en servir. Au passage, ça n'engage à rien d'aller jeter un coup d'oeil à Groovy qui à mon sens est un fantastique langage (ça n'engage que moi, même pas les autres rédacteurs du présent bouquin).</p>
-<h2 id="tout-dabord-les-spécifications">Tout d'abord, les &quot;spécifications&quot;</h2>
+<h2 id="tout-dabord-les-spécifications"><a href="#TOC">Tout d'abord, les &quot;spécifications&quot;</a></h2>
 <p>Dans un premier temps, je veux afficher sur ma page d'accueil :</p>
 <ul>
 <li>les pêcheurs de l'association</li>
@@ -1185,7 +1451,7 @@ competition = Compétition</code></pre>
 <p>//TODO : quand on clique sur une compétition on peut obtenir le détail de celle-ci</p></li>
 </ul>
 <p>Dans un deuxième temps, je veux faire un peu de mise en page &quot;sexy&quot;</p>
-<h2 id="modifions-le-contrôleur">Modifions le contrôleur</h2>
+<h2 id="modifions-le-contrôleur"><a href="#TOC">Modifions le contrôleur</a></h2>
 <p>Allez ouvrir <code>Application.java</code> (dans <code>azerguespeche/app/controllers/</code>). Si vous n'avez rien cassé dans les chapitres précédents, vous devriez avoir le code suivant :</p>
 <pre><code>package controllers;
 
@@ -1204,9 +1470,9 @@ public class Application extends Controller {
     }
 
 }</code></pre>
-<h3 id="on-code">On code :</h3>
+<h3 id="on-code"><a href="#TOC">On code :</a></h3>
 <p>A ceux qui vont grincer des dents en lisant le code : désolé !. Eh oui j'utilise des variables &quot;française&quot;, ce n'est pas joli joli. On s'en fout, nous sommes là pour apprendre à se dépatouiller avec Play!►. Pour les bonnes pratiques, vous verrez avec mes petits camarades dans les parties &quot;pros&quot;.</p>
-<h4 id="ramener-une-liste-denregistrements">&quot;Ramener&quot; une liste d'enregistrements ?</h4>
+<h4 id="ramener-une-liste-denregistrements"><a href="#TOC">&quot;Ramener&quot; une liste d'enregistrements ?</a></h4>
 <p>C'est là, qu'une fois de plus Play!► est magique!. Nos objets &quot;Models&quot; ont tous des méthodes qui permettent d'aller interroger la base, se sauvegarder en base (pour les instances des modèles), etc. … :</p>
 <ul>
 <li><code>Pecheur.find(string query)</code></li>
@@ -1216,7 +1482,7 @@ public class Application extends Controller {
 <li>etc. … (RTFM)</li>
 </ul>
 <p>Donc si je veux la liste de tous les pêcheurs, je vais utiliser ceci : <code>List&lt;Pecheur&gt; listePecheurs = Pecheur.findAll();</code></p>
-<h4 id="et-finalement-ce-contrôleur-il-va-ressembler-à-quoi">Et finalement ce contrôleur, il va ressembler à quoi ?</h4>
+<h4 id="et-finalement-ce-contrôleur-il-va-ressembler-à-quoi"><a href="#TOC">Et finalement ce contrôleur, il va ressembler à quoi ?</a></h4>
 <p>A ceci :</p>
 <pre><code>package controllers;
 
@@ -1244,9 +1510,9 @@ public class Application extends Controller {
 }</code></pre>
 <p><strong>Remarque :</strong> la méthode <code>render</code> sert juste à &quot;balancer&quot; les données obtenue vers la vue.</p>
 <p>Justement, allons modifier notre vue.</p>
-<h2 id="modifions-la-vue">Modifions la vue</h2>
+<h2 id="modifions-la-vue"><a href="#TOC">Modifions la vue</a></h2>
 <p>Allez ouvrir la page <code>index.html</code> (dans <code>azerguespeche/app/views/Application</code>).</p>
-<h3 id="je-souhaite-afficher-la-liste-des-pêcheurs">Je souhaite afficher la liste des pêcheurs</h3>
+<h3 id="je-souhaite-afficher-la-liste-des-pêcheurs"><a href="#TOC">Je souhaite afficher la liste des pêcheurs</a></h3>
 <p>1- je vais utiliser les tags html suivants : <code>&lt;ul&gt;&lt;li&gt;&lt;/li&gt;&lt;/ul&gt;</code> 2- pour parcourir la liste des pêcheurs, je vais utiliser le tag de template Play!► : <code>#{list items:&lt;list_items&gt;, as:'&lt;item&gt;'} … #{/list}</code> 3- pour afficher une valeur, j'utiliserais le tag de template Play!► : <code>${item.propertyOrMethod}</code></p>
 <p>Un exemple est toujours plus parlant :</p>
 <pre><code>#{extends &#39;main.html&#39; /}
@@ -1265,7 +1531,7 @@ public class Application extends Controller {
 <div class="figure">
 <img src="rsrc/p00_ch05_01.png" /><p class="caption"></p>
 </div>
-<h3 id="allez-on-termine">Allez, on termine …</h3>
+<h3 id="allez-on-termine"><a href="#TOC">Allez, on termine …</a></h3>
 <p>Complétons notre vue (toujours dans <code>index.html</code>) :</p>
 <pre><code>#{extends &#39;main.html&#39; /}
 #{set title:&#39;Azergues Pêche&#39; /}
@@ -1298,10 +1564,10 @@ public class Application extends Controller {
 <img src="rsrc/p00_ch05_02.png" /><p class="caption"></p>
 </div>
 <p><strong>Trop facile !</strong>, maintenant je voudrais classer les compétitions par dates et avoir le détail d'une compétition quand je clique sur une compétition.</p>
-<h3 id="on-fignole">On fignole</h3>
-<h4 id="classer-les-compétitions-de-la-plus-récente-à-la-plus-vieille">Classer les compétitions de la plus récente à la plus vieille :</h4>
+<h3 id="on-fignole"><a href="#TOC">On fignole</a></h3>
+<h4 id="classer-les-compétitions-de-la-plus-récente-à-la-plus-vieille"><a href="#TOC">Classer les compétitions de la plus récente à la plus vieille :</a></h4>
 <p>Dans <code>Application.java</code> on remplace <code>List&lt;Competition&gt; listeCompetitions = Competition.findAll();</code> par <code>List&lt;Competition&gt; listeCompetitions = Competition.find(&quot;order by date DESC&quot;).fetch();</code> … Et là vous venez de faire une requête JPA. Vous pouvez tester votre page, ça fonctionne.</p>
-<h4 id="ajouter-des-liens-pour-avoir-le-détail-des-compétitions">Ajouter des liens pour avoir le détail des compétitions</h4>
+<h4 id="ajouter-des-liens-pour-avoir-le-détail-des-compétitions"><a href="#TOC">Ajouter des liens pour avoir le détail des compétitions</a></h4>
 <p>Chaque modèle JPA hérite d'une propriété <code>id</code>, c'est de cette propriété dont nous allons nous servir pour identifier chacune des compétitions.</p>
 <p>1- Modifions <code>index.html</code> la partie correspondant aux compétitions</p>
 <pre><code>&lt;h2&gt;Les compétitions&lt;/h2&gt;
@@ -1332,7 +1598,7 @@ public class Application extends Controller {
 <div class="figure">
 <img src="rsrc/p00_ch05_04.png" /><p class="caption"></p>
 </div>
-<h4 id="modifions-le-contrôlleur-et-terminons-la-vue-competition">Modifions le contrôlleur et terminons la vue &quot;competition&quot;</h4>
+<h4 id="modifions-le-contrôlleur-et-terminons-la-vue-competition"><a href="#TOC">Modifions le contrôlleur et terminons la vue &quot;competition&quot;</a></h4>
 <p>1- Modifions la méthode <code>competition()</code> de <code>Application.java</code> :</p>
 <pre><code>public static void competition(Long id) {
 
@@ -1356,7 +1622,7 @@ public class Application extends Controller {
 <img src="rsrc/p00_ch05_05.png" /><p class="caption"></p>
 </div>
 <p>Et Hop, même pas mal!</p>
-<h2 id="cest-moche">C'est moche !</h2>
+<h2 id="cest-moche"><a href="#TOC">C'est moche !</a></h2>
 <p>Là je suis d'accord :). On va essayer d'embellir tout ça. Je ne suis pas un graphiste, nous allons faire dans le simple. Ensuite, libre à vous de laisser s'exprimer &quot;le délire de l'artiste&quot; ou &quot;le fantasme de l'homme&quot; (cf. &quot;Pierre dans le Père Noël est une ordure&quot;).</p>
 <p>Dans un 1er temps, réglons tout de suite une chose horrible : Vous avez du remarquer que je répète <code>&lt;h1&gt;Azergues Pêche&lt;/h1&gt;</code> dans toute mes vues : c'est idiot. Dans le répertoire <code>azerguespeche/app/views/</code> vous avez une page <code>main.html</code> dont héritent les vues (vous savez la ligne <code>#{extends 'main.html' /}</code> en en-tête des vues). Donc vous me virez <code>&lt;h1&gt;Azergues Pêche&lt;/h1&gt;</code> des vues et vous allez le coller dans <code>main.html</code> :</p>
 <pre><code>&lt;!DOCTYPE html&gt;
@@ -1377,7 +1643,7 @@ public class Application extends Controller {
     &lt;/body&gt;
 &lt;/html&gt;</code></pre>
 <p>Si vous regardez le code de plus près, vous voyez qu'il fait référence à une feuille de style <code>main.css</code> dans le répertoire <code>/public/stylesheets</code>. Allons donc modifier cette feuille (qui est vide pour le moment).</p>
-<h3 id="la-feuille-de-style-main.css">La feuille de style : main.css</h3>
+<h3 id="la-feuille-de-style-main.css"><a href="#TOC">La feuille de style : main.css</a></h3>
 <pre><code>body {
     background-color            : #ddd;
     color                       : #222;
@@ -1434,7 +1700,7 @@ ul li:last-child {
     border-bottom-left-radius   : 6px;
     border-bottom-right-radius  : 6px;
 }</code></pre>
-<h3 id="derniers-réglages">Derniers réglages</h3>
+<h3 id="derniers-réglages"><a href="#TOC">Derniers réglages</a></h3>
 <p>1- Ajoutez ceci <code>&lt;meta name=&quot;viewport&quot; content=&quot;initial-scale=1.0, maximum-scale=1.0, user-scalable=no, width=device-width&quot;&gt;</code> dans <code>main.html</code>, cela permettra à votre page de bien s'adapter sur un mobile.</p>
 <p>2- Lancez votre application et accédez au lien : <a href="http://localhost:9000/">http://localhost:9000/</a> :</p>
 <div class="figure">
@@ -1446,7 +1712,7 @@ ul li:last-child {
 </div>
 <p>OK, ça ne respire pas la couleur, mais en un rien de temps, vous vous êtes fait un site mobile. Allez, soyez créatifs!</p>
 <p>C'est tout pour aujourd'hui.</p>
-<h1 id="note-pour-le-chargement-du-module-crud">Note pour le chargement du module CRUD :</h1>
+<h1 id="note-pour-le-chargement-du-module-crud"><a href="#TOC">Note pour le chargement du module CRUD :</a></h1>
 <p>Je propose d'utiliser la nouvelle méthode de chargement des modules avec le fichier dependencies.yml. En effet, le chargement du module CRUD par le fichier application.conf semble déprécié depuis la version 1.2.1 de play et provoque l'affichage du message suivant: <code>19:40:30,726 WARN ~ Declaring modules in application.conf is deprecated. Use dependencies.yml instead (module.crud)</code></p>
 <p>Cela donnerai donc pour activer le module CRUD :</p>
 <ul>
@@ -1462,12 +1728,12 @@ ul li:last-child {
 <p><strong>Avant de continuer, arrêtez votre application :</strong></p>
 <p>En ligne de commande, taper : <code>play dependencies</code></p>
 <p>Cette commande permet d'installer les modules et/ou bibliothèques externes déclarés dans le fichier dependencies.yml. Donc si tout se passe bien vous devriez voir un message indiquant que le module CRUD a été installé.</p>
-<h1 id="je-suis-prêt">Je suis prêt</h1>
-<h1 id="mise-en-place-de-lapplication-vote4music">Mise en place de l'application Vote4Music</h1>
+<h1 id="je-suis-prêt"><a href="#TOC">Je suis prêt</a></h1>
+<h1 id="mise-en-place-de-lapplication-vote4music"><a href="#TOC">Mise en place de l'application Vote4Music</a></h1>
 <p>Dans la partie précédente nous avons vu comment générer une partie des traitements de notre application grâce au module CRUD. Nous allons maintenant apprendre à développer une petite application entièrement &quot;à la main&quot;. Le but de cette webapp est d'offrir la possibilité de parcourir une CDthèque, d'en ajouter de nouveaux et de voter pour vos albums préférés. Elle seranotre fil conducteur tout au long de cette partie.</p>
 <p>Le code complet de l'application est disponible <a href="https://github.com/loicdescotte/vote4music">ici</a></p>
-<h2 id="le-modèle-de-données">Le modèle de données</h2>
-<h3 id="la-classe-album">La classe Album</h3>
+<h2 id="le-modèle-de-données"><a href="#TOC">Le modèle de données</a></h2>
+<h3 id="la-classe-album"><a href="#TOC">La classe Album</a></h3>
 <p>La classe Album contient les informations suivante :</p>
 <ul>
 <li>Nom de l'album (obligatoire)</li>
@@ -1492,7 +1758,7 @@ ul li:last-child {
         <span class="co">//...</span>
     }</code></pre>
 <p>Nous verrons le code métier de cette classe dans la suite du chapitre.</p>
-<h3 id="la-classe-artist">La classe Artist</h3>
+<h3 id="la-classe-artist"><a href="#TOC">La classe Artist</a></h3>
 <p>La classe Artist est définie comme ceci :</p>
 <pre class="sourceCode java"><code class="sourceCode java">    @Entity
     <span class="kw">public</span> <span class="kw">class</span> Artist <span class="kw">extends</span> Model{
@@ -1501,13 +1767,13 @@ ul li:last-child {
         <span class="kw">public</span> String name;
         <span class="co">//...</span>
     }</code></pre>
-<h3 id="lenum-genre">L'enum Genre</h3>
+<h3 id="lenum-genre"><a href="#TOC">L'enum Genre</a></h3>
 <p>Le genre est une simple Enum, définie comme cela :</p>
 <pre class="sourceCode java"><code class="sourceCode java">    <span class="kw">public</span> <span class="kw">enum</span> Genre {
         ROCK, METAL, JAZZ, BLUES, POP, WORLD, HIP_HOP, OTHER
     }</code></pre>
 <p>Vous pouvez bien sur ajouter autant que genres que vous voulez.</p>
-<h2 id="définition-des-routes">Définition des routes</h2>
+<h2 id="définition-des-routes"><a href="#TOC">Définition des routes</a></h2>
 <p>Les routes que nous allons définir permettront :</p>
 <ul>
 <li>De consulter les albums</li>
@@ -1535,7 +1801,7 @@ GET     /public/                                                staticDir:public
 # Catch all
 *       /{controller}/{action}                                  {controller}.{action}</code></pre>
 <p>La route &quot;catch all&quot; permet de résoudre automatiquement une URL à partir du nom du controlleur et d'une méthode.</p>
-<h2 id="la-page-daccueil">La page d'accueil</h2>
+<h2 id="la-page-daccueil"><a href="#TOC">La page d'accueil</a></h2>
 <p>La page d'accueil permet d'accéder aux principales fonctionnalités de l'application :</p>
 <ul>
 <li>Le formulaire de création d'albums</li>
@@ -1551,7 +1817,7 @@ GET     /public/                                                staticDir:public
     #{/list}
 &lt;/select&gt;</code></pre>
 <p><strong>Remarque</strong> : Le langage d'expression utilisé dans les templates est <a href="http://groovy.codehaus.org/">Groovy</a>. C'est un langage à typage dynamique très proche de Java, qui nous permet de manipuler facilement les objets renvoyés par le contrôleur.</p>
-<h2 id="le-formulaire-dajout">Le formulaire d'ajout</h2>
+<h2 id="le-formulaire-dajout"><a href="#TOC">Le formulaire d'ajout</a></h2>
 <p>Dans le contrôleur <code>Application.java</code>, on crée une méthode pour obtenir le formulaire :</p>
 <pre class="sourceCode java"><code class="sourceCode java">    <span class="kw">public</span> <span class="dt">static</span> <span class="dt">void</span> <span class="fu">form</span>() {
         <span class="fu">render</span>();
@@ -1657,7 +1923,7 @@ GET     /public/                                                staticDir:public
 <p>Les mots clés peuvent être liés avec des &quot;And&quot;. On peut par exemple écrire <code>find(&quot;byNameAndGenre&quot;, name, genre)</code> ou <code>find(&quot;byNameLikeAndGenreIsNotNull&quot;, name, genre)</code>. La méthode <code>find</code> prend un nombre indéfini de paramètres (grâce à la syntaxe <code>...</code>) :</p>
 <pre class="sourceCode java"><code class="sourceCode java">    JPAQuery <span class="fu">find</span>(String query, Object<span class="kw">... </span>params);</code></pre>
 <p>*Il existe différents types de 'like' selon la sensibilité qu'on veut donner à la casse. Le mot clé <code>Like</code> va chercher des mots clés en minuscule dans la base, <code>Ilike</code> est complètement insensible à la casse, alors que <code>Elike</code> et équivalent au <code>like</code> SQL n'effectue aucune conversion.</p>
-<h2 id="lister-et-rechercher-des-albums">Lister et rechercher des albums</h2>
+<h2 id="lister-et-rechercher-des-albums"><a href="#TOC">Lister et rechercher des albums</a></h2>
 <p>On utilise jQuery et le plugin datatables pour améliorer le rendu du tableau des résultats. Ce plugin permet d'afficher des liens pour trier le tableau, et ajoute la pagination des données. Ce plugin est très simple à utiliser, il suffit d'écrire ces quelques lignes pour l'activer :</p>
 <pre class="js"><code>    $(document).ready(function(){
         $(&#39;#albumList&#39;).dataTable();
@@ -1714,7 +1980,7 @@ GET     /public/                                                staticDir:public
         <span class="kw">return</span> albums;
     }</code></pre>
 <p>Selon nos besoins, on peut bien sûr enrichir les filtres et les requêtes pour obtenir des résultats plus précis.</p>
-<h2 id="le-top-10">Le top 10</h2>
+<h2 id="le-top-10"><a href="#TOC">Le top 10</a></h2>
 <p>Cette fonction de l'application permet d'afficher les 10 albums ayant reçu le plus de votes, pour une année et un genre donnés.</p>
 <p>Sur la page d'accueil, on ajoute la possibilité de choisir le genre et l'année durant laquelle sont sortis les albums :</p>
 <pre><code>#{form @listByGenreAndYear()}
@@ -1787,7 +2053,7 @@ GET     /public/                                                staticDir:public
 <p><strong>Remarque</strong> : On aurait pu se passer de cette libraire, appliquer les filtres à l'aide d'une requête en base de données. Mais cet exemple nous permet de voir comment intégrer d'autres librairies à notre application Play!►, tout en obtenant un code intéressant du point de vue de la syntaxe.</p>
 <p>Pour que Play!► puisse bénéficier de lambdaj, on ajoute cette ligne à la section <code>require</code> du fichier dependencies.yml :</p>
 <pre><code>- com.googlecode.lambdaj -&gt; lambdaj 2.2</code></pre>
-<h2 id="la-fonction-de-vote">La fonction de vote</h2>
+<h2 id="la-fonction-de-vote"><a href="#TOC">La fonction de vote</a></h2>
 <p>Voyons maintenant une fonctionnalité clé de cette application, le vote!</p>
 <p>Cette méthode du contrôleur permet d'enregistrer un vote pour un album :</p>
 <pre class="sourceCode java"><code class="sourceCode java">    <span class="kw">public</span> <span class="dt">static</span> <span class="dt">void</span> <span class="fu">vote</span>(String id) {
@@ -1847,7 +2113,7 @@ GET     /public/                                                staticDir:public
     };
 
     $(&#39;a.voteLink&#39;).click(clickVote);</code></pre>
-<h2 id="gestion-des-pochettes-dalbums">Gestion des pochettes d'albums</h2>
+<h2 id="gestion-des-pochettes-dalbums"><a href="#TOC">Gestion des pochettes d'albums</a></h2>
 <p>On veut maintenant ajouter la possibilité d'attacher l'image d'une pochette aux albums. On enrichit la classe Album d'un nouveau champ :</p>
 <pre class="sourceCode java"><code class="sourceCode java">    <span class="kw">public</span> <span class="dt">boolean</span> hasCover = <span class="kw">false</span>;</code></pre>
 <p>Ce booléen nous permettra de savoir si l'album possède une pochette ou non. On ajoute une colonne à la liste des albums. Lors de l'affichage, on effectue le test suivant :</p>
@@ -1879,7 +2145,7 @@ GET     /public/                                                staticDir:public
     };</code></pre>
 <p>Ce code récupère une image dans un répertoire du serveur et effectue son rendu à l'aide du plugin jQuery bt (BeautyTips).</p>
 <p>Voyons maintenant comment enregistrer l'image dans ce répertoire lors de la création d'un album.</p>
-<h3 id="upload-et-sauvegarde-dune-image">Upload et sauvegarde d'une image</h3>
+<h3 id="upload-et-sauvegarde-dune-image"><a href="#TOC">Upload et sauvegarde d'une image</a></h3>
 <p>On ajoute un champ dans le formulaire de création (et d'édition) de l'album :</p>
 <pre><code>&lt;p class=&quot;field&quot;&gt;
     &lt;label for=&quot;cover&quot;&gt;Cover&lt;/label&gt;
@@ -1917,15 +2183,15 @@ GET     /public/                                                staticDir:public
         <span class="fu">list</span>();
     }</code></pre>
 <p>Comme vous pouvez le voir il suffit d'ajouter un paramètre de type <code>File</code> à la méthode <code>save</code> puis de le traiter avec les méthodes <code>Play.getFile</code> (pour déterminer le chemin de destination du fichier) et <code>renameTo</code>.</p>
-<h1 id="services-web">Services Web</h1>
-<h2 id="rest-et-restful-quest-ce-que-cest">REST et RESTful, qu'est ce que c'est?</h2>
+<h1 id="services-web"><a href="#TOC">Services Web</a></h1>
+<h2 id="rest-et-restful-quest-ce-que-cest"><a href="#TOC">REST et RESTful, qu'est ce que c'est?</a></h2>
 <p>On appelle service RESTful un service web respectant le style d'architecture REST. REST (Representational State Transfer) est un modèle d'architecture orienté ressources. Ceci signifie qu'au lieu d'exposer des méthodes comme lorsque l'on utilise le protocole SOAP, on va exposer des ressources. Chaque ressource possède une URL qui l'identifie.</p>
 <p>Contrairement à SOAP, REST s'appuie uniquement sur le protocole HTTP et ne propose aucune couche au dessus de ce protocole. Tout est faisable à partir des opérations fournies par de base par HTTP : GET, PUT, POST, DELETE, etc. Pour récupérer une collection, on effectue un GET sur l'URL appropriée. La réponse contiendra un ensemble d'éléments, décrits par exemple en XML ou en JSON. Pour chaque élément, une URL est définie. Il sera donc possible d'effectuer un appel GET sur un élément en particulier pour ne récupérer que celui ci. Une opération de type PUT sur le même élément permettra de mettre à jour ses données. De la même façon, une opération DELETE supprimera l'élément.</p>
 <p>REST est en fait le modèle sur lequel le web lui même est construit : les sites et les pages web étant des ressources accessibles via des URL, depuis un navigateur grâce à des opérations HTTP.</p>
 <p>Pour la sécurité il est possible de s'appuyer sur l'authentification HTTP, ou encore sur le SSL avec HTTPS. Comme vous pouvez le voir, tout est fait pour utiliser au maximum ce que le web nous fournit depuis toujours, sans sur-couche supplémentaire.</p>
-<h2 id="play-et-les-services-rest">Play!► et les services REST</h2>
+<h2 id="play-et-les-services-rest"><a href="#TOC">Play!► et les services REST</a></h2>
 <p>Les URL de Play!► étant RESTful par essence, il devient très facile de créer une petite API REST/XML conjointement à l'interface Web d'une application Play!►. Voyons comment procéder.</p>
-<h3 id="exposer-des-données-avec-un-service-rest">Exposer des données avec un service REST</h3>
+<h3 id="exposer-des-données-avec-un-service-rest"><a href="#TOC">Exposer des données avec un service REST</a></h3>
 <p>Gardons l'exemple de notre bibliothèque musicale. Notre modèle comporte des albums, des artistes et des genres. Pour rappel, la classe Album se présente comme ceci :</p>
 <pre class="sourceCode java"><code class="sourceCode java">    @Entity
     <span class="kw">public</span> <span class="kw">class</span> Album <span class="kw">extends</span> Model {
@@ -1980,7 +2246,7 @@ GET /api/albums/{genre}   Application.listXml(format:&#39;xml&#39;)</code></pre>
       &lt;genre&gt;ROCK&lt;/genre&gt;
    &lt;/album&gt;
 &lt;/albums&gt;</code></pre>
-<h3 id="envoi-de-données-à-travers-un-service-rest">Envoi de données à travers un service REST</h3>
+<h3 id="envoi-de-données-à-travers-un-service-rest"><a href="#TOC">Envoi de données à travers un service REST</a></h3>
 <p>Dans la première partie nous avons vu comment exposer des données au format XML avec Play!►. Maintenant nous allons effectuer l'opération inverse, l'envoi d'un contenu XML au contrôleur à travers une URL RESTful.</p>
 <p>On veut par exemple envoyer le contenu suivant en POST avec un content type application/xml :</p>
 <pre><code>&lt;album&gt;
@@ -2041,11 +2307,11 @@ GET /api/albums/{genre}   Application.listXml(format:&#39;xml&#39;)</code></pre>
     }</code></pre>
 <p>Notre API REST/XML nous permet donc maintenant de lire la liste des albums de note bibliothèque musicale et d'ajouter des albums. Vous pouvez tester l'envoi de contenu XML avec l'application <a href="http://code.google.com/p/rest-client/">rest-client</a> ou avec le plugin <a href="https://addons.mozilla.org/de/firefox/addon/poster/">Poster de Firefox</a>:</p>
 <div class="figure">
-<embed src="https://static-cdn.addons.mozilla.net/img/uploads/previews/full/19/19951.png?modified=1208233459"><p class="caption">Alt &quot;poster&quot;</p>
+<img src="rsrc/p01_ch02_01.png" alt="Alt &quot;poster&quot;" /><p class="caption">Alt &quot;poster&quot;</p>
 </div>
-<h3 id="services-restjson">Services REST/JSON</h3>
+<h3 id="services-restjson"><a href="#TOC">Services REST/JSON</a></h3>
 <p>Dans la première partie de ce chapitre, nous avons vu comment créer des services REST envoyant et consommant des messages au format XML. Voyons maintenant comment faire la même chose avec JSON.</p>
-<h4 id="le-format-json">Le format JSON</h4>
+<h4 id="le-format-json"><a href="#TOC">Le format JSON</a></h4>
 <p>Définition de wikipedia :</p>
 <p><code>JSON (JavaScript Object Notation) est un format de données textuel, générique, dérivé de la notation des objets du langage ECMAScript. Il permet de représenter de l’information structurée.</code></p>
 <p>L'avantage de JSON par rapport à XML être d'être un peu moins verbeux et directement interprétable dans un navigateur à l'aide de JavaScript.</p>
@@ -2068,7 +2334,7 @@ GET /api/albums/{genre}   Application.listXml(format:&#39;xml&#39;)</code></pre>
         <span class="fu">render</span>(albums);
     }</code></pre>
 <p>Si vous tapez l'URL /api/albums.xml, Play!► cherchera un fichier de template XML nommé <code>listAlbums.xml</code> pour effectuer le rendu.</p>
-<h3 id="recevoir-un-message-json">Recevoir un message JSON</h3>
+<h3 id="recevoir-un-message-json"><a href="#TOC">Recevoir un message JSON</a></h3>
 <p>Maintenant que nous savons exposer des données au format JSON à travers un service REST, voyons comment envoyer des données au serveur en utilisant le même format. Cette méthode du contrôleur permet de résoudre cette problématique :</p>
 <pre class="sourceCode java"><code class="sourceCode java">    <span class="kw">public</span> <span class="dt">static</span> <span class="dt">void</span> <span class="fu">saveAlbumJson</span>() {
         Gson gson = <span class="kw">new</span> <span class="fu">Gson</span>();
@@ -2087,7 +2353,7 @@ GET /api/albums/{genre}   Application.listXml(format:&#39;xml&#39;)</code></pre>
         <span class="kw">else</span> <span class="kw">if</span> (request.<span class="fu">contentType</span>.<span class="fu">equalsIgnoreCase</span>(<span class="st">&quot;application/json&quot;</span>))
             <span class="fu">saveAlbumJson</span>();
         }</code></pre>
-<h2 id="appeler-un-service-externe-avec-play.libs.ws">Appeler un service externe avec Play!►.libs.WS</h2>
+<h2 id="appeler-un-service-externe-avec-play.libs.ws"><a href="#TOC">Appeler un service externe avec Play!►.libs.WS</a></h2>
 <p>Play!► inclue également une libraire pour écrire des clients de services REST. Pour appeler un service externe, on peut écrire :</p>
 <pre class="sourceCode java"><code class="sourceCode java">    <span class="kw">import play.libs.WS;</span>
     <span class="co">//...</span>
@@ -2097,7 +2363,7 @@ GET /api/albums/{genre}   Application.listXml(format:&#39;xml&#39;)</code></pre>
 <p>Cette librairie est aussi compatible avec les services renvoyant du XML ou du texte brut :</p>
 <pre class="sourceCode java"><code class="sourceCode java">    String content = response.<span class="fu">getString</span>();
     Document xml= response.<span class="fu">getXml</span>();</code></pre>
-<h1 id="authentification-et-sécurité">Authentification et sécurité</h1>
+<h1 id="authentification-et-sécurité"><a href="#TOC">Authentification et sécurité</a></h1>
 <p>Maintenant que nous savons comment développer une application Web avec Play!►, voyons comment gérer la sécurité et l'authentification à l'aide du module Secure. Nous allons étudier le cas suivant : notre application est publique, on peut y naviguer sans être authentifié. Mais elle possède également des fonctions d’administrations, affichées lorsque l’on s’identifie comme admin. Pour accéder à ces fonctions, il existe une URL qui permet d’accéder à un formulaire d'authentification.</p>
 <p>Play!► permet d’écrire les informations de session utilisateur dans un cookie. Ce cookie est signé, il n’est donc pas modifiable côté client, par contre il n’est pas crypté, il ne faut donc pas écrire d’informations sensible à l’intérieur (pas de mot de passe par exemple). Dans notre exemple, on souhaite utiliser le cookie de session pour stocker le fait que l’utilisateur soit identifié comme un administrateur ou non.</p>
 <p>Une des choses que l’on souhaite ajouter à l’application web si l’utilisateur est admin est un lien “Supprimer” dans le tableau html qui liste nos entités métiers (on liste des albums de musique pour reprendre les exemples précédents). On peut donc utiliser le code suivant:</p>
@@ -2107,7 +2373,7 @@ GET /api/albums/{genre}   Application.listXml(format:&#39;xml&#39;)</code></pre>
 <p>Mais on se retrouve vite confronté à un problème, un clic sur ce lien mène à une URL comme celle ci :</p>
 <pre><code>/admin/delete?id=11</code></pre>
 <p>Même si le lien est masqué, n’importe qui peut entrer cette URL dans son browser pour supprimer l’entité de son choix. Nous devons donc aussi protéger la méthode delete côté serveur. Le module Secure de Play!► va nous permettre de faire ça de manière élégante. Il propose également un formulaire de login prêt à l’emploi qui permet de mettre les informations dont on a besoin dans le cookie de session.</p>
-<h2 id="mise-en-oeuvre-du-module-secure">Mise en oeuvre du module Secure</h2>
+<h2 id="mise-en-oeuvre-du-module-secure"><a href="#TOC">Mise en oeuvre du module Secure</a></h2>
 <p>Pour activer le module secure, on commence par modifier le fichier <code>dependencies.yml</code> pour y ajouter la ligne suivante dans la section <code>require</code> :</p>
 <pre><code>    - play -&gt; secure</code></pre>
 <p>Dans le fichier application.conf, on ajoute les identifiants d’admin :</p>
@@ -2159,9 +2425,9 @@ application.adminpwd=admin</code></pre>
  #{doLayout /}
  &lt;/body&gt;</code></pre>
 <p>Et voilà, vous savez maintenant comment ajouter des fonctions d’administration et de la sécurité à un site public avec Play!►.</p>
-<h1 id="tester-notre-application">Tester notre application</h1>
+<h1 id="tester-notre-application"><a href="#TOC">Tester notre application</a></h1>
 <p>Play intègre un framework de tests permettant de lancer différents types de tests.</p>
-<h2 id="tests-unitaires">Tests unitaires</h2>
+<h2 id="tests-unitaires"><a href="#TOC">Tests unitaires</a></h2>
 <p>Les tests unitaires testent une partie précise du code de notre application. Voici un exemple de test unitaire :</p>
 <pre class="sourceCode java"><code class="sourceCode java">    <span class="kw">public</span> <span class="kw">class</span> CoreTest <span class="kw">extends</span> UnitTest {
 
@@ -2188,7 +2454,7 @@ application.adminpwd=admin</code></pre>
         }
     }</code></pre>
 <p>Cette classe hérite de la classe UnitTest fournie par Play!►. La méthode <code>filterByYearTest</code> permet de tester la méthode <code>filterByYear</code> de la classe Album.</p>
-<h2 id="tests-fonctionnels">Tests fonctionnels</h2>
+<h2 id="tests-fonctionnels"><a href="#TOC">Tests fonctionnels</a></h2>
 <p>Les tests fonctionnels permettent de tester l'application à partir de son contrôleur en se basant sur le fichier <code>routes</code> pour résoudre les URL d'appel. Ce test permet par exemple d'utiliser un service REST et valider la réponse obtenue :</p>
 <pre class="sourceCode java"><code class="sourceCode java">    <span class="kw">public</span> <span class="kw">class</span> ApplicationTest <span class="kw">extends</span> FunctionalTest {
 
@@ -2260,7 +2526,7 @@ application.adminpwd=admin</code></pre>
         albums = <span class="fu">GET</span>(<span class="st">&quot;/api/albums.xml&quot;</span>);
         <span class="fu">assertTrue</span>(albums.<span class="fu">out</span>.<span class="fu">toString</span>().<span class="fu">contains</span>(<span class="st">&quot;album1&quot;</span>));
     }</code></pre>
-<h2 id="tests-selenium">Tests Selenium</h2>
+<h2 id="tests-selenium"><a href="#TOC">Tests Selenium</a></h2>
 <p>Ces tests permettent de simuler des clicks dans l'application à l'aide de l'outil Selenium. Ce code permet de déclencher la création d'un album, puis de vérifier sa présence dans la liste des albums :</p>
 <pre><code>#{fixture delete:&#39;all&#39;, load:&#39;data.yml&#39; /}
 #{selenium}
@@ -2295,21 +2561,21 @@ name: coolAlbum
 artist: joe
 releaseDate: 2010-11-12 00:00:00
 genre: ROCK</code></pre>
-<h2 id="lancer-les-tests">Lancer les tests</h2>
+<h2 id="lancer-les-tests"><a href="#TOC">Lancer les tests</a></h2>
 <p>Pour lancer les tests, entrez la commande suivante dans votre terminal : <code>play test</code> Puis tapez l'URL <code>http://localhost/@tests</code> dans votre navigateur.</p>
 <p>Vous verrez apparaître cette page :</p>
 <div class="figure">
-<img src="http://www.playframework.org/documentation/1.0/images/test-runner" alt="Tests" /><p class="caption">Tests</p>
+<img src="rsrc/p01_ch04_01.png" alt="Tests" /><p class="caption">Tests</p>
 </div>
 <p>A partir de cet écran, vous pouvez lancer les tests et obtenir un rapport d'erreur (si il y en a)! Plutôt pratique non?</p>
 <p><strong>Remarque</strong> : Si vous désirez connaître la couverture de tests de votre application, il existe un module Play!► pour ça! Le module <a href="http://www.playframework.org/modules/cobertura">Cobertura</a> est capable de générer un rapport de couverture en analysant votre code. Quand le module est actif, il génère automatiquement ce rapport dans le répertoire <code>test-result</code> de l'application.</p>
 <p>Pour installer ce module, ajoutez cette ligne au fichier <code>dependencies.yml</code> :</p>
 <pre><code>require:
     - play -&gt; cobertura 2.1</code></pre>
-<h1 id="jobs-et-traitements-asynchrones">Jobs et traitements asynchrones</h1>
-<h2 id="les-jobs">Les jobs</h2>
+<h1 id="jobs-et-traitements-asynchrones"><a href="#TOC">Jobs et traitements asynchrones</a></h1>
+<h2 id="les-jobs"><a href="#TOC">Les jobs</a></h2>
 <p>Play!► propose un système de jobs qui permet de programmer des traitements sans qu'ils soient explicitement demandés par le navigateur.</p>
-<h3 id="au-démarrage-de-lapplication">Au démarrage de l'application</h3>
+<h3 id="au-démarrage-de-lapplication"><a href="#TOC">Au démarrage de l'application</a></h3>
 <p>Le code suivant permet de charger un jeu de données au démarrage de l'application :</p>
 <pre class="sourceCode java"><code class="sourceCode java">    @OnApplicationStart
     <span class="kw">public</span> <span class="kw">class</span> PopulateOnStart <span class="kw">extends</span> Job {
@@ -2337,7 +2603,7 @@ Album(superAlbum) :
     artist: joe
     releaseDate: 2011-10-09 00:00:00
     genre: ROCK</code></pre>
-<h3 id="effectuer-des-traitements-périodiques">Effectuer des traitements périodiques</h3>
+<h3 id="effectuer-des-traitements-périodiques"><a href="#TOC">Effectuer des traitements périodiques</a></h3>
 <p>Dans cet exemple, on souhaite recharger les albums toutes les heures à partir de notre fichier yml :</p>
 <pre class="sourceCode java"><code class="sourceCode java">    @<span class="fu">Every</span>(<span class="st">&quot;1h&quot;</span>)
     <span class="kw">public</span> <span class="kw">class</span> ReloadData <span class="kw">extends</span> Job {
@@ -2348,12 +2614,12 @@ Album(superAlbum) :
     }</code></pre>
 <p>On peut imaginer beaucoup d'applications possibles pour ce genre de traitements périodiques. On pourrait par exemple envoyer un résumé d'activité par mail tous les lundi à l'ensemble des utilisateurs.</p>
 <p>Pour définir finement la périodicité on peut utiliser la syntaxe CRON avec l'annotation <code>@On</code>. Par exemple, <code>@On(&quot;0 0 8 * * ?&quot;)</code> déclenchera le traitement tous les jours à 8h.</p>
-<h2 id="traitements-asynchrones-websockets">Traitements asynchrones : WebSockets</h2>
+<h2 id="traitements-asynchrones-websockets"><a href="#TOC">Traitements asynchrones : WebSockets</a></h2>
 <p>Il arrive que l'on doive effectuer des traitements longs dans une application web : génération d'un gros rapport PDF, contact d'un serveur distant pour obtenir des informations... Lors d'un traitement long, on ne veut pas que le navigateur reste en suspension en attendant la réponse HTTP après qu'on ait lancé la requête. Il pourrait déclencher une erreur de timeout si le temps d'attente était trop long. Pour résoudre cette problématique, on peut utiliser des traitements asynchrones. Le plus simple pour implémenter ce genre de fonctionnement avec Play!► est d'utiliser les WebSocket HTML5.</p>
 <p>Ce procédé crée un mode de communication bidirectionnel entre le navigateur et le serveur. Dès que le serveur aura fini son action, il notifiera le navigateur sans que celui-ci soit obligé de garder une connexion HTTP ouverte pendant toute la durée du traitement. Le serveur est alors capable de pousser une information au client dès qu'il en a besoin (&quot;push&quot; de données).</p>
 <p>Un autre cas d'usage habituel pour les communications client-serveur bilatérales et asynchrones est l'implémentation d'applications de 'chat' : lorsqu'on envoie un message à un correspondant, on ne sait pas à quel moment on va recevoir une réponse. Il faut donc que le serveur soit capable de pousser un nouveau message vers notre client à n'importe quel moment.</p>
 <p>Voyons comment implémenter un exemple très simple de communication asynchrone avec cette API :</p>
-<h3 id="déclaration-de-la-websocket-dans-le-navigateur">Déclaration de la WebSocket dans le navigateur</h3>
+<h3 id="déclaration-de-la-websocket-dans-le-navigateur"><a href="#TOC">Déclaration de la WebSocket dans le navigateur</a></h3>
 <p>On crée une nouvelle page dans le dossier app/views. On l'appelle par exemple firstWebSocket.html.</p>
 <p>On ajoute cette méthode au contrôleur principal de notre application :</p>
 <pre class="sourceCode java"><code class="sourceCode java">    <span class="kw">public</span> <span class="dt">static</span> <span class="dt">void</span> <span class="fu">firstWebSocket</span>() {
@@ -2388,7 +2654,7 @@ Album(superAlbum) :
 &lt;/script&gt;
 #{/set}</code></pre>
 <p>Lorsqu'un message est reçu, il est affiché dans la div <code>#message</code></p>
-<h3 id="implémentation-côté-serveur">Implémentation côté serveur</h3>
+<h3 id="implémentation-côté-serveur"><a href="#TOC">Implémentation côté serveur</a></h3>
 <p>On crée l'objet liveStream qui sera une sorte de file d'attente de messages. Dès que la file reçoit un message, l'objet outboud (hérité de la classe <code>WebSocketController</code>) est invoqué pour envoyer ce message au client :</p>
 <pre class="sourceCode java"><code class="sourceCode java">    <span class="kw">public</span> <span class="kw">class</span> AsyncController <span class="kw">extends</span> WebSocketController {
 
@@ -2405,7 +2671,7 @@ Album(superAlbum) :
     }</code></pre>
 <p>On met à jour les routes pour spécifier l'utilisation du protocole <code>WS</code> (WebSocket) au lieu de <code>HTTP</code> :</p>
 <pre><code>WS      /asyncTest                                              AsyncController.asyncMessage</code></pre>
-<h3 id="push-de-données-depuis-le-serveur">Push de données depuis le serveur</h3>
+<h3 id="push-de-données-depuis-le-serveur"><a href="#TOC">Push de données depuis le serveur</a></h3>
 <p>Voici le code de notre traitement long (on simule une longue durée avec un sleep):</p>
 <pre class="sourceCode java"><code class="sourceCode java">    <span class="kw">public</span> <span class="dt">static</span> <span class="dt">void</span> <span class="fu">publishEvent</span>(String message) <span class="kw">throws</span> IOException {
             <span class="kw">try</span> {
@@ -2417,7 +2683,7 @@ Album(superAlbum) :
         }</code></pre>
 <p>On ajoute cette méthode au contrôleur principal de notre application.</p>
 <p>Une fois le traitement terminé, on publie un message dans notre file d'attente.</p>
-<h3 id="mise-en-action">Mise en action</h3>
+<h3 id="mise-en-action"><a href="#TOC">Mise en action</a></h3>
 <p>Pour tester le fonctionnement de notre WebSocket, on ouvre la page <code>http://localhost:9000/Application/firstWebSocket</code></p>
 <p>Pour l'instant la zone de messages est vide.</p>
 <p>Dans une console, on peut envoyer un message à l'aide du client HTTP cURL :</p>
@@ -2435,13 +2701,13 @@ Album(superAlbum) :
             );
         });</code></pre>
 <p>Ce système de push peut être utile dans bien d'autres cas de figure. On peut par exemple imaginer déclencher des mises à jours de pages sur le navigateur des internautes, sur un site de news lorsqu'une brève important arrive ou sur un site d'e-commerce lors de la mise en place d'une promotion flash!</p>
-<h2 id="suspension-de-requêtes-http">Suspension de requêtes HTTP</h2>
+<h2 id="suspension-de-requêtes-http"><a href="#TOC">Suspension de requêtes HTTP</a></h2>
 <p>Si on ne peut pas (ou si on ne souhaite pas) utiliser les WebSockets, il existe une autre manière d'executer de longs traitements de manière asynchrone. Ceci peut être implémenté via un mécanisme de long pooling (pour éviter les timeouts dans le navigateur) et de suspension de requêtes. Le code suivant permet par exemple d’analyser un gros fichier de manière asynchrone :</p>
 <p><sub>~</sub> java public static void generateReport(File salesData) { Promise<Report> report= new Report(salesData).now(); Report reportResult = await(report); render(reportResult); } <sub>~</sub> Avec l’utilisation de la classe Promise, la requête HTTP est suspendue et ne sera réactivée que lorsque la génération du rapport sera terminée, pour ne pas monopoliser un thread de connexion sur le serveur pendant toute la durée du traitement.</p>
-<h1 id="a-la-découverte-des-modules">A la découverte des modules</h1>
-<h1 id="découverte-des-modules">Découverte des modules</h1>
+<h1 id="a-la-découverte-des-modules"><a href="#TOC">A la découverte des modules</a></h1>
+<h1 id="découverte-des-modules"><a href="#TOC">Découverte des modules</a></h1>
 <p>Il existe un grand nombre de modules complémentaires pour ajouter des fonctionnalités à Play!►. Nous allons en voir quelques exemples.</p>
-<h2 id="validation-côté-client-avec-html5">Validation côté client avec HTML5</h2>
+<h2 id="validation-côté-client-avec-html5"><a href="#TOC">Validation côté client avec HTML5</a></h2>
 <p>La spécification HTML 5 prévoit la possibilité de valider les données d'un formulaire HTML côté client, directement dans le navigateur avant d'envoyer les données vers un serveur. Il existe un module pour Play!► qui permet de faire un mapping entre les annotations de validation du modèle (qui servent normalement à valider les données côté serveur) et le rendu HTML, pour intégrer cette fonctionnalité.</p>
 <p>Pour activer ce module, après l'avoir téléchargé il suffit d'ajouter cette ligne dans le fichier dependencies.yml, dans la section <code>require</code>:</p>
 <pre><code>- play -&gt; html5validation 1.2</code></pre>
@@ -2463,7 +2729,7 @@ Album(superAlbum) :
 <p>Le tag input supporte un grand nombre d'options et plusieurs types d'annotations de validation, comme @Match pour valider une expression régulière ou @Email. Toutes ces options sont décrites dans <a href="http://www.playframework.org/modules/html5validation-1.0/home">cette documentation</a>.</p>
 <p>Si votre navigateur ne supporte pas la validation HTML5, aucun soucis car la validation côté serveur sera exécutée dans tous les cas. J'ai testé avec Chrome 10 et Firefox 4 beta 12 et cela fonctionne parfaitement sur ces navigateurs.</p>
 <p><a href="http://www.playframework.org/modules/html5validation">Home page du module HTML5 Validation</a></p>
-<h2 id="elastic-search">Elastic Search</h2>
+<h2 id="elastic-search"><a href="#TOC">Elastic Search</a></h2>
 <p>Elastic Search est un framework construit au dessus de <a href="http://lucene.apache.org/java/docs/index.html">Lucene</a>. Il offre la possibilité d'effectuer des recherches &quot;à la google&quot; sur nos entités métier. Pour que cela fonctionne il suffit de les annoter avec <code>@ElasticSearchable</code>.</p>
 <p>Le moteur Lucene permet par exemple de faire des recherches :</p>
 <ul>
@@ -2488,7 +2754,7 @@ Album(superAlbum) :
 <p>Si vous souhaitez conserver le comportement par défaut du module, rien à ajouter dans cette classe! Mais comme pour le module CRUD vous pouvez surcharger ce comportement si vous le désirez. On peut également surcharger les vues et créer de nouveaux templates en créant un répertoire ELASTIC_SEARCH sous <code>app/views</code> dans l'arborescence de notre application.</p>
 <p>Vous pouvez voir ce module en action dans <a href="http://www.youtube.com/watch?v=pHpvNKO1mTE&amp;feature=player_detailpage">cette vidéo</a></p>
 <p><a href="http://www.playframework.org/modules/elasticsearch-0.0.3/home">Home page du module Elastic Search</a></p>
-<h2 id="et-plein-dautres-modules">Et plein d'autres modules!</h2>
+<h2 id="et-plein-dautres-modules"><a href="#TOC">Et plein d'autres modules!</a></h2>
 <p>Il existe un tas d'autres modules et de nouveaux arrivent fréquemment grâce à la communauté des développeurs Play!►.</p>
 <p>On trouve par exemple :</p>
 <ul>
@@ -2501,13 +2767,13 @@ Album(superAlbum) :
 <li>Et beaucoup d'autres...</li>
 </ul>
 <p>La liste complète des modules disponibles est consultable <a href="http://www.playframework.org/modules">ici</a>.</p>
-<h1 id="play-et-scala">Play!► et Scala</h1>
+<h1 id="play-et-scala"><a href="#TOC">Play!► et Scala</a></h1>
 <p>Play!► propose d'utiliser au choix les langages Scala ou Java pour développer des applications.</p>
 <p>Play-Scala est plus qu'un simple module, c'est une version complète du framework dédiée à ce langage. Cette version possède un site dédié qui présente ses avantages et ses fonctionnalités : <a href="http://scala.playframework.org/">scala.playframework.org</a></p>
 <p>Le code de l'application vote4music est disponible dans sa version Scala <a href="https://github.com/loicdescotte/vote4music-scala">ici</a></p>
-<h2 id="le-langage-scala">Le langage Scala</h2>
+<h2 id="le-langage-scala"><a href="#TOC">Le langage Scala</a></h2>
 <p>Scala est un langage pour la machine virtuelle Java (JVM) qui marie les caractéristiques des langages orientés objet et des langage fonctionnels. C'est un langage très différent de Java, il demande donc un temps d'adaptation pour les développeurs Java. Cependant, nous allons voir à travers quelques exemples que c'est un langage très intéressant qui peut nous aider à améliorer sensiblement la lisibilité et l'expressivité du code, grâce à l'approche fonctionnelle.</p>
-<h3 id="quelques-exemples-de-code">Quelques exemples de code</h3>
+<h3 id="quelques-exemples-de-code"><a href="#TOC">Quelques exemples de code</a></h3>
 <p>On peut facilement filtrer une collection avec la fonction filter :</p>
 <pre class="sourceCode java"><code class="sourceCode java">    var numbers = Array(<span class="dv">0</span>, <span class="dv">1</span>, <span class="dv">2</span>, <span class="dv">3</span>, <span class="dv">4</span>, <span class="dv">5</span>, <span class="dv">6</span>, <span class="dv">7</span>, <span class="dv">8</span>, <span class="dv">9</span>)
     <span class="co">// Récupération des nombres pairs</span>
@@ -2525,7 +2791,7 @@ Album(superAlbum) :
     years = first.<span class="fu">to</span>(last).<span class="fu">toList</span></code></pre>
 <p>En Java, ces exemples auraient nécessité de passer par d'horribles boucles for (ou par l'utilisation de librairies comme Guava ou lambdaJ).</p>
 <p>Voyons maintenant quelles sont les spécifités de Play-Scala et comment porter entièrement vote4music avec ce nouveau langage.</p>
-<h2 id="le-moteur-de-templates">Le moteur de templates</h2>
+<h2 id="le-moteur-de-templates"><a href="#TOC">Le moteur de templates</a></h2>
 <p>Play-Scala propose un moteur de templates full Scala. Ce moteur permet d'écrire du code Scala autour de notre code HTML pour définir l'affichage des pages :</p>
 <pre><code>@(messages:List[String])
 
@@ -2538,7 +2804,7 @@ Album(superAlbum) :
 <p>Pour effectuer le rendu d'un template, on appelle une méthode qui porte le même nom que le le fichier HTML contenant ce template :</p>
 <pre class="sourceCode java"><code class="sourceCode java">    def index = html.<span class="fu">index</span>(messages)</code></pre>
 <p>Ces méthodes sont générées automatiquement par le compilateur.</p>
-<h3 id="tags-et-layouts">Tags et layouts</h3>
+<h3 id="tags-et-layouts"><a href="#TOC">Tags et layouts</a></h3>
 <p>Comme dans tout moteur de template qui se respecte, il est possible de créer des tags réutilisables pour factoriser du code.</p>
 <p>Par exemple, pour définir un tag qui affiche les informations concernant une personne, on crée un fichier <code>persons.scala.html</code> :</p>
 <pre><code>@(person:Person)
@@ -2572,7 +2838,7 @@ Album(superAlbum) :
 
 }</code></pre>
 <p>Le titre sera remplacé par &quot;ma page&quot; et le contenu prendra place dans la balise <code>content</code>.</p>
-<h3 id="un-exemple-concret">Un exemple concret</h3>
+<h3 id="un-exemple-concret"><a href="#TOC">Un exemple concret</a></h3>
 <p>Pour mettre à jour un album, on récupère l'album et l'artiste depuis la base de données puis on les transmet au template approprié :</p>
 <pre class="sourceCode java"><code class="sourceCode java">    def <span class="fu">form</span>(id: Option[Long]) = {
         val album = id.<span class="fu">flatMap</span>( id =&gt; Album.<span class="fu">find</span>(<span class="st">&quot;id={id}&quot;</span>).<span class="fu">onParams</span>(id).<span class="fu">first</span>())
@@ -2616,7 +2882,7 @@ Album(superAlbum) :
     }
 &lt;/table&gt;</code></pre>
 <p>Le template définie un paramètre <code>entries</code> qui correspond à la liste des tuples d'albums et d'artistes renvoyée par <code>Album.findAll</code>. A l'intérieur d'un tuple, on accède à un album avec l'expression <code>entry._1</code> et à un artiste avec <code>entry._2</code>.</p>
-<h2 id="authentification-à-laide-des-traits">Authentification à l'aide des traits</h2>
+<h2 id="authentification-à-laide-des-traits"><a href="#TOC">Authentification à l'aide des traits</a></h2>
 <p>Les traits sont une variante plus puissante des interfaces et classes abstraites de Java. Ils permettent aussi d'implémenter facilement le principe du design pattern &quot;décorateur&quot; dont le but est d'ajouter dynamiquement des comportements à des objets. Nous allons voir comment les utiliser pour écrire un mécanisme d'authentification simple. Ce sera l'équivalent du module secure que nous avons utilisé dans la version Java. Ce mécanisme permettra d'accéder aux fonctions d'administration de l'application.</p>
 <p>On définie le trait Secure, qui hérite de <code>Controller</code>. Ce trait définie le comportement suivant : avant chaque action (grâce à l'annotation <code>@Before</code>), on vérifie qu'il existe un utilisateur dans la session (le cookie stocké dans le navigateur). Si un nom d'utilisateur est disponible on le stocke dans la variable <code>connectedUser</code> :</p>
 <pre class="sourceCode java"><code class="sourceCode java">    trait Secure <span class="kw">extends</span> Controller {
@@ -2698,16 +2964,16 @@ Album(superAlbum) :
       ...
     }</code></pre>
 <p>Grâce au mot clé <code>with</code> ce contrôleur hérite des comportements définis dans nos traits.</p>
-<h2 id="accès-à-la-base-de-données-avec-lapi-anorm">Accès à la base de données avec l'API Anorm</h2>
+<h2 id="accès-à-la-base-de-données-avec-lapi-anorm"><a href="#TOC">Accès à la base de données avec l'API Anorm</a></h2>
 <p>Play-Scala intègre une API qui permet d'effectuer très facilement des requêtes SQL et de mapper les résultats dans des objets Scala.</p>
-<h3 id="définition-dune-entité">Définition d'une entité</h3>
+<h3 id="définition-dune-entité"><a href="#TOC">Définition d'une entité</a></h3>
 <p>Une entités est une classe du modèle :</p>
 <pre class="sourceCode java"><code class="sourceCode java">    <span class="kw">case</span> <span class="kw">class</span> <span class="fu">Artist</span>(var id:Pk[Long], @Required var name: String){
         ...
     }</code></pre>
 <p>Le mot clé <code>case</code> en Scala ajoute des facilités pour faire du pattern matching sur les classes et leurs attributs. Ces facilités seront exploitées par Anorm lors de l'exécution des requêtes.</p>
 <p><strong>Remarque</strong> : Comme vous le voyez nous pouvons continuer à utiliser les annotations de validation du modèle, comme <code>@Required</code>.</p>
-<h3 id="la-classe-magic">La classe Magic</h3>
+<h3 id="la-classe-magic"><a href="#TOC">La classe Magic</a></h3>
 <p>En créant un objet Scala qui hérite de la classe <code>Magic</code>, on obtient des méthodes pour manipuler les objets dans la base.</p>
 <p>Si on déclare :</p>
 <pre class="sourceCode java"><code class="sourceCode java">    object Album <span class="kw">extends</span> Magic[Album]</code></pre>
@@ -2720,7 +2986,7 @@ Album(superAlbum) :
     Album.<span class="fu">create</span>()
     <span class="co">//mise à jour</span>
     Album.<span class="fu">update</span>()</code></pre>
-<h3 id="requêtes-plus-complexes">Requêtes plus complexes</h3>
+<h3 id="requêtes-plus-complexes"><a href="#TOC">Requêtes plus complexes</a></h3>
 <p>On a souvent besoin de ramener plus d'un type d'objet à la fois. Cette méthode permet de récupérer tous les albums et les artistes dans la base de données :</p>
 <pre class="sourceCode java"><code class="sourceCode java">    def findAll:List[(Album,Artist)] =
           <span class="fu">SQL</span>(
@@ -2753,7 +3019,7 @@ Album(superAlbum) :
     Action(Application.list)
   }</code></pre>
 <p>Option est un type Scala qui permet d'éviter les erreurs liées aux pointeurs nulls (NullPointerException). Quand on récupère un objet de type Option, il peut avoir la valeur <code>Some</code> ou <code>None</code>. La méthode <code>map</code> appliquée à cette option nous permet de traiter les résultats différents de <code>None</code>. La méthode <code>Action</code> permet d'effectuer une redirection vers une autre action du contrôleur.</p>
-<h2 id="les-tests">Les tests</h2>
+<h2 id="les-tests"><a href="#TOC">Les tests</a></h2>
 <p>Le framework de test de Play-Scala est un bon d'exemple des avantages de ce langage. La syntaxe offerte par Scala donne des tests vraiment expressifs et simples à lire :</p>
 <pre class="sourceCode java"><code class="sourceCode java">    <span class="fu">test</span>(<span class="st">&quot;collections&quot;</span>) {
         var albums=Albums.<span class="fu">findAll</span>()
@@ -2794,16 +3060,16 @@ Album(superAlbum) :
           filteredAlbums.<span class="fu">size</span> should <span class="fu">be</span> (<span class="dv">1</span>)
         }</code></pre>
 <p>NB : un Tuple2 est une paire d'éléments en Scala</p>
-<h2 id="installer-le-module-scala">Installer le module Scala</h2>
+<h2 id="installer-le-module-scala"><a href="#TOC">Installer le module Scala</a></h2>
 <p>Pour installer ce module, il suffit d'ajouter cette ligne dans le fichier <code>dependencies.yml</code>, dans la partie <code>require</code> : <code>- play -&gt; scala 0.9.1</code>. Ca y'est vous êtes armés pour développer en Scala!</p>
-<h2 id="apprendre-scala">Apprendre Scala</h2>
+<h2 id="apprendre-scala"><a href="#TOC">Apprendre Scala</a></h2>
 <p>Si vous désirez apprendre ce langage, il existe <a href="http://programming-scala.labs.oreilly.com/index.html">un e-book gratuit</a> (en anglais)</p>
 <p><a href="http://scala.playframework.org/">Home page du module Scala</a></p>
-<h1 id="créer-son-propre-module">Créer son propre module</h1>
+<h1 id="créer-son-propre-module"><a href="#TOC">Créer son propre module</a></h1>
 <p>Maintenant que nous avons vu un certain nombre de modules existants, voyons comment créer un module personnel pour répondre à nos propres besoins!</p>
-<h2 id="exemple-1-créer-un-tag-personnalisé">Exemple 1 : Créer un tag personnalisé</h2>
+<h2 id="exemple-1-créer-un-tag-personnalisé"><a href="#TOC">Exemple 1 : Créer un tag personnalisé</a></h2>
 <p>Dans le chapitre précédent, je vous ai présenté le module HTML5Validation, qui ajoute la validation des données côté navigateur à l'aide d'un tag, en se basant sur les annotations du modèle. Nous allons maintenant étudier le code de ce module pour comprendre comment réaliser ce genre de tags.</p>
-<h3 id="structure-du-module">Structure du module</h3>
+<h3 id="structure-du-module"><a href="#TOC">Structure du module</a></h3>
 <p>La structure d'un module ressemble à celle d'une application Play!►. Dans ce module nous trouvons les répertoires suivants :</p>
 <ul>
 <li>app</li>
@@ -2857,10 +3123,10 @@ Album(superAlbum) :
         <span class="fu">printAttribute</span>(<span class="st">&quot;pattern&quot;</span>, match.<span class="fu">value</span>(), out);
     }   </code></pre>
 <p><strong>Remarque</strong> : Vous pouvez voir le détail des méthodes <code>printAttribute</code>, <code>printStandardAttributes</code> et <code>printValidationAttributes</code> dans le <a href="https://github.com/oasits/play-html5-validation">code du module</a>.</p>
-<h2 id="exemple-2-amélioration-du-module-crud-avec-jquery-ui">Exemple 2 : Amélioration du module CRUD avec JQuery UI</h2>
+<h2 id="exemple-2-amélioration-du-module-crud-avec-jquery-ui"><a href="#TOC">Exemple 2 : Amélioration du module CRUD avec JQuery UI</a></h2>
 <p>Il y a quelques temps, <a href="http://blog.jqueryui.com/2011/02/unleash-the-grid/">la team jQuery UI a annoncé</a> qu'ils avaient commencé à sérieusement et officiellement travailler sur le widget Grid de la librairie. Le développement prend place au sein de la branche grid du repository github, le répertoire nous intéressant le plus étant <a href="https://github.com/jquery/jquery-ui/tree/grid/grid-datamodel">grid-datamodel</a>.</p>
 <p>Dans cette partie, nous nous intéresserons à l'implémentation grid-datamodel et son intégration dans le module CRUD de Play!►. Nous nous concentrerons à configurer le widget UI Grid et adapter légèrement le CRUD généré par notre framework pour permettre l'utilisation du widget en mode XHR (Ajax).</p>
-<h3 id="le-plan">Le plan</h3>
+<h3 id="le-plan"><a href="#TOC">Le plan</a></h3>
 <p>Le module CRUD comporte un ensemble de fichier de templates (views/tags) permettant de gérer et afficher les données du modèle. Dans l'exemple que nous nous apprêtons à mettre en place ici, cela signifie générer une table à partir des données de notre modèle. Le module CRUD par défaut utilise des paramètres pour permettre pagination, recherche/filtre et tri. Play!► génère alors la table correspondante pour une &quot;page&quot; unique. Ainsi, même si votre modèle comporte des milliers d'objets, le framework générera la table correspondante avec seulement une vingtaine de ligne (configurable).</p>
 <p>Dans le cadre de ce tutoriel, les étapes que l'on devra mettre en place se résumeront à:</p>
 <ol style="list-style-type: decimal">
@@ -2871,7 +3137,7 @@ Album(superAlbum) :
 </ol>
 <p>Le code de cet exemple est disponible ici :</p>
 <pre><code>    git clone git://github.com/mklabs/play-ui-grid.git</code></pre>
-<h3 id="mise-en-place-de-lapplication-exemple">Mise en place de l'application exemple</h3>
+<h3 id="mise-en-place-de-lapplication-exemple"><a href="#TOC">Mise en place de l'application exemple</a></h3>
 <p>Nous utiliserons un exemple de gestion des fuseaux horaires (timezone locale) pour jouer avec un widget grid. Cela nous permettra d'avoir facilement plusieurs milliers d'enregistrement avec lesquels travailler.</p>
 <p>Nous partons d'une application Play!► vierge pour laquelle nous activerons le module CRUD (voir partie 0 du livre).</p>
 <p>Nous allons désormais nous occuper de la création de notre modèle. Dans notre exemple, il s'agit de timezones, le modèle est simple: timezoneId, name, language et un offset.</p>
@@ -2908,8 +3174,8 @@ Album(superAlbum) :
 
         }</code></pre>
 <p>Okay, notre modèle est prêt à être utilisé. Ils nous manque encore le contrôleur CRUD pour afficher le tout.</p>
-<h3 id="contrôleurs-et-modifications-des-vues-du-module-crud">Contrôleurs, et modifications des vues du module CRUD</h3>
-<h4 id="contrôleurs">Contrôleurs</h4>
+<h3 id="contrôleurs-et-modifications-des-vues-du-module-crud"><a href="#TOC">Contrôleurs, et modifications des vues du module CRUD</a></h3>
+<h4 id="contrôleurs"><a href="#TOC">Contrôleurs</a></h4>
 <p>Penchons nous désormais sur le code du contrôleur, la partie de l'application qui permet d'offrir à nos vue les données du modèle sous format JSON (nous voulons faire de UI Grid un consommateur de ce &quot;service&quot;).</p>
 <pre class="sourceCode java"><code class="sourceCode java">    <span class="kw">public</span> <span class="kw">class</span> CrudJson <span class="kw">extends</span> CRUD {
 
@@ -2964,7 +3230,7 @@ GET       /localisedtimezones.json                          LocalisedTimeZones.l
 <img src="rsrc/p02_ch03_01.png" alt="Liste des ObjectType" /><p class="caption">Liste des ObjectType</p>
 </div>
 <p>Page à partir de laquelle nous pouvons accéder à la liste des Timezone. Par défaut, la vue list du module crud n'affiche qu'une colonne contenant le résultat de la méthode <code>toString()</code> de l'objet.</p>
-<h4 id="vues">Vues</h4>
+<h4 id="vues"><a href="#TOC">Vues</a></h4>
 <p>Maintenant, jetons un œil à notre vue custom list.html. Il s'agit de la vue responsable de la génération de notre table HTML (<code>app/views/CRUD/list.html</code>). Le module CRUD offre un moyen simple et efficace de surcharger des composants du module comme les views ou tags avec la commande <code>play crud:ov --template CRUD/list</code>. Cela indiquera à Play!► de vous fournir une copie conforme de ce template dans votre propre répertoire, que l'on peut ensuite modifier à souhait. Aucune configuration supplémentaire n'est à apporter, le système de module implique que le framework cherche d'abord toute ressource au sein du répertoire de votre appli, puis ensuite au sein des modules configurés. Pratique, puissant, flexible, élégant, le système de modules de Play!► est une petite merveille... mais je m'égare, continuons :)</p>
 <p>Pour modifier la vue list.html, Play!► propose la commande <code>play crud:ov</code>:</p>
 <pre><code>&gt; play crud:ov
@@ -3030,7 +3296,7 @@ GET       /localisedtimezones.json                          LocalisedTimeZones.l
   &lt;script src=&quot;/grid/js/grid-datamodel/grid.js&quot;&gt;&lt;/script&gt;
 #{/set}</code></pre>
 <p>Toutes les ressources statiques nécessaires à la configuration du grid sont récupérées à partir du chemin <code>grid</code> qui est une route définie par crud-grid, module que je vous propose de créer ensemble.</p>
-<h3 id="création-du-module-crud-grid">Création du module crud-grid</h3>
+<h3 id="création-du-module-crud-grid"><a href="#TOC">Création du module crud-grid</a></h3>
 <p>Ce module prendra soin de l'import des ressources statiques et de la configuration des routes correspondante pour permettre à notre application d'y avoir accès.</p>
 <p>Cette étape n'est absolument pas nécessaire, et vous pourriez vous contenter de stocker ces fichiers au sein de votre répertoire <code>/public/</code>.</p>
 <p>Toutes les ressources sont récupérées à partir du chemin <code>/grid/</code> qui est une route définie par le module crud-grid. Il prendra soin de faire correspondre toute ressources statiques du répertoire <code>/app/public/</code> au chemin <code>/grid/</code>. Il aura aussi pour rôle de contenir tout code relatif à l'intégration du widget grid (comme la définition du contrôleur spécial CrudJson qui nous permet de renvoyer une représentation JSON et grid-compliant de notre modèle).</p>
@@ -3059,7 +3325,7 @@ GET        /grid/        staticDir:app/public</code></pre>
 #{/set}</code></pre>
 <p>Dans cet exemple, le module crud-grid contient également la classe controller <code>CrudJson</code>. C'est une question de choix, on pourrait très bien la placer au niveau des autres contrôleurs de l'application, mais si l'on veut être un peu plus strict au niveau découplage des responsabilités, cela semble être le plus approprié.</p>
 <p><strong>Remarque</strong> : la plupart des modules que l'on rencontrera seront des modules que l'on peut appeller &quot;techniques&quot;, cad permettant ou facilitant l'intégration de couche &quot;techniques&quot; que ne propose pas Play!► par défaut (gae, sienna, pdf, etc.). Mais on peut imaginer que, dans le cadre d'une application assez large pour s'y prêter, l'utilisation de module pour compartimenter &quot;fonctionnellement&quot; l'application est possible (un module admin, un module gestion, un module facturation, etc.).</p>
-<h3 id="ui-grid">UI GRID!</h3>
+<h3 id="ui-grid"><a href="#TOC">UI GRID!</a></h3>
 <p>Nous avons créé notre application exemple avec de nombreuses données à afficher, nous nous sommes occupé du contrôleur permettant de renvoyer une représentation du modèle sous format JSON et préparer nos vues pour être utilisé avec UI Grid, nous avons enfin créé un module custom permettant de contenir toutes les ressources nécessaires à UI Grid pour fonctionner. Il nous reste alors à configurer ce fameux widget.</p>
 <p>Voici le script responsable de la configuration et de l'initialisation du widget et du datasource associé:</p>
 <pre><code>&lt;script&gt;
@@ -3127,25 +3393,25 @@ GET        /grid/        staticDir:app/public</code></pre>
 <li>la fonctionnalité de filtre est supportée. Tout comme les liens, l'event submit du formulaire est intercepté pour demander au datasource de faire une nouvelle requête en passant une fois encore les paramètres correspondants et attendues par le module Play: <code>datasource.get({search: $.trim($(this).find('input[name=&quot;search&quot;]').val())});</code></li>
 </ul>
 <p>Un tour à l'adresse <a href="http://localhost:9000/admin/localisedtimezones">http://localhost:9000/admin/localisedtimezones</a> devrait vous donner: <img src="rsrc/p02_ch03_00.png" alt="Crud UI Grid" /></p>
-<h3 id="améliorations-possibles">Améliorations possibles</h3>
+<h3 id="améliorations-possibles"><a href="#TOC">Améliorations possibles</a></h3>
 <p>&quot;Et le tri?&quot; me direz-vous. Et bien, ce sera une bonne occasion de continuer l'investigation! Pour le moment, nous nous arrêtons à ce niveau là de l'expérimentation. Ce module est donc encore perfectible, mais il nous a permis de mettre en évidence un bon nombre de principes qui devraient vous donner les billes pour créer de nouveaux modules. Il ne reste plus qu'à laisser parler votre imagination!</p>
-<h3 id="références">Références</h3>
+<h3 id="références"><a href="#TOC">Références</a></h3>
 <p>Cette expérience est grandement inspirée par ces deux excellents articles de <a href="//www.lunatech-research.com/editorials/tags/play">Lunatech Research</a> parlant de l'intégration du plugin datatable avec Play!► :</p>
 <ul>
 <li><a href="//www.lunatech-research.com/archives/2011/01/28/playframework-jquery-datatables">Integrating Play framework with jQuery DataTables</a></li>
 <li><a href="//www.lunatech-research.com/archives/2011/02/07/ajax-datatables-playframework">Ajax DataTables with the Play framework</a></li>
 </ul>
-<h2 id="aller-plus-loin">Aller plus loin</h2>
+<h2 id="aller-plus-loin"><a href="#TOC">Aller plus loin</a></h2>
 <p>Pour aller plus loin dans la création de modules, vous pouvez jeter un oeil à <a href="">ce tutoriel</a> qui explique comment modifier le rendu des pages en utilisant des annotations sur le modèle.</p>
-<h1 id="déploiement">Déploiement</h1>
-<h1 id="play-et-le-déploiement">Play!► et le déploiement</h1>
+<h1 id="déploiement"><a href="#TOC">Déploiement</a></h1>
+<h1 id="play-et-le-déploiement"><a href="#TOC">Play!► et le déploiement</a></h1>
 <p>Combien d'entre vous vont jusqu'au bout dans le cycle de vie d'une application Play!► ? Vous apprenez à vous servir de Play!►, ça tourne très bien sur votre configuration de développement, vous avez pu faire briller les yeux des copains en démontrant la facilité du joujou, mais êtes vous allez plus loin ? Avez vous tenté d'installer votre application sur une autre machine, avec un serveur d'application ou sur le cloud, avec plusieurs instances, ... ???</p>
 <p>Cette nouvelle partie va traiter d'une phase redoutée par certains (moi), maîtrisée par d'autres : la <strong>&quot;mise en production&quot;</strong>.</p>
-<h2 id="quel-contenu">Quel contenu ?</h2>
+<h2 id="quel-contenu"><a href="#TOC">Quel contenu ?</a></h2>
 <p>Alors là, ça dépendra de mes(nos) investigations, des contributions de certains committers, etc. ... Idéalement, j'espère pouvoir traiter les serveurs d'applications, le cloud et l'intégration continue.</p>
 <p>Pour inaugurer cette nouvelle partie, nous commencerons par quelque chose de très simple : installer Tomcat sous linux et déployer un war d'une application Play!► sous ce même serveur d'applications, tout ça en quelques minutes, sans même se préoccuper des bonnes pratiques de réglages avant une mise en production (cela fera l'objet d'un autre chapitre).</p>
 <p>Ce chapitre d'introduction est amené &quot;à bouger&quot;, il dépendra énormément du contenu à venir dans cette partie.</p>
-<h2 id="pré-requis-1">Pré-requis</h2>
+<h2 id="pré-requis-1"><a href="#TOC">Pré-requis</a></h2>
 <p>Commençons par passer notre application en mode <code>prod</code> en modifiant le fichier application.conf : <code>%production.application.mode=prod</code></p>
 <p>On renseigne ensuite les paramètres de base de données de production, par exemple :</p>
 <pre><code>%production.db.url=jdbc:mysql://localhost/myDb
@@ -3153,10 +3419,10 @@ GET        /grid/        staticDir:app/public</code></pre>
 %production.db.user=root
 %production.db.pass=***</code></pre>
 <p>Et voilà, on a déjà les bases pour la mise en production :)</p>
-<h1 id="déploiement-sous-tomcat">Déploiement sous Tomcat</h1>
+<h1 id="déploiement-sous-tomcat"><a href="#TOC">Déploiement sous Tomcat</a></h1>
 <p>Nous allons volontairement faire &quot;très simple&quot;. Voyez ça comme un chapitre &quot;découverte&quot; ou comment s'y coller sans stress. Pour rédiger ce chapitre, j'ai développé une application Play!► sous OSX et je l'ai déployée sous un Tomcat installé sur une distribution Ubuntu (après à vous de vous adapter).</p>
 <p><strong>Pour information</strong> : pour cet exemple, nul besoin d'avoir installé Play!► sur la machine de déploiement cible (il faut java tout de même).</p>
-<h2 id="installation-de-tomcat-v6-sous-linux">Installation de Tomcat (v°6) sous Linux</h2>
+<h2 id="installation-de-tomcat-v6-sous-linux"><a href="#TOC">Installation de Tomcat (v°6) sous Linux</a></h2>
 <p>Nous sommes donc sous Linux (Ubuntu en ce qui me concerne).</p>
 <ul>
 <li>Passez en mode commande</li>
@@ -3172,7 +3438,7 @@ GET        /grid/        staticDir:app/public</code></pre>
 </ul>
 <p>Pour démarrer votre instance, il suffira de lancer la commande : <code>/home/k33g/tools/tomcat6/bin/startup.sh</code></p>
 <p>et pour l'arrêter : <code>/home/k33g/tools/tomcat6/bin/shutdown.sh</code>, justement, on l'arrête avant de passer à la suite.</p>
-<h2 id="préparation-du-war-de-notre-application">Préparation du war de notre application</h2>
+<h2 id="préparation-du-war-de-notre-application"><a href="#TOC">Préparation du war de notre application</a></h2>
 <ul>
 <li>Placez vous dans votre répertoire de travail (un cran au dessus du répertoire de l'application que vous souhaitez déployer) et tapez la commande suivante : <code>play war monappli -o monappli_prod --zip</code></li>
 <li>Vous allez obtenir une duplication de votre arborescence <code>monappli</code> nommée <code>monappli_prod</code>, ainsi qu'un fichier <code>monappli_prod.war</code>.</li>
@@ -3183,20 +3449,20 @@ GET        /grid/        staticDir:app/public</code></pre>
 <li>Vous devriez pouvoir accéder à votre appli : <a href="http://localhost:8080/lyonpubs_prod/">http://localhost:8080/monappli/</a></li>
 <li>Tadaaa !!! Terminé!</li>
 </ul>
-<h2 id="derniers-réglages-1">Derniers réglages</h2>
+<h2 id="derniers-réglages-1"><a href="#TOC">Derniers réglages</a></h2>
 <p>Lorsque vous allez re-démarrer votre Ubuntu, Tomcat démarre automatiquement, mais ce n'est pas votre instance qui démarre, donc tapez la commande suivante : <code>sudo update-rc.d tomcat6 disable</code>, cela va annuler le démarrage automatique et vous évitera d'avoir un conflit avec votre instance (vous pouvez aussi modifier les ports).</p>
 <p>Voilà, vous pouvez commencer à bidouiller. Si vous avez des commentaires, des ajouts, etc. ... N'oubliez pas, ayez le réflexe &quot;pull request&quot;.</p>
-<h1 id="déploiment-avec-puppet">Déploiment avec Puppet</h1>
+<h1 id="déploiment-avec-puppet"><a href="#TOC">Déploiment avec Puppet</a></h1>
 <p>Ce chapitre est une traduction de l'article <a href="http://blog.akquinet.de/2011/10/25/deploying-play-framework-applications-with-puppet/">Deploying Play Framework Applications with Puppet</a>.</p>
 <p>Puppet est un outil de gestion de configuration permettant de gérer facilement une infrastructure et particulièrement son déploiement. Il permet entre-autre de rendre la gestion de l'infrastructure (serveur, applications, configurations...) traçable et plus facile a comprendre et donc a maintenir. Il adhère au mouvement <em>infrastructure as code</em>, une tendance majeure pour réduire la complexité impliquée dans la gestion de l'infrastructure.</p>
 <p>L'intérêt d'utiliser Puppet pour déployer des applications Play est simple: reposer sur des outils d'administration éprouvés qui vont permettre de déployer et configurer nos applications sur des infrastructures complexes.</p>
 <p>Ce chapitre explique comment on peut déployer des applications Play avec Puppet afin de développer des applications web de manière efficace et de la déployer de manière fiable.</p>
-<h2 id="traiter-votre-infrastructure-comme-du-code">Traiter votre infrastructure comme du code</h2>
+<h2 id="traiter-votre-infrastructure-comme-du-code"><a href="#TOC">Traiter votre infrastructure comme du code</a></h2>
 <p>Infrastructure as code est une tendance majeure dans la gestion de ‘infrastructure aujourd’hui. C’est un ensemble de techniques et d’outils permettant de rendre la gestion de l’infrastructure plus pérenne, traçable et facile à maintenir. On peut résumer ce mouvement part : « Traiter votre infrastructure comme du code : Programmable, Testable, Déployable »</p>
 <p>Il y a aujourd’hui beaucoup d’outils permettant de transformer votre infrastructure en du code, tel que <a href="http://wiki.opscode.com/display/chef/Home">Chef</a>, <a href="http://vagrantup.com/">Vagrant</a> et <a href="http://puppetlabs.com/">Puppet</a>. Il y a de très nombreuses ressources disponibles comparant ces outils. Dans ce chapitre nous utilisons Puppet.</p>
 <p>Puppet est un gestionnaire de configuration libre et open source. Puppet suit une philosophie : « Décris ce que tu veux et non pas comment ». En d’autres termes, avec Puppet, nous décrivons notre configuration finale et non pas comment l’atteindre. Cette description est stockée dans un manifeste, spécifiant les ressources nécessaires et leurs états finaux. Puppet analyse l’état actuel et compile le manifeste en un catalogue contenant la liste de ressources et leurs dépendances entre elles. Si ces ressources n’ont pas l’état désiré, elles seront modifiées afin de l’obtenir. (Ceci permet entre autre de réappliquer un manifeste plusieurs fois consécutivement sans effet de bord).</p>
 <p>Avec Puppet, tout est ressource : utilisateur, exécution d’une ligne de commande, un fichier, un serveur, un service… Afin de nous permettre de déployer des applications Play avec Puppet, il nous suffit de définir de nouvelles ressources.</p>
-<h2 id="playing-with-puppet">Playing with Puppet</h2>
+<h2 id="playing-with-puppet"><a href="#TOC">Playing with Puppet</a></h2>
 <p>Nous avons définis un module Puppet (c’est a dire une extension) pour Ubuntu, définissant 3 types de ressources : module, application et service.</p>
 <p>Mais avant de regarder en détails ces ressources, analysons la class Play. Cette classe initialise le framework Play, c’est a dire vérifie qu’il est installé sur le système, et l’installe si besoin. Ainsi, nous sommes sûr que Play est installé.</p>
 <p>Regardons maintenant les ressources définit par la module Puppet pour Play :</p>
@@ -3205,7 +3471,7 @@ GET        /grid/        staticDir:app/public</code></pre>
 <li><em>play::application</em> gère une application Play. Elle assure que l’application spécifiée est démarré (ou stoppée). Si besoin, elle démarrera l’application (ou la stoppera). Durant la phase de démarrage, les dépendances de l’application seront résolues. Cette ressource permet la configuration du <em>framework id</em> ainsi que des options passées à la JVM. (plus d'info sur le frameowrk id sur le <a href="http://www.playframework.org/documentation/1.2.3/ids">site de Play</a>)</li>
 <li><em>play::service</em> gère une application Play démarré comme un service système. Elle assure qu’un script démon (service) est bien présent dans /etc/init.d et qu’il est démarré. Tout comme play::application, cette ressource permet la configuration du <em>framework id</em> ainsi que des options passées à la JVM.</li>
 </ul>
-<h2 id="less-conversation-more-action-please">Less conversation, more action Please</h2>
+<h2 id="less-conversation-more-action-please"><a href="#TOC">Less conversation, more action Please</a></h2>
 <p>Bon, assez parlé. Regardons maintenant comme l’on peut déployer notre application Play avec Puppet. Tout d’abord vous avez besoin d’un serveur Ubuntu avec Puppet, git et Java. A part Puppet, les autres logiciels peuvent être déployé avec Puppet.</p>
 <p>Nous pouvons choisir d’installer le module Puppet dans <em>/etc/puppet/modules</em> ou dans n’importe quel répertoire du moment que l’on modifie le <em>modulepath</em> de Puppet. Afin d’obtenir le plugin, cloner le module Puppet pour Play :</p>
 <pre><code>git clone git://github.com/cescoffier/puppet-play.git play</code></pre>
@@ -3235,11 +3501,11 @@ play::application { &quot;bilderverwaltung&quot; :
 <pre><code>sudo puppet apply --modulepath=/my/puppet/modules site.pp</code></pre>
 <p>C’est tout ! Grace a Puppet, toute la configuration nécessaire est masquée. Nous pouvons stocker notre manifeste dans in gestionnaire de source et ainsi tracer les changements, revenir a une version précédente, réappliquer les même manifestes sur différentes cibles…</p>
 <p>Nous pouvons utiliser ce module dans une configuration serveur-client. Nous pouvons également étendre ce manifeste afin de configurer un hôte virtuel (Apache).</p>
-<h2 id="conclusion">Conclusion</h2>
+<h2 id="conclusion"><a href="#TOC">Conclusion</a></h2>
 <p>Ce chapitre a brièvement introduit les avantages d’utiliser une solution ‘infrastructure as code’ et comment gérer des applications Play avec Puppet. Le <a href="https://github.com/cescoffier/puppet-play">site web</a> du module Play pour Puppet contient tous les détails nécessaires afin de mettre en place efficacement Puppet et Play ensemble.</p>
-<h1 id="déploiement-dune-application-dans-le-cloud-avec-heroku">Déploiement d'une application dans le cloud avec Heroku</h1>
+<h1 id="déploiement-dune-application-dans-le-cloud-avec-heroku"><a href="#TOC">Déploiement d'une application dans le cloud avec Heroku</a></h1>
 <p>Heroku est une plateforme de cloud computing qui supporte les applications Java depuis peu. Cette entreprise, renommée dans le monde Ruby, propose désormais une offre de PaaS (Plateform as a Service) capable d'exécuter nativement des applications Play!►. L'inscription à ce service est gratuite. Par défaut, il propose une infrastructure suffisante pour une application à faible affluence. Pour des besoins plus conséquents, on peut passer sur une formule payante &quot;scalable&quot;, fournissant une montée à charge automatique en fonction de la demande (en fonction du nombre d'utilisateurs, du nombre de requêtes par secondes etc.).</p>
-<h2 id="installation-de-lenvironnement">Installation de l'environnement</h2>
+<h2 id="installation-de-lenvironnement"><a href="#TOC">Installation de l'environnement</a></h2>
 <p>On commence par créer un compte sur le site d'Heroku.</p>
 <pre><code>http://www.heroku.com/signup</code></pre>
 <p>On crée une nouvelle application Play :</p>
@@ -3301,9 +3567,9 @@ Total 30 (delta 1), reused 0 (delta 0)
 -----&gt; Launching... done, v5
        http://vivid-water-232.herokuapp.com deployed to Heroku</code></pre>
 <p>En copiant la dernière ligne, vous obtenez l'URL de production de votre application. Vous voilà avec votre première application déployée dans le Cloud!</p>
-<h2 id="mise-à-jour-de-lapplication">Mise à jour de l'application</h2>
+<h2 id="mise-à-jour-de-lapplication"><a href="#TOC">Mise à jour de l'application</a></h2>
 <p>Pour mettre à jour son appli, rien de plus simple. Une fois les modifications effectuées, on fait un <code>commit</code> avec git suivi de la commande <code>git push heroku master</code></p>
-<h2 id="configuration-dune-base-de-données">Configuration d'une base de données</h2>
+<h2 id="configuration-dune-base-de-données"><a href="#TOC">Configuration d'une base de données</a></h2>
 <p>Heroku propose par défaut sur les comptes gratuits une base de données PostGreSQL partagée avec une capacité de 5 Mo. Pour activer cette base tapez cette commande dans votre terminal :</p>
 <pre><code>heroku addons:add shared-database</code></pre>
 <p>Dans le fichier application.conf, on peut demander l'utilisation de cette base de données :</p>
@@ -3311,7 +3577,7 @@ Total 30 (delta 1), reused 0 (delta 0)
 <p>Heroku remplacera cette valeur au démarrage de l'application par la base de données que vous aurez choisi.</p>
 <p>En mode développement, quand vous lancez votre application en local vous pouvez surcharger cette définition en lançant l'application de cette manière :</p>
 <pre><code>play run -Ddb=mem</code></pre>
-<h2 id="logs">Logs</h2>
+<h2 id="logs"><a href="#TOC">Logs</a></h2>
 <p>Si on rencontre une erreur lors de l'exécution de l'application, Heroku affichera un numero d'erreur que l'on peut retrouver dans les logs. Pour voir les derniers logs on tape cette commande dans notre terminal :</p>
 <pre><code>heroku logs</code></pre>
 <p>Si tout se passe bien et que vous n'avez aucune erreur, vous verrez par exemple les logs de démarrage de votre application :</p>
@@ -3329,11 +3595,11 @@ Total 30 (delta 1), reused 0 (delta 0)
 2011-09-08T19:17:44+00:00 app[web.1]: 19:17:44,332 INFO  ~ Application &#39;heroku&#39; is now started !
 2011-09-08T19:17:44+00:00 app[web.1]: 19:17:44,399 INFO  ~ Listening for HTTP on port 51522 ...
 2011-09-08T19:17:44+00:00 heroku[web.1]: State changed from starting to up</code></pre>
-<h2 id="redis">Redis</h2>
+<h2 id="redis"><a href="#TOC">Redis</a></h2>
 <p>Redis est une base de données NoSQL et un cache clé/valeur. Bonne nouvelle, Heroku propose l'utilisation de Redis dans son catalogue de services. Il existe <a href="https://github.com/tkral/play-redis">un module</a> pour faire fonctionner Play Framework avec Redis. Ce module permet d'utiliser Redis pour la persistance ou comme implémentation de cache par défaut.</p>
-<h1 id="fiches-pratiques">Fiches pratiques</h1>
-<h1 id="utilisation-dun-cache">Utilisation d'un cache</h1>
-<h2 id="mise-en-cache-des-méthodes-du-contrôleur">Mise en cache des méthodes du contrôleur</h2>
+<h1 id="fiches-pratiques"><a href="#TOC">Fiches pratiques</a></h1>
+<h1 id="utilisation-dun-cache"><a href="#TOC">Utilisation d'un cache</a></h1>
+<h2 id="mise-en-cache-des-méthodes-du-contrôleur"><a href="#TOC">Mise en cache des méthodes du contrôleur</a></h2>
 <p>Si une méthode d'un contrôleur dont le résultat varie peu est souvent appelée, on peut mettre en cache son résultat pour économiser des ressources machine :</p>
 <pre class="sourceCode java"><code class="sourceCode java">    @<span class="fu">CacheFor</span>(<span class="st">&quot;10mn&quot;</span>)
     <span class="kw">public</span> <span class="dt">static</span> <span class="dt">void</span> <span class="fu">superMethod</span>() {
@@ -3348,7 +3614,7 @@ Total 30 (delta 1), reused 0 (delta 0)
                 response.<span class="fu">cacheFor</span>(<span class="st">&quot;1h&quot;</span>);
             }
         <span class="fu">render</span>(albums); }</code></pre>
-<h2 id="utilisation-dun-cache-devant-la-base-de-données">Utilisation d'un cache devant la base de données</h2>
+<h2 id="utilisation-dun-cache-devant-la-base-de-données"><a href="#TOC">Utilisation d'un cache devant la base de données</a></h2>
 <p>Si on fait beaucoup de lectures consécutives dans la base de données, on peut s’appuyer sur l’API de caching de Play pour soulager la base sans sacrifier l’aspect stateless du serveur : le fait qu’une donnée soit présente en cache ou non ne changera pas le comportement de l’application, seulement sa réactivité.</p>
 <p>Cet exemple montre le chargement d'une liste de produits. Si la liste est en cache, on la récupère directement. Sinon on fait une requête en base de données et on dépose la liste des produits dans le cache pour une durée de 30 minutes.</p>
 <pre class="sourceCode java"><code class="sourceCode java">    <span class="kw">public</span> <span class="dt">static</span> <span class="dt">void</span> <span class="fu">allProducts</span>() { 
@@ -3363,7 +3629,7 @@ Total 30 (delta 1), reused 0 (delta 0)
 <pre class="sourceCode java"><code class="sourceCode java">    Cache.<span class="fu">delete</span>(<span class="st">&quot;products&quot;</span>);</code></pre>
 <p>Pour être sur que l'objet soit supprimé avant la fin de la requête, on peut utiliser la méthode <code>safeDelete</code> :</p>
 <pre class="sourceCode java"><code class="sourceCode java">    Cache.<span class="fu">safeDelete</span>(<span class="st">&quot;products&quot;</span>);</code></pre>
-<h2 id="choisir-une-implémentation-de-cache">Choisir une implémentation de cache</h2>
+<h2 id="choisir-une-implémentation-de-cache"><a href="#TOC">Choisir une implémentation de cache</a></h2>
 <p>Play fournit une implémentation de cache par défaut pour le développement et pour les environnements mono-serveur. Il également possible d'utiliser <code>Memcached</code> pour les &quot;plus gros&quot; besoins en environnements distribués. Pour cela, on modifie le fichier <code>application.conf</code> pour renseigner les paramètres d'installation du cache :</p>
 <pre><code>memcached=enabled
 memcached.host=127.0.0.1:11211</code></pre>
@@ -3371,7 +3637,7 @@ memcached.host=127.0.0.1:11211</code></pre>
 <pre><code>memcached=enabled
 memcached.1.host=127.0.0.1:11211
 memcached.2.host=127.0.0.1:11212</code></pre>
-<h1 id="linternationalisation">L'internationalisation</h1>
+<h1 id="linternationalisation"><a href="#TOC">L'internationalisation</a></h1>
 <p>Dans le cas d'une application ou d'un site multilingue, on doit être capable de traduire facilement le contenu de nos pages. Pour le message d'accueil de notre application, on peut par exemple écrire :</p>
 <pre><code>&lt;h1&gt;&amp;{welcome}&lt;/h1&gt;</code></pre>
 <p>Les paramètres entourés de <code>&amp;{}</code> seront traduits à partir des clés définies dans les fichiers de configuration de Play. Les clés pour la langue par défaut se trouvent dans le fichier <code>/conf/messages</code> :</p>
@@ -3388,8 +3654,8 @@ POP=pop
 JAZZ=Jazz
 BLUES=Blues
 OTHER=Other</code></pre>
-<h1 id="routes-et-contrôleurs">Routes et contrôleurs</h1>
-<h2 id="gérer-les-routes-avec-les-annotations">Gérer les routes avec les annotations</h2>
+<h1 id="routes-et-contrôleurs"><a href="#TOC">Routes et contrôleurs</a></h1>
+<h2 id="gérer-les-routes-avec-les-annotations"><a href="#TOC">Gérer les routes avec les annotations</a></h2>
 <p>Par défaut, les points d'entrée de l'application sont définis par leurs URLs dans le fichier <code>conf/routes</code> : Exemple :</p>
 <pre><code>POST    /new                                    Application.create
 GET     /api/stuff/{id}                         Application.getById(format:&#39;xml&#39;)</code></pre>
@@ -3413,7 +3679,7 @@ public class Application extends Controller {...}</code></pre>
     @ServeStatic(value = &quot;/public/&quot;, directory = &quot;public&quot;),
     @ServeStatic(value = &quot;/images/&quot;, directory = &quot;images&quot;)
 })</code></pre>
-<h2 id="configuration-devprod-des-routes">Configuration dev/prod des routes</h2>
+<h2 id="configuration-devprod-des-routes"><a href="#TOC">Configuration dev/prod des routes</a></h2>
 <p>On peut également limiter certaines URL au développement ou à la production dans le fichier routes :</p>
 <pre><code>%{ if (play.mode.isProd()) { }%
 #mes routes de prod
@@ -3424,8 +3690,8 @@ public class Application extends Controller {...}</code></pre>
 #mes routes de dev
 ...
 %{ } }%</code></pre>
-<h2 id="les-hooks">Les hooks</h2>
-<h3 id="before-et-after">@Before et @After</h3>
+<h2 id="les-hooks"><a href="#TOC">Les hooks</a></h2>
+<h3 id="before-et-after"><a href="#TOC">@Before et @After</a></h3>
 <p>Dans les contrôleurs, il est possible de définir des interceptions pour réaliser des traitements spécifiques.</p>
 <p>L'annotation @Before permet de définir une action à exécuter avant chaque méthode du contrôleur :</p>
 <pre><code>@Before
@@ -3439,14 +3705,14 @@ static void checkAuthentification() {
 <p>Ou alors on on spécifie celles à ne pas intercepter :</p>
 <pre><code>@Before(unless={&quot;myMethod3&quot;,&quot;myMethod4&quot;})</code></pre>
 <p>@After fonctionne exactement de la même manière que @Before, mais s'exécute <strong>après</strong> les actions du contrôleur (really??? :0 ).</p>
-<h3 id="with">@With</h3>
+<h3 id="with"><a href="#TOC">@With</a></h3>
 <p>Si on veut hériter des comportements @Before et @After d'un ou plusieurs contrôleurs, on peut utiliser l'annotation @With qui simule l'héritage multiple (inexistant dans le langage Java) :</p>
 <pre><code>@With(SuperController.class)
 public class Application extends Controller {...}
 
 @With(value={SuperController1.class,SuperController2.class})
 public class Application2 extends Controller {...}</code></pre>
-<h1 id="gestion-de-la-session-utilisateur">Gestion de la session utilisateur</h1>
+<h1 id="gestion-de-la-session-utilisateur"><a href="#TOC">Gestion de la session utilisateur</a></h1>
 <p>Avec une architecture stateless, vous vous demandez sûrement comment stocker les informations relatives à la session utilisateur. Pour les données peu volumineuses, le framework propose une gestion de la session côté client à travers un cookie (crypté et signé). Pour des données de taille plus conséquentes, il existe plusieurs solutions. La solution à priviliégier pour une application moderne est celle qui consiste à stocker ces informations dans le navigateur via les API Web Storage apportées par HTML5.</p>
 <p>Cette solution est parfaite lorsque l’on utilise un navigateur moderne. Si on souhaite cibler un ensemble de plateformes plus large, il existe des librairies (JavaScript ou basées sur Flash) qui pallient cette difficulté en permettent de stocker localement des données importantes, même dans les navigateurs plus anciens. Enfin, si on a réellement besoin d’enregistrer plus d’informations dans la base de données, on pourra s’appuyer sur l’API de caching de Play, qui permet de soulager la base sans sacrifier l’aspect stateless du serveur (le fait qu’une donnée soit présente en cache ou non ne changera pas le comportement de l’application, seulement sa réactivité).</p>
 </body>

@@ -30,7 +30,7 @@ part99-internationalisation.md \
 part99-routes-et-controleurs.md \
 part99-session-utilisateur.md
 
-pandoc -s --highlight-style kate  -o play.rules.one.docx 00-00-cover.md \
+pandoc -s --toc --highlight-style kate  -o play.rules.one.docx 00-00-cover.md \
 00-01-Preface.md \
 00-02-Introduction-Pourquoi-Play.md \
 part00-ch00-je-suis-nul.md \
@@ -63,7 +63,7 @@ part99-routes-et-controleurs.md \
 part99-session-utilisateur.md
 
 
-pandoc -s --highlight-style kate  -o play.rules.one.html 00-00-cover.md \
+pandoc -s --toc --highlight-style kate  -o play.rules.one.html 00-00-cover.md \
 00-01-Preface.md \
 00-02-Introduction-Pourquoi-Play.md \
 part00-ch00-je-suis-nul.md \
