@@ -9,7 +9,7 @@
 A télécharger ici : 
 
 - epub : [https://github.com/3monkeys/play.rules/raw/master/livre.play.un/play.rules.one.epub](https://github.com/3monkeys/play.rules/raw/master/livre.play.un/play.rules.one.epub)
-- pdf :  [https://github.com/3monkeys/play.rules/blob/master/Play.Rules!►%20eBook.pdf?raw=true](https://github.com/3monkeys/play.rules/blob/master/Play.Rules!►%20eBook.pdf?raw=true)
+- pdf :  [https://github.com/3monkeys/play.rules/blob/master/Play.Rules!►eBook.pdf?raw=true](https://github.com/3monkeys/play.rules/blob/master/Play.Rules!►%20eBook.pdf?raw=true)
 - docx : [https://github.com/3monkeys/play.rules/raw/master/livre.play.un/play.rules.one.docx](https://github.com/3monkeys/play.rules/raw/master/livre.play.un/play.rules.one.docx)
 
 
