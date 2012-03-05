@@ -182,7 +182,7 @@ La méthode save() de la classe Album s'occupe alors d'enregistrer l'album en ba
 Notre API REST/XML nous permet donc maintenant de lire la liste des albums de note bibliothèque musicale et d'ajouter des albums.
 Vous pouvez tester l'envoi de contenu XML avec l'application [rest-client](http://code.google.com/p/rest-client/) ou avec le plugin [Poster de Firefox](https://addons.mozilla.org/de/firefox/addon/poster/):
 
-![Alt "poster"](https://static-cdn.addons.mozilla.net/img/uploads/previews/full/19/19951.png?modified=1208233459)
+![Alt "poster"](rsrc/p01_ch02_01.png)
 
 ### Services REST/JSON
 

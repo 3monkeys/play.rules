@@ -168,7 +168,7 @@ Puis tapez l'URL `http://localhost/@tests` dans votre navigateur.
 
 Vous verrez apparaître cette page : 
 
-![Tests](http://www.playframework.org/documentation/1.0/images/test-runner)
+![Tests](rsrc/p01_ch04_01.png)
 
 A partir de cet écran, vous pouvez lancer les tests et obtenir un rapport d'erreur (si il y en a)! 
 Plutôt pratique non?
