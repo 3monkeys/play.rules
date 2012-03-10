@@ -8,8 +8,9 @@
 
 A télécharger ici : 
 
-- epub : [https://github.com/3monkeys/play.rules/raw/master/livre.play.un/play.rules.one.epub](https://github.com/3monkeys/play.rules/raw/master/livre.play.un/play.rules.one.epub)
 - pdf : [https://github.com/3monkeys/play.rules/raw/master/livre.play.un/play.rules.one.pdf](https://github.com/3monkeys/play.rules/raw/master/livre.play.un/play.rules.one.pdf)
+- epub : [https://github.com/3monkeys/play.rules/raw/master/livre.play.un/play.rules.one.epub](https://github.com/3monkeys/play.rules/raw/master/livre.play.un/play.rules.one.epub)
+- mobi (kindle) : [https://github.com/3monkeys/play.rules/raw/master/livre.play.un/play.rules.one.mobi](https://github.com/3monkeys/play.rules/raw/master/livre.play.un/play.rules.one.mobi)
 - docx : [https://github.com/3monkeys/play.rules/raw/master/livre.play.un/play.rules.one.docx](https://github.com/3monkeys/play.rules/raw/master/livre.play.un/play.rules.one.docx)
 
 
