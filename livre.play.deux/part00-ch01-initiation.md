@@ -707,14 +707,14 @@ Au final le code avec les bons `imports` sera le suivant :
 
 Ensuite, ajoutons dans `routes` :
 
-	POST /jsonadd controllers.Categories.jsonAdd()
+	POST /categories/jsonadd controllers.Categories.jsonAdd()
 
 Et retournons jouer dans la console de notre navigateur :
 
 ```javascript
 	$.ajax({
 		type:"POST",
-		url:"jsonadd",
+		url:"categories/jsonadd",
 		data:JSON.stringify({ label:"dart"}),
 		dataType:"json",
 		contentType:"application/json",

@@ -674,11 +674,11 @@ GET     /assets/*file               controllers.Assets.at(path=&quot;/public&quo
 
     }</code></pre>
 <p>Ensuite, ajoutons dans <code>routes</code> :</p>
-<pre><code>POST /jsonadd controllers.Categories.jsonAdd()</code></pre>
+<pre><code>POST /categories/jsonadd controllers.Categories.jsonAdd()</code></pre>
 <p>Et retournons jouer dans la console de notre navigateur :</p>
 <pre class="sourceCode javascript"><code class="sourceCode javascript">    $.<span class="fu">ajax</span>({
         <span class="dt">type</span>:<span class="st">&quot;POST&quot;</span>,
-        <span class="dt">url</span>:<span class="st">&quot;jsonadd&quot;</span>,
+        <span class="dt">url</span>:<span class="st">&quot;categories/jsonadd&quot;</span>,
         <span class="dt">data</span>:<span class="kw">JSON</span>.<span class="fu">stringify</span>({ <span class="dt">label</span>:<span class="st">&quot;dart&quot;</span>}),
         <span class="dt">dataType</span>:<span class="st">&quot;json&quot;</span>,
         <span class="dt">contentType</span>:<span class="st">&quot;application/json&quot;</span>,
