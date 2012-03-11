@@ -3,16 +3,17 @@
 </div>
 
 ###Dimanche 11 mars
-
-##Play.rules, l'ebook : en mode web
-
-[Play.Rules UN : apprendre Play!► version un](http://3monkeys.github.com/play.rules/livre.play.un.web/play.rules.one.html)
-
 ##Play.rules Return, on commence la version avec Play!► 2
 
 Visible en mode web : [Play.Rules Return : Play!► 2 en douceur](http://3monkeys.github.com/play.rules/livre.play.deux.web/play.rules.return.html)
 
+![](/rsrc/play.rules.min.png)
+
 C'est en cours de rédaction, alors soyez patients ;)
+
+##Play.rules, l'ebook : en mode web
+
+[Play.Rules UN : apprendre Play!► version un](http://3monkeys.github.com/play.rules/livre.play.un.web/play.rules.one.html)
 
 ##Dimanche 4 mars
 
