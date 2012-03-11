@@ -19,7 +19,7 @@ Pas forcément tout voir, je ne vais pas traiter des templates pour cette 1ère 
 ###Modification du PATH
 
 ####Sous OSX (& Linux)
-	
+
 	sudo pico ~/.bash_profile
 	export PATH=$PATH:/ENDROIT_OU_VOUS_AVEZ_DEZIPPE/play-2.0-RC2
 
@@ -516,7 +516,13 @@ Et allons tester ça dans notre navigateur :
 ... puis saisissez la requête ajax suivante (grâce à jQuery) :
 
 ```javascript
-	$.ajax({type:"GET",url:"categories/list",dataType:"json",success:function(d){ console.log("resp : ",d);},error:function(e){console.log("err : ",e);}})
+	$.ajax({
+		type:"GET",
+		url:"categories/list",
+		dataType:"json",
+		success:function(d){ console.log("resp : ",d);},
+		error:function(e){console.log("err : ",e);}
+	})
 ```
 
 Cela peut prendre un peu de temps la 1ère fois à cause de la compilation. Mais si tout va bien vous devriez obtenir ceci :
@@ -574,8 +580,15 @@ Ensuite, dans `routes`, ajouter ceci :
 ... puis re-passez en mode console et saisissez la requête ajax suivante :
 
 ```javascript
-	$.ajax({type:"GET",url:"bookmarks/list",dataType:"json",success:function(d){ console.log("resp : ",d);},error:function(e){console.log("err : ",e);}})
+	$.ajax({
+		type:"GET",
+		url:"bookmarks/list",
+		dataType:"json",
+		success:function(d){ console.log("resp : ",d);},
+		error:function(e){console.log("err : ",e);}
+	})
 ```
+
 Et l'on obtient ceci :
 
 ![](rsrc/part00-ch00.017.png)
@@ -694,12 +707,20 @@ Au final le code avec les bons `imports` sera le suivant :
 
 Ensuite, ajoutons dans `routes` :
 
-	POST /test controllers.Categories.jsonAdd()
+	POST /jsonadd controllers.Categories.jsonAdd()
 
 Et retournons jouer dans la console de notre navigateur :
 
 ```javascript
-	$.ajax({type:"POST",url:"test",data:JSON.stringify({ label:"dart"}),dataType:"json",contentType:"application/json",success:function(d){ console.log("resp : ",d);},error:function(e){console.log("err : ",e);}})
+	$.ajax({
+		type:"POST",
+		url:"jsonadd",
+		data:JSON.stringify({ label:"dart"}),
+		dataType:"json",
+		contentType:"application/json",
+		success:function(d){ console.log("resp : ",d);},
+		error:function(e){console.log("err : ",e);}
+	})
 ```javascript
 
 Côté Terminal, vous devriez voir s'afficher un message de ce type :

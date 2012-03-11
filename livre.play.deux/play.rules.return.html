@@ -511,7 +511,13 @@ GET     /assets/*file               controllers.Assets.at(path=&quot;/public&quo
 <li>passez en mode console</li>
 </ul>
 <p>... puis saisissez la requête ajax suivante (grâce à jQuery) :</p>
-<pre class="sourceCode javascript"><code class="sourceCode javascript">    $.<span class="fu">ajax</span>({<span class="dt">type</span>:<span class="st">&quot;GET&quot;</span>,<span class="dt">url</span>:<span class="st">&quot;categories/list&quot;</span>,<span class="dt">dataType</span>:<span class="st">&quot;json&quot;</span>,<span class="dt">success</span>:<span class="kw">function</span>(d){ <span class="kw">console</span>.<span class="fu">log</span>(<span class="st">&quot;resp : &quot;</span>,d);},<span class="dt">error</span>:<span class="kw">function</span>(e){<span class="kw">console</span>.<span class="fu">log</span>(<span class="st">&quot;err : &quot;</span>,e);}})</code></pre>
+<pre class="sourceCode javascript"><code class="sourceCode javascript">    $.<span class="fu">ajax</span>({
+        <span class="dt">type</span>:<span class="st">&quot;GET&quot;</span>,
+        <span class="dt">url</span>:<span class="st">&quot;categories/list&quot;</span>,
+        <span class="dt">dataType</span>:<span class="st">&quot;json&quot;</span>,
+        <span class="dt">success</span>:<span class="kw">function</span>(d){ <span class="kw">console</span>.<span class="fu">log</span>(<span class="st">&quot;resp : &quot;</span>,d);},
+        <span class="dt">error</span>:<span class="kw">function</span>(e){<span class="kw">console</span>.<span class="fu">log</span>(<span class="st">&quot;err : &quot;</span>,e);}
+    })</code></pre>
 <p>Cela peut prendre un peu de temps la 1ère fois à cause de la compilation. Mais si tout va bien vous devriez obtenir ceci :</p>
 <div class="figure">
 <img src="rsrc/part00-ch00.016.png" /><p class="caption"></p>
@@ -557,7 +563,14 @@ GET     /assets/*file               controllers.Assets.at(path=&quot;/public&quo
 <p>Ensuite, dans <code>routes</code>, ajouter ceci :</p>
 <pre><code>GET /bookmarks/list controllers.Categories.jsonList()</code></pre>
 <p>... puis re-passez en mode console et saisissez la requête ajax suivante :</p>
-<p><code>javascript     $.ajax({type:&quot;GET&quot;,url:&quot;bookmarks/list&quot;,dataType:&quot;json&quot;,success:function(d){ console.log(&quot;resp : &quot;,d);},error:function(e){console.log(&quot;err : &quot;,e);}})</code> Et l'on obtient ceci :</p>
+<pre class="sourceCode javascript"><code class="sourceCode javascript">    $.<span class="fu">ajax</span>({
+        <span class="dt">type</span>:<span class="st">&quot;GET&quot;</span>,
+        <span class="dt">url</span>:<span class="st">&quot;bookmarks/list&quot;</span>,
+        <span class="dt">dataType</span>:<span class="st">&quot;json&quot;</span>,
+        <span class="dt">success</span>:<span class="kw">function</span>(d){ <span class="kw">console</span>.<span class="fu">log</span>(<span class="st">&quot;resp : &quot;</span>,d);},
+        <span class="dt">error</span>:<span class="kw">function</span>(e){<span class="kw">console</span>.<span class="fu">log</span>(<span class="st">&quot;err : &quot;</span>,e);}
+    })</code></pre>
+<p>Et l'on obtient ceci :</p>
 <div class="figure">
 <img src="rsrc/part00-ch00.017.png" /><p class="caption"></p>
 </div>
@@ -661,9 +674,17 @@ GET     /assets/*file               controllers.Assets.at(path=&quot;/public&quo
 
     }</code></pre>
 <p>Ensuite, ajoutons dans <code>routes</code> :</p>
-<pre><code>POST /test controllers.Categories.jsonAdd()</code></pre>
+<pre><code>POST /jsonadd controllers.Categories.jsonAdd()</code></pre>
 <p>Et retournons jouer dans la console de notre navigateur :</p>
-<pre class="sourceCode javascript"><code class="sourceCode javascript">    $.<span class="fu">ajax</span>({<span class="dt">type</span>:<span class="st">&quot;POST&quot;</span>,<span class="dt">url</span>:<span class="st">&quot;test&quot;</span>,<span class="dt">data</span>:<span class="kw">JSON</span>.<span class="fu">stringify</span>({ <span class="dt">label</span>:<span class="st">&quot;dart&quot;</span>}),<span class="dt">dataType</span>:<span class="st">&quot;json&quot;</span>,<span class="dt">contentType</span>:<span class="st">&quot;application/json&quot;</span>,<span class="dt">success</span>:<span class="kw">function</span>(d){ <span class="kw">console</span>.<span class="fu">log</span>(<span class="st">&quot;resp : &quot;</span>,d);},<span class="dt">error</span>:<span class="kw">function</span>(e){<span class="kw">console</span>.<span class="fu">log</span>(<span class="st">&quot;err : &quot;</span>,e);}})</code></pre>
+<pre class="sourceCode javascript"><code class="sourceCode javascript">    $.<span class="fu">ajax</span>({
+        <span class="dt">type</span>:<span class="st">&quot;POST&quot;</span>,
+        <span class="dt">url</span>:<span class="st">&quot;jsonadd&quot;</span>,
+        <span class="dt">data</span>:<span class="kw">JSON</span>.<span class="fu">stringify</span>({ <span class="dt">label</span>:<span class="st">&quot;dart&quot;</span>}),
+        <span class="dt">dataType</span>:<span class="st">&quot;json&quot;</span>,
+        <span class="dt">contentType</span>:<span class="st">&quot;application/json&quot;</span>,
+        <span class="dt">success</span>:<span class="kw">function</span>(d){ <span class="kw">console</span>.<span class="fu">log</span>(<span class="st">&quot;resp : &quot;</span>,d);},
+        <span class="dt">error</span>:<span class="kw">function</span>(e){<span class="kw">console</span>.<span class="fu">log</span>(<span class="st">&quot;err : &quot;</span>,e);}
+    })</code></pre>
 <p>Côté Terminal, vous devriez voir s'afficher un message de ce type :</p>
 <pre><code>{&quot;label&quot;:&quot;dart&quot;}
 41 dart has been saved</code></pre>
