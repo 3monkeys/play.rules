@@ -3,8 +3,19 @@
 <ul>
 	<li><a href="http://3monkeys.github.com/play.rules/livre.play.un.web/play.rules.one.html">Play.Rules UN : apprendre Play!► 1</a></li>
 	<li><a href="http://3monkeys.github.com/play.rules/livre.play.deux.web/play.rules.return.html">Play.Rules Return : Play!► 2 en douceur</a></li>
+	<li><b>Pour les pull requests, issues, fork, etc ... :</b> <a href="https://github.com/3monkeys/play.rules">https://github.com/3monkeys/play.rules</a></li>
 </ul>
 </div>
+
+###Téléchargement des versions e-book de Play.Rules.1 :
+
+- [pdf](https://github.com/3monkeys/play.rules/raw/master/livre.play.un/play.rules.one.pdf)
+- [epub](https://github.com/3monkeys/play.rules/raw/master/livre.play.un/play.rules.one.epub)
+- [mobi (kindle)](https://github.com/3monkeys/play.rules/raw/master/livre.play.un/play.rules.one.mobi)
+- [docx](https://github.com/3monkeys/play.rules/raw/master/livre.play.un/play.rules.one.docx)
+
+---
+
 
 ###Dimanche 11 mars
 ##Play.rules Return, on commence la version avec Play!► 2
