@@ -2,10 +2,15 @@
 <h1>Les News chez <strong>Play.Rules!</strong><small>►</small></h1>
 <ul>
 	<li><a href="http://3monkeys.github.com/play.rules/livre.play.un.web/play.rules.one.html">Play.Rules UN : apprendre Play!► 1</a></li>
-	<li><a href="http://3monkeys.github.com/play.rules/livre.play.deux.web/play.rules.return.html">Play.Rules Return : Play!► 2 en douceur</a></li>
+	<li><a href="http://3monkeys.github.com/play.rules/livre.play.deux.web/play2.rules.return.html">Play.Rules Return : Play!► 2 en douceur</a></li>
 	<li><b>Pour les pull requests, issues, fork, etc ... :</b> <a href="https://github.com/3monkeys/play.rules">https://github.com/3monkeys/play.rules</a></li>
 </ul>
 </div>
+
+###Téléchargement des versions e-book de Play.Rules Return :
+
+- [epub](https://github.com/3monkeys/play.rules/blob/master/livre.play.deux/play2.rules.return.epub)
+- [docx](https://github.com/3monkeys/play.rules/blob/master/livre.play.deux/play2.rules.return.docx)
 
 ###Téléchargement des versions e-book de Play.Rules.1 :
 
@@ -16,15 +21,15 @@
 
 ---
 
+###Mercredi 30 mai
+##Play.rules Return, la version avec Play!► 2 "reloaded"
 
-###Dimanche 11 mars
-##Play.rules Return, on commence la version avec Play!► 2
+La version précédente (du mois de mars) a été complètement revue avec la sortie de la version finale de Play!► 2.
 
-Visible en mode web : [Play.Rules Return : Play!► 2 en douceur](http://3monkeys.github.com/play.rules/livre.play.deux.web/play.rules.return.html)
+Visible en mode web : [Play.Rules Return : Play!► 2 en douceur](http://3monkeys.github.com/play.rules/livre.play.deux.web/play2.rules.return.html)
 
 ![](livre.play.deux.web/rsrc/play.rules.min.png)
 
-C'est en cours de rédaction, alors soyez patients ;)
 
 ##Play.rules, l'ebook : en mode web
 
