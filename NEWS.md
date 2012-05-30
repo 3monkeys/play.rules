@@ -9,8 +9,8 @@
 
 ###Téléchargement des versions e-book de Play.Rules Return :
 
-- [epub](https://github.com/3monkeys/play.rules/blob/master/livre.play.deux/play2.rules.return.epub)
-- [docx](https://github.com/3monkeys/play.rules/blob/master/livre.play.deux/play2.rules.return.docx)
+- [epub](https://github.com/3monkeys/play.rules/raw/master/livre.play.deux/play2.rules.return.epub)
+- [docx](https://github.com/3monkeys/play.rules/raw/master/livre.play.deux/play2.rules.return.docx)
 
 ###Téléchargement des versions e-book de Play.Rules.1 :
 
