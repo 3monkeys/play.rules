@@ -62,7 +62,17 @@ Puis à la racine de `/app`, créez une classe `Global.java` avec le code suivan
 	}
 ```
 
-Vous pouvez rafraîchir votre page pour vérifier.
+Enfin, modifier le fichier `conf/application.conf` et décommenter la ligne suivante, ie :
+
+    # global=Global
+
+devient
+
+    global=Global
+
+Cette manipulation permet d'activer votre nouvelle classe au démarrage de l'application.
+
+Vous pouvez maintenant rafraîchir votre page pour vérifier que les données sont bien chargées au démarrage de votre application.
 
 
 
