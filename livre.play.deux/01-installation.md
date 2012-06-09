@@ -34,11 +34,31 @@ où `ENDROIT_OU_VOUS_AVEZ_DEZIPPE` est le chemin vers Play!► et `play-2.0.1` l
 
 ##Modification sous Linux
 
-	//TODO
+Dans une console (Terminal), tapez la commande suivante : 
+
+	vi ~/.profile
+
+Puis ajoutez les lignes suivantes à la fin de ce fichier : 
+
+  export PLAY_HOME=/ENDROIT_OU_VOUS_AVEZ_DEZIPPE/play-2.0.1
+	export PATH=$PLAY_HOME:$PATH
+
+Sauvegardez et quittez l'éditeur (sous vi, c'est `ESCAPE`, `:`, `wq`), fermez votre console.
+
+où `ENDROIT_OU_VOUS_AVEZ_DEZIPPE` est le chemin vers Play!► et `play-2.0.1` le nom du répertoire dans lequel il y a les éléments constitutifs du framework (je laisse le numéro de version car il m'arrive de travailler sur plusieurs versions).
 
 ##Modification sous Windows
 
-	//TODO
+Modifier les variables d'environnement de Windows, via `Panneau de configuration\Système et sécurité\Système`, puis `Paramètres systèmes avancés` sur la gauche. Dans la boîte de dialogue qui s'affiche, cliquer le bouton `Variables d'environnement...` en bas.
+
+Ajouter une nouvelle `Variable système` :
+
+*   Nom de la variable = PLAY_HOME
+*   Valeur de la variable = ENDROIT_OU_VOUS_AVEZ_DEZIPPE\play-2.0.1
+
+Puis modifier la valeur de la variable `Path` en ajoutant `%PLAY_HOME%;` au début (ne pas oublier le ';' !).
+
+Cliquer sur tous les boutons `OK` pour fermer les différentes boîtes de dialogue.
 
 ##Vérification
 
@@ -51,5 +71,3 @@ Cela "mouline" un peu car Play2!► télécharge quelques dépendances. Vous dev
 ![](rsrc/01-installation-001.png)
 
 Voilà c'est prêt, nous pouvons commencer.
-
-
