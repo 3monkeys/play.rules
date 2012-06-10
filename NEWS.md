@@ -21,6 +21,11 @@
 
 ---
 
+###Dimanche 10 juin
+##Play.rules Return, MàJ
+
+Merci à [@ndeverge] pour sa pullrequest
+
 ###Mercredi 30 mai
 ##Play.rules Return, la version avec Play!► 2 "reloaded"
 
