@@ -45,8 +45,6 @@ code > span.er { color: #ff0000; font-weight: bold; }
 <li><a href="#modification-sous-linux">Modification sous Linux</a></li>
 <li><a href="#modification-sous-windows">Modification sous Windows</a></li>
 <li><a href="#vérification">Vérification</a></li>
-</ul></li>
-<li><a href="#er-contact">1er contact</a><ul>
 <li><a href="#génération-du-squelette-de-lapplication">Génération du squelette de l'application</a></li>
 <li><a href="#paramétrage-dintellij">Paramétrage d'IntelliJ</a></li>
 </ul></li>
@@ -116,6 +114,7 @@ code > span.er { color: #ff0000; font-weight: bold; }
 <ul>
 <li>@kraco_fr : pour ses &quot;tips Play&quot;</li>
 <li>@LyonJUG : pour son équipe qui &quot;maintient l'envie de continuer&quot;</li>
+<li>@ndeverge : le 1er à avoir fait une pull request sur le projet :)</li>
 </ul>
 <h1 id="préface"><a href="#TOC">Préface</a></h1>
 <p>Ce livre est conçu et écrit par <a href="http://www.twitter.com/k33g_org">@k33g_org</a> et <a href="http://www.twitter.com/loic_d">@loic_d</a> (nos petits noms sur Twitter). Il est complètement open source. Faites en ce que vous voulez. Vous pouvez participer par le biais des pull requests et issues du repository GitHub : <a href="https://github.com/3monkeys/play.rules">https://github.com/3monkeys/play.rules</a> (répertoire : <code>livre.play.deux</code>), si vous détectez des fautes, avez des idées, des remarques; etc. ...</p>
@@ -166,9 +165,21 @@ code > span.er { color: #ff0000; font-weight: bold; }
 <p>Sauvegardez (sous pico, c'est <code>Ctrl+o</code>) et quittez l'éditeur, fermez votre Terminal.</p>
 <p>où <code>ENDROIT_OU_VOUS_AVEZ_DEZIPPE</code> est le chemin vers Play!► et <code>play-2.0.1</code> le nom du répertoire dans lequel il y a les éléments constitutifs du framework (je laisse le numéro de version car il m'arrive de travailler sur plusieurs versions).</p>
 <h2 id="modification-sous-linux"><a href="#TOC">Modification sous Linux</a></h2>
-<pre><code>//TODO</code></pre>
+<p>Dans une console (Terminal), tapez la commande suivante :</p>
+<pre><code>vi ~/.profile</code></pre>
+<p>Puis ajoutez les lignes suivantes à la fin de ce fichier :</p>
+<p>export PLAY_HOME=/ENDROIT_OU_VOUS_AVEZ_DEZIPPE/play-2.0.1 export PATH=<span class="math"><em>P</em><em>L</em><em>A</em><em>Y</em><sub><em>H</em></sub><em>O</em><em>M</em><em>E</em>: </span>PATH</p>
+<p>Sauvegardez et quittez l'éditeur (sous vi, c'est <code>ESCAPE</code>, <code>:</code>, <code>wq</code>), fermez votre console.</p>
+<p>où <code>ENDROIT_OU_VOUS_AVEZ_DEZIPPE</code> est le chemin vers Play!► et <code>play-2.0.1</code> le nom du répertoire dans lequel il y a les éléments constitutifs du framework (je laisse le numéro de version car il m'arrive de travailler sur plusieurs versions).</p>
 <h2 id="modification-sous-windows"><a href="#TOC">Modification sous Windows</a></h2>
-<pre><code>//TODO</code></pre>
+<p>Modifier les variables d'environnement de Windows, via <code>Panneau de configuration\Système et sécurité\Système</code>, puis <code>Paramètres systèmes avancés</code> sur la gauche. Dans la boîte de dialogue qui s'affiche, cliquer le bouton <code>Variables d'environnement...</code> en bas.</p>
+<p>Ajouter une nouvelle <code>Variable système</code> :</p>
+<ul>
+<li>Nom de la variable = PLAY_HOME</li>
+<li>Valeur de la variable = ENDROIT_OU_VOUS_AVEZ_DEZIPPE-2.0.1</li>
+</ul>
+<p>Puis modifier la valeur de la variable <code>Path</code> en ajoutant <code>%PLAY_HOME%;</code> au début (ne pas oublier le ';' !).</p>
+<p>Cliquer sur tous les boutons <code>OK</code> pour fermer les différentes boîtes de dialogue.</p>
 <h2 id="vérification"><a href="#TOC">Vérification</a></h2>
 <p>Nous allons vérifier la bonne installation du framework. Ouvrez une nouvelle fois votre Console ou Terminal (il faut que cela soit une nouvelle session pour la prise en compte de la modification du path), et tapez la commande suivante :</p>
 <pre><code>play help</code></pre>
@@ -176,8 +187,7 @@ code > span.er { color: #ff0000; font-weight: bold; }
 <div class="figure">
 <img src="rsrc/01-installation-001.png" /><p class="caption"></p>
 </div>
-<p>Voilà c'est prêt, nous pouvons commencer.</p>
-<h1 id="er-contact"><a href="#TOC">1er contact</a></h1>
+<p>Voilà c'est prêt, nous pouvons commencer. #1er contact</p>
 <pre><code>/* --- Qu&#39;allons nous voir ? ---
 
     - Comment générer le squelette de notre future application
@@ -764,7 +774,12 @@ categories:
         }
 
     }</code></pre>
-<p>Vous pouvez rafraîchir votre page pour vérifier.</p>
+<p>Enfin, modifier le fichier <code>conf/application.conf</code> et décommenter la ligne suivante, ie :</p>
+<pre><code># global=Global</code></pre>
+<p>devient</p>
+<pre><code>global=Global</code></pre>
+<p>Cette manipulation permet d'activer votre nouvelle classe au démarrage de l'application.</p>
+<p>Vous pouvez maintenant rafraîchir votre page pour vérifier que les données sont bien chargées au démarrage de votre application.</p>
 <h1 id="gestion-de-lauthentification"><a href="#TOC">Gestion de l'authentification</a></h1>
 <pre><code>/* --- Qu&#39;allons nous voir ? ---
 
