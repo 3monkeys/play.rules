@@ -11,6 +11,7 @@
 
 - [epub](https://github.com/3monkeys/play.rules/raw/master/livre.play.deux/play2.rules.return.epub)
 - [docx](https://github.com/3monkeys/play.rules/raw/master/livre.play.deux/play2.rules.return.docx)
+- [html](http://3monkeys.github.com/play.rules/livre.play.deux.web/play2.rules.return.html)
 
 ###Téléchargement des versions e-book de Play.Rules.1 :
 
@@ -20,6 +21,19 @@
 - [docx](https://github.com/3monkeys/play.rules/raw/master/livre.play.un/play.rules.one.docx)
 
 ---
+
+###Lundi 18 juin
+##Play.rules Return, MàJ
+
+Grosse mise à jour :  ajout du chapitre **"Services JSON"**, avec au programme :
+
+- faire un service json
+- le sécuriser
+- s'authentifier via une requête ajax
+- faire une "single page application"
+
+Toujours visible en mode web : [Play.Rules Return : Play!► 2 en douceur](http://3monkeys.github.com/play.rules/livre.play.deux.web/play2.rules.return.html)
+
 
 ###Dimanche 10 juin
 ##Play.rules Return, MàJ
