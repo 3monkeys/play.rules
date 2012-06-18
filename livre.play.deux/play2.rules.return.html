@@ -103,7 +103,38 @@ code > span.er { color: #ff0000; font-weight: bold; }
 <li><a href="#modifions-global.java">Modifions Global.java</a></li>
 </ul></li>
 </ul></li>
-<li><a href="#services">Services</a></li>
+<li><a href="#services-json">Services (JSON)</a><ul>
+<li><a href="#primo">Primo :</a></li>
+<li><a href="#création-de-notre-service-json">Création de notre service JSON</a><ul>
+<li><a href="#allons-modifier-le-contrôleur-bookmarks">Allons modifier le contrôleur Bookmarks</a><ul>
+<li><a href="#imports">import(s)</a></li>
+<li><a href="#ajout-de-la-méthode-jsonlist">Ajout de la méthode jsonList()</a></li>
+<li><a href="#modifions-le-fichier-routes">Modifions le fichier routes</a></li>
+<li><a href="#donc-le-code-final-est-le-suivant">Donc le code final est le suivant :</a></li>
+</ul></li>
+</ul></li>
+<li><a href="#utilisation-du-service-json">Utilisation du service JSON</a><ul>
+<li><a href="#directement-avec-lurl">Directement avec l'url</a></li>
+<li><a href="#plus-utile-via-une-requête-ajax">Plus utile : via une requête ajax</a></li>
+</ul></li>
+<li><a href="#sécurisation">Sécurisation</a><ul>
+<li><a href="#securedjson.java">SecuredJson.java</a></li>
+<li><a href="#modification-de-lannotation-dans-bookmarks.java">Modification de l'annotation dans Bookmarks.java</a></li>
+<li><a href="#testons">Testons</a></li>
+<li><a href="#mais-comment-puis-mauthentifier-via-une-requête-ajax">Mais comment puis m'authentifier via une requête ajax ???</a><ul>
+<li><a href="#authenticationjson.java">AuthenticationJson.java</a></li>
+<li><a href="#ajoutons-les-routes">Ajoutons les routes</a></li>
+<li><a href="#testons-1">Testons</a></li>
+</ul></li>
+</ul></li>
+<li><a href="#utilisons-tout-ça-...">Utilisons tout ça ...</a><ul>
+<li><a href="#nouveau-contrôleur-singleapp.java">Nouveau Contrôleur : SingleApp.java</a></li>
+<li><a href="#routes">routes</a></li>
+<li><a href="#nouvelle-vue-mainpage.scala.html">Nouvelle vue : mainPage.scala.html</a></li>
+</ul></li>
+<li><a href="#testons-2">Testons</a></li>
+<li><a href="#conclusion">Conclusion</a></li>
+</ul></li>
 </ul>
 </div>
 <div class="figure">
@@ -1106,10 +1137,497 @@ users:
     }</code></pre>
 <p>C'est bon vous pouvez lancer l'application à nouveau.</p>
 <p><img src="rsrc/07-authentication-001.png" /> <img src="rsrc/07-authentication-002.png" /> <img src="rsrc/07-authentication-003.png" /> <img src="rsrc/07-authentication-004.png" /></p>
-<h1 id="services"><a href="#TOC">Services</a></h1>
+<h1 id="services-json"><a href="#TOC">Services (JSON)</a></h1>
 <pre><code>/* --- Qu&#39;allons nous voir ? ---
 
-    En cours de rédaction.
+    - comment faire un service json
+    - comment sécuriser ce service
+    - comment s&#39;authentifier via ajax
+    - comment faire une &quot;single page application&quot;
 */</code></pre>
+<h2 id="primo"><a href="#TOC">Primo :</a></h2>
+<p>Ajoutons quelques bookmarks dans notre applications <img src="rsrc/08-services-001.png" /></p>
+<h2 id="création-de-notre-service-json"><a href="#TOC">Création de notre service JSON</a></h2>
+<p><strong>Objectif :</strong> faire un service qui nous renvoie la liste des bookmarks au format JSON</p>
+<h3 id="allons-modifier-le-contrôleur-bookmarks"><a href="#TOC">Allons modifier le contrôleur Bookmarks</a></h3>
+<p><em>bookmarks.java dans app/controllers</em></p>
+<h4 id="imports"><a href="#TOC">import(s)</a></h4>
+<pre class="sourceCode java"><code class="sourceCode java">
+    <span class="kw">import java.util.HashMap;</span>
+    <span class="kw">import java.util.List;</span>
+    <span class="kw">import java.util.Map;</span>
+
+    <span class="kw">import static play.libs.Json.toJson;</span></code></pre>
+<h4 id="ajout-de-la-méthode-jsonlist"><a href="#TOC">Ajout de la méthode jsonList()</a></h4>
+<pre class="sourceCode java"><code class="sourceCode java">
+    <span class="kw">public</span> <span class="dt">static</span> Result <span class="fu">jsonList</span>() {
+        Map&lt;String, List&lt;Bookmark&gt;&gt; data = <span class="kw">new</span> HashMap&lt;String, List&lt;Bookmark&gt;&gt;();
+        List&lt;Bookmark&gt; list = Bookmark.<span class="fu">find</span>.<span class="fu">orderBy</span>(<span class="st">&quot;title&quot;</span>).<span class="fu">findList</span>();
+        data.<span class="fu">put</span>(<span class="st">&quot;bookmarks&quot;</span>, list);
+        <span class="kw">return</span> <span class="fu">ok</span>(<span class="fu">toJson</span>(data));
+    }</code></pre>
+<h4 id="modifions-le-fichier-routes"><a href="#TOC">Modifions le fichier routes</a></h4>
+<p>Nous ajoutons la route suivante :</p>
+<pre><code>#Services
+GET /bookmarks/jsonlist controllers.Bookmarks.jsonList()</code></pre>
+<h4 id="donc-le-code-final-est-le-suivant"><a href="#TOC">Donc le code final est le suivant :</a></h4>
+<pre class="sourceCode java"><code class="sourceCode java">
+    <span class="kw">package controllers;</span>
+
+    <span class="kw">import models.Bookmark;</span>
+
+    <span class="kw">import play.*;</span>
+    <span class="kw">import play.mvc.*;</span>
+    <span class="kw">import play.data.*;</span>
+
+    <span class="kw">import java.util.HashMap;</span>
+    <span class="kw">import java.util.List;</span>
+    <span class="kw">import java.util.Map;</span>
+
+    <span class="kw">import static play.libs.Json.toJson;</span>
+
+    <span class="kw">public</span> <span class="kw">class</span> Bookmarks <span class="kw">extends</span> Controller {
+
+        <span class="kw">public</span> <span class="dt">static</span> Result <span class="fu">add</span>() {
+
+            <span class="dt">final</span> Form&lt;Bookmark&gt; bookmarkForm = <span class="fu">form</span>(Bookmark.<span class="fu">class</span>).<span class="fu">bindFromRequest</span>();
+            <span class="dt">final</span> Bookmark bookmark = bookmarkForm.<span class="fu">get</span>();
+
+            bookmark.<span class="fu">save</span>();
+            <span class="kw">return</span> <span class="fu">redirect</span>(routes.<span class="fu">Application</span>.<span class="fu">index</span>());
+
+        }
+
+        <span class="kw">public</span> <span class="dt">static</span> Result <span class="fu">jsonList</span>() {
+            Map&lt;String, List&lt;Bookmark&gt;&gt; data = <span class="kw">new</span> HashMap&lt;String, List&lt;Bookmark&gt;&gt;();
+            List&lt;Bookmark&gt; list = Bookmark.<span class="fu">find</span>.<span class="fu">orderBy</span>(<span class="st">&quot;title&quot;</span>).<span class="fu">findList</span>();
+            data.<span class="fu">put</span>(<span class="st">&quot;bookmarks&quot;</span>, list);
+            <span class="kw">return</span> <span class="fu">ok</span>(<span class="fu">toJson</span>(data));
+        }
+
+
+    }</code></pre>
+<p>Donc, lorsque nous appellerons l'url <code>localhost:9000/bookmarks/jsonlist</code>, nous obtiendrons la liste des bookmarks au format JSON.</p>
+<h2 id="utilisation-du-service-json"><a href="#TOC">Utilisation du service JSON</a></h2>
+<h3 id="directement-avec-lurl"><a href="#TOC">Directement avec l'url</a></h3>
+<p>Dans la zone de saisie de l'url de votre navigateur, saisissez donc <code>localhost:9000/bookmarks/jsonlist</code>. Et vous obtenez le flux JSON de vos bookmarks :</p>
+<div class="figure">
+<img src="rsrc/08-services-002.png" /><p class="caption"></p>
+</div>
+<h3 id="plus-utile-via-une-requête-ajax"><a href="#TOC">Plus utile : via une requête ajax</a></h3>
+<p>Comme vous le savez (ou pas), Play2!► est fourni avec <strong>jQuery</strong>, &quot;petit&quot; framework javascript très utile pour &quot;jouer&quot; avec le DOM de vos pages, mais aussi pour faire des requêtes ajax. Si vous vous souvenez, dans la vue (portion de vue) <code>main.scala.html</code> il y avait le code suivant :</p>
+<pre><code>&lt;script src=&quot;@routes.Assets.at(&quot;javascripts/jquery-1.7.1.min.js&quot;)&quot; type=&quot;text/javascript&quot;&gt;&lt;/script&gt;</code></pre>
+<p>Ce qui signifie que toute vue &quot;utilisant&quot; <code>main.scala.html</code>, comme par exemple <code>index.scala.html</code> (vous trouverez la déclaration <code>@main(...)</code> dans le code), charge <strong>jQuery</strong>. Donc,</p>
+<ul>
+<li>retournez dans votre navigateur, mais cette fois-ci à la racine de votre site (probablement <code>http://localhost:9000</code>)</li>
+<li>ouvrez la console de votre navigateur (click droit + &quot;Inspect Element&quot;)</li>
+<li>et Tapez ceci :</li>
+</ul>
+<pre class="sourceCode javascript"><code class="sourceCode javascript">
+    $.<span class="fu">ajax</span>({<span class="dt">type</span>:<span class="st">&quot;GET&quot;</span>, <span class="dt">url</span>:<span class="st">&quot;/bookmarks/jsonlist&quot;</span>,
+        <span class="dt">error </span>: <span class="kw">function</span>(err){ <span class="kw">console</span>.<span class="fu">log</span>(err); },
+        <span class="dt">success </span>: <span class="kw">function</span>(dataFromServer) { 
+            <span class="kw">console</span>.<span class="fu">log</span>(dataFromServer); 
+        }
+    });</code></pre>
+<div class="figure">
+<img src="rsrc/08-services-003.png" /><p class="caption"></p>
+</div>
+<p>Vous obtenez directement un objet <code>bookmarks</code> qui est un tableau d'objets avec les éléments attendus :</p>
+<div class="figure">
+<img src="rsrc/08-services-004.png" /><p class="caption"></p>
+</div>
+<p>Et vous remarquerez ...</p>
+<div class="figure">
+<img src="rsrc/08-services-005.png" /><p class="caption"></p>
+</div>
+<p>... que les objets <code>bookmark</code> du tableau <code>bookmarks</code> contiennent les objets &quot;liés&quot; <code>category</code>.</p>
+<p><strong>Génialement simplissime et pratique, non !?</strong></p>
+<p><strong>Attention : dans mon exemple le service n'est pas sécurisé</strong></p>
+<h2 id="sécurisation"><a href="#TOC">Sécurisation</a></h2>
+<p>Sécurisons notre contrôleur <code>Bookmarks.java</code> en lui ajoutant l'annotation <code>@Security.Authenticated(Secured.class)</code>. Ensuite (après recompilation), retournez à la racine du site <code>localhost:9000</code> pour vous &quot;deloguer&quot;. Puis relancez votre requête ajax, et là vous obtenez (curieusement ?) le code HTML de la page d'authentification en retour. Ce qui est rassurant, c'est que notre service est bien sécurisé, mais le code de retour n'est pas forcément &quot;top&quot; à gérer.</p>
+<div class="figure">
+<img src="rsrc/08-services-006.png" /><p class="caption"></p>
+</div>
+<p>En fait, dans notre classe <code>Secured.java</code> nous avions la méthode suivante :</p>
+<pre><code>@Override
+public Result onUnauthorized(Context ctx) {
+    return redirect(routes.Authentication.login());
+}</code></pre>
+<p>Donc, si vous n'êtes pas authentifié, vous êtes redirigé vers la page d'authentification, d'où la récupération du code HTML dans notre requête ajax.</p>
+<p>Nous allons donc créer une classe du même type que <code>Secured.java</code> mais dédiée aux appels JSON.</p>
+<h3 id="securedjson.java"><a href="#TOC">SecuredJson.java</a></h3>
+<pre class="sourceCode java"><code class="sourceCode java">
+    <span class="kw">package controllers;</span>
+
+    <span class="kw">import play.*;</span>
+    <span class="kw">import play.mvc.*;</span>
+    <span class="kw">import play.mvc.Http.*;</span>
+
+    <span class="kw">import models.*;</span>
+
+    <span class="kw">import static play.libs.Json.toJson;</span>
+
+    <span class="kw">public</span> <span class="kw">class</span> SecuredJson <span class="kw">extends</span> Security.<span class="fu">Authenticator</span> {
+
+        @Override
+        <span class="kw">public</span> String <span class="fu">getUsername</span>(Context ctx) {
+            <span class="kw">return</span> ctx.<span class="fu">session</span>().<span class="fu">get</span>(<span class="st">&quot;email&quot;</span>);
+        }
+
+        @Override
+        <span class="kw">public</span> Result <span class="fu">onUnauthorized</span>(Context ctx) {
+            <span class="kw">return</span> <span class="fu">ok</span>(<span class="fu">toJson</span>(<span class="st">&quot;failed&quot;</span>));
+        }
+
+    }</code></pre>
+<h3 id="modification-de-lannotation-dans-bookmarks.java"><a href="#TOC">Modification de l'annotation dans Bookmarks.java</a></h3>
+<p>Remplacez <code>@Security.Authenticated(Secured.class)</code> par <code>@Security.Authenticated(SecuredJson.class)</code></p>
+<h3 id="testons"><a href="#TOC">Testons</a></h3>
+<p>Lancez à nouveau, dans la console du navigateur, votre requête ajax :</p>
+<div class="figure">
+<img src="rsrc/08-services-007.png" /><p class="caption"></p>
+</div>
+<h3 id="mais-comment-puis-mauthentifier-via-une-requête-ajax"><a href="#TOC">Mais comment puis m'authentifier via une requête ajax ???</a></h3>
+<p>Là aussi, nous allons devoir créer une classe du même type qu'<code>Authentication.java</code> mais qui ne redirige pas vers la page principale pour ne pas avoir du code HTML comme retour.</p>
+<h4 id="authenticationjson.java"><a href="#TOC">AuthenticationJson.java</a></h4>
+<p><strong>Remarque :</strong> <em>Je pourrais hériter de Authentication.java, mais pour le moment je vais dupliquer le code et le modifier.</em></p>
+<pre class="sourceCode java"><code class="sourceCode java">
+    <span class="kw">package controllers;</span>
+
+    <span class="kw">import play.*;</span>
+    <span class="kw">import play.mvc.*;</span>
+    <span class="kw">import play.data.*;</span>
+
+    <span class="kw">import models.*;</span>
+    <span class="kw">import views.html.*;</span>
+
+    <span class="kw">import static play.libs.Json.toJson;</span>
+
+    <span class="kw">public</span> <span class="kw">class</span> AuthenticationJson <span class="kw">extends</span> Controller {
+
+        <span class="kw">public</span> <span class="dt">static</span> <span class="kw">class</span> AuthenticatedUser {
+
+            <span class="kw">public</span> String email;
+            <span class="kw">public</span> String password;
+
+            <span class="kw">public</span> String <span class="fu">validate</span>() {
+                <span class="kw">if</span>(User.<span class="fu">authenticate</span>(email, password) == <span class="kw">null</span>) {
+                    <span class="kw">return</span> <span class="st">&quot;oups&quot;</span>;
+                }
+
+                <span class="kw">return</span> <span class="kw">null</span>;
+            }
+        }
+
+        <span class="co">//On récupère les informations de login (quand le user se &quot;signe&quot;)</span>
+        <span class="kw">public</span> <span class="dt">static</span> Result <span class="fu">authenticate</span>() {
+            Form&lt;AuthenticatedUser&gt; loginForm = <span class="fu">form</span>(AuthenticatedUser.<span class="fu">class</span>).<span class="fu">bindFromRequest</span>();
+
+            <span class="kw">if</span>(loginForm.<span class="fu">hasErrors</span>()) {
+                <span class="kw">return</span> <span class="fu">ok</span>(<span class="fu">toJson</span>(<span class="st">&quot;badRequest&quot;</span>));
+
+            } <span class="kw">else</span> {
+                <span class="fu">session</span>(<span class="st">&quot;email&quot;</span>, loginForm.<span class="fu">get</span>().<span class="fu">email</span>);
+                User who = User.<span class="fu">findByEmail</span>(loginForm.<span class="fu">get</span>().<span class="fu">email</span>);
+                <span class="kw">return</span> <span class="fu">ok</span>(<span class="fu">toJson</span>(who.<span class="fu">name</span>)); 
+            }
+        }
+
+        <span class="co">//Fermer la session</span>
+        <span class="kw">public</span> <span class="dt">static</span> Result <span class="fu">logout</span>() {
+            <span class="fu">session</span>().<span class="fu">clear</span>();
+            <span class="kw">return</span> <span class="fu">ok</span>(<span class="fu">toJson</span>(<span class="st">&quot;bye&quot;</span>));
+        }
+
+    }</code></pre>
+<h4 id="ajoutons-les-routes"><a href="#TOC">Ajoutons les routes</a></h4>
+<pre><code>POST    /loginjson                          controllers.AuthenticationJson.authenticate()
+GET     /logoutjson                         controllers.AuthenticationJson.logout()</code></pre>
+<h4 id="testons-1"><a href="#TOC">Testons</a></h4>
+<p>Dans la console du navigateur, essayez la commande suivante (vous ne devez pas être authentifié) :</p>
+<pre class="sourceCode javascript"><code class="sourceCode javascript">
+    $.<span class="fu">ajax</span>({
+        <span class="dt">type</span>:<span class="st">&quot;POST&quot;</span>, 
+        <span class="dt">url</span>:<span class="st">&quot;/loginjson&quot;</span>, <span class="dt">data</span>:{<span class="dt">email</span>:<span class="st">&quot;ph.charriere@gmail.com&quot;</span>,<span class="dt">password</span>:<span class="st">&quot;play&quot;</span>}, 
+        <span class="dt">error </span>: <span class="kw">function</span>(err){<span class="kw">console</span>.<span class="fu">log</span>(<span class="st">&quot;Erreur&quot;</span>, err);}, 
+        <span class="dt">success </span>: <span class="kw">function</span>(data){ <span class="kw">console</span>.<span class="fu">log</span>(data);}
+    });</code></pre>
+<p>Vous allez obtenir ceci :</p>
+<div class="figure">
+<img src="rsrc/08-services-008.png" /><p class="caption"></p>
+</div>
+<p>Et si vous rappelez l'url <code>http://localhost:9000</code>, vous apparaissez comme authentifié. Vous pouvez tester à nouveau votre requête pour récupérer la liste des bookmarks :</p>
+<pre class="sourceCode javascript"><code class="sourceCode javascript">
+    $.<span class="fu">ajax</span>({<span class="dt">type</span>:<span class="st">&quot;GET&quot;</span>, <span class="dt">url</span>:<span class="st">&quot;/bookmarks/jsonlist&quot;</span>,
+        <span class="dt">error </span>: <span class="kw">function</span>(err){ <span class="kw">console</span>.<span class="fu">log</span>(err); },
+        <span class="dt">success </span>: <span class="kw">function</span>(dataFromServer) { 
+            <span class="kw">console</span>.<span class="fu">log</span>(dataFromServer); 
+        }
+    });</code></pre>
+<p>Si vous souhaitez vous délogguer (toujours via une requête Ajax) :</p>
+<pre class="sourceCode javascript"><code class="sourceCode javascript">
+    $.<span class="fu">ajax</span>({
+        <span class="dt">type</span>:<span class="st">&quot;GET&quot;</span>, 
+        <span class="dt">url</span>:<span class="st">&quot;/logoutjson&quot;</span>, 
+        <span class="dt">error </span>: <span class="kw">function</span>(err){<span class="kw">console</span>.<span class="fu">log</span>(<span class="st">&quot;Erreur&quot;</span>, err);}, 
+        <span class="dt">success </span>: <span class="kw">function</span>(data){ <span class="kw">console</span>.<span class="fu">log</span>(data);}
+    });</code></pre>
+<div class="figure">
+<img src="rsrc/08-services-009.png" /><p class="caption"></p>
+</div>
+<p>Et si vous rappelez l'url <code>http://localhost:9000</code>, vous n'êtes plus authentifié.</p>
+<div class="figure">
+<img src="rsrc/08-services-010.png" /><p class="caption"></p>
+</div>
+<p>Si vous testez à nouveau votre requête pour récupérer la liste des bookmarks, vous aurez un message vous indiquant que ce n'est pas possible (<code>failed</code>) car non autorisé (cf. <code>SecuredJson.java</code>):</p>
+<div class="figure">
+<img src="rsrc/08-services-011.png" /><p class="caption"></p>
+</div>
+<p>De la même manière, si vous tentez de vous authentifier avec un mauvais compte utilisateur :</p>
+<pre class="sourceCode javascript"><code class="sourceCode javascript">
+    $.<span class="fu">ajax</span>({
+        <span class="dt">type</span>:<span class="st">&quot;POST&quot;</span>, 
+        <span class="dt">url</span>:<span class="st">&quot;/loginjson&quot;</span>, <span class="dt">data</span>:{<span class="dt">email</span>:<span class="st">&quot;sam@gmail.com&quot;</span>,<span class="dt">password</span>:<span class="st">&quot;play&quot;</span>}, 
+        <span class="dt">error </span>: <span class="kw">function</span>(err){<span class="kw">console</span>.<span class="fu">log</span>(<span class="st">&quot;Erreur&quot;</span>, err);}, 
+        <span class="dt">success </span>: <span class="kw">function</span>(data){ <span class="kw">console</span>.<span class="fu">log</span>(data);}
+    });</code></pre>
+<p>Vous obtiendrez un message badRequest (cf. <code>AuthenticationJson.java</code>) :</p>
+<div class="figure">
+<img src="rsrc/08-services-012.png" /><p class="caption"></p>
+</div>
+<h2 id="utilisons-tout-ça-..."><a href="#TOC">Utilisons tout ça ...</a></h2>
+<p>Mettons en applications ce que nous venons de voir pour faire quelque chose d'un peu plus &quot;pratique&quot; : développons une &quot;Single page application&quot; :</p>
+<ul>
+<li>nous allons pouvoir nous authentifier</li>
+<li>nous allons pouvoir charger les bookmarks</li>
+<li>il n'y aura auncun rechargement de page (à part la 1ère fois)</li>
+</ul>
+<p>Commençons par créer un nouveau contrôleur :</p>
+<h3 id="nouveau-contrôleur-singleapp.java"><a href="#TOC">Nouveau Contrôleur : SingleApp.java</a></h3>
+<p>Alors, c'est très simple, dans le répertoire <code>controllers</code>, créez un nouveau contrôleur avec le nom <code>SingleApp.java</code> :</p>
+<pre class="sourceCode java"><code class="sourceCode java">
+    <span class="kw">package controllers;</span>
+
+    <span class="kw">import play.*;</span>
+    <span class="kw">import play.mvc.*;</span>
+    <span class="kw">import play.data.*;</span>
+
+    <span class="kw">import models.*;</span>
+    <span class="kw">import views.html.*;</span>
+
+    <span class="kw">public</span> <span class="kw">class</span> SingleApp <span class="kw">extends</span> Controller {
+
+        <span class="kw">public</span> <span class="dt">static</span> Result <span class="fu">mainPage</span>() {
+
+            <span class="kw">return</span> <span class="fu">ok</span>(mainPage.<span class="fu">render</span>(
+                        <span class="st">&quot;Single Page Application&quot;</span>
+                    ));
+        }
+
+    }</code></pre>
+<h3 id="routes"><a href="#TOC">routes</a></h3>
+<p>Ajoutons une route dans le fichier <code>routes</code> :</p>
+<pre><code># Main Single Page Application
+GET     /main                       controllers.SingleApp.mainPage()</code></pre>
+<p>Finalement le <strong>gros</strong> du travail va se faire en html et javascript. Nous disposons de jQuery (c'est fourni en standard avec Play!►), et si vous vous souvenez, nous avons installé Twitter Bootstrap. Nous allons donc voir comment faire une &quot;single page application&quot;, donc plus notions de templating : <strong>je vais utiliser une vue &quot;scala&quot; mais qui ne contiendra que le minimum de code scala</strong> (dans l'absolu nous pourrions utiliser une simple page html).</p>
+<h3 id="nouvelle-vue-mainpage.scala.html"><a href="#TOC">Nouvelle vue : mainPage.scala.html</a></h3>
+<p>Commencez par créer une nouvelle vue (dans le répertoire <code>views</code>) que vous nommerez <code>mainPage.scala.html</code>. Je suis reparti (copier/coller ... je sais) de <code>main.scala.html</code>. Je ne fais que reprendre les requêtes &quot;ajax&quot; que nous avons utilisées précédement pour tester nos services json.</p>
+<p><strong>Attention :</strong> mon code javascript n'est pas forcément compatible avec tous les navigateurs, je suis allé au plus simple et j'ai utilisé les possibilités de la dernière version de javascript (par exemple : le <code>forEach</code> sur un <code>array</code>).</p>
+<pre class="sourceCode html"><code class="sourceCode html">
+    @(title: String)
+    <span class="dt">&lt;!DOCTYPE </span>html<span class="dt">&gt;</span>
+
+    <span class="kw">&lt;html&gt;</span>
+        <span class="kw">&lt;head&gt;</span>
+            <span class="kw">&lt;title&gt;</span>@title<span class="kw">&lt;/title&gt;</span>
+            <span class="kw">&lt;meta</span><span class="ot"> http-equiv=</span><span class="st">&quot;Content-Type&quot;</span><span class="ot"> content=</span><span class="st">&quot;text/html; charset=utf-8&quot;</span><span class="kw">&gt;</span>
+            <span class="kw">&lt;link</span><span class="ot"> rel=</span><span class="st">&quot;stylesheet&quot;</span><span class="ot"> media=</span><span class="st">&quot;screen&quot;</span><span class="ot"> href=</span><span class="st">&quot;@routes.Assets.at(&quot;</span><span class="er">bootstrap/css/bootstrap.css&quot;)&quot;</span><span class="kw">&gt;</span>
+            <span class="kw">&lt;style&gt;</span>
+                body <span class="kw">{</span>
+                    <span class="kw">padding-top:</span> <span class="dt">60px</span><span class="kw">;</span>
+                    <span class="kw">padding-bottom:</span> <span class="dt">40px</span><span class="kw">;</span>
+                <span class="kw">}</span>
+            <span class="kw">&lt;/style&gt;</span>
+            <span class="kw">&lt;link</span><span class="ot"> rel=</span><span class="st">&quot;stylesheet&quot;</span><span class="ot"> media=</span><span class="st">&quot;screen&quot;</span><span class="ot"> href=</span><span class="st">&quot;@routes.Assets.at(&quot;</span><span class="er">bootstrap/css/bootstrap-responsive.css&quot;)&quot;</span><span class="kw">&gt;</span>
+            <span class="kw">&lt;link</span><span class="ot"> rel=</span><span class="st">&quot;shortcut icon&quot;</span><span class="ot"> type=</span><span class="st">&quot;image/png&quot;</span><span class="ot"> href=</span><span class="st">&quot;@routes.Assets.at(&quot;</span><span class="er">images/favicon.png&quot;)&quot;</span><span class="kw">&gt;</span>
+            <span class="kw">&lt;script</span><span class="ot"> src=</span><span class="st">&quot;@routes.Assets.at(&quot;</span><span class="er">javascripts/jquery-1.7.1.min.js&quot;)&quot;</span><span class="ot"> type=</span><span class="st">&quot;text/javascript&quot;</span><span class="kw">&gt;&lt;/script&gt;</span>
+        <span class="kw">&lt;/head&gt;</span>
+        <span class="kw">&lt;body&gt;</span>
+
+            <span class="kw">&lt;div</span><span class="ot"> class=</span><span class="st">&quot;navbar navbar-fixed-top&quot;</span><span class="kw">&gt;</span>
+                <span class="kw">&lt;div</span><span class="ot"> class=</span><span class="st">&quot;navbar-inner&quot;</span><span class="kw">&gt;</span>
+                    <span class="kw">&lt;div</span><span class="ot"> class=</span><span class="st">&quot;container&quot;</span><span class="kw">&gt;</span>
+                        <span class="kw">&lt;a</span><span class="ot"> class=</span><span class="st">&quot;brand&quot;</span><span class="kw">&gt;</span>@title<span class="kw">&lt;/a&gt;</span>
+
+                    <span class="kw">&lt;/div&gt;</span>
+                <span class="kw">&lt;/div&gt;</span>
+            <span class="kw">&lt;/div&gt;</span>
+
+            <span class="kw">&lt;div</span><span class="ot"> class=</span><span class="st">&quot;container&quot;</span><span class="kw">&gt;</span>
+                <span class="co">&lt;!-- === Formulaire d&#39;authentification === --&gt;</span>
+                <span class="kw">&lt;fieldset&gt;</span>
+                    <span class="kw">&lt;legend&gt;</span>Authentification :<span class="kw">&lt;/legend&gt;</span>
+                    <span class="kw">&lt;div</span><span class="ot"> class=</span><span class="st">&quot;well&quot;</span><span class="kw">&gt;</span>
+                        <span class="kw">&lt;label&gt;</span>Email : 
+                        <span class="kw">&lt;input</span><span class="ot"> type=</span><span class="st">&quot;email&quot;</span><span class="ot"> name=</span><span class="st">&quot;email&quot;</span><span class="ot"> placeholder=</span><span class="st">&quot;Email&quot;</span><span class="kw">&gt;&lt;/label&gt;</span>
+                        <span class="kw">&lt;label&gt;</span>Password : 
+                        <span class="kw">&lt;input</span><span class="ot"> type=</span><span class="st">&quot;password&quot;</span><span class="ot"> name=</span><span class="st">&quot;password&quot;</span><span class="ot"> placeholder=</span><span class="st">&quot;Password&quot;</span><span class="kw">&gt;&lt;/label&gt;</span>
+                        <span class="kw">&lt;button</span><span class="ot"> name=</span><span class="st">&quot;login&quot;</span><span class="ot"> class=</span><span class="st">&quot;btn btn-primary&quot;</span><span class="kw">&gt;</span>Login<span class="kw">&lt;/button&gt;</span>
+                        <span class="kw">&lt;button</span><span class="ot"> name=</span><span class="st">&quot;logout&quot;</span><span class="ot"> class=</span><span class="st">&quot;btn&quot;</span><span class="kw">&gt;</span>Logout<span class="kw">&lt;/button&gt;</span>
+                    <span class="kw">&lt;/div&gt;</span>
+                <span class="kw">&lt;/fieldset&gt;</span>
+
+                <span class="co">&lt;!-- === Les messages s&#39;afficheront ici === --&gt;</span>
+                <span class="kw">&lt;div</span><span class="ot"> name=</span><span class="st">&quot;authentication&quot;</span><span class="ot"> class=</span><span class="st">&quot;alert alert-info&quot;</span><span class="kw">&gt;</span>
+                  <span class="kw">&lt;strong&gt;</span>Info : <span class="kw">&lt;/strong&gt;</span> Veuillez vous authentifier s&#39;il vous plaît
+                <span class="kw">&lt;/div&gt;</span>
+
+                <span class="co">&lt;!-- === Les bookmarks s&#39;afficheront ici === --&gt;</span>
+                <span class="kw">&lt;fieldset&gt;</span>
+                    <span class="kw">&lt;legend&gt;</span>Liste des Bookmarks <span class="kw">&lt;button</span><span class="ot"> name=</span><span class="st">&quot;loadbookmarks&quot;</span><span class="ot"> class=</span><span class="st">&quot;btn btn-inverse&quot;</span><span class="kw">&gt;</span>Charger ...<span class="kw">&lt;/button&gt;&lt;/legend&gt;</span>
+                    <span class="kw">&lt;ul</span><span class="ot"> name=</span><span class="st">&quot;bookmarks&quot;</span><span class="kw">&gt;&lt;/ul&gt;</span>
+                <span class="kw">&lt;/fieldset&gt;</span>
+
+            <span class="kw">&lt;/div&gt;</span>
+
+        <span class="kw">&lt;/body&gt;</span>
+
+        <span class="co">&lt;!-- === ici votre code applicatif === --&gt;</span>
+        <span class="kw">&lt;script&gt;</span>
+            <span class="co">/*</span>=== mon code ne s&#39;exécute qu&#39;une fois le DOM complètement chargé ===<span class="co">*/</span>
+            $(<span class="kw">function</span> (){
+
+                <span class="co">//définition des différents éléments d</span>&#39;<span class="co">IHM</span>
+                <span class="kw">var</span> user = {}
+                ,   alertAuthentication = $(<span class="ch">&#39;div</span>[<span class="ch">name</span>=<span class="ch">authentication</span>]<span class="ch">&#39;</span>)
+                ,   loginButton = $(<span class="st">&quot;button</span>[<span class="st">name</span>=<span class="st">login</span>]<span class="st">&quot;</span>)
+                ,   logoutButton = $(<span class="st">&quot;button</span>[<span class="st">name</span>=<span class="st">logout</span>]<span class="st">&quot;</span>)
+                ,   loadBookmarksButton = $(<span class="st">&quot;button</span>[<span class="st">name</span>=<span class="st">loadbookmarks</span>]<span class="st">&quot;</span>)
+                ,   email = $(<span class="ch">&#39;input</span>[<span class="ch">name</span>=<span class="ch">email</span>]<span class="ch">&#39;</span>)
+                ,   password = $(<span class="ch">&#39;input</span>[<span class="ch">name</span>=<span class="ch">password</span>]<span class="ch">&#39;</span>)
+                ,   labels = $(<span class="ch">&#39;label&#39;</span>)
+                ,   bookmarksList = $(<span class="ch">&#39;ul</span>[<span class="ch">name</span>=<span class="ch">bookmarks</span>]<span class="ch">&#39;</span>);
+
+                <span class="co">// onclick du bouton login</span>
+                <span class="kw">loginButton</span>.<span class="fu">click</span>(<span class="kw">function</span>(){
+
+                    <span class="kw">user</span>.<span class="fu">email</span> = <span class="kw">email</span>.<span class="fu">val</span>();
+                    <span class="kw">user</span>.<span class="fu">password</span> = <span class="kw">password</span>.<span class="fu">val</span>();
+                    $.<span class="fu">ajax</span>({
+                        <span class="dt">type</span>:<span class="st">&quot;POST&quot;</span>, 
+                        <span class="dt">url</span>:<span class="st">&quot;</span>/<span class="st">loginjson&quot;</span>, <span class="dt">data</span>:{<span class="dt">email </span>: <span class="kw">user</span>.<span class="fu">email</span>, <span class="dt">password </span>: <span class="kw">user</span>.<span class="fu">password</span> }, 
+                        <span class="dt">error </span>: <span class="kw">function</span>(err){<span class="kw">console</span>.<span class="fu">log</span>(<span class="st">&quot;Erreur&quot;</span>, err);}, 
+                        <span class="dt">success </span>: <span class="kw">function</span>(data){
+                            <span class="kw">if</span>(data !== <span class="st">&quot;badRequest&quot;</span>) {
+                                alertAuthentication
+                                    .<span class="fu">attr</span>(<span class="ch">&#39;class&#39;</span>,<span class="ch">&#39;alert</span> <span class="ch">alert</span>-<span class="ch">success&#39;</span>)
+                                    .<span class="fu">html</span>(<span class="ch">&#39;</span>&lt;<span class="ch">strong</span>&gt;<span class="ch">Bienvenue</span> !&lt;/<span class="ch">strong</span>&gt; <span class="ch">&#39;</span> + data);
+                                <span class="kw">user</span>.<span class="fu">name</span> = data;
+
+                                <span class="kw">labels</span>.<span class="fu">hide</span>();
+                                <span class="kw">email</span>.<span class="fu">hide</span>();
+                                <span class="kw">password</span>.<span class="fu">hide</span>();
+                                <span class="kw">loginButton</span>.<span class="fu">hide</span>();
+
+                            } <span class="kw">else</span> {
+                                alertAuthentication
+                                    .<span class="fu">attr</span>(<span class="ch">&#39;class&#39;</span>,<span class="ch">&#39;alert</span> <span class="ch">alert</span>-<span class="ch">error&#39;</span>)
+                                    .<span class="fu">html</span>(<span class="ch">&#39;</span>&lt;<span class="ch">strong</span>&gt;<span class="ch">Oups</span> !&lt;/<span class="ch">strong</span>&gt; <span class="ch">vous</span> <span class="ch">avez</span> <span class="ch">du</span> <span class="ch">vous</span> <span class="ch">tromper&#39;</span>);
+                            }
+                        }
+                    });
+                });
+
+                <span class="co">// onclick du bouton logout</span>
+                <span class="kw">logoutButton</span>.<span class="fu">click</span>(<span class="kw">function</span>(){
+
+                    $.<span class="fu">ajax</span>({
+                        <span class="dt">type</span>:<span class="st">&quot;GET&quot;</span>, 
+                        <span class="dt">url</span>:<span class="st">&quot;</span>/<span class="st">logoutjson&quot;</span>, 
+                        <span class="dt">error </span>: <span class="kw">function</span>(err){<span class="kw">console</span>.<span class="fu">log</span>(<span class="st">&quot;Erreur&quot;</span>, err);}, 
+                        <span class="dt">success </span>: <span class="kw">function</span>(data){ 
+
+                            <span class="kw">if</span>(<span class="kw">user</span>.<span class="fu">name</span>) {
+                                alertAuthentication
+                                    .<span class="fu">attr</span>(<span class="ch">&#39;class&#39;</span>,<span class="ch">&#39;alert</span> <span class="ch">alert</span>-<span class="ch">info&#39;</span>)
+                                    .<span class="fu">html</span>(<span class="ch">&#39;</span>&lt;<span class="ch">strong</span>&gt;<span class="ch">Au</span> <span class="ch">revoir</span>&lt;/<span class="ch">strong</span>&gt; <span class="ch">&#39;</span> + <span class="kw">user</span>.<span class="fu">name</span>);
+
+                                    <span class="kw">labels</span>.<span class="fu">show</span>();
+                                    <span class="kw">email</span>.<span class="fu">show</span>();
+                                    <span class="kw">password</span>.<span class="fu">show</span>();
+                                    <span class="kw">loginButton</span>.<span class="fu">show</span>();
+
+                                    user = {};
+
+                                    <span class="kw">bookmarksList</span>.<span class="fu">html</span>(<span class="ch">&#39;&#39;</span>);
+                            }
+
+
+                        }
+                    });
+                });
+
+                <span class="co">// onclick du bouton de chargement des bookmarks</span>
+                <span class="kw">loadBookmarksButton</span>.<span class="fu">click</span>(<span class="kw">function</span>(){
+                    $.<span class="fu">ajax</span>({<span class="dt">type</span>:<span class="st">&quot;GET&quot;</span>, <span class="dt">url</span>:<span class="st">&quot;</span>/<span class="st">bookmarks</span>/<span class="st">jsonlist&quot;</span>,
+                        <span class="dt">error </span>: <span class="kw">function</span>(err){ <span class="kw">console</span>.<span class="fu">log</span>(err); },
+                        <span class="dt">success </span>: <span class="kw">function</span>(data) { 
+
+                            <span class="kw">if</span>(data !== <span class="st">&quot;failed&quot;</span>) {
+                                <span class="kw">bookmarksList</span>.<span class="fu">html</span>(<span class="ch">&#39;&#39;</span>);
+                                <span class="kw">data.bookmarks</span>.<span class="fu">forEach</span>(<span class="kw">function</span>(bookmark){
+                                    <span class="kw">bookmarksList</span>.<span class="fu">append</span>(
+                                        $(<span class="ch">&#39;</span>&lt;<span class="ch">li</span>&gt;<span class="ch">&#39;</span>)
+                                            .<span class="fu">append</span>($(<span class="ch">&#39;</span>&lt;<span class="ch">b</span>&gt;<span class="ch">&#39;</span>).<span class="fu">append</span>(<span class="kw">bookmark</span>.<span class="fu">title</span>))
+                                            .<span class="fu">append</span>(<span class="ch">&#39;</span> | <span class="ch">&#39;</span>)
+                                            .<span class="fu">append</span>($(<span class="ch">&#39;</span>&lt;<span class="ch">a</span>&gt;<span class="ch">&#39;</span>).<span class="fu">attr</span>(<span class="st">&quot;href&quot;</span>,<span class="kw">bookmark</span>.<span class="fu">url</span>).<span class="fu">append</span>(<span class="kw">bookmark</span>.<span class="fu">url</span>))
+                                            .<span class="fu">append</span>(<span class="ch">&#39;</span> | <span class="ch">&#39;</span>)
+                                            .<span class="fu">append</span>($(<span class="ch">&#39;</span>&lt;<span class="ch">i</span>&gt;<span class="ch">&#39;</span>).<span class="fu">append</span>(<span class="kw">bookmark</span>.<span class="fu">details</span>))
+                                            .<span class="fu">append</span>(<span class="ch">&#39;</span> | (<span class="ch">&#39;</span>).<span class="fu">append</span>(<span class="kw">bookmark.category</span>.<span class="fu">label</span>).<span class="fu">append</span>(<span class="ch">&#39;</span>)<span class="ch">&#39;</span>)
+                                    );
+                                });
+                            } <span class="kw">else</span> {
+                                alertAuthentication
+                                    .<span class="fu">attr</span>(<span class="ch">&#39;class&#39;</span>,<span class="ch">&#39;alert</span> <span class="ch">alert</span>-<span class="ch">error&#39;</span>)
+                                    .<span class="fu">html</span>(<span class="ch">&#39;</span>&lt;<span class="ch">strong</span>&gt;<span class="ch">Il</span> <span class="ch">faut</span> <span class="ch">être</span> <span class="ch">authentifié</span> !&lt;/<span class="ch">strong</span>&gt; <span class="ch">pour</span> <span class="ch">obtenir</span> <span class="ch">la</span> <span class="ch">liste</span> <span class="ch">des</span> <span class="ch">bookmarks&#39;</span>);
+                            }
+                        }
+                    });
+                });
+
+
+
+            });
+        <span class="kw">&lt;/script&gt;</span>
+
+    <span class="kw">&lt;/html&gt;</span></code></pre>
+<h2 id="testons-2"><a href="#TOC">Testons</a></h2>
+<p>Dans votre navigateur, appelez l'url : <code>http://localhost:9000/main</code></p>
+<div class="figure">
+<img src="rsrc/08-services-013.png" /><p class="caption"></p>
+</div>
+<p>Si vous vous trompez en vous authentifiant :</p>
+<div class="figure">
+<img src="rsrc/08-services-014.png" /><p class="caption"></p>
+</div>
+<p>Si vous essayez de charger les bookmarks alors que vous n'êtes pas authentifié :</p>
+<div class="figure">
+<img src="rsrc/08-services-015.png" /><p class="caption"></p>
+</div>
+<p>Si vous vous êtes correctement authentifié :</p>
+<div class="figure">
+<img src="rsrc/08-services-016.png" /><p class="caption"></p>
+</div>
+<p>Vous pouvez donc charger les bookmarks :</p>
+<div class="figure">
+<img src="rsrc/08-services-017.png" /><p class="caption"></p>
+</div>
+<p>Si vous retournez à la racine du site : <code>http://localhost:9000/</code>, vous pouvez vérifiez que vous avez effectivemnt été authentifié :</p>
+<div class="figure">
+<img src="rsrc/08-services-018.png" /><p class="caption"></p>
+</div>
+<h2 id="conclusion"><a href="#TOC">Conclusion</a></h2>
+<p>Il est donc finallement très possible de &quot;faire&quot; du <strong>Play!► 2</strong> (java) sans utiliser (ou presque) du scala dans les vues. Pensez-y lorsque vous faites du <strong>Play!► 1</strong> (le mécanisme décrit est tout à fait reproductible dans la version 1), cela peut faciliter vos migrations.</p>
 </body>
 </html>

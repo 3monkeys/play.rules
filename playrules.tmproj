@@ -3,7 +3,7 @@
 <plist version="1.0">
 <dict>
 	<key>currentDocument</key>
-	<string>livre.play.deux/00-01-Preface.md</string>
+	<string>livre.play.deux/08-services.md</string>
 	<key>documents</key>
 	<array>
 		<dict>
@@ -65,15 +65,30 @@
 				<integer>9</integer>
 			</dict>
 		</dict>
+		<key>livre.play.deux/08-services.md</key>
+		<dict>
+			<key>caret</key>
+			<dict>
+				<key>column</key>
+				<integer>23</integer>
+				<key>line</key>
+				<integer>297</integer>
+			</dict>
+			<key>firstVisibleColumn</key>
+			<integer>0</integer>
+			<key>firstVisibleLine</key>
+			<integer>34</integer>
+		</dict>
 	</dict>
 	<key>openDocuments</key>
 	<array>
 		<string>livre.play.deux/00-00-cover.md</string>
 		<string>livre.play.deux/00-01-Preface.md</string>
+		<string>livre.play.deux/08-services.md</string>
 	</array>
 	<key>showFileHierarchyDrawer</key>
 	<true/>
 	<key>windowFrame</key>
-	<string>{{-1239, 38}, {850, 746}}</string>
+	<string>{{1028, 200}, {850, 746}}</string>
 </dict>
 </plist>
