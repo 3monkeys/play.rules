@@ -26,7 +26,7 @@ Pour cela nous allons utiliser les annotations @Required et @MaxLength
 	    @Id
 	    public Long id;
 
-            @Constraints.Required
+        @Constraints.Required
 	    @Constraints.MaxLength(30)
 	    public String label;
 
@@ -46,7 +46,7 @@ public static Result add() {
 	}
 	final Bookmark bookmark = bookmarkForm.get();
 	bookmark.save();
-        return redirect(routes.Application.index());
+    return redirect(routes.Application.index());
 }
 ```
 En cas de problème on renvoie une erreur à notre template.
@@ -76,9 +76,6 @@ Avec HTML5, il est possible de valider des données d'un formulaire directement 
 
 Il existe [un module Play](https://github.com/loicdescotte/Play2-HTML5Tags) pour générer les bonnes balises HTML à partir des contraintes du modèle.
 
-HTML5 reconnait de nouveaux type de données dans les formualires, comme les nombres, les numéros de téléphone, les URL....
-Le module prend en charge ces types de données à travers des tags particuliers.
-
 Dans le cas de notre application de gestion de bookmarks, on va pouvoir remplacer ceci : 
 
 ```html
@@ -88,13 +85,58 @@ Dans le cas de notre application de gestion de bookmarks, on va pouvoir remplace
 Par cela :
 
 ```scala
- @text(bookmarkForm("url"), 'label -> "URL : ")
+ @text(bookmarkForm("url"), 'placeholder -> "URL : ")
 
 ```
 
-Et le "markup" approprié sera généré.
+Et le "markup" approprié sera généré :
+
+```html
+<input name="url" placeholder="url" maxlength="30" required>
+```
+Le navigateur vérifiera alors la présence et la longueur du champ avant d'envoyer les données au serveur, ce qui permettra à l'utilisateur d'avoir un retour d'erreur plus rapide en case de problème et d'économiser un peu de bande passante!
+
+Remarque : Le fait de référencer un objet `bookmarkForm` nous permettra si on le souhaite plus tard d'éditer un bookmark existant en remplissant directement le champ du formulaire avec la valeur de notre objet. On pourrait par exemple écrire quelque chose comme ça dans le contrôleur :
+
+```java
+  public static Result edit(Long id) {
+    Form<Bookmark> bookmarkForm = form(Bookmark.class).fill(
+      Bookmark.find.byId(id)
+    );
+    return ok(
+      edit.render(id, bookmarkForm)
+    );
+  }
+```
 
 
-//TODO autres exemples (number, email) et images
+Le tag `text` tag est capable de changer le type d'"input" si une annotation particulière est détectée. 
+Par exemple avec le modèle suivant :
 
+```java
+    @Constraints.Email
+    public String contactMail;
+```
+    
+Et ce tag :
+
+```scala  
+    @text(form("contactMail"))
+```
+
+On obtiendra ceci :
+
+```html
+    <input type="email" id="contactMail" name="contactMail" value="">
+```
+Et le navigateur vérifiera le format saisi :
+
+![](rsrc/validation-01.png)
+
+
+HTML5 reconnait de nouveaux type de données dans les formulaires, comme les nombres, les dates, les numéros de téléphone, les URL....
+Le module prend en charge ces types de données à travers des tags particuliers (@number, @date, @telephone, @url....)
+Le fait de préciser le type d'"input" permet également au navigateur, particulièrement sur mobile, d'adapter son IHM au format demandé :
+ 
+![](rsrc/validation-02.png)
 
