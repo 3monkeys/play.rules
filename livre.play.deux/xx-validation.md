@@ -138,7 +138,8 @@ Et le navigateur vérifiera le format saisi :
 HTML5 reconnait de nouveaux type de données dans les formulaires, comme les nombres, les dates, les numéros de téléphone, les URL....
 Le module prend en charge ces types de données à travers des tags particuliers (@number, @date, @telephone, @url....)
 
-Le fait de préciser le type d'"input" permet également au navigateur, particulièrement sur mobile, d'adapter son IHM au format demandé :
+Le fait de préciser le type d'"input" permet également au navigateur, particulièrement sur mobile, d'adapter son IHM au format demandé. 
+Par exemple pour un champ numérique : 
  
 ![](rsrc/validation-02.png)
 
