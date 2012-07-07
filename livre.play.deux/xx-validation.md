@@ -14,23 +14,24 @@ Pour cela nous allons utiliser les annotations @Required et @MaxLength
 
 ```java
 
-	package models;
+  package models;
 
-	import play.db.ebean.Model;
-	import javax.persistence.*;
-        import play.data.validation.Constraints;
+  import play.db.ebean.Model;
+  import javax.persistence.*;
+  import play.data.validation.Constraints;
+ 
+  @Entity
+  public class Category extends Model{
 
-	@Entity
-	public class Category extends Model{
+  @Id
+  public Long id;
 
-	    @Id
-	    public Long id;
+  @Constraints.Required
+  @Constraints.MaxLength(30)
+  public String label;
 
-        @Constraints.Required
-	    @Constraints.MaxLength(30)
-	    public String label;
-
-	    // ...
+  // ...
+  }
 
 
 ```
@@ -38,16 +39,16 @@ Pour cela nous allons utiliser les annotations @Required et @MaxLength
 Ceci nous permettra ensuite de vérifier l'intégrité des données lors de la soumission du formulaire :
 
 ```java
-public static Result add() {
-        final Form<Bookmark> bookmarkForm = form(Bookmark.class).bindFromRequest();
-        if (bookmarkForm.hasErrors()) {
-			flash("error", "Form contains errors");
-			return badRequest(routes.Application.index());
-	}
-	final Bookmark bookmark = bookmarkForm.get();
-	bookmark.save();
+  public static Result add() {
+    final Form<Bookmark> bookmarkForm = form(Bookmark.class).bindFromRequest();
+    if (bookmarkForm.hasErrors()) {
+	  flash("error", "Form contains errors");
+	  return badRequest(routes.Application.index());
+    }
+    final Bookmark bookmark = bookmarkForm.get();
+    bookmark.save();
     return redirect(routes.Application.index());
-}
+  }
 ```
 En cas de problème on renvoie une erreur à notre template.
 
@@ -55,9 +56,9 @@ Pour afficher cette erreur on peut ajouter ceci à notre fichier index.scala.htm
 
 ```scala
   @if(flash.containsKey("error")) {
-        <div class="alert-message warning">
-            <strong>Oups!</strong> @flash.get("error")
-        </div>
+      <div class="alert-message warning">
+          <strong>Oups!</strong> @flash.get("error")
+      </div>
   } 
 ```
 
