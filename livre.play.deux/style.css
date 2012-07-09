@@ -53,6 +53,7 @@ h3{
 code{
 	font-family: monospace, sans-serif;
     background: #F0F0F0;
+	/*font-size:80%;*/
 }
 
 pre code{

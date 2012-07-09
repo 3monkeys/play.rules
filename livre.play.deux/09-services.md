@@ -12,7 +12,7 @@
 ##Primo :
 
 Ajoutons quelques bookmarks dans notre applications
-![](rsrc/08-services-001.png)
+![](rsrc/09-services-001.png)
 
 ##Création de notre service JSON
 
@@ -102,7 +102,7 @@ Donc, lorsque nous appellerons l'url `localhost:9000/bookmarks/jsonlist`, nous o
 
 Dans la zone de saisie de l'url de votre navigateur, saisissez donc `localhost:9000/bookmarks/jsonlist`. Et vous obtenez le flux JSON de vos bookmarks :
 
-![](rsrc/08-services-002.png)
+![](rsrc/09-services-002.png)
 
 ###Plus utile : via une requête ajax
 
@@ -128,15 +128,15 @@ Ce qui signifie que toute vue "utilisant" `main.scala.html`, comme par exemple `
 	});
 ```
 
-![](rsrc/08-services-003.png)
+![](rsrc/09-services-003.png)
 
 Vous obtenez directement un objet `bookmarks` qui est un tableau d'objets avec les éléments attendus :
 
-![](rsrc/08-services-004.png)
+![](rsrc/09-services-004.png)
 
 Et vous remarquerez  ...
 
-![](rsrc/08-services-005.png)
+![](rsrc/09-services-005.png)
 
 ... que les objets `bookmark` du tableau `bookmarks` contiennent les objets "liés" `category`.
 
@@ -148,7 +148,7 @@ Et vous remarquerez  ...
 
 Sécurisons notre contrôleur `Bookmarks.java` en lui ajoutant l'annotation `@Security.Authenticated(Secured.class)`. Ensuite (après recompilation), retournez à la racine du site `localhost:9000` pour vous "deloguer". Puis relancez votre requête ajax, et là vous obtenez (curieusement ?) le code HTML de la page d'authentification en retour. Ce qui est rassurant, c'est que notre service est bien sécurisé, mais le code de retour n'est pas forcément "top" à gérer.
 
-![](rsrc/08-services-006.png)
+![](rsrc/09-services-006.png)
 
 En fait, dans notre classe `Secured.java` nous avions la méthode suivante :
 
@@ -198,7 +198,7 @@ Remplacez `@Security.Authenticated(Secured.class)` par `@Security.Authenticated(
 
 Lancez à nouveau, dans la console du navigateur, votre requête ajax :
 
-![](rsrc/08-services-007.png)
+![](rsrc/09-services-007.png)
 
 ###Mais comment puis m'authentifier via une requête ajax ???
 
@@ -282,7 +282,7 @@ Dans la console du navigateur, essayez la commande suivante (vous ne devez pas �
 
 Vous allez obtenir ceci :
 
-![](rsrc/08-services-008.png)
+![](rsrc/09-services-008.png)
 
 Et si vous rappelez l'url `http://localhost:9000`, vous apparaissez comme authentifié. Vous pouvez tester à nouveau votre requête pour récupérer la liste des bookmarks :
 
@@ -308,15 +308,15 @@ Si vous souhaitez vous délogguer (toujours via une requête Ajax) :
 	});
 ```
 
-![](rsrc/08-services-009.png)
+![](rsrc/09-services-009.png)
 
 Et si vous rappelez l'url `http://localhost:9000`, vous n'êtes plus authentifié.
 
-![](rsrc/08-services-010.png)
+![](rsrc/09-services-010.png)
 
 Si vous testez à nouveau votre requête pour récupérer la liste des bookmarks, vous aurez un message vous indiquant que ce n'est pas possible (`failed`) car non autorisé (cf. `SecuredJson.java`):
 
-![](rsrc/08-services-011.png)
+![](rsrc/09-services-011.png)
 	
 De la même manière, si vous tentez de vous authentifier avec un mauvais compte utilisateur :
 
@@ -332,7 +332,7 @@ De la même manière, si vous tentez de vous authentifier avec un mauvais compte
 
 Vous obtiendrez un message badRequest (cf. `AuthenticationJson.java`) :
 
-![](rsrc/08-services-012.png)
+![](rsrc/09-services-012.png)
 
 ##Utilisons tout ça ...
 
@@ -562,27 +562,27 @@ Commencez par créer une nouvelle vue (dans le répertoire `views`) que vous nom
 
 Dans votre navigateur, appelez l'url : `http://localhost:9000/main`
 
-![](rsrc/08-services-013.png)
+![](rsrc/09-services-013.png)
 
 Si vous vous trompez en vous authentifiant :
 
-![](rsrc/08-services-014.png)
+![](rsrc/09-services-014.png)
 
 Si vous essayez de charger les bookmarks alors que vous n'êtes pas authentifié :
 
-![](rsrc/08-services-015.png)
+![](rsrc/09-services-015.png)
 
 Si vous vous êtes correctement authentifié :
 
-![](rsrc/08-services-016.png)
+![](rsrc/09-services-016.png)
 
 Vous pouvez donc charger les bookmarks :
 
-![](rsrc/08-services-017.png)
+![](rsrc/09-services-017.png)
 
 Si vous retournez à la racine du site : `http://localhost:9000/`, vous pouvez vérifiez que vous avez effectivemnt été authentifié :
 
-![](rsrc/08-services-018.png)
+![](rsrc/09-services-018.png)
 
 ##Conclusion
 

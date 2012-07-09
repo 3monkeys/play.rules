@@ -379,8 +379,8 @@ Ainsi, nous aurons 2 utilisateurs au chargement de l'application. Et pour les ch
 
 C'est bon vous pouvez lancer l'application à nouveau.
 
-![](rsrc/07-authentication-001.png)
-![](rsrc/07-authentication-002.png)
-![](rsrc/07-authentication-003.png)
-![](rsrc/07-authentication-004.png)
+![](rsrc/08-authentication-001.png)
+![](rsrc/08-authentication-002.png)
+![](rsrc/08-authentication-003.png)
+![](rsrc/08-authentication-004.png)
 
