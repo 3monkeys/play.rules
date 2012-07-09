@@ -87,6 +87,14 @@ code > span.er { color: #ff0000; font-weight: bold; }
 </ul></li>
 </ul></li>
 <li><a href="#charger-des-données-au-démarrage">Charger des données au démarrage</a></li>
+<li><a href="#validation-des-données">Validation des données</a><ul>
+<li><a href="#enrichissement-du-modèle-et-vérification-des-données">Enrichissement du modèle et vérification des données</a></li>
+<li><a href="#validation-côté-client">Validation côté client</a><ul>
+<li><a href="#installation-de-play2-html5tags">Installation de Play2-HTML5Tags</a></li>
+<li><a href="#déclaration-de-play2-html5tags">Déclaration de Play2-HTML5Tags</a></li>
+<li><a href="#utilisation-de-play2-html5tags">Utilisation de Play2-HTML5Tags</a></li>
+</ul></li>
+</ul></li>
 <li><a href="#gestion-de-lauthentification">Gestion de l'authentification</a><ul>
 <li><a href="#création-dun-modèle-user">Création d'un modèle User</a></li>
 <li><a href="#création-dun-contrôleur-secured">Création d'un contrôleur Secured</a></li>
@@ -134,6 +142,9 @@ code > span.er { color: #ff0000; font-weight: bold; }
 </ul></li>
 <li><a href="#testons-2">Testons</a></li>
 <li><a href="#conclusion">Conclusion</a></li>
+</ul></li>
+<li><a href="#assets">Assets ?</a><ul>
+<li><a href="#quallons-nous-voir">Qu'allons nous voir ?</a></li>
 </ul></li>
 </ul>
 </div>
@@ -811,6 +822,193 @@ categories:
 <pre><code>global=Global</code></pre>
 <p>Cette manipulation permet d'activer votre nouvelle classe au démarrage de l'application.</p>
 <p>Vous pouvez maintenant rafraîchir votre page pour vérifier que les données sont bien chargées au démarrage de votre application.</p>
+<h1 id="validation-des-données"><a href="#TOC">Validation des données</a></h1>
+<pre><code>/* --- Qu&#39;allons nous voir ? ---
+
+    - comment définir des contraintes sur un modèle
+    - comment vérifier les données d&#39;un formulaire
+    - comment valider les données côté client en utilisant un module tiers
+*/</code></pre>
+<h2 id="enrichissement-du-modèle-et-vérification-des-données"><a href="#TOC">Enrichissement du modèle et vérification des données</a></h2>
+<p>Nous voulons nous assurer que l'utilisateur entre bien un label (d'une catégorie) lors de la création d'un bookmark. Nous voulons aussi limiter la taille à 30 caractères (pourquoi pas?). Pour cela nous allons utiliser les annotations @Required et @MaxLength dans notre modèle <code>Category</code> sur le &quot;champ&quot; <code>label</code> (on n'oublie pas : <code>import play.data.validation.Constraints)</code>:</p>
+<pre class="sourceCode java"><code class="sourceCode java">
+    <span class="kw">package models;</span>
+
+    <span class="kw">import play.db.ebean.Model;</span>
+    <span class="kw">import javax.persistence.*;</span>
+    <span class="kw">import play.data.validation.Constraints;</span>
+
+    @Entity
+    <span class="kw">public</span> <span class="kw">class</span> Category <span class="kw">extends</span> Model {
+
+        @Id
+        <span class="kw">public</span> Long id;
+
+        @Constraints.<span class="fu">Required</span>
+        @Constraints.<span class="fu">MaxLength</span>(<span class="dv">30</span>)
+        <span class="kw">public</span> String label;
+
+        <span class="co">// ...</span>
+    }</code></pre>
+<p>Ceci nous permettra ensuite de vérifier l'intégrité des données lors de la soumission du formulaire (= lorsque l'on ajoute une catégorie). Modifions un peu le code de notre contrôleur <code>Categories</code> :</p>
+<pre class="sourceCode java"><code class="sourceCode java">
+    <span class="kw">public</span> <span class="kw">class</span> Categories <span class="kw">extends</span> Controller {
+
+        <span class="kw">public</span> <span class="dt">static</span> Result <span class="fu">add</span>() {
+
+            <span class="dt">final</span> Form&lt;Category&gt; categoryForm = <span class="fu">form</span>(Category.<span class="fu">class</span>).<span class="fu">bindFromRequest</span>();
+
+            <span class="kw">if</span> (categoryForm.<span class="fu">hasErrors</span>()) { <span class="co">// &lt;--- le code modifié, ça commence ici !</span>
+
+                <span class="fu">flash</span>(<span class="st">&quot;error&quot;</span>, <span class="st">&quot;Non, non, il faut saisir autre chose !&quot;</span>);
+
+            } <span class="kw">else</span> { <span class="co">// &lt;--- on n&#39;enregistre que si tout va bien</span>
+                <span class="dt">final</span> Category category = categoryForm.<span class="fu">get</span>();
+                category.<span class="fu">save</span>();    
+            }
+
+            <span class="kw">return</span> <span class="fu">redirect</span>(routes.<span class="fu">Application</span>.<span class="fu">index</span>());
+
+        }
+    }</code></pre>
+<p>En cas de problème on renvoie une erreur à notre template.</p>
+<p>Pour afficher cette erreur on peut ajouter ceci à notre fichier <code>index.scala.html</code> :</p>
+<pre class="sourceCode scala"><code class="sourceCode scala">
+    @<span class="fu">if</span>(flash.<span class="fu">containsKey</span>(<span class="st">&quot;error&quot;</span>)) {
+        &lt;div <span class="kw">class</span>=<span class="st">&quot;alert alert-error&quot;</span>&gt; &lt;!-- ceci est un style twitter bootstrap --&gt;
+            &lt;strong&gt;Oups!&lt;/strong&gt; @flash.<span class="fu">get</span>(<span class="st">&quot;error&quot;</span>)
+        &lt;/div&gt;
+    }</code></pre>
+<p><strong>Vous pouvez tout de suite essayer :</strong></p>
+<div class="figure">
+<img src="rsrc/07-validation-001.png" /><p class="caption"></p>
+</div>
+<div class="figure">
+<img src="rsrc/07-validation-002.png" /><p class="caption"></p>
+</div>
+<p>Il existe d'autres annotations de validation :</p>
+<ul>
+<li><code>@Max</code> et <code>@Min</code> pour les valeurs numériques</li>
+<li><code>@MinLength</code> pour demander une taille longueur minimum à un champ</li>
+<li><code>@Pattern</code> qui permet de valider des expressions régulières</li>
+<li><code>@Email</code> pour valider le format email</li>
+</ul>
+<p>On peut bien sûr écrire facilement nos propres validateurs...</p>
+<h2 id="validation-côté-client"><a href="#TOC">Validation côté client</a></h2>
+<p>Avec HTML5, il est possible de valider des données d'un formulaire directement depuis le navigateur avant de les envoyer au serveur.</p>
+<p>Il existe un module Play (développé par un de vos serviteurs : <a href="http://www.twitter.com/loic_d">@loic_d</a>) que vous trouverez ici : <a href="https://github.com/loicdescotte/Play2-HTML5Tags">https://github.com/loicdescotte/Play2-HTML5Tags</a>, pour générer les bonnes balises HTML à partir des contraintes du modèle.</p>
+<p>Avant de l'utiliser, voyons comment l'installer.</p>
+<h3 id="installation-de-play2-html5tags"><a href="#TOC">Installation de Play2-HTML5Tags</a></h3>
+<p>Pour le moment il n'existe pas de repository public pour les modules Play2!►, donc téléchargez sur le site le plugin (utilisez le bouton &quot;zip&quot; ou directement le lien <a href="https://github.com/loicdescotte/Play2-HTML5Tags/zipball/master">https://github.com/loicdescotte/Play2-HTML5Tags/zipball/master</a>). Une fois le module téléchargé, dé-zippez, allez dans le répertoire du module :</p>
+<p><strong>Les versions de Play, Sbt, ... ont une importance &quot;VITALE&quot; ;)</strong>, il faut donc aller modifier quelques petits paramètres en fonction de la version de Play que vous utilisez, mais <strong>seulement si c'est nécessaire</strong>, ce n'est utile que dans les cas où la version du module a été développé pour une version antérieur de Play (par exemple version 2.0.1 contre version 2.0.2). Si c'est le cas vous aurez les 2 manipulations ci-dessous à effectuer :</p>
+<ul>
+<li>dans le répertoire <code>/projet</code> changez dans <code>build.properties</code> <code>sbt.version=0.11.2</code> par <code>sbt.version=0.11.3</code></li>
+<li>dans le répertoire <code>/projet</code> changez dans <code>plugins.sbt</code> <code>addSbtPlugin(&quot;play&quot; % &quot;sbt-plugin&quot; % &quot;2.0&quot;)</code> par <code>addSbtPlugin(&quot;play&quot; % &quot;sbt-plugin&quot; % &quot;2.0.2&quot;)</code></li>
+</ul>
+<p><em>PS: bien sûr cela change en fonction des versions de Play.</em></p>
+<p>Ensuite dans le répertoire du module, en mode console, tapez : <code>play</code>, cela va &quot;mouliner&quot; un petit moment, vous devriez ensuite obtenir un prompt avec le nom du module :</p>
+<div class="figure">
+<img src="rsrc/07-validation-003.png" /><p class="caption"></p>
+</div>
+<p>Ensuite, au prompt, tapez <code>publish-local</code>, là encore cela mouline un moment, Play compile et installe le plugin pour qu'il soit utilisable par toutes vos applications Play. Vous pouvez allez vérifier dans le répertoire d'installation de Play, dans <code>/repository/local</code> vous avez maintenant un répertoire <code>com.loicdescotte.coffeebean</code> qui contient le module <code>html5tags_2.9.1</code>.</p>
+<h3 id="déclaration-de-play2-html5tags"><a href="#TOC">Déclaration de Play2-HTML5Tags</a></h3>
+<p>Avant de pouvoir utiliser le module, vous devez déclarer son utilisation dans votre application. Il va donc falloir modifier le fichier <code>/project/Build.scala</code> de votre application Play :</p>
+<pre class="sourceCode scala"><code class="sourceCode scala">
+    <span class="kw">import</span> sbt.<span class="fu">_</span>
+    <span class="kw">import</span> Keys.<span class="fu">_</span>
+    <span class="kw">import</span> PlayProject.<span class="fu">_</span>
+
+    <span class="kw">object</span> ApplicationBuild <span class="kw">extends</span> Build {
+
+        <span class="kw">val</span> appName         = <span class="st">&quot;bookmarks&quot;</span>
+        <span class="kw">val</span> appVersion      = <span class="st">&quot;1.0-SNAPSHOT&quot;</span>
+
+        <span class="kw">val</span> appDependencies = Seq(
+          <span class="co">// Add your project dependencies here,</span>
+          <span class="st">&quot;com.loicdescotte.coffeebean&quot;</span> % <span class="st">&quot;html5tags_2.9.1&quot;</span> % <span class="st">&quot;1.0-SNAPSHOT&quot;</span>
+        )
+
+        <span class="kw">val</span> main = <span class="fu">PlayProject</span>(appName, appVersion, appDependencies, mainLang = JAVA).<span class="fu">settings</span>(
+          <span class="co">// Add your own project settings here </span>
+          resolvers += <span class="st">&quot;Local Play Repository&quot;</span> at <span class="st">&quot;/Users/k33g_org/play-2.0.2/repository&quot;</span>     
+        )
+    }</code></pre>
+<p>Maintenant vous pouvez utiliser le module.</p>
+<h3 id="utilisation-de-play2-html5tags"><a href="#TOC">Utilisation de Play2-HTML5Tags</a></h3>
+<p>Dans le cas de notre application de gestion de bookmarks, on va pouvoir remplacer ceci :</p>
+<pre class="sourceCode html"><code class="sourceCode html">
+    <span class="kw">&lt;input</span><span class="ot"> name=</span><span class="st">&quot;label&quot;</span><span class="ot"> placeholder=</span><span class="st">&quot;label&quot;</span><span class="kw">&gt;</span></code></pre>
+<p>Par cela :</p>
+<pre class="sourceCode scala"><code class="sourceCode scala">
+    @<span class="fu">text</span>(<span class="fu">categoryForm</span>(<span class="st">&quot;label&quot;</span>), &#39;placeholder -&gt; <span class="st">&quot;LABEL : &quot;</span>)</code></pre>
+<p>Et le &quot;markup&quot; approprié sera généré :</p>
+<pre class="sourceCode html"><code class="sourceCode html">
+    <span class="kw">&lt;input</span><span class="ot"> name=</span><span class="st">&quot;url&quot;</span><span class="ot"> placeholder=</span><span class="st">&quot;url&quot;</span><span class="ot"> maxlength=</span><span class="st">&quot;30&quot;</span><span class="ot"> required</span><span class="kw">&gt;</span></code></pre>
+<p>Le navigateur vérifiera alors la présence et la longueur du champ avant d'envoyer les données au serveur, ce qui permettra à l'utilisateur d'avoir un retour d'erreur plus rapide en case de problème et d'économiser un peu de bande passante!</p>
+<p><strong>Mais pour que cela fonctionne, quelques manipulations sont encore nécessaires :</strong></p>
+<p>Dans le contrôleur <code>Application.java</code>, ajoutons <code>form(Category.class)</code> en argument de la méthode <code>index.render()</code> :</p>
+<pre class="sourceCode java"><code class="sourceCode java">
+    <span class="kw">public</span> <span class="kw">class</span> Application <span class="kw">extends</span> Controller {
+
+        <span class="kw">public</span> <span class="dt">static</span> Result <span class="fu">index</span>() {
+
+            <span class="kw">return</span> <span class="fu">ok</span>(index.<span class="fu">render</span>(
+                        <span class="st">&quot;Vous pouvez commencer à saisir ...&quot;</span>,
+                        Bookmark.<span class="fu">find</span>.<span class="fu">fetch</span>(<span class="st">&quot;category&quot;</span>).<span class="fu">orderBy</span>(<span class="st">&quot;title&quot;</span>).<span class="fu">findList</span>(),
+                        Category.<span class="fu">find</span>.<span class="fu">orderBy</span>(<span class="st">&quot;label&quot;</span>).<span class="fu">findList</span>(),
+                        User.<span class="fu">find</span>.<span class="fu">byId</span>(<span class="fu">request</span>().<span class="fu">username</span>()),
+                        <span class="fu">form</span>(Category.<span class="fu">class</span>) <span class="co">//&lt;--- c&#39;est ici</span>
+                    ));
+        }
+
+    }</code></pre>
+<p>Puis, dans la vue <code>index.scala.html</code>, déclarons ce nouveau paramètre :</p>
+<pre class="sourceCode scala"><code class="sourceCode scala">
+    @(
+    message: String,
+    bookmarks: List[models.<span class="fu">Bookmark</span>],
+    categories: List[models.<span class="fu">Category</span>],
+    user: User,
+    categoryForm: Form[models.<span class="fu">Category</span>]
+    )</code></pre>
+<p>Ajoutons tout de suite après ceci (spécifique au module que nous avons installé):</p>
+<pre class="sourceCode scala"><code class="sourceCode scala">
+    @import html5.<span class="fu">tags</span>.<span class="fu">html</span>.<span class="fu">_</span></code></pre>
+<p>Maintenant nous pouvons remplacer <code>&lt;input name=&quot;label&quot; placeholder=&quot;label&quot;&gt;</code> par <code>@text(categoryForm(&quot;label&quot;), 'placeholder -&gt; &quot;saisir un label&quot;)</code> et vous obtiendrez ceci :</p>
+<div class="figure">
+<img src="rsrc/07-validation-004.png" /><p class="caption"></p>
+</div>
+<p>Si vous ne souhaitez pas voir apparaître les contraintes de saisie, utilisez plutôt : <code>@text(categoryForm(&quot;label&quot;), 'placeholder -&gt; &quot;saisir un label&quot;, '_showConstraints -&gt; false)</code>.</p>
+<p><strong>Remarque :</strong> Le fait de référencer un objet <code>categoryForm</code> nous permettra si on le souhaite plus tard d'éditer une catégorie existante en remplissant directement le champ du formulaire avec la valeur de notre objet. On pourrait par exemple écrire quelque chose comme ça dans le contrôleur :</p>
+<pre class="sourceCode java"><code class="sourceCode java">
+    <span class="kw">public</span> <span class="dt">static</span> Result <span class="fu">edit</span>(Long id) {
+        Form&lt;Category&gt; categoryForm = <span class="fu">form</span>(Category.<span class="fu">class</span>).<span class="fu">fill</span>(
+            Category.<span class="fu">find</span>.<span class="fu">byId</span>(id)
+        );
+        <span class="kw">return</span> <span class="fu">ok</span>(
+            edit.<span class="fu">render</span>(id, categoryForm)
+        );
+    }</code></pre>
+<p>Le tag <code>text</code> tag est capable de changer le type de <code>&lt;input&gt;</code> si une annotation particulière est détectée.</p>
+<p>Par exemple avec le modèle suivant :</p>
+<pre class="sourceCode java"><code class="sourceCode java">
+    @Constraints.<span class="fu">Email</span>
+    <span class="kw">public</span> String contactMail;</code></pre>
+<p>Et ce tag :</p>
+<pre class="sourceCode scala"><code class="sourceCode scala">
+    @<span class="fu">text</span>(<span class="fu">form</span>(<span class="st">&quot;contactMail&quot;</span>))</code></pre>
+<p>On obtiendra ceci :</p>
+<pre class="sourceCode html"><code class="sourceCode html">
+    <span class="kw">&lt;input</span><span class="ot"> type=</span><span class="st">&quot;email&quot;</span><span class="ot"> id=</span><span class="st">&quot;contactMail&quot;</span><span class="ot"> name=</span><span class="st">&quot;contactMail&quot;</span><span class="ot"> value=</span><span class="st">&quot;&quot;</span><span class="kw">&gt;</span></code></pre>
+<p>Et le navigateur vérifiera le format saisi :</p>
+<div class="figure">
+<img src="rsrc/07-validation-005.png" /><p class="caption"></p>
+</div>
+<p>HTML5 reconnait de nouveaux type de données dans les formulaires, comme les nombres, les dates, les numéros de téléphone, les URL.... Le module prend en charge ces types de données à travers des tags particuliers (<code>@number</code>, <code>@date</code>, <code>@telephone</code>, <code>@url</code> ...)</p>
+<p>Le fait de préciser le type de <code>&lt;input&gt;</code> permet également au navigateur, particulièrement sur mobile, d'adapter son IHM au format demandé. Par exemple pour un champ numérique :</p>
+<div class="figure">
+<img src="rsrc/07-validation-006.png" /><p class="caption"></p>
+</div>
 <h1 id="gestion-de-lauthentification"><a href="#TOC">Gestion de l'authentification</a></h1>
 <pre><code>/* --- Qu&#39;allons nous voir ? ---
 
@@ -1136,7 +1334,7 @@ users:
         }
     }</code></pre>
 <p>C'est bon vous pouvez lancer l'application à nouveau.</p>
-<p><img src="rsrc/07-authentication-001.png" /> <img src="rsrc/07-authentication-002.png" /> <img src="rsrc/07-authentication-003.png" /> <img src="rsrc/07-authentication-004.png" /></p>
+<p><img src="rsrc/08-authentication-001.png" /> <img src="rsrc/08-authentication-002.png" /> <img src="rsrc/08-authentication-003.png" /> <img src="rsrc/08-authentication-004.png" /></p>
 <h1 id="services-json"><a href="#TOC">Services (JSON)</a></h1>
 <pre><code>/* --- Qu&#39;allons nous voir ? ---
 
@@ -1146,7 +1344,7 @@ users:
     - comment faire une &quot;single page application&quot;
 */</code></pre>
 <h2 id="primo"><a href="#TOC">Primo :</a></h2>
-<p>Ajoutons quelques bookmarks dans notre applications <img src="rsrc/08-services-001.png" /></p>
+<p>Ajoutons quelques bookmarks dans notre applications <img src="rsrc/09-services-001.png" /></p>
 <h2 id="création-de-notre-service-json"><a href="#TOC">Création de notre service JSON</a></h2>
 <p><strong>Objectif :</strong> faire un service qui nous renvoie la liste des bookmarks au format JSON</p>
 <h3 id="allons-modifier-le-contrôleur-bookmarks"><a href="#TOC">Allons modifier le contrôleur Bookmarks</a></h3>
@@ -1212,7 +1410,7 @@ GET /bookmarks/jsonlist controllers.Bookmarks.jsonList()</code></pre>
 <h3 id="directement-avec-lurl"><a href="#TOC">Directement avec l'url</a></h3>
 <p>Dans la zone de saisie de l'url de votre navigateur, saisissez donc <code>localhost:9000/bookmarks/jsonlist</code>. Et vous obtenez le flux JSON de vos bookmarks :</p>
 <div class="figure">
-<img src="rsrc/08-services-002.png" /><p class="caption"></p>
+<img src="rsrc/09-services-002.png" /><p class="caption"></p>
 </div>
 <h3 id="plus-utile-via-une-requête-ajax"><a href="#TOC">Plus utile : via une requête ajax</a></h3>
 <p>Comme vous le savez (ou pas), Play2!► est fourni avec <strong>jQuery</strong>, &quot;petit&quot; framework javascript très utile pour &quot;jouer&quot; avec le DOM de vos pages, mais aussi pour faire des requêtes ajax. Si vous vous souvenez, dans la vue (portion de vue) <code>main.scala.html</code> il y avait le code suivant :</p>
@@ -1231,15 +1429,15 @@ GET /bookmarks/jsonlist controllers.Bookmarks.jsonList()</code></pre>
         }
     });</code></pre>
 <div class="figure">
-<img src="rsrc/08-services-003.png" /><p class="caption"></p>
+<img src="rsrc/09-services-003.png" /><p class="caption"></p>
 </div>
 <p>Vous obtenez directement un objet <code>bookmarks</code> qui est un tableau d'objets avec les éléments attendus :</p>
 <div class="figure">
-<img src="rsrc/08-services-004.png" /><p class="caption"></p>
+<img src="rsrc/09-services-004.png" /><p class="caption"></p>
 </div>
 <p>Et vous remarquerez ...</p>
 <div class="figure">
-<img src="rsrc/08-services-005.png" /><p class="caption"></p>
+<img src="rsrc/09-services-005.png" /><p class="caption"></p>
 </div>
 <p>... que les objets <code>bookmark</code> du tableau <code>bookmarks</code> contiennent les objets &quot;liés&quot; <code>category</code>.</p>
 <p><strong>Génialement simplissime et pratique, non !?</strong></p>
@@ -1247,7 +1445,7 @@ GET /bookmarks/jsonlist controllers.Bookmarks.jsonList()</code></pre>
 <h2 id="sécurisation"><a href="#TOC">Sécurisation</a></h2>
 <p>Sécurisons notre contrôleur <code>Bookmarks.java</code> en lui ajoutant l'annotation <code>@Security.Authenticated(Secured.class)</code>. Ensuite (après recompilation), retournez à la racine du site <code>localhost:9000</code> pour vous &quot;deloguer&quot;. Puis relancez votre requête ajax, et là vous obtenez (curieusement ?) le code HTML de la page d'authentification en retour. Ce qui est rassurant, c'est que notre service est bien sécurisé, mais le code de retour n'est pas forcément &quot;top&quot; à gérer.</p>
 <div class="figure">
-<img src="rsrc/08-services-006.png" /><p class="caption"></p>
+<img src="rsrc/09-services-006.png" /><p class="caption"></p>
 </div>
 <p>En fait, dans notre classe <code>Secured.java</code> nous avions la méthode suivante :</p>
 <pre><code>@Override
@@ -1286,7 +1484,7 @@ public Result onUnauthorized(Context ctx) {
 <h3 id="testons"><a href="#TOC">Testons</a></h3>
 <p>Lancez à nouveau, dans la console du navigateur, votre requête ajax :</p>
 <div class="figure">
-<img src="rsrc/08-services-007.png" /><p class="caption"></p>
+<img src="rsrc/09-services-007.png" /><p class="caption"></p>
 </div>
 <h3 id="mais-comment-puis-mauthentifier-via-une-requête-ajax"><a href="#TOC">Mais comment puis m'authentifier via une requête ajax ???</a></h3>
 <p>Là aussi, nous allons devoir créer une classe du même type qu'<code>Authentication.java</code> mais qui ne redirige pas vers la page principale pour ne pas avoir du code HTML comme retour.</p>
@@ -1355,7 +1553,7 @@ GET     /logoutjson                         controllers.AuthenticationJson.logou
     });</code></pre>
 <p>Vous allez obtenir ceci :</p>
 <div class="figure">
-<img src="rsrc/08-services-008.png" /><p class="caption"></p>
+<img src="rsrc/09-services-008.png" /><p class="caption"></p>
 </div>
 <p>Et si vous rappelez l'url <code>http://localhost:9000</code>, vous apparaissez comme authentifié. Vous pouvez tester à nouveau votre requête pour récupérer la liste des bookmarks :</p>
 <pre class="sourceCode javascript"><code class="sourceCode javascript">
@@ -1374,15 +1572,15 @@ GET     /logoutjson                         controllers.AuthenticationJson.logou
         <span class="dt">success </span>: <span class="kw">function</span>(data){ <span class="kw">console</span>.<span class="fu">log</span>(data);}
     });</code></pre>
 <div class="figure">
-<img src="rsrc/08-services-009.png" /><p class="caption"></p>
+<img src="rsrc/09-services-009.png" /><p class="caption"></p>
 </div>
 <p>Et si vous rappelez l'url <code>http://localhost:9000</code>, vous n'êtes plus authentifié.</p>
 <div class="figure">
-<img src="rsrc/08-services-010.png" /><p class="caption"></p>
+<img src="rsrc/09-services-010.png" /><p class="caption"></p>
 </div>
 <p>Si vous testez à nouveau votre requête pour récupérer la liste des bookmarks, vous aurez un message vous indiquant que ce n'est pas possible (<code>failed</code>) car non autorisé (cf. <code>SecuredJson.java</code>):</p>
 <div class="figure">
-<img src="rsrc/08-services-011.png" /><p class="caption"></p>
+<img src="rsrc/09-services-011.png" /><p class="caption"></p>
 </div>
 <p>De la même manière, si vous tentez de vous authentifier avec un mauvais compte utilisateur :</p>
 <pre class="sourceCode javascript"><code class="sourceCode javascript">
@@ -1394,7 +1592,7 @@ GET     /logoutjson                         controllers.AuthenticationJson.logou
     });</code></pre>
 <p>Vous obtiendrez un message badRequest (cf. <code>AuthenticationJson.java</code>) :</p>
 <div class="figure">
-<img src="rsrc/08-services-012.png" /><p class="caption"></p>
+<img src="rsrc/09-services-012.png" /><p class="caption"></p>
 </div>
 <h2 id="utilisons-tout-ça-..."><a href="#TOC">Utilisons tout ça ...</a></h2>
 <p>Mettons en applications ce que nous venons de voir pour faire quelque chose d'un peu plus &quot;pratique&quot; : développons une &quot;Single page application&quot; :</p>
@@ -1605,29 +1803,40 @@ GET     /main                       controllers.SingleApp.mainPage()</code></pre
 <h2 id="testons-2"><a href="#TOC">Testons</a></h2>
 <p>Dans votre navigateur, appelez l'url : <code>http://localhost:9000/main</code></p>
 <div class="figure">
-<img src="rsrc/08-services-013.png" /><p class="caption"></p>
+<img src="rsrc/09-services-013.png" /><p class="caption"></p>
 </div>
 <p>Si vous vous trompez en vous authentifiant :</p>
 <div class="figure">
-<img src="rsrc/08-services-014.png" /><p class="caption"></p>
+<img src="rsrc/09-services-014.png" /><p class="caption"></p>
 </div>
 <p>Si vous essayez de charger les bookmarks alors que vous n'êtes pas authentifié :</p>
 <div class="figure">
-<img src="rsrc/08-services-015.png" /><p class="caption"></p>
+<img src="rsrc/09-services-015.png" /><p class="caption"></p>
 </div>
 <p>Si vous vous êtes correctement authentifié :</p>
 <div class="figure">
-<img src="rsrc/08-services-016.png" /><p class="caption"></p>
+<img src="rsrc/09-services-016.png" /><p class="caption"></p>
 </div>
 <p>Vous pouvez donc charger les bookmarks :</p>
 <div class="figure">
-<img src="rsrc/08-services-017.png" /><p class="caption"></p>
+<img src="rsrc/09-services-017.png" /><p class="caption"></p>
 </div>
 <p>Si vous retournez à la racine du site : <code>http://localhost:9000/</code>, vous pouvez vérifiez que vous avez effectivemnt été authentifié :</p>
 <div class="figure">
-<img src="rsrc/08-services-018.png" /><p class="caption"></p>
+<img src="rsrc/09-services-018.png" /><p class="caption"></p>
 </div>
 <h2 id="conclusion"><a href="#TOC">Conclusion</a></h2>
 <p>Il est donc finallement très possible de &quot;faire&quot; du <strong>Play!► 2</strong> (java) sans utiliser (ou presque) du scala dans les vues. Pensez-y lorsque vous faites du <strong>Play!► 1</strong> (le mécanisme décrit est tout à fait reproductible dans la version 1), cela peut faciliter vos migrations.</p>
+<h1 id="assets"><a href="#TOC">Assets ?</a></h1>
+<hr />
+<h4 id="quallons-nous-voir"><a href="#TOC">Qu'allons nous voir ?</a></h4>
+<ul>
+<li><em>Qu'est-ce que c'est et pourquoi ?</em></li>
+<li><em>Découverte rapide de Coffeescript</em></li>
+<li><em>Utilisation de Coffeescript</em></li>
+<li><em>LESS ?</em></li>
+<li><em>...</em></li>
+</ul>
+<hr />
 </body>
 </html>
