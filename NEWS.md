@@ -22,6 +22,22 @@
 
 ---
 
+###Lundi 09 Juillet
+##Play.rules Return, Nouveau chapitre
+
+Ajout du chapitre **"Validation de données"**, avec au programme :
+
+- Validation de saisie des données par ajout d'annotations dans les modèles
+- Utilisation d'un composant tiers (module)
+
+Toujours visible en mode web : [Play.Rules Return : Play!► 2 en douceur](http://3monkeys.github.com/play.rules/livre.play.deux.web/play2.rules.return.html)
+
+à venir :
+
+- Assets
+- Une feuille de style plus sympa pour essayer d'avoir un epub plus joli
+- Une version pdf 
+
 ###Lundi 18 juin
 ##Play.rules Return, MàJ
 
