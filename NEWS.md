@@ -7,8 +7,16 @@
 </ul>
 </div>
 
+
+<div class="bigHighlight">
+<h1><strong>Play.Rules!</strong><small>►</small><strong>Return</strong></h1>
+<h1>Le pdf, c'est ici : <a href="https://github.com/3monkeys/play.rules/raw/master/livre.play.deux/play2.rules.return.pdf">Téléchargez !</a></h1>
+</div>
+
+
 ###Téléchargement des versions e-book de Play.Rules Return :
 
+- **[pdf](https://github.com/3monkeys/play.rules/raw/master/livre.play.deux/play2.rules.return.pdf)**
 - [epub](https://github.com/3monkeys/play.rules/raw/master/livre.play.deux/play2.rules.return.epub)
 - [docx](https://github.com/3monkeys/play.rules/raw/master/livre.play.deux/play2.rules.return.docx)
 - [html](http://3monkeys.github.com/play.rules/livre.play.deux.web/play2.rules.return.html)
@@ -21,6 +29,20 @@
 - [docx](https://github.com/3monkeys/play.rules/raw/master/livre.play.un/play.rules.one.docx)
 
 ---
+
+
+###Mercredi 1er Août
+##Play.rules Return : Assets & le PDF !!!
+
+Ajout du chapitre sur les **assets** :
+
+- Assets ?
+- Coffeescript 
+- Less
+
+Enfin la version **pdf** (je la trouve plus lisible sur tablettes que le format epub)
+
+
 
 ###Lundi 09 Juillet
 ##Play.rules Return, Nouveau chapitre
