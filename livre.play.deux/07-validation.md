@@ -1,11 +1,10 @@
 #Validation des données
 
-	/* --- Qu'allons nous voir ? ---
+>*Qu'allons nous voir ?*
 
-		- comment définir des contraintes sur un modèle
-		- comment vérifier les données d'un formulaire
-		- comment valider les données côté client en utilisant un module tiers
-	*/
+>	- *comment définir des contraintes sur un modèle*
+>	- *comment vérifier les données d'un formulaire*
+>	- *comment valider les données côté client en utilisant un module tiers*
 
 ##Enrichissement du modèle et vérification des données
 
@@ -77,9 +76,9 @@ Pour afficher cette erreur on peut ajouter ceci à notre fichier `index.scala.ht
 
 **Vous pouvez tout de suite essayer :**
 
-![](rsrc/07-validation-001.png)
+![](rsrc/07-validation-001.png)\
 
-![](rsrc/07-validation-002.png)
+![](rsrc/07-validation-002.png)\
 
 
 Il existe d'autres annotations de validation : 
@@ -101,7 +100,7 @@ Avant de l'utiliser, voyons comment l'installer.
 
 ###Installation de Play2-HTML5Tags
 
-Pour le moment il n'existe pas de repository public pour les modules Play2!►, donc téléchargez sur le site le plugin (utilisez le bouton "zip" ou directement le lien [https://github.com/loicdescotte/Play2-HTML5Tags/zipball/master](https://github.com/loicdescotte/Play2-HTML5Tags/zipball/master)).
+Pour le moment il n'existe pas de repository public pour les modules Play2!>, donc téléchargez sur le site le plugin (utilisez le bouton "zip" ou directement le lien [https://github.com/loicdescotte/Play2-HTML5Tags/zipball/master](https://github.com/loicdescotte/Play2-HTML5Tags/zipball/master)).
 Une fois le module téléchargé, dé-zippez, allez dans le répertoire du module :
 
 **Les versions de Play, Sbt, ... ont une importance "VITALE" ;)**, il faut donc aller modifier quelques petits paramètres en fonction de la version de Play que vous utilisez, mais **seulement si c'est nécessaire**, ce n'est utile que dans les cas où la version du module a été développé pour une version antérieur de Play (par exemple version 2.0.1 contre version 2.0.2). Si c'est le cas vous aurez les 2 manipulations ci-dessous à effectuer :
@@ -113,7 +112,7 @@ Une fois le module téléchargé, dé-zippez, allez dans le répertoire du modul
 
 Ensuite dans le répertoire du module, en mode console, tapez : `play`, cela va "mouliner" un petit moment, vous devriez ensuite obtenir un prompt avec le nom du module :
 
-![](rsrc/07-validation-003.png)
+![](rsrc/07-validation-003.png)\
 
 Ensuite, au prompt, tapez `publish-local`, là encore cela mouline un moment, Play compile et installe le plugin pour qu'il soit utilisable par toutes vos applications Play. Vous pouvez allez vérifier dans le répertoire d'installation de Play, dans `/repository/local` vous avez maintenant un répertoire `com.loicdescotte.coffeebean` qui contient le module `html5tags_2.9.1`.
 
@@ -137,7 +136,8 @@ Avant de pouvoir utiliser le module, vous devez déclarer son utilisation dans v
 	      "com.loicdescotte.coffeebean" % "html5tags_2.9.1" % "1.0-SNAPSHOT"
 	    )
 
-	    val main = PlayProject(appName, appVersion, appDependencies, mainLang = JAVA).settings(
+	    val main = PlayProject(appName, 
+	    						appVersion, appDependencies, mainLang = JAVA).settings(
 	      // Add your own project settings here 
 	      resolvers += "Local Play Repository" at "/Users/k33g_org/play-2.0.2/repository"     
 	    )
@@ -259,7 +259,7 @@ On obtiendra ceci :
 
 Et le navigateur vérifiera le format saisi :
 
-![](rsrc/07-validation-005.png)
+![](rsrc/07-validation-005.png)\
 
 
 HTML5 reconnait de nouveaux type de données dans les formulaires, comme les nombres, les dates, les numéros de téléphone, les URL....
@@ -268,5 +268,5 @@ Le module prend en charge ces types de données à travers des tags particuliers
 Le fait de préciser le type de `<input>` permet également au navigateur, particulièrement sur mobile, d'adapter son IHM au format demandé. 
 Par exemple pour un champ numérique : 
  
-![](rsrc/07-validation-006.png)
+![](rsrc/07-validation-006.png)\
 

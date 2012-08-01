@@ -9,18 +9,19 @@
 table.sourceCode, tr.sourceCode, td.lineNumbers, td.sourceCode {
   margin: 0; padding: 0; vertical-align: baseline; border: none; }
 table.sourceCode { width: 100%; }
-td.lineNumbers { text-align: right; padding-right: 4px; padding-left: 4px; background-color: #dddddd; }
+td.lineNumbers { text-align: right; padding-right: 4px; padding-left: 4px; color: #aaaaaa; border-right: 1px solid #aaaaaa; }
 td.sourceCode { padding-left: 5px; }
-code > span.kw { font-weight: bold; }
-code > span.dt { color: #800000; }
-code > span.dv { color: #0000ff; }
-code > span.bn { color: #0000ff; }
-code > span.fl { color: #800080; }
-code > span.ch { color: #ff00ff; }
-code > span.st { color: #dd0000; }
-code > span.co { color: #808080; font-style: italic; }
-code > span.al { color: #00ff00; font-weight: bold; }
-code > span.fu { color: #000080; }
+code > span.kw { color: #007020; font-weight: bold; }
+code > span.dt { color: #902000; }
+code > span.dv { color: #40a070; }
+code > span.bn { color: #40a070; }
+code > span.fl { color: #40a070; }
+code > span.ch { color: #4070a0; }
+code > span.st { color: #4070a0; }
+code > span.co { color: #60a0b0; font-style: italic; }
+code > span.ot { color: #007020; }
+code > span.al { color: #ff0000; font-weight: bold; }
+code > span.fu { color: #06287e; }
 code > span.er { color: #ff0000; font-weight: bold; }
   </style>
   <link rel="stylesheet" href="style.css" type="text/css" />
@@ -31,272 +32,289 @@ code > span.er { color: #ff0000; font-weight: bold; }
 </div>
 <div id="TOC">
 <ul>
-<li><a href="#remerciements">Remerciements</a></li>
-<li><a href="#préface">Préface</a></li>
-<li><a href="#objectifs">Objectifs</a></li>
-<li><a href="#qui-sommes-nous">Qui sommes-nous ?</a></li>
-<li><a href="#dédicaces">Dédicaces</a></li>
-<li><a href="#avant-propos">Avant-propos</a></li>
-<li><a href="#remarques">Remarques</a></li>
-<li><a href="#introduction---pourquoi-play">Introduction - Pourquoi Play!►</a></li>
-<li><a href="#installation">Installation</a><ul>
-<li><a href="#prérequis">Prérequis</a></li>
-<li><a href="#modification-sous-osx">Modification sous OSX</a></li>
-<li><a href="#modification-sous-linux">Modification sous Linux</a></li>
-<li><a href="#modification-sous-windows">Modification sous Windows</a></li>
-<li><a href="#vérification">Vérification</a></li>
-<li><a href="#génération-du-squelette-de-lapplication">Génération du squelette de l'application</a></li>
-<li><a href="#paramétrage-dintellij">Paramétrage d'IntelliJ</a></li>
+<li><a href="#remerciements"><span class="toc-section-number">1</span> Remerciements</a></li>
+<li><a href="#préface"><span class="toc-section-number">2</span> Préface</a><ul>
+<li><a href="#objectifs"><span class="toc-section-number">2.1</span> Objectifs</a></li>
+<li><a href="#qui-sommes-nous"><span class="toc-section-number">2.2</span> Qui sommes-nous ?</a></li>
+<li><a href="#dédicaces"><span class="toc-section-number">2.3</span> Dédicaces</a></li>
+<li><a href="#avant-propos"><span class="toc-section-number">2.4</span> Avant-propos</a></li>
+<li><a href="#remarques"><span class="toc-section-number">2.5</span> Remarques</a></li>
 </ul></li>
-<li><a href="#on-code">On code !!!</a><ul>
-<li><a href="#très-important">Très important !!!</a></li>
-<li><a href="#construisons-les-bases-de-notre-application-paramétrages">Construisons les bases de notre application : paramétrages</a><ul>
-<li><a href="#il-nous-faut-une-base-de-données">Il nous faut une base de données</a></li>
-<li><a href="#il-nous-faudra-des-modèles">Il nous faudra des modèles</a></li>
+<li><a href="#introduction---pourquoi-play"><span class="toc-section-number">3</span> Introduction - Pourquoi Play!&gt;</a></li>
+<li><a href="#installation"><span class="toc-section-number">4</span> Installation</a><ul>
+<li><a href="#prérequis"><span class="toc-section-number">4.1</span> Prérequis</a></li>
+<li><a href="#modification-sous-osx"><span class="toc-section-number">4.2</span> Modification sous OSX</a></li>
+<li><a href="#modification-sous-linux"><span class="toc-section-number">4.3</span> Modification sous Linux</a></li>
+<li><a href="#modification-sous-windows"><span class="toc-section-number">4.4</span> Modification sous Windows</a></li>
+<li><a href="#vérification"><span class="toc-section-number">4.5</span> Vérification</a></li>
 </ul></li>
-<li><a href="#les-modèles">Les modèles</a><ul>
-<li><a href="#création-dun-1er-modèle-category">Création d'un 1er modèle : Category</a></li>
-<li><a href="#création-dun-2ème-modèle-bookmark">Création d'un 2ème modèle : Bookmark</a></li>
+<li><a href="#er-contact"><span class="toc-section-number">5</span> 1er contact</a><ul>
+<li><a href="#génération-du-squelette-de-lapplication"><span class="toc-section-number">5.1</span> Génération du squelette de l'application</a></li>
 </ul></li>
-<li><a href="#les-contrôleurs">Les contrôleurs</a><ul>
-<li><a href="#création-du-contrôleur-bookmarks">Création du contrôleur Bookmarks</a><ul>
-<li><a href="#quavons-nous-fait">Qu'avons nous fait ?</a></li>
-<li><a href="#modification-du-fichier-routes">Modification du fichier routes</a></li>
+<li><a href="#paramétrage-de-lide"><span class="toc-section-number">6</span> Paramétrage de l'IDE</a><ul>
+<li><a href="#paramétrage-dintellij"><span class="toc-section-number">6.1</span> Paramétrage d'IntelliJ</a></li>
 </ul></li>
-<li><a href="#création-du-contrôleur-categories">Création du contrôleur Categories</a><ul>
-<li><a href="#modification-du-fichier-routes-1">Modification du fichier routes</a></li>
+<li><a href="#on-code"><span class="toc-section-number">7</span> On code !!!</a><ul>
+<li><a href="#très-important"><span class="toc-section-number">7.1</span> Très important !!!</a></li>
+<li><a href="#construisons-les-bases-de-notre-application-paramétrages"><span class="toc-section-number">7.2</span> Construisons les bases de notre application : paramétrages</a><ul>
+<li><a href="#il-nous-faut-une-base-de-données"><span class="toc-section-number">7.2.1</span> Il nous faut une base de données</a></li>
+<li><a href="#il-nous-faudra-des-modèles"><span class="toc-section-number">7.2.2</span> Il nous faudra des modèles</a></li>
 </ul></li>
-<li><a href="#modification-du-contrôleur-application">Modification du contrôleur Application</a><ul>
-<li><a href="#petit-exercice">Petit exercice :</a></li>
-<li><a href="#maintenant-modifions-vraiment-application.java">Maintenant, modifions vraiment Application.java</a></li>
+<li><a href="#les-modèles"><span class="toc-section-number">7.3</span> Les modèles</a><ul>
+<li><a href="#création-dun-1er-modèle-category"><span class="toc-section-number">7.3.1</span> Création d'un 1er modèle : Category</a></li>
+<li><a href="#création-dun-2ème-modèle-bookmark"><span class="toc-section-number">7.3.2</span> Création d'un 2ème modèle : Bookmark</a></li>
+</ul></li>
+<li><a href="#les-contrôleurs"><span class="toc-section-number">7.4</span> Les contrôleurs</a><ul>
+<li><a href="#création-du-contrôleur-bookmarks"><span class="toc-section-number">7.4.1</span> Création du contrôleur Bookmarks</a><ul>
+<li><a href="#quavons-nous-fait"><span class="toc-section-number">7.4.1.1</span> Qu'avons nous fait ?</a></li>
+<li><a href="#modification-du-fichier-routes"><span class="toc-section-number">7.4.1.2</span> Modification du fichier routes</a></li>
+</ul></li>
+<li><a href="#création-du-contrôleur-categories"><span class="toc-section-number">7.4.2</span> Création du contrôleur Categories</a><ul>
+<li><a href="#modification-du-fichier-routes-1"><span class="toc-section-number">7.4.2.1</span> Modification du fichier routes</a></li>
+</ul></li>
+<li><a href="#modification-du-contrôleur-application"><span class="toc-section-number">7.4.3</span> Modification du contrôleur Application</a><ul>
+<li><a href="#petit-exercice"><span class="toc-section-number">7.4.3.1</span> Petit exercice :</a></li>
+<li><a href="#maintenant-modifions-vraiment-application.java"><span class="toc-section-number">7.4.3.2</span> Maintenant, modifions vraiment Application.java</a></li>
 </ul></li>
 </ul></li>
-<li><a href="#les-vues">Les vues</a><ul>
-<li><a href="#modification-de-la-vue-principale-index.scala.html">Modification de la vue principale : index.scala.html</a><ul>
-<li><a href="#quavons-nous-fait-1">Qu'avons nous fait</a></li>
-</ul></li>
-</ul></li>
-</ul></li>
-<li><a href="#un-peu-de-cosmétique">Un peu de cosmétique</a><ul>
-<li><a href="#prérequis-1">Prérequis</a></li>
-<li><a href="#utilisation">Utilisation</a><ul>
-<li><a href="#modifions-le-code-de-main.scala.html">Modifions le code de <code>main.scala.html</code></a><ul>
-<li><a href="#customisons-légèrement-main.scala.html">Customisons légèrement <code>main.scala.html</code></a></li>
-<li><a href="#allons-customiser-légèrement-index.scala.html">Allons customiser légèrement <code>index.scala.html</code></a></li>
+<li><a href="#les-vues"><span class="toc-section-number">7.5</span> Les vues</a><ul>
+<li><a href="#modification-de-la-vue-principale-index.scala.html"><span class="toc-section-number">7.5.1</span> Modification de la vue principale : index.scala.html</a><ul>
+<li><a href="#quavons-nous-fait-1"><span class="toc-section-number">7.5.1.1</span> Qu'avons nous fait</a></li>
 </ul></li>
 </ul></li>
 </ul></li>
-<li><a href="#charger-des-données-au-démarrage">Charger des données au démarrage</a></li>
-<li><a href="#validation-des-données">Validation des données</a><ul>
-<li><a href="#enrichissement-du-modèle-et-vérification-des-données">Enrichissement du modèle et vérification des données</a></li>
-<li><a href="#validation-côté-client">Validation côté client</a><ul>
-<li><a href="#installation-de-play2-html5tags">Installation de Play2-HTML5Tags</a></li>
-<li><a href="#déclaration-de-play2-html5tags">Déclaration de Play2-HTML5Tags</a></li>
-<li><a href="#utilisation-de-play2-html5tags">Utilisation de Play2-HTML5Tags</a></li>
+<li><a href="#un-peu-de-cosmétique"><span class="toc-section-number">8</span> Un peu de cosmétique</a><ul>
+<li><a href="#prérequis-1"><span class="toc-section-number">8.1</span> Prérequis</a></li>
+<li><a href="#utilisation"><span class="toc-section-number">8.2</span> Utilisation</a><ul>
+<li><a href="#modifions-le-code-de-main.scala.html"><span class="toc-section-number">8.2.1</span> Modifions le code de <code>main.scala.html</code></a><ul>
+<li><a href="#customisons-légèrement-main.scala.html"><span class="toc-section-number">8.2.1.1</span> Customisons légèrement <code>main.scala.html</code></a></li>
+<li><a href="#allons-customiser-légèrement-index.scala.html"><span class="toc-section-number">8.2.1.2</span> Allons customiser légèrement <code>index.scala.html</code></a></li>
 </ul></li>
 </ul></li>
-<li><a href="#gestion-de-lauthentification">Gestion de l'authentification</a><ul>
-<li><a href="#création-dun-modèle-user">Création d'un modèle User</a></li>
-<li><a href="#création-dun-contrôleur-secured">Création d'un contrôleur Secured</a></li>
-<li><a href="#allons-modifier-le-contrôleur-application">Allons modifier le contrôleur Application</a></li>
-<li><a href="#création-dun-contrôleur-authentication">Création d'un contrôleur Authentication</a></li>
-<li><a href="#allons-modifier-les-routes">Allons modifier les routes</a></li>
-<li><a href="#allons-modifier-main.scala.html-et-index.scala.html">Allons modifier main.scala.html et index.scala.html</a><ul>
-<li><a href="#main.scala.html">main.scala.html</a></li>
-<li><a href="#il-faut-aussi-modifier-index.scala.html">Il faut aussi modifier index.scala.html</a></li>
 </ul></li>
-<li><a href="#allons-créer-un-formulaire-de-login-vue">Allons créer un formulaire de login / Vue</a></li>
-<li><a href="#allons-ajouter-des-users-dans-initial-data.yml">Allons ajouter des users dans initial-data.yml</a><ul>
-<li><a href="#ajoutons-des-utilisateurs">Ajoutons des utilisateurs :</a></li>
-<li><a href="#modifions-global.java">Modifions Global.java</a></li>
+<li><a href="#charger-des-données-au-démarrage"><span class="toc-section-number">9</span> Charger des données au démarrage</a></li>
+<li><a href="#validation-des-données"><span class="toc-section-number">10</span> Validation des données</a><ul>
+<li><a href="#enrichissement-du-modèle-et-vérification-des-données"><span class="toc-section-number">10.1</span> Enrichissement du modèle et vérification des données</a></li>
+<li><a href="#validation-côté-client"><span class="toc-section-number">10.2</span> Validation côté client</a><ul>
+<li><a href="#installation-de-play2-html5tags"><span class="toc-section-number">10.2.1</span> Installation de Play2-HTML5Tags</a></li>
+<li><a href="#déclaration-de-play2-html5tags"><span class="toc-section-number">10.2.2</span> Déclaration de Play2-HTML5Tags</a></li>
+<li><a href="#utilisation-de-play2-html5tags"><span class="toc-section-number">10.2.3</span> Utilisation de Play2-HTML5Tags</a></li>
 </ul></li>
 </ul></li>
-<li><a href="#services-json">Services (JSON)</a><ul>
-<li><a href="#primo">Primo :</a></li>
-<li><a href="#création-de-notre-service-json">Création de notre service JSON</a><ul>
-<li><a href="#allons-modifier-le-contrôleur-bookmarks">Allons modifier le contrôleur Bookmarks</a><ul>
-<li><a href="#imports">import(s)</a></li>
-<li><a href="#ajout-de-la-méthode-jsonlist">Ajout de la méthode jsonList()</a></li>
-<li><a href="#modifions-le-fichier-routes">Modifions le fichier routes</a></li>
-<li><a href="#donc-le-code-final-est-le-suivant">Donc le code final est le suivant :</a></li>
+<li><a href="#gestion-de-lauthentification"><span class="toc-section-number">11</span> Gestion de l'authentification</a><ul>
+<li><a href="#création-dun-modèle-user"><span class="toc-section-number">11.1</span> Création d'un modèle User</a></li>
+<li><a href="#création-dun-contrôleur-secured"><span class="toc-section-number">11.2</span> Création d'un contrôleur Secured</a></li>
+<li><a href="#allons-modifier-le-contrôleur-application"><span class="toc-section-number">11.3</span> Allons modifier le contrôleur Application</a></li>
+<li><a href="#création-dun-contrôleur-authentication"><span class="toc-section-number">11.4</span> Création d'un contrôleur Authentication</a></li>
+<li><a href="#allons-modifier-les-routes"><span class="toc-section-number">11.5</span> Allons modifier les routes</a></li>
+<li><a href="#allons-modifier-main.scala.html-et-index.scala.html"><span class="toc-section-number">11.6</span> Allons modifier main.scala.html et index.scala.html</a><ul>
+<li><a href="#main.scala.html"><span class="toc-section-number">11.6.1</span> main.scala.html</a></li>
+<li><a href="#il-faut-aussi-modifier-index.scala.html"><span class="toc-section-number">11.6.2</span> Il faut aussi modifier index.scala.html</a></li>
+</ul></li>
+<li><a href="#allons-créer-un-formulaire-de-login-vue"><span class="toc-section-number">11.7</span> Allons créer un formulaire de login / Vue</a></li>
+<li><a href="#allons-ajouter-des-users-dans-initial-data.yml"><span class="toc-section-number">11.8</span> Allons ajouter des users dans initial-data.yml</a><ul>
+<li><a href="#ajoutons-des-utilisateurs"><span class="toc-section-number">11.8.1</span> Ajoutons des utilisateurs :</a></li>
+<li><a href="#modifions-global.java"><span class="toc-section-number">11.8.2</span> Modifions Global.java</a></li>
 </ul></li>
 </ul></li>
-<li><a href="#utilisation-du-service-json">Utilisation du service JSON</a><ul>
-<li><a href="#directement-avec-lurl">Directement avec l'url</a></li>
-<li><a href="#plus-utile-via-une-requête-ajax">Plus utile : via une requête ajax</a></li>
-</ul></li>
-<li><a href="#sécurisation">Sécurisation</a><ul>
-<li><a href="#securedjson.java">SecuredJson.java</a></li>
-<li><a href="#modification-de-lannotation-dans-bookmarks.java">Modification de l'annotation dans Bookmarks.java</a></li>
-<li><a href="#testons">Testons</a></li>
-<li><a href="#mais-comment-puis-mauthentifier-via-une-requête-ajax">Mais comment puis m'authentifier via une requête ajax ???</a><ul>
-<li><a href="#authenticationjson.java">AuthenticationJson.java</a></li>
-<li><a href="#ajoutons-les-routes">Ajoutons les routes</a></li>
-<li><a href="#testons-1">Testons</a></li>
+<li><a href="#services-json"><span class="toc-section-number">12</span> Services (JSON)</a><ul>
+<li><a href="#primo"><span class="toc-section-number">12.1</span> Primo :</a></li>
+<li><a href="#création-de-notre-service-json"><span class="toc-section-number">12.2</span> Création de notre service JSON</a><ul>
+<li><a href="#allons-modifier-le-contrôleur-bookmarks"><span class="toc-section-number">12.2.1</span> Allons modifier le contrôleur Bookmarks</a><ul>
+<li><a href="#imports"><span class="toc-section-number">12.2.1.1</span> import(s)</a></li>
+<li><a href="#ajout-de-la-méthode-jsonlist"><span class="toc-section-number">12.2.1.2</span> Ajout de la méthode jsonList()</a></li>
+<li><a href="#modifions-le-fichier-routes"><span class="toc-section-number">12.2.1.3</span> Modifions le fichier routes</a></li>
+<li><a href="#donc-le-code-final-est-le-suivant"><span class="toc-section-number">12.2.1.4</span> Donc le code final est le suivant :</a></li>
 </ul></li>
 </ul></li>
-<li><a href="#utilisons-tout-ça-...">Utilisons tout ça ...</a><ul>
-<li><a href="#nouveau-contrôleur-singleapp.java">Nouveau Contrôleur : SingleApp.java</a></li>
-<li><a href="#routes">routes</a></li>
-<li><a href="#nouvelle-vue-mainpage.scala.html">Nouvelle vue : mainPage.scala.html</a></li>
+<li><a href="#utilisation-du-service-json"><span class="toc-section-number">12.3</span> Utilisation du service JSON</a><ul>
+<li><a href="#directement-avec-lurl"><span class="toc-section-number">12.3.1</span> Directement avec l'url</a></li>
+<li><a href="#plus-utile-via-une-requête-ajax"><span class="toc-section-number">12.3.2</span> Plus utile : via une requête ajax</a></li>
 </ul></li>
-<li><a href="#testons-2">Testons</a></li>
-<li><a href="#conclusion">Conclusion</a></li>
+<li><a href="#sécurisation"><span class="toc-section-number">12.4</span> Sécurisation</a><ul>
+<li><a href="#securedjson.java"><span class="toc-section-number">12.4.1</span> SecuredJson.java</a></li>
+<li><a href="#modification-de-lannotation-dans-bookmarks.java"><span class="toc-section-number">12.4.2</span> Modification de l'annotation dans Bookmarks.java</a></li>
+<li><a href="#testons"><span class="toc-section-number">12.4.3</span> Testons</a></li>
+<li><a href="#mais-comment-puis-mauthentifier-via-une-requête-ajax"><span class="toc-section-number">12.4.4</span> Mais comment puis m'authentifier via une requête ajax ???</a><ul>
+<li><a href="#authenticationjson.java"><span class="toc-section-number">12.4.4.1</span> AuthenticationJson.java</a></li>
+<li><a href="#ajoutons-les-routes"><span class="toc-section-number">12.4.4.2</span> Ajoutons les routes</a></li>
+<li><a href="#testons-1"><span class="toc-section-number">12.4.4.3</span> Testons</a></li>
 </ul></li>
-<li><a href="#assets">Assets ?</a><ul>
-<li><a href="#quallons-nous-voir">Qu'allons nous voir ?</a></li>
+</ul></li>
+<li><a href="#utilisons-tout-ça-..."><span class="toc-section-number">12.5</span> Utilisons tout ça ...</a><ul>
+<li><a href="#nouveau-contrôleur-singleapp.java"><span class="toc-section-number">12.5.1</span> Nouveau Contrôleur : SingleApp.java</a></li>
+<li><a href="#routes"><span class="toc-section-number">12.5.2</span> routes</a></li>
+<li><a href="#nouvelle-vue-mainpage.scala.html"><span class="toc-section-number">12.5.3</span> Nouvelle vue : mainPage.scala.html</a></li>
+</ul></li>
+<li><a href="#testons-2"><span class="toc-section-number">12.6</span> Testons</a></li>
+<li><a href="#conclusion"><span class="toc-section-number">12.7</span> Conclusion</a></li>
+</ul></li>
+<li><a href="#les-assets-dans-play"><span class="toc-section-number">13</span> Les assets dans Play</a><ul>
+<li><a href="#assets"><span class="toc-section-number">13.1</span> Assets ???</a></li>
+<li><a href="#assets-compilés"><span class="toc-section-number">13.2</span> Assets &quot;compilés&quot;</a></li>
+<li><a href="#mise-en-oeuvre"><span class="toc-section-number">13.3</span> Mise en oeuvre</a><ul>
+<li><a href="#préparation"><span class="toc-section-number">13.3.1</span> Préparation</a></li>
+<li><a href="#coffeescript"><span class="toc-section-number">13.3.2</span> Coffeescript</a><ul>
+<li><a href="#rappels"><span class="toc-section-number">13.3.2.1</span> Rappels</a><ul>
+<li><a href="#pourquoi"><span class="toc-section-number">13.3.2.1.1</span> Pourquoi ?</a></li>
+<li><a href="#les-fonctions-en-coffeescript"><span class="toc-section-number">13.3.2.1.2</span> Les fonctions en Coffeescript</a></li>
+<li><a href="#utilisation-dautres-librairies-javascript-et-simplification"><span class="toc-section-number">13.3.2.1.3</span> Utilisation d'autres librairies javascript (et simplification)</a></li>
+<li><a href="#les-strings-les-interpolations"><span class="toc-section-number">13.3.2.1.4</span> Les &quot;Strings&quot; &amp; les Interpolations</a></li>
+<li><a href="#les-arrays"><span class="toc-section-number">13.3.2.1.5</span> Les Arrays</a></li>
+<li><a href="#et-enfin-les-classes"><span class="toc-section-number">13.3.2.1.6</span> Et enfin : les CLASSES !!!</a></li>
+<li><a href="#avec-un-peu-dhéritage"><span class="toc-section-number">13.3.2.1.7</span> Avec un peu d'héritage</a></li>
+</ul></li>
+<li><a href="#mise-en-oeuvre-1"><span class="toc-section-number">13.3.2.2</span> Mise en oeuvre</a><ul>
+<li><a href="#préparation-1"><span class="toc-section-number">13.3.2.2.1</span> Préparation</a></li>
+<li><a href="#myapp.coffee"><span class="toc-section-number">13.3.2.2.2</span> myapp.coffee</a></li>
+</ul></li>
+</ul></li>
+<li><a href="#less"><span class="toc-section-number">13.3.3</span> Less</a><ul>
+<li><a href="#mise-en-oeuvre-2"><span class="toc-section-number">13.3.3.1</span> Mise en oeuvre</a><ul>
+<li><a href="#myapp.coffee-1"><span class="toc-section-number">13.3.3.1.1</span> myapp.coffee</a></li>
+<li><a href="#index.scala.html"><span class="toc-section-number">13.3.3.1.2</span> index.scala.html</a></li>
+</ul></li>
+</ul></li>
+</ul></li>
 </ul></li>
 </ul>
 </div>
-<div class="figure">
-<img src="rsrc/play.rules.return.png" /><p class="caption"></p>
-</div>
-<h2 id="remerciements"><a href="#TOC">Remerciements</a></h2>
+<p><img src="rsrc/play_rules_return.png" /><br /></p>
+<h1 id="remerciements"><a href="#TOC"><span class="header-section-number">1</span> Remerciements</a></h1>
 <pre><code>//TODO: à compléter</code></pre>
 <ul>
 <li>@kraco_fr : pour ses &quot;tips Play&quot;</li>
 <li>@LyonJUG : pour son équipe qui &quot;maintient l'envie de continuer&quot;</li>
 <li>@ndeverge : le 1er à avoir fait une pull request sur le projet :)</li>
 </ul>
-<h1 id="préface"><a href="#TOC">Préface</a></h1>
+<h1 id="préface"><a href="#TOC"><span class="header-section-number">2</span> Préface</a></h1>
 <p>Ce livre est conçu et écrit par <a href="http://www.twitter.com/k33g_org">@k33g_org</a> et <a href="http://www.twitter.com/loic_d">@loic_d</a> (nos petits noms sur Twitter). Il est complètement open source. Faites en ce que vous voulez. Vous pouvez participer par le biais des pull requests et issues du repository GitHub : <a href="https://github.com/3monkeys/play.rules">https://github.com/3monkeys/play.rules</a> (répertoire : <code>livre.play.deux</code>), si vous détectez des fautes, avez des idées, des remarques; etc. ...</p>
 <p>Si cet e-book vous plaît, n'hésitez pas à nous le faire savoir (nous faisons ça sur notre temps personnel de façon purement bénévole).</p>
-<h1 id="objectifs"><a href="#TOC">Objectifs</a></h1>
+<h2 id="objectifs"><a href="#TOC"><span class="header-section-number">2.1</span> Objectifs</a></h2>
 <ul>
-<li>Démontrer que Play2!► est facile à apprendre</li>
+<li>Démontrer que Play2!&gt;; est facile à apprendre</li>
 <li>Que faire des Webapp en Java (et Scala), ce n'est pas si difficile (même si vous ne venez pas de Java)</li>
 <li>... et ce, quel que soit votre niveau</li>
 </ul>
-<h1 id="qui-sommes-nous"><a href="#TOC">Qui sommes-nous ?</a></h1>
+<h2 id="qui-sommes-nous"><a href="#TOC"><span class="header-section-number">2.2</span> Qui sommes-nous ?</a></h2>
 <pre><code>//TODO</code></pre>
-<h1 id="dédicaces"><a href="#TOC">Dédicaces</a></h1>
+<h2 id="dédicaces"><a href="#TOC"><span class="header-section-number">2.3</span> Dédicaces</a></h2>
 <pre><code>//TODO</code></pre>
-<h1 id="avant-propos"><a href="#TOC">Avant-propos</a></h1>
+<h2 id="avant-propos"><a href="#TOC"><span class="header-section-number">2.4</span> Avant-propos</a></h2>
 <p>A l'heure actuelle, ce livre est encore incomplet. Cependant nous essayons de lui conserver une certaine structure et de ne publier que des choses utilisables : vous n'aurez pas de chapitres qui ne servent à rien (l'e-book est regénéré uniquement dans le cas d'un ajout d'un chapitre complet ou de correction).</p>
 <p>Donc, beaucoup de <code>TODO</code> mais quand même du contenu pour &quot;s'y mettre&quot;.</p>
 <ul>
 <li>Pendant le &quot;chantier&quot;, la structure et le contenu peuvent changer.</li>
 <li>Les images doivent être retaillées</li>
 </ul>
-<p>En espérant que cet e-book vous serve &amp; vous fasse aimer Play2!►.</p>
-<h1 id="remarques"><a href="#TOC">Remarques</a></h1>
-<p>Les premiers chapitres traitent de la version <strong>Java</strong> de Play2!►, mais la version <strong>Scala</strong> sera elle aussi abordée.</p>
-<h1 id="introduction---pourquoi-play"><a href="#TOC">Introduction - Pourquoi Play!►</a></h1>
+<p>En espérant que cet e-book vous serve &amp; vous fasse aimer Play2!&gt;;.</p>
+<h2 id="remarques"><a href="#TOC"><span class="header-section-number">2.5</span> Remarques</a></h2>
+<p>Les premiers chapitres traitent de la version <strong>Java</strong> de Play2!&gt;;, mais la version <strong>Scala</strong> sera elle aussi abordée.</p>
+<h1 id="introduction---pourquoi-play"><a href="#TOC"><span class="header-section-number">3</span> Introduction - Pourquoi Play!&gt;</a></h1>
 <pre><code>//TODO: ...</code></pre>
-<h1 id="installation"><a href="#TOC">Installation</a></h1>
-<p><strong>version de Play!► utilisée : 2.0.1</strong></p>
-<pre><code>/* --- Qu&#39;allons nous voir ? ---
-
-    - Installation de Play2!►
-        . sous OSX
-        . sous Linux
-        . sous Windows
-*/</code></pre>
-<h2 id="prérequis"><a href="#TOC">Prérequis</a></h2>
+<h1 id="installation"><a href="#TOC"><span class="header-section-number">4</span> Installation</a></h1>
+<p><strong>version de Play!&gt; utilisée : 2.0.1</strong></p>
+<blockquote>
+<p><em>Qu'allons nous voir ? ... Installation de Play2!&gt;</em></p>
+</blockquote>
+<blockquote>
 <ul>
-<li>Vous devez avoir Java sur votre machine : attention, vous devez avoir le JDK 6 minimum (Eh oui, vous avez le 7 aussi) : donc attention à ne pas proposer Play2!► à des clients étant encore en JDK 5 (si, ça existe encore !)</li>
-<li>Téléchargez Play!► sur <a href="http://www.playframework.org/">http://www.playframework.org/</a></li>
+<li><em>sous OSX</em></li>
+<li><em>sous Linux</em></li>
+<li><em>sous Windows</em></li>
+</ul>
+</blockquote>
+<h2 id="prérequis"><a href="#TOC"><span class="header-section-number">4.1</span> Prérequis</a></h2>
+<ul>
+<li>Vous devez avoir Java sur votre machine : attention, vous devez avoir le JDK 6 minimum (Eh oui, vous avez le 7 aussi) : donc attention à ne pas proposer Play2!&gt; à des clients étant encore en JDK 5 (si, ça existe encore !)</li>
+<li>Téléchargez Play!&gt; sur <a href="http://www.playframework.org/">http://www.playframework.org/</a></li>
 <li>Dézippez l'archive dans un répertoire</li>
 </ul>
 <p>Ensuite, il faut modifier votre path.</p>
-<h2 id="modification-sous-osx"><a href="#TOC">Modification sous OSX</a></h2>
+<h2 id="modification-sous-osx"><a href="#TOC"><span class="header-section-number">4.2</span> Modification sous OSX</a></h2>
 <p>Dans une console (Terminal), tapez la commande suivante :</p>
 <pre><code>sudo pico ~/.bash_profile</code></pre>
 <p>Puis ajoutez la ligne suivante dans votre fichier de configuration :</p>
-<pre><code>export PATH=$PATH:/ENDROIT_OU_VOUS_AVEZ_DEZIPPE/play-2.0.1</code></pre>
+<pre><code>export PATH=$PATH:/endroitOuVousAvezDezippePlay/play-2.0.1</code></pre>
 <p>Sauvegardez (sous pico, c'est <code>Ctrl+o</code>) et quittez l'éditeur, fermez votre Terminal.</p>
-<p>où <code>ENDROIT_OU_VOUS_AVEZ_DEZIPPE</code> est le chemin vers Play!► et <code>play-2.0.1</code> le nom du répertoire dans lequel il y a les éléments constitutifs du framework (je laisse le numéro de version car il m'arrive de travailler sur plusieurs versions).</p>
-<h2 id="modification-sous-linux"><a href="#TOC">Modification sous Linux</a></h2>
+<p>où <code>endroitOuVousAvezDezippePlay</code> est le chemin vers Play!&gt; et <code>play-2.0.1</code> le nom du répertoire dans lequel il y a les éléments constitutifs du framework (je laisse le numéro de version car il m'arrive de travailler sur plusieurs versions).</p>
+<h2 id="modification-sous-linux"><a href="#TOC"><span class="header-section-number">4.3</span> Modification sous Linux</a></h2>
 <p>Dans une console (Terminal), tapez la commande suivante :</p>
 <pre><code>vi ~/.profile</code></pre>
 <p>Puis ajoutez les lignes suivantes à la fin de ce fichier :</p>
-<p>export PLAY_HOME=/ENDROIT_OU_VOUS_AVEZ_DEZIPPE/play-2.0.1 export PATH=<span class="math"><em>P</em><em>L</em><em>A</em><em>Y</em><sub><em>H</em></sub><em>O</em><em>M</em><em>E</em>: </span>PATH</p>
+<pre><code>export PLAY_HOME=/endroitOuVousAvezDezippePlay/play-2.0.1
+export PATH=$PLAY_HOME:$PATH</code></pre>
 <p>Sauvegardez et quittez l'éditeur (sous vi, c'est <code>ESCAPE</code>, <code>:</code>, <code>wq</code>), fermez votre console.</p>
-<p>où <code>ENDROIT_OU_VOUS_AVEZ_DEZIPPE</code> est le chemin vers Play!► et <code>play-2.0.1</code> le nom du répertoire dans lequel il y a les éléments constitutifs du framework (je laisse le numéro de version car il m'arrive de travailler sur plusieurs versions).</p>
-<h2 id="modification-sous-windows"><a href="#TOC">Modification sous Windows</a></h2>
+<p>où <code>endroitOuVousAvezDezippePlay</code> est le chemin vers Play!&gt; et <code>play-2.0.1</code> le nom du répertoire dans lequel il y a les éléments constitutifs du framework (je laisse le numéro de version car il m'arrive de travailler sur plusieurs versions).</p>
+<h2 id="modification-sous-windows"><a href="#TOC"><span class="header-section-number">4.4</span> Modification sous Windows</a></h2>
 <p>Modifier les variables d'environnement de Windows, via <code>Panneau de configuration\Système et sécurité\Système</code>, puis <code>Paramètres systèmes avancés</code> sur la gauche. Dans la boîte de dialogue qui s'affiche, cliquer le bouton <code>Variables d'environnement...</code> en bas.</p>
 <p>Ajouter une nouvelle <code>Variable système</code> :</p>
 <ul>
-<li>Nom de la variable = PLAY_HOME</li>
-<li>Valeur de la variable = ENDROIT_OU_VOUS_AVEZ_DEZIPPE-2.0.1</li>
+<li>Nom de la variable = <code>PLAY_HOME</code></li>
+<li>Valeur de la variable = <code>endroitOuVousAvezDezippePlay\play-2.0.1</code></li>
 </ul>
 <p>Puis modifier la valeur de la variable <code>Path</code> en ajoutant <code>%PLAY_HOME%;</code> au début (ne pas oublier le ';' !).</p>
 <p>Cliquer sur tous les boutons <code>OK</code> pour fermer les différentes boîtes de dialogue.</p>
-<h2 id="vérification"><a href="#TOC">Vérification</a></h2>
+<h2 id="vérification"><a href="#TOC"><span class="header-section-number">4.5</span> Vérification</a></h2>
 <p>Nous allons vérifier la bonne installation du framework. Ouvrez une nouvelle fois votre Console ou Terminal (il faut que cela soit une nouvelle session pour la prise en compte de la modification du path), et tapez la commande suivante :</p>
 <pre><code>play help</code></pre>
-<p>Cela &quot;mouline&quot; un peu car Play2!► télécharge quelques dépendances. Vous devriez obtenir ceci :</p>
-<div class="figure">
-<img src="rsrc/01-installation-001.png" /><p class="caption"></p>
-</div>
-<p>Voilà c'est prêt, nous pouvons commencer. #1er contact</p>
-<pre><code>/* --- Qu&#39;allons nous voir ? ---
-
-    - Comment générer le squelette de notre future application
-    - Comment lancer l&#39;application
-
-    ... jusque là, ça va ;)
-*/</code></pre>
-<h2 id="génération-du-squelette-de-lapplication"><a href="#TOC">Génération du squelette de l'application</a></h2>
+<p>Cela &quot;mouline&quot; un peu car Play2!&gt; télécharge quelques dépendances. Vous devriez obtenir ceci :</p>
+<p><img src="rsrc/01-installation-001.png" /><br /> Voilà c'est prêt, nous pouvons commencer.</p>
+<h1 id="er-contact"><a href="#TOC"><span class="header-section-number">5</span> 1er contact</a></h1>
+<blockquote>
+<p><em>Qu'allons nous voir ?</em></p>
+</blockquote>
+<blockquote>
+<ul>
+<li><em>Comment générer le squelette de notre future application</em></li>
+<li><em>Comment lancer l'application</em></li>
+</ul>
+</blockquote>
+<blockquote>
+<p><em>... jusque là, ça va ;)</em></p>
+</blockquote>
+<h2 id="génération-du-squelette-de-lapplication"><a href="#TOC"><span class="header-section-number">5.1</span> Génération du squelette de l'application</a></h2>
 <ul>
 <li>Installez vous dans votre répertoire de travail (<code>cd mon_repertoire_de_travail</code>)</li>
 <li>Tapez la commande <code>play new bookmarks</code></li>
 <li>validez et suivez les instructions</li>
 </ul>
-<p>Play!► vous propose un nom par défaut pour votre application : acceptez</p>
-<div class="figure">
-<img src="rsrc/02-firstapp-001.png" /><p class="caption"></p>
-</div>
-<p>Play!► vous demande quel type de projet vous souhaitez générer, choisissez la version Java (deuxième choix donc) et validez :</p>
-<div class="figure">
-<img src="rsrc/02-firstapp-002.png" /><p class="caption"></p>
-</div>
-<p>C'est terminé :</p>
-<div class="figure">
-<img src="rsrc/02-firstapp-003.png" /><p class="caption"></p>
-</div>
-<p>Si vous aller jeter un coup d'oeil dans votre répertoire, vous pourrez vérifier que Play!► a généré toute l'arborescence applicative nécessaire :</p>
-<div class="figure">
-<img src="rsrc/02-firstapp-004.png" /><p class="caption"></p>
-</div>
-<p>Pour plus de détail sur l'anatomie d'une application Play!►, allez faire un tour par là : <a href="http://www.playframework.org/documentation/2.0.1/Anatomy">http://www.playframework.org/documentation/2.0.1/Anatomy</a></p>
+<p>Play!&gt; vous propose un nom par défaut pour votre application : acceptez</p>
+<p><img src="rsrc/02-firstapp-001.png" /><br /> Play!&gt; vous demande quel type de projet vous souhaitez générer, choisissez la version Java (deuxième choix donc) et validez :</p>
+<p><img src="rsrc/02-firstapp-002.png" /><br /> C'est terminé :</p>
+<p><img src="rsrc/02-firstapp-003.png" /><br /> Si vous aller jeter un coup d'oeil dans votre répertoire, vous pourrez vérifier que Play!&gt; a généré toute l'arborescence applicative nécessaire :</p>
+<p><img src="rsrc/02-firstapp-004.png" /><br /> Pour plus de détail sur l'anatomie d'une application Play!&gt;, allez faire un tour par là : <a href="http://www.playframework.org/documentation/2.0.1/Anatomy">http://www.playframework.org/documentation/2.0.1/Anatomy</a></p>
 <p>Lançons donc notre application pour être réellement sûr que nous avons tout ce qu'il faut. pour cela, tapez les commandes :</p>
 <pre><code>cd bookmarks
 play</code></pre>
-<p>La première fois, cela risque de prendre du temps, car Play!► télécharge divers éléments dont il a besoin pour fonctionner. Patientez un peu. Vous arrivez ensuite sur un &quot;prompt&quot; qui prend le nom de votre application <code>[bookmarks]</code> :</p>
-<div class="figure">
-<img src="rsrc/02-firstapp-005.png" /><p class="caption"></p>
-</div>
-<p>Tapez <code>run</code> et validez :</p>
-<div class="figure">
-<img src="rsrc/02-firstapp-006.png" /><p class="caption"></p>
-</div>
-<p>Vous pouvez lire que Play!► a démarré une application web sur laquelle vous pouvez vous connecter via <a href="http://localhost:9000">http://localhost:9000</a>. Allons-y. En parallèle, côté serveur, ça compile :</p>
-<div class="figure">
-<img src="rsrc/02-firstapp-007.png" /><p class="caption"></p>
-</div>
-<p>Et au bout de quelques instants, si tout va bien, vous obtenez cette page dans votre navigateur :</p>
-<p><img src="rsrc/02-firstapp-008.png" /> #Paramétrage de l'IDE</p>
-<pre><code>/* --- Qu&#39;allons nous voir ? ---
-
-    - Comment paramétrer un IDE pour &quot;bosser&quot; facilement avec Play2!►
-
-    Pour le moment je ne parle que d&#39;IntelliJ. Sachez cependant qu&#39;avec un peu d&#39;habitude, il est possible de &quot;faire du Play&quot; avec un bon éditeur de texte comme SublimeText, UltraEdit, Notepad++, TextMate, ...
-*/</code></pre>
-<p>Nous avons donc une installation de Play2!► et un squelette d'application opérationnels. Avant d'aller plus loin, nous allons paramétrer un IDE pour nous faciliter le développement (il est aussi possible d'utiliser un simple éditeur de texte). Play!► peut fonctionner avec plusieurs IDE :</p>
+<p>La première fois, cela risque de prendre du temps, car Play!&gt; télécharge divers éléments dont il a besoin pour fonctionner. Patientez un peu. Vous arrivez ensuite sur un &quot;prompt&quot; qui prend le nom de votre application <code>[bookmarks]</code> :</p>
+<p><img src="rsrc/02-firstapp-005.png" /><br /> Tapez <code>run</code> et validez :</p>
+<p><img src="rsrc/02-firstapp-006.png" /><br /> Vous pouvez lire que Play!&gt; a démarré une application web sur laquelle vous pouvez vous connecter via <a href="http://localhost:9000">http://localhost:9000</a>. Allons-y. En parallèle, côté serveur, ça compile :</p>
+<p><img src="rsrc/02-firstapp-007.png" /><br /> Et au bout de quelques instants, si tout va bien, vous obtenez cette page dans votre navigateur :</p>
+<p><img src="rsrc/02-firstapp-008.png" /><br /></p>
+<h1 id="paramétrage-de-lide"><a href="#TOC"><span class="header-section-number">6</span> Paramétrage de l'IDE</a></h1>
+<blockquote>
+<p><em>Qu'allons nous voir ?</em></p>
+</blockquote>
+<blockquote>
+<ul>
+<li><em>Comment paramétrer un IDE pour &quot;bosser&quot; facilement avec Play2!&gt;</em></li>
+</ul>
+</blockquote>
+<blockquote>
+<p><em>Pour le moment je ne parle que d'IntelliJ. Sachez cependant qu'avec un peu d'habitude, il est possible de &quot;faire du Play&quot; avec un bon éditeur de texte comme SublimeText, UltraEdit, Notepad++, TextMate, ...</em></p>
+</blockquote>
+<p>Nous avons donc une installation de Play2!&gt; et un squelette d'application opérationnels. Avant d'aller plus loin, nous allons paramétrer un IDE pour nous faciliter le développement (il est aussi possible d'utiliser un simple éditeur de texte). Play!&gt; peut fonctionner avec plusieurs IDE :</p>
 <ul>
 <li>IntelliJ</li>
 <li>NetBeans (il reste à ce jour encore quelques réglages/développements à réaliser)</li>
 <li>Eclipse</li>
 </ul>
-<p>Je vous propose d'utiliser la version Community d'IntelliJ (qui semble faite pour Play!►), qui a l'avantage d'être gratuite et puissante à la fois. Pour les autres IDE, allez faire un tour sur le site de Play!►, tout est expliqué.</p>
+<p>Je vous propose d'utiliser la version Community d'IntelliJ (qui semble faite pour Play!&gt;), qui a l'avantage d'être gratuite et puissante à la fois. Pour les autres IDE, allez faire un tour sur le site de Play!&gt;, tout est expliqué.</p>
 <pre><code>//TODO : liens etc ...</code></pre>
-<h2 id="paramétrage-dintellij"><a href="#TOC">Paramétrage d'IntelliJ</a></h2>
-<p>Pour cela nous devons transformer notre arborescence projet en &quot;module IDEA&quot;. Tout d'abord, arrêtez votre application : faites un <code>Ctrl+c</code>, puis relancez Play!► : <code>play</code> (vous êtes toujours dans le répertoire de votre application). Une fois que vous êtes revenu au prompt <code>[bookmarks]</code>, tapez la commande <code>idea</code> et validez. Vous obtenez ceci :</p>
-<div class="figure">
-<img src="rsrc/03-ide-001.png" /><p class="caption"></p>
-</div>
-<p>Play!► a généré dans le répertoire de l'application un fichier bookmarks.iml.</p>
+<h2 id="paramétrage-dintellij"><a href="#TOC"><span class="header-section-number">6.1</span> Paramétrage d'IntelliJ</a></h2>
+<p>Pour cela nous devons transformer notre arborescence projet en &quot;module IDEA&quot;. Tout d'abord, arrêtez votre application : faites un <code>Ctrl+c</code>, puis relancez Play!&gt; : <code>play</code> (vous êtes toujours dans le répertoire de votre application). Une fois que vous êtes revenu au prompt <code>[bookmarks]</code>, tapez la commande <code>idea</code> et validez. Vous obtenez ceci :</p>
+<p><img src="rsrc/03-ide-001.png" /><br /> Play!&gt; a généré dans le répertoire de l'application un fichier bookmarks.iml.</p>
 <p>Passons au paramétrage du projet :</p>
 <ul>
 <li>Démarrez IntelliJ</li>
@@ -315,58 +333,48 @@ play</code></pre>
 <li>Cliquez sur &quot;Finish&quot;</li>
 </ul>
 <p>Vous devriez obtenir l'écran suivant (si vous avez tout fait comme il faut) :</p>
-<div class="figure">
-<img src="rsrc/03-ide-002.png" /><p class="caption"></p>
-</div>
-<p>Cliquez sur &quot;OK&quot;. Votre projet est prêt :</p>
-<div class="figure">
-<img src="rsrc/03-ide-003.png" /><p class="caption"></p>
-</div>
-<p>Nous sommes enfin prêts à commencer.</p>
+<p><img src="rsrc/03-ide-002.png" /><br /> Cliquez sur &quot;OK&quot;. Votre projet est prêt :</p>
+<p><img src="rsrc/03-ide-003.png" /><br /> Nous sommes enfin prêts à commencer.</p>
 <p>Si vraiment vous souhaitez utiliser un autre IDE, c'est expliqué ici : <a href="https://github.com/playframework/Play20/wiki/IDE">https://github.com/playframework/Play20/wiki/IDE</a></p>
-<h1 id="on-code"><a href="#TOC">On code !!!</a></h1>
-<pre><code>/* --- Qu&#39;allons nous voir ? ---
-
-    - Comment paramétrer notre application :
-        . déclarer la base de données embarquée proposée par Play!►
-        . créer nos premiers modèles
-        . créer nos premiers contrôleurs, les modifier
-        . paramétrer &quot;les routes&quot;
-        . créer notre première vue
-
-    ... faites vous un bon café, et soyez attentif, cela devient sérieux.
-
-*/</code></pre>
-<h2 id="très-important"><a href="#TOC">Très important !!!</a></h2>
-<p>Plutôt que d'utiliser la commande <code>run</code> vous pouvez utiliser <code>~run</code> et à ce moment là Play!► compile à la volée dès qu'il détecte un changement dans le code. Cela va accélérer grandement votre travail (merci à <a href="@kraco_fr">@kraco_fr</a> pour ça, j'étais prêt à mettre Play!► en pause tellement la compilation était devenue lente et là c'est que du bonheur.)</p>
-<h2 id="construisons-les-bases-de-notre-application-paramétrages"><a href="#TOC">Construisons les bases de notre application : paramétrages</a></h2>
+<h1 id="on-code"><a href="#TOC"><span class="header-section-number">7</span> On code !!!</a></h1>
+<blockquote>
+<p><em>Qu'allons nous voir ? ... Comment paramétrer notre application</em></p>
+</blockquote>
+<blockquote>
+<ul>
+<li><em>déclarer la base de données embarquée proposée par Play!&gt;</em></li>
+<li><em>créer nos premiers modèles</em></li>
+<li><em>créer nos premiers contrôleurs, les modifier</em></li>
+<li><em>paramétrer &quot;les routes&quot;</em></li>
+<li><em>créer notre première vue</em></li>
+</ul>
+</blockquote>
+<blockquote>
+<p><em>... faites vous un bon café, et soyez attentif, cela devient sérieux.</em></p>
+</blockquote>
+<h2 id="très-important"><a href="#TOC"><span class="header-section-number">7.1</span> Très important !!!</a></h2>
+<p>Plutôt que d'utiliser la commande <code>run</code> vous pouvez utiliser <code>~run</code> et à ce moment là Play!&gt; compile à la volée dès qu'il détecte un changement dans le code. Cela va accélérer grandement votre travail (merci à <a href="@kraco_fr">@kraco_fr</a> pour ça, j'étais prêt à mettre Play!&gt; en pause tellement la compilation était devenue lente et là c'est que du bonheur.)</p>
+<h2 id="construisons-les-bases-de-notre-application-paramétrages"><a href="#TOC"><span class="header-section-number">7.2</span> Construisons les bases de notre application : paramétrages</a></h2>
 <pre><code>//TODO : expliquer ce que va faire l&#39;application</code></pre>
-<h3 id="il-nous-faut-une-base-de-données"><a href="#TOC">Il nous faut une base de données</a></h3>
-<p>Tout d'abord, nous avons besoin d'une base de données. Nous allons aller au plus simple : Play!► &quot;embarque&quot; une base de donnée &quot;H2 Database&quot; (<a href="http://www.h2database.com/html/main.html">http://www.h2database.com/html/main.html</a>) qui est une base de donnée rapide, légère, qui peut même fonctionner en mémoire et qui respecte les standards JDBC. Cela signifie que vous pouvez facilement prototyper vos applications avec cette base de données pour ensuite changer de base de manière transparente.</p>
+<h3 id="il-nous-faut-une-base-de-données"><a href="#TOC"><span class="header-section-number">7.2.1</span> Il nous faut une base de données</a></h3>
+<p>Tout d'abord, nous avons besoin d'une base de données. Nous allons aller au plus simple : Play!&gt; &quot;embarque&quot; une base de donnée &quot;H2 Database&quot; (<a href="http://www.h2database.com/html/main.html">http://www.h2database.com/html/main.html</a>) qui est une base de donnée rapide, légère, qui peut même fonctionner en mémoire et qui respecte les standards JDBC. Cela signifie que vous pouvez facilement prototyper vos applications avec cette base de données pour ensuite changer de base de manière transparente.</p>
 <p>Pour définir notre base, allons faire un tour dans le fichier <code>conf/application.conf</code> et au niveau de la section <code># Database configuration</code> ajoutons ceci :</p>
 <pre><code>db.default.driver=org.h2.Driver
 db.default.url=&quot;jdbc:h2:file:play&quot;</code></pre>
-<p>Nous avons donc expliqué à Play!►, que nous souhaitions utiliser la base de données &quot;H2 Database&quot; en mode fichier. Comme cela toutes nos modifications seront sauvegardées.</p>
-<h3 id="il-nous-faudra-des-modèles"><a href="#TOC">Il nous faudra des modèles</a></h3>
+<p>Nous avons donc expliqué à Play!&gt;, que nous souhaitions utiliser la base de données &quot;H2 Database&quot; en mode fichier. Comme cela toutes nos modifications seront sauvegardées.</p>
+<h3 id="il-nous-faudra-des-modèles"><a href="#TOC"><span class="header-section-number">7.2.2</span> Il nous faudra des modèles</a></h3>
 <p>Dans un premier temps :</p>
 <ul>
 <li>Créez un répertoire <code>models</code> dans <code>app</code> car cela n'est pas fait automatiquement (pour le moment ?) (dans IntelliJ, utilisez la fonction &quot;New Package&quot; sur le répertoire <code>app</code> et appelez le <code>models</code>)</li>
 <li>Dans conf/application.conf modifiez la partie <code># Ebean configuration</code> : Dé commentez la ligne : <code>ebean.default=models.*</code></li>
 </ul>
-<table>
-<col width="4%" />
-<tbody>
-<tr class="odd">
-<td align="left"><strong>Remarque :</strong> Play!► 2 utilise <strong>Ebean</strong> comme framework de persistance au lieu de Hibernate+JPA (comme le faisait Play!► v°1). Ebean est un ORM Java qui continue à utiliser les annotations JPA (<code>@entity</code>, <code>@OneToMany</code>, ...) pour le mapping et qui propose une API plus simple (en tous les cas plus moderne) et qui a la particularité d'être <em>&quot;sessionless&quot;</em>.</td>
-</tr>
-<tr class="even">
-<td align="left">//TODO : expliquer sessionless</td>
-</tr>
-</tbody>
-</table>
-<h2 id="les-modèles"><a href="#TOC">Les modèles</a></h2>
+<blockquote>
+<p><strong>Remarque :</strong> Play!&gt; 2 utilise <strong>Ebean</strong> comme framework de persistance au lieu de Hibernate+JPA (comme le faisait Play!&gt; v1). Ebean est un ORM Java qui continue à utiliser les annotations JPA (<code>@entity</code>, <code>@OneToMany</code>, ...) pour le mapping et qui propose une API plus simple (en tous les cas plus moderne) et qui a la particularité d'être <em>&quot;sessionless&quot;</em>.</p>
+</blockquote>
+<pre><code>//TODO : expliquer sessionless</code></pre>
+<h2 id="les-modèles"><a href="#TOC"><span class="header-section-number">7.3</span> Les modèles</a></h2>
 <p>Nous allons étudier ça par l'exemple.</p>
-<h3 id="création-dun-1er-modèle-category"><a href="#TOC">Création d'un 1er modèle : Category</a></h3>
+<h3 id="création-dun-1er-modèle-category"><a href="#TOC"><span class="header-section-number">7.3.1</span> Création d'un 1er modèle : Category</a></h3>
 <p>Créez une classe <code>Category.java</code> dans <code>app/models</code> :</p>
 <pre class="sourceCode java"><code class="sourceCode java">
     <span class="kw">package models;</span>
@@ -385,21 +393,13 @@ db.default.url=&quot;jdbc:h2:file:play&quot;</code></pre>
                 <span class="kw">new</span> Finder&lt;Long, Category&gt;(Long.<span class="fu">class</span>, Category.<span class="fu">class</span>);
 
     }</code></pre>
-<table>
-<col width="4%" />
-<tbody>
-<tr class="odd">
-<td align="left">Nous avons eu besoin d'importer <code>play.db.ebean.Model</code> pour pouvoir persister nos modèles, <code>javax.persistence.*</code> pour pouvoir utiliser les annotations. Nous avons fait précéder notre classe de l'annotation <code>@Entity</code> et hériter de <code>Model</code> pour pouvoir bénéficier des fonctionnalités de persistance. Et l'utilisation de l'annotation <code>@Id</code> nous permet de définir que la clé du modèle en base de données est <code>id</code>. Notez le membre <code>find</code> de type <code>Finder</code>, <code>Finder</code> est un type &quot;apporté&quot; per Ebean, il nous permettra d'interroger nos modèles.</td>
-</tr>
-</tbody>
-</table>
+<blockquote>
+<p><strong>Remarque :</strong> Nous avons eu besoin d'importer <code>play.db.ebean.Model</code> pour pouvoir persister nos modèles, <code>javax.persistence.*</code> pour pouvoir utiliser les annotations. Nous avons fait précéder notre classe de l'annotation <code>@Entity</code> et hériter de <code>Model</code> pour pouvoir bénéficier des fonctionnalités de persistance. Et l'utilisation de l'annotation <code>@Id</code> nous permet de définir que la clé du modèle en base de données est <code>id</code>. Notez le membre <code>find</code> de type <code>Finder</code>, <code>Finder</code> est un type &quot;apporté&quot; per Ebean, il nous permettra d'interroger nos modèles.</p>
+</blockquote>
 <p>Redémarrez dès maintenant l'application et connectez vous à <a href="http://localhost:9000/">http://localhost:9000/</a> avec votre ordinateur.</p>
-<p>Play!► détecte (c'est un peu long, je vous l'accorde) que vous avez créé un modèle et vous propose donc de créer le modèle de données (la table category dans notre cas) :</p>
-<div class="figure">
-<img src="rsrc/04-firstapp.next-001.png" /><p class="caption"></p>
-</div>
-<p>Cliquez sur <strong>&quot;Apply this script now !&quot;</strong> pour créer la structure de données dans la base. ... Et votre base de données est ainsi créée.</p>
-<h3 id="création-dun-2ème-modèle-bookmark"><a href="#TOC">Création d'un 2ème modèle : Bookmark</a></h3>
+<p>Play!&gt; détecte (c'est un peu long, je vous l'accorde) que vous avez créé un modèle et vous propose donc de créer le modèle de données (la table category dans notre cas) :</p>
+<p><img src="rsrc/04-firstapp_next-001.png" alt="FIG1" /><br /> Cliquez sur <strong>&quot;Apply this script now !&quot;</strong> pour créer la structure de données dans la base. ... Et votre base de données est ainsi créée.</p>
+<h3 id="création-dun-2ème-modèle-bookmark"><a href="#TOC"><span class="header-section-number">7.3.2</span> Création d'un 2ème modèle : Bookmark</a></h3>
 <p>De la même manière, créez un modèle Bookmark :</p>
 <pre class="sourceCode java"><code class="sourceCode java">
     <span class="kw">package models;</span>
@@ -422,25 +422,15 @@ db.default.url=&quot;jdbc:h2:file:play&quot;</code></pre>
         <span class="kw">public</span> <span class="dt">static</span> Finder&lt;Long, Bookmark&gt; find = 
                 <span class="kw">new</span> Finder&lt;Long, Bookmark&gt;(Long.<span class="fu">class</span>, Bookmark.<span class="fu">class</span>);
     }</code></pre>
-<table>
-<col width="4%" />
-<tbody>
-<tr class="odd">
-<td align="left"><strong>Remarques :</strong></td>
-</tr>
-<tr class="even">
-<td align="left">- Notez l'annotation <code>@ManyToOne</code> : nous expliquons à Play!► qu'un <code>Bookmark</code> peut appartenir à plusieurs <code>Category(ies)</code>.</td>
-</tr>
-</tbody>
-</table>
-<p>Vous venez de créer un nouveau modèle, il est temps de &quot;rafraîchir&quot; à nouveau votre application. Play!► détecte la modification et vous propose encore une fois d'appliquer le script pour modifier la base de données. Acceptez :</p>
-<div class="figure">
-<img src="rsrc/04-firstapp.next-002.png" /><p class="caption"></p>
-</div>
+<blockquote>
+<p><strong>Remarques :</strong> Notez l'annotation <code>@ManyToOne</code> : nous expliquons à Play!&gt; qu'un <code>Bookmark</code> peut appartenir à plusieurs <code>Category(ies)</code>.</p>
+</blockquote>
+<p>Vous venez de créer un nouveau modèle, il est temps de &quot;rafraîchir&quot; à nouveau votre application. Play!&gt; détecte la modification et vous propose encore une fois d'appliquer le script pour modifier la base de données. Acceptez :</p>
+<p><img src="rsrc/04-firstapp_next-002.png" alt="FIG2" /><br /></p>
 <p>A ce stade, nous avons nos modèles et une base de données. mettons en oeuvre la suite de notre mécanique pour pouvoir bientôt jouer justement avec ces modèles.</p>
-<h2 id="les-contrôleurs"><a href="#TOC">Les contrôleurs</a></h2>
+<h2 id="les-contrôleurs"><a href="#TOC"><span class="header-section-number">7.4</span> Les contrôleurs</a></h2>
 <p>Par convention, nous nommons un contrôleur d'un modèle avec le nom du modèle au pluriel, par exemple : <code>Bookmarks</code> pour le contrôleur du modèle <code>Bookmark</code> (en même temps, si vous avez envie de le nommer <code>BookmarksController</code>, rien ne vous en empêche).</p>
-<h3 id="création-du-contrôleur-bookmarks"><a href="#TOC">Création du contrôleur Bookmarks</a></h3>
+<h3 id="création-du-contrôleur-bookmarks"><a href="#TOC"><span class="header-section-number">7.4.1</span> Création du contrôleur Bookmarks</a></h3>
 <p>Dans <code>/app/controllers/</code> créez la classe <code>Bookmarks.java</code> :</p>
 <pre class="sourceCode java"><code class="sourceCode java">
     <span class="kw">package controllers;</span>
@@ -463,7 +453,7 @@ db.default.url=&quot;jdbc:h2:file:play&quot;</code></pre>
 
         }
     }</code></pre>
-<h4 id="quavons-nous-fait"><a href="#TOC">Qu'avons nous fait ?</a></h4>
+<h4 id="quavons-nous-fait"><a href="#TOC"><span class="header-section-number">7.4.1.1</span> Qu'avons nous fait ?</a></h4>
 <ul>
 <li>Nous avons un contrôleur <code>Bookmarks</code> avec une méthode <code>add()</code></li>
 <li><code>final Form&lt;Bookmark&gt; bookmarkForm = form(Bookmark.class).bindFromRequest()</code> permet de récupérer les informations en provenance d'un <code>POST</code> à partir d'un formulaire html (<code>&lt;form&gt;&lt;/form&gt;</code>)</li>
@@ -471,9 +461,9 @@ db.default.url=&quot;jdbc:h2:file:play&quot;</code></pre>
 <li><code>bookmark.save()</code> permet d'ajouter le bookmark en base</li>
 <li><code>return redirect(routes.Application.index())</code> fait une redirection vers <code>routes.Application.index()</code> (donc appel de la méthode <code>index()</code> du contrôleur <code>Application</code> qui se chargera d'afficher des informations dans la page, nous allons voir ça plus loin)</li>
 </ul>
-<h4 id="modification-du-fichier-routes"><a href="#TOC">Modification du fichier routes</a></h4>
+<h4 id="modification-du-fichier-routes"><a href="#TOC"><span class="header-section-number">7.4.1.2</span> Modification du fichier routes</a></h4>
 <pre><code>//TODO: expliquer ce que c&#39;est qu&#39;une route (ou pas?)</code></pre>
-<p>Nous allons modifier le fichier <code>routes</code> dans le répertoire <code>/conf</code> pour expliquer à Play!► que toute requête http de type <code>POST</code> avec une url <code>/bookmark/add</code> déclenchera la méthode <code>add()</code> du contrôleur <code>Bookmarks</code>. Donc dans le fichier <code>routes</code> ajoutez ceci :</p>
+<p>Nous allons modifier le fichier <code>routes</code> dans le répertoire <code>/conf</code> pour expliquer à Play!&gt; que toute requête http de type <code>POST</code> avec une url <code>/bookmark/add</code> déclenchera la méthode <code>add()</code> du contrôleur <code>Bookmarks</code>. Donc dans le fichier <code>routes</code> ajoutez ceci :</p>
 <pre><code># Models routes
 POST /bookmark/add  controllers.Bookmarks.add()</code></pre>
 <p>Votre fichier <code>routes</code> doit ressemblez à ceci :</p>
@@ -490,7 +480,7 @@ POST /bookmark/add  controllers.Bookmarks.add()
 # Map static resources from the /public folder to the /assets URL path
 GET     /assets/*file               controllers.Assets.at(path=&quot;/public&quot;, file)</code></pre>
 <p>Procédons de la même manière pour créer un contrôleur <code>Categories</code>.</p>
-<h3 id="création-du-contrôleur-categories"><a href="#TOC">Création du contrôleur Categories</a></h3>
+<h3 id="création-du-contrôleur-categories"><a href="#TOC"><span class="header-section-number">7.4.2</span> Création du contrôleur Categories</a></h3>
 <p>Dans <code>/app/controllers/</code> créez la classe <code>Categories.java</code> :</p>
 <pre class="sourceCode java"><code class="sourceCode java">
     <span class="kw">package controllers;</span>
@@ -512,11 +502,11 @@ GET     /assets/*file               controllers.Assets.at(path=&quot;/public&quo
 
         }
     }</code></pre>
-<h4 id="modification-du-fichier-routes-1"><a href="#TOC">Modification du fichier routes</a></h4>
+<h4 id="modification-du-fichier-routes-1"><a href="#TOC"><span class="header-section-number">7.4.2.1</span> Modification du fichier routes</a></h4>
 <p>Dans le fichier routes, à la suite de notre précédente modification, ajoutons ceci :</p>
 <pre><code>POST /category/add  controllers.Categories.add()</code></pre>
-<h3 id="modification-du-contrôleur-application"><a href="#TOC">Modification du contrôleur Application</a></h3>
-<p>Play!► génère par défaut un contrôleur <code>Application</code> qui permet de &quot;piloter&quot; la page d'accueil. Si vous allez voir à nouveau le fichier <code>routes</code>, vous verrez ceci :</p>
+<h3 id="modification-du-contrôleur-application"><a href="#TOC"><span class="header-section-number">7.4.3</span> Modification du contrôleur Application</a></h3>
+<p>Play!&gt; génère par défaut un contrôleur <code>Application</code> qui permet de &quot;piloter&quot; la page d'accueil. Si vous allez voir à nouveau le fichier <code>routes</code>, vous verrez ceci :</p>
 <pre><code># Home page
 GET     /                           controllers.Application.index()</code></pre>
 <p>Cela signifie que dès que vous êtes à la racine de votre site (<code>/</code>, donc <code>http://localhost:9000</code>) c'est la méthode <code>index()</code> du contrôleur <code>Application</code> qui est appelée. Si vous lisez le code de <code>Application.java</code> :</p>
@@ -543,7 +533,7 @@ GET     /                           controllers.Application.index()</code></pre>
     @play20.welcome(message, style = &quot;Java&quot;)
 
 }</code></pre>
-<h4 id="petit-exercice"><a href="#TOC">Petit exercice :</a></h4>
+<h4 id="petit-exercice"><a href="#TOC"><span class="header-section-number">7.4.3.1</span> Petit exercice :</a></h4>
 <p>Changez donc le message dans le contrôleur :</p>
 <pre class="sourceCode java"><code class="sourceCode java">
     <span class="kw">package controllers;</span>
@@ -561,10 +551,8 @@ GET     /                           controllers.Application.index()</code></pre>
 
     }</code></pre>
 <p>et rafraîchissez votre page :</p>
-<div class="figure">
-<img src="rsrc/04-firstapp.next-003.png" /><p class="caption"></p>
-</div>
-<h4 id="maintenant-modifions-vraiment-application.java"><a href="#TOC">Maintenant, modifions vraiment Application.java</a></h4>
+<p><img src="rsrc/04-firstapp_next-003.png" alt="FIG3" /><br /></p>
+<h4 id="maintenant-modifions-vraiment-application.java"><a href="#TOC"><span class="header-section-number">7.4.3.2</span> Maintenant, modifions vraiment Application.java</a></h4>
 <p>Que voulons nous faire ?</p>
 <p>En fait, je souhaite passer en paramètres de la méthode <code>render()</code> de la vue <code>index</code>, la liste des catégories et la liste des bookmarks, pour que ma vue puisse les afficher. Modifions le code du contrôleur <code>Application.java</code> de la façon suivante :</p>
 <pre class="sourceCode java"><code class="sourceCode java">
@@ -589,8 +577,8 @@ GET     /                           controllers.Application.index()</code></pre>
     }</code></pre>
 <pre><code>//TODO : expliquer le fetch</code></pre>
 <p>Et allons tout de suite modifier notre vue, pour enfin avoir quelque chose à montrer</p>
-<h2 id="les-vues"><a href="#TOC">Les vues</a></h2>
-<h3 id="modification-de-la-vue-principale-index.scala.html"><a href="#TOC">Modification de la vue principale : index.scala.html</a></h3>
+<h2 id="les-vues"><a href="#TOC"><span class="header-section-number">7.5</span> Les vues</a></h2>
+<h3 id="modification-de-la-vue-principale-index.scala.html"><a href="#TOC"><span class="header-section-number">7.5.1</span> Modification de la vue principale : index.scala.html</a></h3>
 <pre class="sourceCode html"><code class="sourceCode html">
     @(
         message: String,
@@ -647,14 +635,9 @@ GET     /                           controllers.Application.index()</code></pre>
         <span class="kw">&lt;/ul&gt;</span>
     }</code></pre>
 <p>Lancez tout de suite, nous passerons aux explications plus tard, rafraîchissez donc votre page, vous devriez obtenir ceci :</p>
-<div class="figure">
-<img src="rsrc/04-firstapp.next-004.png" /><p class="caption"></p>
-</div>
-<p>Et vous pouvez même commencer à saisir :</p>
-<div class="figure">
-<img src="rsrc/04-firstapp.next-005.png" /><p class="caption"></p>
-</div>
-<h4 id="quavons-nous-fait-1"><a href="#TOC">Qu'avons nous fait</a></h4>
+<p><img src="rsrc/04-firstapp_next-004.png" alt="FIG4" /><br /> Et vous pouvez même commencer à saisir :</p>
+<p><img src="rsrc/04-firstapp_next-005.png" alt="FIG5" /><br /></p>
+<h4 id="quavons-nous-fait-1"><a href="#TOC"><span class="header-section-number">7.5.1.1</span> Qu'avons nous fait</a></h4>
 <ul>
 <li><p>Nous avons passé en paramètres des informations à la vue :</p>
 <pre><code>@(
@@ -676,36 +659,36 @@ GET     /                           controllers.Application.index()</code></pre>
     }
 &lt;/ul&gt;</code></pre></li>
 </ul>
-<table>
-<col width="4%" />
-<tbody>
-<tr class="odd">
-<td align="left"><strong>Remarque :</strong> le langage utilisé pour les templates des vues est <strong>Scala</strong>. C'est un peu déroutant, mais vous verrez que l'on s'habitue (et que l'on peut aussi s'en passer, mais ça c'est une autre histoire).</td>
-</tr>
-</tbody>
-</table>
+<blockquote>
+<p><strong>Remarque :</strong> le langage utilisé pour les templates des vues est <strong>Scala</strong>. C'est un peu déroutant, mais vous verrez que l'on s'habitue (et que l'on peut aussi s'en passer, mais ça c'est une autre histoire).</p>
+</blockquote>
 <p>Voilà, nous avons un embryon d'application qui fonctionne. Je vous propose maintenant d'habiller notre application pour la rendre un peu plus sexy avant de passer à des choses plus sérieuses.</p>
-<h1 id="un-peu-de-cosmétique"><a href="#TOC">Un peu de cosmétique</a></h1>
-<pre><code>/* --- Qu&#39;allons nous voir ? ---
-
-    - Une petite récréation : comment rendre un site web &quot;beau&quot; alors que l&#39;on est une bille en design ?
-
-    ... Ce n&#39;est pas du Play!►, mais ça va faire joli :)
-*/</code></pre>
-<p>Le framework css à la mode, en ce moment c'est Twitter Bootstrap. Il permet à tout développeur web le plus nul en design de donner un aspect &quot;pro&quot; &amp; &quot;joli&quot; à ses pages web. Alors certains me diront : &quot;on va tous avoir des sites avec la même tête !&quot;, et je répondrais : &quot;certes, mais au moins, ils seront propres, sobres, ... et puis rien ne vous empêche ensuite d'aller un peu modifier les couleurs&quot;. Toujours est-il que c'est plus agréable de travailler avec quelque chose de joli et ça me donne l'opportunité de vous expliquer où sont les ressources statiques dans une application Play!►.</p>
-<h2 id="prérequis-1"><a href="#TOC">Prérequis</a></h2>
+<h1 id="un-peu-de-cosmétique"><a href="#TOC"><span class="header-section-number">8</span> Un peu de cosmétique</a></h1>
+<blockquote>
+<p><em>Qu'allons nous voir ?</em></p>
+</blockquote>
+<blockquote>
+<ul>
+<li><em>Une petite récréation : comment rendre un site web &quot;beau&quot; alors que l'on est une bille en design ?</em></li>
+</ul>
+</blockquote>
+<blockquote>
+<p><em>... Ce n'est pas du Play!&gt;, mais ça va faire joli :)</em></p>
+</blockquote>
+<p>Le framework css à la mode, en ce moment c'est Twitter Bootstrap. Il permet à tout développeur web le plus nul en design de donner un aspect &quot;pro&quot; &amp; &quot;joli&quot; à ses pages web. Alors certains me diront : &quot;on va tous avoir des sites avec la même tête !&quot;, et je répondrais : &quot;certes, mais au moins, ils seront propres, sobres, ... et puis rien ne vous empêche ensuite d'aller un peu modifier les couleurs&quot;. Toujours est-il que c'est plus agréable de travailler avec quelque chose de joli et ça me donne l'opportunité de vous expliquer où sont les ressources statiques dans une application Play!&gt;.</p>
+<h2 id="prérequis-1"><a href="#TOC"><span class="header-section-number">8.1</span> Prérequis</a></h2>
 <ul>
 <li>Allons télécharger <strong>Bootstrap</strong> : <a href="http://twitter.github.com/bootstrap/assets/bootstrap.zip">http://twitter.github.com/bootstrap/assets/bootstrap.zip</a></li>
 <li>Dé-zippez, vous obtenez un répertoire <code>bootstrap</code></li>
 <li>Allez copier ce répertoire dans le répertoire <code>public</code> de notre application</li>
 </ul>
-<h2 id="utilisation"><a href="#TOC">Utilisation</a></h2>
+<h2 id="utilisation"><a href="#TOC"><span class="header-section-number">8.2</span> Utilisation</a></h2>
 <p>Si vous allez dans le répertoire <code>app/views</code> de notre application, vous remarquerez le fichier <code>main.scala.html</code>. En fait on pourrait dire que le fichier (la vue) <code>index.scala.html</code> utilise <code>main.scala.html</code>. Remarquez dans <code>index.scala.html</code> la ligne :</p>
 <pre><code>@main(&quot;Gestion des bookmarks&quot;) { ... }</code></pre>
 <p>et dans <code>main.scala.html</code> :</p>
 <pre><code>@(title: String)(content: Html)</code></pre>
 <p><code>index</code> &quot;appelle&quot; <code>main</code> en lui passant en paramètre le titre de la page et le contenu HTML. Et c'est dans <code>main.scala.html</code> que sont déclarées les ressources javascript et css avec la commande <code>@routes.Assets.at</code>.</p>
-<h3 id="modifions-le-code-de-main.scala.html"><a href="#TOC">Modifions le code de <code>main.scala.html</code></a></h3>
+<h3 id="modifions-le-code-de-main.scala.html"><a href="#TOC"><span class="header-section-number">8.2.1</span> Modifions le code de <code>main.scala.html</code></a></h3>
 <pre class="sourceCode html"><code class="sourceCode html">
     @(title: String)(content: Html)
 
@@ -715,16 +698,20 @@ GET     /                           controllers.Application.index()</code></pre>
         <span class="kw">&lt;head&gt;</span>
             <span class="kw">&lt;title&gt;</span>@title<span class="kw">&lt;/title&gt;</span>
             <span class="kw">&lt;meta</span><span class="ot"> http-equiv=</span><span class="st">&quot;Content-Type&quot;</span><span class="ot"> content=</span><span class="st">&quot;text/html; charset=utf-8&quot;</span><span class="kw">&gt;</span>
-            <span class="kw">&lt;link</span><span class="ot"> rel=</span><span class="st">&quot;stylesheet&quot;</span><span class="ot"> media=</span><span class="st">&quot;screen&quot;</span><span class="ot"> href=</span><span class="st">&quot;@routes.Assets.at(&quot;</span><span class="er">bootstrap/css/bootstrap.css&quot;)&quot;</span><span class="kw">&gt;</span>
+            <span class="kw">&lt;link</span><span class="ot"> rel=</span><span class="st">&quot;stylesheet&quot;</span><span class="ot"> media=</span><span class="st">&quot;screen&quot;</span> 
+<span class="ot">                href=</span><span class="st">&quot;@routes.Assets.at(&quot;</span><span class="er">bootstrap/css/bootstrap.css&quot;)&quot;</span><span class="kw">&gt;</span>
             <span class="kw">&lt;style&gt;</span>
                 body <span class="kw">{</span>
                     <span class="kw">padding-top:</span> <span class="dt">60px</span><span class="kw">;</span>
                     <span class="kw">padding-bottom:</span> <span class="dt">40px</span><span class="kw">;</span>
                 <span class="kw">}</span>
             <span class="kw">&lt;/style&gt;</span>
-            <span class="kw">&lt;link</span><span class="ot"> rel=</span><span class="st">&quot;stylesheet&quot;</span><span class="ot"> media=</span><span class="st">&quot;screen&quot;</span><span class="ot"> href=</span><span class="st">&quot;@routes.Assets.at(&quot;</span><span class="er">bootstrap/css/bootstrap-responsive.css&quot;)&quot;</span><span class="kw">&gt;</span>
-            <span class="kw">&lt;link</span><span class="ot"> rel=</span><span class="st">&quot;shortcut icon&quot;</span><span class="ot"> type=</span><span class="st">&quot;image/png&quot;</span><span class="ot"> href=</span><span class="st">&quot;@routes.Assets.at(&quot;</span><span class="er">images/favicon.png&quot;)&quot;</span><span class="kw">&gt;</span>
-            <span class="kw">&lt;script</span><span class="ot"> src=</span><span class="st">&quot;@routes.Assets.at(&quot;</span><span class="er">javascripts/jquery-1.7.1.min.js&quot;)&quot;</span><span class="ot"> type=</span><span class="st">&quot;text/javascript&quot;</span><span class="kw">&gt;&lt;/script&gt;</span>
+            <span class="kw">&lt;link</span><span class="ot"> rel=</span><span class="st">&quot;stylesheet&quot;</span><span class="ot"> media=</span><span class="st">&quot;screen&quot;</span> 
+<span class="ot">                href=</span><span class="st">&quot;@routes.Assets.at(&quot;</span><span class="er">bootstrap/css/bootstrap-responsive.css&quot;)&quot;</span><span class="kw">&gt;</span>
+            <span class="kw">&lt;link</span><span class="ot"> rel=</span><span class="st">&quot;shortcut icon&quot;</span><span class="ot"> type=</span><span class="st">&quot;image/png&quot;</span> 
+<span class="ot">                href=</span><span class="st">&quot;@routes.Assets.at(&quot;</span><span class="er">images/favicon.png&quot;)&quot;</span><span class="kw">&gt;</span>
+            <span class="kw">&lt;script</span><span class="ot"> src=</span><span class="st">&quot;@routes.Assets.at(&quot;</span><span class="er">javascripts/jquery-1.7.1.min.js&quot;)&quot;</span> 
+<span class="ot">                type=</span><span class="st">&quot;text/javascript&quot;</span><span class="kw">&gt;&lt;/script&gt;</span>
         <span class="kw">&lt;/head&gt;</span>
         <span class="kw">&lt;body&gt;</span>
             @content
@@ -732,10 +719,8 @@ GET     /                           controllers.Application.index()</code></pre>
     <span class="kw">&lt;/html&gt;</span></code></pre>
 <pre><code>//TODO : donner un peu d&#39;explications</code></pre>
 <p>Vous pouvez rafraîchir votre page, c'est déjà beaucoup plus sympa :</p>
-<div class="figure">
-<img src="rsrc/05-sexy-001.png" /><p class="caption"></p>
-</div>
-<h4 id="customisons-légèrement-main.scala.html"><a href="#TOC">Customisons légèrement <code>main.scala.html</code></a></h4>
+<p><img src="rsrc/05-sexy-001.png" /><br /></p>
+<h4 id="customisons-légèrement-main.scala.html"><a href="#TOC"><span class="header-section-number">8.2.1.1</span> Customisons légèrement <code>main.scala.html</code></a></h4>
 <p>Modifiez le tag <code>&lt;body&gt;</code> de la façon suivante :</p>
 <pre class="sourceCode html"><code class="sourceCode html">
     <span class="kw">&lt;body&gt;</span>
@@ -753,22 +738,22 @@ GET     /                           controllers.Application.index()</code></pre>
 
     <span class="kw">&lt;/body&gt;</span></code></pre>
 <p>Vous pouvez rafraîchir votre page à nouveau, ça prend forme ... :</p>
-<div class="figure">
-<img src="rsrc/05-sexy-002.png" /><p class="caption"></p>
-</div>
-<h4 id="allons-customiser-légèrement-index.scala.html"><a href="#TOC">Allons customiser légèrement <code>index.scala.html</code></a></h4>
+<p><img src="rsrc/05-sexy-002.png" /><br /></p>
+<h4 id="allons-customiser-légèrement-index.scala.html"><a href="#TOC"><span class="header-section-number">8.2.1.2</span> Allons customiser légèrement <code>index.scala.html</code></a></h4>
 <p>Vous pouvez remplacer les tags <code>&lt;legend&gt;</code> par <code>&lt;h2&gt;</code> Ajoutez la classe <code>btn</code> aux tags <code>&lt;button class=&quot;btn&quot;&gt;</code>, pour avoir des boutons arrondis Remplacez le tag <code>&lt;p&gt;@message&lt;/p&gt;</code> par <code>&lt;h6&gt;@message&lt;/h6&gt;</code></p>
-<div class="figure">
-<img src="rsrc/05-sexy-003.png" /><p class="caption"></p>
-</div>
-<p>Bref, amusez vous !</p>
-<h1 id="charger-des-données-au-démarrage"><a href="#TOC">Charger des données au démarrage</a></h1>
-<pre><code>/* --- Qu&#39;allons nous voir ? ---
-
-    - Comment pré-charger des données au démarrage de l&#39;application ?
-
-    ... Très pratique à l&#39;usage
-*/</code></pre>
+<p><img src="rsrc/05-sexy-003.png" /><br /> Bref, amusez vous !</p>
+<h1 id="charger-des-données-au-démarrage"><a href="#TOC"><span class="header-section-number">9</span> Charger des données au démarrage</a></h1>
+<blockquote>
+<p><em>Qu'allons nous voir ?</em></p>
+</blockquote>
+<blockquote>
+<ul>
+<li><em>Comment pré-charger des données au démarrage de l'application ?</em></li>
+</ul>
+</blockquote>
+<blockquote>
+<p><em>... Très pratique à l'usage</em></p>
+</blockquote>
 <p>A chaque fois que vous allez modifier vos modèles, vous allez perdre vos données. Donc nous allons voir comment charger un jeu de données au démarrage pour éviter d'avoir à tout re-saisir à chaque fois.</p>
 <p>Dans le répertoire <code>/conf</code>, créez un fichier <code>initial-data.yml</code> avec les données suivantes :</p>
 <pre><code># Categories
@@ -805,7 +790,8 @@ categories:
             <span class="kw">public</span> <span class="dt">static</span> <span class="dt">void</span> <span class="fu">insert</span>(Application app) {
                 <span class="kw">if</span>(Ebean.<span class="fu">find</span>(Category.<span class="fu">class</span>).<span class="fu">findRowCount</span>() == <span class="dv">0</span>) {
 
-                    Map&lt;String,List&lt;Object&gt;&gt; all = (Map&lt;String,List&lt;Object&gt;&gt;)Yaml.<span class="fu">load</span>(<span class="st">&quot;initial-data.yml&quot;</span>);
+                    Map&lt;String,List&lt;Object&gt;&gt; all = 
+                        (Map&lt;String,List&lt;Object&gt;&gt;)Yaml.<span class="fu">load</span>(<span class="st">&quot;initial-data.yml&quot;</span>);
 
                     <span class="co">// Insert categories first</span>
                     Ebean.<span class="fu">save</span>(all.<span class="fu">get</span>(<span class="st">&quot;categories&quot;</span>));
@@ -822,14 +808,18 @@ categories:
 <pre><code>global=Global</code></pre>
 <p>Cette manipulation permet d'activer votre nouvelle classe au démarrage de l'application.</p>
 <p>Vous pouvez maintenant rafraîchir votre page pour vérifier que les données sont bien chargées au démarrage de votre application.</p>
-<h1 id="validation-des-données"><a href="#TOC">Validation des données</a></h1>
-<pre><code>/* --- Qu&#39;allons nous voir ? ---
-
-    - comment définir des contraintes sur un modèle
-    - comment vérifier les données d&#39;un formulaire
-    - comment valider les données côté client en utilisant un module tiers
-*/</code></pre>
-<h2 id="enrichissement-du-modèle-et-vérification-des-données"><a href="#TOC">Enrichissement du modèle et vérification des données</a></h2>
+<h1 id="validation-des-données"><a href="#TOC"><span class="header-section-number">10</span> Validation des données</a></h1>
+<blockquote>
+<p><em>Qu'allons nous voir ?</em></p>
+</blockquote>
+<blockquote>
+<ul>
+<li><em>comment définir des contraintes sur un modèle</em></li>
+<li><em>comment vérifier les données d'un formulaire</em></li>
+<li><em>comment valider les données côté client en utilisant un module tiers</em></li>
+</ul>
+</blockquote>
+<h2 id="enrichissement-du-modèle-et-vérification-des-données"><a href="#TOC"><span class="header-section-number">10.1</span> Enrichissement du modèle et vérification des données</a></h2>
 <p>Nous voulons nous assurer que l'utilisateur entre bien un label (d'une catégorie) lors de la création d'un bookmark. Nous voulons aussi limiter la taille à 30 caractères (pourquoi pas?). Pour cela nous allons utiliser les annotations @Required et @MaxLength dans notre modèle <code>Category</code> sur le &quot;champ&quot; <code>label</code> (on n'oublie pas : <code>import play.data.validation.Constraints)</code>:</p>
 <pre class="sourceCode java"><code class="sourceCode java">
     <span class="kw">package models;</span>
@@ -880,12 +870,7 @@ categories:
         &lt;/div&gt;
     }</code></pre>
 <p><strong>Vous pouvez tout de suite essayer :</strong></p>
-<div class="figure">
-<img src="rsrc/07-validation-001.png" /><p class="caption"></p>
-</div>
-<div class="figure">
-<img src="rsrc/07-validation-002.png" /><p class="caption"></p>
-</div>
+<p><img src="rsrc/07-validation-001.png" /><br /> <img src="rsrc/07-validation-002.png" /><br /></p>
 <p>Il existe d'autres annotations de validation :</p>
 <ul>
 <li><code>@Max</code> et <code>@Min</code> pour les valeurs numériques</li>
@@ -894,12 +879,12 @@ categories:
 <li><code>@Email</code> pour valider le format email</li>
 </ul>
 <p>On peut bien sûr écrire facilement nos propres validateurs...</p>
-<h2 id="validation-côté-client"><a href="#TOC">Validation côté client</a></h2>
+<h2 id="validation-côté-client"><a href="#TOC"><span class="header-section-number">10.2</span> Validation côté client</a></h2>
 <p>Avec HTML5, il est possible de valider des données d'un formulaire directement depuis le navigateur avant de les envoyer au serveur.</p>
 <p>Il existe un module Play (développé par un de vos serviteurs : <a href="http://www.twitter.com/loic_d">@loic_d</a>) que vous trouverez ici : <a href="https://github.com/loicdescotte/Play2-HTML5Tags">https://github.com/loicdescotte/Play2-HTML5Tags</a>, pour générer les bonnes balises HTML à partir des contraintes du modèle.</p>
 <p>Avant de l'utiliser, voyons comment l'installer.</p>
-<h3 id="installation-de-play2-html5tags"><a href="#TOC">Installation de Play2-HTML5Tags</a></h3>
-<p>Pour le moment il n'existe pas de repository public pour les modules Play2!►, donc téléchargez sur le site le plugin (utilisez le bouton &quot;zip&quot; ou directement le lien <a href="https://github.com/loicdescotte/Play2-HTML5Tags/zipball/master">https://github.com/loicdescotte/Play2-HTML5Tags/zipball/master</a>). Une fois le module téléchargé, dé-zippez, allez dans le répertoire du module :</p>
+<h3 id="installation-de-play2-html5tags"><a href="#TOC"><span class="header-section-number">10.2.1</span> Installation de Play2-HTML5Tags</a></h3>
+<p>Pour le moment il n'existe pas de repository public pour les modules Play2!&gt;, donc téléchargez sur le site le plugin (utilisez le bouton &quot;zip&quot; ou directement le lien <a href="https://github.com/loicdescotte/Play2-HTML5Tags/zipball/master">https://github.com/loicdescotte/Play2-HTML5Tags/zipball/master</a>). Une fois le module téléchargé, dé-zippez, allez dans le répertoire du module :</p>
 <p><strong>Les versions de Play, Sbt, ... ont une importance &quot;VITALE&quot; ;)</strong>, il faut donc aller modifier quelques petits paramètres en fonction de la version de Play que vous utilisez, mais <strong>seulement si c'est nécessaire</strong>, ce n'est utile que dans les cas où la version du module a été développé pour une version antérieur de Play (par exemple version 2.0.1 contre version 2.0.2). Si c'est le cas vous aurez les 2 manipulations ci-dessous à effectuer :</p>
 <ul>
 <li>dans le répertoire <code>/projet</code> changez dans <code>build.properties</code> <code>sbt.version=0.11.2</code> par <code>sbt.version=0.11.3</code></li>
@@ -907,11 +892,8 @@ categories:
 </ul>
 <p><em>PS: bien sûr cela change en fonction des versions de Play.</em></p>
 <p>Ensuite dans le répertoire du module, en mode console, tapez : <code>play</code>, cela va &quot;mouliner&quot; un petit moment, vous devriez ensuite obtenir un prompt avec le nom du module :</p>
-<div class="figure">
-<img src="rsrc/07-validation-003.png" /><p class="caption"></p>
-</div>
-<p>Ensuite, au prompt, tapez <code>publish-local</code>, là encore cela mouline un moment, Play compile et installe le plugin pour qu'il soit utilisable par toutes vos applications Play. Vous pouvez allez vérifier dans le répertoire d'installation de Play, dans <code>/repository/local</code> vous avez maintenant un répertoire <code>com.loicdescotte.coffeebean</code> qui contient le module <code>html5tags_2.9.1</code>.</p>
-<h3 id="déclaration-de-play2-html5tags"><a href="#TOC">Déclaration de Play2-HTML5Tags</a></h3>
+<p><img src="rsrc/07-validation-003.png" /><br /> Ensuite, au prompt, tapez <code>publish-local</code>, là encore cela mouline un moment, Play compile et installe le plugin pour qu'il soit utilisable par toutes vos applications Play. Vous pouvez allez vérifier dans le répertoire d'installation de Play, dans <code>/repository/local</code> vous avez maintenant un répertoire <code>com.loicdescotte.coffeebean</code> qui contient le module <code>html5tags_2.9.1</code>.</p>
+<h3 id="déclaration-de-play2-html5tags"><a href="#TOC"><span class="header-section-number">10.2.2</span> Déclaration de Play2-HTML5Tags</a></h3>
 <p>Avant de pouvoir utiliser le module, vous devez déclarer son utilisation dans votre application. Il va donc falloir modifier le fichier <code>/project/Build.scala</code> de votre application Play :</p>
 <pre class="sourceCode scala"><code class="sourceCode scala">
     <span class="kw">import</span> sbt.<span class="fu">_</span>
@@ -928,13 +910,14 @@ categories:
           <span class="st">&quot;com.loicdescotte.coffeebean&quot;</span> % <span class="st">&quot;html5tags_2.9.1&quot;</span> % <span class="st">&quot;1.0-SNAPSHOT&quot;</span>
         )
 
-        <span class="kw">val</span> main = <span class="fu">PlayProject</span>(appName, appVersion, appDependencies, mainLang = JAVA).<span class="fu">settings</span>(
+        <span class="kw">val</span> main = <span class="fu">PlayProject</span>(appName, 
+                                appVersion, appDependencies, mainLang = JAVA).<span class="fu">settings</span>(
           <span class="co">// Add your own project settings here </span>
           resolvers += <span class="st">&quot;Local Play Repository&quot;</span> at <span class="st">&quot;/Users/k33g_org/play-2.0.2/repository&quot;</span>     
         )
     }</code></pre>
 <p>Maintenant vous pouvez utiliser le module.</p>
-<h3 id="utilisation-de-play2-html5tags"><a href="#TOC">Utilisation de Play2-HTML5Tags</a></h3>
+<h3 id="utilisation-de-play2-html5tags"><a href="#TOC"><span class="header-section-number">10.2.3</span> Utilisation de Play2-HTML5Tags</a></h3>
 <p>Dans le cas de notre application de gestion de bookmarks, on va pouvoir remplacer ceci :</p>
 <pre class="sourceCode html"><code class="sourceCode html">
     <span class="kw">&lt;input</span><span class="ot"> name=</span><span class="st">&quot;label&quot;</span><span class="ot"> placeholder=</span><span class="st">&quot;label&quot;</span><span class="kw">&gt;</span></code></pre>
@@ -1001,23 +984,24 @@ categories:
 <pre class="sourceCode html"><code class="sourceCode html">
     <span class="kw">&lt;input</span><span class="ot"> type=</span><span class="st">&quot;email&quot;</span><span class="ot"> id=</span><span class="st">&quot;contactMail&quot;</span><span class="ot"> name=</span><span class="st">&quot;contactMail&quot;</span><span class="ot"> value=</span><span class="st">&quot;&quot;</span><span class="kw">&gt;</span></code></pre>
 <p>Et le navigateur vérifiera le format saisi :</p>
-<div class="figure">
-<img src="rsrc/07-validation-005.png" /><p class="caption"></p>
-</div>
+<p><img src="rsrc/07-validation-005.png" /><br /></p>
 <p>HTML5 reconnait de nouveaux type de données dans les formulaires, comme les nombres, les dates, les numéros de téléphone, les URL.... Le module prend en charge ces types de données à travers des tags particuliers (<code>@number</code>, <code>@date</code>, <code>@telephone</code>, <code>@url</code> ...)</p>
 <p>Le fait de préciser le type de <code>&lt;input&gt;</code> permet également au navigateur, particulièrement sur mobile, d'adapter son IHM au format demandé. Par exemple pour un champ numérique :</p>
-<div class="figure">
-<img src="rsrc/07-validation-006.png" /><p class="caption"></p>
-</div>
-<h1 id="gestion-de-lauthentification"><a href="#TOC">Gestion de l'authentification</a></h1>
-<pre><code>/* --- Qu&#39;allons nous voir ? ---
-
-    - Comment mettre en oeuvre un système simple d&#39;authentification
-
-    Remarque : la rédaction de ce chapitre reste encore à faire, mais les codes sont complets et vous pouvez les utiliser tels quels.
-*/</code></pre>
-<p>Pour que n'importe qui ne puisse saisir pas saisir des bookmarks, nous allons mettre en place un système d'authentification.</p>
-<h2 id="création-dun-modèle-user"><a href="#TOC">Création d'un modèle User</a></h2>
+<p><img src="rsrc/07-validation-006.png" /><br /></p>
+<h1 id="gestion-de-lauthentification"><a href="#TOC"><span class="header-section-number">11</span> Gestion de l'authentification</a></h1>
+<blockquote>
+<p><em>Qu'allons nous voir ?</em></p>
+</blockquote>
+<blockquote>
+<ul>
+<li><em>Comment mettre en oeuvre un système simple d'authentification</em></li>
+</ul>
+</blockquote>
+<blockquote>
+<p><em>Remarque : la rédaction &quot;complète&quot; de ce chapitre reste encore à faire, mais les codes sont complets et vous pouvez les utiliser tels quels.</em></p>
+</blockquote>
+<p>Pour que n'importe qui ne puisse pas saisir des bookmarks, nous allons mettre en place un système d'authentification.</p>
+<h2 id="création-dun-modèle-user"><a href="#TOC"><span class="header-section-number">11.1</span> Création d'un modèle User</a></h2>
 <pre class="sourceCode java"><code class="sourceCode java">
     <span class="co">//TODO : expliquer ce que fait le code</span>
     <span class="kw">package models;</span>
@@ -1044,7 +1028,8 @@ categories:
         @Constraints.<span class="fu">Required</span>
         <span class="kw">public</span> String password;
 
-        <span class="kw">public</span> <span class="dt">static</span> Model.<span class="fu">Finder</span>&lt;String,User&gt; find = <span class="kw">new</span> Model.<span class="fu">Finder</span>(String.<span class="fu">class</span>, User.<span class="fu">class</span>);
+        <span class="kw">public</span> <span class="dt">static</span> Model.<span class="fu">Finder</span>&lt;String,User&gt; find = 
+            <span class="kw">new</span> Model.<span class="fu">Finder</span>(String.<span class="fu">class</span>, User.<span class="fu">class</span>);
 
         <span class="kw">public</span> <span class="dt">static</span> List&lt;User&gt; <span class="fu">findAll</span>() {
             <span class="kw">return</span> find.<span class="fu">all</span>();
@@ -1066,7 +1051,7 @@ categories:
         }
 
     }</code></pre>
-<h2 id="création-dun-contrôleur-secured"><a href="#TOC">Création d'un contrôleur Secured</a></h2>
+<h2 id="création-dun-contrôleur-secured"><a href="#TOC"><span class="header-section-number">11.2</span> Création d'un contrôleur Secured</a></h2>
 <pre class="sourceCode java"><code class="sourceCode java">
     <span class="co">//TODO : expliquer ce que fait le code</span>
     <span class="kw">package controllers;</span>
@@ -1090,7 +1075,7 @@ categories:
         }
 
     }</code></pre>
-<h2 id="allons-modifier-le-contrôleur-application"><a href="#TOC">Allons modifier le contrôleur Application</a></h2>
+<h2 id="allons-modifier-le-contrôleur-application"><a href="#TOC"><span class="header-section-number">11.3</span> Allons modifier le contrôleur Application</a></h2>
 <ul>
 <li>Ajout de l'annotation <code>@Security.Authenticated(Secured.class)</code></li>
 <li>Passage du user à la méthode <code>index.render()</code></li>
@@ -1121,7 +1106,7 @@ categories:
         }
 
     }</code></pre>
-<h2 id="création-dun-contrôleur-authentication"><a href="#TOC">Création d'un contrôleur Authentication</a></h2>
+<h2 id="création-dun-contrôleur-authentication"><a href="#TOC"><span class="header-section-number">11.4</span> Création d'un contrôleur Authentication</a></h2>
 <pre class="sourceCode java"><code class="sourceCode java">
     <span class="kw">package controllers;</span>
 
@@ -1156,7 +1141,8 @@ categories:
 
         <span class="co">//On récupère les informations de login (quand le user se &quot;signe&quot;)</span>
         <span class="kw">public</span> <span class="dt">static</span> Result <span class="fu">authenticate</span>() {
-            Form&lt;AuthenticatedUser&gt; loginForm = <span class="fu">form</span>(AuthenticatedUser.<span class="fu">class</span>).<span class="fu">bindFromRequest</span>();
+            Form&lt;AuthenticatedUser&gt; loginForm = 
+                <span class="fu">form</span>(AuthenticatedUser.<span class="fu">class</span>).<span class="fu">bindFromRequest</span>();
             <span class="kw">if</span>(loginForm.<span class="fu">hasErrors</span>()) {
                 <span class="kw">return</span> <span class="fu">badRequest</span>(login.<span class="fu">render</span>(loginForm));
             } <span class="kw">else</span> {
@@ -1177,12 +1163,12 @@ categories:
         }
 
     }</code></pre>
-<h2 id="allons-modifier-les-routes"><a href="#TOC">Allons modifier les routes</a></h2>
+<h2 id="allons-modifier-les-routes"><a href="#TOC"><span class="header-section-number">11.5</span> Allons modifier les routes</a></h2>
 <pre><code># Authentication
 GET     /login                              controllers.Authentication.login()
 POST    /login                              controllers.Authentication.authenticate()
 GET     /logout                             controllers.Authentication.logout()</code></pre>
-<h2 id="allons-modifier-main.scala.html-et-index.scala.html"><a href="#TOC">Allons modifier main.scala.html et index.scala.html</a></h2>
+<h2 id="allons-modifier-main.scala.html-et-index.scala.html"><a href="#TOC"><span class="header-section-number">11.6</span> Allons modifier main.scala.html et index.scala.html</a></h2>
 <p>Nous avons vu que nous passions le user authentifié à la méthode <code>index.render()</code> de la vue dans le contrôleur <code>Application</code> :</p>
 <pre class="sourceCode java"><code class="sourceCode java">
     <span class="kw">public</span> <span class="dt">static</span> Result <span class="fu">index</span>() {
@@ -1195,7 +1181,7 @@ GET     /logout                             controllers.Authentication.logout()<
                 ));
     }</code></pre>
 <p>Modifions donc le code des formulaires en conséquence :</p>
-<h3 id="main.scala.html"><a href="#TOC">main.scala.html</a></h3>
+<h3 id="main.scala.html"><a href="#TOC"><span class="header-section-number">11.6.1</span> main.scala.html</a></h3>
 <ul>
 <li>on ajoute <code>user</code> en paramètre : <code>@(title: String, user: User)(content: Html)</code></li>
 <li>si le <code>user</code> est authentifié nous affichons ses informations et la possibilité de se &quot;déloguer&quot; :</li>
@@ -1217,16 +1203,20 @@ GET     /logout                             controllers.Authentication.logout()<
         <span class="kw">&lt;head&gt;</span>
             <span class="kw">&lt;title&gt;</span>@title<span class="kw">&lt;/title&gt;</span>
             <span class="kw">&lt;meta</span><span class="ot"> http-equiv=</span><span class="st">&quot;Content-Type&quot;</span><span class="ot"> content=</span><span class="st">&quot;text/html; charset=utf-8&quot;</span><span class="kw">&gt;</span>
-            <span class="kw">&lt;link</span><span class="ot"> rel=</span><span class="st">&quot;stylesheet&quot;</span><span class="ot"> media=</span><span class="st">&quot;screen&quot;</span><span class="ot"> href=</span><span class="st">&quot;@routes.Assets.at(&quot;</span><span class="er">bootstrap/css/bootstrap.css&quot;)&quot;</span><span class="kw">&gt;</span>
+            <span class="kw">&lt;link</span><span class="ot"> rel=</span><span class="st">&quot;stylesheet&quot;</span><span class="ot"> media=</span><span class="st">&quot;screen&quot;</span> 
+<span class="ot">                href=</span><span class="st">&quot;@routes.Assets.at(&quot;</span><span class="er">bootstrap/css/bootstrap.css&quot;)&quot;</span><span class="kw">&gt;</span>
             <span class="kw">&lt;style&gt;</span>
                 body <span class="kw">{</span>
                     <span class="kw">padding-top:</span> <span class="dt">60px</span><span class="kw">;</span>
                     <span class="kw">padding-bottom:</span> <span class="dt">40px</span><span class="kw">;</span>
                 <span class="kw">}</span>
             <span class="kw">&lt;/style&gt;</span>
-            <span class="kw">&lt;link</span><span class="ot"> rel=</span><span class="st">&quot;stylesheet&quot;</span><span class="ot"> media=</span><span class="st">&quot;screen&quot;</span><span class="ot"> href=</span><span class="st">&quot;@routes.Assets.at(&quot;</span><span class="er">bootstrap/css/bootstrap-responsive.css&quot;)&quot;</span><span class="kw">&gt;</span>
-            <span class="kw">&lt;link</span><span class="ot"> rel=</span><span class="st">&quot;shortcut icon&quot;</span><span class="ot"> type=</span><span class="st">&quot;image/png&quot;</span><span class="ot"> href=</span><span class="st">&quot;@routes.Assets.at(&quot;</span><span class="er">images/favicon.png&quot;)&quot;</span><span class="kw">&gt;</span>
-            <span class="kw">&lt;script</span><span class="ot"> src=</span><span class="st">&quot;@routes.Assets.at(&quot;</span><span class="er">javascripts/jquery-1.7.1.min.js&quot;)&quot;</span><span class="ot"> type=</span><span class="st">&quot;text/javascript&quot;</span><span class="kw">&gt;&lt;/script&gt;</span>
+            <span class="kw">&lt;link</span><span class="ot"> rel=</span><span class="st">&quot;stylesheet&quot;</span><span class="ot"> media=</span><span class="st">&quot;screen&quot;</span> 
+<span class="ot">                href=</span><span class="st">&quot;@routes.Assets.at(&quot;</span><span class="er">bootstrap/css/bootstrap-responsive.css&quot;)&quot;</span><span class="kw">&gt;</span>
+            <span class="kw">&lt;link</span><span class="ot"> rel=</span><span class="st">&quot;shortcut icon&quot;</span><span class="ot"> type=</span><span class="st">&quot;image/png&quot;</span> 
+<span class="ot">                href=</span><span class="st">&quot;@routes.Assets.at(&quot;</span><span class="er">images/favicon.png&quot;)&quot;</span><span class="kw">&gt;</span>
+            <span class="kw">&lt;script</span><span class="ot"> src=</span><span class="st">&quot;@routes.Assets.at(&quot;</span><span class="er">javascripts/jquery-1.7.1.min.js&quot;)&quot;</span> 
+<span class="ot">                type=</span><span class="st">&quot;text/javascript&quot;</span><span class="kw">&gt;&lt;/script&gt;</span>
         <span class="kw">&lt;/head&gt;</span>
         <span class="kw">&lt;body&gt;</span>
 
@@ -1236,8 +1226,8 @@ GET     /logout                             controllers.Authentication.logout()<
                         <span class="kw">&lt;a</span><span class="ot"> class=</span><span class="st">&quot;brand&quot;</span><span class="kw">&gt;</span>@title<span class="kw">&lt;/a&gt;</span>
                         @if(user != null) {
                             <span class="kw">&lt;ul</span><span class="ot"> class=</span><span class="st">&quot;nav&quot;</span><span class="kw">&gt;</span>
-                                <span class="kw">&lt;li&gt;&lt;a&gt;</span>@user.name <span class="kw">&lt;span&gt;</span>(@user.email)<span class="kw">&lt;/span&gt;&lt;/a&gt;&lt;/li&gt;</span>
-                                <span class="kw">&lt;li&gt;&lt;a</span><span class="ot"> href=</span><span class="st">&quot;@routes.Authentication.logout()&quot;</span><span class="kw">&gt;</span>Logout<span class="kw">&lt;/a&gt;&lt;/li&gt;</span>
+                              <span class="kw">&lt;li&gt;&lt;a&gt;</span>@user.name <span class="kw">&lt;span&gt;</span>(@user.email)<span class="kw">&lt;/span&gt;&lt;/a&gt;&lt;/li&gt;</span>
+                              <span class="kw">&lt;li&gt;&lt;a</span><span class="ot"> href=</span><span class="st">&quot;@routes.Authentication.logout()&quot;</span><span class="kw">&gt;</span>Logout<span class="kw">&lt;/a&gt;&lt;/li&gt;</span>
                             <span class="kw">&lt;/ul&gt;</span>
                         }
                     <span class="kw">&lt;/div&gt;</span>
@@ -1250,7 +1240,7 @@ GET     /logout                             controllers.Authentication.logout()<
 
         <span class="kw">&lt;/body&gt;</span>
     <span class="kw">&lt;/html&gt;</span></code></pre>
-<h3 id="il-faut-aussi-modifier-index.scala.html"><a href="#TOC">Il faut aussi modifier index.scala.html</a></h3>
+<h3 id="il-faut-aussi-modifier-index.scala.html"><a href="#TOC"><span class="header-section-number">11.6.2</span> Il faut aussi modifier index.scala.html</a></h3>
 <p>En effet, <code>index</code> utilisant <code>main</code>, nous devons ajouter la notion de <code>user</code>, il y a juste le début à modifier :</p>
 <p>Vous vous souvenez, dans <code>Application</code> nous avons modifié l'appel de <code>index.render()</code> :</p>
 <pre><code>@(
@@ -1261,7 +1251,7 @@ user: User
 )</code></pre>
 <p>et la modification précédente de <code>main.scala.html</code> implique le passage du paramètre <code>user</code> à <code>@main()</code> :</p>
 <pre><code>@main(&quot;Gestion des bookmarks&quot;, user) { ...</code></pre>
-<h2 id="allons-créer-un-formulaire-de-login-vue"><a href="#TOC">Allons créer un formulaire de login / Vue</a></h2>
+<h2 id="allons-créer-un-formulaire-de-login-vue"><a href="#TOC"><span class="header-section-number">11.7</span> Allons créer un formulaire de login / Vue</a></h2>
 <p>Nous y sommes presque. Il faut créer le formulaire de login : créez dans le répertoire <code>views</code> un fichier <code>login.scala.html</code> avec le code suivant :</p>
 <pre class="sourceCode html"><code class="sourceCode html">
     @(form: Form[Authentication.AuthenticatedUser])
@@ -1280,13 +1270,14 @@ user: User
                 <span class="kw">&lt;p</span><span class="ot"> class=</span><span class="st">&quot;success&quot;</span><span class="kw">&gt;</span>@flash.get(&quot;success&quot;)<span class="kw">&lt;/p&gt;</span>
             }
 
-            <span class="kw">&lt;p&gt;&lt;input</span><span class="ot"> type=</span><span class="st">&quot;email&quot;</span><span class="ot"> name=</span><span class="st">&quot;email&quot;</span><span class="ot"> placeholder=</span><span class="st">&quot;Email&quot;</span><span class="ot"> value=</span><span class="st">&quot;@form(&quot;</span><span class="er">email&quot;).value&quot;</span><span class="kw">&gt;&lt;/p&gt;</span>
+            <span class="kw">&lt;p&gt;&lt;input</span><span class="ot"> type=</span><span class="st">&quot;email&quot;</span><span class="ot"> name=</span><span class="st">&quot;email&quot;</span><span class="ot"> placeholder=</span><span class="st">&quot;Email&quot;</span> 
+<span class="ot">                value=</span><span class="st">&quot;@form(&quot;</span><span class="er">email&quot;).value&quot;</span><span class="kw">&gt;&lt;/p&gt;</span>
             <span class="kw">&lt;p&gt;&lt;input</span><span class="ot"> type=</span><span class="st">&quot;password&quot;</span><span class="ot"> name=</span><span class="st">&quot;password&quot;</span><span class="ot"> placeholder=</span><span class="st">&quot;Password&quot;</span><span class="kw">&gt;&lt;/p&gt;</span>
             <span class="kw">&lt;p&gt;&lt;button</span><span class="ot"> class=</span><span class="st">&quot;btn&quot;</span><span class="ot"> type=</span><span class="st">&quot;submit&quot;</span><span class="kw">&gt;</span>Login<span class="kw">&lt;/button&gt;&lt;/p&gt;</span>
         }
     }</code></pre>
-<h2 id="allons-ajouter-des-users-dans-initial-data.yml"><a href="#TOC">Allons ajouter des users dans initial-data.yml</a></h2>
-<h3 id="ajoutons-des-utilisateurs"><a href="#TOC">Ajoutons des utilisateurs :</a></h3>
+<h2 id="allons-ajouter-des-users-dans-initial-data.yml"><a href="#TOC"><span class="header-section-number">11.8</span> Allons ajouter des users dans initial-data.yml</a></h2>
+<h3 id="ajoutons-des-utilisateurs"><a href="#TOC"><span class="header-section-number">11.8.1</span> Ajoutons des utilisateurs :</a></h3>
 <p>Cela permettra de se connecter, donc dans le fichier <code>initial-data.yml</code>, ajouter ceci (ou quelque chose d'approchant) :</p>
 <pre><code># Users
 
@@ -1302,7 +1293,7 @@ users:
         name:       bob
         password:   indochine</code></pre>
 <p>Ainsi, nous aurons 2 utilisateurs au chargement de l'application. Et pour les charger, nous allons modifier le fichier <code>Global.java</code></p>
-<h3 id="modifions-global.java"><a href="#TOC">Modifions Global.java</a></h3>
+<h3 id="modifions-global.java"><a href="#TOC"><span class="header-section-number">11.8.2</span> Modifions Global.java</a></h3>
 <pre class="sourceCode java"><code class="sourceCode java">
     <span class="kw">import play.*;</span>
     <span class="kw">import play.libs.*;</span>
@@ -1320,7 +1311,8 @@ users:
 
             <span class="kw">public</span> <span class="dt">static</span> <span class="dt">void</span> <span class="fu">insert</span>(Application app) {
 
-                Map&lt;String,List&lt;Object&gt;&gt; all = (Map&lt;String,List&lt;Object&gt;&gt;)Yaml.<span class="fu">load</span>(<span class="st">&quot;initial-data.yml&quot;</span>);
+                Map&lt;String,List&lt;Object&gt;&gt; all = 
+                    (Map&lt;String,List&lt;Object&gt;&gt;)Yaml.<span class="fu">load</span>(<span class="st">&quot;initial-data.yml&quot;</span>);
 
                 <span class="kw">if</span>(Ebean.<span class="fu">find</span>(User.<span class="fu">class</span>).<span class="fu">findRowCount</span>() == <span class="dv">0</span>) {                
                     Ebean.<span class="fu">save</span>(all.<span class="fu">get</span>(<span class="st">&quot;users&quot;</span>));   
@@ -1334,29 +1326,34 @@ users:
         }
     }</code></pre>
 <p>C'est bon vous pouvez lancer l'application à nouveau.</p>
-<p><img src="rsrc/08-authentication-001.png" /> <img src="rsrc/08-authentication-002.png" /> <img src="rsrc/08-authentication-003.png" /> <img src="rsrc/08-authentication-004.png" /></p>
-<h1 id="services-json"><a href="#TOC">Services (JSON)</a></h1>
-<pre><code>/* --- Qu&#39;allons nous voir ? ---
-
-    - comment faire un service json
-    - comment sécuriser ce service
-    - comment s&#39;authentifier via ajax
-    - comment faire une &quot;single page application&quot;
-*/</code></pre>
-<h2 id="primo"><a href="#TOC">Primo :</a></h2>
-<p>Ajoutons quelques bookmarks dans notre applications <img src="rsrc/09-services-001.png" /></p>
-<h2 id="création-de-notre-service-json"><a href="#TOC">Création de notre service JSON</a></h2>
+<p><img src="rsrc/08-authentication-001.png" /><br /><img src="rsrc/08-authentication-002.png" /><br /><img src="rsrc/08-authentication-003.png" /><br /><img src="rsrc/08-authentication-004.png" /><br /></p>
+<h1 id="services-json"><a href="#TOC"><span class="header-section-number">12</span> Services (JSON)</a></h1>
+<blockquote>
+<p><em>Qu'allons nous voir ?</em></p>
+</blockquote>
+<blockquote>
+<ul>
+<li><em>comment faire un service json</em></li>
+<li><em>comment sécuriser ce service</em></li>
+<li><em>comment s'authentifier via ajax</em></li>
+<li><em>comment faire une &quot;single page application&quot;</em></li>
+</ul>
+</blockquote>
+<h2 id="primo"><a href="#TOC"><span class="header-section-number">12.1</span> Primo :</a></h2>
+<p>Ajoutons quelques bookmarks dans notre applications :</p>
+<p><img src="rsrc/09-services-001.png" /><br /></p>
+<h2 id="création-de-notre-service-json"><a href="#TOC"><span class="header-section-number">12.2</span> Création de notre service JSON</a></h2>
 <p><strong>Objectif :</strong> faire un service qui nous renvoie la liste des bookmarks au format JSON</p>
-<h3 id="allons-modifier-le-contrôleur-bookmarks"><a href="#TOC">Allons modifier le contrôleur Bookmarks</a></h3>
+<h3 id="allons-modifier-le-contrôleur-bookmarks"><a href="#TOC"><span class="header-section-number">12.2.1</span> Allons modifier le contrôleur Bookmarks</a></h3>
 <p><em>bookmarks.java dans app/controllers</em></p>
-<h4 id="imports"><a href="#TOC">import(s)</a></h4>
+<h4 id="imports"><a href="#TOC"><span class="header-section-number">12.2.1.1</span> import(s)</a></h4>
 <pre class="sourceCode java"><code class="sourceCode java">
     <span class="kw">import java.util.HashMap;</span>
     <span class="kw">import java.util.List;</span>
     <span class="kw">import java.util.Map;</span>
 
     <span class="kw">import static play.libs.Json.toJson;</span></code></pre>
-<h4 id="ajout-de-la-méthode-jsonlist"><a href="#TOC">Ajout de la méthode jsonList()</a></h4>
+<h4 id="ajout-de-la-méthode-jsonlist"><a href="#TOC"><span class="header-section-number">12.2.1.2</span> Ajout de la méthode jsonList()</a></h4>
 <pre class="sourceCode java"><code class="sourceCode java">
     <span class="kw">public</span> <span class="dt">static</span> Result <span class="fu">jsonList</span>() {
         Map&lt;String, List&lt;Bookmark&gt;&gt; data = <span class="kw">new</span> HashMap&lt;String, List&lt;Bookmark&gt;&gt;();
@@ -1364,11 +1361,11 @@ users:
         data.<span class="fu">put</span>(<span class="st">&quot;bookmarks&quot;</span>, list);
         <span class="kw">return</span> <span class="fu">ok</span>(<span class="fu">toJson</span>(data));
     }</code></pre>
-<h4 id="modifions-le-fichier-routes"><a href="#TOC">Modifions le fichier routes</a></h4>
+<h4 id="modifions-le-fichier-routes"><a href="#TOC"><span class="header-section-number">12.2.1.3</span> Modifions le fichier routes</a></h4>
 <p>Nous ajoutons la route suivante :</p>
 <pre><code>#Services
 GET /bookmarks/jsonlist controllers.Bookmarks.jsonList()</code></pre>
-<h4 id="donc-le-code-final-est-le-suivant"><a href="#TOC">Donc le code final est le suivant :</a></h4>
+<h4 id="donc-le-code-final-est-le-suivant"><a href="#TOC"><span class="header-section-number">12.2.1.4</span> Donc le code final est le suivant :</a></h4>
 <pre class="sourceCode java"><code class="sourceCode java">
     <span class="kw">package controllers;</span>
 
@@ -1406,15 +1403,14 @@ GET /bookmarks/jsonlist controllers.Bookmarks.jsonList()</code></pre>
 
     }</code></pre>
 <p>Donc, lorsque nous appellerons l'url <code>localhost:9000/bookmarks/jsonlist</code>, nous obtiendrons la liste des bookmarks au format JSON.</p>
-<h2 id="utilisation-du-service-json"><a href="#TOC">Utilisation du service JSON</a></h2>
-<h3 id="directement-avec-lurl"><a href="#TOC">Directement avec l'url</a></h3>
+<h2 id="utilisation-du-service-json"><a href="#TOC"><span class="header-section-number">12.3</span> Utilisation du service JSON</a></h2>
+<h3 id="directement-avec-lurl"><a href="#TOC"><span class="header-section-number">12.3.1</span> Directement avec l'url</a></h3>
 <p>Dans la zone de saisie de l'url de votre navigateur, saisissez donc <code>localhost:9000/bookmarks/jsonlist</code>. Et vous obtenez le flux JSON de vos bookmarks :</p>
-<div class="figure">
-<img src="rsrc/09-services-002.png" /><p class="caption"></p>
-</div>
-<h3 id="plus-utile-via-une-requête-ajax"><a href="#TOC">Plus utile : via une requête ajax</a></h3>
-<p>Comme vous le savez (ou pas), Play2!► est fourni avec <strong>jQuery</strong>, &quot;petit&quot; framework javascript très utile pour &quot;jouer&quot; avec le DOM de vos pages, mais aussi pour faire des requêtes ajax. Si vous vous souvenez, dans la vue (portion de vue) <code>main.scala.html</code> il y avait le code suivant :</p>
-<pre><code>&lt;script src=&quot;@routes.Assets.at(&quot;javascripts/jquery-1.7.1.min.js&quot;)&quot; type=&quot;text/javascript&quot;&gt;&lt;/script&gt;</code></pre>
+<p><img src="rsrc/09-services-002.png" /><br /></p>
+<h3 id="plus-utile-via-une-requête-ajax"><a href="#TOC"><span class="header-section-number">12.3.2</span> Plus utile : via une requête ajax</a></h3>
+<p>Comme vous le savez (ou pas), Play2!&gt; est fourni avec <strong>jQuery</strong>, &quot;petit&quot; framework javascript très utile pour &quot;jouer&quot; avec le DOM de vos pages, mais aussi pour faire des requêtes ajax. Si vous vous souvenez, dans la vue (portion de vue) <code>main.scala.html</code> il y avait le code suivant :</p>
+<pre><code>&lt;script src=&quot;@routes.Assets.at(&quot;javascripts/jquery-1.7.1.min.js&quot;)&quot; 
+    type=&quot;text/javascript&quot;&gt;&lt;/script&gt;</code></pre>
 <p>Ce qui signifie que toute vue &quot;utilisant&quot; <code>main.scala.html</code>, comme par exemple <code>index.scala.html</code> (vous trouverez la déclaration <code>@main(...)</code> dans le code), charge <strong>jQuery</strong>. Donc,</p>
 <ul>
 <li>retournez dans votre navigateur, mais cette fois-ci à la racine de votre site (probablement <code>http://localhost:9000</code>)</li>
@@ -1428,33 +1424,21 @@ GET /bookmarks/jsonlist controllers.Bookmarks.jsonList()</code></pre>
             <span class="kw">console</span>.<span class="fu">log</span>(dataFromServer); 
         }
     });</code></pre>
-<div class="figure">
-<img src="rsrc/09-services-003.png" /><p class="caption"></p>
-</div>
-<p>Vous obtenez directement un objet <code>bookmarks</code> qui est un tableau d'objets avec les éléments attendus :</p>
-<div class="figure">
-<img src="rsrc/09-services-004.png" /><p class="caption"></p>
-</div>
-<p>Et vous remarquerez ...</p>
-<div class="figure">
-<img src="rsrc/09-services-005.png" /><p class="caption"></p>
-</div>
-<p>... que les objets <code>bookmark</code> du tableau <code>bookmarks</code> contiennent les objets &quot;liés&quot; <code>category</code>.</p>
+<p><img src="rsrc/09-services-003.png" /><br /> Vous obtenez directement un objet <code>bookmarks</code> qui est un tableau d'objets avec les éléments attendus :</p>
+<p><img src="rsrc/09-services-004.png" /><br /> Et vous remarquerez ...</p>
+<p><img src="rsrc/09-services-005.png" /><br /> ... que les objets <code>bookmark</code> du tableau <code>bookmarks</code> contiennent les objets &quot;liés&quot; <code>category</code>.</p>
 <p><strong>Génialement simplissime et pratique, non !?</strong></p>
 <p><strong>Attention : dans mon exemple le service n'est pas sécurisé</strong></p>
-<h2 id="sécurisation"><a href="#TOC">Sécurisation</a></h2>
+<h2 id="sécurisation"><a href="#TOC"><span class="header-section-number">12.4</span> Sécurisation</a></h2>
 <p>Sécurisons notre contrôleur <code>Bookmarks.java</code> en lui ajoutant l'annotation <code>@Security.Authenticated(Secured.class)</code>. Ensuite (après recompilation), retournez à la racine du site <code>localhost:9000</code> pour vous &quot;deloguer&quot;. Puis relancez votre requête ajax, et là vous obtenez (curieusement ?) le code HTML de la page d'authentification en retour. Ce qui est rassurant, c'est que notre service est bien sécurisé, mais le code de retour n'est pas forcément &quot;top&quot; à gérer.</p>
-<div class="figure">
-<img src="rsrc/09-services-006.png" /><p class="caption"></p>
-</div>
-<p>En fait, dans notre classe <code>Secured.java</code> nous avions la méthode suivante :</p>
+<p><img src="rsrc/09-services-006.png" /><br /> En fait, dans notre classe <code>Secured.java</code> nous avions la méthode suivante :</p>
 <pre><code>@Override
 public Result onUnauthorized(Context ctx) {
     return redirect(routes.Authentication.login());
 }</code></pre>
 <p>Donc, si vous n'êtes pas authentifié, vous êtes redirigé vers la page d'authentification, d'où la récupération du code HTML dans notre requête ajax.</p>
 <p>Nous allons donc créer une classe du même type que <code>Secured.java</code> mais dédiée aux appels JSON.</p>
-<h3 id="securedjson.java"><a href="#TOC">SecuredJson.java</a></h3>
+<h3 id="securedjson.java"><a href="#TOC"><span class="header-section-number">12.4.1</span> SecuredJson.java</a></h3>
 <pre class="sourceCode java"><code class="sourceCode java">
     <span class="kw">package controllers;</span>
 
@@ -1479,16 +1463,15 @@ public Result onUnauthorized(Context ctx) {
         }
 
     }</code></pre>
-<h3 id="modification-de-lannotation-dans-bookmarks.java"><a href="#TOC">Modification de l'annotation dans Bookmarks.java</a></h3>
-<p>Remplacez <code>@Security.Authenticated(Secured.class)</code> par <code>@Security.Authenticated(SecuredJson.class)</code></p>
-<h3 id="testons"><a href="#TOC">Testons</a></h3>
+<h3 id="modification-de-lannotation-dans-bookmarks.java"><a href="#TOC"><span class="header-section-number">12.4.2</span> Modification de l'annotation dans Bookmarks.java</a></h3>
+<p>Remplacez <code>@Security.Authenticated(Secured.class)</code> par :</p>
+<pre><code>`@Security.Authenticated(SecuredJson.class)`</code></pre>
+<h3 id="testons"><a href="#TOC"><span class="header-section-number">12.4.3</span> Testons</a></h3>
 <p>Lancez à nouveau, dans la console du navigateur, votre requête ajax :</p>
-<div class="figure">
-<img src="rsrc/09-services-007.png" /><p class="caption"></p>
-</div>
-<h3 id="mais-comment-puis-mauthentifier-via-une-requête-ajax"><a href="#TOC">Mais comment puis m'authentifier via une requête ajax ???</a></h3>
+<p><img src="rsrc/09-services-007.png" /><br /></p>
+<h3 id="mais-comment-puis-mauthentifier-via-une-requête-ajax"><a href="#TOC"><span class="header-section-number">12.4.4</span> Mais comment puis m'authentifier via une requête ajax ???</a></h3>
 <p>Là aussi, nous allons devoir créer une classe du même type qu'<code>Authentication.java</code> mais qui ne redirige pas vers la page principale pour ne pas avoir du code HTML comme retour.</p>
-<h4 id="authenticationjson.java"><a href="#TOC">AuthenticationJson.java</a></h4>
+<h4 id="authenticationjson.java"><a href="#TOC"><span class="header-section-number">12.4.4.1</span> AuthenticationJson.java</a></h4>
 <p><strong>Remarque :</strong> <em>Je pourrais hériter de Authentication.java, mais pour le moment je vais dupliquer le code et le modifier.</em></p>
 <pre class="sourceCode java"><code class="sourceCode java">
     <span class="kw">package controllers;</span>
@@ -1520,7 +1503,8 @@ public Result onUnauthorized(Context ctx) {
 
         <span class="co">//On récupère les informations de login (quand le user se &quot;signe&quot;)</span>
         <span class="kw">public</span> <span class="dt">static</span> Result <span class="fu">authenticate</span>() {
-            Form&lt;AuthenticatedUser&gt; loginForm = <span class="fu">form</span>(AuthenticatedUser.<span class="fu">class</span>).<span class="fu">bindFromRequest</span>();
+            Form&lt;AuthenticatedUser&gt; loginForm = 
+                <span class="fu">form</span>(AuthenticatedUser.<span class="fu">class</span>).<span class="fu">bindFromRequest</span>();
 
             <span class="kw">if</span>(loginForm.<span class="fu">hasErrors</span>()) {
                 <span class="kw">return</span> <span class="fu">ok</span>(<span class="fu">toJson</span>(<span class="st">&quot;badRequest&quot;</span>));
@@ -1539,10 +1523,10 @@ public Result onUnauthorized(Context ctx) {
         }
 
     }</code></pre>
-<h4 id="ajoutons-les-routes"><a href="#TOC">Ajoutons les routes</a></h4>
+<h4 id="ajoutons-les-routes"><a href="#TOC"><span class="header-section-number">12.4.4.2</span> Ajoutons les routes</a></h4>
 <pre><code>POST    /loginjson                          controllers.AuthenticationJson.authenticate()
 GET     /logoutjson                         controllers.AuthenticationJson.logout()</code></pre>
-<h4 id="testons-1"><a href="#TOC">Testons</a></h4>
+<h4 id="testons-1"><a href="#TOC"><span class="header-section-number">12.4.4.3</span> Testons</a></h4>
 <p>Dans la console du navigateur, essayez la commande suivante (vous ne devez pas être authentifié) :</p>
 <pre class="sourceCode javascript"><code class="sourceCode javascript">
     $.<span class="fu">ajax</span>({
@@ -1552,10 +1536,7 @@ GET     /logoutjson                         controllers.AuthenticationJson.logou
         <span class="dt">success </span>: <span class="kw">function</span>(data){ <span class="kw">console</span>.<span class="fu">log</span>(data);}
     });</code></pre>
 <p>Vous allez obtenir ceci :</p>
-<div class="figure">
-<img src="rsrc/09-services-008.png" /><p class="caption"></p>
-</div>
-<p>Et si vous rappelez l'url <code>http://localhost:9000</code>, vous apparaissez comme authentifié. Vous pouvez tester à nouveau votre requête pour récupérer la liste des bookmarks :</p>
+<p><img src="rsrc/09-services-008.png" /><br /> Et si vous rappelez l'url <code>http://localhost:9000</code>, vous apparaissez comme authentifié. Vous pouvez tester à nouveau votre requête pour récupérer la liste des bookmarks :</p>
 <pre class="sourceCode javascript"><code class="sourceCode javascript">
     $.<span class="fu">ajax</span>({<span class="dt">type</span>:<span class="st">&quot;GET&quot;</span>, <span class="dt">url</span>:<span class="st">&quot;/bookmarks/jsonlist&quot;</span>,
         <span class="dt">error </span>: <span class="kw">function</span>(err){ <span class="kw">console</span>.<span class="fu">log</span>(err); },
@@ -1571,18 +1552,9 @@ GET     /logoutjson                         controllers.AuthenticationJson.logou
         <span class="dt">error </span>: <span class="kw">function</span>(err){<span class="kw">console</span>.<span class="fu">log</span>(<span class="st">&quot;Erreur&quot;</span>, err);}, 
         <span class="dt">success </span>: <span class="kw">function</span>(data){ <span class="kw">console</span>.<span class="fu">log</span>(data);}
     });</code></pre>
-<div class="figure">
-<img src="rsrc/09-services-009.png" /><p class="caption"></p>
-</div>
-<p>Et si vous rappelez l'url <code>http://localhost:9000</code>, vous n'êtes plus authentifié.</p>
-<div class="figure">
-<img src="rsrc/09-services-010.png" /><p class="caption"></p>
-</div>
-<p>Si vous testez à nouveau votre requête pour récupérer la liste des bookmarks, vous aurez un message vous indiquant que ce n'est pas possible (<code>failed</code>) car non autorisé (cf. <code>SecuredJson.java</code>):</p>
-<div class="figure">
-<img src="rsrc/09-services-011.png" /><p class="caption"></p>
-</div>
-<p>De la même manière, si vous tentez de vous authentifier avec un mauvais compte utilisateur :</p>
+<p><img src="rsrc/09-services-009.png" /><br /> Et si vous rappelez l'url <code>http://localhost:9000</code>, vous n'êtes plus authentifié.</p>
+<p><img src="rsrc/09-services-010.png" /><br /> Si vous testez à nouveau votre requête pour récupérer la liste des bookmarks, vous aurez un message vous indiquant que ce n'est pas possible (<code>failed</code>) car non autorisé (cf. <code>SecuredJson.java</code>):</p>
+<p><img src="rsrc/09-services-011.png" /><br /> De la même manière, si vous tentez de vous authentifier avec un mauvais compte utilisateur :</p>
 <pre class="sourceCode javascript"><code class="sourceCode javascript">
     $.<span class="fu">ajax</span>({
         <span class="dt">type</span>:<span class="st">&quot;POST&quot;</span>, 
@@ -1591,10 +1563,8 @@ GET     /logoutjson                         controllers.AuthenticationJson.logou
         <span class="dt">success </span>: <span class="kw">function</span>(data){ <span class="kw">console</span>.<span class="fu">log</span>(data);}
     });</code></pre>
 <p>Vous obtiendrez un message badRequest (cf. <code>AuthenticationJson.java</code>) :</p>
-<div class="figure">
-<img src="rsrc/09-services-012.png" /><p class="caption"></p>
-</div>
-<h2 id="utilisons-tout-ça-..."><a href="#TOC">Utilisons tout ça ...</a></h2>
+<p><img src="rsrc/09-services-012.png" /><br /></p>
+<h2 id="utilisons-tout-ça-..."><a href="#TOC"><span class="header-section-number">12.5</span> Utilisons tout ça ...</a></h2>
 <p>Mettons en applications ce que nous venons de voir pour faire quelque chose d'un peu plus &quot;pratique&quot; : développons une &quot;Single page application&quot; :</p>
 <ul>
 <li>nous allons pouvoir nous authentifier</li>
@@ -1602,7 +1572,7 @@ GET     /logoutjson                         controllers.AuthenticationJson.logou
 <li>il n'y aura auncun rechargement de page (à part la 1ère fois)</li>
 </ul>
 <p>Commençons par créer un nouveau contrôleur :</p>
-<h3 id="nouveau-contrôleur-singleapp.java"><a href="#TOC">Nouveau Contrôleur : SingleApp.java</a></h3>
+<h3 id="nouveau-contrôleur-singleapp.java"><a href="#TOC"><span class="header-section-number">12.5.1</span> Nouveau Contrôleur : SingleApp.java</a></h3>
 <p>Alors, c'est très simple, dans le répertoire <code>controllers</code>, créez un nouveau contrôleur avec le nom <code>SingleApp.java</code> :</p>
 <pre class="sourceCode java"><code class="sourceCode java">
     <span class="kw">package controllers;</span>
@@ -1624,12 +1594,12 @@ GET     /logoutjson                         controllers.AuthenticationJson.logou
         }
 
     }</code></pre>
-<h3 id="routes"><a href="#TOC">routes</a></h3>
+<h3 id="routes"><a href="#TOC"><span class="header-section-number">12.5.2</span> routes</a></h3>
 <p>Ajoutons une route dans le fichier <code>routes</code> :</p>
 <pre><code># Main Single Page Application
 GET     /main                       controllers.SingleApp.mainPage()</code></pre>
-<p>Finalement le <strong>gros</strong> du travail va se faire en html et javascript. Nous disposons de jQuery (c'est fourni en standard avec Play!►), et si vous vous souvenez, nous avons installé Twitter Bootstrap. Nous allons donc voir comment faire une &quot;single page application&quot;, donc plus notions de templating : <strong>je vais utiliser une vue &quot;scala&quot; mais qui ne contiendra que le minimum de code scala</strong> (dans l'absolu nous pourrions utiliser une simple page html).</p>
-<h3 id="nouvelle-vue-mainpage.scala.html"><a href="#TOC">Nouvelle vue : mainPage.scala.html</a></h3>
+<p>Finalement le <strong>gros</strong> du travail va se faire en html et javascript. Nous disposons de jQuery (c'est fourni en standard avec Play!&gt;), et si vous vous souvenez, nous avons installé Twitter Bootstrap. Nous allons donc voir comment faire une &quot;single page application&quot;, donc plus notions de templating : <strong>je vais utiliser une vue &quot;scala&quot; mais qui ne contiendra que le minimum de code scala</strong> (dans l'absolu nous pourrions utiliser une simple page html).</p>
+<h3 id="nouvelle-vue-mainpage.scala.html"><a href="#TOC"><span class="header-section-number">12.5.3</span> Nouvelle vue : mainPage.scala.html</a></h3>
 <p>Commencez par créer une nouvelle vue (dans le répertoire <code>views</code>) que vous nommerez <code>mainPage.scala.html</code>. Je suis reparti (copier/coller ... je sais) de <code>main.scala.html</code>. Je ne fais que reprendre les requêtes &quot;ajax&quot; que nous avons utilisées précédement pour tester nos services json.</p>
 <p><strong>Attention :</strong> mon code javascript n'est pas forcément compatible avec tous les navigateurs, je suis allé au plus simple et j'ai utilisé les possibilités de la dernière version de javascript (par exemple : le <code>forEach</code> sur un <code>array</code>).</p>
 <pre class="sourceCode html"><code class="sourceCode html">
@@ -1640,16 +1610,20 @@ GET     /main                       controllers.SingleApp.mainPage()</code></pre
         <span class="kw">&lt;head&gt;</span>
             <span class="kw">&lt;title&gt;</span>@title<span class="kw">&lt;/title&gt;</span>
             <span class="kw">&lt;meta</span><span class="ot"> http-equiv=</span><span class="st">&quot;Content-Type&quot;</span><span class="ot"> content=</span><span class="st">&quot;text/html; charset=utf-8&quot;</span><span class="kw">&gt;</span>
-            <span class="kw">&lt;link</span><span class="ot"> rel=</span><span class="st">&quot;stylesheet&quot;</span><span class="ot"> media=</span><span class="st">&quot;screen&quot;</span><span class="ot"> href=</span><span class="st">&quot;@routes.Assets.at(&quot;</span><span class="er">bootstrap/css/bootstrap.css&quot;)&quot;</span><span class="kw">&gt;</span>
+            <span class="kw">&lt;link</span><span class="ot"> rel=</span><span class="st">&quot;stylesheet&quot;</span><span class="ot"> media=</span><span class="st">&quot;screen&quot;</span> 
+<span class="ot">                href=</span><span class="st">&quot;@routes.Assets.at(&quot;</span><span class="er">bootstrap/css/bootstrap.css&quot;)&quot;</span><span class="kw">&gt;</span>
             <span class="kw">&lt;style&gt;</span>
                 body <span class="kw">{</span>
                     <span class="kw">padding-top:</span> <span class="dt">60px</span><span class="kw">;</span>
                     <span class="kw">padding-bottom:</span> <span class="dt">40px</span><span class="kw">;</span>
                 <span class="kw">}</span>
             <span class="kw">&lt;/style&gt;</span>
-            <span class="kw">&lt;link</span><span class="ot"> rel=</span><span class="st">&quot;stylesheet&quot;</span><span class="ot"> media=</span><span class="st">&quot;screen&quot;</span><span class="ot"> href=</span><span class="st">&quot;@routes.Assets.at(&quot;</span><span class="er">bootstrap/css/bootstrap-responsive.css&quot;)&quot;</span><span class="kw">&gt;</span>
-            <span class="kw">&lt;link</span><span class="ot"> rel=</span><span class="st">&quot;shortcut icon&quot;</span><span class="ot"> type=</span><span class="st">&quot;image/png&quot;</span><span class="ot"> href=</span><span class="st">&quot;@routes.Assets.at(&quot;</span><span class="er">images/favicon.png&quot;)&quot;</span><span class="kw">&gt;</span>
-            <span class="kw">&lt;script</span><span class="ot"> src=</span><span class="st">&quot;@routes.Assets.at(&quot;</span><span class="er">javascripts/jquery-1.7.1.min.js&quot;)&quot;</span><span class="ot"> type=</span><span class="st">&quot;text/javascript&quot;</span><span class="kw">&gt;&lt;/script&gt;</span>
+            <span class="kw">&lt;link</span><span class="ot"> rel=</span><span class="st">&quot;stylesheet&quot;</span><span class="ot"> media=</span><span class="st">&quot;screen&quot;</span> 
+<span class="ot">                href=</span><span class="st">&quot;@routes.Assets.at(&quot;</span><span class="er">bootstrap/css/bootstrap-responsive.css&quot;)&quot;</span><span class="kw">&gt;</span>
+            <span class="kw">&lt;link</span><span class="ot"> rel=</span><span class="st">&quot;shortcut icon&quot;</span><span class="ot"> type=</span><span class="st">&quot;image/png&quot;</span> 
+<span class="ot">                href=</span><span class="st">&quot;@routes.Assets.at(&quot;</span><span class="er">images/favicon.png&quot;)&quot;</span><span class="kw">&gt;</span>
+            <span class="kw">&lt;script</span><span class="ot"> src=</span><span class="st">&quot;@routes.Assets.at(&quot;</span><span class="er">javascripts/jquery-1.7.1.min.js&quot;)&quot;</span> 
+<span class="ot">                type=</span><span class="st">&quot;text/javascript&quot;</span><span class="kw">&gt;&lt;/script&gt;</span>
         <span class="kw">&lt;/head&gt;</span>
         <span class="kw">&lt;body&gt;</span>
 
@@ -1670,7 +1644,8 @@ GET     /main                       controllers.SingleApp.mainPage()</code></pre
                         <span class="kw">&lt;label&gt;</span>Email : 
                         <span class="kw">&lt;input</span><span class="ot"> type=</span><span class="st">&quot;email&quot;</span><span class="ot"> name=</span><span class="st">&quot;email&quot;</span><span class="ot"> placeholder=</span><span class="st">&quot;Email&quot;</span><span class="kw">&gt;&lt;/label&gt;</span>
                         <span class="kw">&lt;label&gt;</span>Password : 
-                        <span class="kw">&lt;input</span><span class="ot"> type=</span><span class="st">&quot;password&quot;</span><span class="ot"> name=</span><span class="st">&quot;password&quot;</span><span class="ot"> placeholder=</span><span class="st">&quot;Password&quot;</span><span class="kw">&gt;&lt;/label&gt;</span>
+                        <span class="kw">&lt;input</span><span class="ot"> type=</span><span class="st">&quot;password&quot;</span><span class="ot"> name=</span><span class="st">&quot;password&quot;</span> 
+<span class="ot">                            placeholder=</span><span class="st">&quot;Password&quot;</span><span class="kw">&gt;&lt;/label&gt;</span>
                         <span class="kw">&lt;button</span><span class="ot"> name=</span><span class="st">&quot;login&quot;</span><span class="ot"> class=</span><span class="st">&quot;btn btn-primary&quot;</span><span class="kw">&gt;</span>Login<span class="kw">&lt;/button&gt;</span>
                         <span class="kw">&lt;button</span><span class="ot"> name=</span><span class="st">&quot;logout&quot;</span><span class="ot"> class=</span><span class="st">&quot;btn&quot;</span><span class="kw">&gt;</span>Logout<span class="kw">&lt;/button&gt;</span>
                     <span class="kw">&lt;/div&gt;</span>
@@ -1683,7 +1658,8 @@ GET     /main                       controllers.SingleApp.mainPage()</code></pre
 
                 <span class="co">&lt;!-- === Les bookmarks s&#39;afficheront ici === --&gt;</span>
                 <span class="kw">&lt;fieldset&gt;</span>
-                    <span class="kw">&lt;legend&gt;</span>Liste des Bookmarks <span class="kw">&lt;button</span><span class="ot"> name=</span><span class="st">&quot;loadbookmarks&quot;</span><span class="ot"> class=</span><span class="st">&quot;btn btn-inverse&quot;</span><span class="kw">&gt;</span>Charger ...<span class="kw">&lt;/button&gt;&lt;/legend&gt;</span>
+                    <span class="kw">&lt;legend&gt;</span>Liste des Bookmarks <span class="kw">&lt;button</span><span class="ot"> name=</span><span class="st">&quot;loadbookmarks&quot;</span> 
+<span class="ot">                        class=</span><span class="st">&quot;btn btn-inverse&quot;</span><span class="kw">&gt;</span>Charger ...<span class="kw">&lt;/button&gt;&lt;/legend&gt;</span>
                     <span class="kw">&lt;ul</span><span class="ot"> name=</span><span class="st">&quot;bookmarks&quot;</span><span class="kw">&gt;&lt;/ul&gt;</span>
                 <span class="kw">&lt;/fieldset&gt;</span>
 
@@ -1714,7 +1690,10 @@ GET     /main                       controllers.SingleApp.mainPage()</code></pre
                     <span class="kw">user</span>.<span class="fu">password</span> = <span class="kw">password</span>.<span class="fu">val</span>();
                     $.<span class="fu">ajax</span>({
                         <span class="dt">type</span>:<span class="st">&quot;POST&quot;</span>, 
-                        <span class="dt">url</span>:<span class="st">&quot;</span>/<span class="st">loginjson&quot;</span>, <span class="dt">data</span>:{<span class="dt">email </span>: <span class="kw">user</span>.<span class="fu">email</span>, <span class="dt">password </span>: <span class="kw">user</span>.<span class="fu">password</span> }, 
+                        <span class="dt">url</span>:<span class="st">&quot;</span>/<span class="st">loginjson&quot;</span>, <span class="dt">data</span>:{
+                            <span class="dt">email </span>: <span class="kw">user</span>.<span class="fu">email</span>, 
+                            <span class="dt">password </span>: <span class="kw">user</span>.<span class="fu">password</span> 
+                        }, 
                         <span class="dt">error </span>: <span class="kw">function</span>(err){<span class="kw">console</span>.<span class="fu">log</span>(<span class="st">&quot;Erreur&quot;</span>, err);}, 
                         <span class="dt">success </span>: <span class="kw">function</span>(data){
                             <span class="kw">if</span>(data !== <span class="st">&quot;badRequest&quot;</span>) {
@@ -1730,8 +1709,8 @@ GET     /main                       controllers.SingleApp.mainPage()</code></pre
 
                             } <span class="kw">else</span> {
                                 alertAuthentication
-                                    .<span class="fu">attr</span>(<span class="ch">&#39;class&#39;</span>,<span class="ch">&#39;alert</span> <span class="ch">alert</span>-<span class="ch">error&#39;</span>)
-                                    .<span class="fu">html</span>(<span class="ch">&#39;</span>&lt;<span class="ch">strong</span>&gt;<span class="ch">Oups</span> !&lt;/<span class="ch">strong</span>&gt; <span class="ch">vous</span> <span class="ch">avez</span> <span class="ch">du</span> <span class="ch">vous</span> <span class="ch">tromper&#39;</span>);
+                                 .<span class="fu">attr</span>(<span class="ch">&#39;class&#39;</span>,<span class="ch">&#39;alert</span> <span class="ch">alert</span>-<span class="ch">error&#39;</span>)
+                                 .<span class="fu">html</span>(<span class="ch">&#39;</span>&lt;<span class="ch">strong</span>&gt;<span class="ch">Oups</span> !&lt;/<span class="ch">strong</span>&gt; <span class="ch">vous</span> <span class="ch">avez</span> <span class="ch">du</span> <span class="ch">vous</span> <span class="ch">tromper&#39;</span>);
                             }
                         }
                     });
@@ -1773,22 +1752,26 @@ GET     /main                       controllers.SingleApp.mainPage()</code></pre
                         <span class="dt">success </span>: <span class="kw">function</span>(data) { 
 
                             <span class="kw">if</span>(data !== <span class="st">&quot;failed&quot;</span>) {
-                                <span class="kw">bookmarksList</span>.<span class="fu">html</span>(<span class="ch">&#39;&#39;</span>);
-                                <span class="kw">data.bookmarks</span>.<span class="fu">forEach</span>(<span class="kw">function</span>(bookmark){
-                                    <span class="kw">bookmarksList</span>.<span class="fu">append</span>(
-                                        $(<span class="ch">&#39;</span>&lt;<span class="ch">li</span>&gt;<span class="ch">&#39;</span>)
-                                            .<span class="fu">append</span>($(<span class="ch">&#39;</span>&lt;<span class="ch">b</span>&gt;<span class="ch">&#39;</span>).<span class="fu">append</span>(<span class="kw">bookmark</span>.<span class="fu">title</span>))
-                                            .<span class="fu">append</span>(<span class="ch">&#39;</span> | <span class="ch">&#39;</span>)
-                                            .<span class="fu">append</span>($(<span class="ch">&#39;</span>&lt;<span class="ch">a</span>&gt;<span class="ch">&#39;</span>).<span class="fu">attr</span>(<span class="st">&quot;href&quot;</span>,<span class="kw">bookmark</span>.<span class="fu">url</span>).<span class="fu">append</span>(<span class="kw">bookmark</span>.<span class="fu">url</span>))
-                                            .<span class="fu">append</span>(<span class="ch">&#39;</span> | <span class="ch">&#39;</span>)
-                                            .<span class="fu">append</span>($(<span class="ch">&#39;</span>&lt;<span class="ch">i</span>&gt;<span class="ch">&#39;</span>).<span class="fu">append</span>(<span class="kw">bookmark</span>.<span class="fu">details</span>))
-                                            .<span class="fu">append</span>(<span class="ch">&#39;</span> | (<span class="ch">&#39;</span>).<span class="fu">append</span>(<span class="kw">bookmark.category</span>.<span class="fu">label</span>).<span class="fu">append</span>(<span class="ch">&#39;</span>)<span class="ch">&#39;</span>)
-                                    );
-                                });
+                              <span class="kw">bookmarksList</span>.<span class="fu">html</span>(<span class="ch">&#39;&#39;</span>);
+                              <span class="kw">data.bookmarks</span>.<span class="fu">forEach</span>(<span class="kw">function</span>(bookmark){
+                                <span class="kw">bookmarksList</span>.<span class="fu">append</span>(
+                                  $(<span class="ch">&#39;</span>&lt;<span class="ch">li</span>&gt;<span class="ch">&#39;</span>)
+                                    .<span class="fu">append</span>($(<span class="ch">&#39;</span>&lt;<span class="ch">b</span>&gt;<span class="ch">&#39;</span>).<span class="fu">append</span>(<span class="kw">bookmark</span>.<span class="fu">title</span>))
+                                    .<span class="fu">append</span>(<span class="ch">&#39;</span> | <span class="ch">&#39;</span>)
+                                    .<span class="fu">append</span>($(<span class="ch">&#39;</span>&lt;<span class="ch">a</span>&gt;<span class="ch">&#39;</span>).<span class="fu">attr</span>(<span class="st">&quot;href&quot;</span>,<span class="kw">bookmark</span>.<span class="fu">url</span>)
+                                    .<span class="fu">append</span>(<span class="kw">bookmark</span>.<span class="fu">url</span>))
+                                    .<span class="fu">append</span>(<span class="ch">&#39;</span> | <span class="ch">&#39;</span>)
+                                    .<span class="fu">append</span>($(<span class="ch">&#39;</span>&lt;<span class="ch">i</span>&gt;<span class="ch">&#39;</span>)
+                                    .<span class="fu">append</span>(<span class="kw">bookmark</span>.<span class="fu">details</span>))
+                                    .<span class="fu">append</span>(<span class="ch">&#39;</span> | (<span class="ch">&#39;</span>)
+                                    .<span class="fu">append</span>(<span class="kw">bookmark.category</span>.<span class="fu">label</span>).<span class="fu">append</span>(<span class="ch">&#39;</span>)<span class="ch">&#39;</span>)
+                                );
+                              });
                             } <span class="kw">else</span> {
-                                alertAuthentication
-                                    .<span class="fu">attr</span>(<span class="ch">&#39;class&#39;</span>,<span class="ch">&#39;alert</span> <span class="ch">alert</span>-<span class="ch">error&#39;</span>)
-                                    .<span class="fu">html</span>(<span class="ch">&#39;</span>&lt;<span class="ch">strong</span>&gt;<span class="ch">Il</span> <span class="ch">faut</span> <span class="ch">être</span> <span class="ch">authentifié</span> !&lt;/<span class="ch">strong</span>&gt; <span class="ch">pour</span> <span class="ch">obtenir</span> <span class="ch">la</span> <span class="ch">liste</span> <span class="ch">des</span> <span class="ch">bookmarks&#39;</span>);
+                               alertAuthentication
+                                .<span class="fu">attr</span>(<span class="ch">&#39;class&#39;</span>,<span class="ch">&#39;alert</span> <span class="ch">alert</span>-<span class="ch">error&#39;</span>)
+                                .<span class="fu">html</span>(<span class="ch">&#39;</span>&lt;<span class="ch">strong</span>&gt;<span class="ch">Il</span> <span class="ch">faut</span> <span class="ch">être</span> <span class="ch">authentifié</span> !&lt;/<span class="ch">strong</span>&gt; <span class="ch">\n</span>
+                                    pour obtenir la liste des bookmarks<span class="ch">&#39;</span>);
                             }
                         }
                     });
@@ -1800,36 +1783,21 @@ GET     /main                       controllers.SingleApp.mainPage()</code></pre
         <span class="kw">&lt;/script&gt;</span>
 
     <span class="kw">&lt;/html&gt;</span></code></pre>
-<h2 id="testons-2"><a href="#TOC">Testons</a></h2>
+<h2 id="testons-2"><a href="#TOC"><span class="header-section-number">12.6</span> Testons</a></h2>
 <p>Dans votre navigateur, appelez l'url : <code>http://localhost:9000/main</code></p>
-<div class="figure">
-<img src="rsrc/09-services-013.png" /><p class="caption"></p>
-</div>
-<p>Si vous vous trompez en vous authentifiant :</p>
-<div class="figure">
-<img src="rsrc/09-services-014.png" /><p class="caption"></p>
-</div>
-<p>Si vous essayez de charger les bookmarks alors que vous n'êtes pas authentifié :</p>
-<div class="figure">
-<img src="rsrc/09-services-015.png" /><p class="caption"></p>
-</div>
-<p>Si vous vous êtes correctement authentifié :</p>
-<div class="figure">
-<img src="rsrc/09-services-016.png" /><p class="caption"></p>
-</div>
-<p>Vous pouvez donc charger les bookmarks :</p>
-<div class="figure">
-<img src="rsrc/09-services-017.png" /><p class="caption"></p>
-</div>
-<p>Si vous retournez à la racine du site : <code>http://localhost:9000/</code>, vous pouvez vérifiez que vous avez effectivemnt été authentifié :</p>
-<div class="figure">
-<img src="rsrc/09-services-018.png" /><p class="caption"></p>
-</div>
-<h2 id="conclusion"><a href="#TOC">Conclusion</a></h2>
-<p>Il est donc finallement très possible de &quot;faire&quot; du <strong>Play!► 2</strong> (java) sans utiliser (ou presque) du scala dans les vues. Pensez-y lorsque vous faites du <strong>Play!► 1</strong> (le mécanisme décrit est tout à fait reproductible dans la version 1), cela peut faciliter vos migrations.</p>
-<h1 id="assets"><a href="#TOC">Assets ?</a></h1>
-<hr />
-<h4 id="quallons-nous-voir"><a href="#TOC">Qu'allons nous voir ?</a></h4>
+<p><img src="rsrc/09-services-013.png" /><br /> Si vous vous trompez en vous authentifiant :</p>
+<p><img src="rsrc/09-services-014.png" /><br /> Si vous essayez de charger les bookmarks alors que vous n'êtes pas authentifié :</p>
+<p><img src="rsrc/09-services-015.png" /><br /> Si vous vous êtes correctement authentifié :</p>
+<p><img src="rsrc/09-services-016.png" /><br /> Vous pouvez donc charger les bookmarks :</p>
+<p><img src="rsrc/09-services-017.png" /><br /> Si vous retournez à la racine du site : <code>http://localhost:9000/</code>, vous pouvez vérifiez que vous avez effectivemnt été authentifié :</p>
+<p><img src="rsrc/09-services-018.png" /><br /></p>
+<h2 id="conclusion"><a href="#TOC"><span class="header-section-number">12.7</span> Conclusion</a></h2>
+<p>Il est donc finallement très possible de &quot;faire&quot; du <strong>Play!&gt; 2</strong> (java) sans utiliser (ou presque) du scala dans les vues. Pensez-y lorsque vous faites du <strong>Play!&gt; 1</strong> (le mécanisme décrit est tout à fait reproductible dans la version 1), cela peut faciliter vos migrations.</p>
+<h1 id="les-assets-dans-play"><a href="#TOC"><span class="header-section-number">13</span> Les assets dans Play</a></h1>
+<blockquote>
+<p><em>Qu'allons nous voir ?</em></p>
+</blockquote>
+<blockquote>
 <ul>
 <li><em>Qu'est-ce que c'est et pourquoi ?</em></li>
 <li><em>Découverte rapide de Coffeescript</em></li>
@@ -1837,6 +1805,328 @@ GET     /main                       controllers.SingleApp.mainPage()</code></pre
 <li><em>LESS ?</em></li>
 <li><em>...</em></li>
 </ul>
-<hr />
+</blockquote>
+<h2 id="assets"><a href="#TOC"><span class="header-section-number">13.1</span> Assets ???</a></h2>
+<p>Mais qu'est-ce donc ? En fait, ce sont tous les fichiers statiques (css, html, js, coffee, png, jpg ...) de votre application web Play. Vous les trouvez dans le répertoire <code>public</code> de l'application. Et pour y faire référence dans nos vues scala, nous utilisons le mot clé <code>@routes.Assets.at()</code> :</p>
+<ul>
+<li>pour les fichiers javascript : <code>&lt;script src=&quot;@routes.Assets.at(&quot;javascripts/jquery-1.7.1.min.js&quot;)&quot; type=&quot;text/javascript&quot;&gt;&lt;/script&gt;</code></li>
+<li>pour les feuilles de style : <code>&lt;link rel=&quot;stylesheet&quot; media=&quot;screen&quot; href=&quot;@routes.Assets.at(&quot;bootstrap/css/bootstrap-responsive.css&quot;)&quot;&gt;</code></li>
+<li>pour les images : <code>&lt;link rel=&quot;shortcut icon&quot; type=&quot;image/png&quot; href=&quot;@routes.Assets.at(&quot;images/favicon.png&quot;)&quot;&gt;</code></li>
+<li>etc. ...</li>
+</ul>
+<p>Mais il existe d'autres types d'assets.</p>
+<h2 id="assets-compilés"><a href="#TOC"><span class="header-section-number">13.2</span> Assets &quot;compilés&quot;</a></h2>
+<p>Ce sont les fichiers statiques qui subissent un retraitement avant publication, comme :</p>
+<ul>
+<li>la minification des fichiers javascript pour améliorer les temps de chargement</li>
+<li>la compression gzip pour les browsers qui le supportent</li>
+<li>la transformation de fichiers <code>less</code> en <code>css</code> (nous allons voir ce que c'est plus loin)</li>
+<li>la transpilation de fichiers coffeescript en javascript (ça aussi, nous allons le voir)</li>
+<li>...</li>
+</ul>
+<blockquote>
+<p><strong>Remarque :</strong> Play gère la mise en cache des assets.</p>
+</blockquote>
+<h2 id="mise-en-oeuvre"><a href="#TOC"><span class="header-section-number">13.3</span> Mise en oeuvre</a></h2>
+<h3 id="préparation"><a href="#TOC"><span class="header-section-number">13.3.1</span> Préparation</a></h3>
+<p>Pour que Play compile les assets, il faut créer un répertoire <code>assets</code> dans le répertoire <code>app</code>, puis dans le répertoire <code>assets</code>, créez un répertoire <code>javascripts</code> et un répertoire <code>stylesheets</code>.</p>
+<p>Nous allons commencer par des assets Coffeescript.</p>
+<h3 id="coffeescript"><a href="#TOC"><span class="header-section-number">13.3.2</span> Coffeescript</a></h3>
+<p>Mais, tout d'abors une petite présentation de Coffeescript avant la mise en oeuvre.</p>
+<h4 id="rappels"><a href="#TOC"><span class="header-section-number">13.3.2.1</span> Rappels</a></h4>
+<p>Coffeescript c'est à la fois un langage et un transpiler (un run-time aussi). Vous écrivez en Coffeescript, puis vous transpilez en Javascript. Ce nouveau langage a été créé par Jeremy Ashkenas (<a href="https://github.com/jashkenas/coffee-script">https://github.com/jashkenas/coffee-script</a> &amp; <a href="http://coffeescript.org/">http://coffeescript.org/</a>).</p>
+<blockquote>
+<p><strong>Remarque :</strong> Coffeescript est &quot;fourni&quot; avec Play!&gt;2.</p>
+</blockquote>
+<p>Vous pouvez exécuter Coffeescript :</p>
+<ul>
+<li>côté client, dans le navigateur une fois transpilé en javascript ou directement en coffeescript avec un runtime javascript capable d'exécuter les script <code>coffee</code></li>
+<li>côté serveur ou en mode commande avec Nodejs</li>
+</ul>
+<h5 id="pourquoi"><a href="#TOC"><span class="header-section-number">13.3.2.1.1</span> Pourquoi ?</a></h5>
+<blockquote>
+<p><em>&quot;CoffeeScript is JavaScript, the same language with a different accent&quot;</em> <strong>Patrick Lee</strong> (CoffeeScript in Action)</p>
+</blockquote>
+<p>Coffescript simplifie le javascript, génère du javascript &quot;propre&quot; et apporte de nombreux &quot;plus&quot; pour vous faciliter la vie, simplifier votre code, en améliorer la lisibilité.</p>
+<p>Quelques exemples avant de passer à la pratique.</p>
+<h5 id="les-fonctions-en-coffeescript"><a href="#TOC"><span class="header-section-number">13.3.2.1.2</span> Les fonctions en Coffeescript</a></h5>
+<pre><code>addition = (a,b) -&gt; 
+    a+b</code></pre>
+<h5 id="utilisation-dautres-librairies-javascript-et-simplification"><a href="#TOC"><span class="header-section-number">13.3.2.1.3</span> Utilisation d'autres librairies javascript (et simplification)</a></h5>
+<pre><code>#Ceci est une remarque :
+#code js avant : 
+#   jQuery $(document).ready(function () {
+#       some();
+#       init();
+#       calls();
+#   });
+
+$ -&gt; some()
+    init()
+    calls()</code></pre>
+<blockquote>
+<p><strong>Remarque :</strong> la syntaxe coffeescript facilite la création de DSL</p>
+</blockquote>
+<h5 id="les-strings-les-interpolations"><a href="#TOC"><span class="header-section-number">13.3.2.1.4</span> Les &quot;Strings&quot; &amp; les Interpolations</a></h5>
+<p>Par exemple vous avez un objet :</p>
+<pre><code>bob =
+   firstName : &quot;Bob&quot;
+   lastName : &quot;Morane&quot;
+   hello : -&gt;
+        &quot;Hello !&quot;</code></pre>
+<p>sont équivalent javascript serait :</p>
+<pre><code>var bob = {
+    firstName : &quot;Bob&quot;,
+    lastName : &quot;Morane&quot;,
+    hello : function () {
+        return &quot;Hello !&quot;;
+    }
+}</code></pre>
+<p>Vous pouvez ensuite l'utiliser dans une String (et notez bien, sur plusieurs lignes) de la façon suivante :</p>
+<pre><code>console.log &quot;
+   Firstname : #{bob.firstName},
+   LastName  : #{bob.lastName},
+   Method (hello) : #{bob.hello()}
+&quot;</code></pre>
+<h5 id="les-arrays"><a href="#TOC"><span class="header-section-number">13.3.2.1.5</span> Les Arrays</a></h5>
+<pre><code>buddies = [
+    {name:&quot;Bob&quot;, age:30}
+    {name:&quot;Sam&quot;, age:50}
+    { name : &quot;John&quot;, age : 20 }
+]
+
+#tous les copains de moins de 50 ans
+result = (buddy for buddy in buddies when buddy.age &lt; 50)</code></pre>
+<h5 id="et-enfin-les-classes"><a href="#TOC"><span class="header-section-number">13.3.2.1.6</span> Et enfin : les CLASSES !!!</a></h5>
+<pre><code>class Human
+
+    #static field
+    @counter : 0
+
+    constructor : (@firstName, @lastName) -&gt;
+        #fields : @ = this
+        Human.counter += 1
+
+    #method
+    hello : -&gt;
+        console.log &quot;Hello #{@firstName} #{@lastName}&quot;
+
+    #static method
+    @howMany : -&gt;
+        Human.counter
+
+    Bob = new Human &quot;Bob&quot;, &quot;Morane&quot; 
+    console.log &quot;Human.counter #{Human.howMany()}&quot;</code></pre>
+<h5 id="avec-un-peu-dhéritage"><a href="#TOC"><span class="header-section-number">13.3.2.1.7</span> Avec un peu d'héritage</a></h5>
+<pre><code>class Superhero extends Human
+    constructor : (@firstName, @lastName, @name) -&gt;
+    hello : -&gt;
+        super + &quot; aka #{@name}&quot;</code></pre>
+<h4 id="mise-en-oeuvre-1"><a href="#TOC"><span class="header-section-number">13.3.2.2</span> Mise en oeuvre</a></h4>
+<p>Nous allons re-écrire le code de notre &quot;single page application&quot; (cf chapitre <strong>&quot;Services (JSON)&quot;</strong>) en Coffeescript.</p>
+<h5 id="préparation-1"><a href="#TOC"><span class="header-section-number">13.3.2.2.1</span> Préparation</a></h5>
+<p>Tout d'abord, vous pouvez supprimer le code javascript dans la vie <code>mainPage.scala.html</code> (juste après la remarque <code>&lt;!-- === ici votre code applicatif === --&gt;</code>).</p>
+<p>Ensuite, toujours dans la même vue, dans la section <code>&lt;head&gt;</code>, juste après la référence à jQuery, ajoutez une référence à notre futur code :</p>
+<pre><code>&lt;script src=&quot;@routes.Assets.at(&quot;javascripts/myapp.js&quot;)&quot; type=&quot;text/javascript&quot;&gt;&lt;/script&gt;</code></pre>
+<p>Nous allons ensuite créer un fichier <code>myapp.coffee</code> qui sera automatiquement compilé (transpilé) par Play en javascript.</p>
+<h5 id="myapp.coffee"><a href="#TOC"><span class="header-section-number">13.3.2.2.2</span> myapp.coffee</a></h5>
+<p>Dans le répertoire <code>app/assets/javascripts</code>, créez un fichier <code>myapp.coffee</code> avec le code suivant :</p>
+<pre><code>#=== mon code ne s&#39;exécute qu&#39;une fois le DOM complètement chargé ===
+console.log &quot;CoffeeScript version in progress ...&quot;
+$ -&gt;
+    #définition des différents éléments d&#39;IHM
+    console.log &quot;dom loaded ... i hope ...&quot;
+    user = {}
+    alertAuthentication = $ &quot;div[name=authentication]&quot;
+    loginButton = $ &quot;button[name=login]&quot;
+    logoutButton = $ &quot;button[name=logout]&quot;
+    loadBookmarksButton = $ &quot;button[name=loadbookmarks]&quot;
+    email = $ &quot;input[name=email]&quot;
+    password = $ &quot;input[name=password]&quot;
+    labels = $ &quot;label&quot;
+    bookmarksList = $ &quot;ul[name=bookmarks]&quot;
+
+    #onclick du bouton login
+    console.log &quot;OnClick login button definition ...&quot;
+    loginButton.click -&gt;
+        user.email = email.val()
+        user.password = password.val()
+
+        $.ajax 
+            type:&quot;POST&quot;
+            url:&quot;/loginjson&quot;
+            data: 
+                email : user.email
+                password : user.password
+            error : (err)-&gt;
+                console.log &quot;Erreur&quot;, err
+            success : (data)-&gt;
+                if data isnt &quot;badRequest&quot;
+                    alertAuthentication.attr(&quot;class&quot;,&quot;alert alert-success&quot;)
+                      .html &quot;&lt;strong&gt;Bienvenue !&lt;/strong&gt; #{data}&quot;
+                    user.name = data
+                    labels.hide()
+                    email.hide()
+                    password.hide()
+                    loginButton.hide()
+                else
+                    alertAuthentication.attr(&quot;class&quot;,&quot;alert alert-error&quot;)
+                        .html &quot;&lt;strong&gt;Oups !&lt;/strong&gt; vous avez du vous tromper&quot;
+
+    #onclick du bouton logout
+    console.log &quot;OnClick logout button definition ...&quot;
+    logoutButton.click -&gt;
+
+        $.ajax 
+            type:&quot;GET&quot;
+            url:&quot;/logoutjson&quot;
+            error : (err)-&gt;
+                console.log &quot;Erreur&quot;, err
+            success : (data)-&gt;
+                if user.name
+                  alertAuthentication.attr(&quot;class&quot;, &quot;alert alert-info&quot;)
+                    .html &quot;&lt;strong&gt;Au revoir&lt;/strong&gt; #{user.name}&quot;
+                  labels.show()
+                  email.show()
+                  password.show()
+                  loginButton.show()
+                  user = {}
+                  bookmarksList.html &quot;&quot;
+
+    #onclick du bouton de chargement des bookmarks
+    console.log &quot;OnClick load bookmarks button definition ...&quot;
+    loadBookmarksButton.click -&gt;
+
+        $.ajax 
+            type:&quot;GET&quot;
+            url:&quot;/bookmarks/jsonlist&quot;
+            error : (err)-&gt;
+                console.log &quot;Erreur&quot;, err
+            success : (data)-&gt;
+                if data isnt &quot;failed&quot;
+                    console.log data
+                    bookmarksList.html &quot;&quot;
+                    data.bookmarks.forEach (bookmark) -&gt;
+                        bookmarksList.append $ &quot;&quot;&quot;
+                            &lt;li&gt;&lt;b&gt;#{bookmark.title} | 
+                            &lt;a href=&#39;#{bookmark.url}&#39;&gt;#{bookmark.url}&lt;/a&gt; | 
+                            &lt;i&gt;#{bookmark.details}&lt;/i&gt; | 
+                            (#{bookmark.category.label})&lt;/li&gt;
+                        &quot;&quot;&quot;
+                else
+                    alertAuthentication.attr(&quot;class&quot;, &quot;alert alert-error&quot;)
+                        .html &quot;
+                            &lt;strong&gt;
+                                Il faut être authentifié !
+                            &lt;/strong&gt; pour obtenir la liste des bookmarks
+                            &quot;</code></pre>
+<p>Enregistrez, relancez votre application (<a href="http://localhost:9000/main">http://localhost:9000/main</a>), et ça fonctionne comme avant. Alors, je suis d'accord, faire du Coffeescript, c'est quand même un gros changement. Mais vous n'êtes pas obligés, cependant je vous engage à donner une chance à ce langage, vous verrez, vous ne ferez plus du javascript comme avant.</p>
+<p>Passons à une nouvelle &quot;visions&quot; des feuilles de styles avec <strong>LESS</strong>.</p>
+<h3 id="less"><a href="#TOC"><span class="header-section-number">13.3.3</span> Less</a></h3>
+<p>Less <a href="http://lesscss.org/">http://lesscss.org/</a> est une autre façon d'écrire vos feuilles de style. C'est un nouveau langage css, dynamique, plus pratique, avec la possibilité d'utiliser des variables, des opérations, ... Pour une présentation plus détaillée, allez faire un tour sur le blog de <strong>Cedric Exbrayat</strong> : <a href="http://hypedrivendev.wordpress.com/2012/01/31/css-sucks-do-less/">http://hypedrivendev.wordpress.com/2012/01/31/css-sucks-do-less/</a>.</p>
+<h4 id="mise-en-oeuvre-2"><a href="#TOC"><span class="header-section-number">13.3.3.1</span> Mise en oeuvre</a></h4>
+<p>Alors, nous n'allons pas re-écrire Twitter Bootstrap (qui est lui aussi créé avec Less), mais ajouter des styles à notre vue principale <code>index.scala.html</code>.</p>
+<p>Pour cela, allez d'abord dans la vue <code>main.scala.html</code> (qui est référencée dans <code>index.scala.html</code>), puis dans la section <code>&lt;head&gt;</code> de la vue, ajoutez une référence à notre future feuille de style :</p>
+<pre><code>&lt;link rel=&quot;stylesheet&quot; media=&quot;screen&quot; href=&quot;@routes.Assets.at(&quot;stylesheets/mycss.css&quot;)&quot;&gt;</code></pre>
+<h5 id="myapp.coffee-1"><a href="#TOC"><span class="header-section-number">13.3.3.1.1</span> myapp.coffee</a></h5>
+<p>Dans le répertoire <code>app/assets/stylesheets</code>, créez un fichier <code>mycss.lss</code> avec le code suivant :</p>
+<pre><code>@h1BckGrdColor : blue;
+@h1ForeColor : white;
+
+@h2BckGrdColor : gray;
+@h2ForeColor : whitesmoke;
+
+supertag {
+    h1 {
+        color: @h1ForeColor;
+        background-color: @h1BckGrdColor;
+        padding-left: 5px;
+    }
+    h2 {
+        color : @h2ForeColor;
+        background-color: @h2BckGrdColor;
+        padding-left: 5px;
+        margin-bottom: 5px;
+    }
+
+    input {
+        background-color: yellow
+    }
+}</code></pre>
+<p>J'utilise donc 4 variables : <code>@h1BckGrdColor</code>, <code>@h1ForeColor</code>, <code>@h2BckGrdColor</code>, <code>@h2ForeColor</code> (cela permet de rendre le code plus paramétrable). Puis je crée un tag <code>supertag</code> et surcharge les styles <code>h1</code>, <code>h2</code> et <code>input</code>. Cela signifie que tous les tags <code>h1</code>, <code>h2</code> et <code>input</code> à l'intérieur d'un tag <code>supertag</code> prendront les styles définis dans notre fichier less.</p>
+<h5 id="index.scala.html"><a href="#TOC"><span class="header-section-number">13.3.3.1.2</span> index.scala.html</a></h5>
+<p>Nous pouvons maintenant utiliser notre tag <code>&lt;supertag&gt;</code>. Allez modifier la vue <code>index.scala.html</code> : encadrez tous le code html par le tag <code>&lt;supertag&gt;&lt;/supertag&gt;</code> :</p>
+<pre class="sourceCode html"><code class="sourceCode html">
+    @(
+    message: String,
+    bookmarks: List[models.Bookmark],
+    categories: List[models.Category],
+    user: User
+    )
+
+    @main(&quot;Gestion des bookmarks&quot;, user) {
+
+    <span class="kw">&lt;supertag&gt;</span>
+    <span class="kw">&lt;h1&gt;</span>BookMarks<span class="kw">&lt;/h1&gt;</span>
+    <span class="kw">&lt;h6&gt;</span>@message<span class="kw">&lt;/h6&gt;</span>
+    <span class="co">&lt;!-- Formulaire de saisie : Catégories --&gt;</span>
+    <span class="kw">&lt;fieldset&gt;</span>
+        <span class="kw">&lt;h2&gt;</span>Nouvelle Cat<span class="dv">&amp;eacute;</span>gorie<span class="kw">&lt;/h2&gt;</span>
+        <span class="kw">&lt;form</span><span class="ot"> method=</span><span class="st">&quot;post&quot;</span><span class="ot"> action=</span><span class="st">&quot;@routes.Categories.add()&quot;</span><span class="kw">&gt;</span>
+            <span class="kw">&lt;input</span><span class="ot"> name=</span><span class="st">&quot;label&quot;</span><span class="ot"> placeholder=</span><span class="st">&quot;label&quot;</span><span class="kw">&gt;</span>
+
+            <span class="kw">&lt;button</span><span class="ot"> class=</span><span class="st">&quot;btn&quot;</span><span class="ot"> type=</span><span class="st">&quot;submit&quot;</span><span class="kw">&gt;</span>Ajouter la Cat<span class="dv">&amp;eacute;</span>gorie<span class="kw">&lt;/button&gt;</span>
+        <span class="kw">&lt;/form&gt;</span>
+    <span class="kw">&lt;/fieldset&gt;</span>
+
+    @if(flash.containsKey(&quot;error&quot;)) {
+        <span class="kw">&lt;div</span><span class="ot"> class=</span><span class="st">&quot;alert alert-error&quot;</span><span class="kw">&gt;</span>
+            <span class="kw">&lt;strong&gt;</span>Oups!<span class="kw">&lt;/strong&gt;</span> @flash.get(&quot;error&quot;)
+        <span class="kw">&lt;/div&gt;</span>
+    }
+
+    <span class="co">&lt;!-- Liste des Catégories --&gt;</span>
+    <span class="kw">&lt;ul&gt;</span>
+        @for(category <span class="er">&lt;</span>- categories) {
+        <span class="kw">&lt;li&gt;</span>@category.id @category.label<span class="kw">&lt;/li&gt;</span>
+        }
+    <span class="kw">&lt;/ul&gt;</span>
+
+    <span class="co">&lt;!-- Formulaire de saisie : Bookmarks --&gt;</span>
+
+    <span class="kw">&lt;fieldset&gt;</span>
+        <span class="kw">&lt;h2&gt;</span>Nouveau Bookmark<span class="kw">&lt;/h2&gt;</span>
+        <span class="kw">&lt;form</span><span class="ot"> method=</span><span class="st">&quot;post&quot;</span><span class="ot"> action=</span><span class="st">&quot;@routes.Bookmarks.add()&quot;</span><span class="kw">&gt;</span>
+            <span class="kw">&lt;input</span><span class="ot"> name=</span><span class="st">&quot;title&quot;</span><span class="ot"> placeholder=</span><span class="st">&quot;title&quot;</span><span class="kw">&gt;</span>
+            <span class="kw">&lt;input</span><span class="ot"> name=</span><span class="st">&quot;url&quot;</span><span class="ot"> placeholder=</span><span class="st">&quot;url&quot;</span><span class="kw">&gt;</span>
+            <span class="kw">&lt;input</span><span class="ot"> name=</span><span class="st">&quot;details&quot;</span><span class="ot"> placeholder=</span><span class="st">&quot;details&quot;</span><span class="kw">&gt;</span>
+
+            <span class="kw">&lt;select</span><span class="ot"> size=</span><span class="st">&quot;1&quot;</span><span class="ot"> name=</span><span class="st">&quot;category.id&quot;</span><span class="kw">&gt;</span>
+                @for(category <span class="er">&lt;</span>- categories) {
+                <span class="kw">&lt;option</span><span class="ot"> value=</span><span class="st">&quot;@category.id&quot;</span><span class="kw">&gt;</span>@category.label<span class="kw">&lt;/option&gt;</span>
+                }
+            <span class="kw">&lt;/select&gt;</span>
+
+            <span class="kw">&lt;button</span><span class="ot"> class=</span><span class="st">&quot;btn&quot;</span><span class="ot"> type=</span><span class="st">&quot;submit&quot;</span><span class="kw">&gt;</span>Ajouter le Bookmark<span class="kw">&lt;/button&gt;</span>
+        <span class="kw">&lt;/form&gt;</span>
+    <span class="kw">&lt;/fieldset&gt;</span>
+    <span class="co">&lt;!-- Liste des Bookmarks --&gt;</span>
+    <span class="kw">&lt;ul&gt;</span>
+        @for(bookmark <span class="er">&lt;</span>- bookmarks) {
+        <span class="kw">&lt;li&gt;</span>@bookmark.title : <span class="kw">&lt;a</span><span class="ot"> href=</span><span class="st">&quot;@bookmark.url&quot;</span><span class="kw">&gt;</span>@bookmark.url<span class="kw">&lt;/a&gt;</span> :
+            @if(bookmark.category != null) {
+            @bookmark.category.label
+            }
+        <span class="kw">&lt;/li&gt;</span>
+        }
+    <span class="kw">&lt;/ul&gt;</span>
+    <span class="kw">&lt;/supertag&gt;</span>
+    }</code></pre>
+<p>Enregistrez. Lancez : Tadaaaaa !</p>
+<p><img src="rsrc/10-assets-less-001.png" alt="FIG1" /><br /></p>
+<blockquote>
+<p>Oui je sais, c'est moche !</p>
+</blockquote>
+<p>Entrainez vous maintenant, vous verrez, cela devient intéressant de faire du css ;).</p>
 </body>
 </html>

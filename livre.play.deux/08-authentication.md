@@ -1,13 +1,12 @@
 #Gestion de l'authentification
 
-	/* --- Qu'allons nous voir ? ---
+>*Qu'allons nous voir ?*
 
-		- Comment mettre en oeuvre un système simple d'authentification
+>	- *Comment mettre en oeuvre un système simple d'authentification*
 
-		Remarque : la rédaction de ce chapitre reste encore à faire, mais les codes sont complets et vous pouvez les utiliser tels quels.
-	*/
+>*Remarque : la rédaction "complète" de ce chapitre reste encore à faire, mais les codes sont complets et vous pouvez les utiliser tels quels.*
 
-Pour que n'importe qui ne puisse saisir pas saisir des bookmarks, nous allons mettre en place un système d'authentification.
+Pour que n'importe qui ne puisse pas saisir des bookmarks, nous allons mettre en place un système d'authentification.
 
 ##Création d'un modèle User
 
@@ -38,7 +37,8 @@ Pour que n'importe qui ne puisse saisir pas saisir des bookmarks, nous allons me
 		@Constraints.Required
 		public String password;
 	
-		public static Model.Finder<String,User> find = new Model.Finder(String.class, User.class);
+		public static Model.Finder<String,User> find = 
+			new Model.Finder(String.class, User.class);
 	
 		public static List<User> findAll() {
 			return find.all();
@@ -162,7 +162,8 @@ Code final :
 	
 		//On récupère les informations de login (quand le user se "signe")
 		public static Result authenticate() {
-			Form<AuthenticatedUser> loginForm = form(AuthenticatedUser.class).bindFromRequest();
+			Form<AuthenticatedUser> loginForm = 
+				form(AuthenticatedUser.class).bindFromRequest();
 			if(loginForm.hasErrors()) {
 				return badRequest(login.render(loginForm));
 			} else {
@@ -238,16 +239,20 @@ Le code définitif va donner ceci :
 		<head>
 			<title>@title</title>
 			<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
-			<link rel="stylesheet" media="screen" href="@routes.Assets.at("bootstrap/css/bootstrap.css")">
+			<link rel="stylesheet" media="screen" 
+				href="@routes.Assets.at("bootstrap/css/bootstrap.css")">
 			<style>
 				body {
 					padding-top: 60px;
 					padding-bottom: 40px;
 				}
 			</style>
-			<link rel="stylesheet" media="screen" href="@routes.Assets.at("bootstrap/css/bootstrap-responsive.css")">
-			<link rel="shortcut icon" type="image/png" href="@routes.Assets.at("images/favicon.png")">
-			<script src="@routes.Assets.at("javascripts/jquery-1.7.1.min.js")" type="text/javascript"></script>
+			<link rel="stylesheet" media="screen" 
+				href="@routes.Assets.at("bootstrap/css/bootstrap-responsive.css")">
+			<link rel="shortcut icon" type="image/png" 
+				href="@routes.Assets.at("images/favicon.png")">
+			<script src="@routes.Assets.at("javascripts/jquery-1.7.1.min.js")" 
+				type="text/javascript"></script>
 		</head>
 		<body>
 	
@@ -257,8 +262,8 @@ Le code définitif va donner ceci :
 						<a class="brand">@title</a>
 						@if(user != null) {
 							<ul class="nav">
-								<li><a>@user.name <span>(@user.email)</span></a></li>
-								<li><a href="@routes.Authentication.logout()">Logout</a></li>
+							  <li><a>@user.name <span>(@user.email)</span></a></li>
+							  <li><a href="@routes.Authentication.logout()">Logout</a></li>
 							</ul>
 						}
 					</div>
@@ -313,7 +318,8 @@ Nous y sommes presque. Il faut créer le formulaire de login : créez dans le r�
 				<p class="success">@flash.get("success")</p>
 			}
 	
-			<p><input type="email" name="email" placeholder="Email" value="@form("email").value"></p>
+			<p><input type="email" name="email" placeholder="Email" 
+				value="@form("email").value"></p>
 			<p><input type="password" name="password" placeholder="Password"></p>
 			<p><button class="btn" type="submit">Login</button></p>
 		}
@@ -362,7 +368,8 @@ Ainsi, nous aurons 2 utilisateurs au chargement de l'application. Et pour les ch
 	
 			public static void insert(Application app) {
 	
-				Map<String,List<Object>> all = (Map<String,List<Object>>)Yaml.load("initial-data.yml");
+				Map<String,List<Object>> all = 
+					(Map<String,List<Object>>)Yaml.load("initial-data.yml");
 	
 				if(Ebean.find(User.class).findRowCount() == 0) {                
 					Ebean.save(all.get("users"));   
@@ -379,8 +386,8 @@ Ainsi, nous aurons 2 utilisateurs au chargement de l'application. Et pour les ch
 
 C'est bon vous pouvez lancer l'application à nouveau.
 
-![](rsrc/08-authentication-001.png)
-![](rsrc/08-authentication-002.png)
-![](rsrc/08-authentication-003.png)
-![](rsrc/08-authentication-004.png)
+![](rsrc/08-authentication-001.png)\
+![](rsrc/08-authentication-002.png)\
+![](rsrc/08-authentication-003.png)\
+![](rsrc/08-authentication-004.png)\
 

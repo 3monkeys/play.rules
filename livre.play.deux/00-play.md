@@ -1,4 +1,4 @@
-#Introduction - Pourquoi Play!►
+#Introduction - Pourquoi Play!>
 
 	//TODO: ...
 
