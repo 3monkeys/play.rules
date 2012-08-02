@@ -42,7 +42,7 @@ Nous allons commencer par des assets Coffeescript.
 
 ###Coffeescript
 
-Mais, tout d'abors une petite présentation de Coffeescript avant la mise en oeuvre.
+Mais, tout d'abord une petite présentation de Coffeescript avant la mise en oeuvre.
 
 ####Rappels
 
