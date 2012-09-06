@@ -177,6 +177,22 @@ code > span.er { color: #ff0000; font-weight: bold; }
 </ul></li>
 </ul></li>
 </ul></li>
+<li><a href="#créer-des-templates-play"><span class="toc-section-number">14</span> Créer des templates Play</a><ul>
+<li><a href="#pourquoi-1"><span class="toc-section-number">14.1</span> Pourquoi ?</a></li>
+<li><a href="#prérequis-installation-de-conscript"><span class="toc-section-number">14.2</span> Prérequis : Installation de conscript</a></li>
+<li><a href="#installation-de-giter8"><span class="toc-section-number">14.3</span> Installation de giter8</a></li>
+<li><a href="#créationpréparation-de-votre-template-projet"><span class="toc-section-number">14.4</span> Création/Préparation de votre template projet</a><ul>
+<li><a href="#dans-projectplugin.sbt"><span class="toc-section-number">14.4.1</span> Dans <code>/project/plugin.sbt</code> :</a></li>
+<li><a href="#dans-srcmaing8default.properties"><span class="toc-section-number">14.4.2</span> Dans <code>/src/main/g8/default.properties</code> :</a></li>
+<li><a href="#dans-srcmaing8application_names"><span class="toc-section-number">14.4.3</span> Dans <code>/src/main/g8/$application_names$/</code> :</a></li>
+<li><a href="#vérifier-que-srcmaing8application_namesprojectbuild.scala-a-bien-le-contenu-suivant"><span class="toc-section-number">14.4.4</span> Vérifier que <code>/src/main/g8/$application_names$/project/Build.scala</code> a bien le contenu suivant:</a></li>
+<li><a href="#dans-srcmaing8application_namesconfapplication.conf"><span class="toc-section-number">14.4.5</span> Dans <code>/src/main/g8/$application_names$/conf/application.conf</code> :</a></li>
+<li><a href="#vérifier-que-dans-srcmaing8application_namesprojectplugin.sbt"><span class="toc-section-number">14.4.6</span> Vérifier que dans <code>/src/main/g8/$application_names$/project/plugin.sbt</code> :</a></li>
+<li><a href="#vérifier-que-dans-srcmaing8application_namesprojectbuild.properties"><span class="toc-section-number">14.4.7</span> Vérifier que dans <code>/src/main/g8/$application_names$/project/build.properties</code> :</a></li>
+<li><a href="#poussez-moi-tout-ça-sous-github"><span class="toc-section-number">14.4.8</span> Poussez moi tout ça sous github</a></li>
+</ul></li>
+<li><a href="#installation-dun-template"><span class="toc-section-number">14.5</span> Installation d'un template :</a></li>
+</ul></li>
 </ul>
 </div>
 <p><img src="rsrc/play_rules_return.png" /><br /></p>
@@ -212,6 +228,7 @@ code > span.er { color: #ff0000; font-weight: bold; }
 <p>Les premiers chapitres traitent de la version <strong>Java</strong> de Play2!&gt;;, mais la version <strong>Scala</strong> sera elle aussi abordée.</p>
 <h1 id="introduction---pourquoi-play"><a href="#TOC"><span class="header-section-number">3</span> Introduction - Pourquoi Play!&gt;</a></h1>
 <pre><code>//TODO: ...</code></pre>
+<p>Vous pouvez lire en attendant <a href="https://github.com/3monkeys/play.rules/blob/master/livre.play.un/00-02-Introduction-Pourquoi-Play.md">cette introduction</a> du livre 1, la philosohie n'ayant pas changé.</p>
 <h1 id="installation"><a href="#TOC"><span class="header-section-number">4</span> Installation</a></h1>
 <p><strong>version de Play!&gt; utilisée : 2.0.1</strong></p>
 <blockquote>
@@ -579,6 +596,12 @@ GET     /                           controllers.Application.index()</code></pre>
 <p>Et allons tout de suite modifier notre vue, pour enfin avoir quelque chose à montrer</p>
 <h2 id="les-vues"><a href="#TOC"><span class="header-section-number">7.5</span> Les vues</a></h2>
 <h3 id="modification-de-la-vue-principale-index.scala.html"><a href="#TOC"><span class="header-section-number">7.5.1</span> Modification de la vue principale : index.scala.html</a></h3>
+<p><strong>Notez que :</strong> il y a 2 notations possibles pour l'attribut <code>action</code> des formulaires html :</p>
+<ul>
+<li><code>action=&quot;@routes.Categories.add()&quot;</code></li>
+<li><code>action=&quot;/category/add&gt;</code></li>
+</ul>
+<p>personnellement, la 2ème me semble plus appropriée (et plus élégante).</p>
 <pre class="sourceCode html"><code class="sourceCode html">
     @(
         message: String,
@@ -593,7 +616,8 @@ GET     /                           controllers.Application.index()</code></pre>
         <span class="co">&lt;!-- Formulaire de saisie : Catégories --&gt;</span>
         <span class="kw">&lt;fieldset&gt;</span>
             <span class="kw">&lt;legend&gt;</span>Nouvelle Cat<span class="dv">&amp;eacute;</span>gorie<span class="kw">&lt;/legend&gt;</span>
-            <span class="kw">&lt;form</span><span class="ot"> method=</span><span class="st">&quot;post&quot;</span><span class="ot"> action=</span><span class="st">&quot;@routes.Categories.add()&quot;</span><span class="kw">&gt;</span>
+            <span class="co">&lt;!--&lt;form method=&quot;post&quot; action=&quot;@routes.Categories.add()&quot;&gt;--&gt;</span>
+            <span class="kw">&lt;form</span><span class="ot"> method=</span><span class="st">&quot;post&quot;</span><span class="ot"> action=</span><span class="st">&quot;/category/add&quot;</span><span class="kw">&gt;</span>
                 <span class="kw">&lt;input</span><span class="ot"> name=</span><span class="st">&quot;label&quot;</span><span class="ot"> placeholder=</span><span class="st">&quot;label&quot;</span><span class="kw">&gt;</span>
                 <span class="kw">&lt;button</span><span class="ot"> type=</span><span class="st">&quot;submit&quot;</span><span class="kw">&gt;</span>Ajouter la Cat<span class="dv">&amp;eacute;</span>gorie<span class="kw">&lt;/button&gt;</span>
             <span class="kw">&lt;/form&gt;</span>
@@ -609,7 +633,8 @@ GET     /                           controllers.Application.index()</code></pre>
 
         <span class="kw">&lt;fieldset&gt;</span>
             <span class="kw">&lt;legend&gt;</span>Nouveau Bookmark<span class="kw">&lt;/legend&gt;</span>
-            <span class="kw">&lt;form</span><span class="ot"> method=</span><span class="st">&quot;post&quot;</span><span class="ot"> action=</span><span class="st">&quot;@routes.Bookmarks.add()&quot;</span><span class="kw">&gt;</span>
+            <span class="co">&lt;!--&lt;form method=&quot;post&quot; action=&quot;@routes.Bookmarks.add()&quot;&gt;--&gt;</span>
+            <span class="kw">&lt;form</span><span class="ot"> method=</span><span class="st">&quot;post&quot;</span><span class="ot"> action=</span><span class="st">&quot;/bookmark/add&quot;</span><span class="kw">&gt;</span>
                 <span class="kw">&lt;input</span><span class="ot"> name=</span><span class="st">&quot;title&quot;</span><span class="ot"> placeholder=</span><span class="st">&quot;title&quot;</span><span class="kw">&gt;</span>
                 <span class="kw">&lt;input</span><span class="ot"> name=</span><span class="st">&quot;url&quot;</span><span class="ot"> placeholder=</span><span class="st">&quot;url&quot;</span><span class="kw">&gt;</span>
                 <span class="kw">&lt;input</span><span class="ot"> name=</span><span class="st">&quot;details&quot;</span><span class="ot"> placeholder=</span><span class="st">&quot;details&quot;</span><span class="kw">&gt;</span>
@@ -1832,7 +1857,7 @@ GET     /main                       controllers.SingleApp.mainPage()</code></pre
 <p>Pour que Play compile les assets, il faut créer un répertoire <code>assets</code> dans le répertoire <code>app</code>, puis dans le répertoire <code>assets</code>, créez un répertoire <code>javascripts</code> et un répertoire <code>stylesheets</code>.</p>
 <p>Nous allons commencer par des assets Coffeescript.</p>
 <h3 id="coffeescript"><a href="#TOC"><span class="header-section-number">13.3.2</span> Coffeescript</a></h3>
-<p>Mais, tout d'abors une petite présentation de Coffeescript avant la mise en oeuvre.</p>
+<p>Mais, tout d'abord une petite présentation de Coffeescript avant la mise en oeuvre.</p>
 <h4 id="rappels"><a href="#TOC"><span class="header-section-number">13.3.2.1</span> Rappels</a></h4>
 <p>Coffeescript c'est à la fois un langage et un transpiler (un run-time aussi). Vous écrivez en Coffeescript, puis vous transpilez en Javascript. Ce nouveau langage a été créé par Jeremy Ashkenas (<a href="https://github.com/jashkenas/coffee-script">https://github.com/jashkenas/coffee-script</a> &amp; <a href="http://coffeescript.org/">http://coffeescript.org/</a>).</p>
 <blockquote>
@@ -2128,5 +2153,130 @@ supertag {
 <p>Oui je sais, c'est moche !</p>
 </blockquote>
 <p>Entrainez vous maintenant, vous verrez, cela devient intéressant de faire du css ;).</p>
+<h1 id="créer-des-templates-play"><a href="#TOC"><span class="header-section-number">14</span> Créer des templates Play</a></h1>
+<blockquote>
+<p><em>Qu'allons nous voir ?</em></p>
+</blockquote>
+<blockquote>
+<ul>
+<li><em>Comment créer un template Play ré-utilisable avec giter8</em></li>
+</ul>
+</blockquote>
+<h2 id="pourquoi-1"><a href="#TOC"><span class="header-section-number">14.1</span> Pourquoi ?</a></h2>
+<p>Voilà, vous commencez à &quot;bricoler&quot; avec Play 2. Vous en avez fait la pub à tout vos camarades de travail, du coup, vous devez faire des démos à un peu tout le monde. Et vous vous apercevez qu'à chaque fois, vous devez à chaque fois</p>
+<ul>
+<li>copier les fichiers twitter bootstrap,</li>
+<li>créer un répertoire <code>models</code>,</li>
+<li>que finalement vous avez besoin de l'authentification, le modèle <code>user</code>, le controller associé,</li>
+<li>que la page de démarrage, le fichier de conf, ... ce sont toujours les mêmes</li>
+<li>etc. ...</li>
+</ul>
+<p>Et un &quot;ingénieur informaticien&quot;, c'est faignant ....</p>
+<p>La possibilité de faire des templates est prévues dans Play 2, mais n'est pas encore disponible à l'heure où j'écris (en tous les cas je ne suis pas au courant).</p>
+<p>Cependant il y a une solution (Play 2 va probablement utiliser les mêmes composants) : <strong>Giter8</strong> <a href="https://github.com/n8han/giter8">https://github.com/n8han/giter8</a>.</p>
+<p><strong>Giter8</strong> est un outil en ligne de commande qui permet de générer une structure projet à portir d'un template projet hébergé sur github (donc pour le moment, pas le choix, il faut héberger ça sur github).</p>
+<p>J'ai pu tester sous windows et OSX, je n'ai pas eu de problème. Il y a quelques pré-requis avant d'arriver à installer <strong>Giter8</strong>, mais vous allez voir tout est simple.</p>
+<h2 id="prérequis-installation-de-conscript"><a href="#TOC"><span class="header-section-number">14.2</span> Prérequis : Installation de conscript</a></h2>
+<p><strong>Conscript</strong> est un utilitaire qui va nous permettre d'installer <strong>Giter8</strong>.</p>
+<ul>
+<li>aller ici : <a href="https://github.com/n8han/conscript#readme">https://github.com/n8han/conscript#readme</a></li>
+<li>télécharger &quot;conscript runnable jar&quot; : <a href="https://github.com/downloads/n8han/conscript/conscript-0.4.0.jar">https://github.com/downloads/n8han/conscript/conscript-0.4.0.jar</a></li>
+<li>lancer <strong>Conscript</strong> (en général un double-click sur le jar suffit, sinon : <code>java -jar conscript-0.4.0.jar</code>)</li>
+<li>attendre, un message va vous avertir que <code>cs</code> a été installé</li>
+<li>mettre <code>cs</code> dans votre path</li>
+</ul>
+<h2 id="installation-de-giter8"><a href="#TOC"><span class="header-section-number">14.3</span> Installation de giter8</a></h2>
+<p>Tout simplement :</p>
+<ul>
+<li>en mode commande, tapez <code>cs n8han/giter8</code> ... patientez</li>
+<li>c'est fini</li>
+</ul>
+<h2 id="créationpréparation-de-votre-template-projet"><a href="#TOC"><span class="header-section-number">14.4</span> Création/Préparation de votre template projet</a></h2>
+<p>Créez un répertoire (que vous penserez à pousser sous github ensuite) avec la structure suivante : j'ai appelé mon répertoire <code>play-java-lazy.g8</code> : Les templates sont sur des repositories github et ont un suffixe <code>.g8</code>.</p>
+<p>... et il contient ceci :</p>
+<pre><code>play-java-lazy.g8
+    +-project
+    | +-plugin.sbt
+    |
+    +-src/
+      +-main/
+        +-g8/
+        | +-default.properties
+        | +-$application_names$/
+        |   +-app/
+        |   +-conf/
+        |     +-application.conf
+        |   +-project/
+        |     +-build.properties
+        |     +-Build.scala
+        |     +-plugin.sbt
+        |   +-public/
+        |   +-README.md
+        |  </code></pre>
+<h3 id="dans-projectplugin.sbt"><a href="#TOC"><span class="header-section-number">14.4.1</span> Dans <code>/project/plugin.sbt</code> :</a></h3>
+<pre><code>addSbtPlugin(&quot;net.databinder&quot; %% &quot;giter8-plugin&quot; % &quot;0.4.4&quot;)</code></pre>
+<h3 id="dans-srcmaing8default.properties"><a href="#TOC"><span class="header-section-number">14.4.2</span> Dans <code>/src/main/g8/default.properties</code> :</a></h3>
+<pre><code>description = This template generates a Java play 2.0.x project with some goodies
+play_version=2.0.2
+application_secret = unicornslovecats
+application_name = killer_app
+verbatim = *.html *.js *.css *.coffee</code></pre>
+<h3 id="dans-srcmaing8application_names"><a href="#TOC"><span class="header-section-number">14.4.3</span> Dans <code>/src/main/g8/$application_names$/</code> :</a></h3>
+<p>Vous copiez les répertoires les répertoires de votre projet &quot;template&quot;.</p>
+<h3 id="vérifier-que-srcmaing8application_namesprojectbuild.scala-a-bien-le-contenu-suivant"><a href="#TOC"><span class="header-section-number">14.4.4</span> Vérifier que <code>/src/main/g8/$application_names$/project/Build.scala</code> a bien le contenu suivant:</a></h3>
+<pre><code>import sbt._
+    import Keys._
+    import PlayProject._
+
+    object ApplicationBuild extends Build {
+
+        val appName         = &quot;$application_name$&quot;
+        val appVersion      = &quot;1.0&quot;
+
+        val appDependencies = Seq(
+          // Add your project dependencies here,
+        )
+
+        val main = PlayProject(appName, appVersion, appDependencies, mainLang = JAVA).settings(
+          // Add your own project settings here   
+        )
+
+    }</code></pre>
+<p><strong>Ce qui est important,</strong> c'est la ligne <code>val appName = &quot;$application_name$&quot;</code>, cela permet de choisir le nom de votre projet à la création de celui ci (ainsi que le nom du répertoire projet).</p>
+<h3 id="dans-srcmaing8application_namesconfapplication.conf"><a href="#TOC"><span class="header-section-number">14.4.5</span> Dans <code>/src/main/g8/$application_names$/conf/application.conf</code> :</a></h3>
+<p>Vous pouvez rendre le paramètre <code>application.conf</code> paramétrable (valeur par défaut dans <code>default.properties</code>) :</p>
+<pre><code># If you deploy your application to several instances be sure to use the same key!
+application.secret=&quot;$application_secret;format=&quot;random&quot;$&quot;</code></pre>
+<h3 id="vérifier-que-dans-srcmaing8application_namesprojectplugin.sbt"><a href="#TOC"><span class="header-section-number">14.4.6</span> Vérifier que dans <code>/src/main/g8/$application_names$/project/plugin.sbt</code> :</a></h3>
+<p>Il y a la bonne version de <strong>Play</strong> :</p>
+<pre><code>// Comment to get more information during initialization
+logLevel := Level.Warn
+
+// The Typesafe repository
+resolvers += &quot;Typesafe repository&quot; at &quot;http://repo.typesafe.com/typesafe/releases/&quot;
+
+// Use the Play sbt plugin for Play projects
+addSbtPlugin(&quot;play&quot; % &quot;sbt-plugin&quot; % &quot;2.0.2&quot;)
+
+sbtPlugin := true</code></pre>
+<h3 id="vérifier-que-dans-srcmaing8application_namesprojectbuild.properties"><a href="#TOC"><span class="header-section-number">14.4.7</span> Vérifier que dans <code>/src/main/g8/$application_names$/project/build.properties</code> :</a></h3>
+<p>Il y a la bonne version de <strong>sbt</strong> : par exemple <code>sbt.version=0.11.3</code></p>
+<p>Vous pouvez trouver un exemple ici : <a href="https://github.com/k33g/play-java-lazy.g8">https://github.com/k33g/play-java-lazy.g8</a>. <em>(PS: ne pas tenir compte du fichier mycommands.scala, c'est juste un test)</em></p>
+<p>Mais pour être &quot;plus sûr&quot;, vous pouvez allez voir l'exemple de chez <strong>TypeSafe</strong> : <a href="https://github.com/typesafehub/play-java.g8">https://github.com/typesafehub/play-java.g8</a>.</p>
+<h3 id="poussez-moi-tout-ça-sous-github"><a href="#TOC"><span class="header-section-number">14.4.8</span> Poussez moi tout ça sous github</a></h3>
+<ul>
+<li>en mode commande pour les champion</li>
+<li>avec le fabuleux client github (pour moi)</li>
+</ul>
+<h2 id="installation-dun-template"><a href="#TOC"><span class="header-section-number">14.5</span> Installation d'un template :</a></h2>
+<p>Maintenant que votre modèle de projet giter8 est publié sous github, vous pouvez l'installer simplement, en tapant la commande suivante dans un terminal :</p>
+<pre><code>g8 k33g/play-java-lazy.g8</code></pre>
+<p>Puis répondez aux questions, par exemple :</p>
+<pre><code>This template generates a Java play 2.0.x project with some goodies 
+
+application_secret [unicornslovecats]: 
+application_name [killer_app]: 
+play_version [2.0.2]: 2.0.3</code></pre>
+<p>Et voilà, votre application est créée, vous n'avez plus qu'à lancer.</p>
 </body>
 </html>

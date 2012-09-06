@@ -1,8 +1,8 @@
 <div class="bigHighlight">
 <h1>Les News chez <strong>Play.Rules!</strong><small>►</small></h1>
 <ul>
-	<li><a href="http://3monkeys.github.com/play.rules/livre.play.un.web/play.rules.one.html">Play.Rules UN : apprendre Play!► 1</a></li>
 	<li><a href="http://3monkeys.github.com/play.rules/livre.play.deux.web/play2.rules.return.html">Play.Rules Return : Play!► 2 en douceur</a></li>
+	<li><a href="http://3monkeys.github.com/play.rules/livre.play.un.web/play.rules.one.html">Play.Rules UN : apprendre Play!► 1</a></li>
 	<li><b>Pour les pull requests, issues, fork, etc ... :</b> <a href="https://github.com/3monkeys/play.rules">https://github.com/3monkeys/play.rules</a></li>
 </ul>
 </div>
@@ -18,7 +18,6 @@
 
 - **[pdf](https://github.com/3monkeys/play.rules/raw/master/livre.play.deux/play2.rules.return.pdf)**
 - [epub](https://github.com/3monkeys/play.rules/raw/master/livre.play.deux/play2.rules.return.epub)
-- [docx](https://github.com/3monkeys/play.rules/raw/master/livre.play.deux/play2.rules.return.docx)
 - [html](http://3monkeys.github.com/play.rules/livre.play.deux.web/play2.rules.return.html)
 
 ###Téléchargement des versions e-book de Play.Rules.1 :
@@ -30,6 +29,11 @@
 
 ---
 
+
+###Jeudi 6 Septembre
+##Play.rules Return, Nouveau chapitre
+
+- comment faire des templates de projet ré-utilisable (arborescence projet)
 
 ###Mercredi 1er Août
 ##Play.rules Return : Assets & le PDF !!!
