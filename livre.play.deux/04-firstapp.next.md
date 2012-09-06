@@ -324,6 +324,13 @@ Et allons tout de suite modifier notre vue, pour enfin avoir quelque chose à mo
 
 ###Modification de la vue principale : index.scala.html
 
+**Notez que :** il y a 2 notations possibles pour l'attribut `action` des formulaires html :
+
+- `action="@routes.Categories.add()"`
+- `action="/category/add>`
+
+personnellement, la 2ème me semble plus appropriée (et plus élégante).
+
 ```html
 
 	@(
@@ -339,7 +346,8 @@ Et allons tout de suite modifier notre vue, pour enfin avoir quelque chose à mo
         <!-- Formulaire de saisie : Catégories -->
         <fieldset>
             <legend>Nouvelle Cat&eacute;gorie</legend>
-            <form method="post" action="@routes.Categories.add()">
+		    <!--<form method="post" action="@routes.Categories.add()">-->
+		    <form method="post" action="/category/add">
                 <input name="label" placeholder="label">
                 <button type="submit">Ajouter la Cat&eacute;gorie</button>
             </form>
@@ -355,7 +363,8 @@ Et allons tout de suite modifier notre vue, pour enfin avoir quelque chose à mo
 
         <fieldset>
             <legend>Nouveau Bookmark</legend>
-            <form method="post" action="@routes.Bookmarks.add()">
+		    <!--<form method="post" action="@routes.Bookmarks.add()">-->
+		    <form method="post" action="/bookmark/add">
                 <input name="title" placeholder="title">
                 <input name="url" placeholder="url">
                 <input name="details" placeholder="details">
