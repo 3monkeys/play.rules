@@ -33,7 +33,7 @@
 ###Jeudi 6 Septembre
 ##Play.rules Return, Nouveau chapitre
 
-- comment faire des templates de projet ré-utilisable (arborescence projet)
+- comment faire des templates de projet ré-utilisables (arborescence projet)
 
 ###Mercredi 1er Août
 ##Play.rules Return : Assets & le PDF !!!
