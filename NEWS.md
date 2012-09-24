@@ -30,12 +30,12 @@
 ---
 
 
-###Jeudi 6 Septembre
+###Jeudi 6 Septembre 2012
 ##Play.rules Return, Nouveau chapitre
 
 - comment faire des templates de projet ré-utilisables (arborescence projet)
 
-###Mercredi 1er Août
+###Mercredi 1er Août 2012
 ##Play.rules Return : Assets & le PDF !!!
 
 Ajout du chapitre sur les **assets** :
@@ -48,7 +48,7 @@ Enfin la version **pdf** (je la trouve plus lisible sur tablettes que le format 
 
 
 
-###Lundi 09 Juillet
+###Lundi 09 Juillet 2012
 ##Play.rules Return, Nouveau chapitre
 
 Ajout du chapitre **"Validation de données"**, avec au programme :
@@ -64,7 +64,7 @@ Toujours visible en mode web : [Play.Rules Return : Play!► 2 en douceur](http:
 - Une feuille de style plus sympa pour essayer d'avoir un epub plus joli
 - Une version pdf 
 
-###Lundi 18 juin
+###Lundi 18 juin 2012
 ##Play.rules Return, MàJ
 
 Grosse mise à jour :  ajout du chapitre **"Services JSON"**, avec au programme :
@@ -77,12 +77,12 @@ Grosse mise à jour :  ajout du chapitre **"Services JSON"**, avec au programme 
 Toujours visible en mode web : [Play.Rules Return : Play!► 2 en douceur](http://3monkeys.github.com/play.rules/livre.play.deux.web/play2.rules.return.html)
 
 
-###Dimanche 10 juin
+###Dimanche 10 juin 2012
 ##Play.rules Return, MàJ
 
 Merci à [@ndeverge](https://twitter.com/#!/ndeverge) pour sa pullrequest
 
-###Mercredi 30 mai
+###Mercredi 30 mai 2012
 ##Play.rules Return, la version avec Play!► 2 "reloaded"
 
 La version précédente (du mois de mars) a été complètement revue avec la sortie de la version finale de Play!► 2.
@@ -96,7 +96,7 @@ Visible en mode web : [Play.Rules Return : Play!► 2 en douceur](http://3monkey
 
 [Play.Rules UN : apprendre Play!► 1](http://3monkeys.github.com/play.rules/livre.play.un.web/play.rules.one.html)
 
-##Dimanche 4 mars
+##Dimanche 4 mars 2012
 
 **L'ebook est là !!!** 
 
@@ -118,27 +118,27 @@ Pour lire le livre au format epub sur PC ou Mac vous pouvez utiliser le logiciel
 
 Retours appréciés ;)
 
-##Samedi 28 Janvier
+##Samedi 28 Janvier 2012
 Mise en ligne d'une présentation interactive du framework avec tutoriels intégrés : [voir ici](http://3monkeys.github.com/prez.play/)
 
-##Lundi 28 novembre
+##Lundi 28 novembre 2011
 Une première version [disponible en pdf](https://github.com/3monkeys/play.rules/blob/master/Play.Rules!►%20eBook.pdf?raw=true)
 
-##Dimanche 27 novembre
+##Dimanche 27 novembre 2011
 
 - Ajout d'une fiche pratique sur la gestion des routes et des URL
 
-##Samedi 26 novembre
+##Samedi 26 novembre 2011
 
 - Ajout d'une fiche pratique sur la gestion du cache
 
-##Samedi 22 octobre
+##Samedi 22 octobre 2011
 
 - Ajout d'une nouvelle partie dediée au déploiement
 - Et on commence avec Tomcat
 - Contributions bienvenues ;)
 
-##Vendredi 14 octobre
+##Vendredi 14 octobre 2011
 
 - amélioration du scrolling sous iOS5 (juste 1 ligne à changer!)
 
@@ -146,11 +146,11 @@ Une première version [disponible en pdf](https://github.com/3monkeys/play.rules
 	la version "mobile" devrait être pas mal sous iPhone (iOS5)
 	la version "mobile" sous android s'en sort bien (testée sur HTC Desire)
 
-##Lundi 10 octobre
+##Lundi 10 octobre 2011
 
 - Une version pour mobile en ligne (beta à optimiser) : [http://3monkeys.github.com/play.rules/m.html](http://3monkeys.github.com/play.rules/m.html)
 
-##Mercredi 5 octobre
+##Mercredi 5 octobre 2011
 
 Nous avons mis le temps, mais nous nous sommes enfin décidés à créer un mini-site lié au repository [https://github.com/3monkeys/play.rules](https://github.com/3monkeys/play.rules). Il vous permettra de naviguer dans les chapitres déjà écrits (il reste quelques réglages de mise en page pour le rendu, mais c'est déjà utilisable).
 
