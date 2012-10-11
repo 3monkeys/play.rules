@@ -2,7 +2,7 @@
 
 ##Intro
 
-Il s'agit pas de refaire un tuto entier sur Scala ou de redétailler toute l'api Play en version Scala... 
+Il s'agit pas de refaire un tuto entier sur Scala ou de redétailler toute l'API Play Framework en version Scala... 
 
 Par contre nous allons expliquer ce que ça apporte d'utiliser Scala à travers quelques exemples, les différences avec la version Java et surtout "pourquoi Scala colle à l'esprit de Play". 
 Ce chapitre peut donc être vu comme un chapitre bonus, sans lien avec le tuto "Bookmarks", pour vous donner envie de découvrir Scala.
