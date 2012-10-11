@@ -193,6 +193,17 @@ code > span.er { color: #ff0000; font-weight: bold; }
 </ul></li>
 <li><a href="#installation-dun-template"><span class="toc-section-number">14.5</span> Installation d'un template :</a></li>
 </ul></li>
+<li><a href="#coder-son-application-play-en-scala"><span class="toc-section-number">15</span> Coder son application Play!&gt; en Scala</a><ul>
+<li><a href="#intro"><span class="toc-section-number">15.1</span> Intro</a></li>
+<li><a href="#liens-entre-stateless-et-programmation-fonctionnelle"><span class="toc-section-number">15.2</span> Liens entre Stateless et programmation fonctionnelle</a></li>
+<li><a href="#iteratee"><span class="toc-section-number">15.3</span> Iteratee</a><ul>
+<li><a href="#un-exemple-avec-comet"><span class="toc-section-number">15.3.1</span> Un exemple avec Comet</a></li>
+<li><a href="#controleur"><span class="toc-section-number">15.3.2</span> Controleur</a><ul>
+<li><a href="#adapter-le-contenu-avec-un-enumeratee"><span class="toc-section-number">15.3.2.1</span> Adapter le contenu avec un enumeratee</a></li>
+</ul></li>
+<li><a href="#dautres-exemples-intéressants"><span class="toc-section-number">15.3.3</span> D'autres exemples intéressants</a></li>
+</ul></li>
+</ul></li>
 </ul>
 </div>
 <p><img src="rsrc/play_rules_return.png" /><br /></p>
@@ -227,8 +238,25 @@ code > span.er { color: #ff0000; font-weight: bold; }
 <h2 id="remarques"><a href="#TOC"><span class="header-section-number">2.5</span> Remarques</a></h2>
 <p>Les premiers chapitres traitent de la version <strong>Java</strong> de Play2!&gt;;, mais la version <strong>Scala</strong> sera elle aussi abordée.</p>
 <h1 id="introduction---pourquoi-play"><a href="#TOC"><span class="header-section-number">3</span> Introduction - Pourquoi Play!&gt;</a></h1>
-<pre><code>//TODO: ...</code></pre>
-<p>Vous pouvez lire en attendant <a href="https://github.com/3monkeys/play.rules/blob/master/livre.play.un/00-02-Introduction-Pourquoi-Play.md">cette introduction</a> du livre 1, la philosohie n'ayant pas changé.</p>
+<p>Play Framework dans sa version 1 a apporté un vent de révolution au monde des frameworks Web Java.</p>
+<p>Les principaux points d'innovation étaient à l'époque</p>
+<ul>
+<li>Une productivité grandement améliorée (notamment via déploiement à chaud des modifications de code)</li>
+<li>Une architecture simplifiée et centrée sur les modèles (tout en facilitant l'évolutivité et la maintenabilité)</li>
+<li>Une &quot;coeur&quot; modulaire et extensible</li>
+<li>Un framework basé sur REST</li>
+<li>Un framework permettant de monter très facilement en charge (scalabilité)</li>
+<li>Et enfin une architecture entièrement stateless côté serveur</li>
+</ul>
+<p>L'architecture stateless consiste à ne garder aucun état sur le serveur. Une telle architecture propose de nombreux avantages. Si notre application se trouve derrière un load balancer, on peut ajouter un serveur, en couper un pour le mettre à jour... sans aucune conséquence pour le client qui ne risque pas de perdre sa session pendant l'opération... un utilisateur pourra être dirigé aléatoirement vers un serveur ou un autre à chaque requête, pas besoin de mettre en place une session HTTP distribuée (usine à gaz...)</p>
+<p>Cela va de paire avec l'aspect RESTful : Prenez n'importe quelle page dont l'URL d'accès est définie par une méthode HTTP <code>Get</code>. Vous pourrez toujours mettre cette page en bookmark dans votre navigateur et y revenir plus tard. Le serveur ne conservant pas de session, vous n'aurez pas de surprise, vous obtiendrez toujours le même résultat. Si vous avez déjà utilisé des frameworks stateful comme JSF, vous avez sûrement remarqué que ce n'était pas simple avec une telle architecture. Note : une page bookmarkable sera aussi plus facile à mettre en cache et sera compatible avec le bouton &quot;back&quot; du navigateur (là encore je vous renvoie à JSF...).</p>
+<p>Note : On peut bien sûr gérer des informations sur la session utilisateur côté client, via un cookie (signé et crypté) ou via le stockage local HTML5.</p>
+<p>Play!&gt; 2 conserve tous ces principes et en apporte de nouveaux...</p>
+<ul>
+<li>Toute requête est potentiellement asynchrone</li>
+<li>Tout est typé et vérifié à la compilation, même les templates de vues et les fichiers de définitions des routes HTTP (nous verrons plus loin de quoi il s'agit).</li>
+</ul>
+<p>L'aspect asynchrone est particulièrement intéressant. En ce moment on parle beaucoup de &quot;real time web applications&quot;. Certains n'y voient qu'un buzzword, mais le concept est vraiment intéressant et Play!&gt; 2 permet de faire ce genre de choses facilement. On peut par exemple, depuis une requête HTTP, récupérer une multitude d'informations en appelant différents services externes (twitter, linkedin ...), mixer ces infos et les pousser vers le client, tout ça en mode non bloquant, c'est à dire que le navigateur ne reste pas en attente entre la demande d'informations et la réponse. Après la requête, la connexion est libérée, puis une autre connexion sera créée dans le sens inverse (server -&gt; client) une fois que le résultat sera calculé. Nous verrons ces concepts plus en détail tout à la fin de cet ebook.</p>
 <h1 id="installation"><a href="#TOC"><span class="header-section-number">4</span> Installation</a></h1>
 <p><strong>version de Play!&gt; utilisée : 2.0.1</strong></p>
 <blockquote>
@@ -716,9 +744,9 @@ GET     /                           controllers.Application.index()</code></pre>
 <h3 id="modifions-le-code-de-main.scala.html"><a href="#TOC"><span class="header-section-number">8.2.1</span> Modifions le code de <code>main.scala.html</code></a></h3>
 <pre class="sourceCode html"><code class="sourceCode html">
     @(title: String)(content: Html)
-
+    
     <span class="dt">&lt;!DOCTYPE </span>html<span class="dt">&gt;</span>
-
+    
     <span class="kw">&lt;html&gt;</span>
         <span class="kw">&lt;head&gt;</span>
             <span class="kw">&lt;title&gt;</span>@title<span class="kw">&lt;/title&gt;</span>
@@ -749,7 +777,7 @@ GET     /                           controllers.Application.index()</code></pre>
 <p>Modifiez le tag <code>&lt;body&gt;</code> de la façon suivante :</p>
 <pre class="sourceCode html"><code class="sourceCode html">
     <span class="kw">&lt;body&gt;</span>
-
+        
         <span class="kw">&lt;div</span><span class="ot"> class=</span><span class="st">&quot;navbar navbar-fixed-top&quot;</span><span class="kw">&gt;</span>
             <span class="kw">&lt;div</span><span class="ot"> class=</span><span class="st">&quot;navbar-inner&quot;</span><span class="kw">&gt;</span>
                 <span class="kw">&lt;div</span><span class="ot"> class=</span><span class="st">&quot;container&quot;</span><span class="kw">&gt;</span>
@@ -760,7 +788,7 @@ GET     /                           controllers.Application.index()</code></pre>
         <span class="kw">&lt;div</span><span class="ot"> class=</span><span class="st">&quot;container&quot;</span><span class="kw">&gt;</span>
             @content
         <span class="kw">&lt;/div&gt;</span>
-
+        
     <span class="kw">&lt;/body&gt;</span></code></pre>
 <p>Vous pouvez rafraîchir votre page à nouveau, ça prend forme ... :</p>
 <p><img src="rsrc/05-sexy-002.png" /><br /></p>
@@ -805,27 +833,27 @@ categories:
     <span class="kw">import models.*;</span>
 
     <span class="kw">public</span> <span class="kw">class</span> Global <span class="kw">extends</span> GlobalSettings {
-
+        
         <span class="kw">public</span> <span class="dt">void</span> <span class="fu">onStart</span>(Application app) {
             InitialData.<span class="fu">insert</span>(app);
         }
-
+        
         <span class="dt">static</span> <span class="kw">class</span> InitialData {
-
+            
             <span class="kw">public</span> <span class="dt">static</span> <span class="dt">void</span> <span class="fu">insert</span>(Application app) {
                 <span class="kw">if</span>(Ebean.<span class="fu">find</span>(Category.<span class="fu">class</span>).<span class="fu">findRowCount</span>() == <span class="dv">0</span>) {
-
+                    
                     Map&lt;String,List&lt;Object&gt;&gt; all = 
                         (Map&lt;String,List&lt;Object&gt;&gt;)Yaml.<span class="fu">load</span>(<span class="st">&quot;initial-data.yml&quot;</span>);
 
                     <span class="co">// Insert categories first</span>
                     Ebean.<span class="fu">save</span>(all.<span class="fu">get</span>(<span class="st">&quot;categories&quot;</span>));
-
+                    
                 }
             }
-
+            
         }
-
+        
     }</code></pre>
 <p>Enfin, modifier le fichier <code>conf/application.conf</code> et décommenter la ligne suivante, ie :</p>
 <pre><code># global=Global</code></pre>
@@ -866,7 +894,7 @@ categories:
         <span class="co">// ...</span>
     }</code></pre>
 <p>Ceci nous permettra ensuite de vérifier l'intégrité des données lors de la soumission du formulaire (= lorsque l'on ajoute une catégorie). Modifions un peu le code de notre contrôleur <code>Categories</code> :</p>
-<pre class="sourceCode java"><code class="sourceCode java">
+<pre class="sourceCode java"><code class="sourceCode java">    
     <span class="kw">public</span> <span class="kw">class</span> Categories <span class="kw">extends</span> Controller {
 
         <span class="kw">public</span> <span class="dt">static</span> Result <span class="fu">add</span>() {
@@ -885,7 +913,8 @@ categories:
             <span class="kw">return</span> <span class="fu">redirect</span>(routes.<span class="fu">Application</span>.<span class="fu">index</span>());
 
         }
-    }</code></pre>
+    }
+    </code></pre>
 <p>En cas de problème on renvoie une erreur à notre template.</p>
 <p>Pour afficher cette erreur on peut ajouter ceci à notre fichier <code>index.scala.html</code> :</p>
 <pre class="sourceCode scala"><code class="sourceCode scala">
@@ -1003,7 +1032,7 @@ categories:
     @Constraints.<span class="fu">Email</span>
     <span class="kw">public</span> String contactMail;</code></pre>
 <p>Et ce tag :</p>
-<pre class="sourceCode scala"><code class="sourceCode scala">
+<pre class="sourceCode scala"><code class="sourceCode scala">  
     @<span class="fu">text</span>(<span class="fu">form</span>(<span class="st">&quot;contactMail&quot;</span>))</code></pre>
 <p>On obtiendra ceci :</p>
 <pre class="sourceCode html"><code class="sourceCode html">
@@ -1030,75 +1059,75 @@ categories:
 <pre class="sourceCode java"><code class="sourceCode java">
     <span class="co">//TODO : expliquer ce que fait le code</span>
     <span class="kw">package models;</span>
-
+    
     <span class="kw">import java.util.*;</span>
     <span class="kw">import javax.persistence.*;</span>
-
+    
     <span class="kw">import play.db.ebean.Model;</span>
     <span class="kw">import play.data.format.*;</span>
     <span class="kw">import play.data.validation.*;</span>
-
-
+    
+    
     @Entity 
     <span class="kw">public</span> <span class="kw">class</span> User <span class="kw">extends</span> Model {
-
+    
         @Id
         @Constraints.<span class="fu">Required</span>
         @Formats.<span class="fu">NonEmpty</span>
         <span class="kw">public</span> String email;
-
+    
         @Constraints.<span class="fu">Required</span>
         <span class="kw">public</span> String name;
-
+    
         @Constraints.<span class="fu">Required</span>
         <span class="kw">public</span> String password;
-
+    
         <span class="kw">public</span> <span class="dt">static</span> Model.<span class="fu">Finder</span>&lt;String,User&gt; find = 
             <span class="kw">new</span> Model.<span class="fu">Finder</span>(String.<span class="fu">class</span>, User.<span class="fu">class</span>);
-
+    
         <span class="kw">public</span> <span class="dt">static</span> List&lt;User&gt; <span class="fu">findAll</span>() {
             <span class="kw">return</span> find.<span class="fu">all</span>();
         }
-
+    
         <span class="kw">public</span> <span class="dt">static</span> User <span class="fu">findByEmail</span>(String email) {
             <span class="kw">return</span> find.<span class="fu">where</span>().<span class="fu">eq</span>(<span class="st">&quot;email&quot;</span>, email).<span class="fu">findUnique</span>();
         }
-
+    
         <span class="kw">public</span> <span class="dt">static</span> User <span class="fu">authenticate</span>(String email, String password) {
             <span class="kw">return</span> find.<span class="fu">where</span>()
                 .<span class="fu">eq</span>(<span class="st">&quot;email&quot;</span>, email)
                 .<span class="fu">eq</span>(<span class="st">&quot;password&quot;</span>, password)
                 .<span class="fu">findUnique</span>();
         }
-
+    
         <span class="kw">public</span> String <span class="fu">toString</span>() {
             <span class="kw">return</span> <span class="st">&quot;User(&quot;</span> + email + <span class="st">&quot;)&quot;</span>;
         }
-
+    
     }</code></pre>
 <h2 id="création-dun-contrôleur-secured"><a href="#TOC"><span class="header-section-number">11.2</span> Création d'un contrôleur Secured</a></h2>
 <pre class="sourceCode java"><code class="sourceCode java">
     <span class="co">//TODO : expliquer ce que fait le code</span>
     <span class="kw">package controllers;</span>
-
+    
     <span class="kw">import play.*;</span>
     <span class="kw">import play.mvc.*;</span>
     <span class="kw">import play.mvc.Http.*;</span>
-
+    
     <span class="kw">import models.*;</span>
-
+    
     <span class="kw">public</span> <span class="kw">class</span> Secured <span class="kw">extends</span> Security.<span class="fu">Authenticator</span> {
-
+    
         @Override
         <span class="kw">public</span> String <span class="fu">getUsername</span>(Context ctx) {
             <span class="kw">return</span> ctx.<span class="fu">session</span>().<span class="fu">get</span>(<span class="st">&quot;email&quot;</span>);
         }
-
+    
         @Override
         <span class="kw">public</span> Result <span class="fu">onUnauthorized</span>(Context ctx) {
             <span class="kw">return</span> <span class="fu">redirect</span>(routes.<span class="fu">Authentication</span>.<span class="fu">login</span>());
         }
-
+    
     }</code></pre>
 <h2 id="allons-modifier-le-contrôleur-application"><a href="#TOC"><span class="header-section-number">11.3</span> Allons modifier le contrôleur Application</a></h2>
 <ul>
@@ -1108,20 +1137,20 @@ categories:
 <p>Code final :</p>
 <pre class="sourceCode java"><code class="sourceCode java">
     <span class="kw">package controllers;</span>
-
+    
     <span class="kw">import play.*;</span>
     <span class="kw">import play.mvc.*;</span>
     <span class="kw">import play.data.*;</span>
-
+    
     <span class="kw">import models.*;</span>
     <span class="kw">import views.html.*;</span>
-
-
+    
+    
     @Security.<span class="fu">Authenticated</span>(Secured.<span class="fu">class</span>)
     <span class="kw">public</span> <span class="kw">class</span> Application <span class="kw">extends</span> Controller {
-
+    
         <span class="kw">public</span> <span class="dt">static</span> Result <span class="fu">index</span>() {
-
+    
             <span class="kw">return</span> <span class="fu">ok</span>(index.<span class="fu">render</span>(
                         <span class="st">&quot;Vous pouvez commencer à saisir ...&quot;</span>,
                         Bookmark.<span class="fu">find</span>.<span class="fu">fetch</span>(<span class="st">&quot;category&quot;</span>).<span class="fu">orderBy</span>(<span class="st">&quot;title&quot;</span>).<span class="fu">findList</span>(),
@@ -1129,27 +1158,27 @@ categories:
                         User.<span class="fu">find</span>.<span class="fu">byId</span>(<span class="fu">request</span>().<span class="fu">username</span>())
                     ));
         }
-
+    
     }</code></pre>
 <h2 id="création-dun-contrôleur-authentication"><a href="#TOC"><span class="header-section-number">11.4</span> Création d'un contrôleur Authentication</a></h2>
 <pre class="sourceCode java"><code class="sourceCode java">
     <span class="kw">package controllers;</span>
-
+    
     <span class="kw">import play.*;</span>
     <span class="kw">import play.mvc.*;</span>
     <span class="kw">import play.data.*;</span>
-
+    
     <span class="kw">import models.*;</span>
     <span class="kw">import views.html.*;</span>
-
-
+    
+    
     <span class="kw">public</span> <span class="kw">class</span> Authentication <span class="kw">extends</span> Controller {
-
+    
         <span class="kw">public</span> <span class="dt">static</span> <span class="kw">class</span> AuthenticatedUser {
-
+    
             <span class="kw">public</span> String email;
             <span class="kw">public</span> String password;
-
+    
             <span class="kw">public</span> String <span class="fu">validate</span>() {
                 <span class="kw">if</span>(User.<span class="fu">authenticate</span>(email, password) == <span class="kw">null</span>) {
                     <span class="kw">return</span> <span class="st">&quot;oups! râté! Essaye encore une fois&quot;</span>;
@@ -1157,13 +1186,13 @@ categories:
                 <span class="kw">return</span> <span class="kw">null</span>;
             }
         }
-
+    
         <span class="kw">public</span> <span class="dt">static</span> Result <span class="fu">login</span>() {
             <span class="kw">return</span> <span class="fu">ok</span>(
                 login.<span class="fu">render</span>(<span class="fu">form</span>(AuthenticatedUser.<span class="fu">class</span>))
             );
         }
-
+    
         <span class="co">//On récupère les informations de login (quand le user se &quot;signe&quot;)</span>
         <span class="kw">public</span> <span class="dt">static</span> Result <span class="fu">authenticate</span>() {
             Form&lt;AuthenticatedUser&gt; loginForm = 
@@ -1177,7 +1206,7 @@ categories:
                 );
             }
         }
-
+    
         <span class="co">//Fermer la session</span>
         <span class="kw">public</span> <span class="dt">static</span> Result <span class="fu">logout</span>() {
             <span class="fu">session</span>().<span class="fu">clear</span>();
@@ -1186,7 +1215,7 @@ categories:
                 routes.<span class="fu">Authentication</span>.<span class="fu">login</span>()
             );
         }
-
+    
     }</code></pre>
 <h2 id="allons-modifier-les-routes"><a href="#TOC"><span class="header-section-number">11.5</span> Allons modifier les routes</a></h2>
 <pre><code># Authentication
@@ -1197,7 +1226,7 @@ GET     /logout                             controllers.Authentication.logout()<
 <p>Nous avons vu que nous passions le user authentifié à la méthode <code>index.render()</code> de la vue dans le contrôleur <code>Application</code> :</p>
 <pre class="sourceCode java"><code class="sourceCode java">
     <span class="kw">public</span> <span class="dt">static</span> Result <span class="fu">index</span>() {
-
+    
         <span class="kw">return</span> <span class="fu">ok</span>(index.<span class="fu">render</span>(
                     <span class="st">&quot;Vous pouvez commencer à saisir ...&quot;</span>,
                     Bookmark.<span class="fu">find</span>.<span class="fu">fetch</span>(<span class="st">&quot;category&quot;</span>).<span class="fu">orderBy</span>(<span class="st">&quot;title&quot;</span>).<span class="fu">findList</span>(),
@@ -1221,9 +1250,9 @@ GET     /logout                             controllers.Authentication.logout()<
 <p>Le code définitif va donner ceci :</p>
 <pre class="sourceCode html"><code class="sourceCode html">
     @(title: String, user: User)(content: Html)
-
+    
     <span class="dt">&lt;!DOCTYPE </span>html<span class="dt">&gt;</span>
-
+    
     <span class="kw">&lt;html&gt;</span>
         <span class="kw">&lt;head&gt;</span>
             <span class="kw">&lt;title&gt;</span>@title<span class="kw">&lt;/title&gt;</span>
@@ -1244,7 +1273,7 @@ GET     /logout                             controllers.Authentication.logout()<
 <span class="ot">                type=</span><span class="st">&quot;text/javascript&quot;</span><span class="kw">&gt;&lt;/script&gt;</span>
         <span class="kw">&lt;/head&gt;</span>
         <span class="kw">&lt;body&gt;</span>
-
+    
             <span class="kw">&lt;div</span><span class="ot"> class=</span><span class="st">&quot;navbar navbar-fixed-top&quot;</span><span class="kw">&gt;</span>
                 <span class="kw">&lt;div</span><span class="ot"> class=</span><span class="st">&quot;navbar-inner&quot;</span><span class="kw">&gt;</span>
                     <span class="kw">&lt;div</span><span class="ot"> class=</span><span class="st">&quot;container&quot;</span><span class="kw">&gt;</span>
@@ -1258,11 +1287,11 @@ GET     /logout                             controllers.Authentication.logout()<
                     <span class="kw">&lt;/div&gt;</span>
                 <span class="kw">&lt;/div&gt;</span>
             <span class="kw">&lt;/div&gt;</span>
-
+    
             <span class="kw">&lt;div</span><span class="ot"> class=</span><span class="st">&quot;container&quot;</span><span class="kw">&gt;</span>
                 @content
             <span class="kw">&lt;/div&gt;</span>
-
+    
         <span class="kw">&lt;/body&gt;</span>
     <span class="kw">&lt;/html&gt;</span></code></pre>
 <h3 id="il-faut-aussi-modifier-index.scala.html"><a href="#TOC"><span class="header-section-number">11.6.2</span> Il faut aussi modifier index.scala.html</a></h3>
@@ -1280,21 +1309,21 @@ user: User
 <p>Nous y sommes presque. Il faut créer le formulaire de login : créez dans le répertoire <code>views</code> un fichier <code>login.scala.html</code> avec le code suivant :</p>
 <pre class="sourceCode html"><code class="sourceCode html">
     @(form: Form[Authentication.AuthenticatedUser])
-
+    
     @main(&quot;Authentification&quot;, null) {
-
+    
         @helper.form(routes.Authentication.authenticate) {
-
+    
             <span class="kw">&lt;h2&gt;</span>Qui êtes vous ?<span class="kw">&lt;/h2&gt;</span>
-
+    
             @if(form.hasGlobalErrors) { 
                 <span class="kw">&lt;p</span><span class="ot"> class=</span><span class="st">&quot;error&quot;</span><span class="kw">&gt;</span>@form.globalError.message<span class="kw">&lt;/p&gt;</span>
             }
-
+    
             @if(flash.contains(&quot;success&quot;)) {
                 <span class="kw">&lt;p</span><span class="ot"> class=</span><span class="st">&quot;success&quot;</span><span class="kw">&gt;</span>@flash.get(&quot;success&quot;)<span class="kw">&lt;/p&gt;</span>
             }
-
+    
             <span class="kw">&lt;p&gt;&lt;input</span><span class="ot"> type=</span><span class="st">&quot;email&quot;</span><span class="ot"> name=</span><span class="st">&quot;email&quot;</span><span class="ot"> placeholder=</span><span class="st">&quot;Email&quot;</span> 
 <span class="ot">                value=</span><span class="st">&quot;@form(&quot;</span><span class="er">email&quot;).value&quot;</span><span class="kw">&gt;&lt;/p&gt;</span>
             <span class="kw">&lt;p&gt;&lt;input</span><span class="ot"> type=</span><span class="st">&quot;password&quot;</span><span class="ot"> name=</span><span class="st">&quot;password&quot;</span><span class="ot"> placeholder=</span><span class="st">&quot;Password&quot;</span><span class="kw">&gt;&lt;/p&gt;</span>
@@ -1325,24 +1354,24 @@ users:
     <span class="kw">import java.util.*;</span>
     <span class="kw">import com.avaje.ebean.*;</span>
     <span class="kw">import models.*;</span>
-
+    
     <span class="kw">public</span> <span class="kw">class</span> Global <span class="kw">extends</span> GlobalSettings {
-
+    
         <span class="kw">public</span> <span class="dt">void</span> <span class="fu">onStart</span>(Application app) {
             InitialData.<span class="fu">insert</span>(app);
         }
-
+    
         <span class="dt">static</span> <span class="kw">class</span> InitialData {
-
+    
             <span class="kw">public</span> <span class="dt">static</span> <span class="dt">void</span> <span class="fu">insert</span>(Application app) {
-
+    
                 Map&lt;String,List&lt;Object&gt;&gt; all = 
                     (Map&lt;String,List&lt;Object&gt;&gt;)Yaml.<span class="fu">load</span>(<span class="st">&quot;initial-data.yml&quot;</span>);
-
+    
                 <span class="kw">if</span>(Ebean.<span class="fu">find</span>(User.<span class="fu">class</span>).<span class="fu">findRowCount</span>() == <span class="dv">0</span>) {                
                     Ebean.<span class="fu">save</span>(all.<span class="fu">get</span>(<span class="st">&quot;users&quot;</span>));   
                 }
-
+    
                 <span class="kw">if</span>(Ebean.<span class="fu">find</span>(Category.<span class="fu">class</span>).<span class="fu">findRowCount</span>() == <span class="dv">0</span>) {
                     <span class="co">// Insert categories first</span>
                     Ebean.<span class="fu">save</span>(all.<span class="fu">get</span>(<span class="st">&quot;categories&quot;</span>));                
@@ -1610,9 +1639,9 @@ GET     /logoutjson                         controllers.AuthenticationJson.logou
     <span class="kw">import views.html.*;</span>
 
     <span class="kw">public</span> <span class="kw">class</span> SingleApp <span class="kw">extends</span> Controller {
-
+        
         <span class="kw">public</span> <span class="dt">static</span> Result <span class="fu">mainPage</span>() {
-
+    
             <span class="kw">return</span> <span class="fu">ok</span>(mainPage.<span class="fu">render</span>(
                         <span class="st">&quot;Single Page Application&quot;</span>
                     ));
@@ -1750,10 +1779,10 @@ GET     /main                       controllers.SingleApp.mainPage()</code></pre
                         <span class="dt">error </span>: <span class="kw">function</span>(err){<span class="kw">console</span>.<span class="fu">log</span>(<span class="st">&quot;Erreur&quot;</span>, err);}, 
                         <span class="dt">success </span>: <span class="kw">function</span>(data){ 
 
-                            <span class="kw">if</span>(<span class="kw">user</span>.<span class="fu">name</span>) {
+<span class="er">                            if(user.name) {</span>
                                 alertAuthentication
                                     .<span class="fu">attr</span>(<span class="ch">&#39;class&#39;</span>,<span class="ch">&#39;alert</span> <span class="ch">alert</span>-<span class="ch">info&#39;</span>)
-                                    .<span class="fu">html</span>(<span class="ch">&#39;</span>&lt;<span class="ch">strong</span>&gt;<span class="ch">Au</span> <span class="ch">revoir</span>&lt;/<span class="ch">strong</span>&gt; <span class="ch">&#39;</span> + <span class="kw">user</span>.<span class="fu">name</span>);
+<span class="er">                                    .html(&#39;&lt;strong&gt;Au revoir&lt;/strong&gt; &#39; + user.name);</span>
 
                                     <span class="kw">labels</span>.<span class="fu">show</span>();
                                     <span class="kw">email</span>.<span class="fu">show</span>();
@@ -1781,15 +1810,15 @@ GET     /main                       controllers.SingleApp.mainPage()</code></pre
                               <span class="kw">data.bookmarks</span>.<span class="fu">forEach</span>(<span class="kw">function</span>(bookmark){
                                 <span class="kw">bookmarksList</span>.<span class="fu">append</span>(
                                   $(<span class="ch">&#39;</span>&lt;<span class="ch">li</span>&gt;<span class="ch">&#39;</span>)
-                                    .<span class="fu">append</span>($(<span class="ch">&#39;</span>&lt;<span class="ch">b</span>&gt;<span class="ch">&#39;</span>).<span class="fu">append</span>(<span class="kw">bookmark</span>.<span class="fu">title</span>))
+<span class="er">                                    .append($(&#39;&lt;b&gt;&#39;).append(bookmark.title))</span>
                                     .<span class="fu">append</span>(<span class="ch">&#39;</span> | <span class="ch">&#39;</span>)
-                                    .<span class="fu">append</span>($(<span class="ch">&#39;</span>&lt;<span class="ch">a</span>&gt;<span class="ch">&#39;</span>).<span class="fu">attr</span>(<span class="st">&quot;href&quot;</span>,<span class="kw">bookmark</span>.<span class="fu">url</span>)
-                                    .<span class="fu">append</span>(<span class="kw">bookmark</span>.<span class="fu">url</span>))
+<span class="er">                                    .append($(&#39;&lt;a&gt;&#39;).attr(&quot;href&quot;,bookmark.url)</span>
+<span class="er">                                    .append(bookmark.url))</span>
                                     .<span class="fu">append</span>(<span class="ch">&#39;</span> | <span class="ch">&#39;</span>)
                                     .<span class="fu">append</span>($(<span class="ch">&#39;</span>&lt;<span class="ch">i</span>&gt;<span class="ch">&#39;</span>)
-                                    .<span class="fu">append</span>(<span class="kw">bookmark</span>.<span class="fu">details</span>))
+<span class="er">                                    .append(bookmark.details))</span>
                                     .<span class="fu">append</span>(<span class="ch">&#39;</span> | (<span class="ch">&#39;</span>)
-                                    .<span class="fu">append</span>(<span class="kw">bookmark.category</span>.<span class="fu">label</span>).<span class="fu">append</span>(<span class="ch">&#39;</span>)<span class="ch">&#39;</span>)
+<span class="er">                                    .append(bookmark.category.label).append(&#39;)&#39;)</span>
                                 );
                               });
                             } <span class="kw">else</span> {
@@ -1807,7 +1836,8 @@ GET     /main                       controllers.SingleApp.mainPage()</code></pre
             });
         <span class="kw">&lt;/script&gt;</span>
 
-    <span class="kw">&lt;/html&gt;</span></code></pre>
+    <span class="kw">&lt;/html&gt;</span>
+    </code></pre>
 <h2 id="testons-2"><a href="#TOC"><span class="header-section-number">12.6</span> Testons</a></h2>
 <p>Dans votre navigateur, appelez l'url : <code>http://localhost:9000/main</code></p>
 <p><img src="rsrc/09-services-013.png" /><br /> Si vous vous trompez en vous authentifiant :</p>
@@ -2099,7 +2129,7 @@ supertag {
         <span class="kw">&lt;h2&gt;</span>Nouvelle Cat<span class="dv">&amp;eacute;</span>gorie<span class="kw">&lt;/h2&gt;</span>
         <span class="kw">&lt;form</span><span class="ot"> method=</span><span class="st">&quot;post&quot;</span><span class="ot"> action=</span><span class="st">&quot;@routes.Categories.add()&quot;</span><span class="kw">&gt;</span>
             <span class="kw">&lt;input</span><span class="ot"> name=</span><span class="st">&quot;label&quot;</span><span class="ot"> placeholder=</span><span class="st">&quot;label&quot;</span><span class="kw">&gt;</span>
-
+            
             <span class="kw">&lt;button</span><span class="ot"> class=</span><span class="st">&quot;btn&quot;</span><span class="ot"> type=</span><span class="st">&quot;submit&quot;</span><span class="kw">&gt;</span>Ajouter la Cat<span class="dv">&amp;eacute;</span>gorie<span class="kw">&lt;/button&gt;</span>
         <span class="kw">&lt;/form&gt;</span>
     <span class="kw">&lt;/fieldset&gt;</span>
@@ -2109,7 +2139,7 @@ supertag {
             <span class="kw">&lt;strong&gt;</span>Oups!<span class="kw">&lt;/strong&gt;</span> @flash.get(&quot;error&quot;)
         <span class="kw">&lt;/div&gt;</span>
     }
-
+        
     <span class="co">&lt;!-- Liste des Catégories --&gt;</span>
     <span class="kw">&lt;ul&gt;</span>
         @for(category <span class="er">&lt;</span>- categories) {
@@ -2278,5 +2308,94 @@ application_secret [unicornslovecats]:
 application_name [killer_app]: 
 play_version [2.0.2]: 2.0.3</code></pre>
 <p>Et voilà, votre application est créée, vous n'avez plus qu'à lancer.</p>
+<h1 id="coder-son-application-play-en-scala"><a href="#TOC"><span class="header-section-number">15</span> Coder son application Play!&gt; en Scala</a></h1>
+<h2 id="intro"><a href="#TOC"><span class="header-section-number">15.1</span> Intro</a></h2>
+<p>Il s'agit pas de refaire un tuto entier sur Scala ou de redétailler toute l'api Play en version Scala...</p>
+<p>Par contre nous allons expliquer ce que ça apporte d'utiliser Scala à travers quelques exemples, les différences avec la version Java et surtout &quot;pourquoi Scala colle à l'esprit de Play&quot;. Ce chapitre peut donc être vu comme un chapitre bonus, sans lien avec le tuto &quot;Bookmarks&quot;, pour vous donner envie de découvrir Scala.</p>
+<h2 id="liens-entre-stateless-et-programmation-fonctionnelle"><a href="#TOC"><span class="header-section-number">15.2</span> Liens entre Stateless et programmation fonctionnelle</a></h2>
+<p>Si vous avez lu cet ebook depuis le début, vous savez que Play!&gt; est basé sur une architecture sans état côté serveur.</p>
+<p>La programmation fonctionnelle permet de pousser ce concept à un niveau maximum en évitant d'utiliser des variables mutables. Les variables mutables sont des variables dont la valeur peut changer au cours du temps. Prenez l'exemple d'un compteur que l'on incrémente.</p>
+<p>Play!&gt; ne conserve aucun état entre 2 requêtes HTTP. Cependant, au niveau d'une requête, une variable mutable dans une méthode constitue quelque chose qui se rapproche d'un état. Techniquement on ne parle pas du même type d'état, mais on peut rapprocher les 2 concepts... Si les accès concurrents (sur plusieurs threads) sont mal gérés, une variable mutable peut être source d'erreur. Si un client A et un client B accèdent en même temps à une telle variable et que l'un d'entre eux la modifie, que se passe-t-il? La programmation fonctionnelle permet d'éviter ce genre de soucis.</p>
+<p>Exemple du calcul de la somme des chiffres d'une liste en programmation itérative :</p>
+<pre class="sourceCode scala"><code class="sourceCode scala"><span class="kw">val</span> numbers: List(<span class="dv">1</span>, <span class="dv">2</span>, <span class="dv">4</span>)
+<span class="kw">var</span> total = <span class="dv">0</span>
+
+<span class="kw">for</span>(i &lt;- xs){
+    total +=  i
+}       
+
+<span class="co">//total = 7</span></code></pre>
+<p>Si le total est un membre de classe susceptible d'être lu et modifié par plusieurs personnes en même temps, on va devoir jouer avec les locks pour éviter les problèmes... en plus de perdre en performance (les traitements seront bloquants) le code risque de devenir très vite compliqué pour pas grand chose.</p>
+<p>Voici un exemple du calcul de la somme des chiffres d'une liste en programmation fonctionnelle :</p>
+<pre class="sourceCode scala"><code class="sourceCode scala"><span class="kw">val</span> numbers: List(<span class="dv">1</span>, <span class="dv">2</span>, <span class="dv">4</span>)
+
+<span class="kw">val</span> total = <span class="fu">sum</span>(<span class="dv">0</span>, numbers) <span class="co">//total = 7</span>
+
+<span class="kw">def</span> <span class="fu">sum</span>(total: Int, xs: List[Int]) : Int ={
+  <span class="kw">if</span>(xs.<span class="fu">isEmpty</span>) total
+  <span class="kw">else</span> <span class="fu">sum</span>(total+xs.<span class="fu">head</span>, xs.<span class="fu">tail</span>)
+}</code></pre>
+<p>On dit d'un code basé uniquement sur des données immutables qu'il est sans effet de bords : aucun risque de fausser un résultat en affectant une valeur non désirée, ou en inversant l'ordre des affectations... Ici on calcule la somme de manière récursive (head renvoie le premier élément de la liste, tail tous les autres). Le total intermédiaire n'est jamais stocké dans une variable, il est local à chaque itération de la fonction.</p>
+<p>Scala pousse bien sur à utiliser la deuxième solution.</p>
+<p>Les ordinateurs possèdent un nombre toujours croissants de coeurs, les programmes optimisés utilisent donc de plus en plus d'accès concurrents. L'API Scala étant basée sur ces principes, elle permet d'en bénéficier directement de la force de la programmation parallèle.</p>
+<p>Voici comment on filtre une liste en Scala :</p>
+<pre class="sourceCode scala"><code class="sourceCode scala">    <span class="kw">val</span> result = data.<span class="fu">filter</span>(line =&gt; line.<span class="fu">contains</span>(<span class="st">&quot;keyword&quot;</span>))</code></pre>
+<p>Pour faire la même avec un traitement parallèle il suffit d'ajouter <code>.par</code> après la référence à notre liste de données :</p>
+<pre class="sourceCode scala"><code class="sourceCode scala">    <span class="kw">val</span> result = data.<span class="fu">par</span>.<span class="fu">filter</span>(line =&gt; line.<span class="fu">contains</span>(<span class="st">&quot;keyword&quot;</span>))</code></pre>
+<h2 id="iteratee"><a href="#TOC"><span class="header-section-number">15.3</span> Iteratee</a></h2>
+<p>Aujourd’hui on voit de plus de plus de sites web dont les données affichées se rafraîchissement en temps réel. Plutôt que de lancer des requêtes au serveur toutes les x secondes, il est possible de d'envoyer des données en &quot;push&quot;, du serveur vers le navigateur. Pour cela il existe plusieurs solutions dont Comet, WebSocket et SSE. WebSocket et SSE (Server Sent events) font partie de la spécification HTML5 et nécessitent donc un navigateur récent. Comet (ou long polling) permet via différentes techniques de pousser des données vers le navigateur à partir d'une première connexion (une requête du navigateur) dont la durée est infinie.</p>
+<p>Pour cela on utilise HTTP de manière asynchrone. Pour ce type de requêtes, Play!&gt; va traiter la demande, libérer les threads de connexion, puis rappeler le client lorsque les données seront disponibles. Ceci a 2 avantages : tout est traité de manière non bloquante (le navigateur n'est pas bloqué en attente d'un résultat si on utilise les WebSockets par exemple) et on y gagnes en consommation de ressources (moins de threads utilisés sur le serveur).</p>
+<p>Play propose une API nommée Iteratee qui permet de manipuler des flux de données de manière totalement asynchrone afin de répondre à ces problématiques.</p>
+<h3 id="un-exemple-avec-comet"><a href="#TOC"><span class="header-section-number">15.3.1</span> Un exemple avec Comet</a></h3>
+<p>Dans cet exemple nous allons voir commencer mixer 2 flux Twitter pour les afficher en temps réeel, à l'aide de l'API Iteratee.</p>
+<p>Vous pouvez voir la solution complète en récupérant ce <a href="https://github.com/loicdescotte/Play2-MixedTweets">mini project</a></p>
+<h3 id="controleur"><a href="#TOC"><span class="header-section-number">15.3.2</span> Controleur</a></h3>
+<p>Définissons une méthode <code>comet</code> dans notre controleur :</p>
+<pre class="sourceCode scala"><code class="sourceCode scala"><span class="kw">def</span> <span class="fu">comet</span>(query1: String, query2: String) = Action {
+
+  <span class="kw">lazy</span> <span class="kw">val</span> results1 = <span class="fu">getStream</span>(query1)
+
+  <span class="kw">lazy</span> <span class="kw">val</span> results2 = <span class="fu">getStream</span>(query2)
+
+  <span class="co">//pipe result 1 and result 2 and push to comet socket </span>
+  Ok.<span class="fu">stream</span>(results1 &gt;- results2 &amp;&gt; <span class="fu">Comet</span>(callback = <span class="st">&quot;parent.messageChanged&quot;</span>))
+  
+}</code></pre>
+<p><code>query1</code> et <code>query2</code> sont de simples chaînes de caractères utilisées pour lancer une recherche, comme &quot;java&quot; ou &quot;ruby&quot;.</p>
+<p><code>results1</code> et <code>results2</code> vont contenir les résultats des recherches Twitter correspondant.</p>
+<p>Dans la dernière ligne, <code>Ok.stream</code> va envoyer une réponse HTTP au client sous forme de chunks, c'est à dire par morceaux. Cela signifie qu'au lieu d'une réponse complète, la navigateur va recevoir des morceaux de réponse progressivement.</p>
+<p><code>results1 &gt;- results2</code> va effectuer un &quot;pipe&quot;, pour mixer les réponses des 2 recherches. <code>&amp;&gt; Comet(callback = &quot;parent.messageChanged&quot;)</code> va pousser le tout sur une socket Comet.</p>
+<p>Voyons maintenant comment récupérer les résultats de Twitter. Pour cela nous utiliserons des <code>enumerators</code>. Les enumerators font partie de l'API Iteratee de Play!&gt;.</p>
+<p>Il est important de savoir que dans cette API de manipulation des données</p>
+<ul>
+<li>Iteratee représente un consommateur de données asynchrone</li>
+<li>Enumerator représente un fournisseur de données asynchrone</li>
+</ul>
+<p>Les enumerators permettent donc de fournir des données à un iteratee qui va les consommer de manière asynchrone et non bloquante. Cela peut paraître compliqué mais ne vous inquiétez pas, le framework fera tout ce travail pour vous lorsque vous combinerez les enumeratos avec l'objet Comet.</p>
+<pre class="sourceCode scala"><code class="sourceCode scala"><span class="kw">private</span> <span class="kw">def</span> <span class="fu">getStream</span>(query: String) = {
+    Enumerator.<span class="fu">fromCallback</span>[String](() =&gt; 
+        Promise.<span class="fu">timeout</span>(WS.<span class="fu">url</span>(<span class="st">&quot;http://search.twitter.com/search.json?q=&quot;</span>+query+<span class="st">&quot;&amp;rpp=1&quot;</span>).<span class="fu">get</span>(), <span class="dv">1000</span> milliseconds).<span class="fu">flatMap</span>(_.<span class="fu">map</span> { response =&gt;
+            (response.<span class="fu">json</span> \\ <span class="st">&quot;text&quot;</span>).<span class="fu">headOption</span>.<span class="fu">map</span>(query + <span class="st">&quot; : &quot;</span> + _.<span class="fu">as</span>[String])
+        })
+    )
+}</code></pre>
+<p>Ce code dit que toutes les secondes, on va demander les nouveaux tweets correspondant à nos requêtes. <code>Enumerator.fromCallback</code> attend une fonction qui retourne une &quot;promesse&quot; de réponse. Quand cette réponse sera prête, elle sera poussée (de manière asynchrone) à la socket comet. On combine ceci avec <code>Promise.timeout</code> pour demander les nouveaux résultats à Twitter toutes les secondes. Nous obtenons alors une promesse de réponse, et pas une réponse! C'est pour ça qu'on utilise <code>flatMap</code> pour récupérer directement la réponse contenue dans la promesse (si elle existe).</p>
+<p>Un autre trick, <code>response.json \\ &quot;text&quot;</code> aide à parser la réponse JSON envoyée par Twitter à en extraire le contenu.</p>
+<h4 id="adapter-le-contenu-avec-un-enumeratee"><a href="#TOC"><span class="header-section-number">15.3.2.1</span> Adapter le contenu avec un enumeratee</a></h4>
+<p>Un enumeratee est une sorte d'adaptateur dans l'API Iteratee. Nous allons utiliser ce concept pour transformer les résultats envoyés au navigateur. Voyons un exemple très simple : envoyer tous les tweets en majuscule.</p>
+<p><code>scala val upperCase = Enumeratee.map[String] {     tweet =&gt; tweet.map(_.toUpperCase) }</code> Note : En scala, '_'permet de représenter un élément courant. On aurait aussi pu écrire <code>tweet.map((tweet :String) =&gt; tweet.toUpperCase)</code> }</p>
+<p>Pour insérer cette transformation dans le pipe juste avant d'envoyer le contenu à notre socket Comet, nous devons simplement modifier notre code comme ceci :</p>
+<pre class="sourceCode scala"><code class="sourceCode scala">Ok.<span class="fu">stream</span>(results1 &gt;- results2 &amp;&gt; upperCase &amp;&gt; <span class="fu">Comet</span>(callback = <span class="st">&quot;parent.messageChanged&quot;</span>))</code></pre>
+<p>Note : <code>&amp;&gt;</code> est juste un alias pour la méthode &quot;through&quot;.</p>
+<p>Enfin on a plus qu'à utiliser la technique &quot;iframe hack&quot; to démarrer le streaming dans le navigateur (voir <code>index.scala.html</code> dans le projet).</p>
+<p>Enjoy!!</p>
+<p>Si vous voulez en savoir plus sur les iteratees je vous conseille <a href="https://gist.github.com/3727850">cet article</a> (en français).</p>
+<h3 id="dautres-exemples-intéressants"><a href="#TOC"><span class="header-section-number">15.3.3</span> D'autres exemples intéressants</a></h3>
+<ul>
+<li><a href="http://en.lichess.org/games">Un jeu d'échecs</a> &quot;real time&quot; codé avec Play!&gt;</li>
+<li><a href="http://wiki-growth.herokuapp.com">Affichage d'une carte en streaming</a> - <a href="http://yannexpress.blogspot.de/2012/08/handling-data-streams-with-play2-and.html">Explicitations et code</a></li>
+<li><a href="http://reactivemongo.org/">ReactiveMongo</a>, un driver MongoDB asynchrone et non bloquant</li>
+</ul>
+<p>Note : ces API <a href="http://www.playframework.org/documentation/2.0.4/JavaAsync">existent en Java</a> mais apportent moins de souplesse et de lisibilité que leur équivalent Scala à cause des faiblesses du langage Java. Elles sont donc plus souvent utilisées en Scala.</p>
 </body>
 </html>

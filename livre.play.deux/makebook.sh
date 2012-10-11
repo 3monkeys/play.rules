@@ -14,7 +14,8 @@ pandoc -s --toc --highlight-style pygments -c --strict -N -o play2.rules.return.
 08-authentication.md \
 09-services.md \
 10-assets.md \
-11-templates.md
+11-templates.md \
+12-scala.md
 
 pandoc -s --toc --epub-metadata=meta.xml --epub-stylesheet=style.css --highlight-style pygments -N -o play2.rules.return.epub 00-00-cover.md \
 00-01-Preface.md \
@@ -29,7 +30,8 @@ pandoc -s --toc --epub-metadata=meta.xml --epub-stylesheet=style.css --highlight
 08-authentication.md \
 09-services.md \
 10-assets.md \
-11-templates.md
+11-templates.md \
+12-scala.md
 
 #pandoc -s --toc --highlight-style kate -c style.css -o play2.rules.return.docx 00-00-cover.md \
 #00-01-Preface.md \
@@ -58,4 +60,5 @@ pandoc -s --toc --highlight-style pygments -c style.css -N -o play2.rules.return
 08-authentication.md \
 09-services.md \
 10-assets.md \
-11-templates.md
+11-templates.md \
+12-scala.md
