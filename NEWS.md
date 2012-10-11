@@ -30,6 +30,11 @@
 ---
 
 
+###Jeudi 11 Octobre 2012
+##Play.rules Return, Nouveaux chapitre
+
+- découverte de Scala (chapitre 12), et l'intro du livre :)
+
 ###Jeudi 6 Septembre 2012
 ##Play.rules Return, Nouveau chapitre
 
