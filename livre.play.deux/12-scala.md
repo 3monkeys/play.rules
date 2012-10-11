@@ -20,8 +20,7 @@ Si les accès concurrents (sur plusieurs threads) sont mal gérés, une variable
 
 Exemple du calcul de la somme des chiffres d'une liste en programmation itérative :
 
-~~~scala
-
+```scala
 val numbers: List(1, 2, 4)
 var total = 0
 
@@ -30,14 +29,13 @@ for(i <- xs){
 }		
 
 //total = 7
-~~~
+```
 
 Si le total est un membre de classe susceptible d'être lu et modifié par plusieurs personnes en même temps, on va devoir jouer avec les locks pour éviter les problèmes... en plus de perdre en performance (les traitements seront bloquants) le code risque de devenir très vite compliqué pour pas grand chose.
 
 Voici un exemple du calcul de la somme des chiffres d'une liste en programmation fonctionnelle :
 
-~~~scala
-
+```scala
 val numbers: List(1, 2, 4)
 
 val total = sum(0, numbers) //total = 7
@@ -47,7 +45,7 @@ def sum(total: Int, xs: List[Int]) : Int ={
   else sum(total+xs.head, xs.tail)
 }
 
-~~~
+```
 
 On dit d'un code basé uniquement sur des données immutables qu'il est sans effet de bords : aucun risque de fausser un résultat en affectant une valeur non désirée, ou en inversant l'ordre des affectations... Ici on calcule la somme de manière récursive (head renvoie le premier élément de la liste, tail tous les autres).
 Le total intermédiaire n'est jamais stocké dans une variable, il est local à chaque itération de la fonction.
@@ -58,15 +56,15 @@ Les ordinateurs possèdent un nombre toujours croissants de coeurs, les programm
 
 Voici comment on filtre une liste en Scala :
 
-~~~scala
+```scala
 	val result = data.filter(line => line.contains("keyword"))
-~~~
+```
 
 Pour faire la même avec un traitement parallèle il suffit d'ajouter `.par` après la référence à notre liste de données :
 
-~~~scala
+```scala
 	val result = data.par.filter(line => line.contains("keyword"))
-~~~
+```
 
 
 ##Iteratee 
@@ -90,15 +88,14 @@ Définissons une méthode `comet` dans notre controleur :
 ```scala
 def comet(query1: String, query2: String) = Action {
 
-	  lazy val results1 = getStream(query1)
+  lazy val results1 = getStream(query1)
 
-	  lazy val results2 = getStream(query2)
+  lazy val results2 = getStream(query2)
 
-	  //pipe result 1 and result 2 and push to comet socket	
-	  Ok.stream(results1 >- results2 &> Comet(callback = "parent.messageChanged"))
+  //pipe result 1 and result 2 and push to comet socket	
+  Ok.stream(results1 >- results2 &> Comet(callback = "parent.messageChanged"))
   
-	}
-
+}
 ```
 
 `query1` et `query2` sont de simples chaînes de caractères utilisées pour lancer une recherche, comme "java" ou "ruby".
@@ -122,12 +119,12 @@ Cela peut paraître compliqué mais ne vous inquiétez pas, le framework fera to
 
 ```scala
 private def getStream(query: String) = {
-		Enumerator.fromCallback[String](() => 
-			Promise.timeout(WS.url("http://search.twitter.com/search.json?q="+query+"&rpp=1").get(), 1000 milliseconds).flatMap(_.map { response =>
-				(response.json \\ "text").headOption.map(query + " : " + _.as[String])
-			})
-		)
-	}
+	Enumerator.fromCallback[String](() => 
+		Promise.timeout(WS.url("http://search.twitter.com/search.json?q="+query+"&rpp=1").get(), 1000 milliseconds).flatMap(_.map { response =>
+			(response.json \\ "text").headOption.map(query + " : " + _.as[String])
+		})
+	)
+}
 ```
 
 Ce code dit que toutes les secondes, on va demander les nouveaux tweets correspondant à nos requêtes.
