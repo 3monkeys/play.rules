@@ -173,6 +173,52 @@ Le navigateur vérifiera alors la présence et la longueur du champ avant d'envo
 
 **Mais pour que cela fonctionne, quelques manipulations sont encore nécessaires :**
 
+Créons un modèle User (il nous reservira plus tard)
+
+```java
+
+	package models;
+	
+	import java.util.*;
+	import javax.persistence.*;
+	
+	import play.db.ebean.Model;
+	import play.data.format.*;
+	import play.data.validation.*;
+	
+	
+	@Entity 
+	public class User extends Model {
+	
+		@Id
+		@Constraints.Required
+		@Formats.NonEmpty
+		public String email;
+	
+		@Constraints.Required
+		public String name;
+	
+		@Constraints.Required
+		public String password;
+	
+		public static Model.Finder<String,User> find = 
+			new Model.Finder(String.class, User.class);
+	
+		public static List<User> findAll() {
+			return find.all();
+		}
+	
+		public static User findByEmail(String email) {
+			return find.where().eq("email", email).findUnique();
+		}
+	
+		public String toString() {
+			return "User(" + email + ")";
+		}
+	
+	}
+```
+
 Dans le contrôleur `Application.java`, ajoutons `form(Category.class)` en argument de la méthode `index.render()` :
 
 ```java
@@ -219,7 +265,7 @@ Maintenant nous pouvons remplacer `<input name="label" placeholder="label">` par
 
 Si vous ne souhaitez pas voir apparaître les contraintes de saisie, utilisez plutôt : `@text(categoryForm("label"), 'placeholder -> "saisir un label", '_showConstraints -> false)`.
 
-**Remarque :** Le fait de référencer un objet `categoryForm` nous permettra si on le souhaite plus tard d'éditer une catégorie existante en remplissant directement le champ du formulaire avec la valeur de notre objet. On pourrait par exemple écrire quelque chose comme ça dans le contrôleur :
+**Remarque :** Le fait de référencer un objet `categoryForm` nous permettra si on le souhaite plus tard d'éditer une catégorie existante en remplissant directement le champ du formulaire avec la valeur de notre objet. On pourrait par exemple écrire quelque chose comme ça dans le contrôleur (ceci est un exemple sans lien avec le code du tuto) :
 
 ```java
 

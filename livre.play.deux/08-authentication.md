@@ -8,11 +8,9 @@
 
 Pour que n'importe qui ne puisse pas saisir des bookmarks, nous allons mettre en place un système d'authentification.
 
-##Création d'un modèle User
+##Complétons la classe User
 
 ```java
-
-	//TODO : expliquer ce que fait le code
 	package models;
 	
 	import java.util.*;
@@ -47,7 +45,8 @@ Pour que n'importe qui ne puisse pas saisir des bookmarks, nous allons mettre en
 		public static User findByEmail(String email) {
 			return find.where().eq("email", email).findUnique();
 		}
-	
+		
+		//TODO : expliquer ce que fait le code
 		public static User authenticate(String email, String password) {
 			return find.where()
 				.eq("email", email)
@@ -61,6 +60,8 @@ Pour que n'importe qui ne puisse pas saisir des bookmarks, nous allons mettre en
 	
 	}
 ```
+
+Remarque : on a rajouté une méthode `authenticate`
 
 ##Création d'un contrôleur Secured
 
