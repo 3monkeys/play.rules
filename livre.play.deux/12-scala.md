@@ -24,7 +24,7 @@ Exemple du calcul de la somme des chiffres d'une liste en programmation itérati
 val numbers: List(1, 2, 4)
 var total = 0
 
-for(i <- xs){
+for(i <- numbers){
 	total +=  i
 }		
 
@@ -52,7 +52,7 @@ Le total intermédiaire n'est jamais stocké dans une variable, il est local à 
 
 Scala pousse bien sur à utiliser la deuxième solution.
 
-Les ordinateurs possèdent un nombre toujours croissants de coeurs, les programmes optimisés utilisent donc de plus en plus d'accès concurrents. L'API Scala étant basée sur ces principes, elle permet d'en bénéficier directement de la force de la programmation parallèle.
+Les ordinateurs possèdent un nombre toujours croissants de coeurs, les programmes optimisés utilisent donc de plus en plus d'accès concurrents. L'API Scala étant basée sur ces principes, elle permet de bénéficier directement de la force de la programmation parallèle.
 
 Voici comment on filtre une liste en Scala :
 
