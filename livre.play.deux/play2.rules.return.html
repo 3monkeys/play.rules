@@ -2425,7 +2425,7 @@ play_version [2.0.2]: 2.0.3</code></pre>
 <p>Un autre trick, <code>response.json \\ &quot;text&quot;</code> aide à parser la réponse JSON envoyée par Twitter à en extraire le contenu.</p>
 <h4 id="adapter-le-contenu-avec-un-enumeratee"><a href="#TOC"><span class="header-section-number">15.3.2.1</span> Adapter le contenu avec un enumeratee</a></h4>
 <p>Un enumeratee est une sorte d'adaptateur dans l'API Iteratee. Nous allons utiliser ce concept pour transformer les résultats envoyés au navigateur. Voyons un exemple très simple : envoyer tous les tweets en majuscule.</p>
-<p><code>scala val upperCase = Enumeratee.map[String] {     tweet =&gt; tweet.map(_.toUpperCase) }</code> Note : En scala, '_'permet de représenter un élément courant. On aurait aussi pu écrire <code>tweet.map((tweet :String) =&gt; tweet.toUpperCase)</code> }</p>
+<p><code>scala val upperCase = Enumeratee.map[String] {     tweet =&gt; tweet.map(_.toUpperCase) }</code> Note : En scala, '_' permet de représenter un élément courant (ici la fonction <code>map</code> traite chaque caractère du tweet). }</p>
 <p>Pour insérer cette transformation dans le pipe juste avant d'envoyer le contenu à notre socket Comet, nous devons simplement modifier notre code comme ceci :</p>
 <pre class="sourceCode scala"><code class="sourceCode scala">Ok.<span class="fu">stream</span>(results1 &gt;- results2 &amp;&gt; upperCase &amp;&gt; <span class="fu">Comet</span>(callback = <span class="st">&quot;parent.messageChanged&quot;</span>))</code></pre>
 <p>Note : <code>&amp;&gt;</code> est juste un alias pour la méthode &quot;through&quot;.</p>
