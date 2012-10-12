@@ -2362,7 +2362,7 @@ play_version [2.0.2]: 2.0.3</code></pre>
 <pre class="sourceCode scala"><code class="sourceCode scala"><span class="kw">val</span> numbers: List(<span class="dv">1</span>, <span class="dv">2</span>, <span class="dv">4</span>)
 <span class="kw">var</span> total = <span class="dv">0</span>
 
-<span class="kw">for</span>(i &lt;- xs){
+<span class="kw">for</span>(i &lt;- numbers){
     total +=  i
 }       
 
@@ -2379,7 +2379,7 @@ play_version [2.0.2]: 2.0.3</code></pre>
 }</code></pre>
 <p>On dit d'un code basé uniquement sur des données immutables qu'il est sans effet de bords : aucun risque de fausser un résultat en affectant une valeur non désirée, ou en inversant l'ordre des affectations... Ici on calcule la somme de manière récursive (head renvoie le premier élément de la liste, tail tous les autres). Le total intermédiaire n'est jamais stocké dans une variable, il est local à chaque itération de la fonction.</p>
 <p>Scala pousse bien sur à utiliser la deuxième solution.</p>
-<p>Les ordinateurs possèdent un nombre toujours croissants de coeurs, les programmes optimisés utilisent donc de plus en plus d'accès concurrents. L'API Scala étant basée sur ces principes, elle permet d'en bénéficier directement de la force de la programmation parallèle.</p>
+<p>Les ordinateurs possèdent un nombre toujours croissants de coeurs, les programmes optimisés utilisent donc de plus en plus d'accès concurrents. L'API Scala étant basée sur ces principes, elle permet de bénéficier directement de la force de la programmation parallèle.</p>
 <p>Voici comment on filtre une liste en Scala :</p>
 <pre class="sourceCode scala"><code class="sourceCode scala">    <span class="kw">val</span> result = data.<span class="fu">filter</span>(line =&gt; line.<span class="fu">contains</span>(<span class="st">&quot;keyword&quot;</span>))</code></pre>
 <p>Pour faire la même avec un traitement parallèle il suffit d'ajouter <code>.par</code> après la référence à notre liste de données :</p>
