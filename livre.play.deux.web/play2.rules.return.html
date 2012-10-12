@@ -102,7 +102,7 @@ code > span.er { color: #ff0000; font-weight: bold; }
 </ul></li>
 </ul></li>
 <li><a href="#gestion-de-lauthentification"><span class="toc-section-number">11</span> Gestion de l'authentification</a><ul>
-<li><a href="#création-dun-modèle-user"><span class="toc-section-number">11.1</span> Création d'un modèle User</a></li>
+<li><a href="#complétons-la-classe-user"><span class="toc-section-number">11.1</span> Complétons la classe User</a></li>
 <li><a href="#création-dun-contrôleur-secured"><span class="toc-section-number">11.2</span> Création d'un contrôleur Secured</a></li>
 <li><a href="#allons-modifier-le-contrôleur-application"><span class="toc-section-number">11.3</span> Allons modifier le contrôleur Application</a></li>
 <li><a href="#création-dun-contrôleur-authentication"><span class="toc-section-number">11.4</span> Création d'un contrôleur Authentication</a></li>
@@ -983,6 +983,48 @@ categories:
     <span class="kw">&lt;input</span><span class="ot"> name=</span><span class="st">&quot;url&quot;</span><span class="ot"> placeholder=</span><span class="st">&quot;url&quot;</span><span class="ot"> maxlength=</span><span class="st">&quot;30&quot;</span><span class="ot"> required</span><span class="kw">&gt;</span></code></pre>
 <p>Le navigateur vérifiera alors la présence et la longueur du champ avant d'envoyer les données au serveur, ce qui permettra à l'utilisateur d'avoir un retour d'erreur plus rapide en case de problème et d'économiser un peu de bande passante!</p>
 <p><strong>Mais pour que cela fonctionne, quelques manipulations sont encore nécessaires :</strong></p>
+<p>Créons un modèle User (il nous reservira plus tard)</p>
+<pre class="sourceCode java"><code class="sourceCode java">
+    <span class="kw">package models;</span>
+    
+    <span class="kw">import java.util.*;</span>
+    <span class="kw">import javax.persistence.*;</span>
+    
+    <span class="kw">import play.db.ebean.Model;</span>
+    <span class="kw">import play.data.format.*;</span>
+    <span class="kw">import play.data.validation.*;</span>
+    
+    
+    @Entity 
+    <span class="kw">public</span> <span class="kw">class</span> User <span class="kw">extends</span> Model {
+    
+        @Id
+        @Constraints.<span class="fu">Required</span>
+        @Formats.<span class="fu">NonEmpty</span>
+        <span class="kw">public</span> String email;
+    
+        @Constraints.<span class="fu">Required</span>
+        <span class="kw">public</span> String name;
+    
+        @Constraints.<span class="fu">Required</span>
+        <span class="kw">public</span> String password;
+    
+        <span class="kw">public</span> <span class="dt">static</span> Model.<span class="fu">Finder</span>&lt;String,User&gt; find = 
+            <span class="kw">new</span> Model.<span class="fu">Finder</span>(String.<span class="fu">class</span>, User.<span class="fu">class</span>);
+    
+        <span class="kw">public</span> <span class="dt">static</span> List&lt;User&gt; <span class="fu">findAll</span>() {
+            <span class="kw">return</span> find.<span class="fu">all</span>();
+        }
+    
+        <span class="kw">public</span> <span class="dt">static</span> User <span class="fu">findByEmail</span>(String email) {
+            <span class="kw">return</span> find.<span class="fu">where</span>().<span class="fu">eq</span>(<span class="st">&quot;email&quot;</span>, email).<span class="fu">findUnique</span>();
+        }
+    
+        <span class="kw">public</span> String <span class="fu">toString</span>() {
+            <span class="kw">return</span> <span class="st">&quot;User(&quot;</span> + email + <span class="st">&quot;)&quot;</span>;
+        }
+    
+    }</code></pre>
 <p>Dans le contrôleur <code>Application.java</code>, ajoutons <code>form(Category.class)</code> en argument de la méthode <code>index.render()</code> :</p>
 <pre class="sourceCode java"><code class="sourceCode java">
     <span class="kw">public</span> <span class="kw">class</span> Application <span class="kw">extends</span> Controller {
@@ -1016,7 +1058,7 @@ categories:
 <img src="rsrc/07-validation-004.png" /><p class="caption"></p>
 </div>
 <p>Si vous ne souhaitez pas voir apparaître les contraintes de saisie, utilisez plutôt : <code>@text(categoryForm(&quot;label&quot;), 'placeholder -&gt; &quot;saisir un label&quot;, '_showConstraints -&gt; false)</code>.</p>
-<p><strong>Remarque :</strong> Le fait de référencer un objet <code>categoryForm</code> nous permettra si on le souhaite plus tard d'éditer une catégorie existante en remplissant directement le champ du formulaire avec la valeur de notre objet. On pourrait par exemple écrire quelque chose comme ça dans le contrôleur :</p>
+<p><strong>Remarque :</strong> Le fait de référencer un objet <code>categoryForm</code> nous permettra si on le souhaite plus tard d'éditer une catégorie existante en remplissant directement le champ du formulaire avec la valeur de notre objet. On pourrait par exemple écrire quelque chose comme ça dans le contrôleur (ceci est un exemple sans lien avec le code du tuto) :</p>
 <pre class="sourceCode java"><code class="sourceCode java">
     <span class="kw">public</span> <span class="dt">static</span> Result <span class="fu">edit</span>(Long id) {
         Form&lt;Category&gt; categoryForm = <span class="fu">form</span>(Category.<span class="fu">class</span>).<span class="fu">fill</span>(
@@ -1055,10 +1097,8 @@ categories:
 <p><em>Remarque : la rédaction &quot;complète&quot; de ce chapitre reste encore à faire, mais les codes sont complets et vous pouvez les utiliser tels quels.</em></p>
 </blockquote>
 <p>Pour que n'importe qui ne puisse pas saisir des bookmarks, nous allons mettre en place un système d'authentification.</p>
-<h2 id="création-dun-modèle-user"><a href="#TOC"><span class="header-section-number">11.1</span> Création d'un modèle User</a></h2>
-<pre class="sourceCode java"><code class="sourceCode java">
-    <span class="co">//TODO : expliquer ce que fait le code</span>
-    <span class="kw">package models;</span>
+<h2 id="complétons-la-classe-user"><a href="#TOC"><span class="header-section-number">11.1</span> Complétons la classe User</a></h2>
+<pre class="sourceCode java"><code class="sourceCode java">    <span class="kw">package models;</span>
     
     <span class="kw">import java.util.*;</span>
     <span class="kw">import javax.persistence.*;</span>
@@ -1092,7 +1132,8 @@ categories:
         <span class="kw">public</span> <span class="dt">static</span> User <span class="fu">findByEmail</span>(String email) {
             <span class="kw">return</span> find.<span class="fu">where</span>().<span class="fu">eq</span>(<span class="st">&quot;email&quot;</span>, email).<span class="fu">findUnique</span>();
         }
-    
+        
+        <span class="co">//TODO : expliquer ce que fait le code</span>
         <span class="kw">public</span> <span class="dt">static</span> User <span class="fu">authenticate</span>(String email, String password) {
             <span class="kw">return</span> find.<span class="fu">where</span>()
                 .<span class="fu">eq</span>(<span class="st">&quot;email&quot;</span>, email)
@@ -1105,6 +1146,7 @@ categories:
         }
     
     }</code></pre>
+<p>Remarque : on a rajouté une méthode <code>authenticate</code></p>
 <h2 id="création-dun-contrôleur-secured"><a href="#TOC"><span class="header-section-number">11.2</span> Création d'un contrôleur Secured</a></h2>
 <pre class="sourceCode java"><code class="sourceCode java">
     <span class="co">//TODO : expliquer ce que fait le code</span>
@@ -2310,7 +2352,7 @@ play_version [2.0.2]: 2.0.3</code></pre>
 <p>Et voilà, votre application est créée, vous n'avez plus qu'à lancer.</p>
 <h1 id="coder-son-application-play-en-scala"><a href="#TOC"><span class="header-section-number">15</span> Coder son application Play!&gt; en Scala</a></h1>
 <h2 id="intro"><a href="#TOC"><span class="header-section-number">15.1</span> Intro</a></h2>
-<p>Il s'agit pas de refaire un tuto entier sur Scala ou de redétailler toute l'api Play en version Scala...</p>
+<p>Il s'agit pas de refaire un tuto entier sur Scala ou de redétailler toute l'API Play Framework en version Scala...</p>
 <p>Par contre nous allons expliquer ce que ça apporte d'utiliser Scala à travers quelques exemples, les différences avec la version Java et surtout &quot;pourquoi Scala colle à l'esprit de Play&quot;. Ce chapitre peut donc être vu comme un chapitre bonus, sans lien avec le tuto &quot;Bookmarks&quot;, pour vous donner envie de découvrir Scala.</p>
 <h2 id="liens-entre-stateless-et-programmation-fonctionnelle"><a href="#TOC"><span class="header-section-number">15.2</span> Liens entre Stateless et programmation fonctionnelle</a></h2>
 <p>Si vous avez lu cet ebook depuis le début, vous savez que Play!&gt; est basé sur une architecture sans état côté serveur.</p>
@@ -2344,7 +2386,7 @@ play_version [2.0.2]: 2.0.3</code></pre>
 <pre class="sourceCode scala"><code class="sourceCode scala">    <span class="kw">val</span> result = data.<span class="fu">par</span>.<span class="fu">filter</span>(line =&gt; line.<span class="fu">contains</span>(<span class="st">&quot;keyword&quot;</span>))</code></pre>
 <h2 id="iteratee"><a href="#TOC"><span class="header-section-number">15.3</span> Iteratee</a></h2>
 <p>Aujourd’hui on voit de plus de plus de sites web dont les données affichées se rafraîchissement en temps réel. Plutôt que de lancer des requêtes au serveur toutes les x secondes, il est possible de d'envoyer des données en &quot;push&quot;, du serveur vers le navigateur. Pour cela il existe plusieurs solutions dont Comet, WebSocket et SSE. WebSocket et SSE (Server Sent events) font partie de la spécification HTML5 et nécessitent donc un navigateur récent. Comet (ou long polling) permet via différentes techniques de pousser des données vers le navigateur à partir d'une première connexion (une requête du navigateur) dont la durée est infinie.</p>
-<p>Pour cela on utilise HTTP de manière asynchrone. Pour ce type de requêtes, Play!&gt; va traiter la demande, libérer les threads de connexion, puis rappeler le client lorsque les données seront disponibles. Ceci a 2 avantages : tout est traité de manière non bloquante (le navigateur n'est pas bloqué en attente d'un résultat si on utilise les WebSockets par exemple) et on y gagnes en consommation de ressources (moins de threads utilisés sur le serveur).</p>
+<p>Pour cela on utilise HTTP de manière asynchrone. Pour ce type de requêtes, Play!&gt; va traiter la demande, libérer les threads de connexion, puis rappeler le client lorsque les données seront disponibles. Ceci a 2 avantages : tout est traité de manière non bloquante (le navigateur n'est pas bloqué en attente d'un résultat si on utilise les WebSockets par exemple) et on y gagne en consommation de ressources (moins de threads utilisés sur le serveur).</p>
 <p>Play propose une API nommée Iteratee qui permet de manipuler des flux de données de manière totalement asynchrone afin de répondre à ces problématiques.</p>
 <h3 id="un-exemple-avec-comet"><a href="#TOC"><span class="header-section-number">15.3.1</span> Un exemple avec Comet</a></h3>
 <p>Dans cet exemple nous allons voir commencer mixer 2 flux Twitter pour les afficher en temps réeel, à l'aide de l'API Iteratee.</p>
