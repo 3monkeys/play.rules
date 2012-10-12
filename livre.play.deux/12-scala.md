@@ -141,7 +141,7 @@ val upperCase = Enumeratee.map[String] {
     tweet => tweet.map(_.toUpperCase)
 }
 ```
-Note : En scala, '_'permet de représenter un élément courant (ici la fonction `map` traite chaque caractère du tweet).
+Note : En scala, '_' permet de représenter un élément courant (ici la fonction `map` traite chaque caractère du tweet).
 }
 
 Pour insérer cette transformation dans le pipe juste avant d'envoyer le contenu à notre socket Comet, nous devons simplement modifier notre code comme ceci :
