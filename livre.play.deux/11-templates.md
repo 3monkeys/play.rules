@@ -15,13 +15,13 @@ Voilà, vous commencez à "bricoler" avec Play 2. Vous en avez fait la pub à to
 - que la page de démarrage, le fichier de conf, ... ce sont toujours les mêmes
 - etc. ...
 
-Et un "ingénieur informaticien", c'est faignant ....
+Et un "ingénieur informaticien", c'est fainéant ....
 
 La possibilité de faire des templates est prévues dans Play 2, mais n'est pas encore disponible à l'heure où j'écris (en tous les cas je ne suis pas au courant).
 
 Cependant il y a une solution (Play 2 va probablement utiliser les mêmes composants) : **Giter8** [https://github.com/n8han/giter8](https://github.com/n8han/giter8).
 
-**Giter8** est un outil en ligne de commande qui permet de générer une structure projet à portir d'un template projet hébergé sur github (donc pour le moment, pas le choix, il faut héberger ça sur github).
+**Giter8** est un outil en ligne de commande qui permet de générer une structure projet à partir d'un template projet hébergé sur github (donc pour le moment, pas le choix, il faut héberger ça sur github).
 
 J'ai pu tester sous windows et OSX, je n'ai pas eu de problème. Il y a quelques pré-requis avant d'arriver à installer **Giter8**, mais vous allez voir tout est simple.
 
