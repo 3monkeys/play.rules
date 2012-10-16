@@ -43,7 +43,10 @@ code > span.er { color: #ff0000; font-weight: bold; }
 <li><a href="#introduction---pourquoi-play"><span class="toc-section-number">3</span> Introduction - Pourquoi Play!&gt;</a></li>
 <li><a href="#installation"><span class="toc-section-number">4</span> Installation</a><ul>
 <li><a href="#prérequis"><span class="toc-section-number">4.1</span> Prérequis</a></li>
-<li><a href="#modification-sous-osx"><span class="toc-section-number">4.2</span> Modification sous OSX</a></li>
+<li><a href="#modification-sous-osx"><span class="toc-section-number">4.2</span> Modification sous OSX</a><ul>
+<li><a href="#sans-homebrew"><span class="toc-section-number">4.2.1</span> Sans homebrew</a></li>
+<li><a href="#avec-homebrew"><span class="toc-section-number">4.2.2</span> Avec homebrew</a></li>
+</ul></li>
 <li><a href="#modification-sous-linux"><span class="toc-section-number">4.3</span> Modification sous Linux</a></li>
 <li><a href="#modification-sous-windows"><span class="toc-section-number">4.4</span> Modification sous Windows</a></li>
 <li><a href="#vérification"><span class="toc-section-number">4.5</span> Vérification</a></li>
@@ -277,12 +280,21 @@ code > span.er { color: #ff0000; font-weight: bold; }
 </ul>
 <p>Ensuite, il faut modifier votre path.</p>
 <h2 id="modification-sous-osx"><a href="#TOC"><span class="header-section-number">4.2</span> Modification sous OSX</a></h2>
+<h3 id="sans-homebrew"><a href="#TOC"><span class="header-section-number">4.2.1</span> Sans homebrew</a></h3>
 <p>Dans une console (Terminal), tapez la commande suivante :</p>
 <pre><code>sudo pico ~/.bash_profile</code></pre>
 <p>Puis ajoutez la ligne suivante dans votre fichier de configuration :</p>
 <pre><code>export PATH=$PATH:/endroitOuVousAvezDezippePlay/play-2.0.1</code></pre>
 <p>Sauvegardez (sous pico, c'est <code>Ctrl+o</code>) et quittez l'éditeur, fermez votre Terminal.</p>
 <p>où <code>endroitOuVousAvezDezippePlay</code> est le chemin vers Play!&gt; et <code>play-2.0.1</code> le nom du répertoire dans lequel il y a les éléments constitutifs du framework (je laisse le numéro de version car il m'arrive de travailler sur plusieurs versions).</p>
+<h3 id="avec-homebrew"><a href="#TOC"><span class="header-section-number">4.2.2</span> Avec homebrew</a></h3>
+<p><a href="http://mxcl.github.com/homebrew/">Homebrew</a> est un gestionaire de paquet pour OSX. L'installation se faire via :</p>
+<pre><code>brew install play</code></pre>
+<p>Ceci va automatiquement télécharger l'archive, la décompresser et surtout mettre à jour les variables d'environements nécessaire.</p>
+<p>Pour mettre à jour il suffira de faire :</p>
+<pre><code>brew update</code></pre>
+<p>Puis</p>
+<pre><code>brew upgrade</code></pre>
 <h2 id="modification-sous-linux"><a href="#TOC"><span class="header-section-number">4.3</span> Modification sous Linux</a></h2>
 <p>Dans une console (Terminal), tapez la commande suivante :</p>
 <pre><code>vi ~/.profile</code></pre>
@@ -2243,10 +2255,10 @@ supertag {
 <li>que la page de démarrage, le fichier de conf, ... ce sont toujours les mêmes</li>
 <li>etc. ...</li>
 </ul>
-<p>Et un &quot;ingénieur informaticien&quot;, c'est faignant ....</p>
+<p>Et un &quot;ingénieur informaticien&quot;, c'est fainéant ....</p>
 <p>La possibilité de faire des templates est prévues dans Play 2, mais n'est pas encore disponible à l'heure où j'écris (en tous les cas je ne suis pas au courant).</p>
 <p>Cependant il y a une solution (Play 2 va probablement utiliser les mêmes composants) : <strong>Giter8</strong> <a href="https://github.com/n8han/giter8">https://github.com/n8han/giter8</a>.</p>
-<p><strong>Giter8</strong> est un outil en ligne de commande qui permet de générer une structure projet à portir d'un template projet hébergé sur github (donc pour le moment, pas le choix, il faut héberger ça sur github).</p>
+<p><strong>Giter8</strong> est un outil en ligne de commande qui permet de générer une structure projet à partir d'un template projet hébergé sur github (donc pour le moment, pas le choix, il faut héberger ça sur github).</p>
 <p>J'ai pu tester sous windows et OSX, je n'ai pas eu de problème. Il y a quelques pré-requis avant d'arriver à installer <strong>Giter8</strong>, mais vous allez voir tout est simple.</p>
 <h2 id="prérequis-installation-de-conscript"><a href="#TOC"><span class="header-section-number">14.2</span> Prérequis : Installation de conscript</a></h2>
 <p><strong>Conscript</strong> est un utilitaire qui va nous permettre d'installer <strong>Giter8</strong>.</p>
@@ -2387,7 +2399,7 @@ play_version [2.0.2]: 2.0.3</code></pre>
 <h2 id="iteratee"><a href="#TOC"><span class="header-section-number">15.3</span> Iteratee</a></h2>
 <p>Aujourd’hui on voit de plus de plus de sites web dont les données affichées se rafraîchissement en temps réel. Plutôt que de lancer des requêtes au serveur toutes les x secondes, il est possible de d'envoyer des données en &quot;push&quot;, du serveur vers le navigateur. Pour cela il existe plusieurs solutions dont Comet, WebSocket et SSE. WebSocket et SSE (Server Sent events) font partie de la spécification HTML5 et nécessitent donc un navigateur récent. Comet (ou long polling) permet via différentes techniques de pousser des données vers le navigateur à partir d'une première connexion (une requête du navigateur) dont la durée est infinie.</p>
 <p>Pour cela on utilise HTTP de manière asynchrone. Pour ce type de requêtes, Play!&gt; va traiter la demande, libérer les threads de connexion, puis rappeler le client lorsque les données seront disponibles. Ceci a 2 avantages : tout est traité de manière non bloquante (le navigateur n'est pas bloqué en attente d'un résultat si on utilise les WebSockets par exemple) et on y gagne en consommation de ressources (moins de threads utilisés sur le serveur).</p>
-<p>Play propose une API nommée Iteratee qui permet de manipuler des flux de données de manière totalement asynchrone afin de répondre à ces problématiques.</p>
+<p>Play propose une API nommée Iteratee qui permet de manipuler des flux de données immutables de manière totalement asynchrone afin de répondre à ces problématiques.</p>
 <h3 id="un-exemple-avec-comet"><a href="#TOC"><span class="header-section-number">15.3.1</span> Un exemple avec Comet</a></h3>
 <p>Dans cet exemple nous allons voir commencer mixer 2 flux Twitter pour les afficher en temps réeel, à l'aide de l'API Iteratee.</p>
 <p>Vous pouvez voir la solution complète en récupérant ce <a href="https://github.com/loicdescotte/Play2-MixedTweets">mini project</a></p>
