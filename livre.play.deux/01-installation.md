@@ -19,6 +19,8 @@ Ensuite, il faut modifier votre path.
 
 ##Modification sous OSX
 
+###Sans homebrew
+
 Dans une console (Terminal), tapez la commande suivante : 
 
 	sudo pico ~/.bash_profile
@@ -30,6 +32,22 @@ Puis ajoutez la ligne suivante dans votre fichier de configuration :
 Sauvegardez (sous pico, c'est `Ctrl+o`) et quittez l'éditeur, fermez votre Terminal.
 
 où `endroitOuVousAvezDezippePlay` est le chemin vers Play!> et `play-2.0.1` le nom du répertoire dans lequel il y a les éléments constitutifs du framework (je laisse le numéro de version car il m'arrive de travailler sur plusieurs versions).
+
+###Avec homebrew
+
+[Homebrew](http://mxcl.github.com/homebrew/) est un gestionaire de paquet pour OSX. L'installation se faire via :
+
+	brew install play
+
+Ceci va automatiquement télécharger l'archive, la décompresser et surtout mettre à jour les variables d'environements nécessaire.
+
+Pour mettre à jour il suffira de faire :
+
+	brew update
+
+Puis 
+
+	brew upgrade
 
 ##Modification sous Linux
 

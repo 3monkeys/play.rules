@@ -73,7 +73,7 @@ Aujourd’hui on voit de plus de plus de sites web dont les données affichées 
 
 Pour cela on utilise HTTP de manière asynchrone. Pour ce type de requêtes, Play!> va traiter la demande, libérer les threads de connexion, puis rappeler le client lorsque les données seront disponibles. Ceci a 2 avantages : tout est traité de manière non bloquante (le navigateur n'est pas bloqué en attente d'un résultat si on utilise les WebSockets par exemple) et on y gagne en consommation de ressources (moins de threads utilisés sur le serveur).
 
-Play propose une API nommée Iteratee qui permet de manipuler des flux de données de manière totalement asynchrone afin de répondre à ces problématiques.
+Play propose une API nommée Iteratee qui permet de manipuler des flux de données immutables de manière totalement asynchrone afin de répondre à ces problématiques.
 
 ###Un exemple avec Comet
 
