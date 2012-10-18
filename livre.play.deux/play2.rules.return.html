@@ -480,7 +480,7 @@ db.default.url=&quot;jdbc:h2:file:play&quot;</code></pre>
                 <span class="kw">new</span> Finder&lt;Long, Bookmark&gt;(Long.<span class="fu">class</span>, Bookmark.<span class="fu">class</span>);
     }</code></pre>
 <blockquote>
-<p><strong>Remarques :</strong> Notez l'annotation <code>@ManyToOne</code> : nous expliquons à Play!&gt; qu'un <code>Bookmark</code> peut appartenir à plusieurs <code>Category(ies)</code>.</p>
+<p><strong>Remarques :</strong> Notez l'annotation <code>@ManyToOne</code> : nous expliquons à Play!&gt; que plusieurs <code>Bookmark(s)</code> peuvent appartenir à la même <code>Category</code> et qu'un <code>Bookmark</code> n'a q'une seule <code>Category</code></p>
 </blockquote>
 <p>Vous venez de créer un nouveau modèle, il est temps de &quot;rafraîchir&quot; à nouveau votre application. Play!&gt; détecte la modification et vous propose encore une fois d'appliquer le script pour modifier la base de données. Acceptez :</p>
 <p><img src="rsrc/04-firstapp_next-002.png" alt="FIG2" /><br /></p>
@@ -756,9 +756,9 @@ GET     /                           controllers.Application.index()</code></pre>
 <h3 id="modifions-le-code-de-main.scala.html"><a href="#TOC"><span class="header-section-number">8.2.1</span> Modifions le code de <code>main.scala.html</code></a></h3>
 <pre class="sourceCode html"><code class="sourceCode html">
     @(title: String)(content: Html)
-    
+
     <span class="dt">&lt;!DOCTYPE </span>html<span class="dt">&gt;</span>
-    
+
     <span class="kw">&lt;html&gt;</span>
         <span class="kw">&lt;head&gt;</span>
             <span class="kw">&lt;title&gt;</span>@title<span class="kw">&lt;/title&gt;</span>
@@ -789,7 +789,7 @@ GET     /                           controllers.Application.index()</code></pre>
 <p>Modifiez le tag <code>&lt;body&gt;</code> de la façon suivante :</p>
 <pre class="sourceCode html"><code class="sourceCode html">
     <span class="kw">&lt;body&gt;</span>
-        
+
         <span class="kw">&lt;div</span><span class="ot"> class=</span><span class="st">&quot;navbar navbar-fixed-top&quot;</span><span class="kw">&gt;</span>
             <span class="kw">&lt;div</span><span class="ot"> class=</span><span class="st">&quot;navbar-inner&quot;</span><span class="kw">&gt;</span>
                 <span class="kw">&lt;div</span><span class="ot"> class=</span><span class="st">&quot;container&quot;</span><span class="kw">&gt;</span>
@@ -800,7 +800,7 @@ GET     /                           controllers.Application.index()</code></pre>
         <span class="kw">&lt;div</span><span class="ot"> class=</span><span class="st">&quot;container&quot;</span><span class="kw">&gt;</span>
             @content
         <span class="kw">&lt;/div&gt;</span>
-        
+
     <span class="kw">&lt;/body&gt;</span></code></pre>
 <p>Vous pouvez rafraîchir votre page à nouveau, ça prend forme ... :</p>
 <p><img src="rsrc/05-sexy-002.png" /><br /></p>
@@ -845,27 +845,27 @@ categories:
     <span class="kw">import models.*;</span>
 
     <span class="kw">public</span> <span class="kw">class</span> Global <span class="kw">extends</span> GlobalSettings {
-        
+
         <span class="kw">public</span> <span class="dt">void</span> <span class="fu">onStart</span>(Application app) {
             InitialData.<span class="fu">insert</span>(app);
         }
-        
+
         <span class="dt">static</span> <span class="kw">class</span> InitialData {
-            
+
             <span class="kw">public</span> <span class="dt">static</span> <span class="dt">void</span> <span class="fu">insert</span>(Application app) {
                 <span class="kw">if</span>(Ebean.<span class="fu">find</span>(Category.<span class="fu">class</span>).<span class="fu">findRowCount</span>() == <span class="dv">0</span>) {
-                    
+
                     Map&lt;String,List&lt;Object&gt;&gt; all = 
                         (Map&lt;String,List&lt;Object&gt;&gt;)Yaml.<span class="fu">load</span>(<span class="st">&quot;initial-data.yml&quot;</span>);
 
                     <span class="co">// Insert categories first</span>
                     Ebean.<span class="fu">save</span>(all.<span class="fu">get</span>(<span class="st">&quot;categories&quot;</span>));
-                    
+
                 }
             }
-            
+
         }
-        
+
     }</code></pre>
 <p>Enfin, modifier le fichier <code>conf/application.conf</code> et décommenter la ligne suivante, ie :</p>
 <pre><code># global=Global</code></pre>
@@ -906,7 +906,7 @@ categories:
         <span class="co">// ...</span>
     }</code></pre>
 <p>Ceci nous permettra ensuite de vérifier l'intégrité des données lors de la soumission du formulaire (= lorsque l'on ajoute une catégorie). Modifions un peu le code de notre contrôleur <code>Categories</code> :</p>
-<pre class="sourceCode java"><code class="sourceCode java">    
+<pre class="sourceCode java"><code class="sourceCode java">
     <span class="kw">public</span> <span class="kw">class</span> Categories <span class="kw">extends</span> Controller {
 
         <span class="kw">public</span> <span class="dt">static</span> Result <span class="fu">add</span>() {
@@ -925,8 +925,7 @@ categories:
             <span class="kw">return</span> <span class="fu">redirect</span>(routes.<span class="fu">Application</span>.<span class="fu">index</span>());
 
         }
-    }
-    </code></pre>
+    }</code></pre>
 <p>En cas de problème on renvoie une erreur à notre template.</p>
 <p>Pour afficher cette erreur on peut ajouter ceci à notre fichier <code>index.scala.html</code> :</p>
 <pre class="sourceCode scala"><code class="sourceCode scala">
@@ -998,44 +997,44 @@ categories:
 <p>Créons un modèle User (il nous reservira plus tard)</p>
 <pre class="sourceCode java"><code class="sourceCode java">
     <span class="kw">package models;</span>
-    
+
     <span class="kw">import java.util.*;</span>
     <span class="kw">import javax.persistence.*;</span>
-    
+
     <span class="kw">import play.db.ebean.Model;</span>
     <span class="kw">import play.data.format.*;</span>
     <span class="kw">import play.data.validation.*;</span>
-    
-    
+
+
     @Entity 
     <span class="kw">public</span> <span class="kw">class</span> User <span class="kw">extends</span> Model {
-    
+
         @Id
         @Constraints.<span class="fu">Required</span>
         @Formats.<span class="fu">NonEmpty</span>
         <span class="kw">public</span> String email;
-    
+
         @Constraints.<span class="fu">Required</span>
         <span class="kw">public</span> String name;
-    
+
         @Constraints.<span class="fu">Required</span>
         <span class="kw">public</span> String password;
-    
+
         <span class="kw">public</span> <span class="dt">static</span> Model.<span class="fu">Finder</span>&lt;String,User&gt; find = 
             <span class="kw">new</span> Model.<span class="fu">Finder</span>(String.<span class="fu">class</span>, User.<span class="fu">class</span>);
-    
+
         <span class="kw">public</span> <span class="dt">static</span> List&lt;User&gt; <span class="fu">findAll</span>() {
             <span class="kw">return</span> find.<span class="fu">all</span>();
         }
-    
+
         <span class="kw">public</span> <span class="dt">static</span> User <span class="fu">findByEmail</span>(String email) {
             <span class="kw">return</span> find.<span class="fu">where</span>().<span class="fu">eq</span>(<span class="st">&quot;email&quot;</span>, email).<span class="fu">findUnique</span>();
         }
-    
+
         <span class="kw">public</span> String <span class="fu">toString</span>() {
             <span class="kw">return</span> <span class="st">&quot;User(&quot;</span> + email + <span class="st">&quot;)&quot;</span>;
         }
-    
+
     }</code></pre>
 <p>Dans le contrôleur <code>Application.java</code>, ajoutons <code>form(Category.class)</code> en argument de la méthode <code>index.render()</code> :</p>
 <pre class="sourceCode java"><code class="sourceCode java">
@@ -1086,7 +1085,7 @@ categories:
     @Constraints.<span class="fu">Email</span>
     <span class="kw">public</span> String contactMail;</code></pre>
 <p>Et ce tag :</p>
-<pre class="sourceCode scala"><code class="sourceCode scala">  
+<pre class="sourceCode scala"><code class="sourceCode scala">
     @<span class="fu">text</span>(<span class="fu">form</span>(<span class="st">&quot;contactMail&quot;</span>))</code></pre>
 <p>On obtiendra ceci :</p>
 <pre class="sourceCode html"><code class="sourceCode html">
@@ -1111,40 +1110,40 @@ categories:
 <p>Pour que n'importe qui ne puisse pas saisir des bookmarks, nous allons mettre en place un système d'authentification.</p>
 <h2 id="complétons-la-classe-user"><a href="#TOC"><span class="header-section-number">11.1</span> Complétons la classe User</a></h2>
 <pre class="sourceCode java"><code class="sourceCode java">    <span class="kw">package models;</span>
-    
+
     <span class="kw">import java.util.*;</span>
     <span class="kw">import javax.persistence.*;</span>
-    
+
     <span class="kw">import play.db.ebean.Model;</span>
     <span class="kw">import play.data.format.*;</span>
     <span class="kw">import play.data.validation.*;</span>
-    
-    
+
+
     @Entity 
     <span class="kw">public</span> <span class="kw">class</span> User <span class="kw">extends</span> Model {
-    
+
         @Id
         @Constraints.<span class="fu">Required</span>
         @Formats.<span class="fu">NonEmpty</span>
         <span class="kw">public</span> String email;
-    
+
         @Constraints.<span class="fu">Required</span>
         <span class="kw">public</span> String name;
-    
+
         @Constraints.<span class="fu">Required</span>
         <span class="kw">public</span> String password;
-    
+
         <span class="kw">public</span> <span class="dt">static</span> Model.<span class="fu">Finder</span>&lt;String,User&gt; find = 
             <span class="kw">new</span> Model.<span class="fu">Finder</span>(String.<span class="fu">class</span>, User.<span class="fu">class</span>);
-    
+
         <span class="kw">public</span> <span class="dt">static</span> List&lt;User&gt; <span class="fu">findAll</span>() {
             <span class="kw">return</span> find.<span class="fu">all</span>();
         }
-    
+
         <span class="kw">public</span> <span class="dt">static</span> User <span class="fu">findByEmail</span>(String email) {
             <span class="kw">return</span> find.<span class="fu">where</span>().<span class="fu">eq</span>(<span class="st">&quot;email&quot;</span>, email).<span class="fu">findUnique</span>();
         }
-        
+
         <span class="co">//TODO : expliquer ce que fait le code</span>
         <span class="kw">public</span> <span class="dt">static</span> User <span class="fu">authenticate</span>(String email, String password) {
             <span class="kw">return</span> find.<span class="fu">where</span>()
@@ -1152,36 +1151,36 @@ categories:
                 .<span class="fu">eq</span>(<span class="st">&quot;password&quot;</span>, password)
                 .<span class="fu">findUnique</span>();
         }
-    
+
         <span class="kw">public</span> String <span class="fu">toString</span>() {
             <span class="kw">return</span> <span class="st">&quot;User(&quot;</span> + email + <span class="st">&quot;)&quot;</span>;
         }
-    
+
     }</code></pre>
 <p>Remarque : on a rajouté une méthode <code>authenticate</code></p>
 <h2 id="création-dun-contrôleur-secured"><a href="#TOC"><span class="header-section-number">11.2</span> Création d'un contrôleur Secured</a></h2>
 <pre class="sourceCode java"><code class="sourceCode java">
     <span class="co">//TODO : expliquer ce que fait le code</span>
     <span class="kw">package controllers;</span>
-    
+
     <span class="kw">import play.*;</span>
     <span class="kw">import play.mvc.*;</span>
     <span class="kw">import play.mvc.Http.*;</span>
-    
+
     <span class="kw">import models.*;</span>
-    
+
     <span class="kw">public</span> <span class="kw">class</span> Secured <span class="kw">extends</span> Security.<span class="fu">Authenticator</span> {
-    
+
         @Override
         <span class="kw">public</span> String <span class="fu">getUsername</span>(Context ctx) {
             <span class="kw">return</span> ctx.<span class="fu">session</span>().<span class="fu">get</span>(<span class="st">&quot;email&quot;</span>);
         }
-    
+
         @Override
         <span class="kw">public</span> Result <span class="fu">onUnauthorized</span>(Context ctx) {
             <span class="kw">return</span> <span class="fu">redirect</span>(routes.<span class="fu">Authentication</span>.<span class="fu">login</span>());
         }
-    
+
     }</code></pre>
 <h2 id="allons-modifier-le-contrôleur-application"><a href="#TOC"><span class="header-section-number">11.3</span> Allons modifier le contrôleur Application</a></h2>
 <ul>
@@ -1191,20 +1190,20 @@ categories:
 <p>Code final :</p>
 <pre class="sourceCode java"><code class="sourceCode java">
     <span class="kw">package controllers;</span>
-    
+
     <span class="kw">import play.*;</span>
     <span class="kw">import play.mvc.*;</span>
     <span class="kw">import play.data.*;</span>
-    
+
     <span class="kw">import models.*;</span>
     <span class="kw">import views.html.*;</span>
-    
-    
+
+
     @Security.<span class="fu">Authenticated</span>(Secured.<span class="fu">class</span>)
     <span class="kw">public</span> <span class="kw">class</span> Application <span class="kw">extends</span> Controller {
-    
+
         <span class="kw">public</span> <span class="dt">static</span> Result <span class="fu">index</span>() {
-    
+
             <span class="kw">return</span> <span class="fu">ok</span>(index.<span class="fu">render</span>(
                         <span class="st">&quot;Vous pouvez commencer à saisir ...&quot;</span>,
                         Bookmark.<span class="fu">find</span>.<span class="fu">fetch</span>(<span class="st">&quot;category&quot;</span>).<span class="fu">orderBy</span>(<span class="st">&quot;title&quot;</span>).<span class="fu">findList</span>(),
@@ -1212,27 +1211,27 @@ categories:
                         User.<span class="fu">find</span>.<span class="fu">byId</span>(<span class="fu">request</span>().<span class="fu">username</span>())
                     ));
         }
-    
+
     }</code></pre>
 <h2 id="création-dun-contrôleur-authentication"><a href="#TOC"><span class="header-section-number">11.4</span> Création d'un contrôleur Authentication</a></h2>
 <pre class="sourceCode java"><code class="sourceCode java">
     <span class="kw">package controllers;</span>
-    
+
     <span class="kw">import play.*;</span>
     <span class="kw">import play.mvc.*;</span>
     <span class="kw">import play.data.*;</span>
-    
+
     <span class="kw">import models.*;</span>
     <span class="kw">import views.html.*;</span>
-    
-    
+
+
     <span class="kw">public</span> <span class="kw">class</span> Authentication <span class="kw">extends</span> Controller {
-    
+
         <span class="kw">public</span> <span class="dt">static</span> <span class="kw">class</span> AuthenticatedUser {
-    
+
             <span class="kw">public</span> String email;
             <span class="kw">public</span> String password;
-    
+
             <span class="kw">public</span> String <span class="fu">validate</span>() {
                 <span class="kw">if</span>(User.<span class="fu">authenticate</span>(email, password) == <span class="kw">null</span>) {
                     <span class="kw">return</span> <span class="st">&quot;oups! râté! Essaye encore une fois&quot;</span>;
@@ -1240,13 +1239,13 @@ categories:
                 <span class="kw">return</span> <span class="kw">null</span>;
             }
         }
-    
+
         <span class="kw">public</span> <span class="dt">static</span> Result <span class="fu">login</span>() {
             <span class="kw">return</span> <span class="fu">ok</span>(
                 login.<span class="fu">render</span>(<span class="fu">form</span>(AuthenticatedUser.<span class="fu">class</span>))
             );
         }
-    
+
         <span class="co">//On récupère les informations de login (quand le user se &quot;signe&quot;)</span>
         <span class="kw">public</span> <span class="dt">static</span> Result <span class="fu">authenticate</span>() {
             Form&lt;AuthenticatedUser&gt; loginForm = 
@@ -1260,7 +1259,7 @@ categories:
                 );
             }
         }
-    
+
         <span class="co">//Fermer la session</span>
         <span class="kw">public</span> <span class="dt">static</span> Result <span class="fu">logout</span>() {
             <span class="fu">session</span>().<span class="fu">clear</span>();
@@ -1269,7 +1268,7 @@ categories:
                 routes.<span class="fu">Authentication</span>.<span class="fu">login</span>()
             );
         }
-    
+
     }</code></pre>
 <h2 id="allons-modifier-les-routes"><a href="#TOC"><span class="header-section-number">11.5</span> Allons modifier les routes</a></h2>
 <pre><code># Authentication
@@ -1280,7 +1279,7 @@ GET     /logout                             controllers.Authentication.logout()<
 <p>Nous avons vu que nous passions le user authentifié à la méthode <code>index.render()</code> de la vue dans le contrôleur <code>Application</code> :</p>
 <pre class="sourceCode java"><code class="sourceCode java">
     <span class="kw">public</span> <span class="dt">static</span> Result <span class="fu">index</span>() {
-    
+
         <span class="kw">return</span> <span class="fu">ok</span>(index.<span class="fu">render</span>(
                     <span class="st">&quot;Vous pouvez commencer à saisir ...&quot;</span>,
                     Bookmark.<span class="fu">find</span>.<span class="fu">fetch</span>(<span class="st">&quot;category&quot;</span>).<span class="fu">orderBy</span>(<span class="st">&quot;title&quot;</span>).<span class="fu">findList</span>(),
@@ -1304,9 +1303,9 @@ GET     /logout                             controllers.Authentication.logout()<
 <p>Le code définitif va donner ceci :</p>
 <pre class="sourceCode html"><code class="sourceCode html">
     @(title: String, user: User)(content: Html)
-    
+
     <span class="dt">&lt;!DOCTYPE </span>html<span class="dt">&gt;</span>
-    
+
     <span class="kw">&lt;html&gt;</span>
         <span class="kw">&lt;head&gt;</span>
             <span class="kw">&lt;title&gt;</span>@title<span class="kw">&lt;/title&gt;</span>
@@ -1327,7 +1326,7 @@ GET     /logout                             controllers.Authentication.logout()<
 <span class="ot">                type=</span><span class="st">&quot;text/javascript&quot;</span><span class="kw">&gt;&lt;/script&gt;</span>
         <span class="kw">&lt;/head&gt;</span>
         <span class="kw">&lt;body&gt;</span>
-    
+
             <span class="kw">&lt;div</span><span class="ot"> class=</span><span class="st">&quot;navbar navbar-fixed-top&quot;</span><span class="kw">&gt;</span>
                 <span class="kw">&lt;div</span><span class="ot"> class=</span><span class="st">&quot;navbar-inner&quot;</span><span class="kw">&gt;</span>
                     <span class="kw">&lt;div</span><span class="ot"> class=</span><span class="st">&quot;container&quot;</span><span class="kw">&gt;</span>
@@ -1341,11 +1340,11 @@ GET     /logout                             controllers.Authentication.logout()<
                     <span class="kw">&lt;/div&gt;</span>
                 <span class="kw">&lt;/div&gt;</span>
             <span class="kw">&lt;/div&gt;</span>
-    
+
             <span class="kw">&lt;div</span><span class="ot"> class=</span><span class="st">&quot;container&quot;</span><span class="kw">&gt;</span>
                 @content
             <span class="kw">&lt;/div&gt;</span>
-    
+
         <span class="kw">&lt;/body&gt;</span>
     <span class="kw">&lt;/html&gt;</span></code></pre>
 <h3 id="il-faut-aussi-modifier-index.scala.html"><a href="#TOC"><span class="header-section-number">11.6.2</span> Il faut aussi modifier index.scala.html</a></h3>
@@ -1363,21 +1362,21 @@ user: User
 <p>Nous y sommes presque. Il faut créer le formulaire de login : créez dans le répertoire <code>views</code> un fichier <code>login.scala.html</code> avec le code suivant :</p>
 <pre class="sourceCode html"><code class="sourceCode html">
     @(form: Form[Authentication.AuthenticatedUser])
-    
+
     @main(&quot;Authentification&quot;, null) {
-    
+
         @helper.form(routes.Authentication.authenticate) {
-    
+
             <span class="kw">&lt;h2&gt;</span>Qui êtes vous ?<span class="kw">&lt;/h2&gt;</span>
-    
+
             @if(form.hasGlobalErrors) { 
                 <span class="kw">&lt;p</span><span class="ot"> class=</span><span class="st">&quot;error&quot;</span><span class="kw">&gt;</span>@form.globalError.message<span class="kw">&lt;/p&gt;</span>
             }
-    
+
             @if(flash.contains(&quot;success&quot;)) {
                 <span class="kw">&lt;p</span><span class="ot"> class=</span><span class="st">&quot;success&quot;</span><span class="kw">&gt;</span>@flash.get(&quot;success&quot;)<span class="kw">&lt;/p&gt;</span>
             }
-    
+
             <span class="kw">&lt;p&gt;&lt;input</span><span class="ot"> type=</span><span class="st">&quot;email&quot;</span><span class="ot"> name=</span><span class="st">&quot;email&quot;</span><span class="ot"> placeholder=</span><span class="st">&quot;Email&quot;</span> 
 <span class="ot">                value=</span><span class="st">&quot;@form(&quot;</span><span class="er">email&quot;).value&quot;</span><span class="kw">&gt;&lt;/p&gt;</span>
             <span class="kw">&lt;p&gt;&lt;input</span><span class="ot"> type=</span><span class="st">&quot;password&quot;</span><span class="ot"> name=</span><span class="st">&quot;password&quot;</span><span class="ot"> placeholder=</span><span class="st">&quot;Password&quot;</span><span class="kw">&gt;&lt;/p&gt;</span>
@@ -1408,24 +1407,24 @@ users:
     <span class="kw">import java.util.*;</span>
     <span class="kw">import com.avaje.ebean.*;</span>
     <span class="kw">import models.*;</span>
-    
+
     <span class="kw">public</span> <span class="kw">class</span> Global <span class="kw">extends</span> GlobalSettings {
-    
+
         <span class="kw">public</span> <span class="dt">void</span> <span class="fu">onStart</span>(Application app) {
             InitialData.<span class="fu">insert</span>(app);
         }
-    
+
         <span class="dt">static</span> <span class="kw">class</span> InitialData {
-    
+
             <span class="kw">public</span> <span class="dt">static</span> <span class="dt">void</span> <span class="fu">insert</span>(Application app) {
-    
+
                 Map&lt;String,List&lt;Object&gt;&gt; all = 
                     (Map&lt;String,List&lt;Object&gt;&gt;)Yaml.<span class="fu">load</span>(<span class="st">&quot;initial-data.yml&quot;</span>);
-    
+
                 <span class="kw">if</span>(Ebean.<span class="fu">find</span>(User.<span class="fu">class</span>).<span class="fu">findRowCount</span>() == <span class="dv">0</span>) {                
                     Ebean.<span class="fu">save</span>(all.<span class="fu">get</span>(<span class="st">&quot;users&quot;</span>));   
                 }
-    
+
                 <span class="kw">if</span>(Ebean.<span class="fu">find</span>(Category.<span class="fu">class</span>).<span class="fu">findRowCount</span>() == <span class="dv">0</span>) {
                     <span class="co">// Insert categories first</span>
                     Ebean.<span class="fu">save</span>(all.<span class="fu">get</span>(<span class="st">&quot;categories&quot;</span>));                
@@ -1693,9 +1692,9 @@ GET     /logoutjson                         controllers.AuthenticationJson.logou
     <span class="kw">import views.html.*;</span>
 
     <span class="kw">public</span> <span class="kw">class</span> SingleApp <span class="kw">extends</span> Controller {
-        
+
         <span class="kw">public</span> <span class="dt">static</span> Result <span class="fu">mainPage</span>() {
-    
+
             <span class="kw">return</span> <span class="fu">ok</span>(mainPage.<span class="fu">render</span>(
                         <span class="st">&quot;Single Page Application&quot;</span>
                     ));
@@ -1833,10 +1832,10 @@ GET     /main                       controllers.SingleApp.mainPage()</code></pre
                         <span class="dt">error </span>: <span class="kw">function</span>(err){<span class="kw">console</span>.<span class="fu">log</span>(<span class="st">&quot;Erreur&quot;</span>, err);}, 
                         <span class="dt">success </span>: <span class="kw">function</span>(data){ 
 
-<span class="er">                            if(user.name) {</span>
+                            <span class="kw">if</span>(<span class="kw">user</span>.<span class="fu">name</span>) {
                                 alertAuthentication
                                     .<span class="fu">attr</span>(<span class="ch">&#39;class&#39;</span>,<span class="ch">&#39;alert</span> <span class="ch">alert</span>-<span class="ch">info&#39;</span>)
-<span class="er">                                    .html(&#39;&lt;strong&gt;Au revoir&lt;/strong&gt; &#39; + user.name);</span>
+                                    .<span class="fu">html</span>(<span class="ch">&#39;</span>&lt;<span class="ch">strong</span>&gt;<span class="ch">Au</span> <span class="ch">revoir</span>&lt;/<span class="ch">strong</span>&gt; <span class="ch">&#39;</span> + <span class="kw">user</span>.<span class="fu">name</span>);
 
                                     <span class="kw">labels</span>.<span class="fu">show</span>();
                                     <span class="kw">email</span>.<span class="fu">show</span>();
@@ -1864,15 +1863,15 @@ GET     /main                       controllers.SingleApp.mainPage()</code></pre
                               <span class="kw">data.bookmarks</span>.<span class="fu">forEach</span>(<span class="kw">function</span>(bookmark){
                                 <span class="kw">bookmarksList</span>.<span class="fu">append</span>(
                                   $(<span class="ch">&#39;</span>&lt;<span class="ch">li</span>&gt;<span class="ch">&#39;</span>)
-<span class="er">                                    .append($(&#39;&lt;b&gt;&#39;).append(bookmark.title))</span>
+                                    .<span class="fu">append</span>($(<span class="ch">&#39;</span>&lt;<span class="ch">b</span>&gt;<span class="ch">&#39;</span>).<span class="fu">append</span>(<span class="kw">bookmark</span>.<span class="fu">title</span>))
                                     .<span class="fu">append</span>(<span class="ch">&#39;</span> | <span class="ch">&#39;</span>)
-<span class="er">                                    .append($(&#39;&lt;a&gt;&#39;).attr(&quot;href&quot;,bookmark.url)</span>
-<span class="er">                                    .append(bookmark.url))</span>
+                                    .<span class="fu">append</span>($(<span class="ch">&#39;</span>&lt;<span class="ch">a</span>&gt;<span class="ch">&#39;</span>).<span class="fu">attr</span>(<span class="st">&quot;href&quot;</span>,<span class="kw">bookmark</span>.<span class="fu">url</span>)
+                                    .<span class="fu">append</span>(<span class="kw">bookmark</span>.<span class="fu">url</span>))
                                     .<span class="fu">append</span>(<span class="ch">&#39;</span> | <span class="ch">&#39;</span>)
                                     .<span class="fu">append</span>($(<span class="ch">&#39;</span>&lt;<span class="ch">i</span>&gt;<span class="ch">&#39;</span>)
-<span class="er">                                    .append(bookmark.details))</span>
+                                    .<span class="fu">append</span>(<span class="kw">bookmark</span>.<span class="fu">details</span>))
                                     .<span class="fu">append</span>(<span class="ch">&#39;</span> | (<span class="ch">&#39;</span>)
-<span class="er">                                    .append(bookmark.category.label).append(&#39;)&#39;)</span>
+                                    .<span class="fu">append</span>(<span class="kw">bookmark.category</span>.<span class="fu">label</span>).<span class="fu">append</span>(<span class="ch">&#39;</span>)<span class="ch">&#39;</span>)
                                 );
                               });
                             } <span class="kw">else</span> {
@@ -1890,8 +1889,7 @@ GET     /main                       controllers.SingleApp.mainPage()</code></pre
             });
         <span class="kw">&lt;/script&gt;</span>
 
-    <span class="kw">&lt;/html&gt;</span>
-    </code></pre>
+    <span class="kw">&lt;/html&gt;</span></code></pre>
 <h2 id="testons-2"><a href="#TOC"><span class="header-section-number">12.6</span> Testons</a></h2>
 <p>Dans votre navigateur, appelez l'url : <code>http://localhost:9000/main</code></p>
 <p><img src="rsrc/09-services-013.png" /><br /> Si vous vous trompez en vous authentifiant :</p>
@@ -2183,7 +2181,7 @@ supertag {
         <span class="kw">&lt;h2&gt;</span>Nouvelle Cat<span class="dv">&amp;eacute;</span>gorie<span class="kw">&lt;/h2&gt;</span>
         <span class="kw">&lt;form</span><span class="ot"> method=</span><span class="st">&quot;post&quot;</span><span class="ot"> action=</span><span class="st">&quot;@routes.Categories.add()&quot;</span><span class="kw">&gt;</span>
             <span class="kw">&lt;input</span><span class="ot"> name=</span><span class="st">&quot;label&quot;</span><span class="ot"> placeholder=</span><span class="st">&quot;label&quot;</span><span class="kw">&gt;</span>
-            
+
             <span class="kw">&lt;button</span><span class="ot"> class=</span><span class="st">&quot;btn&quot;</span><span class="ot"> type=</span><span class="st">&quot;submit&quot;</span><span class="kw">&gt;</span>Ajouter la Cat<span class="dv">&amp;eacute;</span>gorie<span class="kw">&lt;/button&gt;</span>
         <span class="kw">&lt;/form&gt;</span>
     <span class="kw">&lt;/fieldset&gt;</span>
@@ -2193,7 +2191,7 @@ supertag {
             <span class="kw">&lt;strong&gt;</span>Oups!<span class="kw">&lt;/strong&gt;</span> @flash.get(&quot;error&quot;)
         <span class="kw">&lt;/div&gt;</span>
     }
-        
+
     <span class="co">&lt;!-- Liste des Catégories --&gt;</span>
     <span class="kw">&lt;ul&gt;</span>
         @for(category <span class="er">&lt;</span>- categories) {
@@ -2413,7 +2411,7 @@ play_version [2.0.2]: 2.0.3</code></pre>
 
   <span class="co">//pipe result 1 and result 2 and push to comet socket </span>
   Ok.<span class="fu">stream</span>(results1 &gt;- results2 &amp;&gt; <span class="fu">Comet</span>(callback = <span class="st">&quot;parent.messageChanged&quot;</span>))
-  
+
 }</code></pre>
 <p><code>query1</code> et <code>query2</code> sont de simples chaînes de caractères utilisées pour lancer une recherche, comme &quot;java&quot; ou &quot;ruby&quot;.</p>
 <p><code>results1</code> et <code>results2</code> vont contenir les résultats des recherches Twitter correspondant.</p>
