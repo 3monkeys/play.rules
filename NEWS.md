@@ -94,9 +94,6 @@ La version précédente (du mois de mars) a été complètement revue avec la so
 
 Visible en mode web : [Play.Rules Return : Play!► 2 en douceur](http://3monkeys.github.com/play.rules/livre.play.deux.web/play2.rules.return.html)
 
-![](livre.play.deux.web/rsrc/play.rules.min.png)
-
-
 ##Play.rules, l'ebook : en mode web
 
 [Play.Rules UN : apprendre Play!► 1](http://3monkeys.github.com/play.rules/livre.play.un.web/play.rules.one.html)
