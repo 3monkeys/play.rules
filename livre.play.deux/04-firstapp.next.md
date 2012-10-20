@@ -326,8 +326,8 @@ Et allons tout de suite modifier notre vue, pour enfin avoir quelque chose à mo
 
 **Notez que :** il y a 2 notations possibles pour l'attribut `action` des formulaires html :
 
-- `action="@routes.Categories.add()"`
-- `action="/category/add>`
+- `action="@routes.Categories.add()">`
+- `action="/category/add">`
 
 personnellement, la 2ème me semble plus appropriée (et plus élégante).
 
