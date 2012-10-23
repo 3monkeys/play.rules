@@ -7,6 +7,7 @@
 - @ndeverge : le 1er à avoir fait une pull request sur le projet :)
 - [akka-labs](https://github.com/akka-labs)
 - @kbenhdech
+- @BrunoVernay
 
 #Préface
 
