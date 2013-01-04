@@ -562,8 +562,7 @@ Commencez par créer une nouvelle vue (dans le répertoire `views`) que vous nom
 							} else {
 							   alertAuthentication
 								.attr('class','alert alert-error')
-								.html('<strong>Il faut être authentifié !</strong> \n
-									pour obtenir la liste des bookmarks');
+								.html('<strong>Il faut être authentifié !</strong> \n pour obtenir la liste des bookmarks');
 							}
 						}
 					});
