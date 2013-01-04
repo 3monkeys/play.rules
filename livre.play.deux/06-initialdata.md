@@ -15,14 +15,29 @@ Dans le répertoire `/conf`, créez un fichier `initial-data.yml` avec les donn�
 
 	categories:
 
-	    - !!models.Category
+	    - &category1 !!models.Category
 	        label:   Javascript
 
-	    - !!models.Category
+	    - &category2 !!models.Category
 	        label:   Java
 
-	    - !!models.Category
+	    - &category3 !!models.Category
 	        label:   Coffeescript
+
+	# Bookmarks
+
+	bookmarks:
+
+	    - !!models.Bookmark
+	        title:    CoffeeBean
+	        url:      http://coffeebean.loicdescotte.com/
+	        category: *category2
+
+	    - !!models.Bookmark
+	        title:    K33g_org
+	        url:      http://k33g.github.com/
+	        category: *category1
+
 
 Puis à la racine de `/app`, créez une classe `Global.java` avec le code suivant :
 
@@ -54,6 +69,8 @@ Puis à la racine de `/app`, créez une classe `Global.java` avec le code suivan
 
 		            // Insert categories first
 		            Ebean.save(all.get("categories"));
+
+		            Ebean.save(all.get("bookmarks"));
 		            
 		        }
 		    }
