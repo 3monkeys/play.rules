@@ -231,7 +231,6 @@ Dans le contrôleur `Application.java`, ajoutons `form(Category.class)` en argum
 	                    "Vous pouvez commencer à saisir ...",
 	                    Bookmark.find.fetch("category").orderBy("title").findList(),
 	                    Category.find.orderBy("label").findList(),
-	                    User.find.byId(request().username()),
 	                    form(Category.class) //<--- c'est ici
 	                ));
 	    }
@@ -247,7 +246,6 @@ Puis, dans la vue `index.scala.html`, déclarons ce nouveau paramètre :
 	message: String,
 	bookmarks: List[models.Bookmark],
 	categories: List[models.Category],
-	user: User,
 	categoryForm: Form[models.Category]
 	)
 ```
