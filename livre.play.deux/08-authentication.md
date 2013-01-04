@@ -119,7 +119,8 @@ Code final :
 						"Vous pouvez commencer à saisir ...",
 						Bookmark.find.fetch("category").orderBy("title").findList(),
 						Category.find.orderBy("label").findList(),
-						User.find.byId(request().username())
+						User.find.byId(request().username()),
+						form(Category.class)
 					));
 		}
 	
@@ -206,7 +207,8 @@ Nous avons vu que nous passions le user authentifié à la méthode `index.rende
 					"Vous pouvez commencer à saisir ...",
 					Bookmark.find.fetch("category").orderBy("title").findList(),
 					Category.find.orderBy("label").findList(),
-					User.find.byId(request().username())
+					User.find.byId(request().username()),
+					form(Category.class)
 				));
 	}
 ```
@@ -289,7 +291,8 @@ Vous vous souvenez, dans `Application` nous avons modifié l'appel de `index.ren
 	message: String,
 	bookmarks: List[models.Bookmark],
 	categories: List[models.Category],
-	user: User
+	user: User,
+	categoryForm: Form[models.Category]
 	)
 
 et la modification précédente de `main.scala.html` implique le passage du paramètre `user` à `@main()` :

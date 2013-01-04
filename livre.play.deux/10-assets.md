@@ -318,7 +318,8 @@ Nous pouvons maintenant utiliser notre tag `<supertag>`. Allez modifier la vue `
 	message: String,
 	bookmarks: List[models.Bookmark],
 	categories: List[models.Category],
-	user: User
+	user: User,
+	categoryForm: Form[models.Category]
 	)
 
 	@main("Gestion des bookmarks", user) {
