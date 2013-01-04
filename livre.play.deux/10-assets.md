@@ -158,7 +158,7 @@ Nous allons re-écrire le code de notre "single page application" (cf chapitre *
 
 #####Préparation 
 
-Tout d'abord, vous pouvez supprimer le code javascript dans la vie `mainPage.scala.html` (juste après la remarque `<!-- === ici votre code applicatif === -->`).
+Tout d'abord, vous pouvez supprimer le code javascript dans la vue `mainPage.scala.html` (juste après la remarque `<!-- === ici votre code applicatif === -->`).
 
 Ensuite, toujours dans la même vue, dans la section `<head>`, juste après la référence à jQuery, ajoutez une référence à notre futur code :
 
@@ -277,9 +277,9 @@ Pour cela, allez d'abord dans la vue `main.scala.html` (qui est référencée da
 
 	<link rel="stylesheet" media="screen" href="@routes.Assets.at("stylesheets/mycss.css")">
 
-#####myapp.coffee
+#####myapp.less
 
-Dans le répertoire `app/assets/stylesheets`, créez un fichier `mycss.lss` avec le code suivant :
+Dans le répertoire `app/assets/stylesheets`, créez un fichier `mycss.less` avec le code suivant :
 
 	@h1BckGrdColor : blue;
 	@h1ForeColor : white;
@@ -318,7 +318,8 @@ Nous pouvons maintenant utiliser notre tag `<supertag>`. Allez modifier la vue `
 	message: String,
 	bookmarks: List[models.Bookmark],
 	categories: List[models.Category],
-	user: User
+	user: User,
+	categoryForm: Form[models.Category]
 	)
 
 	@main("Gestion des bookmarks", user) {
