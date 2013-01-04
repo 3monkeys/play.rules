@@ -380,6 +380,10 @@ Ainsi, nous aurons 2 utilisateurs au chargement de l'application. Et pour les ch
 					// Insert categories first
 					Ebean.save(all.get("categories"));                
 				}
+
+				if(Ebean.find(Bookmark.class).findRowCount() == 0) {
+					Ebean.save(all.get("bookmarks"));
+				}
 			}
 		}
 	}
