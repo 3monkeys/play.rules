@@ -112,7 +112,7 @@ De la même manière, créez un modèle Bookmark :
 	}
 ```
 
->**Remarques :** Notez l'annotation `@ManyToOne` : nous expliquons à Play!> que plusieurs `Bookmark(s)` peuvent appartenir à la même `Category` et qu'un `Bookmark` n'a q'une seule `Category` 
+>**Remarques :** Notez l'annotation `@ManyToOne` : nous expliquons à Play!> que plusieurs `Bookmark(s)` peuvent appartenir à la même `Category` et qu'un `Bookmark` n'a qu'une seule `Category` 
 
 
 Vous venez de créer un nouveau modèle, il est temps de "rafraîchir" à nouveau votre application. Play!> détecte la modification et vous propose encore une fois d'appliquer le script pour modifier la base de données. Acceptez :
